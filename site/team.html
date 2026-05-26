@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Meet the team behind Vasl Health &mdash; deep clinical roots, mission-locked governance, and the specific expertise to build what this platform requires.">
+<title>Our Team &mdash; Vasl Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  :root {
+    --warm-white:  #FAF7F2;
+    --parchment:   #F0EAE0;
+    --ink:         #1C1C1C;
+    --ink-70:      rgba(28,28,28,0.70);
+    --ink-50:      rgba(28,28,28,0.50);
+    --ink-25:      rgba(28,28,28,0.25);
+    --ink-12:      rgba(28,28,28,0.12);
+    --clay:        #C4896F;
+    --clay-light:  #E8C4AE;
+    --clay-pale:   #F5E6DC;
+    --deep-green:  #2D4A3E;
+    --dust:        #8B7B6B;
+    --chalk:       #E2DAD0;
+    --charcoal:    #222222;
+
+    --serif: 'Newsreader', Georgia, serif;
+    --sans:  'IBM Plex Sans', sans-serif;
+    --mono:  'IBM Plex Mono', monospace;
+    --gutter: 7vw;
+  }
+
+  body {
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  .reveal {
+    transition: opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1);
+  }
+  .js-ready .reveal { opacity: 0; transform: translateY(22px); }
+  .js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
+  .d1 { transition-delay: 0.10s; } .d2 { transition-delay: 0.22s; }
+  .d3 { transition-delay: 0.34s; } .d4 { transition-delay: 0.46s; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px var(--gutter);
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(240,234,224,0.94);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--ink-12);
+  }
+  .nav-logo { font-family: var(--serif); font-size: 22px; font-weight: 400; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
+  .nav-logo span { color: var(--clay); font-style: italic; }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { font-family: var(--mono); font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--dust); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+  .nav-cta { font-family: var(--mono); font-size: 10px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--deep-green); border: 1px solid var(--deep-green); padding: 9px 20px; text-decoration: none; transition: background 0.22s, color 0.22s; }
+  .nav-cta:hover { background: var(--deep-green); color: var(--warm-white); }
+
+  /* ─── SHARED ─── */
+  .chapter-label {
+    font-family: var(--mono); font-size: 10px; font-weight: 300; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--clay);
+    display: flex; align-items: center; gap: 12px; margin-bottom: 52px;
+  }
+  .chapter-label::after { content: ''; display: block; width: 36px; height: 1px; background: var(--clay); opacity: 0.45; }
+  .chapter-label.light { color: var(--clay-light); }
+  .chapter-label.light::after { background: var(--clay-light); }
+  .chapter-label.muted { color: rgba(250,247,242,0.35); }
+  .chapter-label.muted::after { background: rgba(250,247,242,0.35); }
+
+  section { padding: 130px var(--gutter); position: relative; }
+
+  .btn-dark { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--ink); color: var(--warm-white); padding: 16px 32px; text-decoration: none; display: inline-block; transition: background 0.22s; }
+  .btn-dark:hover { background: var(--deep-green); }
+  .btn-outline { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dust); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s; }
+  .btn-outline:hover { color: var(--ink); }
+  .btn-outline::after { content: '→'; font-size: 14px; }
+  .btn-light { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--warm-white); color: var(--ink); padding: 16px 32px; text-decoration: none; display: inline-block; transition: background 0.22s; }
+  .btn-light:hover { background: var(--clay-light); }
+  .btn-ghost-light { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250,247,242,0.40); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s; }
+  .btn-ghost-light:hover { color: var(--warm-white); }
+  .btn-ghost-light::after { content: '→'; }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 01 — THE TEAM
+  ═══════════════════════════════════════════ */
+  #intro {
+    min-height: 80vh;
+    padding-top: 180px; padding-bottom: 120px;
+    background: var(--parchment);
+    border-bottom: 1px solid var(--chalk);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 100px;
+    align-items: center;
+  }
+
+  .intro-left {}
+
+  .intro-kicker {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--dust); margin-bottom: 40px; display: block;
+  }
+
+  .intro-headline {
+    font-family: var(--serif);
+    font-size: clamp(46px, 5.5vw, 80px);
+    font-weight: 300; line-height: 1.03; letter-spacing: -0.03em;
+    color: var(--ink); margin-bottom: 48px;
+  }
+  .intro-headline em { font-style: italic; color: var(--clay); }
+
+  .intro-body {
+    font-size: 19px; font-weight: 300; line-height: 1.72;
+    color: var(--ink-70); max-width: 460px; margin-bottom: 48px;
+  }
+
+  .intro-right {
+    border-left: 1px solid var(--chalk); padding-left: 80px;
+  }
+
+  /* PBC declaration */
+  .pbc-block {
+    background: var(--ink); padding: 44px 44px; margin-bottom: 36px;
+  }
+
+  .pbc-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--clay-light); margin-bottom: 16px;
+  }
+
+  .pbc-title {
+    font-family: var(--serif); font-size: 22px; font-weight: 400;
+    color: var(--warm-white); margin-bottom: 12px; line-height: 1.25; letter-spacing: -0.01em;
+  }
+
+  .pbc-body {
+    font-size: 14px; font-weight: 300; line-height: 1.7;
+    color: rgba(250,247,242,0.52);
+  }
+
+  /* Team summary */
+  .team-summary { display: flex; flex-direction: column; gap: 0; }
+
+  .ts-item {
+    padding: 22px 0; border-bottom: 1px solid var(--chalk);
+    display: grid; grid-template-columns: 120px 1fr; gap: 16px; align-items: baseline;
+  }
+  .ts-item:last-child { border-bottom: none; }
+
+  .ts-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dust);
+  }
+
+  .ts-value {
+    font-family: var(--serif); font-size: 16px; font-weight: 400; color: var(--ink);
+  }
+
+
+  /* ═══════════════════════════════════════════
+     SHARED PERSON ROW STYLES
+  ═══════════════════════════════════════════ */
+  .person-row {
+    display: grid; grid-template-columns: 280px 1fr 1fr; gap: 0 60px;
+    padding: 72px 0; border-bottom: 1px solid; align-items: start;
+  }
+  .person-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .person-row.on-parchment { border-color: var(--chalk); }
+  .person-row.on-white { border-color: var(--chalk); }
+  .person-row.on-green { border-color: rgba(250,247,242,0.12); }
+
+  /* Initial block */
+  .person-initial {
+    width: 72px; height: 72px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-size: 32px; font-weight: 300;
+    font-style: italic; margin-bottom: 20px; flex-shrink: 0;
+  }
+  .person-initial.dark { background: var(--ink); color: var(--warm-white); }
+  .person-initial.green { background: var(--deep-green); color: var(--warm-white); }
+  .person-initial.clay { background: var(--clay); color: var(--warm-white); }
+
+  .person-name {
+    font-family: var(--serif); font-size: 28px; font-weight: 400;
+    color: var(--ink); line-height: 1.15; letter-spacing: -0.015em; margin-bottom: 4px;
+  }
+  .on-green .person-name { color: var(--warm-white); }
+
+  .person-title {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 16px;
+  }
+  .on-green .person-title { color: var(--clay-light); }
+
+  .person-credentials { display: flex; flex-direction: column; gap: 6px; margin-bottom: 0; }
+
+  .person-cred {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em;
+    color: var(--dust); display: flex; align-items: center; gap: 8px;
+  }
+  .on-green .person-cred { color: rgba(250,247,242,0.40); }
+  .person-cred::before { content: '—'; color: var(--clay); font-size: 10px; }
+  .on-green .person-cred::before { color: var(--clay-light); }
+
+  /* Bio columns */
+  .person-mid {}
+
+  .person-section-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .person-section-label::before { content: ''; display: block; width: 14px; height: 1px; }
+  .on-parchment .person-section-label,
+  .on-white .person-section-label { color: var(--clay); }
+  .on-parchment .person-section-label::before,
+  .on-white .person-section-label::before { background: var(--clay); }
+  .on-green .person-section-label { color: var(--clay-light); }
+  .on-green .person-section-label::before { background: var(--clay-light); }
+
+  .person-bio {
+    font-size: 15px; font-weight: 300; line-height: 1.75; margin-bottom: 16px;
+  }
+  .on-parchment .person-bio,
+  .on-white .person-bio { color: var(--ink-70); }
+  .on-green .person-bio { color: rgba(250,247,242,0.60); }
+
+  .person-pull {
+    font-family: var(--serif); font-size: 18px; font-style: italic;
+    font-weight: 300; line-height: 1.5;
+    border-left: 2px solid; padding-left: 18px; margin-top: 20px;
+  }
+  .on-parchment .person-pull,
+  .on-white .person-pull { color: var(--ink); border-color: var(--clay-light); }
+  .on-green .person-pull { color: var(--warm-white); border-color: rgba(196,137,111,0.5); }
+
+  /* Right detail column */
+  .person-right {}
+
+  .person-detail-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; margin-bottom: 14px;
+  }
+  .on-parchment .person-detail-label,
+  .on-white .person-detail-label { color: var(--dust); }
+  .on-green .person-detail-label { color: rgba(250,247,242,0.35); }
+
+  .person-detail-item {
+    padding: 14px 0; border-bottom: 1px solid;
+  }
+  .person-detail-item:last-child { border-bottom: none; }
+  .on-parchment .person-detail-item,
+  .on-white .person-detail-item { border-color: var(--chalk); }
+  .on-green .person-detail-item { border-color: rgba(250,247,242,0.08); }
+
+  .pdi-label {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-bottom: 5px;
+  }
+  .on-parchment .pdi-label,
+  .on-white .pdi-label { color: var(--dust); }
+  .on-green .pdi-label { color: rgba(250,247,242,0.30); }
+
+  .pdi-value {
+    font-size: 13px; font-weight: 300; line-height: 1.6;
+  }
+  .on-parchment .pdi-value,
+  .on-white .pdi-value { color: var(--ink-70); }
+  .on-green .pdi-value { color: rgba(250,247,242,0.65); }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 02 — LEADERSHIP
+  ═══════════════════════════════════════════ */
+  #leadership {
+    background: var(--parchment);
+    padding-top: 150px; padding-bottom: 150px;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .section-header {
+    display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px;
+    align-items: end; margin-bottom: 80px;
+    padding-bottom: 60px; border-bottom: 1px solid var(--chalk);
+  }
+
+  .section-headline {
+    font-family: var(--serif); font-size: clamp(36px, 4vw, 54px);
+    font-weight: 300; line-height: 1.08; letter-spacing: -0.025em; color: var(--ink);
+  }
+  .section-headline em { font-style: italic; color: var(--clay); }
+
+  .section-intro {
+    font-size: 17px; font-weight: 300; line-height: 1.72; color: var(--ink-70);
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 03 — CLINICAL LEADERSHIP
+  ═══════════════════════════════════════════ */
+  #clinical {
+    background: var(--deep-green);
+    color: var(--warm-white);
+    padding-top: 150px; padding-bottom: 150px;
+  }
+
+  .section-headline.on-green { color: var(--warm-white); }
+  .section-headline.on-green em { color: var(--clay-light); }
+  .section-intro.on-green { color: rgba(250,247,242,0.58); }
+  .section-header.on-green { border-color: rgba(250,247,242,0.12); }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 04 — MEDICAL ADVISORY
+  ═══════════════════════════════════════════ */
+  #advisory {
+    background: var(--warm-white);
+    padding-top: 150px; padding-bottom: 150px;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  /* Hopkins institution tag */
+  .institution-tag {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 8px 14px; border: 1px solid var(--chalk);
+    background: var(--parchment); margin-top: 16px;
+  }
+
+  .it-name {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink);
+  }
+
+  .it-detail {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--dust);
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 05 — JOIN THE MISSION
+  ═══════════════════════════════════════════ */
+  #join {
+    background: var(--charcoal);
+    padding-top: 160px; padding-bottom: 160px;
+    overflow: hidden; position: relative;
+  }
+
+  .join-bg {
+    position: absolute; bottom: -8vw; right: -4vw;
+    font-family: var(--serif); font-size: 36vw; font-weight: 300; font-style: italic;
+    color: rgba(250,247,242,0.018); pointer-events: none; user-select: none;
+    line-height: 1; letter-spacing: -0.05em;
+  }
+
+  .join-inner {
+    position: relative; z-index: 2;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0 100px; align-items: center;
+  }
+
+  .join-left {}
+
+  .join-headline {
+    font-family: var(--serif); font-size: clamp(40px, 5vw, 68px);
+    font-weight: 300; line-height: 1.06; letter-spacing: -0.03em;
+    color: var(--warm-white); margin-bottom: 32px;
+  }
+  .join-headline em { font-style: italic; color: var(--clay-light); }
+
+  .join-body {
+    font-size: 18px; font-weight: 300; line-height: 1.72;
+    color: rgba(250,247,242,0.50); margin-bottom: 52px; max-width: 460px;
+  }
+
+  .join-actions { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+
+  .join-right {}
+
+  .join-note {
+    padding: 36px 40px; border: 1px solid rgba(250,247,242,0.14);
+    background: rgba(250,247,242,0.04);
+  }
+
+  .jn-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay-light); margin-bottom: 16px;
+  }
+
+  .jn-text {
+    font-size: 15px; font-weight: 300; line-height: 1.7;
+    color: rgba(250,247,242,0.52);
+  }
+
+  /* ─── FOOTER ─── */
+  .footer-logo-col {}
+  .footer-logo span { color: var(--clay); font-style: italic; }
+  .footer-nav a { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250,247,242,0.32); text-decoration: none; transition: color 0.2s; }
+  .footer-nav a:hover { color: var(--warm-white); }
+  .footer-legal a { font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250,247,242,0.22); text-decoration: none; transition: color 0.2s; }
+  .footer-legal a:hover { color: var(--warm-white); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1100px) {
+    #intro { grid-template-columns: 1fr; gap: 80px; padding-top: 160px; }
+    .intro-right { border-left: none; padding-left: 0; border-top: 1px solid var(--chalk); padding-top: 60px; }
+    .person-row { grid-template-columns: 1fr; gap: 40px; }
+    .person-initial { width: 60px; height: 60px; font-size: 26px; }
+    .section-header { grid-template-columns: 1fr; gap: 28px; }
+    .join-inner { grid-template-columns: 1fr; gap: 60px; }
+  }
+  @media (max-width: 768px) {
+    :root { --gutter: 5vw; }
+    .nav-links { display: none; }
+    .ts-item { grid-template-columns: 1fr; gap: 4px; }
+  }
+
+  .ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
+  .ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.2s;}
+  .ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .ham-btn.open span:nth-child(2){opacity:0;}
+  .ham-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+  @media(max-width:780px){
+    .ham-btn{display:flex;}
+    .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--warm);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{font-size:22px;letter-spacing:0.04em;}
+    .nav-cta{display:none;}
+  }
+
+  footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);padding:0;}
+  .footer-sitemap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:0;padding:56px 7vw 40px;border-bottom:1px solid rgba(250,247,242,0.08);}
+  .fs-brand{padding-right:40px;}
+  .footer-logo{font-family:var(--serif);font-size:22px;color:var(--warm-white,#FAF7F2);letter-spacing:-0.02em;text-decoration:none;display:block;margin-bottom:12px;}
+  .footer-logo span{color:var(--clay,#C4896F);font-style:italic;}
+  .footer-mission{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.28);line-height:1.8;margin-bottom:20px;}
+  .fs-cta{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:var(--clay,#C4896F);border:1px solid rgba(196,137,111,0.40);padding:9px 18px;text-decoration:none;transition:all 0.18s;}
+  .fs-cta:hover{background:rgba(196,137,111,0.12);}
+  .fs-col{padding-left:32px;border-left:1px solid rgba(250,247,242,0.06);}
+  .fs-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,247,242,0.30);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(250,247,242,0.06);}
+  .fs-col a{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,247,242,0.45);text-decoration:none;margin-bottom:10px;transition:color 0.15s;}
+  .fs-col a:hover{color:var(--clay,#C4896F);}
+  .footer-bottom{padding:20px 7vw;display:flex;align-items:center;justify-content:space-between;}
+  .footer-copy{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,0.20);}
+  .footer-legal{display:flex;gap:20px;}
+  .footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+  .footer-legal a:hover{color:var(--clay,#C4896F);}
+  @media(max-width:1100px){.footer-sitemap{grid-template-columns:1fr 1fr 1fr;gap:32px;}.fs-brand{grid-column:1/-1;padding-right:0;}.fs-col{border-left:none;padding-left:0;}}
+  @media(max-width:680px){.footer-sitemap{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}}
+  @media(max-width:400px){.footer-sitemap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="index.html" class="nav-logo">Vasl <span>Health</span></a>
+    <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="platform.html">Platform</a></li>
+    <li><a href="outcomes.html">Outcomes</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="contact.html" class="nav-cta">Contact Us</a>
+</nav>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 01 &mdash; THE TEAM
+════════════════════════════════════ -->
+<section id="intro">
+  <div class="intro-left">
+    <span class="intro-kicker reveal">Our Team</span>
+    <h1 class="intro-headline reveal d1">
+      The specific people<br>
+      this work<br>
+      <em>requires.</em>
+    </h1>
+    <p class="intro-body reveal d2">
+      Building a culturally fluent behavioral health platform at the intersection of AI, clinical science, and community trust requires a rare combination: founders who have built institutions, clinicians who have spent careers inside the communities being served, and advisors whose research validates what the platform claims. This is that team.
+    </p>
+  </div>
+
+  <div class="intro-right reveal d2">
+    <div class="pbc-block">
+      <div class="pbc-label">Delaware Public Benefit Corporation</div>
+      <div class="pbc-title">Mission-locked governance. Not just a pitch.</div>
+      <p class="pbc-body">Vasl Health's commitment to advancing health equity for communities of color, LGBTQ+ individuals, and low-income and underserved families is written into our corporate charter &mdash; legally binding at every stage of growth. This is not a values statement. It is the document.</p>
+    </div>
+
+    <div class="team-summary">
+      <div class="ts-item">
+        <span class="ts-label">Leadership</span>
+        <span class="ts-value">Rodney Bell &middot; Kacy Keys</span>
+      </div>
+      <div class="ts-item">
+        <span class="ts-label">Clinical</span>
+        <span class="ts-value">Paula Bruce &middot; Janice Nishiyama &middot; Marcie Johnson</span>
+      </div>
+      <div class="ts-item">
+        <span class="ts-label">Advisory</span>
+        <span class="ts-value">Panagis Galiatsatos &middot; Johns Hopkins Medicine</span>
+      </div>
+      <div class="ts-item">
+        <span class="ts-label">Structure</span>
+        <span class="ts-value">Delaware PBC &middot; Techstars alumni &middot; IRB active</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 02 &mdash; LEADERSHIP
+════════════════════════════════════ -->
+<section id="leadership">
+  <div class="chapter-label reveal">Chapter 02 &mdash; Leadership</div>
+
+  <div class="section-header">
+    <h2 class="section-headline reveal d1">
+      Founders who<br>
+      have built<br>
+      <em>institutions.</em>
+    </h2>
+    <p class="section-intro reveal d2">
+      Vasl Health was founded by people who came to this work from the outside &mdash; from investment banking, from law, from real estate development &mdash; and who recognized, specifically because of that vantage point, what the standard approach to mental health for underserved communities was missing. Their backgrounds in capital markets and institutional development are not incidental to the platform. They are why it is built to scale, structured to sustain, and governed to last.
+    </p>
+  </div>
+
+  <!-- Rodney Bell -->
+  <div class="person-row on-parchment reveal">
+    <div>
+      <div class="person-initial dark">R</div>
+      <div class="person-name">Rodney Bell</div>
+      <div class="person-title">Founder & CEO</div>
+      <div class="person-credentials">
+        <span class="person-cred">Investment banking &mdash; M&A and capital markets</span>
+        <span class="person-cred">Fintech founder for underserved communities</span>
+        <span class="person-cred">Techstars alumni</span>
+      </div>
+    </div>
+
+    <div class="person-mid">
+      <div class="person-section-label">Background</div>
+      <p class="person-bio">Rodney came to Vasl Health through two distinct lenses: first as an investment banker who spent years in M&A and capital markets, understanding how institutions are built and capitalized; then as a fintech founder who recognized that the same communities he'd watched financial services ignore were being equally failed by the mental health system.</p>
+      <p class="person-bio">The founding insight at Vasl isn't that mental health care for underserved youth needs better technology. It's that the technology that exists was built for the wrong population &mdash; trained on the wrong language, designed around the wrong entry points, and governed by incentives that don't extend to communities without purchasing power. Rodney's background in institutional finance gives him an unusual ability to see both the structural problem and the structural solution simultaneously.</p>
+      <blockquote class="person-pull">"The gap isn't access. The gap is architecture. Every other platform was built for someone else and then pointed at communities that needed something different from the beginning."</blockquote>
+    </div>
+
+    <div class="person-right">
+      <div class="person-detail-label">Background Detail</div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Prior background</div>
+        <div class="pdi-value">M&A investment banking and capital markets &mdash; the institutional fluency that shapes how Vasl is structured, funded, and governed</div>
+      </div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Founder experience</div>
+        <div class="pdi-value">Previously founded a fintech platform focused on financial access for underserved communities &mdash; the direct predecessor to Vasl's community-equity focus</div>
+      </div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Accelerator</div>
+        <div class="pdi-value">Techstars alumni &mdash; institutional startup training and network</div>
+      </div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Current role</div>
+        <div class="pdi-value">Founder & CEO &mdash; Vasl Health, Inc. Also serves as COO and VP at Next Play, Inc., a nonprofit venture accelerator focused on athlete entrepreneurship and post-career leadership</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kacy Keys -->
+  <div class="person-row on-parchment reveal">
+    <div>
+      <div class="person-initial dark">K</div>
+      <div class="person-name">Kacy Keys</div>
+      <div class="person-title">Co-Founder</div>
+      <div class="person-credentials">
+        <span class="person-cred">Founder & CEO, Praxis Development Group</span>
+        <span class="person-cred">$1B+ real estate development portfolio</span>
+        <span class="person-cred">JD, UC Berkeley School of Law</span>
+        <span class="person-cred">Techstars alumni &middot; UCLA TechQuity cohort</span>
+      </div>
+    </div>
+
+    <div class="person-mid">
+      <div class="person-section-label">Background</div>
+      <p class="person-bio">Kacy Keys brings to Vasl Health something rare in the health technology space: the specific operational discipline of someone who has built at scale in the physical world. As Founder and CEO of Praxis Development Group &mdash; a real estate development firm with a portfolio exceeding $1 billion in assets &mdash; she has navigated the institutional, regulatory, and community dynamics of large-scale development projects through some of the most complex urban environments in California.</p>
+      <p class="person-bio">Her background includes time at the LA Mayor's Office, Allen Matkins, JH Snyder, and Seritage Growth Properties &mdash; a career arc that built fluency in the intersection of law, policy, community impact, and capital. At Vasl, that background translates directly: the platform operates at the intersection of healthcare regulation, community trust, institutional partnership, and technology scale &mdash; exactly the terrain Kacy has spent a career navigating.</p>
+      <blockquote class="person-pull">"Every major development project I've worked on required understanding who the community was, what they actually needed, and how to build something that outlasted the funding cycle. Mental health equity requires exactly the same discipline."</blockquote>
+    </div>
+
+    <div class="person-right">
+      <div class="person-detail-label">Background Detail</div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Current company</div>
+        <div class="pdi-value">Founder & CEO, Praxis Development Group &mdash; $1B+ real estate development portfolio across Los Angeles</div>
+      </div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Legal background</div>
+        <div class="pdi-value">JD, UC Berkeley School of Law &mdash; practice background in real estate, regulatory compliance, and institutional transactions</div>
+      </div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Prior roles</div>
+        <div class="pdi-value">LA Mayor's Office &middot; Allen Matkins &middot; JH Snyder &middot; Seritage Growth Properties &middot; USC Dollinger program</div>
+      </div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Accelerators</div>
+        <div class="pdi-value">Techstars alumni &middot; UCLA TechQuity cohort &mdash; community-focused technology development</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 03 &mdash; CLINICAL LEADERSHIP
+════════════════════════════════════ -->
+<section id="clinical">
+  <div class="chapter-label light reveal">Chapter 03 &mdash; Clinical Leadership</div>
+
+  <div class="section-header on-green">
+    <h2 class="section-headline on-green reveal d1">
+      Clinicians who have<br>
+      spent careers inside<br>
+      <em>these communities.</em>
+    </h2>
+    <p class="section-intro on-green reveal d2">
+      The clinical leadership team does not provide therapy to Vasl members. They provide the clinical architecture, oversight, and expertise that makes every element of the platform clinically sound &mdash; from the VLAP signal taxonomy to the coaching training framework to the warm handoff protocol. Their decades of practice within the specific communities Vasl serves are what the platform's clinical credibility is built on.
+    </p>
+  </div>
+
+  <!-- Paula Bruce -->
+  <div class="person-row on-green reveal">
+    <div>
+      <div class="person-initial clay">P</div>
+      <div class="person-name">Paula Bruce, PhD</div>
+      <div class="person-title">Chief Medical Officer</div>
+      <div class="person-credentials">
+        <span class="person-cred">Clinical & forensic psychologist &mdash; 30 years</span>
+        <span class="person-cred">Founder, PBA Psychology Group</span>
+        <span class="person-cred">Specializes in BIPOC, LGBTQ+, and racial trauma</span>
+      </div>
+    </div>
+
+    <div class="person-mid">
+      <div class="person-section-label">Clinical Role at Vasl</div>
+      <p class="person-bio">As Chief Medical Officer, Dr. Bruce provides the clinical authority and oversight framework for the Vasl platform &mdash; from the VLAP signal taxonomy design to the clinical escalation protocols to the coaching training standards. Her 30 years of practice specializing in culturally competent care for BIPOC and LGBTQ+ communities is the foundation on which Vasl's clinical model is built.</p>
+      <p class="person-bio">As founder of PBA Psychology Group, Dr. Bruce has spent decades developing clinical approaches to racial trauma, identity-based stress, and the specific distress presentations that standard clinical instruments consistently misread in communities of color. That body of practice is what makes the VLAP signal taxonomy clinically grounded &mdash; not theoretically, but from decades of direct clinical observation of exactly what the platform is built to detect.</p>
+      <blockquote class="person-pull">"The gap between what standard clinical tools measure and what BIPOC and LGBTQ+ youth are actually communicating is not a data problem. It's a presence problem. The tools were built by people who weren't in the room."</blockquote>
+    </div>
+
+    <div class="person-right">
+      <div class="person-detail-label">Clinical Profile</div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Credential</div>
+        <div class="pdi-value">PhD &mdash; Clinical & Forensic Psychology &middot; 30 years of licensed practice</div>
+      </div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Practice</div>
+        <div class="pdi-value">Founder, PBA Psychology Group &mdash; practice specializing in BIPOC, LGBTQ+, and racial trauma clinical care</div>
+      </div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Clinical expertise</div>
+        <div class="pdi-value">Racial trauma &middot; Intergenerational trauma &middot; Identity-based stress &middot; Culturally competent forensic psychology</div>
+      </div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Role at Vasl</div>
+        <div class="pdi-value">Chief Medical Officer &mdash; clinical architecture, VLAP signal taxonomy oversight, clinical escalation protocol design, coaching training standards</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Janice Nishiyama -->
+  <div class="person-row on-green reveal">
+    <div>
+      <div class="person-initial clay">J</div>
+      <div class="person-name">Janice Nishiyama, PhD</div>
+      <div class="person-title">Clinical Officer</div>
+      <div class="person-credentials">
+        <span class="person-cred">Licensed clinical psychologist</span>
+        <span class="person-cred">PBA Psychology Group</span>
+        <span class="person-cred">Specializes in trauma, anxiety, and culturally competent care</span>
+      </div>
+    </div>
+
+    <div class="person-mid">
+      <div class="person-section-label">Clinical Role at Vasl</div>
+      <p class="person-bio">As Clinical Officer, Dr. Nishiyama provides clinical operational oversight &mdash; translating the platform's clinical architecture into the day-to-day protocols, training frameworks, and quality standards that govern how the Vasl care model functions in deployment. Her work bridges the gap between clinical theory and clinical practice at scale.</p>
+      <p class="person-bio">Dr. Nishiyama's clinical practice focuses on trauma-informed care and anxiety disorders &mdash; with deep specialization in the specific presentations that diverse cultural backgrounds produce. Her work with immigrant and diaspora youth, where distress manifests through cultural norms around stoicism, family loyalty, and collectivist values rather than through the language of Western clinical instruments, has directly shaped the VLAP Cultural Context Modifier (CCM) signal dimension.</p>
+      <blockquote class="person-pull">"The most important clinical skill is knowing what you're not hearing. For many of the youth Vasl serves, the real communication is in the frame around what they say &mdash; not in what they say directly."</blockquote>
+    </div>
+
+    <div class="person-right">
+      <div class="person-detail-label">Clinical Profile</div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Credential</div>
+        <div class="pdi-value">PhD &mdash; Licensed Clinical Psychologist &middot; PBA Psychology Group</div>
+      </div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Clinical expertise</div>
+        <div class="pdi-value">Trauma-informed care &middot; Anxiety disorders &middot; Culturally competent care for immigrant and diaspora communities</div>
+      </div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Population focus</div>
+        <div class="pdi-value">AAPI communities &middot; Immigrant families &middot; Collectivist cultural frameworks &middot; First-generation youth</div>
+      </div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Role at Vasl</div>
+        <div class="pdi-value">Clinical Officer &mdash; operational protocols, coaching training oversight, clinical quality standards, CCM signal dimension development</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Marcie Johnson -->
+  <div class="person-row on-green reveal">
+    <div>
+      <div class="person-initial clay">M</div>
+      <div class="person-name">Marcie Johnson, PhD</div>
+      <div class="person-title">Chief Clinical Director</div>
+      <div class="person-credentials">
+        <span class="person-cred">Clinical psychologist &middot; PhD, University of Iowa</span>
+        <span class="person-cred">Neuropsychology & CBT specialist</span>
+        <span class="person-cred">Lifespan practice: individual, group & assessment</span>
+      </div>
+    </div>
+
+    <div class="person-mid">
+      <div class="person-section-label">Clinical Role at Vasl</div>
+      <p class="person-bio">As Chief Clinical Director, Dr. Johnson provides the evidence-based clinical framework that governs the Vasl platform's treatment model &mdash; ensuring every element, from the care sequencing to the VLAP signal taxonomy to the coaching intervention protocols, is grounded in validated clinical science. Her specialization in neuropsychology and cognitive behavioral therapy gives Vasl's model its clinical rigor.</p>
+      <p class="person-bio">Dr. Johnson's practice spans the full lifespan &mdash; individual sessions, group therapy, and comprehensive psychological assessment &mdash; across diverse populations. Her neuropsychological expertise is particularly relevant to how Vasl's platform understands the relationship between language, cognition, and emotional state: the clinical basis for why language-based signal detection is a valid proxy for behavioral health risk.</p>
+      <blockquote class="person-pull">"Evidence-based care and culturally responsive care are not in tension. The evidence is clear: culturally matched care produces better outcomes. Building that into the platform architecture is simply good clinical science."</blockquote>
+    </div>
+
+    <div class="person-right">
+      <div class="person-detail-label">Clinical Profile</div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Credential</div>
+        <div class="pdi-value">PhD, University of Iowa &mdash; Clinical Psychology &middot; Neuropsychology specialization</div>
+      </div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Clinical expertise</div>
+        <div class="pdi-value">Neuropsychology &middot; Cognitive Behavioral Therapy &middot; Psychological assessment &middot; Group therapy &middot; Lifespan practice</div>
+      </div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Practice scope</div>
+        <div class="pdi-value">Individual, group, and psychological assessment across the lifespan &mdash; diverse cultural populations</div>
+      </div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Role at Vasl</div>
+        <div class="pdi-value">Chief Clinical Director &mdash; evidence-based framework, treatment model governance, clinical protocol validation, outcome measurement design</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 04 &mdash; MEDICAL ADVISORY
+════════════════════════════════════ -->
+<section id="advisory">
+  <div class="chapter-label reveal">Chapter 04 &mdash; Medical Advisory</div>
+
+  <div class="section-header">
+    <h2 class="section-headline reveal d1">
+      Advisors whose<br>
+      research validates<br>
+      <em>what we claim.</em>
+    </h2>
+    <p class="section-intro reveal d2">
+      Advisory relationships at Vasl are not credential collections. They are active engagements with researchers and clinicians whose specific expertise provides independent validation of the platform's clinical approach &mdash; and whose institutional affiliations signal to the health systems, payers, and academic partners Vasl works with that the science behind this platform has been reviewed by peers.
+    </p>
+  </div>
+
+  <!-- Panagis Galiatsatos -->
+  <div class="person-row on-white reveal">
+    <div>
+      <div class="person-initial green">P</div>
+      <div class="person-name">Panagis Galiatsatos, MD</div>
+      <div class="person-title">Senior Medical Advisor</div>
+      <div class="person-credentials">
+        <span class="person-cred">Associate Professor, Johns Hopkins School of Medicine</span>
+        <span class="person-cred">Co-Chair, Hopkins Health Equity Steering Committee</span>
+        <span class="person-cred">Co-Founder, Medicine for the Greater Good</span>
+        <span class="person-cred">100+ peer-reviewed publications</span>
+      </div>
+      <div class="institution-tag">
+        <span class="it-name">Johns Hopkins Medicine</span>
+        <span class="it-detail">School of Medicine</span>
+      </div>
+    </div>
+
+    <div class="person-mid">
+      <div class="person-section-label">Advisory Role at Vasl</div>
+      <p class="person-bio">Dr. Galiatsatos is one of the most prominent voices in American health equity &mdash; a practicing pulmonologist, an Associate Professor at Johns Hopkins School of Medicine, and Co-Chair of the Hopkins Health Equity Steering Committee. His work sits at the precise intersection where clinical medicine, community health, and institutional accountability meet. His 100+ peer-reviewed publications span community medicine, social determinants of health, and health equity interventions.</p>
+      <p class="person-bio">As Senior Medical Advisor to Vasl Health, Dr. Galiatsatos provides strategic clinical guidance for the platform's community medicine approach and health equity methodology. His co-founding of Medicine for the Greater Good &mdash; a national initiative dedicated to health equity through community engagement &mdash; reflects the same conviction that underlies Vasl: that equitable health outcomes require meeting communities where they are, in the language they speak, through the channels they trust.</p>
+      <p class="person-bio">His affiliation with Johns Hopkins provides Vasl with access to one of the most respected clinical research networks in the country &mdash; and signals to health system and payer partners that the platform's clinical methodology has been reviewed and endorsed at the highest level of academic medicine.</p>
+      <blockquote class="person-pull">"Health equity isn't a specialty. It's the standard we should be measuring every healthcare intervention against &mdash; including the AI we deploy in clinical settings."</blockquote>
+    </div>
+
+    <div class="person-right">
+      <div class="person-detail-label">Profile</div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Institution</div>
+        <div class="pdi-value">Associate Professor, Johns Hopkins School of Medicine &mdash; Department of Medicine</div>
+      </div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Equity leadership</div>
+        <div class="pdi-value">Co-Chair, Hopkins Health Equity Steering Committee &mdash; institutional leadership of Hopkins' equity research and clinical agenda</div>
+      </div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Initiative</div>
+        <div class="pdi-value">Co-Founder, Medicine for the Greater Good &mdash; national initiative advancing health equity through community engagement and clinical innovation</div>
+      </div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Research output</div>
+        <div class="pdi-value">100+ peer-reviewed publications in community medicine, social determinants of health, and health equity interventions</div>
+      </div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Role at Vasl</div>
+        <div class="pdi-value">Senior Medical Advisor &mdash; community medicine methodology, health equity framework, clinical advisory for payer and health system partnerships</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 05 &mdash; JOIN THE MISSION
+════════════════════════════════════ -->
+<section id="join">
+  <div class="join-bg" aria-hidden="true">Team</div>
+  <div class="join-inner">
+    <div class="join-left">
+      <div class="chapter-label muted reveal">Chapter 05 &mdash; Join Us</div>
+      <h2 class="join-headline reveal d1">
+        We're building<br>
+        the team this<br>
+        work <em>deserves.</em>
+      </h2>
+      <p class="join-body reveal d2">
+        Vasl is growing. We are looking for people who bring specific expertise &mdash; clinical, technical, community, operational &mdash; and who understand that building for underserved communities is not a charitable gesture. It is the most demanding, most consequential, and most necessary work in health technology right now.
+      </p>
+      <div class="join-actions reveal d3">
+        <a href="careers.html" class="btn-light">View Open Positions</a>
+        <a href="contact.html" class="btn-ghost-light">Get in touch</a>
+      </div>
+    </div>
+
+    <div class="join-right reveal d2">
+      <div class="join-note">
+        <div class="jn-label">Equal Opportunity Statement</div>
+        <p class="jn-text">Vasl Health is an equal opportunity employer committed to building a team that reflects the communities we serve. We actively seek applicants from BIPOC, LGBTQ+, first-generation, and other underrepresented backgrounds &mdash; not as a diversity metric, but because the work requires the specific knowledge that lived experience produces. If you have that experience and this mission speaks to you, we want to hear from you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-sitemap">
+    <div class="fs-brand">
+      <a href="index.html" class="footer-logo">Vasl <span>Health</span></a>
+      <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
+      <a href="contact.html" class="fs-cta">Request a Demo &rarr;</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Platform</div>
+      <a href="platform.html">Platform Overview</a>
+      <a href="vlap.html">VLAP</a>
+      <a href="ai-model.html">AI Model</a>
+      <a href="technology.html">Technology</a>
+      <a href="peer-groups.html">Peer Groups</a>
+      <a href="teletherapy.html">Teletherapy</a>
+      <a href="prototype.html">Live Demo Portal</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Who We Serve</div>
+      <a href="for-schools.html">For Schools</a>
+      <a href="for-organizations.html">For Organizations</a>
+      <a href="outcomes.html">Outcomes</a>
+      <a href="clinical-outcomes.html">Clinical Outcomes</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Company</div>
+      <a href="about.html">About Vasl</a>
+      <a href="team.html">Team</a>
+      <a href="careers.html">Careers</a>
+      <a href="research.html">Research</a>
+      <a href="blog.html">Blog &amp; Insights</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Support &amp; Legal</div>
+      <a href="support.html">Help Center</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="baa.html">Business Associate Agreement</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 Vasl Health, Inc. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="baa.html">BAA</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js-ready');
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.06, rootMargin: '0px 0px -24px 0px' });
+  reveals.forEach(el => io.observe(el));
+  window.addEventListener('load', () => {
+    reveals.forEach((el, i) => {
+      if (el.getBoundingClientRect().top < window.innerHeight) {
+        setTimeout(() => el.classList.add('visible'), i * 55);
+      }
+    });
+  });
+</script>
+</body>
+</html>
