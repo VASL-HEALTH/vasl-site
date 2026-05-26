@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VLAP &mdash; Vasl Language Analysis Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  /* ─── RESET ─── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  /* ─── TOKENS ─── */
+  :root {
+    --warm-white:   #FAF7F2;
+    --ink:          #1C1C1C;
+    --ink-70:       rgba(28,28,28,0.70);
+    --ink-45:       rgba(28,28,28,0.45);
+    --ink-20:       rgba(28,28,28,0.20);
+    --clay:         #C4896F;
+    --clay-light:   #E8C4AE;
+    --clay-pale:    #F5E6DC;
+    --deep-green:   #2D4A3E;
+    --green-mid:    #3D6454;
+    --parchment:    #F0EAE0;
+    --dust:         #8B7B6B;
+    --chalk:        #E2DAD0;
+    --charcoal:     #242424;
+
+    --serif:  'Newsreader', Georgia, serif;
+    --sans:   'IBM Plex Sans', sans-serif;
+    --mono:   'IBM Plex Mono', monospace;
+
+    --gutter: 7vw;
+  }
+
+  /* ─── BASE ─── */
+  body {
+    background: var(--warm-white);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  /* ─── GRAIN ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    pointer-events: none;
+    opacity: 0.028;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 256px;
+  }
+
+  /* ─── SCROLL REVEAL ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 1s cubic-bezier(0.16,1,0.3,1),
+                transform 1s cubic-bezier(0.16,1,0.3,1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .d1 { transition-delay: 0.10s; }
+  .d2 { transition-delay: 0.22s; }
+  .d3 { transition-delay: 0.34s; }
+  .d4 { transition-delay: 0.46s; }
+  .d5 { transition-delay: 0.58s; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px var(--gutter);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(250,247,242,0.90);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--ink-20);
+  }
+  .nav-left { display: flex; align-items: center; gap: 36px; }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 21px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--clay); font-style: italic; }
+  .nav-product-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dust);
+    border-left: 1px solid var(--chalk);
+    padding-left: 24px;
+  }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--dust);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--deep-green);
+    border: 1px solid var(--deep-green);
+    padding: 9px 20px;
+    text-decoration: none;
+    transition: background 0.22s, color 0.22s;
+  }
+  .nav-cta:hover { background: var(--deep-green); color: var(--warm-white); }
+
+  /* ─── SHARED ─── */
+  .chapter-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--clay);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 56px;
+  }
+  .chapter-label::after {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 1px;
+    background: var(--clay);
+    opacity: 0.45;
+  }
+  .chapter-label.light { color: var(--clay-light); }
+  .chapter-label.light::after { background: var(--clay-light); }
+  .chapter-label.muted { color: rgba(250,247,242,0.35); }
+  .chapter-label.muted::after { background: rgba(250,247,242,0.35); }
+
+  section { padding: 130px var(--gutter); position: relative; }
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 01 — THE PROBLEM WITH CLINICAL LISTENING
+  ═══════════════════════════════════════════ */
+  #intro {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 100px;
+    align-items: center;
+    padding-top: 180px;
+    border-bottom: 1px solid var(--chalk);
+    overflow: hidden;
+  }
+
+  .intro-left {}
+
+  .intro-kicker {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--dust);
+    margin-bottom: 36px;
+    display: block;
+  }
+
+  .intro-headline {
+    font-family: var(--serif);
+    font-size: clamp(48px, 5.8vw, 86px);
+    font-weight: 300;
+    line-height: 1.03;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 48px;
+  }
+  .intro-headline em { font-style: italic; color: var(--clay); }
+
+  .intro-body {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.72;
+    color: var(--ink-70);
+    max-width: 460px;
+    margin-bottom: 52px;
+  }
+
+  .intro-tag-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid var(--chalk);
+    color: var(--dust);
+  }
+  .tag.active { border-color: var(--deep-green); color: var(--deep-green); }
+
+  .intro-right {
+    padding-left: 80px;
+    border-left: 1px solid var(--chalk);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* Clinical instrument failure display */
+  .instrument-item {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--chalk);
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  .instrument-item:last-child { border-bottom: none; }
+
+  .instrument-name {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--dust);
+    padding-top: 3px;
+  }
+
+  .instrument-right {}
+  .instrument-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-bottom: 8px;
+  }
+  .instrument-claim {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1.45;
+    margin-bottom: 10px;
+  }
+  .instrument-gap {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--ink-45);
+    line-height: 1.6;
+  }
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 02 — WHAT VLAP IS
+  ═══════════════════════════════════════════ */
+  #what {
+    background: var(--charcoal);
+    color: var(--warm-white);
+    padding-top: 150px;
+    padding-bottom: 150px;
+  }
+
+  .what-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 120px;
+    align-items: start;
+  }
+
+  .what-left {}
+
+  .what-headline {
+    font-family: var(--serif);
+    font-size: clamp(40px, 4.8vw, 72px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--warm-white);
+    margin-bottom: 48px;
+  }
+  .what-headline em { font-style: italic; color: var(--clay-light); }
+
+  .what-body {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(250,247,242,0.60);
+    margin-bottom: 48px;
+    max-width: 480px;
+  }
+
+  .what-pull {
+    border-left: 2px solid var(--clay);
+    padding: 24px 32px;
+    background: rgba(250,247,242,0.04);
+    font-family: var(--serif);
+    font-size: 22px;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--warm-white);
+  }
+
+  .what-right {
+    padding-top: 8px;
+  }
+
+  /* Definition block */
+  .definition-block {
+    border: 1px solid rgba(250,247,242,0.12);
+    padding: 52px 48px;
+    margin-bottom: 32px;
+  }
+
+  .definition-term {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-bottom: 20px;
+  }
+
+  .definition-text {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 1.45;
+    color: var(--warm-white);
+    letter-spacing: -0.01em;
+  }
+  .definition-text em { font-style: italic; color: var(--clay-light); }
+
+  .what-spec-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(250,247,242,0.12);
+  }
+
+  .spec-cell {
+    background: var(--charcoal);
+    padding: 28px 32px;
+  }
+
+  .spec-num {
+    font-family: var(--serif);
+    font-size: 44px;
+    font-weight: 300;
+    letter-spacing: -0.04em;
+    color: var(--warm-white);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .spec-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(250,247,242,0.38);
+    line-height: 1.5;
+  }
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 03 — THE FIVE DIMENSIONS
+  ═══════════════════════════════════════════ */
+  #dimensions {
+    background: var(--parchment);
+    padding-top: 150px;
+    padding-bottom: 150px;
+  }
+
+  .dimensions-header {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 80px;
+    align-items: end;
+    margin-bottom: 100px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .dimensions-headline {
+    font-family: var(--serif);
+    font-size: clamp(36px, 4vw, 58px);
+    font-weight: 300;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+  }
+  .dimensions-headline em { font-style: italic; color: var(--clay); }
+
+  .dimensions-intro {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.72;
+    color: var(--ink-70);
+  }
+
+  /* Each dimension is a full editorial row */
+  .dimension-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 1.2fr;
+    gap: 0 60px;
+    padding: 72px 0;
+    border-bottom: 1px solid var(--chalk);
+    align-items: start;
+  }
+  .dimension-row:last-child { border-bottom: none; }
+
+  .dim-num-large {
+    font-family: var(--serif);
+    font-size: 80px;
+    font-weight: 300;
+    color: var(--clay-light);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    padding-top: 4px;
+  }
+
+  .dim-left {}
+
+  .dim-name {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 20px;
+    letter-spacing: -0.015em;
+  }
+
+  .dim-desc {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--ink-70);
+    margin-bottom: 28px;
+    max-width: 400px;
+  }
+
+  .dim-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--deep-green);
+    border: 1px solid var(--deep-green);
+    padding: 6px 12px;
+    display: inline-block;
+  }
+
+  /* Signal example panel */
+  .dim-right {}
+
+  .signal-panel {
+    background: var(--warm-white);
+    border: 1px solid var(--chalk);
+    overflow: hidden;
+  }
+
+  .signal-panel-header {
+    background: var(--ink);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .signal-panel-title {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(250,247,242,0.5);
+  }
+
+  .signal-panel-badge {
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--clay-light);
+    border: 1px solid rgba(196,137,111,0.4);
+    padding: 3px 8px;
+  }
+
+  .signal-example {
+    padding: 28px 24px;
+    border-bottom: 1px solid var(--chalk);
+  }
+  .signal-example:last-child { border-bottom: none; }
+
+  .signal-ex-label {
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dust);
+    margin-bottom: 10px;
+  }
+
+  .signal-utterance {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+
+  .signal-interpretation {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .signal-arrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--clay);
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  .signal-interp-text {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--ink-70);
+  }
+
+  .signal-tokens {
+    margin-top: 14px;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .token-chip {
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.08em;
+    color: var(--deep-green);
+    background: rgba(45,74,62,0.08);
+    padding: 3px 8px;
+  }
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 04 — THE SIGNAL FLOW
+  ═══════════════════════════════════════════ */
+  #flow {
+    background: var(--deep-green);
+    color: var(--warm-white);
+    padding-top: 150px;
+    padding-bottom: 150px;
+  }
+
+  .flow-header {
+    max-width: 680px;
+    margin-bottom: 100px;
+  }
+
+  .flow-headline {
+    font-family: var(--serif);
+    font-size: clamp(38px, 4.5vw, 64px);
+    font-weight: 300;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    color: var(--warm-white);
+    margin-bottom: 32px;
+  }
+  .flow-headline em { font-style: italic; color: var(--clay-light); }
+
+  .flow-subhead {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.72;
+    color: rgba(250,247,242,0.55);
+    max-width: 540px;
+  }
+
+  /* Signal flow diagram */
+  .flow-diagram {
+    position: relative;
+  }
+
+  .flow-stages {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    position: relative;
+  }
+
+  /* connecting line behind stages */
+  .flow-stages::before {
+    content: '';
+    position: absolute;
+    top: 32px;
+    left: 5%;
+    right: 5%;
+    height: 1px;
+    background: rgba(250,247,242,0.15);
+    z-index: 0;
+  }
+
+  .flow-stage {
+    padding: 0 20px 0 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .stage-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--clay);
+    margin-bottom: 28px;
+    position: relative;
+  }
+  .stage-dot::before {
+    content: '';
+    position: absolute;
+    inset: -5px;
+    border-radius: 50%;
+    border: 1px solid rgba(196,137,111,0.3);
+  }
+
+  .stage-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--clay-light);
+    margin-bottom: 14px;
+    line-height: 1.4;
+  }
+
+  .stage-desc {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.65;
+    color: rgba(250,247,242,0.50);
+  }
+
+  /* Privacy notice */
+  .flow-privacy {
+    margin-top: 80px;
+    padding: 48px 52px;
+    border: 1px solid rgba(250,247,242,0.12);
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+
+  .privacy-icon {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(250,247,242,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 16px;
+    color: rgba(250,247,242,0.4);
+    flex-shrink: 0;
+  }
+
+  .privacy-body {}
+
+  .privacy-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--clay-light);
+    margin-bottom: 14px;
+  }
+
+  .privacy-text {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(250,247,242,0.50);
+  }
+
+  .privacy-commitments {
+    margin-top: 24px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .commitment-tag {
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(250,247,242,0.40);
+    border: 1px solid rgba(250,247,242,0.15);
+    padding: 5px 10px;
+  }
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 05 — WHAT VLAP IS NOT
+  ═══════════════════════════════════════════ */
+  #not {
+    background: var(--warm-white);
+    padding-top: 150px;
+    padding-bottom: 150px;
+    border-top: 1px solid var(--chalk);
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .not-header {
+    margin-bottom: 80px;
+  }
+
+  .not-headline {
+    font-family: var(--serif);
+    font-size: clamp(42px, 5vw, 72px);
+    font-weight: 300;
+    line-height: 1.06;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    max-width: 720px;
+  }
+  .not-headline em { font-style: italic; color: var(--clay); }
+
+  .not-subhead {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--ink-70);
+    max-width: 560px;
+    margin-top: 28px;
+  }
+
+  /* Not list — aggressive, authoritative */
+  .not-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .not-item {
+    padding: 52px 56px 52px 0;
+    border-bottom: 1px solid var(--chalk);
+    border-right: 1px solid var(--chalk);
+    position: relative;
+  }
+  .not-item:nth-child(2n) {
+    padding-left: 56px;
+    padding-right: 0;
+    border-right: none;
+  }
+  .not-item:nth-last-child(-n+2) { border-bottom: none; }
+
+  .not-item-no {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .not-item-no::before {
+    content: '✕';
+    font-size: 12px;
+  }
+
+  .not-item-title {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 18px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .not-item-body {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--ink-70);
+    max-width: 380px;
+  }
+
+  .not-item-contrast {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid var(--chalk);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--deep-green);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .not-item-contrast::before { content: '→'; }
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 06 — DATA INTEGRITY
+  ═══════════════════════════════════════════ */
+  #integrity {
+    background: var(--parchment);
+    padding-top: 150px;
+    padding-bottom: 150px;
+  }
+
+  .integrity-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 0 100px;
+    align-items: start;
+  }
+
+  .integrity-left { position: sticky; top: 140px; }
+
+  .integrity-headline {
+    font-family: var(--serif);
+    font-size: clamp(36px, 4vw, 54px);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+  .integrity-headline em { font-style: italic; color: var(--clay); }
+
+  .integrity-body {
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.72;
+    color: var(--ink-70);
+    margin-bottom: 40px;
+  }
+
+  .integrity-cert {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--deep-green);
+    border: 1px solid var(--deep-green);
+    padding: 10px 16px;
+    display: inline-block;
+  }
+
+  .integrity-right { }
+
+  .integrity-row {
+    padding: 40px 0;
+    border-bottom: 1px solid var(--chalk);
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  .integrity-row:first-child { padding-top: 0; }
+  .integrity-row:last-child { border-bottom: none; }
+
+  .integrity-row-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dust);
+    padding-top: 4px;
+    line-height: 1.5;
+  }
+
+  .integrity-row-content {}
+
+  .integrity-row-title {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 10px;
+    line-height: 1.25;
+  }
+
+  .integrity-row-desc {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--ink-70);
+  }
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 07 — ACCESS
+  ═══════════════════════════════════════════ */
+  #access {
+    background: var(--ink);
+    color: var(--warm-white);
+    padding-top: 160px;
+    padding-bottom: 160px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .access-bg-text {
+    position: absolute;
+    bottom: -6vw;
+    right: -2vw;
+    font-family: var(--serif);
+    font-size: 32vw;
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(250,247,242,0.022);
+    white-space: nowrap;
+    letter-spacing: -0.05em;
+    pointer-events: none;
+    user-select: none;
+    line-height: 1;
+  }
+
+  .access-inner {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 100px;
+    align-items: start;
+  }
+
+  .access-left {}
+
+  .access-headline {
+    font-family: var(--serif);
+    font-size: clamp(40px, 5vw, 70px);
+    font-weight: 300;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    color: var(--warm-white);
+    margin-bottom: 32px;
+  }
+  .access-headline em { font-style: italic; color: var(--clay-light); }
+
+  .access-body {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.72;
+    color: rgba(250,247,242,0.50);
+    margin-bottom: 52px;
+    max-width: 460px;
+  }
+
+  .access-actions {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary-light {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--warm-white);
+    color: var(--ink);
+    padding: 18px 36px;
+    text-decoration: none;
+    transition: background 0.22s;
+    display: inline-block;
+  }
+  .btn-primary-light:hover { background: var(--clay-light); }
+
+  .btn-text-light {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(250,247,242,0.40);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+  .btn-text-light:hover { color: var(--warm-white); }
+  .btn-text-light::after { content: '→'; }
+
+  .access-right {
+    padding-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .access-tier {
+    padding: 36px 0;
+    border-bottom: 1px solid rgba(250,247,242,0.10);
+  }
+  .access-tier:last-child { border-bottom: none; }
+
+  .tier-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-bottom: 12px;
+  }
+
+  .tier-name {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--warm-white);
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+
+  .tier-desc {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.65;
+    color: rgba(250,247,242,0.45);
+    max-width: 380px;
+  }
+
+  /* ─── FOOTER ─── */
+  .footer-logo span { color: var(--clay); font-style: italic; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1100px) {
+    #intro { grid-template-columns: 1fr; gap: 80px; padding-top: 160px; }
+    .intro-right { border-left: none; padding-left: 0; border-top: 1px solid var(--chalk); padding-top: 60px; }
+    .what-grid { grid-template-columns: 1fr; gap: 60px; }
+    .dimensions-header { grid-template-columns: 1fr; gap: 28px; }
+    .dimension-row { grid-template-columns: 60px 1fr; gap: 32px; }
+    .dim-right { grid-column: 2; }
+    .not-grid { grid-template-columns: 1fr; }
+    .not-item { padding: 48px 0; border-right: none; }
+    .not-item:nth-child(2n) { padding-left: 0; border-right: none; }
+    .not-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--chalk); }
+    .not-item:last-child { border-bottom: none; }
+    .integrity-grid { grid-template-columns: 1fr; gap: 60px; }
+    .integrity-left { position: static; }
+    .integrity-row { grid-template-columns: 1fr; gap: 10px; }
+    .access-inner { grid-template-columns: 1fr; gap: 60px; }
+    .flow-stages { grid-template-columns: 1fr 1fr; }
+    .flow-stages::before { display: none; }
+  }
+
+  @media (max-width: 768px) {
+    :root { --gutter: 5vw; }
+    nav { padding: 16px var(--gutter); }
+    .nav-links { display: none; }
+    .nav-product-tag { display: none; }
+    .dimension-row { grid-template-columns: 1fr; }
+    .dim-num-large { font-size: 56px; }
+    .flow-stages { grid-template-columns: 1fr; }
+    .what-spec-row { grid-template-columns: 1fr; }
+  }
+  .footer-logo span{color:var(--clay);font-style:italic;}
+  .footer-nav a{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.32);text-decoration:none;}
+  .footer-nav a:hover{color:var(--warm-white);}
+  .footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+
+  .ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
+  .ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.2s;}
+  .ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .ham-btn.open span:nth-child(2){opacity:0;}
+  .ham-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+  @media(max-width:780px){
+    .ham-btn{display:flex;}
+    .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--warm);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{font-size:22px;letter-spacing:0.04em;}
+    .nav-cta{display:none;}
+  }
+
+  footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);padding:0;}
+  .footer-sitemap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:0;padding:56px 7vw 40px;border-bottom:1px solid rgba(250,247,242,0.08);}
+  .fs-brand{padding-right:40px;}
+  .footer-logo{font-family:var(--serif);font-size:22px;color:var(--warm-white,#FAF7F2);letter-spacing:-0.02em;text-decoration:none;display:block;margin-bottom:12px;}
+  .footer-logo span{color:var(--clay,#C4896F);font-style:italic;}
+  .footer-mission{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.28);line-height:1.8;margin-bottom:20px;}
+  .fs-cta{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:var(--clay,#C4896F);border:1px solid rgba(196,137,111,0.40);padding:9px 18px;text-decoration:none;transition:all 0.18s;}
+  .fs-cta:hover{background:rgba(196,137,111,0.12);}
+  .fs-col{padding-left:32px;border-left:1px solid rgba(250,247,242,0.06);}
+  .fs-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,247,242,0.30);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(250,247,242,0.06);}
+  .fs-col a{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,247,242,0.45);text-decoration:none;margin-bottom:10px;transition:color 0.15s;}
+  .fs-col a:hover{color:var(--clay,#C4896F);}
+  .footer-bottom{padding:20px 7vw;display:flex;align-items:center;justify-content:space-between;}
+  .footer-copy{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,0.20);}
+  .footer-legal{display:flex;gap:20px;}
+  .footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+  .footer-legal a:hover{color:var(--clay,#C4896F);}
+  @media(max-width:1100px){.footer-sitemap{grid-template-columns:1fr 1fr 1fr;gap:32px;}.fs-brand{grid-column:1/-1;padding-right:0;}.fs-col{border-left:none;padding-left:0;}}
+  @media(max-width:680px){.footer-sitemap{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}}
+  @media(max-width:400px){.footer-sitemap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <div class="nav-left">
+    <a href="index.html" class="nav-logo">Vasl <span>Health</span></a>
+    <span class="nav-product-tag">VLAP &mdash; Language Analysis Platform</span>
+  </div>
+    <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="platform.html">Platform</a></li>
+    <li><a href="outcomes.html">Outcomes</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="#access" class="nav-cta">Request Access</a>
+</nav>
+
+<!-- ═══════════════════════════════════
+     CHAPTER 01 &mdash; THE PROBLEM WITH CLINICAL LISTENING
+════════════════════════════════════ -->
+<section id="intro">
+  <div class="intro-left">
+    <span class="intro-kicker reveal">Chapter 01 &mdash; The Problem With Clinical Listening</span>
+
+    <h1 class="intro-headline reveal d1">
+      Every instrument<br>
+      the field built<br>
+      was built for<br>
+      <em>someone else.</em>
+    </h1>
+
+    <p class="intro-body reveal d2">
+      The PHQ-9. The GAD-7. The Columbia Protocol. They are rigorous instruments, carefully validated &mdash; on populations that don't look, speak, or carry pain the way BIPOC and underserved youth do. The tools aren't wrong. They're just measuring the wrong frequency.
+    </p>
+
+    <div class="intro-tag-row reveal d3">
+      <span class="tag active">Non-diagnostic</span>
+      <span class="tag active">Non-prescriptive</span>
+      <span class="tag active">Culturally grounded</span>
+      <span class="tag">Clinician-facing only</span>
+    </div>
+  </div>
+
+  <div class="intro-right reveal d2">
+    <div class="instrument-item">
+      <div class="instrument-name">PHQ-9</div>
+      <div class="instrument-right">
+        <div class="instrument-label">What it asks</div>
+        <div class="instrument-claim">"Little interest or pleasure in doing things?"</div>
+        <div class="instrument-gap">A youth who says "I don't fw anything no more" will not select "Nearly every day." They don't read formal distress language as their own. The signal disappears.</div>
+      </div>
+    </div>
+
+    <div class="instrument-item">
+      <div class="instrument-name">GAD-7</div>
+      <div class="instrument-right">
+        <div class="instrument-label">What it misses</div>
+        <div class="instrument-claim">"Feeling nervous, anxious, or on edge?"</div>
+        <div class="instrument-gap">Hypervigilance in communities under threat reads as calm, watchful, prepared &mdash; not anxious. A youth who has learned to scan the room doesn't call it anxiety. They call it survival.</div>
+      </div>
+    </div>
+
+    <div class="instrument-item">
+      <div class="instrument-name">Columbia Protocol</div>
+      <div class="instrument-right">
+        <div class="instrument-label">The translation gap</div>
+        <div class="instrument-claim">"Have you wished you were dead?"</div>
+        <div class="instrument-gap">"I'm dead tired." "I'm deadass done." "This whole thing is dead to me." Three different youth. Three different meanings. One instrument that can't tell the difference.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     CHAPTER 02 &mdash; WHAT VLAP IS
+════════════════════════════════════ -->
+<section id="what">
+  <div class="chapter-label light reveal">Chapter 02 &mdash; What VLAP Is</div>
+
+  <div class="what-grid">
+    <div class="what-left">
+      <h2 class="what-headline reveal d1">
+        The first language<br>
+        analysis platform<br>
+        built on <em>how<br>youth actually speak.</em>
+      </h2>
+
+      <p class="what-body reveal d2">
+        VLAP &mdash; the Vasl Language Analysis Platform &mdash; is a precision interpretation engine trained on community language, not clinical corpora. It doesn't assign diagnoses. It doesn't surface alerts. It translates &mdash; converting the language youth actually use into signal a licensed clinician can act on.
+      </p>
+
+      <blockquote class="what-pull reveal d3">
+        "Built from the inside of a community's language. Not retrofitted onto it."
+      </blockquote>
+    </div>
+
+    <div class="what-right reveal d2">
+      <div class="definition-block">
+        <div class="definition-term">VLAP &mdash; Definition</div>
+        <div class="definition-text">
+          A real-time language analysis layer that detects <em>culturally specific distress signals</em> across five behavioral dimensions &mdash; surfaced exclusively to licensed clinicians as interpretive context, never as diagnostic output.
+        </div>
+      </div>
+
+      <div class="what-spec-row">
+        <div class="spec-cell">
+          <div class="spec-num">2,400<span style="font-size:22px">+</span></div>
+          <div class="spec-label">AAVE & youth vernacular<br>tokens in the corpus</div>
+        </div>
+        <div class="spec-cell">
+          <div class="spec-num">5</div>
+          <div class="spec-label">Behavioral signal<br>dimensions analyzed</div>
+        </div>
+        <div class="spec-cell">
+          <div class="spec-num">0</div>
+          <div class="spec-label">Diagnostic outputs<br>ever produced</div>
+        </div>
+        <div class="spec-cell">
+          <div class="spec-num">1</div>
+          <div class="spec-label">Audience for signal data:<br>licensed clinicians only</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     CHAPTER 03 &mdash; THE FIVE DIMENSIONS
+════════════════════════════════════ -->
+<section id="dimensions">
+  <div class="chapter-label reveal">Chapter 03 &mdash; The Five Dimensions</div>
+
+  <div class="dimensions-header">
+    <h2 class="dimensions-headline reveal d1">
+      Five ways<br>youth signal<br>what words<br><em>almost say.</em>
+    </h2>
+    <p class="dimensions-intro reveal d2">
+      VLAP doesn't listen for clinical keywords. It listens for patterns &mdash; tonal, temporal, relational, and cultural &mdash; across five behavioral dimensions that clinical instruments were never designed to read. Each dimension is a different way a young person tells the truth without using the language the system recognizes.
+    </p>
+  </div>
+
+  <!-- DIMENSION 01 -->
+  <div class="dimension-row reveal">
+    <div class="dim-num-large">01</div>
+    <div class="dim-left">
+      <div class="dim-name">Emotional Valence Shift</div>
+      <p class="dim-desc">
+        Detects inversions &mdash; moments where the surface tone of an expression contradicts its emotional weight. Youth often communicate serious distress through affect that reads as light: humor, irony, exaggeration, or casual declaration. VLAP reads beneath the register.
+      </p>
+      <span class="dim-tag">Tonal Inversion Detection</span>
+    </div>
+    <div class="dim-right">
+      <div class="signal-panel">
+        <div class="signal-panel-header">
+          <span class="signal-panel-title">Signal Examples &mdash; Composite / De-identified</span>
+          <span class="signal-panel-badge">Dimension 01</span>
+        </div>
+        <div class="signal-example">
+          <div class="signal-ex-label">Utterance</div>
+          <div class="signal-utterance">"Bro I am actually so unbothered it's insane."</div>
+          <div class="signal-interpretation">
+            <span class="signal-arrow">&rarr;</span>
+            <div class="signal-interp-text">Hyper-assertion of emotional detachment following a high-stress trigger. "Unbothered" in this context is a suppression marker, not an affect state.</div>
+          </div>
+          <div class="signal-tokens">
+            <span class="token-chip">unbothered</span>
+            <span class="token-chip">actually so</span>
+            <span class="token-chip">it's insane</span>
+          </div>
+        </div>
+        <div class="signal-example">
+          <div class="signal-ex-label">Utterance</div>
+          <div class="signal-utterance">"It's giving unalive energy out here ngl."</div>
+          <div class="signal-interpretation">
+            <span class="signal-arrow">&rarr;</span>
+            <div class="signal-interp-text">Euphemistic framing of self-harm ideation using vernacular distancing. "Ngl" (not gonna lie) often signals a pivot toward honesty the speaker is testing.</div>
+          </div>
+          <div class="signal-tokens">
+            <span class="token-chip">giving</span>
+            <span class="token-chip">unalive</span>
+            <span class="token-chip">ngl</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIMENSION 02 -->
+  <div class="dimension-row reveal">
+    <div class="dim-num-large">02</div>
+    <div class="dim-left">
+      <div class="dim-name">Social Withdrawal Markers</div>
+      <p class="dim-desc">
+        Identifies linguistic patterns associated with voluntary disengagement from community, connection, and belonging. Withdrawal in youth often precedes escalation &mdash; but its language is subtle, coded, and frequently read as attitude rather than distress.
+      </p>
+      <span class="dim-tag">Isolation Pattern Recognition</span>
+    </div>
+    <div class="dim-right">
+      <div class="signal-panel">
+        <div class="signal-panel-header">
+          <span class="signal-panel-title">Signal Examples &mdash; Composite / De-identified</span>
+          <span class="signal-panel-badge">Dimension 02</span>
+        </div>
+        <div class="signal-example">
+          <div class="signal-ex-label">Utterance</div>
+          <div class="signal-utterance">"I'm moving different now. People can't handle it."</div>
+          <div class="signal-interpretation">
+            <span class="signal-arrow">&rarr;</span>
+            <div class="signal-interp-text">Behavioral reframing of social withdrawal as self-elevation. "Moving different" signals a self-initiated departure from peer systems &mdash; often following rupture or rejection.</div>
+          </div>
+          <div class="signal-tokens">
+            <span class="token-chip">moving different</span>
+            <span class="token-chip">can't handle it</span>
+          </div>
+        </div>
+        <div class="signal-example">
+          <div class="signal-ex-label">Utterance</div>
+          <div class="signal-utterance">"I don't really fw people like that no more."</div>
+          <div class="signal-interpretation">
+            <span class="signal-arrow">&rarr;</span>
+            <div class="signal-interp-text">Broad relational withdrawal signal. "No more" indicates a temporal shift &mdash; something changed. The absence of a specific cause is itself clinically significant.</div>
+          </div>
+          <div class="signal-tokens">
+            <span class="token-chip">fw people</span>
+            <span class="token-chip">like that</span>
+            <span class="token-chip">no more</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIMENSION 03 -->
+  <div class="dimension-row reveal">
+    <div class="dim-num-large">03</div>
+    <div class="dim-left">
+      <div class="dim-name">Hypervigilance Signals</div>
+      <p class="dim-desc">
+        Reads coded alertness language common in youth navigating unsafe, unpredictable, or high-threat environments. Hypervigilance often presents as competence, not distress &mdash; and gets read as maturity, independence, or toughness. VLAP flags the pattern beneath the posture.
+      </p>
+      <span class="dim-tag">Environmental Threat Response</span>
+    </div>
+    <div class="dim-right">
+      <div class="signal-panel">
+        <div class="signal-panel-header">
+          <span class="signal-panel-title">Signal Examples &mdash; Composite / De-identified</span>
+          <span class="signal-panel-badge">Dimension 03</span>
+        </div>
+        <div class="signal-example">
+          <div class="signal-ex-label">Utterance</div>
+          <div class="signal-utterance">"I stay ready. You can't be slipping out here."</div>
+          <div class="signal-interpretation">
+            <span class="signal-arrow">&rarr;</span>
+            <div class="signal-interp-text">Sustained threat orientation expressed as lifestyle philosophy. "Stay ready" and "can't be slipping" are hypervigilance identity markers &mdash; protective framing around a chronic state of alertness.</div>
+          </div>
+          <div class="signal-tokens">
+            <span class="token-chip">stay ready</span>
+            <span class="token-chip">slipping</span>
+            <span class="token-chip">out here</span>
+          </div>
+        </div>
+        <div class="signal-example">
+          <div class="signal-ex-label">Utterance</div>
+          <div class="signal-utterance">"I always know who's in the room before they know I'm there."</div>
+          <div class="signal-interpretation">
+            <span class="signal-arrow">&rarr;</span>
+            <div class="signal-interp-text">Perceptual hypervigilance narrated as skill. The pride in the statement is real &mdash; and so is the exhaustion underneath it.</div>
+          </div>
+          <div class="signal-tokens">
+            <span class="token-chip">always know</span>
+            <span class="token-chip">in the room</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIMENSION 04 -->
+  <div class="dimension-row reveal">
+    <div class="dim-num-large">04</div>
+    <div class="dim-left">
+      <div class="dim-name">Cultural Coping Idioms</div>
+      <p class="dim-desc">
+        Recognizes humor, spiritual framing, deflection, and collective identity language as active coping strategies &mdash; not symptoms of avoidance or lack of insight. This dimension was built specifically to prevent the misreading of cultural resilience as clinical resistance.
+      </p>
+      <span class="dim-tag">Resilience vs. Avoidance Differentiation</span>
+    </div>
+    <div class="dim-right">
+      <div class="signal-panel">
+        <div class="signal-panel-header">
+          <span class="signal-panel-title">Signal Examples &mdash; Composite / De-identified</span>
+          <span class="signal-panel-badge">Dimension 04</span>
+        </div>
+        <div class="signal-example">
+          <div class="signal-ex-label">Utterance</div>
+          <div class="signal-utterance">"God got me. That's all I'm saying."</div>
+          <div class="signal-interpretation">
+            <span class="signal-arrow">&rarr;</span>
+            <div class="signal-interp-text">Spiritual coping as conversational closure. Can signal genuine faith-based resilience &mdash; or a shutdown of further disclosure. Context and frequency across sessions is the differentiator.</div>
+          </div>
+          <div class="signal-tokens">
+            <span class="token-chip">God got me</span>
+            <span class="token-chip">that's all I'm saying</span>
+          </div>
+        </div>
+        <div class="signal-example">
+          <div class="signal-ex-label">Utterance</div>
+          <div class="signal-utterance">"I'm built different. This ain't even a thing to me."</div>
+          <div class="signal-interpretation">
+            <span class="signal-arrow">&rarr;</span>
+            <div class="signal-interp-text">Collective identity-based deflection. "Built different" is both a genuine cultural pride marker and a distress minimizer. VLAP reads both simultaneously &mdash; the clinician decides which is primary.</div>
+          </div>
+          <div class="signal-tokens">
+            <span class="token-chip">built different</span>
+            <span class="token-chip">ain't even a thing</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIMENSION 05 -->
+  <div class="dimension-row reveal">
+    <div class="dim-num-large">05</div>
+    <div class="dim-left">
+      <div class="dim-name">Temporal Distress Framing</div>
+      <p class="dim-desc">
+        Detects collapsed, fatalistic, or compressed future language &mdash; ways of speaking about time that signal a loss of forward imagination. This is one of VLAP's most clinically significant dimensions: the inability to envision a future is a well-documented precursor to crisis escalation, and it speaks in very specific vernacular.
+      </p>
+      <span class="dim-tag">Future Horizon Collapse Detection</span>
+    </div>
+    <div class="dim-right">
+      <div class="signal-panel">
+        <div class="signal-panel-header">
+          <span class="signal-panel-title">Signal Examples &mdash; Composite / De-identified</span>
+          <span class="signal-panel-badge">Dimension 05</span>
+        </div>
+        <div class="signal-example">
+          <div class="signal-ex-label">Utterance</div>
+          <div class="signal-utterance">"I don't even be thinking about next year like that."</div>
+          <div class="signal-interpretation">
+            <span class="signal-arrow">&rarr;</span>
+            <div class="signal-interp-text">Future horizon compression. "Like that" softens the statement but doesn't negate it. The absence of future-oriented thought is the signal &mdash; especially when repeated across sessions.</div>
+          </div>
+          <div class="signal-tokens">
+            <span class="token-chip">don't even be</span>
+            <span class="token-chip">next year</span>
+            <span class="token-chip">like that</span>
+          </div>
+        </div>
+        <div class="signal-example">
+          <div class="signal-ex-label">Utterance</div>
+          <div class="signal-utterance">"I just need to make it to the weekend, fr."</div>
+          <div class="signal-interpretation">
+            <span class="signal-arrow">&rarr;</span>
+            <div class="signal-interp-text">Acutely compressed temporal horizon. "Make it to" combined with a very near-term frame signals a survival orientation rather than forward planning. "Fr" (for real) is an authenticity marker &mdash; this is not casual.</div>
+          </div>
+          <div class="signal-tokens">
+            <span class="token-chip">make it to</span>
+            <span class="token-chip">fr</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     CHAPTER 04 &mdash; THE SIGNAL FLOW
+════════════════════════════════════ -->
+<section id="flow">
+  <div class="chapter-label light reveal">Chapter 04 &mdash; The Signal Flow</div>
+
+  <div class="flow-header">
+    <h2 class="flow-headline reveal d1">
+      From youth voice<br>to clinical insight &mdash;<br>
+      <em>without a single<br>diagnostic step.</em>
+    </h2>
+    <p class="flow-subhead reveal d2">
+      This is how VLAP moves. Every stage is designed to preserve dignity, protect privacy, and deliver the interpretation to the one person authorized to act on it.
+    </p>
+  </div>
+
+  <div class="flow-diagram reveal d2">
+    <div class="flow-stages">
+      <div class="flow-stage">
+        <div class="stage-dot"></div>
+        <div class="stage-title">Youth Input</div>
+        <div class="stage-desc">Youth communicate through the Member App &mdash; text, voice, or structured prompts &mdash; in their own language, on their own terms.</div>
+      </div>
+      <div class="flow-stage">
+        <div class="stage-dot"></div>
+        <div class="stage-title">VLAP Processing</div>
+        <div class="stage-desc">The language analysis layer runs in real time across all five behavioral dimensions. No human reviews this stage. No PHI leaves the system.</div>
+      </div>
+      <div class="flow-stage">
+        <div class="stage-dot"></div>
+        <div class="stage-title">Signal Generation</div>
+        <div class="stage-desc">VLAP produces a dimensional signal profile &mdash; not a score, not a diagnosis. A map of what the language is carrying, in context.</div>
+      </div>
+      <div class="flow-stage">
+        <div class="stage-dot"></div>
+        <div class="stage-title">Clinician Review</div>
+        <div class="stage-desc">The signal profile surfaces in the Coach Portal before the session. The clinician &mdash; and only the clinician &mdash; receives and interprets it.</div>
+      </div>
+      <div class="flow-stage">
+        <div class="stage-dot"></div>
+        <div class="stage-title">Care Response</div>
+        <div class="stage-desc">The clinician enters the session informed. What they do with that information is entirely theirs &mdash; the platform supports, never directs.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flow-privacy reveal d3">
+    <div class="privacy-icon">⊘</div>
+    <div class="privacy-body">
+      <div class="privacy-title">Data Architecture &mdash; Non-Negotiable Commitments</div>
+      <p class="privacy-text">
+        VLAP does not store youth language verbatim after processing. Signal data is clinician-facing only and never shared with organizations, payers, researchers, or third parties without explicit, documented consent. No output from VLAP constitutes a clinical diagnosis, a treatment recommendation, or a reportable event. The platform is designed so that even its most granular outputs cannot be used as a substitute for clinical judgment.
+      </p>
+      <div class="privacy-commitments">
+        <span class="commitment-tag">HIPAA Safe Harbor</span>
+        <span class="commitment-tag">No verbatim storage</span>
+        <span class="commitment-tag">Clinician-facing only</span>
+        <span class="commitment-tag">Zero diagnostic output</span>
+        <span class="commitment-tag">No third-party data sharing</span>
+        <span class="commitment-tag">Consent-first architecture</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     CHAPTER 05 &mdash; WHAT VLAP IS NOT
+════════════════════════════════════ -->
+<section id="not">
+  <div class="chapter-label reveal">Chapter 05 &mdash; What VLAP Is Not</div>
+
+  <div class="not-header">
+    <h2 class="not-headline reveal d1">
+      We will be direct<br>
+      about what this<br>
+      platform <em>refuses to be.</em>
+    </h2>
+    <p class="not-subhead reveal d2">
+      The surveillance-tech-as-care industry is growing. The wellness-app-as-treatment pipeline is crowded. VLAP is neither. Here is what that means in practice.
+    </p>
+  </div>
+
+  <div class="not-grid">
+    <div class="not-item reveal">
+      <div class="not-item-no">A diagnostic tool</div>
+      <div class="not-item-title">Not a screener. Not a classifier. Not a risk scorer.</div>
+      <p class="not-item-body">VLAP produces no clinical diagnosis, no risk level, no flag, and no score. It produces interpretive context. A clinician is not replaced by this platform &mdash; they are more prepared because of it. The distinction is not semantic. It is the entire architecture.</p>
+      <div class="not-item-contrast">What it is: a precision interpretation layer</div>
+    </div>
+
+    <div class="not-item reveal d1">
+      <div class="not-item-no">Surveillance technology</div>
+      <div class="not-item-title">Not a monitoring system. Not a behavioral tracker. Not a safety alert engine.</div>
+      <p class="not-item-body">VLAP does not watch youth. It processes what youth choose to share within the platform, for the purpose of improving their care. There is no passive collection. There is no behavioral profiling. There is no alert sent to a school, a parent, or a platform algorithm.</p>
+      <div class="not-item-contrast">What it is: an opt-in interpretive instrument</div>
+    </div>
+
+    <div class="not-item reveal">
+      <div class="not-item-no">A wellness app</div>
+      <div class="not-item-title">Not self-help content. Not mood tracking. Not journaling with AI feedback.</div>
+      <p class="not-item-body">VLAP is a clinical support tool. Its outputs are not visible to youth. Its function is not to make youth feel supported &mdash; that is the clinician's role. VLAP's role is to make the clinician more capable of doing that job with cultural accuracy.</p>
+      <div class="not-item-contrast">What it is: a clinician-facing support infrastructure</div>
+    </div>
+
+    <div class="not-item reveal d1">
+      <div class="not-item-no">A replacement for lived knowledge</div>
+      <div class="not-item-title">Not a substitute for a clinician who knows their community.</div>
+      <p class="not-item-body">VLAP was built to support clinicians who already care &mdash; not to fill in for ones who don't. Cultural intelligence is not a software problem. It is a human practice that this platform reinforces, not replaces. A culturally incompetent clinician with access to VLAP is still a culturally incompetent clinician.</p>
+      <div class="not-item-contrast">What it is: a tool for those already doing the work</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     CHAPTER 06 &mdash; DATA INTEGRITY
+════════════════════════════════════ -->
+<section id="integrity">
+  <div class="chapter-label reveal">Chapter 06 &mdash; Data Integrity</div>
+
+  <div class="integrity-grid">
+    <div class="integrity-left reveal">
+      <h2 class="integrity-headline">
+        The architecture<br>
+        of <em>trust.</em>
+      </h2>
+      <p class="integrity-body">
+        How data moves through VLAP is not a compliance detail. It is a design decision &mdash; one we made before we wrote a line of code. Every technical choice reflects a commitment to the youth who never agreed to be studied.
+      </p>
+      <div class="integrity-cert">HIPAA-Aligned Architecture</div>
+    </div>
+
+    <div class="integrity-right">
+      <div class="integrity-row reveal">
+        <div class="integrity-row-label">Data Minimization</div>
+        <div class="integrity-row-content">
+          <div class="integrity-row-title">We collect only what care requires.</div>
+          <div class="integrity-row-desc">VLAP processes language in context of a care relationship. No passive collection. No behavioral metadata harvested outside the session window. The platform is not learning from youth &mdash; it is learning for them.</div>
+        </div>
+      </div>
+
+      <div class="integrity-row reveal d1">
+        <div class="integrity-row-label">Signal Architecture</div>
+        <div class="integrity-row-content">
+          <div class="integrity-row-title">Signals, not transcripts.</div>
+          <div class="integrity-row-desc">Youth language is processed and converted to dimensional signal data. Verbatim content is not stored after processing. The youth's words don't live in a database &mdash; their meaning does, in a form that protects them.</div>
+        </div>
+      </div>
+
+      <div class="integrity-row reveal d2">
+        <div class="integrity-row-label">Access Control</div>
+        <div class="integrity-row-content">
+          <div class="integrity-row-title">One audience: the licensed clinician.</div>
+          <div class="integrity-row-desc">Signal data surfaces in the Coach Portal and stops there. Organizational administrators see only aggregate, de-identified trend data &mdash; never individual session signals. Payers, researchers, and third parties see nothing.</div>
+        </div>
+      </div>
+
+      <div class="integrity-row reveal d3">
+        <div class="integrity-row-label">Mayo Clinic Validation</div>
+        <div class="integrity-row-content">
+          <div class="integrity-row-title">Platform_Accelerate program participant.</div>
+          <div class="integrity-row-desc">Vasl is an active participant in the Mayo Clinic Platform_Accelerate program. VLAP's training data strategy &mdash; behavioral health encounters, ICD-10 codes, standardized assessments, SDoH demographics &mdash; is being developed in partnership with Mayo Clinic Platform's data infrastructure, with HIPAA Safe Harbor de-identification and HL7 FHIR-compliant formatting as non-negotiable requirements.</div>
+        </div>
+      </div>
+
+      <div class="integrity-row reveal d4">
+        <div class="integrity-row-label">Consent Architecture</div>
+        <div class="integrity-row-content">
+          <div class="integrity-row-title">Nothing moves without consent.</div>
+          <div class="integrity-row-desc">Youth consent is obtained at enrollment and revisited at each stage of data use. Minors' consent frameworks are designed with legal counsel and community input &mdash; not extracted as a terms-of-service checkbox.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     CHAPTER 07 &mdash; ACCESS
+════════════════════════════════════ -->
+<section id="access">
+  <div class="access-bg-text" aria-hidden="true">VLAP</div>
+
+  <div class="access-inner">
+    <div class="access-left">
+      <div class="chapter-label muted reveal">Chapter 07 &mdash; Access</div>
+      <h2 class="access-headline reveal d1">
+        VLAP is not<br>
+        a product you buy.<br>
+        It's a capacity<br>
+        you <em>build into.</em>
+      </h2>
+      <p class="access-body reveal d2">
+        We partner with community health centers, school-based behavioral health programs, and youth-serving organizations who are ready to meet youth where they are &mdash; linguistically, culturally, and clinically. Access is by application. Deployment is supported. Community alignment is required.
+      </p>
+      <div class="access-actions reveal d3">
+        <a href="contact.html" class="btn-primary-light">Request Access</a>
+        <a href="index.html" class="btn-text-light">Back to Vasl Health</a>
+      </div>
+    </div>
+
+    <div class="access-right reveal d2">
+      <div class="access-tier">
+        <div class="tier-label">Community Health Centers</div>
+        <div class="tier-name">Full VLAP Integration</div>
+        <div class="tier-desc">Complete deployment across Member App, Coach Portal, and Client Org Portal. Includes clinician onboarding, cultural competency alignment session, and ongoing signal calibration support.</div>
+      </div>
+
+      <div class="access-tier">
+        <div class="tier-label">School-Based Programs</div>
+        <div class="tier-name">Coach Portal Access</div>
+        <div class="tier-desc">VLAP signal data surfaces for school-based licensed clinicians operating within existing MTSS or behavioral health frameworks. Designed for high-caseload environments where pre-session insight is highest-leverage.</div>
+      </div>
+
+      <div class="access-tier">
+        <div class="tier-label">Research & Validation Partners</div>
+        <div class="tier-name">VLAP Data Partnership</div>
+        <div class="tier-desc">For academic institutions and health systems developing culturally informed behavioral health research. Data access governed by IRB oversight, HIPAA Safe Harbor de-identification, and bilateral data use agreements.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-sitemap">
+    <div class="fs-brand">
+      <a href="index.html" class="footer-logo">Vasl <span>Health</span></a>
+      <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
+      <a href="contact.html" class="fs-cta">Request a Demo &rarr;</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Platform</div>
+      <a href="platform.html">Platform Overview</a>
+      <a href="vlap.html">VLAP</a>
+      <a href="ai-model.html">AI Model</a>
+      <a href="technology.html">Technology</a>
+      <a href="peer-groups.html">Peer Groups</a>
+      <a href="teletherapy.html">Teletherapy</a>
+      <a href="prototype.html">Live Demo Portal</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Who We Serve</div>
+      <a href="for-schools.html">For Schools</a>
+      <a href="for-organizations.html">For Organizations</a>
+      <a href="outcomes.html">Outcomes</a>
+      <a href="clinical-outcomes.html">Clinical Outcomes</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Company</div>
+      <a href="about.html">About Vasl</a>
+      <a href="team.html">Team</a>
+      <a href="careers.html">Careers</a>
+      <a href="research.html">Research</a>
+      <a href="blog.html">Blog &amp; Insights</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Support &amp; Legal</div>
+      <a href="support.html">Help Center</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="baa.html">Business Associate Agreement</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 Vasl Health, Inc. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="baa.html">BAA</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── SCROLL REVEAL ─── -->
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.07, rootMargin: '0px 0px -36px 0px' });
+  reveals.forEach(el => io.observe(el));
+
+  window.addEventListener('load', () => {
+    reveals.forEach((el, i) => {
+      if (el.getBoundingClientRect().top < window.innerHeight) {
+        setTimeout(() => el.classList.add('visible'), i * 70);
+      }
+    });
+  });
+</script>
+</body>
+</html>
