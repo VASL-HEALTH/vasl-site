@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The stressors that BIPOC and LGBTQ+ youth carry are not incidental to their mental health. They are central to it. And standard clinical instruments were not built to see them.">
+<title>The Other Diagnosis: Understanding Identity-Based Stress &mdash; Vasl Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --warm-white:#FAF7F2;--parchment:#F0EAE0;--ink:#1C1C1C;
+  --ink-70:rgba(28,28,28,0.70);--ink-50:rgba(28,28,28,0.50);--ink-12:rgba(28,28,28,0.12);
+  --clay:#C4896F;--clay-light:#E8C4AE;--clay-pale:#F5E6DC;
+  --deep-green:#2D4A3E;--dust:#8B7B6B;--chalk:#E2DAD0;--charcoal:#222222;
+  --serif:'Newsreader',Georgia,serif;--sans:'IBM Plex Sans',sans-serif;--mono:'IBM Plex Mono',monospace;
+  --gutter:7vw;
+}
+body{background:var(--warm-white);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);display:flex;align-items:center;justify-content:space-between;background:rgba(250,247,242,0.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--ink-12);}
+.nav-logo{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:-0.02em;color:var(--ink);text-decoration:none;}
+.nav-logo span{color:var(--clay);font-style:italic;}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--dust);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--ink);}
+.nav-cta{font-family:var(--mono);font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--deep-green);border:1px solid var(--deep-green);padding:9px 20px;text-decoration:none;transition:background 0.22s,color 0.22s;}
+.nav-cta:hover{background:var(--deep-green);color:var(--warm-white);}
+
+/* Article layout */
+.article-header{padding:140px var(--gutter) 72px;border-bottom:1px solid var(--chalk);max-width:1400px;}
+.ah-breadcrumb{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dust);margin-bottom:32px;display:flex;align-items:center;gap:10px;}
+.ah-breadcrumb a{color:var(--dust);text-decoration:none;}
+.ah-breadcrumb a:hover{color:var(--ink);}
+.ah-breadcrumb-sep{color:var(--chalk);}
+.ah-category{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--clay);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.ah-category::before{content:'';display:block;width:20px;height:1px;background:var(--clay);}
+.ah-title{font-family:var(--serif);font-size:clamp(36px,5vw,72px);font-weight:300;line-height:1.06;letter-spacing:-0.03em;color:var(--ink);margin-bottom:28px;max-width:900px;}
+.ah-title em{font-style:italic;color:var(--clay);}
+.ah-deck{font-size:20px;font-weight:300;line-height:1.65;color:var(--ink-70);max-width:680px;margin-bottom:40px;}
+.ah-meta{display:flex;align-items:center;gap:20px;padding-top:28px;border-top:1px solid var(--chalk);flex-wrap:wrap;}
+.ah-author{display:flex;align-items:center;gap:12px;}
+.ah-avatar{width:40px;height:40px;border-radius:8px;background:var(--deep-green);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:17px;color:var(--warm-white);}
+.ah-author-name{font-size:14px;font-weight:500;color:var(--ink);}
+.ah-author-role{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dust);}
+.ah-meta-divider{width:1px;height:32px;background:var(--chalk);}
+.ah-meta-item{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dust);}
+
+/* Body layout */
+.article-body-wrap{padding:80px var(--gutter) 100px;max-width:1400px;display:grid;grid-template-columns:1fr 320px;gap:0 80px;align-items:start;}
+.article-content{}
+.article-sidebar{position:sticky;top:90px;}
+
+/* Article content */
+.ac p{font-size:18px;font-weight:300;line-height:1.80;color:var(--ink-70);margin-bottom:28px;}
+.ac p:last-child{margin-bottom:0;}
+.ac h2{font-family:var(--serif);font-size:30px;font-weight:400;color:var(--ink);margin:56px 0 20px;line-height:1.2;letter-spacing:-0.02em;}
+.ac h3{font-family:var(--serif);font-size:22px;font-weight:400;color:var(--ink);margin:36px 0 14px;line-height:1.2;letter-spacing:-0.01em;}
+.ac strong{font-weight:500;color:var(--ink);}
+.ac em{font-style:italic;}
+.ac a{color:var(--deep-green);text-decoration:none;border-bottom:1px solid rgba(45,74,62,0.3);}
+
+/* Pull quote */
+.pull-quote{margin:52px 0;padding:36px 44px;border-left:3px solid var(--clay);background:var(--clay-pale);}
+.pq-text{font-family:var(--serif);font-size:24px;font-weight:300;font-style:italic;color:var(--ink);line-height:1.45;letter-spacing:-0.01em;}
+.pq-attr{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dust);margin-top:14px;}
+
+/* Stat call-out */
+.stat-callout{margin:44px 0;padding:32px 36px;border:1px solid var(--chalk);background:var(--parchment);}
+.sc-num{font-family:var(--serif);font-size:56px;font-weight:300;color:var(--clay);line-height:1;letter-spacing:-0.04em;margin-bottom:8px;}
+.sc-label{font-size:15px;font-weight:500;color:var(--ink);margin-bottom:6px;}
+.sc-sub{font-size:13px;font-weight:300;color:var(--ink-70);line-height:1.6;}
+
+/* Sidebar */
+.as-section{margin-bottom:40px;padding-bottom:40px;border-bottom:1px solid var(--chalk);}
+.as-section:last-child{border-bottom:none;margin-bottom:0;}
+.as-label{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--clay);margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--chalk);}
+.as-stat{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--chalk);}
+.as-stat:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.as-stat-num{font-family:var(--serif);font-size:36px;font-weight:300;color:var(--ink);line-height:1;letter-spacing:-0.03em;margin-bottom:6px;}
+.as-stat-label{font-size:13px;font-weight:300;color:var(--ink-70);line-height:1.5;}
+.as-stat-caveat{font-family:var(--mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dust);margin-top:4px;}
+
+/* Related articles */
+.related-item{display:block;text-decoration:none;padding:14px 0;border-bottom:1px solid var(--chalk);transition:opacity 0.2s;}
+.related-item:last-child{border-bottom:none;}
+.related-item:hover{opacity:0.70;}
+.ri-cat{font-family:var(--mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--clay);margin-bottom:5px;}
+.ri-title{font-family:var(--serif);font-size:15px;font-weight:400;color:var(--ink);line-height:1.3;}
+
+/* CTA */
+.article-cta{margin:80px var(--gutter) 0;padding:60px 80px;background:var(--deep-green);display:grid;grid-template-columns:1fr auto;gap:0 60px;align-items:center;}
+.cta-headline{font-family:var(--serif);font-size:clamp(26px,3vw,42px);font-weight:300;line-height:1.1;letter-spacing:-0.02em;color:var(--warm-white);}
+.cta-headline em{font-style:italic;color:var(--clay-light);}
+.cta-body{font-size:16px;font-weight:300;color:rgba(250,247,242,0.58);margin-top:12px;line-height:1.65;}
+.cta-btn{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:var(--warm-white);color:var(--ink);padding:16px 32px;text-decoration:none;white-space:nowrap;display:inline-block;transition:background 0.22s;flex-shrink:0;}
+.cta-btn:hover{background:var(--clay-light);}
+.footer-logo span{color:var(--clay);font-style:italic;}
+.footer-nav a{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.32);text-decoration:none;}
+.footer-nav a:hover{color:var(--warm-white);}
+.footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+@media(max-width:1100px){.article-body-wrap{grid-template-columns:1fr;}.article-sidebar{position:static;padding-top:60px;border-top:1px solid var(--chalk);}.article-cta{grid-template-columns:1fr;padding:44px;}.}
+@media(max-width:768px){:root{--gutter:5vw;}.nav-links{display:none;}.article-cta{padding:36px;}.}
+
+  .ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
+  .ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.2s;}
+  .ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .ham-btn.open span:nth-child(2){opacity:0;}
+  .ham-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+  @media(max-width:780px){
+    .ham-btn{display:flex;}
+    .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--warm);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{font-size:22px;letter-spacing:0.04em;}
+    .nav-cta{display:none;}
+  }
+
+  footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);padding:0;}
+  .footer-sitemap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:0;padding:56px 7vw 40px;border-bottom:1px solid rgba(250,247,242,0.08);}
+  .fs-brand{padding-right:40px;}
+  .footer-logo{font-family:var(--serif);font-size:22px;color:var(--warm-white,#FAF7F2);letter-spacing:-0.02em;text-decoration:none;display:block;margin-bottom:12px;}
+  .footer-logo span{color:var(--clay,#C4896F);font-style:italic;}
+  .footer-mission{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.28);line-height:1.8;margin-bottom:20px;}
+  .fs-cta{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:var(--clay,#C4896F);border:1px solid rgba(196,137,111,0.40);padding:9px 18px;text-decoration:none;transition:all 0.18s;}
+  .fs-cta:hover{background:rgba(196,137,111,0.12);}
+  .fs-col{padding-left:32px;border-left:1px solid rgba(250,247,242,0.06);}
+  .fs-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,247,242,0.30);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(250,247,242,0.06);}
+  .fs-col a{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,247,242,0.45);text-decoration:none;margin-bottom:10px;transition:color 0.15s;}
+  .fs-col a:hover{color:var(--clay,#C4896F);}
+  .footer-bottom{padding:20px 7vw;display:flex;align-items:center;justify-content:space-between;}
+  .footer-copy{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,0.20);}
+  .footer-legal{display:flex;gap:20px;}
+  .footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+  .footer-legal a:hover{color:var(--clay,#C4896F);}
+  @media(max-width:1100px){.footer-sitemap{grid-template-columns:1fr 1fr 1fr;gap:32px;}.fs-brand{grid-column:1/-1;padding-right:0;}.fs-col{border-left:none;padding-left:0;}}
+  @media(max-width:680px){.footer-sitemap{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}}
+  @media(max-width:400px){.footer-sitemap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Vasl <span>Health</span></a>
+    <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="platform.html">Platform</a></li>
+    <li><a href="outcomes.html">Outcomes</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="contact.html" class="nav-cta">Request a Demo</a>
+</nav>
+
+<div class="article-header">
+  <div class="ah-breadcrumb">
+    <a href="index.html">Vasl Health</a>
+    <span class="ah-breadcrumb-sep">&rsaquo;</span>
+    <a href="blog.html">Insights</a>
+    <span class="ah-breadcrumb-sep">&rsaquo;</span>
+    <span>Community</span>
+  </div>
+  <div class="ah-category">Community</div>
+  <h1 class="ah-title">The Other Diagnosis:<br>Understanding <em>Identity-Based Stress</em></h1>
+  <p class="ah-deck">The stressors BIPOC and LGBTQ+ youth carry are not incidental to their mental health &mdash; they are central to it. Standard clinical instruments were not built to see them.</p>
+  <div class="ah-meta">
+    <div class="ah-author">
+      <div class="ah-avatar">R</div>
+      <div>
+        <div class="ah-author-name">Rodney Bell</div>
+        <div class="ah-author-role">Founder & CEO, Vasl Health</div>
+      </div>
+    </div>
+    <div class="ah-meta-divider"></div>
+    <span class="ah-meta-item">December 2025</span>
+    <div class="ah-meta-divider"></div>
+    <span class="ah-meta-item">7 min read</span>
+    <div class="ah-meta-divider"></div>
+    <span class="ah-meta-item">Community</span>
+  </div>
+</div>
+
+<div class="article-body-wrap">
+  <div class="article-content ac">
+    
+<p>When a BIPOC adolescent sits across from a therapist and describes their experience of navigating racial microaggressions daily, of managing family expectations that carry the weight of intergenerational sacrifice, of code-switching between home and school in ways that are exhausting in ways they can barely articulate &mdash; the PHQ-9 does not have a question for that. The GAD-7 does not have a question for that. The standard clinical instruments that drive most mental health assessments were not designed to see it.</p>
+
+<p>This is not a peripheral problem. For BIPOC and LGBTQ+ youth, the stress associated with identity &mdash; with navigating systems and environments that were not built for them, with managing the social and psychological weight of being a minority in majority spaces, with the specific and cumulative burden of discrimination, erasure, and the labor of constant cultural translation &mdash; is often the primary driver of their mental health presentation. It is the context in which anxiety, depression, and trauma must be understood. And it is systematically invisible to the instruments that are supposed to be seeing it.</p>
+
+<h2>What the Instruments Miss</h2>
+
+<p>The PHQ-9 and GAD-7 &mdash; the most widely used depression and anxiety screening instruments in behavioral health care &mdash; were validated on adult, primarily White, English-speaking populations. They measure symptom frequency and severity through a lens developed for those populations. They do not ask about discrimination. They do not ask about cultural isolation. They do not ask about the psychological labor of being &ldquo;the only one&rdquo; in a classroom, a workplace, or a clinical setting.</p>
+
+<p>The consequence is systematic underestimation of distress in BIPOC populations. A student who experiences significant depressive symptoms but has developed cultural strategies for managing and concealing them &mdash; strategies that are adaptive in their social context &mdash; will score lower on the PHQ-9 than their actual distress level warrants. A student who has learned that visible emotional distress is unsafe in their community &mdash; a survival adaptation, not a sign of wellness &mdash; will present as less distressed than they are.</p>
+
+<div class="pull-quote">
+  <div class="pq-text">&ldquo;When the PHQ-9 asks how often you have felt down, depressed, or hopeless &mdash; it is asking in a framework that assumes directness is the default mode of reporting distress. For communities where underreporting is an adaptive strategy, the instrument is reading the adaptation, not the underlying experience.&rdquo;</div>
+  <div class="pq-attr">Rodney Bell &mdash; Founder & CEO, Vasl Health</div>
+</div>
+
+<p>LGBTQ+ youth face a related but distinct version of this problem. Their mental health presentations are often substantially shaped by minority stress &mdash; the specific, documented psychological impact of navigating environments that range from unsupportive to hostile. Standard clinical instruments that do not account for this context will miss the meaning of the presentations they are seeing. A teenager who presents as anxious in a clinical setting may be experiencing a legitimate and proportionate response to a genuinely unsafe environment. Without cultural context, that proportionality is invisible to the assessment instrument.</p>
+
+<h2>Why This Matters for AI</h2>
+
+<p>The same gap that exists in clinical instruments exists, amplified, in AI systems used for mental health signal detection. A model trained on general text has no representation of the specific ways that identity-based stress manifests in language. It cannot read the cultural context modifiers that change the meaning of what a young person is saying. It cannot distinguish between minimization that reflects genuine low distress and minimization that reflects learned self-protective underreporting.</p>
+
+<p>Vasl&rsquo;s VLAP signal taxonomy includes a dimension called CCM &mdash; Cultural Context Modifiers. This dimension has no equivalent in standard NLP systems. It is the dimension that tracks the cultural framing around a disclosure: whether a statement is preceded by a minimization hedge that increases rather than decreases its clinical significance, whether a spiritual reference signals genuine resilience or disclosure avoidance, whether code-switching in the language of a message indicates the presence of a perceived authority figure and a corresponding reduction in what the person is willing to say.</p>
+
+<p>The CCM dimension exists because identity-based stress frequently manifests not in direct disclosure but in the cultural framing around disclosure. A young person who has learned that their distress is not legible to adults in their environment &mdash; or that expressing it carries social risk &mdash; will communicate it obliquely, in ways that require cultural fluency to read. Standard models do not have that fluency. VLAP was built to have it.</p>
+
+<h2>Toward Clinical Frameworks That See the Whole Person</h2>
+
+<p>The clinical standard for working with BIPOC and LGBTQ+ youth is not simply to administer standard instruments and adjust for cultural context as an afterthought. It is to build cultural context into the assessment framework from the beginning &mdash; to ask about discrimination, about family and community stressors, about the psychological labor of identity navigation, and to interpret symptom presentations in light of that context.</p>
+
+<p>This requires different instruments, or at minimum significant supplementation of existing ones. It requires clinicians with documented cultural competency. And it requires AI systems that have been built &mdash; not adapted &mdash; to read the communication patterns of the specific communities they are serving.</p>
+
+<p>Vasl&rsquo;s approach to assessment integrates standard instruments (PHQ-8 and GAD-7) with VLAP&rsquo;s cultural context modeling precisely because the standard instruments are necessary but not sufficient. They provide a baseline measure that allows for outcome tracking. VLAP provides the cultural reading layer that allows those measures to be interpreted in context &mdash; and that catches signals the instruments miss.</p>
+
+<p>The other diagnosis &mdash; the one that standard clinical frameworks are not equipped to make &mdash; is the diagnosis of a young person whose distress is real, significant, and shaped in ways the assessment instrument was not built to see. Getting that diagnosis right is not a peripheral clinical concern. For many of the young people who most need behavioral health support, it is the only diagnosis that will lead to care that actually helps.</p>
+
+  </div>
+  <aside class="article-sidebar">
+    <div class="as-section">
+      <div class="as-label">Key Data Points</div>
+      <div class="as-stat"><div class="as-stat-num">42%</div><div class="as-stat-label">Average PHQ-8 improvement at 90 days in Vasl pilot cohorts &mdash; measured against culturally contextualized baseline</div><div class="as-stat-caveat">Pilot data</div></div>
+<div class="as-stat"><div class="as-stat-num">5</div><div class="as-stat-label">Dimensions in the VLAP signal taxonomy &mdash; including CCM (Cultural Context Modifiers), which has no equivalent in standard NLP</div></div>
+<div class="as-stat"><div class="as-stat-num">3 wk.</div><div class="as-stat-label">Vasl time to first meaningful support vs. 9-month national average</div><div class="as-stat-caveat">Pilot data</div></div>
+
+    </div>
+    <div class="as-section">
+      <div class="as-label">Related Articles</div>
+      <a href="blog-future-culturally-responsive.html" class="related-item"><div class="ri-cat">Community</div><div class="ri-title">The Future of Mental Health Must Be Culturally Responsive</div></a>
+<a href="blog-mental-health-equity-crisis.html" class="related-item"><div class="ri-cat">Health Equity</div><div class="ri-title">The Mental Health Equity Crisis</div></a>
+<a href="blog-crisis-without-solving.html" class="related-item"><div class="ri-cat">Research</div><div class="ri-title">The Crisis We Keep Describing Without Solving</div></a>
+
+    </div>
+  </aside>
+</div>
+
+<div class="article-cta">
+  <div>
+    <div class="cta-headline">See Vasl Health<br>in <em>action.</em></div>
+    <p class="cta-body">A 45-minute call with an implementation lead &mdash; not a sales pitch. We come prepared with context specific to your organization and population.</p>
+  </div>
+  <a href="contact.html" class="cta-btn">Request a Demo &rarr;</a>
+</div>
+
+<footer>
+  <div class="footer-sitemap">
+    <div class="fs-brand">
+      <a href="index.html" class="footer-logo">Vasl <span>Health</span></a>
+      <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
+      <a href="contact.html" class="fs-cta">Request a Demo &rarr;</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Platform</div>
+      <a href="platform.html">Platform Overview</a>
+      <a href="vlap.html">VLAP</a>
+      <a href="ai-model.html">AI Model</a>
+      <a href="technology.html">Technology</a>
+      <a href="peer-groups.html">Peer Groups</a>
+      <a href="teletherapy.html">Teletherapy</a>
+      <a href="prototype.html">Live Demo Portal</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Who We Serve</div>
+      <a href="for-schools.html">For Schools</a>
+      <a href="for-organizations.html">For Organizations</a>
+      <a href="outcomes.html">Outcomes</a>
+      <a href="clinical-outcomes.html">Clinical Outcomes</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Company</div>
+      <a href="about.html">About Vasl</a>
+      <a href="team.html">Team</a>
+      <a href="careers.html">Careers</a>
+      <a href="research.html">Research</a>
+      <a href="blog.html">Blog &amp; Insights</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Support &amp; Legal</div>
+      <a href="support.html">Help Center</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="baa.html">Business Associate Agreement</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 Vasl Health, Inc. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="baa.html">BAA</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
