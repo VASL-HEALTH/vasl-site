@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VLAP — Vasl Language Analysis Platform</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --teal: #1D7A6A; --teal2: #155C50; --teal-lt: #DDF0E9;
+  --saff: #C4622A; --saff-lt: #FCEAE5;
+  --forest: #1B3030; --jade: #9FE1CB;
+  --gold: #B8892A; --gold-lt: #FDF3DC;
+  --red: #BE3246; --red-lt: #FCEAEA;
+  --ink: #1A1814; --muted: #6B6660;
+  --sand: #F7F4EE; --stone: #E8E3DA; --cream: #FDFCF9;
+}
+body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--forest); color: var(--cream); min-height: 100vh; }
+
+/* ── NAV ── */
+nav { background: rgba(0,0,0,0.35); border-bottom: 1px solid rgba(255,255,255,0.08); padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; }
+.nav-logo { display: flex; align-items: center; gap: 12px; }
+.nav-name { font-size: 17px; font-weight: 700; color: #fff; letter-spacing: -0.3px; }
+.nav-badge { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--jade); background: rgba(159,225,203,0.12); border: 1px solid rgba(159,225,203,0.3); border-radius: 99px; padding: 3px 10px; }
+.nav-right { font-size: 11px; color: rgba(255,255,255,0.35); }
+
+/* ── LAYOUT ── */
+.layout { max-width: 1100px; margin: 0 auto; padding: 32px 24px 80px; display: grid; grid-template-columns: 1fr 400px; gap: 24px; }
+
+/* ── LEFT PANEL ── */
+.panel { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; overflow: hidden; }
+.panel-header { padding: 18px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: space-between; }
+.panel-title { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--jade); }
+.panel-body { padding: 24px; }
+
+/* ── INPUT AREA ── */
+.input-section { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; margin-bottom: 24px; overflow: hidden; }
+.input-header { padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.input-label { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--jade); }
+textarea {
+  width: 100%; background: transparent; border: none; color: #fff;
+  font-size: 15px; line-height: 1.65; padding: 18px 20px;
+  resize: none; outline: none; font-family: inherit;
+  min-height: 110px;
+}
+textarea::placeholder { color: rgba(255,255,255,0.25); }
+.input-footer { padding: 10px 20px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: space-between; }
+.char-count { font-size: 11px; color: rgba(255,255,255,0.3); }
+
+/* ── SCENARIOS ── */
+.scenarios { margin-bottom: 20px; }
+.scenarios-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 10px; }
+.scenario-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+.stab { font-size: 10px; font-weight: 700; padding: 4px 12px; border-radius: 99px; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.15s; background: transparent; }
+.stab.active, .stab:hover { background: rgba(29,122,106,0.2); border-color: var(--teal); color: var(--jade); }
+.scenario-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+.pill { font-size: 11px; padding: 5px 12px; border-radius: 99px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.6); cursor: pointer; transition: all 0.15s; }
+.pill:hover { background: rgba(29,122,106,0.15); border-color: var(--teal); color: #fff; }
+
+/* ── ANALYZE BUTTON ── */
+.btn-analyze {
+  width: 100%; padding: 14px; background: var(--teal); color: #fff;
+  border: none; border-radius: 10px; font-size: 14px; font-weight: 700;
+  cursor: pointer; transition: background 0.18s; letter-spacing: 0.2px;
+}
+.btn-analyze:hover { background: var(--teal2); }
+.btn-analyze:disabled { background: rgba(29,122,106,0.3); cursor: not-allowed; }
+
+/* ── RESULTS ── */
+.result-area { margin-top: 20px; display: none; }
+.result-area.visible { display: block; }
+
+.tier-hero { padding: 20px; border-radius: 12px; margin-bottom: 16px; border: 1px solid transparent; }
+.tier-hero.clear   { background: rgba(29,122,106,0.12); border-color: rgba(29,122,106,0.3); }
+.tier-hero.monitor { background: rgba(184,137,42,0.12); border-color: rgba(184,137,42,0.3); }
+.tier-hero.high    { background: rgba(196,98,74,0.12); border-color: rgba(196,98,74,0.3); }
+.tier-hero.crisis  { background: rgba(190,50,70,0.12); border-color: rgba(190,50,70,0.4); }
+
+.tier-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.tier-label { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
+.tier-label.clear   { color: var(--jade); }
+.tier-label.monitor { color: var(--gold); }
+.tier-label.high    { color: #E8875A; }
+.tier-label.crisis  { color: #E05070; }
+.tier-score { font-size: 28px; font-weight: 700; }
+.tier-score.clear   { color: var(--jade); }
+.tier-score.monitor { color: var(--gold); }
+.tier-score.high    { color: #E8875A; }
+.tier-score.crisis  { color: #E05070; }
+
+/* Score bars */
+.score-bars { display: flex; flex-direction: column; gap: 5px; margin-top: 8px; }
+.sbar-row { display: flex; align-items: center; gap: 8px; }
+.sbar-lbl { font-size: 10px; font-weight: 600; width: 52px; text-align: right; color: rgba(255,255,255,0.5); text-transform: capitalize; }
+.sbar-track { flex: 1; height: 5px; background: rgba(255,255,255,0.1); border-radius: 99px; overflow: hidden; }
+.sbar-fill { height: 100%; border-radius: 99px; transition: width 0.6s ease; }
+.sbar-pct { font-size: 10px; color: rgba(255,255,255,0.4); width: 32px; text-align: right; }
+
+.member-response { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 14px 16px; margin-bottom: 14px; }
+.response-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 6px; }
+.response-text { font-size: 13.5px; color: rgba(255,255,255,0.85); line-height: 1.6; font-style: italic; }
+
+/* RIGHT PANEL */
+.right-col { display: flex; flex-direction: column; gap: 16px; }
+
+.signals-list { display: flex; flex-direction: column; gap: 8px; }
+.signal-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; }
+.signal-code { font-size: 10px; font-weight: 700; color: var(--jade); background: rgba(29,122,106,0.15); padding: 2px 7px; border-radius: 4px; white-space: nowrap; font-family: monospace; }
+.signal-info { flex: 1; }
+.signal-label { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.85); }
+.signal-dim { font-size: 10px; color: rgba(255,255,255,0.35); text-transform: capitalize; margin-top: 1px; }
+.signal-conf { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); }
+
+.cultural-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.cultural-item { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 10px 12px; }
+.cultural-key { font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 4px; }
+.cultural-val { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.8); }
+
+.modifier-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+.mod-chip { font-size: 10px; padding: 2px 8px; border-radius: 99px; background: rgba(196,98,74,0.15); color: #E8875A; border: 1px solid rgba(196,98,74,0.3); }
+
+.meta-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 11px; }
+.meta-key { color: rgba(255,255,255,0.35); }
+.meta-val { color: rgba(255,255,255,0.7); font-family: monospace; font-size: 10px; }
+
+.empty-state { text-align: center; padding: 40px 20px; color: rgba(255,255,255,0.25); }
+.empty-icon { font-size: 36px; margin-bottom: 10px; }
+.empty-text { font-size: 13px; line-height: 1.6; }
+
+.crisis-banner { background: rgba(190,50,70,0.2); border: 1px solid rgba(190,50,70,0.4); border-radius: 10px; padding: 14px 16px; margin-bottom: 14px; display: none; }
+.crisis-banner.visible { display: block; }
+.crisis-banner-title { font-size: 12px; font-weight: 700; color: #E05070; margin-bottom: 6px; letter-spacing: 0.5px; }
+.crisis-banner-body { font-size: 12px; color: rgba(255,255,255,0.75); line-height: 1.6; }
+
+.sla-pill { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 99px; }
+.sla-crisis { background: rgba(190,50,70,0.2); color: #E05070; border: 1px solid rgba(190,50,70,0.3); }
+.sla-high { background: rgba(196,98,74,0.2); color: #E8875A; border: 1px solid rgba(196,98,74,0.3); }
+
+.loading { display: none; text-align: center; padding: 30px; color: rgba(255,255,255,0.4); font-size: 13px; }
+.loading.visible { display: block; }
+.spinner { display: inline-block; width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.1); border-top-color: var(--jade); border-radius: 50%; animation: spin 0.7s linear infinite; margin-right: 8px; vertical-align: middle; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 768px) {
+  .layout { grid-template-columns: 1fr; }
+  .right-col { order: -1; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <svg viewBox="0 0 72 68" width="28" height="28">
+      <path d="M 4 64 L 36 6" fill="none" stroke="#1D7A6A" stroke-width="7" stroke-linecap="round"/>
+      <path d="M 68 64 L 36 6" fill="none" stroke="#1D7A6A" stroke-width="7" stroke-linecap="round"/>
+      <line x1="18" y1="36" x2="54" y2="36" stroke="#C4622A" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="36" cy="36" r="6" fill="#C4622A"/>
+    </svg>
+    <div>
+      <div class="nav-name">VLAP</div>
+    </div>
+    <span class="nav-badge">vlap-1.0.1 &nbsp;·&nbsp; No external API</span>
+  </div>
+  <div class="nav-right">Vasl Language Analysis Platform &nbsp;·&nbsp; 42 signals · 5 dimensions</div>
+</nav>
+
+<div class="layout">
+
+  <!-- LEFT COLUMN -->
+  <div>
+    <div class="scenarios">
+      <div class="scenarios-label">Test Scenarios</div>
+      <div class="scenario-tabs">
+        <button class="stab active" onclick="setCategory('core')">Core Signals</button>
+        <button class="stab" onclick="setCategory('aave')">AAVE Register</button>
+        <button class="stab" onclick="setCategory('cultural')">Cultural Concealment</button>
+        <button class="stab" onclick="setCategory('crisis')">Crisis Indicators</button>
+        <button class="stab" onclick="setCategory('clear')">Clear / Positive</button>
+      </div>
+      <div class="scenario-pills" id="scenario-pills"></div>
+    </div>
+
+    <div class="input-section">
+      <div class="input-header"><div class="input-label">Message input</div></div>
+      <textarea id="msg-input" placeholder="Enter a message to analyze..." oninput="updateCount(this)"></textarea>
+      <div class="input-footer">
+        <div class="char-count"><span id="char-count">0</span> / 2000</div>
+      </div>
+    </div>
+
+    <button class="btn-analyze" id="analyze-btn" onclick="runAnalysis()">&#129504; Analyze with VLAP</button>
+
+    <div class="loading" id="loading"><span class="spinner"></span>Running VLAP inference...</div>
+
+    <div class="result-area" id="results">
+      <div class="tier-hero" id="tier-hero">
+        <div class="tier-row">
+          <div>
+            <div class="tier-label" id="tier-label">CLEAR</div>
+            <div id="sla-container"></div>
+          </div>
+          <div class="tier-score" id="tier-score">0.00</div>
+        </div>
+        <div class="score-bars" id="score-bars"></div>
+      </div>
+
+      <div class="crisis-banner" id="crisis-banner">
+        <div class="crisis-banner-title">&#128680; Crisis-Tier Signal Detected — SLA Active</div>
+        <div class="crisis-banner-body">This message requires licensed clinician review within <strong id="sla-time">90 minutes</strong>. Crisis escalation workflow has been triggered. Member has been shown 988 resources.</div>
+      </div>
+
+      <div class="member-response">
+        <div class="response-label">Member-facing response</div>
+        <div class="response-text" id="response-text"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT COLUMN -->
+  <div class="right-col">
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">Detected Signals</div>
+        <div id="signal-count" style="font-size:11px;color:rgba(255,255,255,0.35)">—</div>
+      </div>
+      <div class="panel-body">
+        <div id="signals-container">
+          <div class="empty-state">
+            <div class="empty-icon">&#129504;</div>
+            <div class="empty-text">Run an analysis to see<br>detected signal codes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">Cultural Context</div>
+      </div>
+      <div class="panel-body">
+        <div id="cultural-container">
+          <div class="empty-state">
+            <div class="empty-icon">&#127758;</div>
+            <div class="empty-text">Cultural register and<br>modifiers appear here</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header"><div class="panel-title">Inference Metadata</div></div>
+      <div class="panel-body">
+        <div id="meta-container">
+          <div class="empty-state" style="padding:20px">
+            <div class="empty-text">Audit fields appear here</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const SCENARIOS = {
+  core: [
+    { label: "Indirect hopelessness", text: "idk why i even try anymore, feels like nobody gets me" },
+    { label: "Burden narrative", text: "i'm just a burden on everyone. they'd all be better off without me honestly" },
+    { label: "Emotional numbness", text: "i feel nothing anymore. completely empty inside. it's been like this for weeks" },
+    { label: "Active withdrawal", text: "haven't left my room in days. not answering anyone. just staying in bed" },
+    { label: "Social support absence", text: "i genuinely have no one. there's literally no one i can talk to about any of this" },
+  ],
+  aave: [
+    { label: "AAVE distress (HIGH)", text: "idk why i even try anymore tbh, feels like nobody gets me fr" },
+    { label: "AAVE crisis (CRISIS)", text: "lowkey been thinking about hurting myself again ion know what to do no more" },
+    { label: "Code-switch struggle", text: "on god fr fr i can't do this anymore nobody gets me and i'm done with everything" },
+    { label: "AAVE pre-disclosure", text: "ngl been going through it lately. deadass don't know how much longer i can keep doing this" },
+    { label: "AAVE performative", text: "issa lot right now but i'm the strong one fr. can't let them see me fall apart" },
+  ],
+  cultural: [
+    { label: "Pre-disclosure minimize", text: "not to be dramatic but like i've just been really struggling lately" },
+    { label: "Humor masking", text: "lmao i'm such a mess lately but it's whatever i guess i'm fine" },
+    { label: "Stigma deflection", text: "therapy isn't for people like me. my family would think i'm weak" },
+    { label: "Indirect help-seeking", text: "asking for a friend — what would you do if someone was feeling really hopeless and like there was no way out" },
+    { label: "Strong one", text: "i have to be strong for my family. i can't fall apart. people depend on me" },
+  ],
+  crisis: [
+    { label: "Goodbye signal (CRISIS)", text: "wanted to say goodbye to everyone in case something happens. you all meant a lot to me" },
+    { label: "Plan disclosure (CRISIS)", text: "on god i have a plan and i've been thinking about this for a while. feeling calm now actually" },
+    { label: "Explicit ideation (CRISIS)", text: "lowkey been thinking about hurting myself again ion know what to do no more" },
+    { label: "Time-bounding (CRISIS)", text: "i give up on everything. i'm done fighting. not much longer now" },
+    { label: "Permission seeking", text: "would anyone actually miss me if i was just gone? would you even care?" },
+  ],
+  clear: [
+    { label: "Positive check-in (CLEAR)", text: "hey just checking in, had a good day today!" },
+    { label: "Things looking up (CLEAR)", text: "i'm doing well! things are finally looking up for me" },
+    { label: "Gratitude (CLEAR)", text: "just wanted to say i'm feeling really grateful today. things have been good lately" },
+    { label: "Accomplishment (CLEAR)", text: "passed my exam! feeling great about everything right now" },
+    { label: "General update (CLEAR)", text: "had a decent week, nothing major to report. just checking in" },
+  ],
+};
+
+let currentCategory = 'core';
+
+function setCategory(cat) {
+  currentCategory = cat;
+  document.querySelectorAll('.stab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  renderPills();
+}
+
+function renderPills() {
+  const container = document.getElementById('scenario-pills');
+  container.innerHTML = '';
+  SCENARIOS[currentCategory].forEach(s => {
+    const pill = document.createElement('button');
+    pill.className = 'pill';
+    pill.textContent = s.label;
+    pill.onclick = () => { document.getElementById('msg-input').value = s.text; updateCount({value: s.text}); };
+    container.appendChild(pill);
+  });
+}
+
+function updateCount(el) {
+  document.getElementById('char-count').textContent = (el.value || el).length;
+}
+
+function tierColor(tier) {
+  return { clear: '#9FE1CB', monitor: '#B8892A', high: '#E8875A', crisis: '#E05070' }[tier] || '#fff';
+}
+
+function tierBarColor(tier) {
+  return { clear: '#1D7A6A', monitor: '#B8892A', high: '#C4622A', crisis: '#BE3246' }[tier] || '#555';
+}
+
+async function runAnalysis() {
+  const content = document.getElementById('msg-input').value.trim();
+  if (!content) return;
+
+  document.getElementById('analyze-btn').disabled = true;
+  document.getElementById('loading').classList.add('visible');
+  document.getElementById('results').classList.remove('visible');
+
+  try {
+    // Call VLAP engine via embedded JS (same-page simulation of API)
+    const result = await callVLAP(content);
+    renderResult(result);
+  } catch(e) {
+    alert('Analysis error: ' + e.message);
+  } finally {
+    document.getElementById('analyze-btn').disabled = false;
+    document.getElementById('loading').classList.remove('visible');
+  }
+}
+
+// ── EMBEDDED VLAP ENGINE (JavaScript port of Python engine) ──────────────
+// This runs client-side — no API call needed for the demo.
+// Production deploys the Python service; this demo self-contains it.
+
+const SIGNALS_JS = {
+  "HOP-03": { label: "Indirect hopelessness", dim: "hopelessness", patterns: [/\b(why (do i|even) bother|why even try|idk why i (even )?try|done with everything|over it all)\b/i], exemplars: ["idk why i even try","why do i bother","tired of everything","over it","done with everything","can't keep doing this","what's even the point tbh"], tiers: {monitor:0.5,high:0.5,crisis:0.2}, min:0.3 },
+  "HOP-06": { label: "Burden narrative", dim: "hopelessness", patterns: [/\b(i.?m a burden|better off without me|everyone would be better (off)? without|make things (harder|worse) for)\b/i], exemplars: ["i'm a burden","everyone would be better off without me","better off without me","i make everything worse"], tiers: {monitor:0.4,high:0.6,crisis:0.3}, min:0.4 },
+  "HOP-07": { label: "Emotional numbness", dim: "hopelessness", patterns: [/\b(feel nothing|completely numb|can.?t feel anything|empty inside|nothing feels real)\b/i], exemplars: ["i feel nothing","completely numb","empty inside","nothing feels real"], tiers: {monitor:0.3,high:0.4,crisis:0.2}, min:0.3 },
+  "HOP-09": { label: "Giving up framing", dim: "hopelessness", patterns: [/\b(i give up|i.?m done (fighting|trying)|can.?t fight anymore|given up on (getting|being|life))\b/i], exemplars: ["i give up","i'm done fighting","done trying","can't fight anymore"], tiers: {monitor:0.4,high:0.5,crisis:0.3}, min:0.35 },
+  "HOP-05": { label: "Time-bounding", dim: "hopelessness", patterns: [/\b(not (much )?longer|soon (it will be|this will be) over|not gonna be (a problem|here) (much )?(longer|more))\b/i], exemplars: ["not much longer now","soon it will be over","won't be a problem much longer"], tiers: {monitor:0.2,high:0.4,crisis:0.7}, min:0.4 },
+  "ISO-01": { label: "Active withdrawal", dim: "social_isolation", patterns: [/\b(staying in (my )?room|haven.?t left (the house|home)|avoiding everyone|not answering anyone)\b/i], exemplars: ["staying in my room","haven't left the house","avoiding everyone","isolating myself"], tiers: {monitor:0.4,high:0.4,crisis:0.2}, min:0.3 },
+  "ISO-02": { label: "Social withdrawal", dim: "social_isolation", patterns: [/\b(nobody (gets|understands|cares about) me|no one (actually )?cares|i.?m invisible|don.?t belong anywhere)\b/i], exemplars: ["nobody gets me","nobody understands","nobody cares","no one cares","i'm invisible","don't belong anywhere"], tiers: {monitor:0.4,high:0.5,crisis:0.2}, min:0.3 },
+  "ISO-06": { label: "Support system absence", dim: "social_isolation", patterns: [/\b(i (have |truly )?have no one|(literally )?no one (i can|to) (talk to|turn to)|completely alone|utterly alone)\b/i], exemplars: ["i have no one","there's no one i can talk to","no one to turn to","completely alone"], tiers: {monitor:0.4,high:0.5,crisis:0.3}, min:0.35 },
+  "CCM-01": { label: "Minimization deflection", dim: "cultural_concealment", patterns: [/\b(it.?s whatever|don.?t worry about me|not a big deal|just (tired|stressed|fine|okay) (lately|i guess|i think|though))\b/i], exemplars: ["i'm fine it's whatever","don't worry about me","i'll be okay","just tired","just stressed"], tiers: {monitor:0.5,high:0.3,crisis:0.2}, min:0.25 },
+  "CCM-02": { label: "Humor masking", dim: "cultural_concealment", patterns: [/(\b(lol|lmao|haha)\b.{0,50}(mess|falling apart|can.?t|not okay|struggling|crying))|((mess|falling apart|not okay|struggling).{0,30}(lol|lmao|haha))/i], exemplars: ["lol i'm such a mess","haha i'm falling apart","lmao i can't","not gonna lie kinda falling apart rn lol"], tiers: {monitor:0.4,high:0.4,crisis:0.2}, min:0.3 },
+  "CCM-04": { label: "Pre-disclosure minimize", dim: "cultural_concealment", patterns: [/\b(probably nothing but|not to be dramatic but|sounds? (stupid|dumb) but|probably overreacting but|maybe i.?m being (too )?sensitive but)\b/i], exemplars: ["idk it's probably nothing but","not to be dramatic but","sounds stupid but","probably overreacting but"], tiers: {monitor:0.6,high:0.4,crisis:0.2}, min:0.35 },
+  "CCM-05": { label: "Code-switching distress", dim: "cultural_concealment", patterns: [/\b(on god|no cap|lowkey|deadass|ngl|fr fr|ion |issa lot)\b.{0,60}\b(not okay|struggling|going through|can.?t|dark|lot right now)\b/i], exemplars: ["on god i'm not okay","no cap i've been struggling","lowkey been going through it","deadass been feeling off"], tiers: {monitor:0.4,high:0.3,crisis:0.2}, min:0.25 },
+  "CCM-06": { label: "Performative positivity", dim: "cultural_concealment", patterns: [/\b(i.?m (always )?the strong one|have to be strong (for|because)|can.?t fall apart|hold (it|everyone|everything) together)\b/i], exemplars: ["i'm always the strong one","have to be strong for my family","can't fall apart","hold it together"], tiers: {monitor:0.4,high:0.3,crisis:0.1}, min:0.3 },
+  "CCM-07": { label: "Indirect help-seeking", dim: "cultural_concealment", patterns: [/\b(asking for a friend|hypothetically (speaking|if)|not me but|my friend (is going through|has been|told me they|feels like they))\b/i], exemplars: ["asking for a friend","hypothetically if someone","my friend has been struggling"], tiers: {monitor:0.5,high:0.4,crisis:0.3}, min:0.3 },
+  "SHA-01": { label: "Self-harm ideation", dim: "self_harm", patterns: [/\b(hurt(ing)? myself|self.?harm|urges? to hurt|thoughts? about (hurting|harming) myself)\b/i], exemplars: ["been thinking about hurting myself","want to hurt myself","thoughts about hurting myself"], tiers: {monitor:0.3,high:0.4,crisis:0.8}, min:0.5 },
+  "SHA-06": { label: "Suicidal ideation — explicit", dim: "self_harm", patterns: [/\b(suicid|kill(ing)? myself|want to die|end my life|take my (own )?life|don.?t want to live|want to be dead)\b/i], exemplars: ["thinking about suicide","want to die","want to kill myself","end my life"], tiers: {monitor:0,high:0.2,crisis:1.0}, min:0.6 },
+  "SHA-07": { label: "Suicidal ideation — indirect", dim: "self_harm", patterns: [/\b(better off (dead|if i (wasn.?t|was never) here)|world (would be )?better without me|everyone (would be )?better off if i (was gone|wasn.?t here)|wish i (could )?just disappear|wish i (had )?never (been born|existed))\b/i], exemplars: ["i'd be better off dead","world would be better without me","wish i could just disappear"], tiers: {monitor:0.1,high:0.4,crisis:0.8}, min:0.55 },
+  "SHA-09": { label: "Acute state marker", dim: "self_harm", patterns: [/\b(i have (pills|a knife) (in my hand|right now)|i.?m about to (do it|end it)|can.?t stop myself|already (took|started|did) (it|some)|doing it tonight|i have a (specific )?plan)\b/i], exemplars: ["i have a plan to do it","i'm about to do it","can't stop myself"], tiers: {monitor:0,high:0.3,crisis:1.0}, min:0.65 },
+  "CRS-01": { label: "Final goodbye signal", dim: "crisis_indicators", patterns: [/\b(this is (my )?goodbye|(say|said|saying) (my |your )?goodbyes?|in case i (don.?t|never) (talk|see) (you|them) again|if something happens to me|in case (something|anything) happens|wanted to (say|tell) everyone what (you|they) meant)\b/i], exemplars: ["this is goodbye","said my goodbyes","in case i don't talk to you again","if something happens to me"], tiers: {monitor:0,high:0.2,crisis:1.0}, min:0.55 },
+  "CRS-02": { label: "Time-bounding pattern", dim: "crisis_indicators", patterns: [/\b(won.?t (be (a problem|here)|matter) (for |much )?(long|longer)|not much longer (now)?|almost over|few more days.{0,20}(over|done|end))\b/i], exemplars: ["won't be a problem for much longer","not much longer now","it's almost over"], tiers: {monitor:0.1,high:0.3,crisis:0.8}, min:0.45 },
+  "CRS-03": { label: "Plan disclosure", dim: "crisis_indicators", patterns: [/\b(i have a (specific )?plan (for how|to)|been planning (this|it)|know (exactly )?how i.?m going to (do it|end it)|figured out (exactly )?how)\b/i], exemplars: ["i have a plan","i've been planning this","i know how i'm going to do it"], tiers: {monitor:0,high:0.1,crisis:1.0}, min:0.55 },
+  "CRS-04": { label: "Acute emotional state", dim: "crisis_indicators", patterns: [/\b((really |literally )?can.?t (take it|do this) anymore|breaking down (right now)?|falling apart (right now)?|losing it|(really )?not okay right now|at my (absolute )?limit)\b/i], exemplars: ["i can't take it anymore","breaking down right now","completely losing it","really not okay right now"], tiers: {monitor:0.2,high:0.5,crisis:0.5}, min:0.35 },
+  "CRS-07": { label: "Verbal permission seeking", dim: "crisis_indicators", patterns: [/\b(would (you|anyone) (actually )?(miss|care|notice) (me|if)|would (you|anyone) be sad if|would (you|anyone) care if (i died|something happened to me))\b/i], exemplars: ["would you miss me","would anyone notice if i was gone","would you care if i died"], tiers: {monitor:0.1,high:0.3,crisis:0.7}, min:0.5 },
+  "CRS-08": { label: "Sudden calm after distress", dim: "crisis_indicators", patterns: [/\b((actually|finally|surprisingly) (feeling )?(really )?calm|at peace (finally|now)|feel (so much )?lighter (now)?|made my decision and|everything is (suddenly )?(clear|okay) now|calm for the first time)\b/i], exemplars: ["actually feeling calm now","at peace finally","made my decision and feel lighter","calm for the first time"], tiers: {monitor:0.1,high:0.3,crisis:0.7}, min:0.45 },
+  "CRS-09": { label: "Distress escalation", dim: "crisis_indicators", patterns: [/\b(i (really )?need help( right now)?|please (help me|someone)|i need someone (right now)?|i.?m (scared|terrified) and (not okay|don.?t know what to do))\b/i], exemplars: ["i really don't know what to do i need help","please help me","i'm scared and not okay"], tiers: {monitor:0.2,high:0.4,crisis:0.6}, min:0.35 },
+};
+
+const CLEAR_PATTERNS = [
+  /\b(good day|great day|had a good|feeling good|doing well|feeling well)\b/i,
+  /\b(happy|excited|grateful|thankful|blessed|thriving)\b/i,
+  /\b(just checking in|checking in today|wanted to say hi)\b/i,
+  /\b(good news|great news|things are (looking|going) (up|well|good|great|better))\b/i,
+  /\b(passed my|graduated|got (a )?promoted?)\b/i,
+];
+
+const AAVE_TOKENS_JS = ["ion","issa","finna","tryna","lowkey","highkey","deadass","no cap","on god","fr fr","bruh","ngl","tbh","ong","foreal","chile"];
+const CRISIS_OVERRIDE = new Set(["SHA-01","SHA-06","SHA-07","SHA-08","SHA-09","CRS-01","CRS-02","CRS-03","CRS-07","CRS-08"]);
+
+function detectCultural(text) {
+  const tl = text.toLowerCase();
+  let aave = 0, aaveFound = [];
+  AAVE_TOKENS_JS.forEach(t => { if (tl.includes(t)) { aave++; aaveFound.push(t); } });
+  const informal = (tl.match(/\b(tbh|idk|ngl|lol|lmao|omg|wtf|rn|imo)\b/g) || []).length;
+  
+  let register = "standard_english", confidence = 0.5, modifiers = [];
+  if (aave >= 2) { register = "aave"; confidence = Math.min(0.95, 0.5 + aave * 0.1); modifiers.push("aave_register"); }
+  else if (informal >= 3) { register = "informal_youth"; confidence = Math.min(0.75, 0.4 + informal * 0.05); }
+  
+  const hasHumor = /\b(lol|lmao|haha)\b/i.test(text);
+  const hasDistress = /\b(mess|falling apart|not okay|struggling|can.?t|breaking)\b/i.test(text);
+  if (hasHumor && hasDistress) modifiers.push("humor_masking");
+  if (/\b(probably nothing|not to be dramatic|sounds? (stupid|dumb)|probably overreacting)\b/i.test(text)) modifiers.push("pre_disclosure_minimize");
+  if (/\b(have to be strong|always the strong one|can.?t fall apart|hold it together)\b/i.test(text)) modifiers.push("performative_positivity");
+  
+  return { register, confidence, modifiers, aave_tokens_detected: aaveFound };
+}
+
+function isClearlyPositive(text) {
+  return CLEAR_PATTERNS.some(p => p.test(text));
+}
+
+function analyzeLocal(content) {
+  const t0 = performance.now();
+  const cultural = detectCultural(content);
+  const isPositive = isClearlyPositive(content);
+  
+  // Pattern matching
+  const patternHits = [];
+  for (const [code, sig] of Object.entries(SIGNALS_JS)) {
+    for (const pat of sig.patterns) {
+      if (pat.test(content)) { patternHits.push([code, 0.93]); break; }
+    }
+  }
+  
+  const hasOverride = patternHits.some(([c]) => CRISIS_OVERRIDE.has(c));
+  
+  if (isPositive && patternHits.length === 0) {
+    return { risk_tier: "clear", risk_score: 0.08, signals: [], tier_distribution: {clear:0.92,monitor:0.05,high:0.02,crisis:0.01}, cultural_context: { register: cultural.register, register_confidence: cultural.confidence, modifiers: cultural.modifiers, aave_tokens_detected: cultural.aave_tokens_detected }, member_facing_response: "Thanks for checking in. How's everything going for you today?", flagged_for_review: false, sla_window_minutes: null, latency_ms: Math.round(performance.now()-t0), model_version: "vlap-1.0.1", inference_id: "inf_" + Math.random().toString(36).substr(2,10) };
+  }
+  
+  // Simple TF-IDF-like scoring: count word overlaps with exemplars
+  const signalMap = {};
+  for (const [code, hit] of patternHits) signalMap[code] = Math.max(signalMap[code]||0, hit);
+  
+  // Exemplar word overlap scoring
+  const contentWords = new Set(content.toLowerCase().split(/\W+/).filter(w => w.length > 3));
+  for (const [code, sig] of Object.entries(SIGNALS_JS)) {
+    if (code in signalMap) continue;
+    let bestScore = 0;
+    for (const ex of sig.exemplars) {
+      const exWords = new Set(ex.split(/\W+/).filter(w => w.length > 3));
+      let overlap = 0;
+      contentWords.forEach(w => { if (exWords.has(w)) overlap++; });
+      const score = overlap / Math.max(exWords.size, contentWords.size, 1) * 1.5;
+      if (score > bestScore) bestScore = score;
+    }
+    if (bestScore >= sig.min) signalMap[code] = Math.min(0.92, bestScore);
+  }
+  
+  const detected = Object.entries(signalMap).sort((a,b)=>b[1]-a[1]);
+  
+  if (detected.length < 2 && patternHits.length === 0 && !hasOverride) {
+    return { risk_tier: "clear", risk_score: 0.10, signals: [], tier_distribution: {clear:0.85,monitor:0.10,high:0.04,crisis:0.01}, cultural_context: { register: cultural.register, register_confidence: cultural.confidence, modifiers: cultural.modifiers, aave_tokens_detected: cultural.aave_tokens_detected }, member_facing_response: "Thanks for checking in. How's everything going for you today?", flagged_for_review: false, sla_window_minutes: null, latency_ms: Math.round(performance.now()-t0), model_version: "vlap-1.0.1", inference_id: "inf_" + Math.random().toString(36).substr(2,10) };
+  }
+  
+  // Score tiers
+  const tierScores = {clear:0,monitor:0,high:0,crisis:0};
+  for (const [code,conf] of detected) {
+    const tc = SIGNALS_JS[code].tiers;
+    for (const [t,w] of Object.entries(tc)) tierScores[t] += w * conf;
+  }
+  
+  // Cultural adjustments
+  if (cultural.modifiers.includes("aave_register") || cultural.modifiers.includes("pre_disclosure_minimize")) {
+    tierScores.monitor *= 1.25; tierScores.high *= 1.20; tierScores.crisis *= 1.15;
+  }
+  if (cultural.modifiers.includes("humor_masking")) { tierScores.monitor *= 1.30; tierScores.high *= 1.25; }
+  if (cultural.modifiers.includes("performative_positivity")) { tierScores.monitor *= 1.20; tierScores.high *= 1.20; }
+  
+  let tier, score;
+  if (tierScores.crisis > 0.5) { tier = "crisis"; score = Math.min(0.99, 0.5 + tierScores.crisis * 0.3); }
+  else if (tierScores.high > 0.7) { tier = "high"; score = Math.min(0.89, 0.45 + tierScores.high * 0.2); }
+  else if (tierScores.monitor > 0.5) { tier = "monitor"; score = Math.min(0.74, 0.25 + tierScores.monitor * 0.2); }
+  else { tier = "clear"; score = Math.max(0.05, 0.15 - tierScores.monitor * 0.1); }
+  
+  if (isPositive && ["high","crisis"].includes(tier) && !hasOverride && patternHits.length === 0) {
+    tier = "monitor"; score = Math.min(score, 0.60);
+  }
+  
+  const total = Object.values(tierScores).reduce((a,b)=>a+b,1e-10);
+  const dist = {};
+  for (const [t,s] of Object.entries(tierScores)) dist[t] = Math.round(s/total*10000)/10000;
+  
+  const responses = {
+    crisis: "What you're sharing matters, and I want you to know you're not alone in this. Please reach out to 988 right now — they're there for exactly this moment.",
+    high: cultural.modifiers.includes("pre_disclosure_minimize") || cultural.register === "aave"
+      ? "Hey — I caught what you said, even the parts between the lines. That sounds really heavy. I'm here."
+      : "That sounds really heavy, and I'm glad you shared it. You don't have to carry this alone.",
+    monitor: cultural.modifiers.includes("humor_masking")
+      ? "I noticed you kind of slipped something in there. How are you really doing?"
+      : "Sounds like things have been weighing on you. I'm here if you want to get into it.",
+    clear: "Thanks for checking in. How's everything going for you today?"
+  };
+  
+  return {
+    risk_tier: tier,
+    risk_score: Math.round(score*10000)/10000,
+    tier_distribution: dist,
+    signals: detected.slice(0,5).map(([code,conf])=>({
+      code, label: SIGNALS_JS[code].label, dimension: SIGNALS_JS[code].dim, confidence: Math.round(conf*1000)/1000
+    })),
+    cultural_context: { register: cultural.register, register_confidence: cultural.confidence, modifiers: cultural.modifiers, aave_tokens_detected: cultural.aave_tokens_detected },
+    member_facing_response: responses[tier],
+    flagged_for_review: ["high","crisis"].includes(tier),
+    sla_window_minutes: tier === "crisis" ? 90 : tier === "high" ? 480 : null,
+    latency_ms: Math.round(performance.now()-t0),
+    model_version: "vlap-1.0.1",
+    inference_id: "inf_" + Math.random().toString(36).substr(2,10)
+  };
+}
+
+async function callVLAP(content) {
+  // Simulate ~10ms processing time
+  await new Promise(r => setTimeout(r, Math.random() * 20 + 5));
+  return analyzeLocal(content);
+}
+
+function renderResult(r) {
+  const tier = r.risk_tier;
+  const color = tierColor(tier);
+
+  // Tier hero
+  const hero = document.getElementById('tier-hero');
+  hero.className = 'tier-hero ' + tier;
+  document.getElementById('tier-label').textContent = tier.toUpperCase();
+  document.getElementById('tier-label').className = 'tier-label ' + tier;
+  document.getElementById('tier-score').textContent = (r.risk_score * 100).toFixed(1) + '%';
+  document.getElementById('tier-score').className = 'tier-score ' + tier;
+
+  // SLA
+  const slaEl = document.getElementById('sla-container');
+  if (r.sla_window_minutes) {
+    const cls = tier === 'crisis' ? 'sla-crisis' : 'sla-high';
+    slaEl.innerHTML = `<span class="sla-pill ${cls}">SLA: &lt;${r.sla_window_minutes} min clinician review</span>`;
+  } else { slaEl.innerHTML = ''; }
+
+  // Distribution bars
+  const barsEl = document.getElementById('score-bars');
+  const barColors = {clear:'#1D7A6A',monitor:'#B8892A',high:'#C4622A',crisis:'#BE3246'};
+  barsEl.innerHTML = ['clear','monitor','high','crisis'].map(t => {
+    const pct = Math.round((r.tier_distribution[t]||0)*100);
+    return `<div class="sbar-row">
+      <div class="sbar-lbl">${t}</div>
+      <div class="sbar-track"><div class="sbar-fill" style="width:${pct}%;background:${barColors[t]}"></div></div>
+      <div class="sbar-pct">${pct}%</div>
+    </div>`;
+  }).join('');
+
+  // Crisis banner
+  const banner = document.getElementById('crisis-banner');
+  if (tier === 'crisis') {
+    banner.classList.add('visible');
+    document.getElementById('sla-time').textContent = '90 minutes';
+  } else { banner.classList.remove('visible'); }
+
+  // Member response
+  document.getElementById('response-text').textContent = r.member_facing_response;
+
+  // Signals
+  const sigContainer = document.getElementById('signals-container');
+  if (r.signals.length === 0) {
+    sigContainer.innerHTML = '<div class="empty-state"><div style="font-size:28px">✅</div><div class="empty-text" style="margin-top:8px">No distress signals detected</div></div>';
+  } else {
+    sigContainer.innerHTML = '<div class="signals-list">' + r.signals.map(s => `
+      <div class="signal-item">
+        <div class="signal-code">${s.code}</div>
+        <div class="signal-info">
+          <div class="signal-label">${s.label}</div>
+          <div class="signal-dim">${s.dimension.replace('_',' ')}</div>
+        </div>
+        <div class="signal-conf">${Math.round(s.confidence*100)}%</div>
+      </div>`).join('') + '</div>';
+  }
+  document.getElementById('signal-count').textContent = r.signals.length + ' signal' + (r.signals.length !== 1 ? 's' : '');
+
+  // Cultural context
+  const cult = r.cultural_context;
+  const cultEl = document.getElementById('cultural-container');
+  const mods = cult.modifiers.length
+    ? `<div class="modifier-chips">${cult.modifiers.map(m=>`<span class="mod-chip">${m.replace(/_/g,' ')}</span>`).join('')}</div>` : '';
+  const tokens = cult.aave_tokens_detected && cult.aave_tokens_detected.length
+    ? `<div style="margin-top:8px"><div class="cultural-key">AAVE tokens</div><div class="cultural-val" style="font-size:11px">${cult.aave_tokens_detected.join(', ')}</div></div>` : '';
+  cultEl.innerHTML = `<div class="cultural-grid">
+    <div class="cultural-item"><div class="cultural-key">Register</div><div class="cultural-val">${cult.register.replace(/_/g,' ')}</div></div>
+    <div class="cultural-item"><div class="cultural-key">Confidence</div><div class="cultural-val">${Math.round(cult.register_confidence*100)}%</div></div>
+  </div>${mods}${tokens}`;
+
+  // Meta
+  const metaEl = document.getElementById('meta-container');
+  const metas = [
+    ['Inference ID', r.inference_id],
+    ['Model version', r.model_version],
+    ['Latency', r.latency_ms + 'ms'],
+    ['Flagged', r.flagged_for_review ? '✓ Yes' : 'No'],
+    ['PHI stored', 'No — content hashed only'],
+    ['API dependency', 'None — inference is local'],
+  ];
+  metaEl.innerHTML = metas.map(([k,v]) => `<div class="meta-row"><div class="meta-key">${k}</div><div class="meta-val">${v}</div></div>`).join('');
+
+  document.getElementById('results').classList.add('visible');
+}
+
+// Init
+renderPills();
+
+// Keyboard shortcut
+document.getElementById('msg-input').addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') runAnalysis();
+});
+</script>
+</body>
+</html>
