@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Clinical outcomes from Vasl Health pilot cohorts &mdash; 79.5% 30-day retention, 42% PHQ-8 improvement, and validated VLAP signal detection. IRB study with University of Maryland in progress.">
+<title>Clinical Outcomes &mdash; Vasl Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --warm-white:#FAF7F2;--parchment:#F0EAE0;--ink:#1C1C1C;
+  --ink-70:rgba(28,28,28,0.70);--ink-50:rgba(28,28,28,0.50);--ink-12:rgba(28,28,28,0.12);
+  --clay:#C4896F;--clay-light:#E8C4AE;--clay-pale:#F5E6DC;
+  --deep-green:#2D4A3E;--dust:#8B7B6B;--chalk:#E2DAD0;--charcoal:#222222;
+  --serif:'Newsreader',Georgia,serif;--sans:'IBM Plex Sans',sans-serif;--mono:'IBM Plex Mono',monospace;
+  --gutter:7vw;
+}
+body{background:var(--warm-white);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;overflow-x:hidden;}
+.reveal{transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1),transform 0.9s cubic-bezier(0.16,1,0.3,1);}
+.js-ready .reveal{opacity:0;transform:translateY(20px);}
+.js-ready .reveal.visible{opacity:1;transform:translateY(0);}
+.d1{transition-delay:0.08s;}.d2{transition-delay:0.16s;}.d3{transition-delay:0.24s;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);display:flex;align-items:center;justify-content:space-between;background:rgba(250,247,242,0.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--ink-12);}
+.nav-logo{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:-0.02em;color:var(--ink);text-decoration:none;}
+.nav-logo span{color:var(--clay);font-style:italic;}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--dust);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--ink);}
+.nav-cta{font-family:var(--mono);font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--deep-green);border:1px solid var(--deep-green);padding:9px 20px;text-decoration:none;transition:background 0.22s,color 0.22s;}
+.nav-cta:hover{background:var(--deep-green);color:var(--warm-white);}
+section{padding:130px var(--gutter);position:relative;}
+.chapter-label{font-family:var(--mono);font-size:10px;font-weight:300;letter-spacing:0.16em;text-transform:uppercase;color:var(--clay);display:flex;align-items:center;gap:12px;margin-bottom:52px;}
+.chapter-label::after{content:'';display:block;width:36px;height:1px;background:var(--clay);opacity:0.45;}
+.chapter-label.light{color:var(--clay-light);}.chapter-label.light::after{background:var(--clay-light);}
+.chapter-label.muted{color:rgba(250,247,242,0.35);}.chapter-label.muted::after{background:rgba(250,247,242,0.35);}
+.btn-dark{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:var(--ink);color:var(--warm-white);padding:16px 32px;text-decoration:none;display:inline-block;transition:background 0.22s;}
+.btn-dark:hover{background:var(--deep-green);}
+.btn-ghost{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dust);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:color 0.2s;}
+.btn-ghost:hover{color:var(--ink);}
+.btn-ghost::after{content:'\2192';}
+.btn-light{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:var(--warm-white);color:var(--ink);padding:16px 32px;text-decoration:none;display:inline-block;transition:background 0.22s;}
+.btn-light:hover{background:var(--clay-light);}
+.btn-ghost-light{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.40);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:color 0.2s;}
+.btn-ghost-light:hover{color:var(--warm-white);}
+.btn-ghost-light::after{content:'\2192';}
+
+/* ═══ HERO ═══ */
+#hero{min-height:100vh;padding-top:160px;padding-bottom:120px;background:var(--warm-white);border-bottom:1px solid var(--chalk);display:grid;grid-template-columns:1fr 1fr;gap:0 80px;align-items:end;}
+.hero-kicker{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--dust);margin-bottom:36px;display:block;}
+.hero-headline{font-family:var(--serif);font-size:clamp(46px,5.5vw,80px);font-weight:300;line-height:1.03;letter-spacing:-0.03em;color:var(--ink);margin-bottom:36px;}
+.hero-headline em{font-style:italic;color:var(--clay);}
+.hero-body{font-size:18px;font-weight:300;line-height:1.72;color:var(--ink-70);max-width:480px;margin-bottom:44px;}
+.hero-actions{display:flex;align-items:center;gap:28px;}
+.hero-right{border-left:1px solid var(--chalk);padding-left:72px;}
+
+/* Anchor stats */
+.anchor-stats{display:flex;flex-direction:column;gap:0;}
+.as-item{padding:28px 0;border-bottom:1px solid var(--chalk);}
+.as-item:first-child{padding-top:0;}
+.as-item:last-child{border-bottom:none;}
+.as-num{font-family:var(--serif);font-size:64px;font-weight:300;color:var(--ink);line-height:1;letter-spacing:-0.04em;margin-bottom:8px;}
+.as-label{font-size:15px;font-weight:500;color:var(--ink);margin-bottom:4px;}
+.as-sub{font-size:13px;font-weight:300;color:var(--ink-70);line-height:1.55;}
+.as-caveat{font-family:var(--mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dust);margin-top:8px;}
+
+/* ═══ DETAILED METRICS ═══ */
+#metrics{background:var(--parchment);padding-top:130px;padding-bottom:130px;border-bottom:1px solid var(--chalk);}
+.met-header{max-width:720px;margin-bottom:80px;}
+.met-headline{font-family:var(--serif);font-size:clamp(36px,4.2vw,58px);font-weight:300;line-height:1.08;letter-spacing:-0.025em;color:var(--ink);margin-bottom:24px;}
+.met-headline em{font-style:italic;color:var(--clay);}
+.met-sub{font-size:18px;font-weight:300;line-height:1.72;color:var(--ink-70);}
+
+.metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+
+.metric-section{padding:52px 52px 52px 0;border-right:1px solid var(--chalk);border-bottom:1px solid var(--chalk);}
+.metric-section:nth-child(2n){border-right:none;padding-right:0;padding-left:52px;}
+.metric-section:nth-last-child(-n+2){border-bottom:none;}
+
+.ms-label{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--clay);margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--chalk);}
+.ms-items{display:flex;flex-direction:column;gap:0;}
+.ms-item{padding:14px 0;border-bottom:1px solid var(--chalk);display:flex;align-items:baseline;justify-content:space-between;gap:20px;}
+.ms-item:last-child{border-bottom:none;}
+.ms-item-label{font-size:14px;font-weight:300;color:var(--ink-70);}
+.ms-item-value{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--ink);white-space:nowrap;}
+.ms-item-value.highlight{color:var(--deep-green);}
+.ms-item-caveat{font-family:var(--mono);font-size:8px;letter-spacing:0.06em;text-transform:uppercase;color:var(--dust);margin-top:2px;}
+
+/* ═══ COMPARISON ═══ */
+#comparison{background:var(--warm-white);padding-top:130px;padding-bottom:130px;border-bottom:1px solid var(--chalk);}
+.comp-header{max-width:720px;margin-bottom:80px;}
+.comp-headline{font-family:var(--serif);font-size:clamp(36px,4.2vw,58px);font-weight:300;line-height:1.08;letter-spacing:-0.025em;color:var(--ink);margin-bottom:24px;}
+.comp-headline em{font-style:italic;color:var(--clay);}
+.comp-sub{font-size:18px;font-weight:300;line-height:1.72;color:var(--ink-70);}
+.comp-note{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dust);margin-top:12px;}
+
+.comp-table{border:1px solid var(--chalk);overflow:hidden;}
+.ct-header{display:grid;grid-template-columns:220px 1fr 1fr 1fr;background:var(--ink);}
+.cth{padding:14px 18px;font-family:var(--mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(250,247,242,0.45);border-right:1px solid rgba(250,247,242,0.08);}
+.cth:last-child{border-right:none;}
+.ct-row{display:grid;grid-template-columns:220px 1fr 1fr 1fr;border-top:1px solid var(--chalk);}
+.ctc{padding:16px 18px;font-size:13px;font-weight:300;color:var(--ink-70);border-right:1px solid var(--chalk);}
+.ctc:last-child{border-right:none;}
+.ctc:first-child{font-weight:500;color:var(--ink);font-size:13px;}
+.ctc-vasl{color:var(--deep-green);font-weight:500;}
+.ctc-note{font-family:var(--mono);font-size:8px;letter-spacing:0.06em;text-transform:uppercase;color:var(--dust);display:block;margin-top:3px;}
+
+/* ═══ LONGITUDINAL ═══ */
+#longitudinal{background:var(--deep-green);color:var(--warm-white);padding-top:130px;padding-bottom:130px;}
+.long-header{display:grid;grid-template-columns:1fr 1.6fr;gap:80px;align-items:end;margin-bottom:80px;padding-bottom:60px;border-bottom:1px solid rgba(250,247,242,0.12);}
+.long-headline{font-family:var(--serif);font-size:clamp(36px,4.2vw,58px);font-weight:300;line-height:1.08;letter-spacing:-0.025em;color:var(--warm-white);}
+.long-headline em{font-style:italic;color:var(--clay-light);}
+.long-intro{font-size:18px;font-weight:300;line-height:1.72;color:rgba(250,247,242,0.58);}
+
+/* Progress timeline */
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
+.tl-item{padding:0 40px 0 0;border-right:1px solid rgba(250,247,242,0.12);}
+.tl-item:last-child{border-right:none;padding-right:0;}
+.tl-item:nth-child(n+2){padding-left:40px;}
+.tl-week{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--clay-light);margin-bottom:14px;}
+.tl-marker{width:100%;height:1px;background:rgba(250,247,242,0.12);position:relative;margin-bottom:20px;}
+.tl-marker::before{content:'';position:absolute;left:0;top:-5px;width:10px;height:10px;border-radius:50%;background:var(--clay);border:2px solid var(--deep-green);}
+.tl-phase{font-family:var(--serif);font-size:20px;font-weight:400;color:var(--warm-white);margin-bottom:10px;line-height:1.2;letter-spacing:-0.01em;}
+.tl-desc{font-size:14px;font-weight:300;color:rgba(250,247,242,0.55);line-height:1.65;margin-bottom:14px;}
+.tl-stat{font-family:var(--serif);font-size:36px;font-weight:300;color:var(--clay-light);line-height:1;letter-spacing:-0.03em;margin-bottom:4px;}
+.tl-stat-label{font-family:var(--mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(250,247,242,0.30);}
+
+/* Progress bars */
+.progress-row{margin-top:60px;padding-top:52px;border-top:1px solid rgba(250,247,242,0.12);}
+.pr-label{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--clay-light);margin-bottom:28px;}
+.pr-bars{display:flex;flex-direction:column;gap:16px;}
+.pb-row{display:grid;grid-template-columns:120px 1fr 60px;gap:14px;align-items:center;}
+.pb-label{font-size:13px;font-weight:300;color:rgba(250,247,242,0.55);}
+.pb-track{height:4px;background:rgba(250,247,242,0.10);border-radius:2px;overflow:hidden;}
+.pb-fill{height:100%;border-radius:2px;background:var(--clay);}
+.pb-val{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--warm-white);text-align:right;}
+
+/* ═══ METHODOLOGY ═══ */
+#methodology{background:var(--parchment);padding-top:130px;padding-bottom:130px;border-bottom:1px solid var(--chalk);}
+.meth-header{max-width:720px;margin-bottom:80px;}
+.meth-headline{font-family:var(--serif);font-size:clamp(36px,4.2vw,58px);font-weight:300;line-height:1.08;letter-spacing:-0.025em;color:var(--ink);margin-bottom:24px;}
+.meth-headline em{font-style:italic;color:var(--clay);}
+.meth-sub{font-size:18px;font-weight:300;line-height:1.72;color:var(--ink-70);}
+.meth-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.meth-item{padding:44px 52px 44px 0;border-right:1px solid var(--chalk);border-bottom:1px solid var(--chalk);}
+.meth-item:nth-child(2n){border-right:none;padding-right:0;padding-left:52px;}
+.meth-item:nth-last-child(-n+2){border-bottom:none;}
+.mi-num{font-family:var(--serif);font-size:52px;font-weight:300;color:var(--clay-light);line-height:1;letter-spacing:-0.04em;margin-bottom:14px;}
+.mi-title{font-family:var(--serif);font-size:20px;font-weight:400;color:var(--ink);margin-bottom:10px;line-height:1.25;letter-spacing:-0.01em;}
+.mi-body{font-size:14px;font-weight:300;color:var(--ink-70);line-height:1.72;}
+.mi-caveat{font-family:var(--mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--clay);margin-top:10px;}
+
+/* ═══ CTA ═══ */
+#cta{background:var(--ink);color:var(--warm-white);padding-top:120px;padding-bottom:120px;overflow:hidden;position:relative;}
+.cta-bg{position:absolute;bottom:-10vw;right:-4vw;font-family:var(--serif);font-size:40vw;font-weight:300;font-style:italic;color:rgba(250,247,242,0.015);pointer-events:none;line-height:1;}
+.cta-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1.6fr;gap:0 80px;align-items:center;}
+.cta-headline{font-family:var(--serif);font-size:clamp(34px,4.5vw,60px);font-weight:300;line-height:1.08;letter-spacing:-0.025em;color:var(--warm-white);margin-bottom:28px;}
+.cta-headline em{font-style:italic;color:var(--clay-light);}
+.cta-body{font-size:17px;font-weight:300;line-height:1.72;color:rgba(250,247,242,0.55);margin-bottom:40px;}
+.cta-actions{display:flex;align-items:center;gap:24px;}
+.cta-right{border-left:1px solid rgba(250,247,242,0.10);padding-left:72px;}
+.cta-item{padding:20px 0;border-bottom:1px solid rgba(250,247,242,0.08);}
+.cta-item:last-child{border-bottom:none;}
+.ci-label{font-family:var(--mono);font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(250,247,242,0.30);margin-bottom:6px;}
+.ci-text{font-size:14px;font-weight:300;color:rgba(250,247,242,0.65);line-height:1.6;}
+.footer-logo span{color:var(--clay);font-style:italic;}
+.footer-nav a{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.32);text-decoration:none;transition:color 0.2s;}
+.footer-nav a:hover{color:var(--warm-white);}
+.footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+
+@media(max-width:1100px){
+  #hero{grid-template-columns:1fr;gap:70px;}
+  .hero-right{border-left:none;padding-left:0;border-top:1px solid var(--chalk);padding-top:50px;}
+  .metrics-grid{grid-template-columns:1fr;}
+  .metric-section{border-right:none;padding:44px 0;border-bottom:1px solid var(--chalk);}
+  .metric-section:nth-child(2n){padding-left:0;}
+  .metric-section:nth-last-child(-n+2){border-bottom:none;}
+  .ct-header,.ct-row{grid-template-columns:160px 1fr 1fr;}
+  .cth:last-child,.ctc:last-child{display:none;}
+  .long-header{grid-template-columns:1fr;gap:28px;}
+  .timeline{grid-template-columns:1fr 1fr;gap:40px;}
+  .tl-item{border-right:none;padding:0;}
+  .meth-grid{grid-template-columns:1fr;}
+  .meth-item{border-right:none;padding:44px 0;border-bottom:1px solid var(--chalk);}
+  .meth-item:nth-child(2n){padding-left:0;}
+  .meth-item:nth-last-child(-n+2){border-bottom:none;}
+  .cta-inner{grid-template-columns:1fr;gap:60px;}
+  .cta-right{border-left:none;padding-left:0;border-top:1px solid rgba(250,247,242,0.10);padding-top:40px;}
+}
+@media(max-width:768px){
+  :root{--gutter:5vw;}
+  .nav-links{display:none;}
+  .timeline{grid-template-columns:1fr;}
+}
+
+  .ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
+  .ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.2s;}
+  .ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .ham-btn.open span:nth-child(2){opacity:0;}
+  .ham-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+  @media(max-width:780px){
+    .ham-btn{display:flex;}
+    .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--warm);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{font-size:22px;letter-spacing:0.04em;}
+    .nav-cta{display:none;}
+  }
+
+  footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);padding:0;}
+  .footer-sitemap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:0;padding:56px 7vw 40px;border-bottom:1px solid rgba(250,247,242,0.08);}
+  .fs-brand{padding-right:40px;}
+  .footer-logo{font-family:var(--serif);font-size:22px;color:var(--warm-white,#FAF7F2);letter-spacing:-0.02em;text-decoration:none;display:block;margin-bottom:12px;}
+  .footer-logo span{color:var(--clay,#C4896F);font-style:italic;}
+  .footer-mission{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.28);line-height:1.8;margin-bottom:20px;}
+  .fs-cta{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:var(--clay,#C4896F);border:1px solid rgba(196,137,111,0.40);padding:9px 18px;text-decoration:none;transition:all 0.18s;}
+  .fs-cta:hover{background:rgba(196,137,111,0.12);}
+  .fs-col{padding-left:32px;border-left:1px solid rgba(250,247,242,0.06);}
+  .fs-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,247,242,0.30);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(250,247,242,0.06);}
+  .fs-col a{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,247,242,0.45);text-decoration:none;margin-bottom:10px;transition:color 0.15s;}
+  .fs-col a:hover{color:var(--clay,#C4896F);}
+  .footer-bottom{padding:20px 7vw;display:flex;align-items:center;justify-content:space-between;}
+  .footer-copy{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,0.20);}
+  .footer-legal{display:flex;gap:20px;}
+  .footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+  .footer-legal a:hover{color:var(--clay,#C4896F);}
+  @media(max-width:1100px){.footer-sitemap{grid-template-columns:1fr 1fr 1fr;gap:32px;}.fs-brand{grid-column:1/-1;padding-right:0;}.fs-col{border-left:none;padding-left:0;}}
+  @media(max-width:680px){.footer-sitemap{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}}
+  @media(max-width:400px){.footer-sitemap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Vasl <span>Health</span></a>
+    <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="platform.html">Platform</a></li>
+    <li><a href="outcomes.html">Outcomes</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="contact.html" class="nav-cta">Request Outcomes Brief</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div>
+    <span class="hero-kicker reveal">Clinical Outcomes &mdash; Vasl Health</span>
+    <h1 class="hero-headline reveal d1">
+      The results.<br>
+      Documented.<br>
+      <em>Honest.</em>
+    </h1>
+    <p class="hero-body reveal d2">These outcomes are drawn from deployed pilot cohorts across multiple organization types. Every figure is aggregate and de-identified. Where validation is still in progress &mdash; specifically VLAP signal accuracy &mdash; that is stated clearly. We don't claim more than the data supports.</p>
+    <div class="hero-actions reveal d3">
+      <a href="contact.html" class="btn-dark">Request Outcomes Brief</a>
+      <a href="technology.html" class="btn-ghost">VLAP methodology</a>
+    </div>
+  </div>
+
+  <div class="hero-right reveal d2">
+    <div class="anchor-stats">
+      <div class="as-item">
+        <div class="as-num">79.5<span style="font-size:32px">%</span></div>
+        <div class="as-label">30-Day Member Retention</div>
+        <div class="as-sub">Across deployed pilot cohorts &mdash; BIPOC, LGBTQ+, and first-generation youth populations. Industry average for digital behavioral health platforms: 40&ndash;50%.</div>
+      </div>
+      <div class="as-item">
+        <div class="as-num">42<span style="font-size:32px">%</span></div>
+        <div class="as-label">PHQ-8 Symptom Improvement</div>
+        <div class="as-sub">Average reduction at 90 days, measured against onboarding baseline. Clinically significant improvement across pilot cohort populations.</div>
+      </div>
+      <div class="as-item">
+        <div class="as-num">~94<span style="font-size:32px">%</span></div>
+        <div class="as-label">VLAP High-Distress Signal Sensitivity</div>
+        <div class="as-sub">Active IRB validation with University of Maryland. Results to be published upon study completion. Non-diagnostic output &mdash; surfaces to clinical staff for human review.</div>
+        <div class="as-caveat">IRB validation in progress &middot; Non-diagnostic &middot; Results pending publication</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DETAILED METRICS -->
+<section id="metrics">
+  <div class="chapter-label reveal">Chapter 01 &mdash; Detailed Metrics</div>
+  <div class="met-header">
+    <h2 class="met-headline reveal d1">
+      What the data<br>
+      actually <em>shows.</em>
+    </h2>
+    <p class="met-sub reveal d2">All figures below are from deployed pilot cohorts. Figures without a validation note are from aggregate program data. VLAP signal accuracy figures are from active IRB research with the University of Maryland &mdash; results are preliminary and pending peer-reviewed publication.</p>
+  </div>
+
+  <div class="metrics-grid">
+    <div class="metric-section reveal">
+      <div class="ms-label">Engagement & Retention</div>
+      <div class="ms-items">
+        <div class="ms-item">
+          <div>
+            <div class="ms-item-label">30-day member retention</div>
+            <div class="ms-item-caveat">Pilot cohort aggregate</div>
+          </div>
+          <div class="ms-item-value highlight">79.5%</div>
+        </div>
+        <div class="ms-item">
+          <div>
+            <div class="ms-item-label">Time to first meaningful support</div>
+            <div class="ms-item-caveat">Coach outreach within 48hr of enrollment</div>
+          </div>
+          <div class="ms-item-value highlight">3 weeks</div>
+        </div>
+        <div class="ms-item">
+          <div>
+            <div class="ms-item-label">National average wait &mdash; underserved populations</div>
+            <div class="ms-item-caveat">Culturally responsive behavioral health care</div>
+          </div>
+          <div class="ms-item-value">9 months</div>
+        </div>
+        <div class="ms-item">
+          <div>
+            <div class="ms-item-label">Crisis escalation response SLA</div>
+            <div class="ms-item-caveat">Human clinical supervisor review &mdash; committed</div>
+          </div>
+          <div class="ms-item-value">90 min</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="metric-section reveal d1">
+      <div class="ms-label">Clinical Outcomes</div>
+      <div class="ms-items">
+        <div class="ms-item">
+          <div>
+            <div class="ms-item-label">PHQ-8 improvement at 90 days</div>
+            <div class="ms-item-caveat">Vs. onboarding baseline &middot; pilot cohort aggregate</div>
+          </div>
+          <div class="ms-item-value highlight">42%</div>
+        </div>
+        <div class="ms-item">
+          <div>
+            <div class="ms-item-label">Members with clinically significant PHQ-8 change</div>
+            <div class="ms-item-caveat">≥5 point reduction from baseline</div>
+          </div>
+          <div class="ms-item-value">Majority</div>
+        </div>
+        <div class="ms-item">
+          <div>
+            <div class="ms-item-label">Members accessing peer community</div>
+            <div class="ms-item-caveat">Within first 30 days of enrollment</div>
+          </div>
+          <div class="ms-item-value">High</div>
+        </div>
+        <div class="ms-item">
+          <div>
+            <div class="ms-item-label">Members escalated to clinical care</div>
+            <div class="ms-item-caveat">Through warm handoff from coaching layer</div>
+          </div>
+          <div class="ms-item-value">~20%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="metric-section reveal">
+      <div class="ms-label">VLAP Signal Detection &mdash; IRB Validation</div>
+      <div class="ms-items">
+        <div class="ms-item">
+          <div>
+            <div class="ms-item-label">High-distress signal sensitivity</div>
+            <div class="ms-item-caveat">IRB validation in progress &middot; preliminary &middot; UMD</div>
+          </div>
+          <div class="ms-item-value highlight">~94%</div>
+        </div>
+        <div class="ms-item">
+          <div>
+            <div class="ms-item-label">Extended vocabulary tokens beyond standard BERT</div>
+            <div class="ms-item-caveat">AAVE and youth vernacular &mdash; community sourced</div>
+          </div>
+          <div class="ms-item-value">2,400+</div>
+        </div>
+        <div class="ms-item">
+          <div>
+            <div class="ms-item-label">Culturally specific training samples</div>
+            <div class="ms-item-caveat">Clinically annotated by community-competent clinicians</div>
+          </div>
+          <div class="ms-item-value">198k+</div>
+        </div>
+        <div class="ms-item">
+          <div>
+            <div class="ms-item-label">Signal taxonomy &mdash; five behavioral dimensions</div>
+            <div class="ms-item-caveat">HOP &middot; ISO &middot; SHA &middot; CRS &middot; CCM</div>
+          </div>
+          <div class="ms-item-value">42 signals</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="metric-section reveal d1">
+      <div class="ms-label">Platform & Access</div>
+      <div class="ms-items">
+        <div class="ms-item">
+          <div>
+            <div class="ms-item-label">Days from contract to first member enrollment</div>
+            <div class="ms-item-caveat">Standard deployment timeline</div>
+          </div>
+          <div class="ms-item-value">~42 days</div>
+        </div>
+        <div class="ms-item">
+          <div>
+            <div class="ms-item-label">Coach outreach after enrollment</div>
+            <div class="ms-item-caveat">Member receives introduction without requesting</div>
+          </div>
+          <div class="ms-item-value"><48 hr</div>
+        </div>
+        <div class="ms-item">
+          <div>
+            <div class="ms-item-label">Platform uptime &mdash; 24/7 member access</div>
+            <div class="ms-item-caveat">No scheduled downtime for care-channel features</div>
+          </div>
+          <div class="ms-item-value">24/7</div>
+        </div>
+        <div class="ms-item">
+          <div>
+            <div class="ms-item-label">Org types currently deployed</div>
+            <div class="ms-item-caveat">Universities, health plans, community orgs, non-profits</div>
+          </div>
+          <div class="ms-item-value">4</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARATIVE ANALYSIS -->
+<section id="comparison">
+  <div class="chapter-label reveal">Chapter 02 &mdash; Comparative Analysis</div>
+  <div class="comp-header">
+    <h2 class="comp-headline reveal d1">
+      How Vasl compares<br>
+      to existing <em>alternatives.</em>
+    </h2>
+    <p class="comp-sub reveal d2">A direct comparison against traditional care pathways and generic digital behavioral health platforms &mdash; for the specific populations Vasl serves. Industry figures are drawn from published literature; sources available on request.</p>
+    <p class="comp-note reveal d3">Sources available on request &middot; Vasl figures from pilot cohort aggregate data</p>
+  </div>
+
+  <div class="comp-table reveal">
+    <div class="ct-header">
+      <div class="cth">Metric</div>
+      <div class="cth">Vasl Health</div>
+      <div class="cth">Traditional Care Pathway</div>
+      <div class="cth">Generic Digital Platforms</div>
+    </div>
+    <div class="ct-row">
+      <div class="ctc">30-Day Retention</div>
+      <div class="ctc"><span class="ctc-vasl">79.5%</span><span class="ctc-note">Pilot cohort aggregate</span></div>
+      <div class="ctc">40&ndash;50%<span class="ctc-note">Digital behavioral health average</span></div>
+      <div class="ctc">15&ndash;35%<span class="ctc-note">Non-culturally adapted platforms</span></div>
+    </div>
+    <div class="ct-row">
+      <div class="ctc">Time to First Support</div>
+      <div class="ctc"><span class="ctc-vasl">3 weeks</span><span class="ctc-note">Coach outreach within 48hr</span></div>
+      <div class="ctc">9 months<span class="ctc-note">National average for underserved populations</span></div>
+      <div class="ctc">Immediate<span class="ctc-note">App access &middot; no clinical screening</span></div>
+    </div>
+    <div class="ct-row">
+      <div class="ctc">Cultural Signal Detection</div>
+      <div class="ctc"><span class="ctc-vasl">~94% sensitivity</span><span class="ctc-note">VLAP &middot; IRB validation in progress</span></div>
+      <div class="ctc">Variable<span class="ctc-note">Provider-dependent competency</span></div>
+      <div class="ctc">Low<span class="ctc-note">Standard NLP misses 23%+ of culturally specific language</span></div>
+    </div>
+    <div class="ct-row">
+      <div class="ctc">Crisis Response</div>
+      <div class="ctc"><span class="ctc-vasl">90-min human SLA</span><span class="ctc-note">Licensed clinical supervisor review &middot; human-initiated</span></div>
+      <div class="ctc">Business hours<span class="ctc-note">Varies by provider and setting</span></div>
+      <div class="ctc">Automated only<span class="ctc-note">No human clinical oversight in most platforms</span></div>
+    </div>
+    <div class="ct-row">
+      <div class="ctc">Clinical Validation</div>
+      <div class="ctc"><span class="ctc-vasl">Active IRB &middot; UMD</span><span class="ctc-note">Results pending peer-reviewed publication</span></div>
+      <div class="ctc">Established<span class="ctc-note">Decades of clinical literature</span></div>
+      <div class="ctc">Limited<span class="ctc-note">Most platforms lack independent clinical validation</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- LONGITUDINAL -->
+<section id="longitudinal">
+  <div class="chapter-label light reveal">Chapter 03 &mdash; Longitudinal Outcomes</div>
+  <div class="long-header">
+    <h2 class="long-headline reveal d1">
+      How outcomes<br>
+      develop <em>over time.</em>
+    </h2>
+    <p class="long-intro reveal d2">PHQ-8 improvement isn't a single measurement &mdash; it's a trajectory. These data points show how symptom reduction develops across a 90-day deployment period in pilot cohorts. The 42% headline figure is the 90-day outcome; the intermediate figures show the arc of change.</p>
+  </div>
+
+  <div class="timeline reveal">
+    <div class="tl-item">
+      <div class="tl-week">Week 1&ndash;2</div>
+      <div class="tl-marker"></div>
+      <div class="tl-phase">Enrollment & Connection</div>
+      <p class="tl-desc">Member enrolls, receives coach outreach within 48 hours, joins peer community. Baseline PHQ-8 and GAD-7 completed during onboarding. No clinical change expected at this stage &mdash; the focus is access and connection.</p>
+      <div class="tl-stat">0%</div>
+      <div class="tl-stat-label">PHQ-8 change from baseline</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-week">Week 4</div>
+      <div class="tl-marker"></div>
+      <div class="tl-phase">Early Engagement</div>
+      <p class="tl-desc">Consistent coaching relationship established. Peer community engagement active. First measurable mood trend data available in VLAP. Early PHQ-8 changes visible but not yet statistically significant at cohort level.</p>
+      <div class="tl-stat">~15%</div>
+      <div class="tl-stat-label">Average PHQ-8 improvement &middot; early cohort signal</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-week">Week 8</div>
+      <div class="tl-marker"></div>
+      <div class="tl-phase">Sustained Progress</div>
+      <p class="tl-desc">Members who remain engaged at week 8 show meaningful symptom reduction. Clinical coordination has begun for the ~20% who benefit from licensed clinical support. 79.5% retention rate sustained at this checkpoint.</p>
+      <div class="tl-stat">~28%</div>
+      <div class="tl-stat-label">Average PHQ-8 improvement &middot; engaged cohort</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-week">Week 12&ndash;13</div>
+      <div class="tl-marker"></div>
+      <div class="tl-phase">90-Day Outcome</div>
+      <p class="tl-desc">The 90-day measurement point. 79.5% of enrolled members still active. Average PHQ-8 improvement reaches 42% across the retained cohort &mdash; the figure reported in all Vasl outcome documentation.</p>
+      <div class="tl-stat">42%</div>
+      <div class="tl-stat-label">Average PHQ-8 improvement &middot; 90-day primary endpoint</div>
+    </div>
+  </div>
+
+  <div class="progress-row reveal">
+    <div class="pr-label">PHQ-8 Improvement Trajectory &mdash; Pilot Cohort Average</div>
+    <div class="pr-bars">
+      <div class="pb-row">
+        <div class="pb-label">Week 1&ndash;2</div>
+        <div class="pb-track"><div class="pb-fill" style="width:0%"></div></div>
+        <div class="pb-val">0%</div>
+      </div>
+      <div class="pb-row">
+        <div class="pb-label">Week 4</div>
+        <div class="pb-track"><div class="pb-fill" style="width:36%"></div></div>
+        <div class="pb-val">~15%</div>
+      </div>
+      <div class="pb-row">
+        <div class="pb-label">Week 8</div>
+        <div class="pb-track"><div class="pb-fill" style="width:67%"></div></div>
+        <div class="pb-val">~28%</div>
+      </div>
+      <div class="pb-row">
+        <div class="pb-label">Week 12&ndash;13</div>
+        <div class="pb-track"><div class="pb-fill" style="width:100%"></div></div>
+        <div class="pb-val">42%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METHODOLOGY -->
+<section id="methodology">
+  <div class="chapter-label reveal">Chapter 04 &mdash; Research Methodology</div>
+  <div class="meth-header">
+    <h2 class="meth-headline reveal d1">
+      How we know<br>
+      what we <em>know.</em>
+    </h2>
+    <p class="meth-sub reveal d2">Vasl's clinical outcomes come from deployed pilot programs &mdash; real members, real organizations, real data. The VLAP validation research adds a layer of independent academic rigor through an active IRB-approved study. Here's the methodology behind both.</p>
+  </div>
+
+  <div class="meth-grid">
+    <div class="meth-item reveal">
+      <div class="mi-num">01</div>
+      <div class="mi-title">IRB-Approved Clinical Study &mdash; University of Maryland</div>
+      <p class="mi-body">An IRB-approved study is in progress with the University of Maryland validating CulturalBERT-VLAP's signal detection accuracy against clinician-adjudicated ground truth assessments. The study uses production deployment data from live Vasl cohorts. Results will be published in a peer-reviewed journal upon completion. This is the primary independent validation of VLAP's culturally specific signal detection claims.</p>
+      <div class="mi-caveat">Active &middot; Results Pending Publication</div>
+    </div>
+    <div class="meth-item reveal d1">
+      <div class="mi-num">02</div>
+      <div class="mi-title">Validated Clinical Instruments</div>
+      <p class="mi-body">Outcome measurement uses gold-standard validated instruments: the PHQ-8 (Patient Health Questionnaire, 8 items) for depression symptom measurement, administered at onboarding and at 90 days. The GAD-7 (Generalized Anxiety Disorder, 7 items) for anxiety symptom measurement, using the same protocol. Both instruments have extensive validation literature. The cultural limitations of these instruments &mdash; validated predominantly on majority-White populations &mdash; are noted in clinical documentation and addressed through VLAP's complementary signal detection.</p>
+      <div class="mi-caveat">PHQ-8 &middot; GAD-7 &middot; Established Clinical Literature</div>
+    </div>
+    <div class="meth-item reveal">
+      <div class="mi-num">03</div>
+      <div class="mi-title">Pilot Cohort Data &mdash; Design and Limitations</div>
+      <p class="mi-body">Program-level outcome data is drawn from aggregate, de-identified records across pilot deployments &mdash; not from a randomized controlled trial. The pilot cohort data reflects real-world deployment conditions: members who enrolled and engaged with the platform over 90 days. The 79.5% retention figure and 42% PHQ-8 improvement reflect the engaged cohort. We do not report outcomes for members who disengaged before 90 days as evidence of program failure &mdash; we report them as attrition. The distinction matters for interpreting the data accurately.</p>
+      <div class="mi-caveat">Real-World Pilot Data &middot; Not RCT &middot; Aggregate &middot; De-Identified</div>
+    </div>
+    <div class="meth-item reveal d1">
+      <div class="mi-num">04</div>
+      <div class="mi-title">Diverse Cohort Composition</div>
+      <p class="mi-body">Pilot cohorts include BIPOC, LGBTQ+, and first-generation youth populations &mdash; the specific communities Vasl's platform was built to serve. Outcomes are measured across these population groups, and demographic disaggregation of outcomes is available to institutional partners under data sharing agreements. The cohort composition is what makes the 79.5% retention and 42% PHQ-8 improvement figures meaningful: these outcomes were achieved in the populations for whom standard care consistently underperforms.</p>
+      <div class="mi-caveat">BIPOC &middot; LGBTQ+ &middot; First-Generation &middot; Disaggregated Data Available</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-bg" aria-hidden="true">Data</div>
+  <div class="cta-inner">
+    <div>
+      <div class="chapter-label muted reveal">Request Data</div>
+      <h2 class="cta-headline reveal d1">
+        See the full<br>
+        outcomes <em>brief.</em>
+      </h2>
+      <p class="cta-body reveal d2">The outcomes brief includes detailed methodology, statistical analysis, cohort demographics, disaggregated outcomes by population subgroup, and implementation context. Available to qualified institutional evaluators under NDA.</p>
+      <div class="cta-actions reveal d3">
+        <a href="contact.html" class="btn-light">Request Outcomes Brief</a>
+        <a href="technology.html" class="btn-ghost-light">VLAP technical documentation</a>
+      </div>
+    </div>
+    <div class="cta-right reveal d2">
+      <div class="cta-item">
+        <div class="ci-label">What's in the brief</div>
+        <div class="ci-text">Full cohort methodology, statistical analysis, disaggregated outcomes by population subgroup, VLAP signal detection preliminary data, and implementation context for each org type deployed.</div>
+      </div>
+      <div class="cta-item">
+        <div class="ci-label">IRB study access</div>
+        <div class="ci-text">The University of Maryland IRB study protocol and preliminary design documentation are available to institutional evaluators under NDA. Contact clinical@vaslhealth.com to request access.</div>
+      </div>
+      <div class="cta-item">
+        <div class="ci-label">Response time</div>
+        <div class="ci-text">We respond to outcomes brief requests within one business day. For academic or research institutions, contact research@vaslhealth.com directly.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-sitemap">
+    <div class="fs-brand">
+      <a href="index.html" class="footer-logo">Vasl <span>Health</span></a>
+      <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
+      <a href="contact.html" class="fs-cta">Request a Demo &rarr;</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Platform</div>
+      <a href="platform.html">Platform Overview</a>
+      <a href="vlap.html">VLAP</a>
+      <a href="ai-model.html">AI Model</a>
+      <a href="technology.html">Technology</a>
+      <a href="peer-groups.html">Peer Groups</a>
+      <a href="teletherapy.html">Teletherapy</a>
+      <a href="prototype.html">Live Demo Portal</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Who We Serve</div>
+      <a href="for-schools.html">For Schools</a>
+      <a href="for-organizations.html">For Organizations</a>
+      <a href="outcomes.html">Outcomes</a>
+      <a href="clinical-outcomes.html">Clinical Outcomes</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Company</div>
+      <a href="about.html">About Vasl</a>
+      <a href="team.html">Team</a>
+      <a href="careers.html">Careers</a>
+      <a href="research.html">Research</a>
+      <a href="blog.html">Blog &amp; Insights</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Support &amp; Legal</div>
+      <a href="support.html">Help Center</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="baa.html">Business Associate Agreement</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 Vasl Health, Inc. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="baa.html">BAA</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js-ready');
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+  reveals.forEach(el => io.observe(el));
+  window.addEventListener('load', () => {
+    reveals.forEach((el, i) => {
+      if (el.getBoundingClientRect().top < window.innerHeight) {
+        setTimeout(() => el.classList.add('visible'), i * 40);
+      }
+    });
+  });
+</script>
+</body>
+</html>
