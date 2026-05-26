@@ -1,0 +1,1765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Platform Prototype V5 &mdash; Vasl Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  :root {
+    --warm-white:  #FAF7F2;
+    --parchment:   #F0EAE0;
+    --ink:         #1C1C1C;
+    --ink-70:      rgba(28,28,28,0.70);
+    --ink-50:      rgba(28,28,28,0.50);
+    --ink-25:      rgba(28,28,28,0.25);
+    --ink-12:      rgba(28,28,28,0.12);
+    --clay:        #C4896F;
+    --clay-light:  #E8C4AE;
+    --deep-green:  #2D4A3E;
+    --dust:        #8B7B6B;
+    --chalk:       #E2DAD0;
+    --charcoal:    #222222;
+
+    --serif: 'Newsreader', Georgia, serif;
+    --sans:  'IBM Plex Sans', sans-serif;
+    --mono:  'IBM Plex Mono', monospace;
+    --gutter: 7vw;
+  }
+
+  body {
+    background: var(--charcoal);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.65;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: 999;
+    pointer-events: none; opacity: 0.022;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 256px;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 16px var(--gutter);
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(34,34,34,0.96);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(250,247,242,0.10);
+  }
+
+  .nav-left { display: flex; align-items: center; gap: 28px; }
+
+  .nav-logo { font-family: var(--serif); font-size: 20px; font-weight: 400; letter-spacing: -0.02em; color: var(--warm-white); text-decoration: none; }
+  .nav-logo span { color: var(--clay); font-style: italic; }
+
+  .nav-proto-tag {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: rgba(250,247,242,0.35);
+    border-left: 1px solid rgba(250,247,242,0.15); padding-left: 20px;
+  }
+
+  .nav-back {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: rgba(250,247,242,0.40);
+    text-decoration: none; display: flex; align-items: center; gap: 6px;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--warm-white); }
+  .nav-back::before { content: '←'; font-size: 12px; }
+
+  /* ─── WRAPPER ─── */
+  .proto-wrapper {
+    padding-top: 64px;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+  }
+
+  /* ─── INTRO STRIP ─── */
+  .intro-strip {
+    padding: 48px var(--gutter) 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+    align-items: end;
+  }
+
+  .intro-headline {
+    font-family: var(--serif); font-size: clamp(32px, 3.5vw, 52px);
+    font-weight: 300; line-height: 1.08; letter-spacing: -0.025em; color: var(--warm-white);
+  }
+  .intro-headline em { font-style: italic; color: var(--clay-light); }
+
+  .intro-right { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; justify-content: flex-end; }
+
+  .intro-body {
+    font-size: 15px; font-weight: 300; line-height: 1.65;
+    color: rgba(250,247,242,0.52); max-width: 440px;
+  }
+
+  .demo-badge {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay-light);
+    border: 1px solid rgba(196,137,111,0.35); padding: 5px 12px; display: inline-block;
+  }
+
+  /* ─── PORTAL TABS ─── */
+  .portal-tabs {
+    padding: 36px var(--gutter) 0;
+    display: flex; align-items: center; gap: 0;
+    border-bottom: 1px solid rgba(250,247,242,0.10);
+  }
+
+  .portal-tab {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 14px 28px; cursor: pointer;
+    color: rgba(250,247,242,0.38); border-bottom: 2px solid transparent;
+    margin-bottom: -1px; transition: color 0.2s, border-color 0.2s;
+    user-select: none; background: none; border-top: none; border-left: none; border-right: none;
+  }
+  .portal-tab:hover { color: rgba(250,247,242,0.65); }
+  .portal-tab.active { color: var(--warm-white); border-bottom-color: var(--clay); }
+
+  /* ─── PORTAL STAGE ─── */
+  .portal-stage {
+    flex: 1; padding: 0 var(--gutter) 60px;
+    display: none;
+  }
+  .portal-stage.active { display: block; }
+
+
+  /* ══════════════════════════════
+     PORTAL 01 — MEMBER APP
+  ══════════════════════════════ */
+  .member-app {
+    display: grid; grid-template-columns: 320px 1fr; gap: 0;
+    border: 1px solid rgba(250,247,242,0.10);
+    background: var(--warm-white); margin-top: 32px; min-height: 640px;
+    border-radius: 2px; overflow: hidden;
+  }
+
+  /* Phone sidebar */
+  .ma-sidebar {
+    background: var(--parchment); border-right: 1px solid var(--chalk);
+    display: flex; flex-direction: column;
+  }
+
+  .ma-sidebar-header {
+    padding: 20px 20px 16px; border-bottom: 1px solid var(--chalk);
+    background: var(--ink);
+  }
+
+  .ma-app-name {
+    font-family: var(--serif); font-size: 18px; font-weight: 400;
+    color: var(--warm-white); letter-spacing: -0.01em; margin-bottom: 2px;
+  }
+  .ma-app-name span { color: var(--clay); font-style: italic; }
+
+  .ma-app-sub {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: rgba(250,247,242,0.40);
+  }
+
+  .ma-nav { display: flex; flex-direction: column; gap: 0; padding: 12px 0; }
+
+  .ma-nav-item {
+    padding: 12px 20px; cursor: pointer; display: flex; align-items: center; gap: 12px;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--dust); transition: background 0.15s, color 0.15s;
+  }
+  .ma-nav-item:hover { background: var(--chalk); color: var(--ink); }
+  .ma-nav-item.active { background: var(--warm-white); color: var(--ink); font-weight: 500; }
+
+  .ma-nav-dot {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--chalk); flex-shrink: 0;
+  }
+  .ma-nav-item.active .ma-nav-dot { background: var(--clay); }
+
+  /* Main content area */
+  .ma-content { display: flex; flex-direction: column; overflow: hidden; }
+
+  .ma-view { display: none; flex: 1; flex-direction: column; }
+  .ma-view.active { display: flex; }
+
+  .ma-view-header {
+    padding: 20px 28px; border-bottom: 1px solid var(--chalk);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .ma-view-title {
+    font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--ink); letter-spacing: -0.01em;
+  }
+
+  .ma-view-sub {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dust);
+  }
+
+  /* Check-in flow */
+  .checkin-flow { padding: 28px; flex: 1; }
+
+  .checkin-prompt {
+    font-family: var(--serif); font-size: 22px; font-weight: 300; font-style: italic;
+    color: var(--ink); line-height: 1.4; margin-bottom: 28px;
+  }
+
+  .checkin-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+
+  .checkin-option {
+    padding: 14px 20px; border: 1px solid var(--chalk); cursor: pointer;
+    font-family: var(--sans); font-size: 14px; font-weight: 300; color: var(--ink-70);
+    transition: border-color 0.2s, background 0.2s; background: var(--warm-white);
+  }
+  .checkin-option:hover { border-color: var(--clay); color: var(--ink); }
+  .checkin-option.selected { border-color: var(--deep-green); background: var(--parchment); color: var(--ink); }
+
+  .checkin-text-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--dust); margin-bottom: 10px;
+  }
+
+  .checkin-textarea {
+    width: 100%; padding: 14px 16px; border: 1px solid var(--chalk); background: var(--warm-white);
+    font-family: var(--sans); font-size: 14px; font-weight: 300; color: var(--ink);
+    line-height: 1.6; resize: none; height: 80px; outline: none;
+    transition: border-color 0.2s;
+  }
+  .checkin-textarea:focus { border-color: var(--deep-green); }
+
+  .checkin-btn {
+    margin-top: 16px; padding: 12px 24px;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+    background: var(--ink); color: var(--warm-white); border: none; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .checkin-btn:hover { background: var(--deep-green); }
+
+  .checkin-sent {
+    display: none; padding: 24px; background: var(--parchment); border: 1px solid var(--chalk);
+    margin-top: 20px;
+  }
+
+  .cs-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--deep-green); margin-bottom: 10px;
+  }
+
+  .cs-text {
+    font-size: 14px; font-weight: 300; line-height: 1.65; color: var(--ink-70);
+  }
+
+  /* Coach message thread */
+  .message-thread { padding: 20px 28px; flex: 1; display: flex; flex-direction: column; gap: 16px; overflow-y: auto; }
+
+  .msg { display: flex; flex-direction: column; gap: 4px; max-width: 80%; }
+  .msg.coach { align-self: flex-start; }
+  .msg.member { align-self: flex-end; }
+
+  .msg-label {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--dust);
+  }
+
+  .msg-bubble {
+    padding: 12px 16px; font-size: 14px; font-weight: 300; line-height: 1.6;
+  }
+  .msg.coach .msg-bubble { background: var(--parchment); border: 1px solid var(--chalk); color: var(--ink); }
+  .msg.member .msg-bubble { background: var(--ink); color: var(--warm-white); }
+
+  .msg-time {
+    font-family: var(--mono); font-size: 8px; color: var(--dust);
+    align-self: flex-end;
+  }
+
+  .thread-input {
+    padding: 16px 28px; border-top: 1px solid var(--chalk);
+    display: flex; gap: 12px; align-items: center;
+  }
+
+  .thread-input input {
+    flex: 1; padding: 10px 14px; border: 1px solid var(--chalk); background: var(--warm-white);
+    font-family: var(--sans); font-size: 13px; font-weight: 300; color: var(--ink); outline: none;
+  }
+  .thread-input input:focus { border-color: var(--deep-green); }
+
+  .thread-send {
+    padding: 10px 18px; background: var(--ink); color: var(--warm-white); border: none;
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.2s; flex-shrink: 0;
+  }
+  .thread-send:hover { background: var(--deep-green); }
+
+  /* Peer groups view */
+  .peer-groups-list { display: flex; flex-direction: column; gap: 0; overflow-y: auto; flex: 1; }
+
+  .pg-item {
+    padding: 20px 28px; border-bottom: 1px solid var(--chalk); cursor: pointer;
+    transition: background 0.15s;
+  }
+  .pg-item:hover { background: var(--parchment); }
+
+  .pg-item-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+
+  .pg-name {
+    font-family: var(--serif); font-size: 16px; font-weight: 400; color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  .pg-members {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dust);
+  }
+
+  .pg-preview {
+    font-size: 13px; font-weight: 300; color: var(--ink-50); line-height: 1.5;
+  }
+
+  .pg-tag {
+    display: inline-block; margin-top: 8px; font-family: var(--mono); font-size: 7px;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--deep-green);
+    border: 1px solid var(--deep-green); padding: 3px 8px;
+  }
+
+
+  /* ══════════════════════════════
+     PORTAL 02 — COACH PORTAL
+  ══════════════════════════════ */
+  .coach-portal {
+    display: grid; grid-template-columns: 280px 1fr; gap: 0;
+    border: 1px solid rgba(250,247,242,0.10);
+    background: var(--warm-white); margin-top: 32px; min-height: 640px;
+    overflow: hidden;
+  }
+
+  .cp-sidebar {
+    background: var(--parchment); border-right: 1px solid var(--chalk);
+    display: flex; flex-direction: column;
+  }
+
+  .cp-sidebar-header {
+    padding: 18px 18px 14px; border-bottom: 1px solid var(--chalk); background: var(--deep-green);
+  }
+
+  .cp-portal-name {
+    font-family: var(--serif); font-size: 16px; font-weight: 400; color: var(--warm-white);
+    letter-spacing: -0.01em; margin-bottom: 2px;
+  }
+
+  .cp-portal-sub {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: rgba(250,247,242,0.40);
+  }
+
+  .cp-member-list { display: flex; flex-direction: column; gap: 0; overflow-y: auto; flex: 1; }
+
+  .cp-member-item {
+    padding: 14px 18px; border-bottom: 1px solid var(--chalk); cursor: pointer;
+    display: grid; grid-template-columns: 32px 1fr; gap: 12px; align-items: start;
+    transition: background 0.15s;
+  }
+  .cp-member-item:hover { background: var(--chalk); }
+  .cp-member-item.active { background: var(--warm-white); }
+
+  .cp-avatar {
+    width: 32px; height: 32px; border-radius: 50%; background: var(--clay-light);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--ink); flex-shrink: 0;
+  }
+  .cp-avatar.alert { background: var(--clay); color: var(--warm-white); }
+
+  .cp-member-info {}
+
+  .cp-member-name {
+    font-family: var(--sans); font-size: 14px; font-weight: 400; color: var(--ink); margin-bottom: 3px;
+  }
+
+  .cp-member-status {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .cp-member-status.ok { color: var(--deep-green); }
+  .cp-member-status.watch { color: var(--clay); }
+  .cp-member-status.new { color: var(--dust); }
+
+  .cp-member-last {
+    font-size: 11px; font-weight: 300; color: var(--ink-50); margin-top: 2px;
+  }
+
+  /* Coach main view */
+  .cp-main { display: flex; flex-direction: column; }
+
+  .cp-main-header {
+    padding: 20px 28px; border-bottom: 1px solid var(--chalk);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .cp-member-headline {
+    font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  .cp-member-meta {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dust); margin-top: 3px;
+  }
+
+  .cp-action-btn {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase;
+    background: var(--deep-green); color: var(--warm-white); border: none; padding: 10px 18px;
+    cursor: pointer; transition: opacity 0.2s;
+  }
+  .cp-action-btn:hover { opacity: 0.85; }
+
+  .cp-main-body { padding: 24px 28px; flex: 1; overflow-y: auto; }
+
+  .cp-section { margin-bottom: 28px; }
+
+  .cp-section-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .cp-section-label::after { content: ''; flex: 1; height: 1px; background: var(--chalk); }
+
+  .cp-checkin-row {
+    display: flex; gap: 8px; margin-bottom: 8px;
+  }
+
+  .cp-day-bar {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+  }
+
+  .cp-bar {
+    width: 20px; background: var(--chalk);
+    border-radius: 0; position: relative; overflow: hidden;
+  }
+
+  .cp-bar-fill {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: var(--deep-green); transition: height 0.8s cubic-bezier(0.16,1,0.3,1);
+  }
+  .cp-bar.warn .cp-bar-fill { background: var(--clay); }
+
+  .cp-day-label {
+    font-family: var(--mono); font-size: 7px; letter-spacing: 0.06em;
+    color: var(--dust); text-align: center;
+  }
+
+  /* VLAP signal preview in coach portal */
+  .cp-vlap-preview {
+    background: var(--ink); padding: 20px 20px; margin-bottom: 16px;
+  }
+
+  .cp-vlap-label {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay-light); margin-bottom: 12px;
+  }
+
+  .cp-vlap-signal {
+    padding: 12px 0; border-bottom: 1px solid rgba(250,247,242,0.08);
+  }
+  .cp-vlap-signal:last-child { border-bottom: none; }
+
+  .cp-vlap-dim {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(250,247,242,0.35); margin-bottom: 5px;
+  }
+
+  .cp-vlap-text {
+    font-family: var(--serif); font-size: 14px; font-style: italic;
+    color: var(--warm-white); line-height: 1.4;
+  }
+
+  .cp-note-text {
+    font-size: 13px; font-weight: 300; line-height: 1.65; color: var(--ink-70); margin-bottom: 8px;
+  }
+
+  .cp-note-box {
+    background: var(--parchment); padding: 16px 18px; border: 1px solid var(--chalk);
+    font-size: 13px; font-weight: 300; line-height: 1.65; color: var(--ink-70);
+    font-family: var(--sans); border-radius: 0;
+  }
+
+
+  /* ══════════════════════════════
+     PORTAL 03 — CLINICIAN VIEW
+  ══════════════════════════════ */
+  .clinician-view {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border: 1px solid rgba(250,247,242,0.10);
+    background: var(--warm-white); margin-top: 32px; min-height: 640px;
+    overflow: hidden;
+  }
+
+  .cv-left { border-right: 1px solid var(--chalk); display: flex; flex-direction: column; }
+
+  .cv-header {
+    padding: 20px 24px; border-bottom: 1px solid var(--chalk); background: var(--deep-green);
+  }
+
+  .cv-title {
+    font-family: var(--serif); font-size: 18px; font-weight: 400; color: var(--warm-white);
+    letter-spacing: -0.01em; margin-bottom: 3px;
+  }
+
+  .cv-subtitle {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: rgba(250,247,242,0.40);
+  }
+
+  .cv-body { padding: 24px; flex: 1; overflow-y: auto; }
+
+  /* Signal panel */
+  .cv-signal-panel {
+    background: var(--charcoal); margin-bottom: 20px; overflow: hidden;
+  }
+
+  .cv-sp-header {
+    padding: 14px 20px; border-bottom: 1px solid rgba(250,247,242,0.1);
+    background: rgba(250,247,242,0.05);
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: rgba(250,247,242,0.40);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  .cv-sp-badge {
+    font-family: var(--mono); font-size: 7px; letter-spacing: 0.1em;
+    color: var(--clay-light); border: 1px solid rgba(196,137,111,0.3); padding: 2px 6px;
+  }
+
+  .cv-signal-item {
+    padding: 16px 20px; border-bottom: 1px solid rgba(250,247,242,0.07);
+  }
+  .cv-signal-item:last-child { border-bottom: none; }
+
+  .cv-sig-dim {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 6px;
+  }
+
+  .cv-sig-utterance {
+    font-family: var(--serif); font-size: 15px; font-style: italic;
+    color: var(--warm-white); line-height: 1.4; margin-bottom: 6px;
+  }
+
+  .cv-sig-interp {
+    font-size: 12px; font-weight: 300; color: rgba(250,247,242,0.50); line-height: 1.55;
+  }
+
+  .cv-sp-
+
+  /* Clinician right panel */
+  .cv-right { display: flex; flex-direction: column; }
+
+  .cv-right-header {
+    padding: 20px 24px; border-bottom: 1px solid var(--chalk);
+  }
+
+  .cv-right-title {
+    font-family: var(--serif); font-size: 16px; font-weight: 400; color: var(--ink); margin-bottom: 3px;
+  }
+
+  .cv-right-sub {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dust);
+  }
+
+  .cv-right-body { padding: 20px 24px; flex: 1; overflow-y: auto; }
+
+  .cv-context-block { margin-bottom: 20px; }
+
+  .cv-context-label {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--dust); margin-bottom: 8px;
+  }
+
+  .cv-context-value {
+    font-size: 13px; font-weight: 300; line-height: 1.65; color: var(--ink-70);
+    padding: 14px 16px; background: var(--parchment); border: 1px solid var(--chalk);
+  }
+
+  .cv-flag {
+    display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; margin-bottom: 6px;
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .cv-flag.notable { color: var(--clay); border: 1px solid rgba(196,137,111,0.35); background: var(--clay-pale); }
+  .cv-flag.watch { color: var(--deep-green); border: 1px solid rgba(45,74,62,0.25); background: rgba(45,74,62,0.06); }
+  .cv-flag::before { content: '●'; font-size: 6px; }
+
+  .cv-note-area {
+    background: var(--parchment); border: 1px solid var(--chalk); padding: 16px 18px;
+    font-family: var(--sans); font-size: 13px; font-weight: 300; line-height: 1.65;
+    color: var(--ink-70);
+  }
+
+  /* ══════════════════════════════
+     PORTAL 04 — ORG DASHBOARD
+  ══════════════════════════════ */
+  .org-dash {
+    background: var(--warm-white); margin-top: 32px; min-height: 640px;
+    border: 1px solid rgba(250,247,242,0.10); overflow: hidden;
+  }
+
+  .od-header {
+    padding: 20px 28px; border-bottom: 1px solid var(--chalk); background: var(--ink);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .od-title {
+    font-family: var(--serif); font-size: 18px; font-weight: 400; color: var(--warm-white); letter-spacing: -0.01em;
+  }
+
+  .od-badges { display: flex; gap: 8px; }
+
+  .od-badge {
+    font-family: var(--mono); font-size: 7px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(250,247,242,0.40); border: 1px solid rgba(250,247,242,0.15); padding: 4px 10px;
+  }
+
+  .od-body { padding: 28px; display: flex; flex-direction: column; gap: 28px; }
+
+  /* Stat row */
+  .od-stat-row {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+    border: 1px solid var(--chalk);
+  }
+
+  .od-stat {
+    padding: 24px 24px; border-right: 1px solid var(--chalk);
+  }
+  .od-stat:last-child { border-right: none; }
+
+  .od-stat-label {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--dust); margin-bottom: 8px;
+  }
+
+  .od-stat-num {
+    font-family: var(--serif); font-size: 36px; font-weight: 300;
+    color: var(--ink); line-height: 1; letter-spacing: -0.03em; margin-bottom: 4px;
+  }
+
+  .od-stat-note {
+    font-size: 11px; font-weight: 300; color: var(--ink-50);
+  }
+
+  /* Trend section */
+  .od-trends {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+  }
+
+  .od-trend-panel {
+    border: 1px solid var(--chalk); overflow: hidden;
+  }
+
+  .od-trend-header {
+    padding: 14px 18px; border-bottom: 1px solid var(--chalk);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .od-trend-title {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dust);
+  }
+
+  .od-trend-badge {
+    font-family: var(--mono); font-size: 7px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--deep-green);
+    border: 1px solid var(--deep-green); padding: 2px 6px;
+  }
+
+  .od-trend-body { padding: 20px 18px; }
+
+  /* Bar chart */
+  .bar-chart { display: flex; align-items: flex-end; gap: 8px; height: 100px; margin-bottom: 10px; }
+
+  .bc-bar {
+    flex: 1; background: var(--chalk); position: relative; display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .bc-bar-fill {
+    background: var(--deep-green); transition: height 1s cubic-bezier(0.16,1,0.3,1); width: 100%;
+  }
+  .bc-bar.alert .bc-bar-fill { background: var(--clay); }
+
+  .bc-labels { display: flex; gap: 8px; }
+  .bc-label {
+    flex: 1; font-family: var(--mono); font-size: 7px; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--dust); text-align: center;
+  }
+
+  /* Signal dimension trend */
+  .dim-trend { display: flex; flex-direction: column; gap: 10px; }
+
+  .dt-row { display: flex; align-items: center; gap: 12px; }
+
+  .dt-label {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--dust); min-width: 80px; flex-shrink: 0;
+  }
+
+  .dt-bar { flex: 1; height: 4px; background: var(--chalk); position: relative; overflow: hidden; }
+
+  .dt-bar-fill {
+    position: absolute; left: 0; top: 0; height: 100%; background: var(--deep-green);
+    transition: width 1.2s cubic-bezier(0.16,1,0.3,1);
+  }
+  .dt-bar.elevated .dt-bar-fill { background: var(--clay); }
+
+  .dt-val {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.06em;
+    color: var(--dust); min-width: 32px; text-align: right;
+  }
+
+  /* Deident notice */
+  .od-deident {
+    padding: 14px 18px; background: var(--parchment); border: 1px solid var(--chalk);
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--dust);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .od-deident::before { content: '⊘'; font-size: 14px; color: var(--deep-green); }
+
+  /* Peer group activity */
+  .pg-activity { display: flex; flex-direction: column; gap: 0; }
+
+  .pga-item {
+    padding: 12px 0; border-bottom: 1px solid var(--chalk);
+    display: flex; align-items: baseline; justify-content: space-between;
+    font-size: 13px; font-weight: 300; color: var(--ink-70);
+  }
+  .pga-item:last-child { border-bottom: none; }
+
+  .pga-count {
+    font-family: var(--mono); font-size: 10px; font-weight: 500; color: var(--ink);
+  }
+
+
+  /* ─── PROTOTYPE FOOTER ─── */
+  .proto-
+
+  .pf-note {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(250,247,242,0.28);
+  }
+
+  .pf-cta {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--clay-light);
+    text-decoration: none; display: flex; align-items: center; gap: 6px;
+    transition: color 0.2s;
+  }
+  .pf-cta:hover { color: var(--warm-white); }
+  .pf-cta::after { content: '→'; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .member-app, .coach-portal { grid-template-columns: 1fr; }
+    .ma-sidebar, .cp-sidebar { border-right: none; border-bottom: 1px solid var(--chalk); max-height: 200px; }
+    .ma-nav, .cp-member-list { flex-direction: row; overflow-x: auto; }
+    .ma-nav-item, .cp-member-item { flex-shrink: 0; }
+    .clinician-view { grid-template-columns: 1fr; }
+    .cv-left { border-right: none; border-bottom: 1px solid var(--chalk); }
+    .od-stat-row { grid-template-columns: 1fr 1fr; }
+    .od-stat:nth-child(2) { border-right: none; }
+    .od-stat:nth-child(3) { border-top: 1px solid var(--chalk); }
+    .od-trends { grid-template-columns: 1fr; }
+    .intro-strip { grid-template-columns: 1fr; gap: 20px; }
+  }
+
+  @media (max-width: 600px) {
+    :root { --gutter: 4vw; }
+    .portal-tabs { overflow-x: auto; }
+    .portal-tab { flex-shrink: 0; padding: 12px 18px; }
+    .nav-proto-tag { display: none; }
+  }
+
+  footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);padding:0;}
+  .footer-sitemap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:0;padding:56px 7vw 40px;border-bottom:1px solid rgba(250,247,242,0.08);}
+  .fs-brand{padding-right:40px;}
+  .footer-logo{font-family:var(--serif);font-size:22px;color:var(--warm-white,#FAF7F2);letter-spacing:-0.02em;text-decoration:none;display:block;margin-bottom:12px;}
+  .footer-logo span{color:var(--clay,#C4896F);font-style:italic;}
+  .footer-mission{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.28);line-height:1.8;margin-bottom:20px;}
+  .fs-cta{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:var(--clay,#C4896F);border:1px solid rgba(196,137,111,0.40);padding:9px 18px;text-decoration:none;transition:all 0.18s;}
+  .fs-cta:hover{background:rgba(196,137,111,0.12);}
+  .fs-col{padding-left:32px;border-left:1px solid rgba(250,247,242,0.06);}
+  .fs-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,247,242,0.30);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(250,247,242,0.06);}
+  .fs-col a{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,247,242,0.45);text-decoration:none;margin-bottom:10px;transition:color 0.15s;}
+  .fs-col a:hover{color:var(--clay,#C4896F);}
+  .footer-bottom{padding:20px 7vw;display:flex;align-items:center;justify-content:space-between;}
+  .footer-copy{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,0.20);}
+  .footer-legal{display:flex;gap:20px;}
+  .footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+  .footer-legal a:hover{color:var(--clay,#C4896F);}
+  @media(max-width:1100px){.footer-sitemap{grid-template-columns:1fr 1fr 1fr;gap:32px;}.fs-brand{grid-column:1/-1;padding-right:0;}.fs-col{border-left:none;padding-left:0;}}
+  @media(max-width:680px){.footer-sitemap{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}}
+  @media(max-width:400px){.footer-sitemap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <div class="nav-left">
+    <a href="index.html" class="nav-logo">Vasl <span>Health</span></a>
+    <span class="nav-proto-tag">Platform Prototype V5 &mdash; Composite / Simulated Data</span>
+  </div>
+  <a href="index.html" class="nav-back">Back to site</a>
+</nav>
+
+<div class="proto-wrapper">
+
+  <!-- INTRO STRIP -->
+  <div class="intro-strip">
+    <div>
+      <h1 class="intro-headline">
+        The platform &mdash;<br>
+        <em>in motion.</em>
+      </h1>
+    </div>
+    <div class="intro-right">
+      <p class="intro-body">Four portals. Four audiences. One care continuum. Select a portal below to explore the Vasl platform from each perspective. All data shown is composite and de-identified &mdash; for demonstration purposes only.</p>
+      <span class="demo-badge">Composite & Simulated Data &mdash; Not Real Member Records</span>
+    </div>
+  </div>
+
+  <!-- PORTAL TABS -->
+  <div class="portal-tabs">
+    <button class="portal-tab active" data-portal="member">Member App</button>
+    <button class="portal-tab" data-portal="coach">Coach Portal</button>
+    <button class="portal-tab" data-portal="clinician">Clinician View</button>
+    <button class="portal-tab" data-portal="org">Org Dashboard</button>
+    <button class="portal-tab" data-portal="admin">Super Admin</button>
+  </div>
+
+
+  <!-- ══════════════════════════════
+       PORTAL 01 &mdash; MEMBER APP
+  ══════════════════════════════ -->
+  <div class="portal-stage active" id="portal-member">
+    <div class="member-app">
+      <!-- Sidebar nav -->
+      <div class="ma-sidebar">
+        <div class="ma-sidebar-header">
+          <div class="ma-app-name">Vasl <span>Health</span></div>
+          <div class="ma-app-sub">Member App &middot; Composite Demo</div>
+        </div>
+        <nav class="ma-nav">
+          <div class="ma-nav-item active" data-view="checkin">
+            <span class="ma-nav-dot"></span>Daily Check-In
+          </div>
+          <div class="ma-nav-item" data-view="coach">
+            <span class="ma-nav-dot"></span>My Coach
+          </div>
+          <div class="ma-nav-item" data-view="groups">
+            <span class="ma-nav-dot"></span>Peer Groups
+          </div>
+        </nav>
+      </div>
+
+      <!-- Content -->
+      <div class="ma-content">
+
+        <!-- Check-in view -->
+        <div class="ma-view active" id="view-checkin">
+          <div class="ma-view-header">
+            <div>
+              <div class="ma-view-title">Daily Check-In</div>
+              <div class="ma-view-sub">Takes about 45 seconds</div>
+            </div>
+            <div class="demo-badge">Simulated</div>
+          </div>
+          <div class="checkin-flow">
+            <p class="checkin-prompt">"How are you doing today &mdash; honestly?"</p>
+            <div class="checkin-options">
+              <div class="checkin-option" onclick="selectOption(this)">I'm doing okay, honestly</div>
+              <div class="checkin-option" onclick="selectOption(this)">A little off &mdash; not sure why</div>
+              <div class="checkin-option" onclick="selectOption(this)">It's been heavy lately</div>
+              <div class="checkin-option" onclick="selectOption(this)">Not great, I won't lie</div>
+            </div>
+            <div class="checkin-text-label">Anything you want your coach to know?</div>
+            <textarea class="checkin-textarea" placeholder="You can say as much or as little as you want. This goes directly to your coach &mdash; no one else." id="checkin-text"></textarea>
+            <button class="checkin-btn" onclick="sendCheckin()">Send Check-In &rarr;</button>
+            <div class="checkin-sent" id="checkin-sent">
+              <div class="cs-label">Check-in sent to your coach</div>
+              <p class="cs-text">Your coach will see this and reach out. You'll usually hear back within a few hours &mdash; often sooner. In the meantime, your peer group is always open.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coach view -->
+        <div class="ma-view" id="view-coach">
+          <div class="ma-view-header">
+            <div>
+              <div class="ma-view-title">Coach Amara</div>
+              <div class="ma-view-sub">Certified Coach &middot; Active now</div>
+            </div>
+          </div>
+          <div class="message-thread" id="message-thread">
+            <div class="msg coach">
+              <div class="msg-label">Amara &mdash; Coach</div>
+              <div class="msg-bubble">Hey, just checking in. Your check-in yesterday felt like a lot was sitting on you. How are things feeling today?</div>
+              <div class="msg-time">Yesterday, 2:14 PM</div>
+            </div>
+            <div class="msg member">
+              <div class="msg-label">You</div>
+              <div class="msg-bubble">Idk honestly. Not worse but not better either. Just kinda existing.</div>
+              <div class="msg-time">Yesterday, 4:02 PM</div>
+            </div>
+            <div class="msg coach">
+              <div class="msg-label">Amara &mdash; Coach</div>
+              <div class="msg-bubble">That's real. Sometimes "just existing" is the most honest thing you can say. I hear you. Want to talk through what's been heaviest this week?</div>
+              <div class="msg-time">Yesterday, 4:18 PM</div>
+            </div>
+            <div class="msg member">
+              <div class="msg-label">You</div>
+              <div class="msg-bubble">fr it's just the pressure from home combined with school. feels like I can't be good at both</div>
+              <div class="msg-time">Yesterday, 6:45 PM</div>
+            </div>
+            <div class="msg coach">
+              <div class="msg-label">Amara &mdash; Coach</div>
+              <div class="msg-bubble">That split you're describing &mdash; I know exactly what you mean. Let's talk about it tomorrow. I'll reach out in the morning.</div>
+              <div class="msg-time">Yesterday, 7:01 PM</div>
+            </div>
+          </div>
+          <div class="thread-input">
+            <input type="text" placeholder="Message your coach..." id="thread-input-field">
+            <button class="thread-send" onclick="sendMessage()">Send</button>
+          </div>
+        </div>
+
+        <!-- Peer groups view -->
+        <div class="ma-view" id="view-groups">
+          <div class="ma-view-header">
+            <div>
+              <div class="ma-view-title">Peer Groups</div>
+              <div class="ma-view-sub">70+ groups &middot; Human moderated</div>
+            </div>
+          </div>
+          <div class="peer-groups-list">
+            <div class="pg-item">
+              <div class="pg-item-top">
+                <span class="pg-name">First-Gen Focus</span>
+                <span class="pg-members">847 members</span>
+              </div>
+              <div class="pg-preview">"Nobody at home gets what college feels like and nobody at college gets what home feels like&hellip;"</div>
+              <span class="pg-tag">Active now</span>
+            </div>
+            <div class="pg-item">
+              <div class="pg-item-top">
+                <span class="pg-name">Healing in Community</span>
+                <span class="pg-members">1.2K members</span>
+              </div>
+              <div class="pg-preview">"Came here because I needed people who didn't need me to explain why this year hit different&hellip;"</div>
+              <span class="pg-tag">Cultural</span>
+            </div>
+            <div class="pg-item">
+              <div class="pg-item-top">
+                <span class="pg-name">Queer & Thriving</span>
+                <span class="pg-members">634 members</span>
+              </div>
+              <div class="pg-preview">"This is the first space I didn't have to defend my existence before I could just talk&hellip;"</div>
+              <span class="pg-tag">Affirming &middot; Private</span>
+            </div>
+            <div class="pg-item">
+              <div class="pg-item-top">
+                <span class="pg-name">Black Joy Collective</span>
+                <span class="pg-members">502 members</span>
+              </div>
+              <div class="pg-preview">"Everyone wants us to talk about pain. This is where we get to talk about everything&hellip;"</div>
+              <span class="pg-tag">Community</span>
+            </div>
+            <div class="pg-item">
+              <div class="pg-item-top">
+                <span class="pg-name">Grief Without a Map</span>
+                <span class="pg-members">289 members</span>
+              </div>
+              <div class="pg-preview">"No script for this. Just people who've been through sudden loss and are figuring it out too&hellip;"</div>
+              <span class="pg-tag">Grief</span>
+            </div>
+            <div class="pg-item">
+              <div class="pg-item-top">
+                <span class="pg-name">Mindful Mondays</span>
+                <span class="pg-members">418 members</span>
+              </div>
+              <div class="pg-preview">"Weekly space to reset. No pressure to share &mdash; just to breathe together before the week starts&hellip;"</div>
+              <span class="pg-tag">Weekly &middot; Open</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════
+       PORTAL 02 &mdash; COACH PORTAL
+  ══════════════════════════════ -->
+  <div class="portal-stage" id="portal-coach">
+    <div class="coach-portal">
+      <div class="cp-sidebar">
+        <div class="cp-sidebar-header">
+          <div class="cp-portal-name">Coach Portal</div>
+          <div class="cp-portal-sub">Amara W. &middot; Certified Coach</div>
+        </div>
+        <div class="cp-member-list">
+          <div class="cp-member-item active" onclick="selectMember(this, 'jadele')">
+            <div class="cp-avatar alert">JL</div>
+            <div class="cp-member-info">
+              <div class="cp-member-name">Jade L.</div>
+              <div class="cp-member-status watch">Watch</div>
+              <div class="cp-member-last">Check-in 6h ago &middot; Withdrawal signal</div>
+            </div>
+          </div>
+          <div class="cp-member-item" onclick="selectMember(this, 'marcust')">
+            <div class="cp-avatar">MT</div>
+            <div class="cp-member-info">
+              <div class="cp-member-name">Marcus T.</div>
+              <div class="cp-member-status ok">Engaged</div>
+              <div class="cp-member-last">Session tomorrow &middot; Active in group</div>
+            </div>
+          </div>
+          <div class="cp-member-item" onclick="selectMember(this, 'amarak')">
+            <div class="cp-avatar">AK</div>
+            <div class="cp-member-info">
+              <div class="cp-member-name">Amara K.</div>
+              <div class="cp-member-status ok">Active</div>
+              <div class="cp-member-last">Check-in yesterday &middot; Peer group active</div>
+            </div>
+          </div>
+          <div class="cp-member-item" onclick="selectMember(this, 'devonj')">
+            <div class="cp-avatar">DJ</div>
+            <div class="cp-member-info">
+              <div class="cp-member-name">Devon J.</div>
+              <div class="cp-member-status new">New</div>
+              <div class="cp-member-last">Enrolled 3 days ago &middot; First contact needed</div>
+            </div>
+          </div>
+          <div class="cp-member-item" onclick="selectMember(this, 'soniam')">
+            <div class="cp-avatar">SM</div>
+            <div class="cp-member-info">
+              <div class="cp-member-name">Sonia M.</div>
+              <div class="cp-member-status ok">Stable</div>
+              <div class="cp-member-last">Weekly touchpoint complete</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cp-main">
+        <div class="cp-main-header">
+          <div>
+            <div class="cp-member-headline" id="cp-member-name">Jade L.</div>
+            <div class="cp-member-meta" id="cp-member-meta">16 &middot; Enrolled 6 weeks &middot; First-Gen Focus group &middot; Status: Watch</div>
+          </div>
+          <button class="cp-action-btn">Reach Out &rarr;</button>
+        </div>
+
+        <div class="cp-main-body">
+          <!-- Engagement chart -->
+          <div class="cp-section">
+            <div class="cp-section-label">14-Day Check-In Engagement</div>
+            <div class="cp-checkin-row" id="cp-chart">
+              <!-- JS fills this -->
+            </div>
+          </div>
+
+          <!-- VLAP context note -->
+          <div class="cp-section">
+            <div class="cp-section-label">VLAP Signal Context &mdash; Clinician-Informed Note</div>
+            <div class="cp-vlap-preview" id="cp-vlap">
+              <div class="cp-vlap-label">From licensed clinical supervisor &middot; For coaching context</div>
+              <div class="cp-vlap-signal">
+                <div class="cp-vlap-dim">Dimension 02 &mdash; Social Withdrawal</div>
+                <div class="cp-vlap-text">"I don't really fw people like that no more."</div>
+              </div>
+              <div class="cp-vlap-signal">
+                <div class="cp-vlap-dim">Dimension 05 &mdash; Temporal Distress</div>
+                <div class="cp-vlap-text">"Just gotta make it through this week fr."</div>
+              </div>
+            </div>
+            <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dust); margin-top: 8px;">Signal data for licensed clinical use &middot; Non-diagnostic &middot; Human review conducted</div>
+          </div>
+
+          <!-- Coach note -->
+          <div class="cp-section">
+            <div class="cp-section-label">Your Last Note</div>
+            <div class="cp-note-box" id="cp-note">Something shifted this week. She's less forthcoming than usual &mdash; shorter messages, later response times. The group activity drop is noticeable. I didn't push it. The relationship feels solid; I think she'll tell me when she's ready. Plan to reach out proactively tomorrow morning.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════
+       PORTAL 03 &mdash; CLINICIAN VIEW
+  ══════════════════════════════ -->
+  <div class="portal-stage" id="portal-clinician">
+    <div class="clinician-view">
+      <div class="cv-left">
+        <div class="cv-header">
+          <div class="cv-title">Pre-Session Context &mdash; Jade L.</div>
+          <div class="cv-subtitle">Coach Portal &middot; Clinician View &middot; Session in 45 minutes</div>
+        </div>
+        <div class="cv-body">
+          <div style="font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay); margin-bottom: 16px;">VLAP Signal Context &mdash; Prior 14 Days</div>
+
+          <div class="cv-signal-panel">
+            <div class="cv-sp-header">
+              <span>CulturalBERT-VLAP &middot; Dimensional Signal Output</span>
+              <span class="cv-sp-badge">Composite &middot; De-identified Demo</span>
+            </div>
+
+            <div class="cv-signal-item">
+              <div class="cv-sig-dim">Dimension 02 &mdash; Social Withdrawal &middot; ISO-01</div>
+              <div class="cv-sig-utterance">"I don't really fw people like that no more."</div>
+              <div class="cv-sig-interp">Broad relational withdrawal. "No more" is a temporal marker &mdash; something changed. Third occurrence in 14-day window. Absence of explanation is itself clinically significant.</div>
+            </div>
+
+            <div class="cv-signal-item">
+              <div class="cv-sig-dim">Dimension 05 &mdash; Temporal Distress &middot; HOP-05</div>
+              <div class="cv-sig-utterance">"Just gotta make it through this week fr."</div>
+              <div class="cv-sig-interp">Acutely compressed future horizon. "Fr" (for real) is an authenticity marker. First appearance of this pattern in this member's signal history.</div>
+            </div>
+
+            <div class="cv-signal-item">
+              <div class="cv-sig-dim">Dimension 04 &mdash; Cultural Coping &middot; CCM-12</div>
+              <div class="cv-sig-utterance">"God got me. That's all I'm saying."</div>
+              <div class="cv-sig-interp">Spiritual closure as conversational shutdown. May signal active resilience or disclosure avoidance &mdash; second occurrence this cycle. Context and frequency determine interpretation.</div>
+            </div>
+
+            <div class="cv-sp-footer">Non-diagnostic &middot; Non-prescriptive &middot; Clinician interpretation required &middot; Human response initiates all action</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cv-right">
+        <div class="cv-right-header">
+          <div class="cv-right-title">Session Context</div>
+          <div class="cv-right-sub">Coach notes &middot; Engagement &middot; Cultural context</div>
+        </div>
+
+        <div class="cv-right-body">
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;">
+            <span class="cv-flag notable">Withdrawal &mdash; 3 sessions</span>
+            <span class="cv-flag watch">First temporal pattern</span>
+            <span class="cv-flag watch">Peer group gap &mdash; 6 days</span>
+          </div>
+
+          <div class="cv-context-block">
+            <div class="cv-context-label">Coach Context Note</div>
+            <div class="cv-context-value">Something shifted this week. Less forthcoming than usual &mdash; shorter messages, later response times. Group activity dropped noticeably. I didn't push. Relationship feels solid; she'll tell me when ready. Reached out proactively this morning &mdash; she responded within 2 hours.</div>
+          </div>
+
+          <div class="cv-context-block">
+            <div class="cv-context-label">14-Day Engagement</div>
+            <div class="cv-context-value">8 check-ins over 14 days. Consistent through Day 10 &mdash; 4-day gap before session. Coach initiated contact Day 11. Member responded. Pattern may reflect situational stressor, not disengagement.</div>
+          </div>
+
+          <div class="cv-context-block">
+            <div class="cv-context-label">Cultural Context</div>
+            <div class="cv-context-value">First-generation college student. Family recently navigated immigration-related stress. Member has previously framed family loyalty as a competing pressure against her own wellbeing. Spiritual framing ("God got me") has appeared in past sessions as both genuine faith and deflection &mdash; context determines which.</div>
+          </div>
+
+          <div class="cv-context-block">
+            <div class="cv-context-label">Your Pre-Session Note</div>
+            <div class="cv-note-area">Enter pre-session notes here &mdash; your observations, hypotheses, areas you want to open up today. This stays in the clinical record.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════
+       PORTAL 04 &mdash; ORG DASHBOARD
+  ══════════════════════════════ -->
+  <div class="portal-stage" id="portal-org">
+    <div class="org-dash">
+      <div class="od-header">
+        <div class="od-title">Client Org Portal &mdash; Population View</div>
+        <div class="od-badges">
+          <span class="od-badge">De-identified</span>
+          <span class="od-badge">Aggregate only</span>
+          <span class="od-badge">No individual records</span>
+        </div>
+      </div>
+
+      <div class="od-body">
+        <!-- Stat row -->
+        <div class="od-stat-row">
+          <div class="od-stat">
+            <div class="od-stat-label">Active Members</div>
+            <div class="od-stat-num">847</div>
+            <div class="od-stat-note">&uarr; 12% from last quarter</div>
+          </div>
+          <div class="od-stat">
+            <div class="od-stat-label">30-Day Retention</div>
+            <div class="od-stat-num">79.5<span style="font-size:18px">%</span></div>
+            <div class="od-stat-note">vs. 40&ndash;50% industry avg.</div>
+          </div>
+          <div class="od-stat">
+            <div class="od-stat-label">Avg. PHQ-8 Improvement</div>
+            <div class="od-stat-num">42<span style="font-size:18px">%</span></div>
+            <div class="od-stat-note">90-day cohort measurement</div>
+          </div>
+          <div class="od-stat">
+            <div class="od-stat-label">Clinical Escalation Rate</div>
+            <div class="od-stat-num">20<span style="font-size:18px">%</span></div>
+            <div class="od-stat-note">80% resolved pre-clinical</div>
+          </div>
+        </div>
+
+        <div class="od-trends">
+          <!-- Engagement trend -->
+          <div class="od-trend-panel">
+            <div class="od-trend-header">
+              <span class="od-trend-title">Weekly Engagement &mdash; 8 Weeks</span>
+              <span class="od-trend-badge">Check-ins + Coach interactions</span>
+            </div>
+            <div class="od-trend-body">
+              <div class="bar-chart" id="engagement-chart">
+                <!-- JS fills -->
+              </div>
+              <div class="bc-labels" id="engagement-labels">
+                <!-- JS fills -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Signal dimension trends -->
+          <div class="od-trend-panel">
+            <div class="od-trend-header">
+              <span class="od-trend-title">VLAP Signal Trends &mdash; Population Level</span>
+              <span class="od-trend-badge">Aggregate &middot; De-identified</span>
+            </div>
+            <div class="od-trend-body">
+              <div class="dim-trend">
+                <div class="dt-row">
+                  <span class="dt-label">Emotional Valence</span>
+                  <div class="dt-bar"><div class="dt-bar-fill" style="width: 34%"></div></div>
+                  <span class="dt-val">Stable</span>
+                </div>
+                <div class="dt-row">
+                  <span class="dt-label">Withdrawal</span>
+                  <div class="dt-bar elevated"><div class="dt-bar-fill" style="width: 58%"></div></div>
+                  <span class="dt-val" style="color: var(--clay);">&uarr; Notable</span>
+                </div>
+                <div class="dt-row">
+                  <span class="dt-label">Hypervigilance</span>
+                  <div class="dt-bar"><div class="dt-bar-fill" style="width: 41%"></div></div>
+                  <span class="dt-val">Stable</span>
+                </div>
+                <div class="dt-row">
+                  <span class="dt-label">Cultural Coping</span>
+                  <div class="dt-bar"><div class="dt-bar-fill" style="width: 29%"></div></div>
+                  <span class="dt-val">Low</span>
+                </div>
+                <div class="dt-row">
+                  <span class="dt-label">Temporal Distress</span>
+                  <div class="dt-bar elevated"><div class="dt-bar-fill" style="width: 47%"></div></div>
+                  <span class="dt-val" style="color: var(--clay);">&uarr; Watch</span>
+                </div>
+              </div>
+              <div style="margin-top: 16px; font-family: var(--mono); font-size: 8px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dust);">Withdrawal and temporal distress signals elevated in ages 14&ndash;17 cohort &middot; Clinical team reviewing</div>
+            </div>
+          </div>
+
+          <!-- Peer group activity -->
+          <div class="od-trend-panel">
+            <div class="od-trend-header">
+              <span class="od-trend-title">Peer Group Activity &mdash; Top Groups</span>
+              <span class="od-trend-badge">Aggregate &middot; No member identification</span>
+            </div>
+            <div class="od-trend-body">
+              <div class="pg-activity">
+                <div class="pga-item">
+                  <span>First-Gen Focus</span>
+                  <span class="pga-count">1,240 interactions / week</span>
+                </div>
+                <div class="pga-item">
+                  <span>Healing in Community</span>
+                  <span class="pga-count">987 interactions / week</span>
+                </div>
+                <div class="pga-item">
+                  <span>Queer & Thriving</span>
+                  <span class="pga-count">643 interactions / week</span>
+                </div>
+                <div class="pga-item">
+                  <span>Black Joy Collective</span>
+                  <span class="pga-count">521 interactions / week</span>
+                </div>
+                <div class="pga-item">
+                  <span>Anxiety & Overthinking</span>
+                  <span class="pga-count">408 interactions / week</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Deident notice + report CTA -->
+          <div class="od-trend-panel">
+            <div class="od-trend-header">
+              <span class="od-trend-title">Quarterly Impact Report</span>
+              <span class="od-trend-badge">Q1 2026 &middot; Auto-generated</span>
+            </div>
+            <div class="od-trend-body">
+              <div class="od-deident" style="margin-bottom: 20px;">All data aggregate and de-identified. No individual member records accessible in this portal.</div>
+              <div style="display: flex; flex-direction: column; gap: 10px;">
+                <div style="padding: 14px 16px; background: var(--parchment); border: 1px solid var(--chalk); font-size: 13px; font-weight: 300; color: var(--ink-70);">
+                  <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dust); margin-bottom: 6px;">PHQ-8 Trend</div>
+                  Average 42% improvement &middot; Cohort of 847 active members
+                </div>
+                <div style="padding: 14px 16px; background: var(--parchment); border: 1px solid var(--chalk); font-size: 13px; font-weight: 300; color: var(--ink-70);">
+                  <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dust); margin-bottom: 6px;">ROI Estimate</div>
+                  $847K estimated in avoided downstream costs vs. untreated baseline
+                </div>
+                <button style="padding: 12px 20px; background: var(--ink); color: var(--warm-white); border: none; font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: background 0.2s;" onmouseover="this.style.background='#2D4A3E'" onmouseout="this.style.background='#1C1C1C'">Download Q1 Report &rarr;</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════
+       PORTAL 05 &mdash; SUPER ADMIN DASHBOARD
+  ══════════════════════════════ -->
+  <div class="portal-stage" id="portal-admin">
+    <div style="display: grid; grid-template-columns: 220px 1fr; min-height: 700px; border: 1px solid var(--chalk); overflow: hidden;">
+
+      <!-- Sidebar -->
+      <div style="background: var(--charcoal); padding: 0; display: flex; flex-direction: column;">
+        <div style="padding: 24px 20px; border-bottom: 1px solid rgba(250,247,242,0.08);">
+          <div style="font-family: var(--serif); font-size: 18px; color: var(--warm-white); letter-spacing: -0.02em; margin-bottom: 4px;">Vasl<span style="color: var(--clay); font-style: italic;">.</span></div>
+          <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,247,242,0.30);">Super Admin &middot; System View</div>
+        </div>
+        <nav style="padding: 16px 0; flex: 1;">
+          <div style="padding: 10px 20px; font-family: var(--mono); font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,247,242,0.25); margin-bottom: 4px;">System</div>
+          <div style="padding: 10px 20px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--warm-white); background: rgba(250,247,242,0.08); border-left: 2px solid var(--clay); cursor: pointer;">Dashboard</div>
+          <div style="padding: 10px 20px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(250,247,242,0.45); cursor: pointer;">Organizations</div>
+          <div style="padding: 10px 20px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(250,247,242,0.45); cursor: pointer;">VLAP Intelligence</div>
+          <div style="padding: 10px 20px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(250,247,242,0.45); cursor: pointer;">Coaches</div>
+          <div style="padding: 10px 20px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(250,247,242,0.45); cursor: pointer;">Members</div>
+          <div style="padding: 10px 20px; font-family: var(--mono); font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,247,242,0.25); margin-top: 12px; margin-bottom: 4px;">Clinical</div>
+          <div style="padding: 10px 20px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(250,247,242,0.45); cursor: pointer;">Crisis Queue</div>
+          <div style="padding: 10px 20px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(250,247,242,0.45); cursor: pointer;">BAA Status</div>
+          <div style="padding: 10px 20px; font-family: var(--mono); font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,247,242,0.25); margin-top: 12px; margin-bottom: 4px;">System</div>
+          <div style="padding: 10px 20px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(250,247,242,0.45); cursor: pointer;">Audit Logs</div>
+          <div style="padding: 10px 20px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(250,247,242,0.45); cursor: pointer;">Settings</div>
+        </nav>
+        <div style="padding: 16px 20px; border-top: 1px solid rgba(250,247,242,0.08);">
+          <div style="font-family: var(--mono); font-size: 9px; color: rgba(250,247,242,0.30);">Rodney Bell</div>
+          <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250,247,242,0.18);">Super Admin</div>
+        </div>
+      </div>
+
+      <!-- Main area -->
+      <div style="background: var(--warm-white); overflow-y: auto;">
+
+        <!-- Header -->
+        <div style="padding: 24px 32px; border-bottom: 1px solid var(--chalk); display: flex; align-items: center; justify-content: space-between; background: var(--warm-white);">
+          <div>
+            <div style="font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--ink); letter-spacing: -0.02em;">System Dashboard</div>
+            <div style="font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dust); margin-top: 4px;">All organizations &middot; Live data &middot; May 2026</div>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--deep-green); border: 1px solid var(--deep-green); padding: 5px 12px;">System Healthy</div>
+            <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dust); border: 1px solid var(--chalk); padding: 5px 12px;">Export Report</div>
+          </div>
+        </div>
+
+        <!-- System KPIs -->
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--chalk);">
+          <div style="padding: 24px 28px; border-right: 1px solid var(--chalk);">
+            <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dust); margin-bottom: 8px;">Total Active Members</div>
+            <div style="font-family: var(--serif); font-size: 40px; font-weight: 300; color: var(--ink); line-height: 1; letter-spacing: -0.04em;">1,714</div>
+            <div style="font-family: var(--mono); font-size: 9px; color: var(--deep-green); margin-top: 6px;">+47 this month</div>
+          </div>
+          <div style="padding: 24px 28px; border-right: 1px solid var(--chalk);">
+            <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dust); margin-bottom: 8px;">Active Organizations</div>
+            <div style="font-family: var(--serif); font-size: 40px; font-weight: 300; color: var(--ink); line-height: 1; letter-spacing: -0.04em;">4</div>
+            <div style="font-family: var(--mono); font-size: 9px; color: var(--dust); margin-top: 6px;">2 enterprise &middot; 2 pro</div>
+          </div>
+          <div style="padding: 24px 28px; border-right: 1px solid var(--chalk);">
+            <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dust); margin-bottom: 8px;">VLAP Signals (30d)</div>
+            <div style="font-family: var(--serif); font-size: 40px; font-weight: 300; color: var(--ink); line-height: 1; letter-spacing: -0.04em;">8,342</div>
+            <div style="font-family: var(--mono); font-size: 9px; color: var(--dust); margin-top: 6px;">Across all active orgs</div>
+          </div>
+          <div style="padding: 24px 28px;">
+            <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dust); margin-bottom: 8px;">Crisis Escalations (7d)</div>
+            <div style="font-family: var(--serif); font-size: 40px; font-weight: 300; color: var(--clay); line-height: 1; letter-spacing: -0.04em;">3</div>
+            <div style="font-family: var(--mono); font-size: 9px; color: var(--deep-green); margin-top: 6px;">All resolved &middot; Avg 34 min response</div>
+          </div>
+        </div>
+
+        <!-- Org roster + VLAP Intelligence split -->
+        <div style="display: grid; grid-template-columns: 1fr 320px; border-bottom: 1px solid var(--chalk);">
+
+          <!-- Org roster -->
+          <div style="border-right: 1px solid var(--chalk);">
+            <div style="padding: 18px 28px; border-bottom: 1px solid var(--chalk); display: flex; align-items: center; justify-content: space-between;">
+              <div style="font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink);">Organizations</div>
+              <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--clay); cursor: pointer;">+ Add Org</div>
+            </div>
+            <!-- Table header -->
+            <div style="display: grid; grid-template-columns: 1fr 80px 80px 90px 80px; padding: 10px 28px; border-bottom: 1px solid var(--chalk); background: var(--parchment);">
+              <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dust);">Organization</div>
+              <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dust);">Plan</div>
+              <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dust);">Members</div>
+              <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dust);">BAA Status</div>
+              <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dust);">Status</div>
+            </div>
+            <!-- Org rows -->
+            <div style="display: grid; grid-template-columns: 1fr 80px 80px 90px 80px; padding: 14px 28px; border-bottom: 1px solid var(--chalk); align-items: center;">
+              <div>
+                <div style="font-size: 13px; font-weight: 500; color: var(--ink);">State University System</div>
+                <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--dust); margin-top: 3px;">University &middot; Since Jan 2026</div>
+              </div>
+              <div style="font-family: var(--mono); font-size: 9px; color: var(--clay);">Enterprise</div>
+              <div style="font-family: var(--serif); font-size: 18px; font-weight: 300; color: var(--ink);">312</div>
+              <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--deep-green);">Executed</div>
+              <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--deep-green);">Active</div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 80px 80px 90px 80px; padding: 14px 28px; border-bottom: 1px solid var(--chalk); align-items: center;">
+              <div>
+                <div style="font-size: 13px; font-weight: 500; color: var(--ink);">BlueCross Community</div>
+                <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--dust); margin-top: 3px;">Health Plan &middot; Since Feb 2026</div>
+              </div>
+              <div style="font-family: var(--mono); font-size: 9px; color: var(--clay);">Pro</div>
+              <div style="font-family: var(--serif); font-size: 18px; font-weight: 300; color: var(--ink);">890</div>
+              <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--deep-green);">Executed</div>
+              <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--deep-green);">Active</div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 80px 80px 90px 80px; padding: 14px 28px; border-bottom: 1px solid var(--chalk); align-items: center;">
+              <div>
+                <div style="font-size: 13px; font-weight: 500; color: var(--ink);">Metro Community Health</div>
+                <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--dust); margin-top: 3px;">FQHC &middot; Since Mar 2026</div>
+              </div>
+              <div style="font-family: var(--mono); font-size: 9px; color: var(--clay);">Pro</div>
+              <div style="font-family: var(--serif); font-size: 18px; font-weight: 300; color: var(--ink);">445</div>
+              <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--deep-green);">Executed</div>
+              <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--deep-green);">Active</div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 80px 80px 90px 80px; padding: 14px 28px; align-items: center;">
+              <div>
+                <div style="font-size: 13px; font-weight: 500; color: var(--ink);">Youth Empowerment NGO</div>
+                <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--dust); margin-top: 3px;">Non-Profit &middot; Since Apr 2026</div>
+              </div>
+              <div style="font-family: var(--mono); font-size: 9px; color: var(--clay);">Starter</div>
+              <div style="font-family: var(--serif); font-size: 18px; font-weight: 300; color: var(--ink);">67</div>
+              <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--deep-green);">Executed</div>
+              <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--deep-green);">Active</div>
+            </div>
+          </div>
+
+          <!-- VLAP Population Intelligence -->
+          <div style="background: var(--charcoal);">
+            <div style="padding: 18px 20px; border-bottom: 1px solid rgba(250,247,242,0.10);">
+              <div style="font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay-light);">VLAP Population Intelligence</div>
+              <div style="font-family: var(--mono); font-size: 8px; color: rgba(250,247,242,0.30); margin-top: 3px;">Aggregate &middot; All orgs &middot; 30d &middot; De-identified</div>
+            </div>
+            <!-- Signal dimension bars -->
+            <div style="padding: 20px;">
+              <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,247,242,0.30); margin-bottom: 14px;">Signal Distribution by Dimension</div>
+              <div style="display: flex; flex-direction: column; gap: 10px;">
+                <div>
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 4px;"><span style="font-family: var(--mono); font-size: 9px; color: rgba(250,247,242,0.55);">CCM &mdash; Cultural Context</span><span style="font-family: var(--mono); font-size: 9px; font-weight: 500; color: var(--warm-white);">34%</span></div>
+                  <div style="height: 4px; background: rgba(250,247,242,0.08); border-radius: 2px;"><div style="width: 34%; height: 100%; background: var(--clay); border-radius: 2px;"></div></div>
+                </div>
+                <div>
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 4px;"><span style="font-family: var(--mono); font-size: 9px; color: rgba(250,247,242,0.55);">HOP &mdash; Hopelessness</span><span style="font-family: var(--mono); font-size: 9px; font-weight: 500; color: var(--warm-white);">28%</span></div>
+                  <div style="height: 4px; background: rgba(250,247,242,0.08); border-radius: 2px;"><div style="width: 28%; height: 100%; background: var(--clay); border-radius: 2px;"></div></div>
+                </div>
+                <div>
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 4px;"><span style="font-family: var(--mono); font-size: 9px; color: rgba(250,247,242,0.55);">ISO &mdash; Isolation</span><span style="font-family: var(--mono); font-size: 9px; font-weight: 500; color: var(--warm-white);">22%</span></div>
+                  <div style="height: 4px; background: rgba(250,247,242,0.08); border-radius: 2px;"><div style="width: 22%; height: 100%; background: var(--clay); border-radius: 2px;"></div></div>
+                </div>
+                <div>
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 4px;"><span style="font-family: var(--mono); font-size: 9px; color: rgba(250,247,242,0.55);">SHA &mdash; Self-Harm Adjacent</span><span style="font-family: var(--mono); font-size: 9px; font-weight: 500; color: var(--warm-white);">9%</span></div>
+                  <div style="height: 4px; background: rgba(250,247,242,0.08); border-radius: 2px;"><div style="width: 9%; height: 100%; background: var(--clay); border-radius: 2px;"></div></div>
+                </div>
+                <div>
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 4px;"><span style="font-family: var(--mono); font-size: 9px; color: rgba(250,247,242,0.55);">CRS &mdash; Crisis Risk</span><span style="font-family: var(--mono); font-size: 9px; font-weight: 500; color: var(--clay-light);">7%</span></div>
+                  <div style="height: 4px; background: rgba(250,247,242,0.08); border-radius: 2px;"><div style="width: 7%; height: 100%; background: var(--clay-light); border-radius: 2px;"></div></div>
+                </div>
+              </div>
+            </div>
+            <!-- Key population metrics -->
+            <div style="padding: 0 20px 20px;">
+              <div style="border-top: 1px solid rgba(250,247,242,0.10); padding-top: 16px; display: flex; flex-direction: column; gap: 0;">
+                <div style="padding: 10px 0; border-bottom: 1px solid rgba(250,247,242,0.08); display: flex; justify-content: space-between; align-items: baseline;">
+                  <span style="font-family: var(--mono); font-size: 9px; color: rgba(250,247,242,0.45);">30-day retention (all orgs)</span>
+                  <span style="font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--warm-white);">79.5%</span>
+                </div>
+                <div style="padding: 10px 0; border-bottom: 1px solid rgba(250,247,242,0.08); display: flex; justify-content: space-between; align-items: baseline;">
+                  <span style="font-family: var(--mono); font-size: 9px; color: rgba(250,247,242,0.45);">Avg PHQ-8 improvement</span>
+                  <span style="font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--warm-white);">42%</span>
+                </div>
+                <div style="padding: 10px 0; border-bottom: 1px solid rgba(250,247,242,0.08); display: flex; justify-content: space-between; align-items: baseline;">
+                  <span style="font-family: var(--mono); font-size: 9px; color: rgba(250,247,242,0.45);">Active coaches (all orgs)</span>
+                  <span style="font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--warm-white);">24</span>
+                </div>
+                <div style="padding: 10px 0; display: flex; justify-content: space-between; align-items: baseline;">
+                  <span style="font-family: var(--mono); font-size: 9px; color: rgba(250,247,242,0.45);">Crisis SLA met (7d)</span>
+                  <span style="font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--deep-green);">100%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Activity feed -->
+        <div>
+          <div style="padding: 18px 28px; border-bottom: 1px solid var(--chalk); display: flex; align-items: center; justify-content: space-between;">
+            <div style="font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink);">System Activity</div>
+            <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dust);">Last 24 hours</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 0;">
+            <div style="padding: 12px 28px; border-bottom: 1px solid var(--chalk); display: grid; grid-template-columns: 80px 120px 1fr; gap: 16px; align-items: center;">
+              <div style="font-family: var(--mono); font-size: 8px; color: var(--dust);">09:14 AM</div>
+              <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--deep-green);">Crisis Resolved</div>
+              <div style="font-size: 13px; font-weight: 300; color: var(--ink-70);">CRS-02 signal &mdash; BlueCross Community &mdash; Clinical supervisor response: 28 min. Member connected to teletherapy.</div>
+            </div>
+            <div style="padding: 12px 28px; border-bottom: 1px solid var(--chalk); display: grid; grid-template-columns: 80px 120px 1fr; gap: 16px; align-items: center;">
+              <div style="font-family: var(--mono); font-size: 8px; color: var(--dust);">08:47 AM</div>
+              <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--clay);">New Enrollment</div>
+              <div style="font-size: 13px; font-weight: 300; color: var(--ink-70);">State University System &mdash; 4 new member enrollments. Coach Amara W. assigned.</div>
+            </div>
+            <div style="padding: 12px 28px; border-bottom: 1px solid var(--chalk); display: grid; grid-template-columns: 80px 120px 1fr; gap: 16px; align-items: center;">
+              <div style="font-family: var(--mono); font-size: 8px; color: var(--dust);">07:30 AM</div>
+              <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--dust);">System</div>
+              <div style="font-size: 13px; font-weight: 300; color: var(--ink-70);">VLAP inference batch completed &mdash; 847 check-ins processed. Signal profiles updated. No anomalies.</div>
+            </div>
+            <div style="padding: 12px 28px; display: grid; grid-template-columns: 80px 120px 1fr; gap: 16px; align-items: center;">
+              <div style="font-family: var(--mono); font-size: 8px; color: var(--dust);">06:00 AM</div>
+              <div style="font-family: var(--mono); font-size: 8px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--dust);">Billing</div>
+              <div style="font-size: 13px; font-weight: 300; color: var(--ink-70);">Monthly PMPM invoice generated &mdash; Metro Community Health &mdash; 445 members &times; $4.00 = $1,780.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- FOOTER -->
+  <div class="proto-footer">
+    <div class="pf-note">Platform Prototype V5 &middot; All data composite and simulated &middot; Not real member records &middot; HIPAA-compliant demonstration architecture</div>
+    <a href="contact.html" class="pf-cta">Request a live demo</a>
+  </div>
+
+</div><!-- end proto-wrapper -->
+
+<script>
+  // ─── Portal tab switching ───
+  document.querySelectorAll('.portal-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.portal-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.portal-stage').forEach(s => s.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('portal-' + tab.dataset.portal).classList.add('active');
+    });
+  });
+
+  // ─── Member app nav switching ───
+  document.querySelectorAll('.ma-nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+      document.querySelectorAll('.ma-nav-item').forEach(i => i.classList.remove('active'));
+      document.querySelectorAll('.ma-view').forEach(v => v.classList.remove('active'));
+      item.classList.add('active');
+      document.getElementById('view-' + item.dataset.view).classList.add('active');
+    });
+  });
+
+  // ─── Check-in flow ───
+  function selectOption(el) {
+    document.querySelectorAll('.checkin-option').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  function sendCheckin() {
+    const selected = document.querySelector('.checkin-option.selected');
+    const text = document.getElementById('checkin-text').value;
+    if (!selected && !text.trim()) {
+      document.querySelector('.checkin-textarea').style.borderColor = 'var(--clay)';
+      return;
+    }
+    document.getElementById('checkin-sent').style.display = 'block';
+    document.querySelector('.checkin-btn').textContent = 'Sent ✓';
+    document.querySelector('.checkin-btn').style.background = 'var(--deep-green)';
+    document.querySelector('.checkin-btn').disabled = true;
+  }
+
+  // ─── Coach message thread ───
+  function sendMessage() {
+    const input = document.getElementById('thread-input-field');
+    const text = input.value.trim();
+    if (!text) return;
+
+    const thread = document.getElementById('message-thread');
+    const newMsg = document.createElement('div');
+    newMsg.className = 'msg member';
+    newMsg.innerHTML = `<div class="msg-label">You</div><div class="msg-bubble">${text}</div><div class="msg-time">Just now</div>`;
+    thread.appendChild(newMsg);
+    input.value = '';
+    thread.scrollTop = thread.scrollHeight;
+
+    // Coach reply after delay
+    setTimeout(() => {
+      const reply = document.createElement('div');
+      reply.className = 'msg coach';
+      reply.innerHTML = `<div class="msg-label">Amara — Coach</div><div class="msg-bubble">I hear you. Let's talk more — I'll follow up later today.</div><div class="msg-time">Just now</div>`;
+      thread.appendChild(reply);
+      thread.scrollTop = thread.scrollHeight;
+    }, 1800);
+  }
+
+  document.getElementById('thread-input-field')?.addEventListener('keydown', e => {
+    if (e.key === 'Enter') sendMessage();
+  });
+
+  // ─── Coach portal member selection ───
+  const memberData = {
+    jadele: {
+      name: 'Jade L.',
+      meta: '16 · Enrolled 6 weeks · First-Gen Focus group · Status: Watch',
+      bars: [3,4,4,3,4,3,1,0,2,3,2,1,0,1],
+      note: 'Something shifted this week. She\'s less forthcoming than usual — shorter messages, later response times. The group activity drop is noticeable. I didn\'t push it. The relationship feels solid; I think she\'ll tell me when she\'s ready. Plan to reach out proactively tomorrow morning.'
+    },
+    marcust: {
+      name: 'Marcus T.',
+      meta: '19 · Enrolled 14 weeks · Healing in Community · Status: Engaged',
+      bars: [4,5,4,4,5,5,4,4,4,5,4,5,4,4],
+      note: 'Consistent engagement across all 14 weeks. Peer group activity strong. Session scheduled for tomorrow — last session was productive. Preparing context on the family pressure themes we\'ve been working through.'
+    },
+    amarak: {
+      name: 'Amara K.',
+      meta: '20 · Enrolled 9 weeks · First-Gen Focus group · Status: Active',
+      bars: [3,4,3,4,4,3,4,3,4,4,3,4,4,3],
+      note: 'Strong and consistent. The peer group has been a real anchor for her this semester. She initiated check-ins twice this week without prompting — that\'s new. Good sign.'
+    },
+    devonj: {
+      name: 'Devon J.',
+      meta: '17 · Enrolled 3 days · No group yet · Status: New',
+      bars: [0,0,0,0,0,0,0,0,0,0,0,1,1,2],
+      note: 'Brand new. Haven\'t made first contact yet — doing that today. Will introduce myself and ask which groups feel right for them before anything else.'
+    },
+    soniam: {
+      name: 'Sonia M.',
+      meta: '21 · Enrolled 22 weeks · Multiple groups · Status: Stable',
+      bars: [3,3,4,3,3,4,3,3,4,3,4,3,3,4],
+      note: 'Long-term member. Stable for months. Weekly touchpoint is light — she knows I\'m here. The consistent check-in habit is the main thing keeping the relationship warm. No concerns this week.'
+    }
+  };
+
+  function selectMember(el, id) {
+    document.querySelectorAll('.cp-member-item').forEach(i => i.classList.remove('active'));
+    el.classList.add('active');
+    const data = memberData[id];
+    document.getElementById('cp-member-name').textContent = data.name;
+    document.getElementById('cp-member-meta').textContent = data.meta;
+    document.getElementById('cp-note').textContent = data.note;
+    renderCoachChart(data.bars);
+  }
+
+  function renderCoachChart(bars) {
+    const container = document.getElementById('cp-chart');
+    container.innerHTML = '';
+    const days = ['M','T','W','T','F','S','S','M','T','W','T','F','S','S'];
+    bars.forEach((val, i) => {
+      const bar = document.createElement('div');
+      bar.className = 'cp-day-bar';
+      const maxH = 52;
+      const warn = val <= 1;
+      bar.innerHTML = `
+        <div class="cp-bar${warn ? ' warn' : ''}" style="height: ${maxH}px; width: 18px; background: var(--chalk); position: relative; overflow: hidden;">
+          <div class="cp-bar-fill" style="height: ${(val/5)*100}%; position: absolute; bottom: 0; left: 0; right: 0;"></div>
+        </div>
+        <div class="cp-day-label">${days[i]}</div>`;
+      container.appendChild(bar);
+    });
+  }
+
+  // ─── Org dashboard engagement chart ───
+  function renderEngagementChart() {
+    const data = [68, 74, 71, 79, 75, 82, 78, 84];
+    const weeks = ['W1','W2','W3','W4','W5','W6','W7','W8'];
+    const chart = document.getElementById('engagement-chart');
+    const labels = document.getElementById('engagement-labels');
+    if (!chart || !labels) return;
+    chart.innerHTML = ''; labels.innerHTML = '';
+    const maxVal = Math.max(...data);
+    data.forEach((val, i) => {
+      const bar = document.createElement('div');
+      bar.className = 'bc-bar';
+      bar.style.cssText = 'flex: 1; height: 100px; background: var(--chalk); position: relative; overflow: hidden;';
+      const fill = document.createElement('div');
+      fill.className = 'bc-bar-fill';
+      fill.style.cssText = `height: 0; transition: height 1s cubic-bezier(0.16,1,0.3,1) ${i * 0.08}s; width: 100%; position: absolute; bottom: 0; background: var(--deep-green);`;
+      bar.appendChild(fill);
+      chart.appendChild(bar);
+      setTimeout(() => { fill.style.height = (val / maxVal * 100) + '%'; }, 100);
+      const label = document.createElement('div');
+      label.className = 'bc-label';
+      label.textContent = weeks[i];
+      labels.appendChild(label);
+    });
+  }
+
+  // Init on load
+  window.addEventListener('load', () => {
+    renderCoachChart(memberData.jadele.bars);
+    renderEngagementChart();
+  });
+
+  // Re-render when org tab activates
+  document.querySelectorAll('.portal-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      if (tab.dataset.portal === 'org') {
+        setTimeout(renderEngagementChart, 100);
+      }
+    });
+  });
+</script>
+
+<footer style="background:#222222;padding:28px 7vw;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(250,247,242,0.08);">
+  <div style="font-family:'Newsreader',Georgia,serif;font-size:18px;font-weight:300;color:#FAF7F2;letter-spacing:-0.02em;">Vasl <span style="color:#C4896F;font-style:italic;">Health</span></div>
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.20);">&copy; 2026 Vasl Health, Inc.</div>
+  <div style="display:flex;gap:16px;">
+    <a href="privacy.html" style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;">Privacy</a>
+    <a href="terms.html" style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;">Terms</a>
+  </div>
+</footer>
+<script>
+function toggleNav(){
+  var n=document.querySelector('.nav-links');
+  var b=document.getElementById('ham-btn');
+  n.classList.toggle('open');
+  b.classList.toggle('open');
+  document.body.style.overflow=n.classList.contains('open')?'hidden':'';
+}
+document.querySelectorAll('.nav-links a').forEach(function(a){
+  a.addEventListener('click',function(){
+    var n=document.querySelector('.nav-links');
+    var b=document.getElementById('ham-btn');
+    if(n.classList.contains('open')){n.classList.remove('open');b.classList.remove('open');document.body.style.overflow='';}
+  });
+});
+</script>
+</body>
+</html>
