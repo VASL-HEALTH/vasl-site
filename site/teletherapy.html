@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Vasl helps organizations connect youth to licensed, culturally matched clinicians &mdash; with the warm handoff, signal context, and ongoing coordination that make care more effective.">
+<title>Teletherapy &mdash; Vasl Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  :root {
+    --warm-white:  #FAF7F2;
+    --parchment:   #F0EAE0;
+    --ink:         #1C1C1C;
+    --ink-70:      rgba(28,28,28,0.70);
+    --ink-50:      rgba(28,28,28,0.50);
+    --ink-25:      rgba(28,28,28,0.25);
+    --ink-12:      rgba(28,28,28,0.12);
+    --clay:        #C4896F;
+    --clay-light:  #E8C4AE;
+    --clay-pale:   #F5E6DC;
+    --deep-green:  #2D4A3E;
+    --dust:        #8B7B6B;
+    --chalk:       #E2DAD0;
+    --charcoal:    #222222;
+
+    --serif: 'Newsreader', Georgia, serif;
+    --sans:  'IBM Plex Sans', sans-serif;
+    --mono:  'IBM Plex Mono', monospace;
+    --gutter: 7vw;
+  }
+
+  body {
+    background: var(--warm-white);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: 999;
+    pointer-events: none; opacity: 0.028;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 256px;
+  }
+
+  .reveal {
+    transition: opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1);
+  }
+  .js-ready .reveal {
+    opacity: 0; transform: translateY(22px);
+  }
+  .js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
+  .d1 { transition-delay: 0.10s; } .d2 { transition-delay: 0.22s; }
+  .d3 { transition-delay: 0.34s; } .d4 { transition-delay: 0.46s; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px var(--gutter);
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(250,247,242,0.92);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--ink-12);
+  }
+  .nav-logo { font-family: var(--serif); font-size: 22px; font-weight: 400; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
+  .nav-logo span { color: var(--clay); font-style: italic; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { font-family: var(--mono); font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--dust); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+  .nav-cta { font-family: var(--mono); font-size: 10px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--deep-green); border: 1px solid var(--deep-green); padding: 9px 20px; text-decoration: none; transition: background 0.22s, color 0.22s; }
+  .nav-cta:hover { background: var(--deep-green); color: var(--warm-white); }
+
+  /* ─── SHARED ─── */
+  .chapter-label {
+    font-family: var(--mono); font-size: 10px; font-weight: 300; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--clay);
+    display: flex; align-items: center; gap: 12px; margin-bottom: 52px;
+  }
+  .chapter-label::after { content: ''; display: block; width: 36px; height: 1px; background: var(--clay); opacity: 0.45; }
+  .chapter-label.light { color: var(--clay-light); }
+  .chapter-label.light::after { background: var(--clay-light); }
+  .chapter-label.muted { color: rgba(250,247,242,0.35); }
+  .chapter-label.muted::after { background: rgba(250,247,242,0.35); }
+
+  section { padding: 130px var(--gutter); position: relative; }
+
+  .btn-dark { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--ink); color: var(--warm-white); padding: 16px 32px; text-decoration: none; display: inline-block; transition: background 0.22s; }
+  .btn-dark:hover { background: var(--deep-green); }
+  .btn-outline { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dust); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s; }
+  .btn-outline:hover { color: var(--ink); }
+  .btn-outline::after { content: '→'; font-size: 14px; }
+  .btn-light { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--warm-white); color: var(--ink); padding: 16px 32px; text-decoration: none; display: inline-block; transition: background 0.22s; }
+  .btn-light:hover { background: var(--clay-light); }
+  .btn-ghost-light { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250,247,242,0.40); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s; }
+  .btn-ghost-light:hover { color: var(--warm-white); }
+  .btn-ghost-light::after { content: '→'; }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 01 — THERAPY LAST
+  ═══════════════════════════════════════════ */
+  #therapylast {
+    min-height: 100vh;
+    padding-top: 180px; padding-bottom: 140px;
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--chalk);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 100px;
+    align-items: center;
+  }
+
+  .tl-left {}
+
+  .tl-kicker {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--dust); margin-bottom: 40px; display: block;
+  }
+
+  .tl-headline {
+    font-family: var(--serif);
+    font-size: clamp(48px, 5.8vw, 84px);
+    font-weight: 300; line-height: 1.03; letter-spacing: -0.03em;
+    color: var(--ink); margin-bottom: 48px;
+  }
+  .tl-headline em { font-style: italic; color: var(--clay); }
+
+  .tl-body {
+    font-size: 19px; font-weight: 300; line-height: 1.72;
+    color: var(--ink-70); max-width: 460px; margin-bottom: 52px;
+  }
+
+  .tl-actions { display: flex; align-items: center; gap: 32px; }
+
+  .tl-right {
+    border-left: 1px solid var(--chalk); padding-left: 80px;
+  }
+
+  /* Care sequence */
+  .care-sequence {
+    display: flex; flex-direction: column; gap: 0;
+    position: relative;
+  }
+
+  .care-sequence::before {
+    content: '';
+    position: absolute; left: 19px; top: 28px; bottom: 28px;
+    width: 1px; background: var(--clay-light); z-index: 0;
+  }
+
+  .cs-item {
+    display: grid; grid-template-columns: 40px 1fr; gap: 20px;
+    padding: 28px 0; border-bottom: 1px solid var(--chalk);
+    position: relative; z-index: 1;
+  }
+  .cs-item:first-child { padding-top: 0; }
+  .cs-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .cs-dot {
+    width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+    background: var(--warm-white); border: 2px solid var(--clay);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 11px; font-weight: 400; color: var(--clay);
+  }
+  .cs-item.current .cs-dot { background: var(--clay); color: var(--warm-white); border-color: var(--clay); }
+
+  .cs-right {}
+
+  .cs-stage {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 6px;
+  }
+  .cs-item.current .cs-stage { color: var(--clay); }
+
+  .cs-name {
+    font-family: var(--serif); font-size: 22px; font-weight: 400;
+    color: var(--ink); margin-bottom: 8px; line-height: 1.2; letter-spacing: -0.01em;
+  }
+  .cs-item.current .cs-name { color: var(--ink); }
+
+  .cs-desc {
+    font-size: 14px; font-weight: 300; line-height: 1.65; color: var(--ink-70);
+  }
+
+  .cs-tag {
+    display: inline-block; margin-top: 10px;
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 4px 9px; border: 1px solid;
+  }
+  .cs-tag.available { color: var(--deep-green); border-color: var(--deep-green); }
+  .cs-tag.paced { color: var(--clay); border-color: var(--clay); }
+  .cs-tag.immediate { color: var(--dust); border-color: var(--chalk); }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 02 — THE CULTURAL MISMATCH
+  ═══════════════════════════════════════════ */
+  #mismatch {
+    background: var(--deep-green);
+    color: var(--warm-white);
+    padding-top: 150px; padding-bottom: 150px;
+  }
+
+  .mismatch-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0 120px; align-items: center;
+  }
+
+  .mismatch-left {}
+
+  .mismatch-headline {
+    font-family: var(--serif); font-size: clamp(40px, 5vw, 72px);
+    font-weight: 300; line-height: 1.05; letter-spacing: -0.03em;
+    color: var(--warm-white); margin-bottom: 40px;
+  }
+  .mismatch-headline em { font-style: italic; color: var(--clay-light); }
+
+  .mismatch-body {
+    font-size: 18px; font-weight: 300; line-height: 1.75;
+    color: rgba(250,247,242,0.60); max-width: 480px; margin-bottom: 40px;
+  }
+
+  .mismatch-pull {
+    border-left: 2px solid var(--clay);
+    padding: 24px 32px; background: rgba(250,247,242,0.04);
+    font-family: var(--serif); font-size: 20px; font-style: italic;
+    font-weight: 300; line-height: 1.5; color: var(--warm-white);
+  }
+
+  .mismatch-right { padding-top: 8px; }
+
+  /* Stat comparison */
+  .stat-pair {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: rgba(250,247,242,0.12); margin-bottom: 40px;
+  }
+
+  .sp-cell {
+    background: var(--deep-green); padding: 36px 32px;
+  }
+
+  .sp-num {
+    font-family: var(--serif); font-size: 64px; font-weight: 300;
+    color: var(--warm-white); line-height: 1; letter-spacing: -0.04em; margin-bottom: 8px;
+  }
+  .sp-num.red { color: var(--clay-light); }
+
+  .sp-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(250,247,242,0.38); line-height: 1.55;
+  }
+
+  /* What cultural matching means */
+  .matching-list { display: flex; flex-direction: column; gap: 0; }
+
+  .ml-item {
+    padding: 28px 0; border-bottom: 1px solid rgba(250,247,242,0.10);
+    display: grid; grid-template-columns: 36px 1fr; gap: 16px; align-items: start;
+  }
+  .ml-item:last-child { border-bottom: none; }
+
+  .ml-num {
+    font-family: var(--mono); font-size: 10px; color: var(--clay-light); padding-top: 3px;
+  }
+
+  .ml-title {
+    font-family: var(--serif); font-size: 19px; font-weight: 400;
+    color: var(--warm-white); margin-bottom: 8px; line-height: 1.25;
+  }
+
+  .ml-body {
+    font-size: 14px; font-weight: 300; color: rgba(250,247,242,0.52); line-height: 1.65;
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 03 — THE THERAPISTS
+  ═══════════════════════════════════════════ */
+  #therapists {
+    background: var(--parchment);
+    padding-top: 150px; padding-bottom: 150px;
+    border-top: 1px solid var(--chalk); border-bottom: 1px solid var(--chalk);
+  }
+
+  .therapists-header {
+    display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px;
+    align-items: end; margin-bottom: 90px;
+    padding-bottom: 60px; border-bottom: 1px solid var(--chalk);
+  }
+
+  .therapists-headline {
+    font-family: var(--serif); font-size: clamp(36px, 4vw, 56px);
+    font-weight: 300; line-height: 1.08; letter-spacing: -0.025em; color: var(--ink);
+  }
+  .therapists-headline em { font-style: italic; color: var(--clay); }
+
+  .therapists-intro {
+    font-size: 18px; font-weight: 300; line-height: 1.72; color: var(--ink-70);
+  }
+
+  /* Therapist rows — editorial, not doctor cards */
+  .therapist-row {
+    display: grid; grid-template-columns: 280px 1fr 1fr; gap: 0 60px;
+    padding: 64px 0; border-bottom: 1px solid var(--chalk); align-items: start;
+  }
+  .therapist-row:last-child { border-bottom: none; }
+
+  .th-left {}
+
+  .th-initial-block {
+    width: 64px; height: 64px; background: var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-size: 28px; font-weight: 300;
+    color: var(--warm-white); letter-spacing: -0.01em; margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  .th-name {
+    font-family: var(--serif); font-size: 26px; font-weight: 400;
+    color: var(--ink); letter-spacing: -0.015em; margin-bottom: 4px;
+    line-height: 1.2;
+  }
+
+  .th-credential {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--dust); margin-bottom: 16px;
+  }
+
+  .th-specialties { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+
+  .th-specialty {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink); border: 1px solid var(--chalk);
+    padding: 4px 9px; background: var(--warm-white);
+  }
+
+  .th-availability {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--deep-green);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .th-availability::before { content: '●'; font-size: 7px; }
+  .th-availability.next-week { color: var(--dust); }
+  .th-availability.next-week::before { color: var(--dust); }
+
+  .th-mid {}
+
+  .th-community {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .th-community::before { content: ''; display: block; width: 14px; height: 1px; background: var(--clay); }
+
+  .th-philosophy {
+    font-family: var(--serif); font-size: 20px; font-style: italic;
+    font-weight: 300; line-height: 1.45; color: var(--ink); margin-bottom: 18px;
+  }
+
+  .th-bio {
+    font-size: 15px; font-weight: 300; line-height: 1.72; color: var(--ink-70);
+  }
+
+  .th-right {}
+
+  .th-detail-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--dust); margin-bottom: 14px;
+  }
+
+  .th-detail-item {
+    padding: 14px 0; border-bottom: 1px solid var(--chalk);
+    display: grid; grid-template-columns: 100px 1fr; gap: 12px;
+  }
+  .th-detail-item:last-child { border-bottom: none; }
+
+  .thdi-label {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dust); padding-top: 2px; line-height: 1.5;
+  }
+  .thdi-value {
+    font-size: 13px; font-weight: 300; line-height: 1.55; color: var(--ink-70);
+  }
+
+  /* Roster note */
+  .roster-note {
+    margin-top: 60px; padding: 36px 40px; background: var(--warm-white);
+    border: 1px solid var(--chalk);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+  }
+
+  .rn-left {}
+
+  .rn-headline {
+    font-family: var(--serif); font-size: 22px; font-weight: 400;
+    color: var(--ink); line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 8px;
+  }
+
+  .rn-body {
+    font-size: 14px; font-weight: 300; line-height: 1.65; color: var(--ink-70);
+  }
+
+  .rn-right {
+    display: flex; flex-direction: column; gap: 10px;
+  }
+
+  .rn-item {
+    padding: 12px 16px; background: var(--parchment); border: 1px solid var(--chalk);
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dust);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .rn-item::before { content: '—'; color: var(--clay); }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 04 — THE WARM HANDOFF
+  ═══════════════════════════════════════════ */
+  #handoff {
+    background: var(--warm-white);
+    padding-top: 150px; padding-bottom: 150px;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .handoff-header {
+    max-width: 720px; margin-bottom: 90px;
+  }
+
+  .handoff-headline {
+    font-family: var(--serif); font-size: clamp(40px, 4.8vw, 68px);
+    font-weight: 300; line-height: 1.06; letter-spacing: -0.03em; color: var(--ink);
+    margin-bottom: 28px;
+  }
+  .handoff-headline em { font-style: italic; color: var(--clay); }
+
+  .handoff-sub {
+    font-size: 18px; font-weight: 300; line-height: 1.72;
+    color: var(--ink-70); max-width: 580px;
+  }
+
+  /* What the clinician receives */
+  .handoff-receives {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0 80px;
+    margin-bottom: 60px;
+  }
+
+  .hr-left { position: sticky; top: 140px; }
+
+  .hr-headline {
+    font-family: var(--serif); font-size: clamp(28px, 3vw, 42px);
+    font-weight: 300; line-height: 1.15; letter-spacing: -0.02em; color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .hr-headline em { font-style: italic; color: var(--clay); }
+
+  .hr-body {
+    font-size: 16px; font-weight: 300; line-height: 1.72; color: var(--ink-70);
+  }
+
+  .hr-right { display: flex; flex-direction: column; gap: 0; }
+
+  .hr-item {
+    padding: 36px 0; border-bottom: 1px solid var(--chalk);
+  }
+  .hr-item:first-child { padding-top: 0; }
+  .hr-item:last-child { border-bottom: none; }
+
+  .hr-item-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 12px;
+  }
+
+  .hr-item-title {
+    font-family: var(--serif); font-size: 22px; font-weight: 400;
+    color: var(--ink); margin-bottom: 10px; line-height: 1.25; letter-spacing: -0.01em;
+  }
+
+  .hr-item-body {
+    font-size: 14px; font-weight: 300; line-height: 1.7; color: var(--ink-70);
+  }
+
+  /* The difference it makes */
+  .handoff-difference {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border: 1px solid var(--chalk); overflow: hidden;
+  }
+
+  .hd-col {
+    padding: 44px 44px;
+  }
+  .hd-col:first-child { border-right: 1px solid var(--chalk); }
+
+  .hd-col-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--dust); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .hd-col-label.before::before { content: '✕'; color: var(--clay); font-size: 10px; }
+  .hd-col-label.after::before { content: '→'; color: var(--deep-green); font-size: 12px; }
+
+  .hd-scene {
+    font-family: var(--serif); font-size: 20px; font-style: italic;
+    font-weight: 300; line-height: 1.45; color: var(--ink); margin-bottom: 14px;
+  }
+
+  .hd-context {
+    font-size: 14px; font-weight: 300; line-height: 1.65; color: var(--ink-70);
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 05 — HOW SESSIONS WORK
+  ═══════════════════════════════════════════ */
+  #sessions {
+    background: var(--parchment);
+    padding-top: 150px; padding-bottom: 150px;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .sessions-header {
+    display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px;
+    align-items: end; margin-bottom: 90px;
+    padding-bottom: 60px; border-bottom: 1px solid var(--chalk);
+  }
+
+  .sessions-headline {
+    font-family: var(--serif); font-size: clamp(36px, 4vw, 54px);
+    font-weight: 300; line-height: 1.08; letter-spacing: -0.025em; color: var(--ink);
+  }
+  .sessions-headline em { font-style: italic; color: var(--clay); }
+
+  .sessions-intro {
+    font-size: 18px; font-weight: 300; line-height: 1.72; color: var(--ink-70);
+  }
+
+  /* Session detail rows */
+  .session-rows { display: flex; flex-direction: column; gap: 0; }
+
+  .session-row {
+    padding: 44px 0; border-bottom: 1px solid var(--chalk);
+    display: grid; grid-template-columns: 200px 1fr 1fr; gap: 40px; align-items: start;
+  }
+  .session-row:last-child { border-bottom: none; }
+
+  .sr-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--dust); padding-top: 4px; line-height: 1.55;
+  }
+
+  .sr-title {
+    font-family: var(--serif); font-size: 21px; font-weight: 400;
+    color: var(--ink); margin-bottom: 10px; line-height: 1.25; letter-spacing: -0.01em;
+  }
+
+  .sr-body {
+    font-size: 14px; font-weight: 300; line-height: 1.7; color: var(--ink-70);
+  }
+
+  .sr-detail {
+    font-size: 13px; font-weight: 300; line-height: 1.7; color: var(--ink-50);
+    padding: 16px 18px; background: var(--warm-white); border: 1px solid var(--chalk);
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 06 — FOR ORGANIZATIONS
+  ═══════════════════════════════════════════ */
+  #orgs {
+    background: var(--charcoal);
+    color: var(--warm-white);
+    padding-top: 150px; padding-bottom: 150px;
+  }
+
+  .orgs-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0 120px; align-items: start;
+  }
+
+  .orgs-left {}
+
+  .orgs-headline {
+    font-family: var(--serif); font-size: clamp(38px, 4.5vw, 62px);
+    font-weight: 300; line-height: 1.06; letter-spacing: -0.025em;
+    color: var(--warm-white); margin-bottom: 36px;
+  }
+  .orgs-headline em { font-style: italic; color: var(--clay-light); }
+
+  .orgs-body {
+    font-size: 17px; font-weight: 300; line-height: 1.75;
+    color: rgba(250,247,242,0.57); max-width: 480px; margin-bottom: 44px;
+  }
+
+  /* Org types */
+  .org-types { display: flex; flex-direction: column; gap: 0; }
+
+  .ot-item {
+    padding: 28px 0; border-bottom: 1px solid rgba(250,247,242,0.10);
+    display: grid; grid-template-columns: 36px 1fr; gap: 16px; align-items: start;
+  }
+  .ot-item:last-child { border-bottom: none; }
+
+  .ot-num {
+    font-family: var(--mono); font-size: 10px; color: var(--clay-light); padding-top: 3px;
+  }
+
+  .ot-title {
+    font-family: var(--serif); font-size: 19px; font-weight: 400;
+    color: var(--warm-white); margin-bottom: 6px; line-height: 1.25;
+  }
+
+  .ot-body {
+    font-size: 13px; font-weight: 300; color: rgba(250,247,242,0.48); line-height: 1.65;
+  }
+
+  .orgs-right { padding-top: 8px; }
+
+  /* Therapist access model */
+  .access-model {
+    border: 1px solid rgba(250,247,242,0.14); overflow: hidden;
+  }
+
+  .am-header {
+    padding: 16px 28px; border-bottom: 1px solid rgba(250,247,242,0.1);
+    background: rgba(250,247,242,0.05);
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: rgba(250,247,242,0.38);
+  }
+
+  .am-row {
+    padding: 22px 28px; border-bottom: 1px solid rgba(250,247,242,0.08);
+    display: grid; grid-template-columns: 140px 1fr; gap: 20px; align-items: start;
+  }
+  .am-row:last-child { border-bottom: none; }
+
+  .am-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--clay-light); padding-top: 2px; line-height: 1.5;
+  }
+
+  .am-value {
+    font-size: 14px; font-weight: 300; color: rgba(250,247,242,0.65); line-height: 1.55;
+  }
+  .am-value strong { font-weight: 500; color: var(--warm-white); }
+
+  .orgs-cta {
+    margin-top: 40px; display: flex; align-items: center; gap: 28px; flex-wrap: wrap;
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 07 — ACCESS
+  ═══════════════════════════════════════════ */
+  #access {
+    background: var(--ink);
+    padding-top: 160px; padding-bottom: 160px;
+    overflow: hidden; position: relative;
+  }
+
+  .access-bg {
+    position: absolute; bottom: -8vw; right: -4vw;
+    font-family: var(--serif); font-size: 36vw; font-weight: 300; font-style: italic;
+    color: rgba(250,247,242,0.018); pointer-events: none; user-select: none;
+    line-height: 1; letter-spacing: -0.05em;
+  }
+
+  .access-inner {
+    position: relative; z-index: 2;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0 100px; align-items: start;
+  }
+
+  .access-left {}
+
+  .access-headline {
+    font-family: var(--serif); font-size: clamp(40px, 5vw, 70px);
+    font-weight: 300; line-height: 1.06; letter-spacing: -0.03em;
+    color: var(--warm-white); margin-bottom: 32px;
+  }
+  .access-headline em { font-style: italic; color: var(--clay-light); }
+
+  .access-body {
+    font-size: 18px; font-weight: 300; line-height: 1.72;
+    color: rgba(250,247,242,0.50); margin-bottom: 52px; max-width: 460px;
+  }
+
+  .access-actions { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+
+  .access-right { padding-top: 8px; display: flex; flex-direction: column; gap: 0; }
+
+  .access-item {
+    padding: 28px 0; border-bottom: 1px solid rgba(250,247,242,0.09);
+    display: grid; grid-template-columns: 40px 1fr; gap: 20px; align-items: start;
+  }
+  .access-item:last-child { border-bottom: none; }
+
+  .ai-num { font-family: var(--mono); font-size: 10px; color: var(--clay-light); padding-top: 3px; }
+
+  .ai-title {
+    font-family: var(--serif); font-size: 20px; font-weight: 400;
+    color: var(--warm-white); margin-bottom: 6px; line-height: 1.25;
+  }
+
+  .ai-desc {
+    font-size: 14px; font-weight: 300; color: rgba(250,247,242,0.42); line-height: 1.65;
+  }
+
+  /* ─── FOOTER ─── */
+  .footer-logo span { color: var(--clay); font-style: italic; }
+  .footer-nav a { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,247,242,0.30); text-decoration: none; transition: color 0.2s; }
+  .footer-nav a:hover { color: var(--warm-white); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1100px) {
+    #therapylast { grid-template-columns: 1fr; gap: 80px; padding-top: 160px; }
+    .tl-right { border-left: none; padding-left: 0; border-top: 1px solid var(--chalk); padding-top: 60px; }
+    .mismatch-grid { grid-template-columns: 1fr; gap: 60px; }
+    .stat-pair { grid-template-columns: 1fr; }
+    .therapists-header { grid-template-columns: 1fr; gap: 28px; }
+    .therapist-row { grid-template-columns: 1fr; gap: 40px; }
+    .th-initial-block { width: 52px; height: 52px; font-size: 22px; }
+    .roster-note { grid-template-columns: 1fr; gap: 28px; }
+    .handoff-header { max-width: 100%; }
+    .handoff-receives { grid-template-columns: 1fr; gap: 60px; }
+    .hr-left { position: static; }
+    .handoff-difference { grid-template-columns: 1fr; }
+    .hd-col:first-child { border-right: none; border-bottom: 1px solid var(--chalk); }
+    .sessions-header { grid-template-columns: 1fr; gap: 28px; }
+    .session-row { grid-template-columns: 1fr; gap: 12px; }
+    .orgs-grid { grid-template-columns: 1fr; gap: 60px; }
+    .access-inner { grid-template-columns: 1fr; gap: 60px; }
+  }
+  @media (max-width: 768px) {
+    :root { --gutter: 5vw; }
+    .nav-links { display: none; }
+    .am-row { grid-template-columns: 1fr; gap: 4px; }
+  }
+  .footer-logo span{color:var(--clay);font-style:italic;}
+  .footer-nav a{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.32);text-decoration:none;}
+  .footer-nav a:hover{color:var(--warm-white);}
+  .footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+
+  .ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
+  .ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.2s;}
+  .ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .ham-btn.open span:nth-child(2){opacity:0;}
+  .ham-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+  @media(max-width:780px){
+    .ham-btn{display:flex;}
+    .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--warm);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{font-size:22px;letter-spacing:0.04em;}
+    .nav-cta{display:none;}
+  }
+
+  footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);padding:0;}
+  .footer-sitemap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:0;padding:56px 7vw 40px;border-bottom:1px solid rgba(250,247,242,0.08);}
+  .fs-brand{padding-right:40px;}
+  .footer-logo{font-family:var(--serif);font-size:22px;color:var(--warm-white,#FAF7F2);letter-spacing:-0.02em;text-decoration:none;display:block;margin-bottom:12px;}
+  .footer-logo span{color:var(--clay,#C4896F);font-style:italic;}
+  .footer-mission{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.28);line-height:1.8;margin-bottom:20px;}
+  .fs-cta{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:var(--clay,#C4896F);border:1px solid rgba(196,137,111,0.40);padding:9px 18px;text-decoration:none;transition:all 0.18s;}
+  .fs-cta:hover{background:rgba(196,137,111,0.12);}
+  .fs-col{padding-left:32px;border-left:1px solid rgba(250,247,242,0.06);}
+  .fs-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,247,242,0.30);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(250,247,242,0.06);}
+  .fs-col a{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,247,242,0.45);text-decoration:none;margin-bottom:10px;transition:color 0.15s;}
+  .fs-col a:hover{color:var(--clay,#C4896F);}
+  .footer-bottom{padding:20px 7vw;display:flex;align-items:center;justify-content:space-between;}
+  .footer-copy{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,0.20);}
+  .footer-legal{display:flex;gap:20px;}
+  .footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+  .footer-legal a:hover{color:var(--clay,#C4896F);}
+  @media(max-width:1100px){.footer-sitemap{grid-template-columns:1fr 1fr 1fr;gap:32px;}.fs-brand{grid-column:1/-1;padding-right:0;}.fs-col{border-left:none;padding-left:0;}}
+  @media(max-width:680px){.footer-sitemap{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}}
+  @media(max-width:400px){.footer-sitemap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="index.html" class="nav-logo">Vasl <span>Health</span></a>
+    <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="platform.html">Platform</a></li>
+    <li><a href="outcomes.html">Outcomes</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="#access" class="nav-cta">Request Access</a>
+</nav>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 01 &mdash; THERAPY LAST
+════════════════════════════════════ -->
+<section id="therapylast">
+  <div class="tl-left">
+    <span class="tl-kicker reveal">Chapter 01 &mdash; Therapy Last. Not Therapy Never.</span>
+    <h1 class="tl-headline reveal d1">
+      When you're ready.<br>
+      With someone<br>
+      who already<br>
+      <em>understands you.</em>
+    </h1>
+    <p class="tl-body reveal d2">
+      Most platforms connect you with a clinician on day one &mdash; before you've found community, before anyone knows your context, before you've decided you're ready. Vasl builds the relationship first. When a member is ready for clinical care, Vasl coordinates a warm connection to a licensed, culturally matched clinician &mdash; through the organization's own clinical network or an independent partner practice. The clinician arrives knowing who this person is. The session starts in the middle of something real.
+    </p>
+    <div class="tl-actions reveal d3">
+      <a href="#therapists" class="btn-dark">Meet the clinician types</a>
+      <a href="#handoff" class="btn-outline">How it works</a>
+    </div>
+  </div>
+
+  <div class="tl-right reveal d2">
+    <div class="care-sequence">
+      <div class="cs-item">
+        <div class="cs-dot">01</div>
+        <div class="cs-right">
+          <div class="cs-stage">First Step</div>
+          <div class="cs-name">Peer Community</div>
+          <p class="cs-desc">70+ groups organized around shared identity and lived experience. Recognition before intervention. Community before clinical care. Available same day &mdash; no waitlist, no intake.</p>
+          <span class="cs-tag immediate">Same day</span>
+        </div>
+      </div>
+
+      <div class="cs-item">
+        <div class="cs-dot">02</div>
+        <div class="cs-right">
+          <div class="cs-stage">Second Step</div>
+          <div class="cs-name">Certified Coach</div>
+          <p class="cs-desc">Matched by cultural background, community context, and lived experience. Proactively reaches out. The relationship that's there before you need it &mdash; and ready when you do.</p>
+          <span class="cs-tag available">Proactive outreach</span>
+        </div>
+      </div>
+
+      <div class="cs-item current">
+        <div class="cs-dot">03</div>
+        <div class="cs-right">
+          <div class="cs-stage">Third Step &mdash; When Ready</div>
+          <div class="cs-name">Connected to a Clinician</div>
+          <p class="cs-desc">Vasl coordinates a warm connection to a licensed, culturally matched clinician &mdash; through your organization's clinical network or an independent partner practice. The clinician receives VLAP signal context and coaching notes before session one. The member doesn't start over.</p>
+          <span class="cs-tag paced">Member-paced</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 02 &mdash; THE CULTURAL MISMATCH
+════════════════════════════════════ -->
+<section id="mismatch">
+  <div class="chapter-label light reveal">Chapter 02 &mdash; The Cultural Mismatch</div>
+
+  <div class="mismatch-grid">
+    <div class="mismatch-left">
+      <h2 class="mismatch-headline reveal d1">
+        75% of licensed<br>
+        clinicians are white.<br>
+        <em>40% of the<br>country isn't.</em>
+      </h2>
+
+      <p class="mismatch-body reveal d2">
+        Cultural mismatch between clinician and client is not a minor inconvenience. It is one of the most consistently documented drivers of early dropout in mental health care &mdash; and it falls disproportionately on the communities that already face the greatest barriers to access. When a clinician doesn't recognize your cultural context, your vernacular, or your community's specific relationship with systems of care, the clinical encounter becomes one more place where you have to explain yourself before you can be helped.
+      </p>
+
+      <blockquote class="mismatch-pull reveal d3">
+        "Vasl treats cultural matching as a clinical necessity &mdash; not a bonus feature, not a diversity metric, not a preference. It is a treatment variable that affects outcomes."
+      </blockquote>
+    </div>
+
+    <div class="mismatch-right reveal d2">
+      <div class="stat-pair">
+        <div class="sp-cell">
+          <div class="sp-num red">75<span style="font-size:30px">%</span></div>
+          <div class="sp-label">Of licensed clinicians<br>in the U.S. identify as white<br>APA Workforce Data, 2023</div>
+        </div>
+        <div class="sp-cell">
+          <div class="sp-num">40<span style="font-size:30px">%</span></div>
+          <div class="sp-label">Of the U.S. population<br>identifies as a person<br>of color &mdash; and growing</div>
+        </div>
+      </div>
+
+      <div class="matching-list">
+        <div class="ml-item">
+          <span class="ml-num">01</span>
+          <div>
+            <div class="ml-title">Matched on cultural background and lived experience</div>
+            <div class="ml-body">Vasl helps organizations connect members with clinicians who share their cultural community &mdash; not just a demographic checkbox, but a genuine background in the specific pressures, histories, and communication styles of the member's world. A first-generation Somali student is not connected to a clinician whose only cultural competency training was a single-day seminar.</div>
+          </div>
+        </div>
+        <div class="ml-item">
+          <span class="ml-num">02</span>
+          <div>
+            <div class="ml-title">LGBTQ+-affirming practice as a baseline requirement &mdash; not a specialty designation</div>
+            <div class="ml-body">LGBTQ+-affirming practice is a baseline requirement for any licensed clinician Vasl integrates into its care coordination workflow &mdash; not a filter members have to apply to find a safer clinician. The vetting is built into the deployment process, not left to the member.</div>
+          </div>
+        </div>
+        <div class="ml-item">
+          <span class="ml-num">03</span>
+          <div>
+            <div class="ml-title">No translation burden &mdash; the clinician arrives fluent</div>
+            <div class="ml-body">VLAP has processed the member's language before the session begins &mdash; surfacing cultural context and signal data to the clinician. The clinician arrives knowing how this member communicates, what cultural frameworks they use, and what their language has been carrying. The member doesn't spend the first session teaching the clinician how to hear them.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 03 &mdash; THE THERAPISTS
+════════════════════════════════════ -->
+<section id="therapists">
+  <div class="chapter-label reveal">Chapter 03 &mdash; The Therapists</div>
+
+  <div class="therapists-header">
+    <h2 class="therapists-headline reveal d1">
+      The clinicians<br>
+      your members<br>
+      <em>connect with.</em>
+    </h2>
+    <p class="therapists-intro reveal d2">
+      Vasl does not employ clinicians or provide clinical care directly. What Vasl does is coordinate the connection &mdash; helping organizations identify and integrate licensed clinicians from their own networks or independent partner practices, and ensuring every clinician receives the cultural context and VLAP signal data that makes the first session substantive. Below are the types of clinicians Vasl helps organizations connect with, described by community context and clinical focus. Actual clinical networks are configured per deployment.
+    </p>
+  </div>
+
+  <!-- Clinician Type 01 -->
+  <div class="therapist-row reveal">
+    <div class="th-left">
+      <div class="th-initial-block" style="background: var(--deep-green);">01</div>
+      <div class="th-name">Trauma & Racial Identity</div>
+      <div class="th-credential">Licensed Clinical Psychologist &middot; PhD / PsyD</div>
+      <div class="th-specialties">
+        <span class="th-specialty">Racial trauma</span>
+        <span class="th-specialty">Intergenerational</span>
+        <span class="th-specialty">Anxiety</span>
+        <span class="th-specialty">Community health</span>
+      </div>
+    </div>
+
+    <div class="th-mid">
+      <div class="th-community">BIPOC Communities &middot; First-Gen Families &middot; Communities of Color</div>
+      <p class="th-philosophy">"This type of clinician starts where the member is &mdash; in the language they actually use, with the history they actually carry. They don't need the cultural explanation before they can hear the person."</p>
+      <p class="th-bio">Clinicians in this category specialize in trauma rooted in racialized experience &mdash; intergenerational trauma, racial battle fatigue, and the specific weight of navigating predominantly white institutions as a young person of color. Their work typically draws on culturally adapted CBT, narrative therapy, and somatic frameworks. They bring demonstrated experience in community health settings, and are skilled at working with youth whose distress presents in ways that standard clinical instruments consistently misread. VLAP signal context is particularly valuable in this clinical context &mdash; arriving with dimensional data the clinician can apply immediately.</p>
+    </div>
+
+    <div class="th-right">
+      <div class="th-detail-label">Clinical Context</div>
+      <div class="th-detail-item">
+        <span class="thdi-label">Credential</span>
+        <span class="thdi-value">Licensed Clinical Psychologist (PhD/PsyD) or Licensed Clinical Social Worker (LCSW)</span>
+      </div>
+      <div class="th-detail-item">
+        <span class="thdi-label">Community fit</span>
+        <span class="thdi-value">Black, Brown, and Indigenous youth; first-gen college students; multilingual families</span>
+      </div>
+      <div class="th-detail-item">
+        <span class="thdi-label">Approach</span>
+        <span class="thdi-value">Culturally adapted CBT, narrative therapy, somatic grounding, community-embedded practice</span>
+      </div>
+      <div class="th-detail-item">
+        <span class="thdi-label">VLAP integration</span>
+        <span class="thdi-value">Receives full dimensional signal profile and coaching context notes before first session</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Clinician Type 02 -->
+  <div class="therapist-row reveal">
+    <div class="th-left">
+      <div class="th-initial-block" style="background: var(--deep-green);">02</div>
+      <div class="th-name">LGBTQ+ Affirming & Identity</div>
+      <div class="th-credential">Licensed Clinician &middot; MFT / LCSW / LPC</div>
+      <div class="th-specialties">
+        <span class="th-specialty">LGBTQ+ identity</span>
+        <span class="th-specialty">Mood disorders</span>
+        <span class="th-specialty">Minority stress</span>
+        <span class="th-specialty">Intersectionality</span>
+      </div>
+    </div>
+
+    <div class="th-mid">
+      <div class="th-community">LGBTQ+ Youth &middot; Black & Brown Queer Youth &middot; Trans & Non-Binary</div>
+      <p class="th-philosophy">"This type of clinician doesn't ask youth to justify their identity before the work begins. The affirmation is structural &mdash; built into their training, their practice, and how they open a first session."</p>
+      <p class="th-bio">Clinicians in this category serve LGBTQ+ youth with a specific understanding of intersectional experience &mdash; particularly the needs of Black and Brown queer and trans youth whose mental health needs are often invisibilized within both Black community mental health spaces and predominantly white LGBTQ+ clinical settings. Their expertise covers affirmative clinical practice for gender identity, mood disorder presentations in the context of chronic minority stress, and the specific trauma that accompanies family rejection, hostile political environments, and the cumulative weight of daily discrimination. LGBTQ+-affirming practice is a baseline requirement, not a specialty designation, for any clinician Vasl integrates into its coordination workflow.</p>
+    </div>
+
+    <div class="th-right">
+      <div class="th-detail-label">Clinical Context</div>
+      <div class="th-detail-item">
+        <span class="thdi-label">Credential</span>
+        <span class="thdi-value">LMFT, LCSW, LPC, or equivalent with demonstrated LGBTQ+-affirming practice</span>
+      </div>
+      <div class="th-detail-item">
+        <span class="thdi-label">Community fit</span>
+        <span class="thdi-value">LGBTQ+ youth across identity spectrum; intersectional Black and Brown queer youth</span>
+      </div>
+      <div class="th-detail-item">
+        <span class="thdi-label">Approach</span>
+        <span class="thdi-value">Affirmative therapy, IFS, narrative therapy, somatic approaches, minority stress framework</span>
+      </div>
+      <div class="th-detail-item">
+        <span class="thdi-label">VLAP integration</span>
+        <span class="thdi-value">CCM-10 (anti-LGBTQ+ political stressor) and identity-related signal dimensions surfaced pre-session</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Clinician Type 03 -->
+  <div class="therapist-row reveal">
+    <div class="th-left">
+      <div class="th-initial-block" style="background: var(--deep-green);">03</div>
+      <div class="th-name">Grief, Depression & Cultural Displacement</div>
+      <div class="th-credential">Licensed Clinician &middot; PhD / LCSW / LPC</div>
+      <div class="th-specialties">
+        <span class="th-specialty">Depression</span>
+        <span class="th-specialty">Grief</span>
+        <span class="th-specialty">Immigration</span>
+        <span class="th-specialty">Family systems</span>
+      </div>
+    </div>
+
+    <div class="th-mid">
+      <div class="th-community">Immigrant & First-Gen Families &middot; AAPI Communities &middot; Diaspora Youth</div>
+      <p class="th-philosophy">"This type of clinician understands that for many youth, grief is not just personal loss &mdash; it is also the loss of a home, a language, a version of themselves that didn't have to navigate two worlds simultaneously."</p>
+      <p class="th-bio">Clinicians in this category bring deep expertise in the emotional landscape of immigrant and diaspora youth &mdash; the intersection of cultural expectations, collectivist family systems, and individual mental health needs that Western clinical frameworks often frame as character deficits or compliance issues rather than clinical presentations. They specialize in grief that includes cultural displacement and the particular depression that presents through physical symptoms, academic pressure, and performative functionality rather than through the language of Western clinical instruments. Their fluency in collectivist frameworks makes them particularly effective with communities where family loyalty and individual wellbeing are experienced as competing rather than complementary.</p>
+    </div>
+
+    <div class="th-right">
+      <div class="th-detail-label">Clinical Context</div>
+      <div class="th-detail-item">
+        <span class="thdi-label">Credential</span>
+        <span class="thdi-value">PhD, LCSW, LPC, or LMFT with community or immigrant family practice background</span>
+      </div>
+      <div class="th-detail-item">
+        <span class="thdi-label">Community fit</span>
+        <span class="thdi-value">Immigrant and first-gen youth; AAPI communities; multilingual families; diaspora experiences</span>
+      </div>
+      <div class="th-detail-item">
+        <span class="thdi-label">Approach</span>
+        <span class="thdi-value">Psychodynamic, family systems, culturally adapted ACT, collectivist frameworks</span>
+      </div>
+      <div class="th-detail-item">
+        <span class="thdi-label">VLAP integration</span>
+        <span class="thdi-value">CCM-04 (pre-disclosure minimization) and family-pressure signal patterns surface with particular frequency in this population</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Connection note -->
+  <div class="roster-note reveal">
+    <div class="rn-left">
+      <div class="rn-headline">These are clinician types, not named individuals.</div>
+      <p class="rn-body">Vasl does not employ licensed clinicians or operate a clinical practice. The three categories above illustrate the types of clinicians Vasl helps organizations identify, vet, and integrate &mdash; drawn from your own clinical network or independent partner practices. Each clinical network is configured during the implementation process to match your specific member population's cultural communities, languages, and clinical needs. No individual is named or implied.</p>
+    </div>
+    <div class="rn-right">
+      <div class="rn-item">Vasl does not employ clinicians or provide clinical care directly</div>
+      <div class="rn-item">Orgs bring their own network or connect to independent partner practices</div>
+      <div class="rn-item">Cultural and LGBTQ+-affirming practice requirements specified per deployment</div>
+      <div class="rn-item">All connected clinicians briefed on VLAP protocol and warm handoff process</div>
+      <div class="rn-item">Clinical network configured during implementation &mdash; not a default marketplace</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 04 &mdash; THE WARM HANDOFF
+════════════════════════════════════ -->
+<section id="handoff">
+  <div class="chapter-label reveal">Chapter 04 &mdash; The Warm Handoff</div>
+
+  <div class="handoff-header">
+    <h2 class="handoff-headline reveal d1">
+      The clinician enters<br>
+      the room <em>already<br>understanding</em><br>
+      who's in it.
+    </h2>
+    <p class="handoff-sub reveal d2">
+      The warm handoff is not a summary email sent between care providers. It is a structured clinical context transfer &mdash; VLAP signal data, coaching notes, engagement history, and cultural background &mdash; that arrives in the clinician's session view before the first session begins. The member doesn't start over. The clinician doesn't guess.
+    </p>
+  </div>
+
+  <div class="handoff-receives">
+    <div class="hr-left">
+      <h3 class="hr-headline">
+        What the clinician<br>
+        receives before<br>
+        <em>session one.</em>
+      </h3>
+      <p class="hr-body">Every item below arrives in the clinician's Coach Portal view in the 24 hours before the first session. None of it requires the member to repeat themselves. All of it is generated through the member's own engagement with the Vasl platform &mdash; not through a separate assessment battery or intake process.</p>
+    </div>
+
+    <div class="hr-right">
+      <div class="hr-item reveal">
+        <div class="hr-item-label">VLAP Signal Context</div>
+        <div class="hr-item-title">Dimensional signal profile &mdash; what the member's language has been carrying.</div>
+        <p class="hr-item-body">The clinician receives a dimensional signal profile from CulturalBERT-VLAP &mdash; covering emotional valence shifts, social withdrawal patterns, hypervigilance signals, cultural coping idioms, and temporal distress framing across the member's engagement history. Non-diagnostic. Non-prescriptive. A cultural and emotional map of where the member has been &mdash; so the clinician arrives oriented, not orienting.</p>
+      </div>
+
+      <div class="hr-item reveal">
+        <div class="hr-item-label">Coaching Notes</div>
+        <div class="hr-item-title">The coach's contextual understanding &mdash; what the relationship has learned.</div>
+        <p class="hr-item-body">The certified coach who has been working with this member writes a clinical context note before the handoff &mdash; not a summary, but a qualitative account of what the relationship has surfaced: the member's communication style, the themes that have recurred, the cultural context that shapes how they express distress, and the relational observations the coach considers clinically significant. This is the institutional knowledge of the relationship, transferred.</p>
+      </div>
+
+      <div class="hr-item reveal">
+        <div class="hr-item-label">Engagement History</div>
+        <div class="hr-item-title">Check-in patterns, peer group activity, and communication cadence.</div>
+        <p class="hr-item-body">The clinician receives a 30-day engagement summary: check-in frequency, coach message cadence, peer group activity, and the pattern of engagement over time. Changes in pattern are often more significant than the content of any single interaction &mdash; a member who drops from daily check-ins to silence for four days is communicating something that the pattern alone makes visible.</p>
+      </div>
+
+      <div class="hr-item reveal">
+        <div class="hr-item-label">Cultural Context</div>
+        <div class="hr-item-title">Community background, family context, and specific cultural stressors.</div>
+        <p class="hr-item-body">Cultural context notes &mdash; drawn from the member's own disclosures across coaching interactions and check-ins &mdash; give the clinician a framework for understanding the specific pressures, expectations, and community dynamics that shape this member's experience. First-generation immigration stress. Family loyalty as a competing value. Faith-based coping. The context that would otherwise take months of sessions to surface.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- The difference it makes -->
+  <div class="handoff-difference reveal">
+    <div class="hd-col">
+      <div class="hd-col-label before">Without the warm handoff</div>
+      <p class="hd-scene">"So &mdash; tell me a little bit about what brings you here today."</p>
+      <p class="hd-context">Session one is intake. The member explains themselves from the beginning. They navigate whether this person can understand them. They test the relationship. They decide whether it's safe to be honest. By the end of the 50 minutes, the clinician knows what the member was willing to say in an unfamiliar room. The actual work hasn't started yet.</p>
+    </div>
+    <div class="hd-col">
+      <div class="hd-col-label after">With the Vasl warm handoff</div>
+      <p class="hd-scene">"I've read your coach's notes. I know what this month has been like. Where do you want to start?"</p>
+      <p class="hd-context">Session one is session one. The clinician arrived knowing the cultural framework, the signal history, the relational context, and the communication style. The member doesn't explain themselves from scratch. The clinician asks a question that proves they've been paying attention &mdash; before the member has said a word. That is what it means to begin in the middle of something real.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 05 &mdash; HOW SESSIONS WORK
+════════════════════════════════════ -->
+<section id="sessions">
+  <div class="chapter-label reveal">Chapter 05 &mdash; How Sessions Work</div>
+
+  <div class="sessions-header">
+    <h2 class="sessions-headline reveal d1">
+      The practical<br>
+      <em>details.</em>
+    </h2>
+    <p class="sessions-intro reveal d2">
+      Vasl does not conduct therapy sessions &mdash; licensed clinicians from your organization's clinical network do. What Vasl provides is the coordination infrastructure that makes those sessions more effective: the warm handoff of signal context and coaching notes before session one, the communication channel between coach and clinician between sessions, and the care continuity that ensures the member's clinical relationship exists within the same ecosystem as their peer community and coaching. The practical details below reflect how clinical connection typically works in a Vasl-integrated deployment.
+    </p>
+  </div>
+
+  <div class="session-rows">
+    <div class="session-row reveal">
+      <div class="sr-label">Format</div>
+      <div>
+        <div class="sr-title">Video or text &mdash; clinician and member's choice.</div>
+        <p class="sr-body">Clinicians integrated into the Vasl workflow typically offer secure video and text-based sessions, depending on their practice setup and the member's preference. For members in living situations where a private video session isn't possible, text-based sessions offer the same clinical relationship in a more accessible format. The format is determined by the clinician and member &mdash; not the platform.</p>
+      </div>
+      <div class="sr-detail">Session format is determined by the clinician's practice and the member's needs. Vasl supports the coordination and communication layers &mdash; the session itself is conducted through the clinician's own secure platform. HIPAA-compliant session formats required for all clinicians integrated into Vasl deployments.</div>
+    </div>
+
+    <div class="session-row reveal">
+      <div class="sr-label">Length & Frequency</div>
+      <div>
+        <div class="sr-title">50-minute sessions, weekly or bi-weekly &mdash; paced by the member.</div>
+        <p class="sr-body">Session frequency is determined by the member and their clinician &mdash; not by the org's subscription tier or a platform algorithm. Some members benefit from weekly sessions. Others do better with bi-weekly depth combined with ongoing coaching support between sessions. The cadence is a clinical decision, not a product constraint.</p>
+      </div>
+      <div class="sr-detail">Standard 50-minute session length. Bi-weekly and weekly scheduling available. Between-session coach support remains active throughout the clinical relationship &mdash; the coaching layer doesn't pause when therapy begins.</div>
+    </div>
+
+    <div class="session-row reveal">
+      <div class="sr-label">Scheduling</div>
+      <div>
+        <div class="sr-title">Connected through Vasl. Scheduled with the clinician directly.</div>
+        <p class="sr-body">When a member is ready for clinical support, Vasl coordinates the warm connection &mdash; surfacing clinician availability, transferring the clinical context package, and facilitating the first-contact introduction. Scheduling the ongoing session cadence is managed directly between the member and their clinician, within the clinical practice's own system.</p>
+      </div>
+      <div class="sr-detail">Vasl surfaces the clinical connection when the member is ready. Scheduling, reminders, and session management are handled through the clinician's own practice infrastructure. The Vasl Member App keeps the member's peer and coaching relationships active throughout.</div>
+    </div>
+
+    <div class="session-row reveal">
+      <div class="sr-label">Cost to Member</div>
+      <div>
+        <div class="sr-title">Zero cost to members in fully integrated deployments.</div>
+        <p class="sr-body">In Vasl-integrated deployments, clinical costs are covered by the organization's arrangement with their clinical network or payer &mdash; not passed to the member. Vasl's platform subscription covers the coordination infrastructure: VLAP signal context, coaching notes, warm handoff support, and ongoing communication between coach and clinician. The financial model for clinical care itself is determined by the organization and their clinical partners.</p>
+      </div>
+      <div class="sr-detail">Vasl subscription covers coordination infrastructure. Clinical session costs are structured through the organization's payer or clinical network arrangement. In most partner deployments, members access clinical care at zero out-of-pocket cost &mdash; the organizational and payer layer absorbs it.</div>
+    </div>
+
+    <div class="session-row reveal">
+      <div class="sr-label">Documentation</div>
+      <div>
+        <div class="sr-title">Clinical notes live in the clinician's own system. Coordination context lives in Vasl.</div>
+        <p class="sr-body">Session notes and clinical records are maintained by the clinician within their own practice's HIPAA-compliant EHR or documentation system &mdash; not within the Vasl platform. What Vasl maintains is the coordination layer: VLAP signal context, coaching notes, engagement history, and the pre-session context package. These two layers remain distinct. The clinician owns the clinical record. Vasl owns the coordination context.</p>
+      </div>
+      <div class="sr-detail">Clinical documentation: clinician's own system. VLAP signal data and coaching context: Vasl Coach Portal, clinician-facing only. Org administrators access only aggregate, de-identified data &mdash; never individual clinical records or Vasl signal context.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 06 &mdash; FOR ORGANIZATIONS
+════════════════════════════════════ -->
+<section id="orgs">
+  <div class="chapter-label light reveal">Chapter 06 &mdash; For Organizations</div>
+
+  <div class="orgs-grid">
+    <div class="orgs-left">
+      <h2 class="orgs-headline reveal d1">
+        Clinical integration &mdash;<br>
+        not a cold<br>
+        <em>referral.</em>
+      </h2>
+      <p class="orgs-body reveal d2">
+        Vasl is a care coordination and interpretation platform &mdash; not a clinical provider. What we give organizations is the infrastructure that makes their clinical relationships work: VLAP signal context before sessions, coaching notes that transfer the relational history, ongoing communication support between coach and clinician, and aggregate population data that informs where clinical need is building. Organizations bring the clinicians &mdash; from their own network or independent partner practices. Vasl makes the handoff warm, the context rich, and the care continuous.
+      </p>
+
+      <div class="org-types">
+        <div class="ot-item reveal">
+          <span class="ot-num">01</span>
+          <div>
+            <div class="ot-title">Universities and Higher Education</div>
+            <div class="ot-body">Vasl integrates with your existing counseling center &mdash; providing VLAP signal context and coaching notes that prepare your licensed counselors before sessions, and warm handoffs that make escalation from peer/coach support to clinical care a continuation, not a cold start. Your counselors see students who are already known.</div>
+          </div>
+        </div>
+        <div class="ot-item reveal">
+          <span class="ot-num">02</span>
+          <div>
+            <div class="ot-title">K&ndash;12 Districts and School-Based Programs</div>
+            <div class="ot-body">Vasl supports your school counselors and contracted clinical staff with the coordination infrastructure &mdash; signal context, coaching notes, and escalation protocols &mdash; that make early identification possible without adding caseload. Your clinical staff receives warm handoffs with context already transferred. Students are protected from school administrative access under HIPAA architecture.</div>
+          </div>
+        </div>
+        <div class="ot-item reveal">
+          <span class="ot-num">03</span>
+          <div>
+            <div class="ot-title">Community Health Centers and YMCAs</div>
+            <div class="ot-body">Vasl integrates with your organization's licensed clinical staff &mdash; making the connection from peer support and coaching to clinical care a warm continuation rather than a cold referral. Your clinicians arrive at first sessions already oriented. The care stays inside the community ecosystem the member already trusts.</div>
+          </div>
+        </div>
+        <div class="ot-item reveal">
+          <span class="ot-num">04</span>
+          <div>
+            <div class="ot-title">Health Plans and Medicaid Payers</div>
+            <div class="ot-body">Vasl provides the coordination and interpretation layer that makes clinical care more effective and culturally accurate for Medicaid-enrolled youth. The 80% early-resolution rate means the majority of enrolled members never escalate to clinical sessions &mdash; and for those who do, the VLAP signal context and coaching notes mean the clinical encounter starts at depth, not from zero.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="orgs-right reveal d2">
+      <div class="access-model">
+        <div class="am-header">Clinical Integration Model &mdash; How Vasl Coordinates Care</div>
+        <div class="am-row">
+          <div class="am-label">Vasl's role</div>
+          <div class="am-value"><strong>Care coordination & interpretation platform</strong> &mdash; not a clinical provider. Vasl supports the warm handoff, VLAP signal context transfer, and ongoing coach-clinician communication. Clinicians are independent or part of the org's network.</div>
+        </div>
+        <div class="am-row">
+          <div class="am-label">Clinician source</div>
+          <div class="am-value"><strong>Your network or independent partner practices</strong> &mdash; Vasl works with your organization to identify culturally aligned clinicians, configure the warm handoff workflow, and integrate them into the VLAP signal context protocol.</div>
+        </div>
+        <div class="am-row">
+          <div class="am-label">Warm handoff</div>
+          <div class="am-value"><strong>Structured clinical context transfer</strong> &mdash; VLAP signal profile, coaching notes, engagement history, and cultural context delivered to the clinician before session one. This is the core of what Vasl provides to the clinical relationship.</div>
+        </div>
+        <div class="am-row">
+          <div class="am-label">Ongoing coordination</div>
+          <div class="am-value">Coach-clinician communication channel maintained through the Vasl platform. Coaches can surface new signal context or coaching observations to the clinician between sessions &mdash; without accessing clinical notes.</div>
+        </div>
+        <div class="am-row">
+          <div class="am-label">Org data access</div>
+          <div class="am-value"><strong>Aggregate only</strong> &mdash; escalation rate, engagement trends, clinical outcome data at the population level. No individual session content, clinical notes, or member records accessible to org administrators.</div>
+        </div>
+        <div class="am-row">
+          <div class="am-label">Clinical billing</div>
+          <div class="am-value">Handled through the organization's arrangement with their clinical network or payer &mdash; not through Vasl. Vasl's subscription covers the coordination infrastructure. Medicaid billing documentation supported for qualifying deployments.</div>
+        </div>
+      </div>
+
+      <div class="orgs-cta">
+        <a href="contact.html" class="btn-light">Request a Demo</a>
+        <a href="outcomes.html" class="btn-ghost-light">See outcomes data</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 07 &mdash; ACCESS
+════════════════════════════════════ -->
+<section id="access">
+  <div class="access-bg" aria-hidden="true">Care</div>
+  <div class="access-inner">
+    <div class="access-left">
+      <div class="chapter-label muted reveal">Chapter 07 &mdash; Access</div>
+      <h2 class="access-headline reveal d1">
+        The warm handoff<br>
+        your members<br>
+        <em>deserve.</em>
+      </h2>
+      <p class="access-body reveal d2">
+        Vasl is a care coordination platform &mdash; we support the connection to clinical care, not the delivery of it. Organizations that partner with Vasl bring their own clinicians or connect to independent partner practices, and Vasl ensures every clinical relationship begins with the cultural context, VLAP signal data, and coaching history that makes the first session substantive. If your organization isn't yet a Vasl partner, request a demo and we'll show you what clinical integration looks like for your specific population.
+      </p>
+      <div class="access-actions reveal d3">
+        <a href="contact.html" class="btn-light">Request Access</a>
+        <a href="for-schools.html" class="btn-ghost-light">For schools specifically</a>
+      </div>
+    </div>
+
+    <div class="access-right reveal d2">
+      <div class="access-item">
+        <span class="ai-num">01</span>
+        <div>
+          <div class="ai-title">Members are connected to clinicians through their enrolled organization</div>
+          <div class="ai-desc">Clinical care is coordinated through the organization's own clinical network or independent partner practices. Vasl provides the warm handoff infrastructure &mdash; VLAP signal context, coaching notes, and engagement history &mdash; to make every clinical connection start at depth.</div>
+        </div>
+      </div>
+      <div class="access-item">
+        <span class="ai-num">02</span>
+        <div>
+          <div class="ai-title">Organizations integrate their clinical staff or partner practices into Vasl's workflow</div>
+          <div class="ai-desc">During implementation, Vasl works with your organization to connect your clinicians &mdash; or identify culturally aligned independent practitioners &mdash; and integrate them into the VLAP warm handoff protocol. The clinical relationship belongs to the org and clinician. Vasl provides the coordination layer.</div>
+        </div>
+      </div>
+      <div class="access-item">
+        <span class="ai-num">03</span>
+        <div>
+          <div class="ai-title">The connection surfaces when the member is ready &mdash; not when the system decides</div>
+          <div class="ai-desc">The transition from coaching to clinical care is member-paced. Vasl surfaces the clinical connection when the member and coach determine the time is right &mdash; not through an automated escalation trigger. The member initiates. The coordination follows.</div>
+        </div>
+      </div>
+      <div class="access-item">
+        <span class="ai-num">04</span>
+        <div>
+          <div class="ai-title">For organizations not yet partnered &mdash; start with a scoping conversation</div>
+          <div class="ai-desc">Every Vasl partnership begins with understanding your clinical infrastructure, your population, and what cultural alignment looks like for your specific community. We configure the warm handoff protocol and VLAP integration around the clinicians you already work with &mdash; or help you identify independent practitioners who meet your community's specific needs.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-sitemap">
+    <div class="fs-brand">
+      <a href="index.html" class="footer-logo">Vasl <span>Health</span></a>
+      <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
+      <a href="contact.html" class="fs-cta">Request a Demo &rarr;</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Platform</div>
+      <a href="platform.html">Platform Overview</a>
+      <a href="vlap.html">VLAP</a>
+      <a href="ai-model.html">AI Model</a>
+      <a href="technology.html">Technology</a>
+      <a href="peer-groups.html">Peer Groups</a>
+      <a href="teletherapy.html">Teletherapy</a>
+      <a href="prototype.html">Live Demo Portal</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Who We Serve</div>
+      <a href="for-schools.html">For Schools</a>
+      <a href="for-organizations.html">For Organizations</a>
+      <a href="outcomes.html">Outcomes</a>
+      <a href="clinical-outcomes.html">Clinical Outcomes</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Company</div>
+      <a href="about.html">About Vasl</a>
+      <a href="team.html">Team</a>
+      <a href="careers.html">Careers</a>
+      <a href="research.html">Research</a>
+      <a href="blog.html">Blog &amp; Insights</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Support &amp; Legal</div>
+      <a href="support.html">Help Center</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="baa.html">Business Associate Agreement</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 Vasl Health, Inc. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="baa.html">BAA</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── SCROLL REVEAL ─── -->
+<script>
+  // Add js-ready so reveal animation can activate — content visible by default without it
+  document.documentElement.classList.add('js-ready');
+
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.06, rootMargin: '0px 0px -24px 0px' });
+  reveals.forEach(el => io.observe(el));
+
+  window.addEventListener('load', () => {
+    reveals.forEach((el, i) => {
+      if (el.getBoundingClientRect().top < window.innerHeight) {
+        setTimeout(() => el.classList.add('visible'), i * 55);
+      }
+    });
+  });
+</script>
+</body>
+</html>
