@@ -1,0 +1,1750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Vasl Health for K-12 and higher education &mdash; culturally grounded behavioral health support for students, population-level insight for administrators, and a Medicaid billing model that makes it affordable.">
+<title>For Schools &mdash; Vasl Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  :root {
+    --warm-white:  #FAF7F2;
+    --parchment:   #F0EAE0;
+    --parchment-dk: #E6DDD0;
+    --ink:         #1C1C1C;
+    --ink-70:      rgba(28,28,28,0.70);
+    --ink-50:      rgba(28,28,28,0.50);
+    --ink-25:      rgba(28,28,28,0.25);
+    --ink-12:      rgba(28,28,28,0.12);
+    --clay:        #C4896F;
+    --clay-light:  #E8C4AE;
+    --clay-pale:   #F5E6DC;
+    --deep-green:  #2D4A3E;
+    --dust:        #8B7B6B;
+    --chalk:       #E2DAD0;
+    --charcoal:    #222222;
+
+    --serif: 'Newsreader', Georgia, serif;
+    --sans:  'IBM Plex Sans', sans-serif;
+    --mono:  'IBM Plex Mono', monospace;
+    --gutter: 7vw;
+  }
+
+  body {
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: 999;
+    pointer-events: none; opacity: 0.028;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 256px;
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(22px);
+    transition: opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .d1 { transition-delay: 0.10s; } .d2 { transition-delay: 0.22s; }
+  .d3 { transition-delay: 0.34s; } .d4 { transition-delay: 0.46s; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px var(--gutter);
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(240,234,224,0.94);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--ink-12);
+  }
+  .nav-logo { font-family: var(--serif); font-size: 22px; font-weight: 400; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
+  .nav-logo span { color: var(--clay); font-style: italic; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { font-family: var(--mono); font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--dust); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+  .nav-cta { font-family: var(--mono); font-size: 10px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--deep-green); border: 1px solid var(--deep-green); padding: 9px 20px; text-decoration: none; transition: background 0.22s, color 0.22s; }
+  .nav-cta:hover { background: var(--deep-green); color: var(--warm-white); }
+
+  /* ─── SHARED ─── */
+  .chapter-label {
+    font-family: var(--mono); font-size: 10px; font-weight: 300; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--clay);
+    display: flex; align-items: center; gap: 12px; margin-bottom: 52px;
+  }
+  .chapter-label::after { content: ''; display: block; width: 36px; height: 1px; background: var(--clay); opacity: 0.45; }
+  .chapter-label.light { color: var(--clay-light); }
+  .chapter-label.light::after { background: var(--clay-light); }
+  .chapter-label.muted { color: rgba(250,247,242,0.35); }
+  .chapter-label.muted::after { background: rgba(250,247,242,0.35); }
+
+  section { padding: 130px var(--gutter); position: relative; }
+
+  .btn-dark { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--ink); color: var(--warm-white); padding: 16px 32px; text-decoration: none; display: inline-block; transition: background 0.22s; }
+  .btn-dark:hover { background: var(--deep-green); }
+  .btn-outline { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dust); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s; }
+  .btn-outline:hover { color: var(--ink); }
+  .btn-outline::after { content: '→'; font-size: 14px; }
+  .btn-green { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--deep-green); color: var(--warm-white); padding: 16px 32px; text-decoration: none; display: inline-block; transition: opacity 0.22s; }
+  .btn-green:hover { opacity: 0.85; }
+  .btn-light { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--warm-white); color: var(--ink); padding: 16px 32px; text-decoration: none; display: inline-block; transition: background 0.22s; }
+  .btn-light:hover { background: var(--clay-light); }
+  .btn-ghost-light { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250,247,242,0.40); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s; }
+  .btn-ghost-light:hover { color: var(--warm-white); }
+  .btn-ghost-light::after { content: '→'; }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 01 — THE STATE OF SCHOOL MENTAL HEALTH
+  ═══════════════════════════════════════════ */
+  #state {
+    min-height: 100vh;
+    padding-top: 180px; padding-bottom: 140px;
+    background: var(--parchment);
+    border-bottom: 1px solid var(--chalk);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 100px;
+    align-items: end;
+  }
+
+  .state-left {}
+
+  .state-kicker {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--dust); margin-bottom: 40px; display: block;
+  }
+
+  .state-headline {
+    font-family: var(--serif);
+    font-size: clamp(46px, 5.5vw, 82px);
+    font-weight: 300; line-height: 1.03; letter-spacing: -0.03em;
+    color: var(--ink); margin-bottom: 48px;
+  }
+  .state-headline em { font-style: italic; color: var(--clay); }
+
+  .state-body {
+    font-size: 19px; font-weight: 300; line-height: 1.72;
+    color: var(--ink-70); max-width: 460px; margin-bottom: 52px;
+  }
+
+  .state-actions { display: flex; align-items: center; gap: 32px; }
+
+  .state-right {
+    border-left: 1px solid var(--chalk); padding-left: 80px;
+    display: flex; flex-direction: column; gap: 0;
+  }
+
+  /* Crisis stat stack */
+  .crisis-stat {
+    padding: 32px 0; border-bottom: 1px solid var(--chalk);
+    display: grid; grid-template-columns: 140px 1fr; gap: 24px; align-items: start;
+  }
+  .crisis-stat:first-child { padding-top: 0; }
+  .crisis-stat:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .cs-num {
+    font-family: var(--serif); font-size: 52px; font-weight: 300;
+    color: var(--clay); line-height: 1; letter-spacing: -0.04em;
+  }
+
+  .cs-right {}
+  .cs-label {
+    font-family: var(--sans); font-size: 16px; font-weight: 400; color: var(--ink);
+    line-height: 1.35; margin-bottom: 6px;
+  }
+  .cs-source {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dust);
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 02 — WHAT VASL DOES DIFFERENTLY
+  ═══════════════════════════════════════════ */
+  #different {
+    background: var(--warm-white);
+    padding-top: 150px; padding-bottom: 150px;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .diff-header {
+    display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px;
+    align-items: end; margin-bottom: 90px;
+    padding-bottom: 60px; border-bottom: 1px solid var(--chalk);
+  }
+
+  .diff-headline {
+    font-family: var(--serif); font-size: clamp(36px, 4vw, 56px);
+    font-weight: 300; line-height: 1.08; letter-spacing: -0.025em; color: var(--ink);
+  }
+  .diff-headline em { font-style: italic; color: var(--clay); }
+
+  .diff-intro {
+    font-size: 18px; font-weight: 300; line-height: 1.72; color: var(--ink-70);
+  }
+
+  /* Comparison: standard model vs. Vasl */
+  .model-compare {
+    display: grid; grid-template-columns: 200px 1fr 1fr; gap: 0;
+    border: 1px solid var(--chalk);
+  }
+
+  .mc-header {
+    display: contents;
+  }
+
+  .mc-h-cell {
+    padding: 18px 24px; border-right: 1px solid var(--chalk); border-bottom: 1px solid var(--chalk);
+    background: var(--parchment);
+  }
+  .mc-h-cell:last-child { border-right: none; }
+
+  .mc-h-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--dust);
+  }
+
+  .mc-h-name {
+    font-family: var(--serif); font-size: 18px; font-weight: 400;
+    color: var(--ink); margin-top: 4px; letter-spacing: -0.01em;
+  }
+  .mc-h-name em { font-style: italic; color: var(--clay); }
+
+  .mc-row { display: contents; }
+
+  .mc-cell {
+    padding: 20px 24px; border-right: 1px solid var(--chalk); border-bottom: 1px solid var(--chalk);
+    display: flex; align-items: center;
+  }
+  .mc-row:last-child .mc-cell { border-bottom: none; }
+  .mc-cell:last-child { border-right: none; }
+
+  .mc-metric {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dust); line-height: 1.5;
+  }
+
+  .mc-old {
+    font-size: 14px; font-weight: 300; line-height: 1.55; color: var(--ink-50);
+  }
+
+  .mc-vasl {
+    font-size: 14px; font-weight: 300; line-height: 1.55; color: var(--ink-70);
+  }
+  .mc-vasl strong { font-weight: 500; color: var(--ink); }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 03 — THE COUNSELOR PARTNERSHIP
+  ═══════════════════════════════════════════ */
+  #counselors {
+    background: var(--deep-green);
+    color: var(--warm-white);
+    padding-top: 150px; padding-bottom: 150px;
+  }
+
+  .counselor-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0 120px; align-items: start;
+  }
+
+  .counselor-left {}
+
+  .counselor-headline {
+    font-family: var(--serif); font-size: clamp(38px, 4.5vw, 64px);
+    font-weight: 300; line-height: 1.06; letter-spacing: -0.025em;
+    color: var(--warm-white); margin-bottom: 40px;
+  }
+  .counselor-headline em { font-style: italic; color: var(--clay-light); }
+
+  .counselor-body {
+    font-size: 18px; font-weight: 300; line-height: 1.75;
+    color: rgba(250,247,242,0.60); max-width: 480px; margin-bottom: 40px;
+  }
+
+  .counselor-pull {
+    border-left: 2px solid var(--clay);
+    padding: 24px 32px;
+    background: rgba(250,247,242,0.04);
+    font-family: var(--serif); font-size: 20px; font-style: italic;
+    font-weight: 300; line-height: 1.5; color: var(--warm-white);
+  }
+
+  .counselor-right { padding-top: 8px; }
+
+  /* Caseload problem */
+  .caseload-block {
+    border: 1px solid rgba(250,247,242,0.14); overflow: hidden; margin-bottom: 32px;
+  }
+
+  .cb-header {
+    padding: 16px 28px; border-bottom: 1px solid rgba(250,247,242,0.1);
+    background: rgba(250,247,242,0.05);
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: rgba(250,247,242,0.38);
+  }
+
+  .cb-compare {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border-bottom: 1px solid rgba(250,247,242,0.1);
+  }
+
+  .cbc-item {
+    padding: 24px 28px; border-right: 1px solid rgba(250,247,242,0.1);
+  }
+  .cbc-item:last-child { border-right: none; }
+
+  .cbc-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: rgba(250,247,242,0.35); margin-bottom: 8px;
+  }
+
+  .cbc-num {
+    font-family: var(--serif); font-size: 44px; font-weight: 300;
+    color: var(--warm-white); line-height: 1; letter-spacing: -0.04em; margin-bottom: 4px;
+  }
+  .cbc-num.red { color: var(--clay-light); }
+
+  .cbc-desc {
+    font-size: 13px; font-weight: 300; color: rgba(250,247,242,0.45); line-height: 1.55;
+  }
+
+  .cb-note {
+    padding: 16px 28px;
+    font-size: 13px; font-weight: 300; line-height: 1.65;
+    color: rgba(250,247,242,0.45);
+  }
+
+  /* What Vasl frees up */
+  .counselor-frees { display: flex; flex-direction: column; gap: 0; }
+
+  .cf-item {
+    padding: 24px 0; border-bottom: 1px solid rgba(250,247,242,0.10);
+    display: grid; grid-template-columns: 36px 1fr; gap: 16px; align-items: start;
+  }
+  .cf-item:last-child { border-bottom: none; }
+
+  .cf-num {
+    font-family: var(--mono); font-size: 10px; color: var(--clay-light); padding-top: 3px;
+  }
+
+  .cf-title {
+    font-family: var(--serif); font-size: 18px; font-weight: 400;
+    color: var(--warm-white); margin-bottom: 6px; line-height: 1.25;
+  }
+
+  .cf-body {
+    font-size: 13px; font-weight: 300; color: rgba(250,247,242,0.50); line-height: 1.65;
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 04 — THE MEDICAID MODEL
+  ═══════════════════════════════════════════ */
+  #medicaid {
+    background: var(--charcoal);
+    color: var(--warm-white);
+    padding-top: 150px; padding-bottom: 150px;
+  }
+
+  .medicaid-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0 120px; align-items: start;
+  }
+
+  .medicaid-left {}
+
+  .medicaid-headline {
+    font-family: var(--serif); font-size: clamp(38px, 4.5vw, 64px);
+    font-weight: 300; line-height: 1.06; letter-spacing: -0.025em;
+    color: var(--warm-white); margin-bottom: 40px;
+  }
+  .medicaid-headline em { font-style: italic; color: var(--clay-light); }
+
+  .medicaid-body {
+    font-size: 17px; font-weight: 300; line-height: 1.75;
+    color: rgba(250,247,242,0.58); max-width: 480px; margin-bottom: 44px;
+  }
+
+  /* The math */
+  .medicaid-math {
+    border: 1px solid rgba(250,247,242,0.14); overflow: hidden;
+    margin-bottom: 28px;
+  }
+
+  .mm-header {
+    padding: 16px 28px; border-bottom: 1px solid rgba(250,247,242,0.10);
+    background: rgba(250,247,242,0.05);
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: rgba(250,247,242,0.38);
+  }
+
+  .mm-row {
+    padding: 20px 28px; border-bottom: 1px solid rgba(250,247,242,0.08);
+    display: grid; grid-template-columns: 180px 1fr; gap: 20px; align-items: baseline;
+  }
+  .mm-row:last-child { border-bottom: none; }
+
+  .mm-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(250,247,242,0.35); line-height: 1.5;
+  }
+
+  .mm-value {
+    font-size: 14px; font-weight: 300; color: rgba(250,247,242,0.72); line-height: 1.55;
+  }
+  .mm-value strong { font-weight: 500; color: var(--warm-white); }
+
+  .mm-highlight {
+    padding: 24px 28px; background: rgba(196,137,111,0.12);
+    border-top: 1px solid rgba(196,137,111,0.25);
+  }
+
+  .mm-hl-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay-light); margin-bottom: 8px;
+  }
+
+  .mm-hl-num {
+    font-family: var(--serif); font-size: 48px; font-weight: 300;
+    color: var(--warm-white); line-height: 1; letter-spacing: -0.04em; margin-bottom: 4px;
+  }
+
+  .mm-hl-desc {
+    font-size: 13px; font-weight: 300; color: rgba(250,247,242,0.50); line-height: 1.55;
+  }
+
+  .medicaid-right { padding-top: 8px; }
+
+  /* How billing works */
+  .billing-steps { display: flex; flex-direction: column; gap: 0; }
+
+  .bs-item {
+    padding: 28px 0; border-bottom: 1px solid rgba(250,247,242,0.10);
+    display: grid; grid-template-columns: 40px 1fr; gap: 16px; align-items: start;
+  }
+  .bs-item:last-child { border-bottom: none; }
+
+  .bs-num {
+    font-family: var(--serif); font-size: 32px; font-weight: 300;
+    color: var(--clay-light); line-height: 1; letter-spacing: -0.03em;
+  }
+
+  .bs-right {}
+  .bs-title {
+    font-family: var(--serif); font-size: 19px; font-weight: 400;
+    color: var(--warm-white); margin-bottom: 8px; line-height: 1.25;
+  }
+  .bs-body {
+    font-size: 13px; font-weight: 300; color: rgba(250,247,242,0.50); line-height: 1.65;
+  }
+
+  .billing-note {
+    margin-top: 32px; padding: 20px 24px; border: 1px solid rgba(250,247,242,0.12);
+    font-size: 13px; font-weight: 300; color: rgba(250,247,242,0.42); line-height: 1.65;
+  }
+
+  .billing-note strong {
+    color: rgba(250,247,242,0.70); font-weight: 400;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 05 — FOR STUDENTS
+  ═══════════════════════════════════════════ */
+  #students {
+    background: var(--warm-white);
+    padding-top: 150px; padding-bottom: 150px;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .students-header {
+    max-width: 720px; margin-bottom: 90px;
+  }
+
+  .students-headline {
+    font-family: var(--serif); font-size: clamp(40px, 4.8vw, 68px);
+    font-weight: 300; line-height: 1.06; letter-spacing: -0.03em; color: var(--ink);
+    margin-bottom: 28px;
+  }
+  .students-headline em { font-style: italic; color: var(--clay); }
+
+  .students-sub {
+    font-size: 18px; font-weight: 300; line-height: 1.72;
+    color: var(--ink-70); max-width: 580px;
+  }
+
+  /* Three student moments */
+  .student-moments {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+    border-top: 1px solid var(--chalk);
+  }
+
+  .sm-card {
+    padding: 56px 48px 56px 0; border-right: 1px solid var(--chalk);
+  }
+  .sm-card:last-child { border-right: none; padding-right: 0; }
+  .sm-card:nth-child(n+2) { padding-left: 48px; }
+
+  .sm-persona {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 24px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .sm-persona::before { content: ''; display: block; width: 16px; height: 1px; background: var(--clay); }
+
+  .sm-quote {
+    font-family: var(--serif); font-size: 20px; font-style: italic;
+    font-weight: 300; line-height: 1.45; color: var(--ink); margin-bottom: 20px;
+  }
+
+  .sm-context {
+    font-size: 14px; font-weight: 300; line-height: 1.7; color: var(--ink-70); margin-bottom: 20px;
+  }
+
+  .sm-outcome {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--deep-green);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .sm-outcome::before { content: ''; display: block; width: 16px; height: 1px; background: var(--deep-green); }
+
+  /* What students experience */
+  .student-experience {
+    margin-top: 80px; background: var(--parchment);
+    border: 1px solid var(--chalk); overflow: hidden;
+  }
+
+  .se-header {
+    background: var(--ink); padding: 18px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .se-title {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: rgba(250,247,242,0.50);
+  }
+
+  .se-badge {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--clay-light);
+    border: 1px solid rgba(196,137,111,0.35); padding: 3px 10px;
+  }
+
+  .se-body {
+    padding: 44px 40px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+  }
+
+  .se-step {
+    padding-right: 40px; border-right: 1px solid var(--chalk); padding-bottom: 0;
+  }
+  .se-step:last-child { border-right: none; padding-right: 0; }
+  .se-step:nth-child(n+2) { padding-left: 40px; }
+
+  .se-step-num {
+    font-family: var(--serif); font-size: 52px; font-weight: 300;
+    color: var(--clay-light); line-height: 1; letter-spacing: -0.04em; margin-bottom: 16px;
+  }
+
+  .se-step-title {
+    font-family: var(--serif); font-size: 18px; font-weight: 400;
+    color: var(--ink); margin-bottom: 12px; line-height: 1.2; letter-spacing: -0.01em;
+  }
+
+  .se-step-body {
+    font-size: 13px; font-weight: 300; line-height: 1.7; color: var(--ink-70);
+  }
+
+  .se-step-tag {
+    display: inline-block; margin-top: 16px;
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--deep-green);
+    border: 1px solid var(--deep-green); padding: 4px 9px;
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 06 — PRIVACY & COMPLIANCE
+  ═══════════════════════════════════════════ */
+  #compliance {
+    background: var(--parchment);
+    padding-top: 150px; padding-bottom: 150px;
+    border-top: 1px solid var(--chalk); border-bottom: 1px solid var(--chalk);
+  }
+
+  .compliance-header {
+    display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px;
+    align-items: end; margin-bottom: 90px;
+    padding-bottom: 60px; border-bottom: 1px solid var(--chalk);
+  }
+
+  .compliance-headline {
+    font-family: var(--serif); font-size: clamp(36px, 4vw, 54px);
+    font-weight: 300; line-height: 1.08; letter-spacing: -0.025em; color: var(--ink);
+  }
+  .compliance-headline em { font-style: italic; color: var(--clay); }
+
+  .compliance-intro {
+    font-size: 18px; font-weight: 300; line-height: 1.72; color: var(--ink-70);
+  }
+
+  /* Who sees what — critical table */
+  .sees-table {
+    border: 1px solid var(--chalk); overflow: hidden; margin-bottom: 60px;
+  }
+
+  .st-header {
+    display: grid; grid-template-columns: 200px repeat(4, 1fr);
+    background: var(--ink);
+  }
+
+  .st-h-cell {
+    padding: 16px 20px; border-right: 1px solid rgba(250,247,242,0.1);
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: rgba(250,247,242,0.45);
+  }
+  .st-h-cell:last-child { border-right: none; }
+
+  .st-row {
+    display: grid; grid-template-columns: 200px repeat(4, 1fr);
+    border-top: 1px solid var(--chalk);
+  }
+  .st-row:first-child { border-top: none; }
+
+  .st-cell {
+    padding: 18px 20px; border-right: 1px solid var(--chalk);
+    font-size: 13px; font-weight: 300; color: var(--ink-70); display: flex; align-items: center;
+  }
+  .st-cell:last-child { border-right: none; }
+  .st-cell:first-child { font-weight: 400; color: var(--ink); font-size: 13px; }
+
+  .st-yes {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--deep-green);
+  }
+
+  .st-no {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dust);
+  }
+
+  .st-limited {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--clay);
+  }
+
+  /* Compliance rows */
+  .compliance-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0 80px;
+  }
+
+  .compliance-col { display: flex; flex-direction: column; gap: 0; }
+
+  .comp-item {
+    padding: 36px 0; border-bottom: 1px solid var(--chalk);
+  }
+  .comp-item:first-child { padding-top: 0; }
+  .comp-item:last-child { border-bottom: none; }
+
+  .comp-label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 10px;
+  }
+
+  .comp-title {
+    font-family: var(--serif); font-size: 21px; font-weight: 400;
+    color: var(--ink); margin-bottom: 10px; line-height: 1.25; letter-spacing: -0.01em;
+  }
+
+  .comp-body {
+    font-size: 14px; font-weight: 300; line-height: 1.7; color: var(--ink-70);
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 07 — DEPLOYMENT
+  ═══════════════════════════════════════════ */
+  #deployment {
+    background: var(--warm-white);
+    padding-top: 150px; padding-bottom: 150px;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .deploy-header {
+    max-width: 720px; margin-bottom: 90px;
+  }
+
+  .deploy-headline {
+    font-family: var(--serif); font-size: clamp(40px, 4.8vw, 64px);
+    font-weight: 300; line-height: 1.06; letter-spacing: -0.03em; color: var(--ink);
+    margin-bottom: 28px;
+  }
+  .deploy-headline em { font-style: italic; color: var(--clay); }
+
+  .deploy-sub {
+    font-size: 18px; font-weight: 300; line-height: 1.72;
+    color: var(--ink-70); max-width: 580px;
+  }
+
+  /* Timeline */
+  .deploy-timeline {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
+    border-top: 1px solid var(--clay-light); margin-bottom: 80px; position: relative;
+  }
+
+  .dt-phase {
+    padding: 40px 36px 40px 0; border-right: 1px solid var(--chalk);
+    position: relative;
+  }
+  .dt-phase:last-child { border-right: none; padding-right: 0; }
+  .dt-phase:nth-child(n+2) { padding-left: 36px; }
+
+  .dt-dot {
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--warm-white); border: 2px solid var(--clay);
+    margin-bottom: 20px; position: relative; top: -47px; margin-bottom: -32px;
+  }
+  .dt-phase:first-child .dt-dot { background: var(--clay); }
+
+  .dt-week {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 10px;
+  }
+
+  .dt-name {
+    font-family: var(--serif); font-size: 18px; font-weight: 400;
+    color: var(--ink); margin-bottom: 10px; line-height: 1.2; letter-spacing: -0.01em;
+  }
+
+  .dt-desc {
+    font-size: 13px; font-weight: 300; line-height: 1.65; color: var(--ink-70);
+  }
+
+  /* What you get panel */
+  .deploy-what {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0;
+    border: 1px solid var(--chalk);
+  }
+
+  .dw-item {
+    padding: 40px 36px; border-right: 1px solid var(--chalk);
+  }
+  .dw-item:last-child { border-right: none; }
+
+  .dw-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 12px;
+  }
+
+  .dw-title {
+    font-family: var(--serif); font-size: 20px; font-weight: 400;
+    color: var(--ink); margin-bottom: 10px; line-height: 1.2; letter-spacing: -0.01em;
+  }
+
+  .dw-body {
+    font-size: 13px; font-weight: 300; line-height: 1.7; color: var(--ink-70);
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 08 — OUTCOMES
+  ═══════════════════════════════════════════ */
+  #outcomes {
+    background: var(--parchment);
+    padding-top: 150px; padding-bottom: 150px;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .outcomes-header {
+    display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px;
+    align-items: end; margin-bottom: 90px;
+    padding-bottom: 60px; border-bottom: 1px solid var(--chalk);
+  }
+
+  .outcomes-headline {
+    font-family: var(--serif); font-size: clamp(36px, 4vw, 54px);
+    font-weight: 300; line-height: 1.08; letter-spacing: -0.025em; color: var(--ink);
+  }
+  .outcomes-headline em { font-style: italic; color: var(--clay); }
+
+  .outcomes-intro {
+    font-size: 18px; font-weight: 300; line-height: 1.72; color: var(--ink-70);
+  }
+
+  .outcome-row {
+    display: grid; grid-template-columns: 160px 1fr 1fr; gap: 0 60px;
+    padding: 52px 0; border-bottom: 1px solid var(--chalk); align-items: start;
+  }
+  .outcome-row:last-child { border-bottom: none; }
+
+  .or-big {
+    font-family: var(--serif); font-size: 72px; font-weight: 300;
+    color: var(--clay); line-height: 0.9; letter-spacing: -0.04em;
+  }
+  .or-unit {
+    font-family: var(--mono); font-size: 18px; color: var(--clay); letter-spacing: 0.02em;
+  }
+
+  .or-title {
+    font-family: var(--serif); font-size: 24px; font-weight: 400;
+    color: var(--ink); margin-bottom: 12px; line-height: 1.2; letter-spacing: -0.01em;
+  }
+
+  .or-body {
+    font-size: 14px; font-weight: 300; line-height: 1.7; color: var(--ink-70);
+  }
+
+  .or-bench-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--dust); margin-bottom: 10px;
+  }
+
+  .or-bench-item {
+    padding: 10px 0; border-bottom: 1px solid var(--chalk);
+    display: flex; align-items: baseline; gap: 12px;
+    font-size: 13px; font-weight: 300; color: var(--ink-70);
+  }
+  .or-bench-item:last-child { border-bottom: none; }
+
+  .orbi-label {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dust); flex-shrink: 0; min-width: 80px;
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 09 — PILOT PROGRAM
+  ═══════════════════════════════════════════ */
+  #pilot {
+    background: var(--ink);
+    padding-top: 160px; padding-bottom: 160px;
+    overflow: hidden; position: relative;
+  }
+
+  .pilot-bg {
+    position: absolute; bottom: -8vw; right: -4vw;
+    font-family: var(--serif); font-size: 38vw; font-weight: 300; font-style: italic;
+    color: rgba(250,247,242,0.018); pointer-events: none; user-select: none;
+    line-height: 1; letter-spacing: -0.05em;
+  }
+
+  .pilot-inner {
+    position: relative; z-index: 2;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0 100px; align-items: start;
+  }
+
+  .pilot-left {}
+
+  .pilot-headline {
+    font-family: var(--serif); font-size: clamp(40px, 5vw, 70px);
+    font-weight: 300; line-height: 1.06; letter-spacing: -0.03em;
+    color: var(--warm-white); margin-bottom: 32px;
+  }
+  .pilot-headline em { font-style: italic; color: var(--clay-light); }
+
+  .pilot-body {
+    font-size: 18px; font-weight: 300; line-height: 1.72;
+    color: rgba(250,247,242,0.50); margin-bottom: 52px; max-width: 460px;
+  }
+
+  .pilot-actions { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+
+  .pilot-right { padding-top: 8px; display: flex; flex-direction: column; gap: 0; }
+
+  .pilot-item {
+    padding: 28px 0; border-bottom: 1px solid rgba(250,247,242,0.09);
+    display: grid; grid-template-columns: 40px 1fr; gap: 20px; align-items: start;
+  }
+  .pilot-item:last-child { border-bottom: none; }
+
+  .pi-num { font-family: var(--mono); font-size: 10px; color: var(--clay-light); padding-top: 3px; }
+
+  .pi-title {
+    font-family: var(--serif); font-size: 20px; font-weight: 400;
+    color: var(--warm-white); margin-bottom: 6px; line-height: 1.25;
+  }
+
+  .pi-desc {
+    font-size: 14px; font-weight: 300; color: rgba(250,247,242,0.42); line-height: 1.65;
+  }
+
+  /* ─── FOOTER ─── */
+  .footer-logo span { color: var(--clay); font-style: italic; }
+  .footer-nav a { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,247,242,0.30); text-decoration: none; transition: color 0.2s; }
+  .footer-nav a:hover { color: var(--warm-white); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1100px) {
+    #state { grid-template-columns: 1fr; gap: 80px; padding-top: 160px; }
+    .state-right { border-left: none; padding-left: 0; border-top: 1px solid var(--chalk); padding-top: 60px; }
+    .crisis-stat { grid-template-columns: 80px 1fr; }
+    .diff-header { grid-template-columns: 1fr; gap: 28px; }
+    .model-compare { overflow-x: auto; }
+    .counselor-grid { grid-template-columns: 1fr; gap: 60px; }
+    .cb-compare { grid-template-columns: 1fr; }
+    .cbc-item { border-right: none; border-bottom: 1px solid rgba(250,247,242,0.1); }
+    .cbc-item:last-child { border-bottom: none; }
+    .medicaid-grid { grid-template-columns: 1fr; gap: 60px; }
+    .students-header { max-width: 100%; }
+    .student-moments { grid-template-columns: 1fr; }
+    .sm-card { border-right: none; border-bottom: 1px solid var(--chalk); padding: 48px 0; }
+    .sm-card:last-child { border-bottom: none; }
+    .sm-card:nth-child(n) { padding-left: 0; }
+    .se-body { grid-template-columns: 1fr 1fr; }
+    .se-step:nth-child(2) { border-right: none; }
+    .se-step:nth-child(3) { padding-left: 0; border-right: 1px solid var(--chalk); border-top: 1px solid var(--chalk); padding-top: 28px; }
+    .se-step:nth-child(4) { border-right: none; border-top: 1px solid var(--chalk); padding-top: 28px; }
+    .compliance-header { grid-template-columns: 1fr; gap: 28px; }
+    .sees-table { overflow-x: auto; }
+    .compliance-grid { grid-template-columns: 1fr; }
+    .deploy-header { max-width: 100%; }
+    .deploy-timeline { grid-template-columns: 1fr 1fr; overflow: hidden; }
+    .dt-phase:nth-child(2) { border-right: none; }
+    .dt-phase:nth-child(3) { padding-left: 0; border-top: 1px solid var(--chalk); }
+    .deploy-what { grid-template-columns: 1fr; }
+    .dw-item { border-right: none; border-bottom: 1px solid var(--chalk); }
+    .dw-item:last-child { border-bottom: none; }
+    .outcomes-header { grid-template-columns: 1fr; gap: 28px; }
+    .outcome-row { grid-template-columns: 1fr; gap: 28px; }
+    .pilot-inner { grid-template-columns: 1fr; gap: 60px; }
+  }
+  @media (max-width: 768px) {
+    :root { --gutter: 5vw; }
+    .nav-links { display: none; }
+    .se-body { grid-template-columns: 1fr; }
+    .se-step:nth-child(n) { border-right: none; border-top: 1px solid var(--chalk); padding: 24px 0; }
+    .se-step:first-child { border-top: none; }
+    .deploy-timeline { grid-template-columns: 1fr; }
+    .dt-phase:nth-child(n) { border-right: none; border-bottom: 1px solid var(--chalk); padding: 32px 0; }
+    .dt-phase:last-child { border-bottom: none; }
+    .mm-row { grid-template-columns: 1fr; gap: 4px; }
+  }
+  .footer-logo span{color:var(--clay);font-style:italic;}
+  .footer-nav a{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.32);text-decoration:none;}
+  .footer-nav a:hover{color:var(--warm-white);}
+  .footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+
+  .ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
+  .ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.2s;}
+  .ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .ham-btn.open span:nth-child(2){opacity:0;}
+  .ham-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+  @media(max-width:780px){
+    .ham-btn{display:flex;}
+    .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--warm);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{font-size:22px;letter-spacing:0.04em;}
+    .nav-cta{display:none;}
+  }
+
+  footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);padding:0;}
+  .footer-sitemap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:0;padding:56px 7vw 40px;border-bottom:1px solid rgba(250,247,242,0.08);}
+  .fs-brand{padding-right:40px;}
+  .footer-logo{font-family:var(--serif);font-size:22px;color:var(--warm-white,#FAF7F2);letter-spacing:-0.02em;text-decoration:none;display:block;margin-bottom:12px;}
+  .footer-logo span{color:var(--clay,#C4896F);font-style:italic;}
+  .footer-mission{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.28);line-height:1.8;margin-bottom:20px;}
+  .fs-cta{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:var(--clay,#C4896F);border:1px solid rgba(196,137,111,0.40);padding:9px 18px;text-decoration:none;transition:all 0.18s;}
+  .fs-cta:hover{background:rgba(196,137,111,0.12);}
+  .fs-col{padding-left:32px;border-left:1px solid rgba(250,247,242,0.06);}
+  .fs-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,247,242,0.30);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(250,247,242,0.06);}
+  .fs-col a{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,247,242,0.45);text-decoration:none;margin-bottom:10px;transition:color 0.15s;}
+  .fs-col a:hover{color:var(--clay,#C4896F);}
+  .footer-bottom{padding:20px 7vw;display:flex;align-items:center;justify-content:space-between;}
+  .footer-copy{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,0.20);}
+  .footer-legal{display:flex;gap:20px;}
+  .footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+  .footer-legal a:hover{color:var(--clay,#C4896F);}
+  @media(max-width:1100px){.footer-sitemap{grid-template-columns:1fr 1fr 1fr;gap:32px;}.fs-brand{grid-column:1/-1;padding-right:0;}.fs-col{border-left:none;padding-left:0;}}
+  @media(max-width:680px){.footer-sitemap{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}}
+  @media(max-width:400px){.footer-sitemap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="index.html" class="nav-logo">Vasl <span>Health</span></a>
+    <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="platform.html">Platform</a></li>
+    <li><a href="outcomes.html">Outcomes</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="#pilot" class="nav-cta">Request a Pilot</a>
+</nav>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 01 &mdash; THE STATE OF SCHOOL MENTAL HEALTH
+════════════════════════════════════ -->
+<section id="state">
+  <div class="state-left">
+    <span class="state-kicker reveal">Chapter 01 &mdash; The State of School Mental Health</span>
+    <h1 class="state-headline reveal d1">
+      Your counselors<br>
+      are doing the<br>
+      impossible.<br>
+      <em>Let's change that.</em>
+    </h1>
+    <p class="state-body reveal d2">
+      One in five students is navigating a mental health condition right now, in your district, in your classrooms. The infrastructure to reach them &mdash; proactively, culturally, before crisis &mdash; doesn't exist yet in most schools. Vasl builds it. At a cost that Title I districts can sustain, with compliance your legal team can sign off on, and with outcomes your board can present.
+    </p>
+    <div class="state-actions reveal d3">
+      <a href="#pilot" class="btn-dark">Request a Pilot</a>
+      <a href="#medicaid" class="btn-outline">See the budget model</a>
+    </div>
+  </div>
+
+  <div class="state-right reveal d2">
+    <div class="crisis-stat">
+      <div class="cs-num">1 in 5</div>
+      <div class="cs-right">
+        <div class="cs-label">Students currently experiencing a mental health condition that affects their ability to learn</div>
+        <div class="cs-source">CDC / SAMHSA &mdash; consistent finding across national surveys</div>
+      </div>
+    </div>
+    <div class="crisis-stat">
+      <div class="cs-num">464:1</div>
+      <div class="cs-right">
+        <div class="cs-label">Average student-to-counselor ratio in U.S. public schools &mdash; nearly double the ASCA recommended 250:1</div>
+        <div class="cs-source">ASCA National Survey &mdash; 2023</div>
+      </div>
+    </div>
+    <div class="crisis-stat">
+      <div class="cs-num">9<span style="font-size:26px">mo</span></div>
+      <div class="cs-right">
+        <div class="cs-label">Average wait for a mental health appointment in underserved communities &mdash; the time a student waits while symptoms progress</div>
+        <div class="cs-source">SAMHSA &mdash; National Survey on Drug Use and Health</div>
+      </div>
+    </div>
+    <div class="crisis-stat">
+      <div class="cs-num">$26B</div>
+      <div class="cs-right">
+        <div class="cs-label">Annual cost of student mental health to U.S. educational institutions &mdash; in dropout, remediation, and crisis response</div>
+        <div class="cs-source">Active Minds &mdash; 2023 analysis</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 02 &mdash; WHAT VASL DOES DIFFERENTLY
+════════════════════════════════════ -->
+<section id="different">
+  <div class="chapter-label reveal">Chapter 02 &mdash; What Vasl Does Differently</div>
+
+  <div class="diff-header">
+    <h2 class="diff-headline reveal d1">
+      Earlier.<br>
+      Culturally<br>
+      <em>accurate.</em><br>
+      Actually used.
+    </h2>
+    <p class="diff-intro reveal d2">
+      The standard school mental health model is reactive: a student reaches a visible crisis, a counselor is alerted, a referral is issued. Weeks pass. The student waits. By the time support arrives, the moment has passed &mdash; or the situation has worsened. Vasl operates in the space before that. Peer community from day one. Proactive coaching before the crisis. Cultural fluency that removes the barrier the student would otherwise encounter and turn away from.
+    </p>
+  </div>
+
+  <div class="model-compare reveal">
+    <div class="mc-header">
+      <div class="mc-h-cell"></div>
+      <div class="mc-h-cell">
+        <div class="mc-h-label">Standard school mental health</div>
+        <div class="mc-h-name">The current <em>model</em></div>
+      </div>
+      <div class="mc-h-cell">
+        <div class="mc-h-label">Vasl Health</div>
+        <div class="mc-h-name">The <em>Vasl</em> model</div>
+      </div>
+    </div>
+
+    <div class="mc-row">
+      <div class="mc-cell"><span class="mc-metric">Entry Point</span></div>
+      <div class="mc-cell"><span class="mc-old">Student must be in visible distress or referred by a teacher. Proactive outreach is rare.</span></div>
+      <div class="mc-cell"><span class="mc-vasl"><strong>Enrollment is the entry point.</strong> Every enrolled student gets peer community and a coach from day one &mdash; not when they're already in crisis.</span></div>
+    </div>
+    <div class="mc-row">
+      <div class="mc-cell"><span class="mc-metric">Wait Time</span></div>
+      <div class="mc-cell"><span class="mc-old">9 months average to a first therapy appointment. School counselor wait: weeks to months depending on caseload.</span></div>
+      <div class="mc-cell"><span class="mc-vasl"><strong>Same day.</strong> Peer group access and coach assignment begin at enrollment. Median time to first meaningful support: 3 weeks.</span></div>
+    </div>
+    <div class="mc-row">
+      <div class="mc-cell"><span class="mc-metric">Cultural Fit</span></div>
+      <div class="mc-cell"><span class="mc-old">School counselors are predominantly white in a majority-minority student population. Clinical tools are validated on white populations. AAVE and coded youth language are not recognized.</span></div>
+      <div class="mc-cell"><span class="mc-vasl"><strong>Culturally matched coaches.</strong> VLAP reads AAVE, queer vernacular, and coded youth language. Peer groups organized around shared cultural experience.</span></div>
+    </div>
+    <div class="mc-row">
+      <div class="mc-cell"><span class="mc-metric">Caseload on Staff</span></div>
+      <div class="mc-cell"><span class="mc-old">Every student need added to the counselor's caseload. At 464:1 ratios, meaningful relationships are structurally impossible.</span></div>
+      <div class="mc-cell"><span class="mc-vasl"><strong>Vasl absorbs the early-tier load.</strong> 80% of member needs resolved at peer/coach tier. Counselors receive escalations &mdash; not intake.</span></div>
+    </div>
+    <div class="mc-row">
+      <div class="mc-cell"><span class="mc-metric">Early Identification</span></div>
+      <div class="mc-cell"><span class="mc-old">Counselors see students in crisis. The distress that precedes crisis &mdash; the weeks of coded language, withdrawal, and compressed future thinking &mdash; is invisible.</span></div>
+      <div class="mc-cell"><span class="mc-vasl"><strong>VLAP detects the signal before the crisis.</strong> Aggregate population-level trends surface to school administrators. Individual signal context surfaces to licensed clinicians only.</span></div>
+    </div>
+    <div class="mc-row">
+      <div class="mc-cell"><span class="mc-metric">Cost to Student</span></div>
+      <div class="mc-cell"><span class="mc-old">$3,000&ndash;$5,000/year for uninsured outpatient mental health. Co-pays and transportation costs further restrict access.</span></div>
+      <div class="mc-cell"><span class="mc-vasl"><strong>Zero cost to students.</strong> The district or payer covers the contract. No insurance requirement. No co-pay. No scheduling burden.</span></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 03 &mdash; THE COUNSELOR PARTNERSHIP
+════════════════════════════════════ -->
+<section id="counselors">
+  <div class="chapter-label light reveal">Chapter 03 &mdash; The Counselor Partnership</div>
+
+  <div class="counselor-grid">
+    <div class="counselor-left">
+      <h2 class="counselor-headline reveal d1">
+        Vasl doesn't<br>
+        replace school<br>
+        counselors.<br>
+        <em>It frees them.</em>
+      </h2>
+      <p class="counselor-body reveal d2">
+        This is the question every counselor will ask, and it deserves a direct answer. Vasl is not a replacement for your school counselor. It is the layer that handles the volume &mdash; the early-stage distress, the peer connection needs, the proactive outreach &mdash; so that your counselor can do what only a trained human being can: the deep clinical work with the students who need it most.
+      </p>
+      <p class="counselor-body reveal d2">
+        At 464:1, your counselor cannot build meaningful relationships with every student. They can't proactively check in. They can't run peer support groups and manage crisis response and do individual counseling simultaneously. Vasl carries the first two. Your counselor keeps the third.
+      </p>
+      <blockquote class="counselor-pull reveal d3">
+        "The counselor I know doesn't need to be replaced. They need to stop spending 60% of their time on things a peer support platform could handle &mdash; so they can spend 100% of their time on the students who need their specific expertise."
+      </blockquote>
+    </div>
+
+    <div class="counselor-right reveal d2">
+      <div class="caseload-block">
+        <div class="cb-header">Student-to-Counselor Ratios &mdash; The Real Numbers</div>
+        <div class="cb-compare">
+          <div class="cbc-item">
+            <div class="cbc-label">ASCA Recommended Ratio</div>
+            <div class="cbc-num">250<span style="font-size:20px">:1</span></div>
+            <div class="cbc-desc">Maximum caseload for meaningful counseling relationships. Based on research into counselor effectiveness and student outcomes.</div>
+          </div>
+          <div class="cbc-item">
+            <div class="cbc-label">U.S. Average Actual Ratio</div>
+            <div class="cbc-num red">464<span style="font-size:20px">:1</span></div>
+            <div class="cbc-desc">The real number your counselors are working against. In high-need urban districts: often 600:1 or higher. The gap is not a counselor problem. It's a structural one.</div>
+          </div>
+        </div>
+        <div class="cb-note">At 464:1, a counselor who spends 30 minutes per student per year &mdash; once &mdash; has no time left for anything else. Proactive outreach, group work, and early identification are structurally impossible at this ratio.</div>
+      </div>
+
+      <p style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--clay-light); margin-bottom: 20px;">What Vasl Frees Up</p>
+
+      <div class="counselor-frees">
+        <div class="cf-item">
+          <span class="cf-num">01</span>
+          <div>
+            <div class="cf-title">Early-stage peer support and community connection</div>
+            <div class="cf-body">Vasl's peer groups and coaching handle the first tier of student need &mdash; the loneliness, the stress, the cultural navigation &mdash; before it escalates. Your counselor receives students who've already found community, not students in cold isolation.</div>
+          </div>
+        </div>
+        <div class="cf-item">
+          <span class="cf-num">02</span>
+          <div>
+            <div class="cf-title">Proactive check-ins and relationship maintenance</div>
+            <div class="cf-body">Vasl coaches initiate contact with every enrolled student. Your counselor doesn't need to manage 464 proactive relationships &mdash; they receive warm handoffs from students who already have a support relationship established.</div>
+          </div>
+        </div>
+        <div class="cf-item">
+          <span class="cf-num">03</span>
+          <div>
+            <div class="cf-title">Population-level distress monitoring</div>
+            <div class="cf-body">The Client Org Portal gives your counseling director aggregate signal trend data &mdash; so they know which cohorts are showing elevated distress signals before students arrive in crisis. Early identification without additional caseload burden.</div>
+          </div>
+        </div>
+        <div class="cf-item">
+          <span class="cf-num">04</span>
+          <div>
+            <div class="cf-title">Cultural translation and language barrier navigation</div>
+            <div class="cf-body">VLAP and culturally matched coaching handle the cultural interpretation burden &mdash; so your counselors spend their time on clinical depth, not on navigating language and cultural mismatch during the precious minutes of a session.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 04 &mdash; THE MEDICAID MODEL
+════════════════════════════════════ -->
+<section id="medicaid">
+  <div class="chapter-label light reveal">Chapter 04 &mdash; The Medicaid Model</div>
+
+  <div class="medicaid-grid">
+    <div class="medicaid-left">
+      <h2 class="medicaid-headline reveal d1">
+        The budget<br>
+        answer you've<br>
+        been <em>waiting for.</em>
+      </h2>
+      <p class="medicaid-body reveal d2">
+        School mental health funding is broken in a specific way: the infrastructure to deliver it costs more than most districts can sustain without additional revenue. School-based Medicaid billing changes that equation &mdash; but most districts either don't know how to use it or don't have the documentation to claim it. Vasl provides both. We handle the billing infrastructure. You capture the revenue.
+      </p>
+
+      <div class="medicaid-math reveal d3">
+        <div class="mm-header">Medicaid Billing Recovery &mdash; Title I District Model &middot; Pro Plan &middot; 500 Students</div>
+        <div class="mm-row">
+          <div class="mm-label">Platform fee (Pro &middot; annual)</div>
+          <div class="mm-value"><strong>$14,400 / year</strong> &mdash; $1,200/month billed annually</div>
+        </div>
+        <div class="mm-row">
+          <div class="mm-label">Per member per month (schools &middot; $4 avg &times; 500 &times; 12)</div>
+          <div class="mm-value"><strong>$24,000 / year</strong> &mdash; billed monthly at $3&ndash;5 per member</div>
+        </div>
+        <div class="mm-row">
+          <div class="mm-label">Total annual cost</div>
+          <div class="mm-value"><strong>$38,400 / year</strong> &mdash; platform fee plus PMPM</div>
+        </div>
+        <div class="mm-row">
+          <div class="mm-label">Medicaid Recovery (~50%)</div>
+          <div class="mm-value"><strong>~$19,200</strong> recovered through school-based Medicaid billing for qualifying services</div>
+        </div>
+        <div class="mm-row">
+          <div class="mm-label">Net District Cost</div>
+          <div class="mm-value"><strong>~$19,200 / year</strong> after billing recovery &mdash; for 500 students</div>
+        </div>
+        <div class="mm-row">
+          <div class="mm-label">Per-Student Net Cost</div>
+          <div class="mm-value"><strong>~$38 / student / year</strong> net &mdash; after Medicaid recovery</div>
+        </div>
+        <div class="mm-highlight">
+          <div class="mm-hl-label">Net cost per student per year &mdash; after Medicaid billing</div>
+          <div class="mm-hl-num">~$38</div>
+          <div class="mm-hl-desc">For Title I districts utilizing school-based Medicaid billing on a Pro plan with 500 students. Actual recovery depends on your state Medicaid plan, student eligibility rate, and which services qualify. Vasl provides the CPT codes, service documentation, and billing infrastructure your finance team needs. Additional funding through Title IV-A and ESSER may further reduce net cost.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="medicaid-right reveal d2">
+      <p style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--clay-light); margin-bottom: 28px;">How the Billing Works</p>
+
+      <div class="billing-steps">
+        <div class="bs-item">
+          <div class="bs-num">01</div>
+          <div class="bs-right">
+            <div class="bs-title">Vasl documents every qualifying service interaction</div>
+            <div class="bs-body">Each certified coaching session, licensed therapy interaction, and structured peer support facilitation is documented with CPT codes and service records that meet Medicaid billing requirements. The documentation burden is ours, not yours.</div>
+          </div>
+        </div>
+        <div class="bs-item">
+          <div class="bs-num">02</div>
+          <div class="bs-right">
+            <div class="bs-title">We provide your finance team with billing-ready exports</div>
+            <div class="bs-body">Monthly billing exports are formatted for your district's Medicaid billing system &mdash; including CPT codes, provider credentials, service dates, and claim documentation. Your finance team reviews and submits. Vasl handles the record generation.</div>
+          </div>
+        </div>
+        <div class="bs-item">
+          <div class="bs-num">03</div>
+          <div class="bs-right">
+            <div class="bs-title">Title I districts recover approximately 50% of contract cost</div>
+            <div class="bs-body">Recovery rates vary by state Medicaid plan and student Medicaid eligibility rates. For Title I districts with high Medicaid-eligible student populations, recovery of 40&ndash;60% of contract cost is achievable. We model your specific recovery potential during the pilot scoping process.</div>
+          </div>
+        </div>
+        <div class="bs-item">
+          <div class="bs-num">04</div>
+          <div class="bs-right">
+            <div class="bs-title">Additional funding mechanisms: Title IV-A, ESSER, and grants</div>
+            <div class="bs-body">Beyond Medicaid, Vasl is fundable through Title IV-A student support and academic enrichment grants, remaining ESSER III funds (where applicable), and state-level behavioral health block grants. We provide budget documentation for all applicable funding mechanisms.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="billing-note">
+        <strong>Note on Medicaid recovery estimates:</strong> Recovery rates depend on state-specific Medicaid plan provisions, student eligibility rates, and district billing infrastructure. Vasl provides a custom recovery model for each district during the pilot scoping process. The <$18/student/year figure represents documented experience across pilot districts &mdash; individual results vary.
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 05 &mdash; FOR STUDENTS
+════════════════════════════════════ -->
+<section id="students">
+  <div class="chapter-label reveal">Chapter 05 &mdash; For Students</div>
+
+  <div class="students-header">
+    <h2 class="students-headline reveal d1">
+      What a student<br>
+      actually<br>
+      <em>experiences.</em>
+    </h2>
+    <p class="students-sub reveal d2">
+      Not a clinical intake. Not a referral form. Not a waiting room. This is what it looks like to be a student in a Vasl-enrolled school &mdash; from the first day to the first real moment of support.
+    </p>
+  </div>
+
+  <!-- Three student portraits -->
+  <div class="student-moments">
+    <div class="sm-card reveal">
+      <div class="sm-persona">10th Grade &middot; Title I High School &middot; South LA</div>
+      <p class="sm-quote">"I thought it was gonna be like a school thing. Like they'd report it back or something. It's actually just for me."</p>
+      <p class="sm-context">The fear of disclosure in a school context is not irrational &mdash; students know that what they say to a school counselor can reach parents, administrators, and records. Vasl's privacy architecture is designed to address this fear directly: individual student data never reaches school staff. The student experiences the platform as genuinely private.</p>
+      <div class="sm-outcome">Still enrolled &mdash; 14 weeks</div>
+    </div>
+    <div class="sm-card reveal d1">
+      <div class="sm-persona">First-Gen College Student &middot; University Partner</div>
+      <p class="sm-quote">"My coach actually texts me first. I don't have to make an appointment or explain why I need help. She just checks in."</p>
+      <p class="sm-context">The proactive contact model &mdash; coaches reach out first &mdash; removes the single largest barrier to student engagement with mental health support: the requirement that the student recognize they need help and initiate contact. The coach arrives before the crisis. The relationship is established before it's needed.</p>
+      <div class="sm-outcome">Connected to licensed therapy at week 8</div>
+    </div>
+    <div class="sm-card reveal d2">
+      <div class="sm-persona">LGBTQ+ Student &middot; School-Based Program</div>
+      <p class="sm-quote">"The Queer and Thriving group is the first school thing where I didn't have to explain myself before anyone would talk to me."</p>
+      <p class="sm-context">For LGBTQ+ students in schools where the political climate is hostile, the peer group is often the only affirming space in the school day. Vasl's peer groups are explicitly identity-affirming &mdash; organized around shared experience, moderated by trained human moderators, and private from school administration.</p>
+      <div class="sm-outcome">Active in peer group &middot; Coach relationship established</div>
+    </div>
+  </div>
+
+  <!-- The student journey -->
+  <div class="student-experience reveal">
+    <div class="se-header">
+      <span class="se-title">Student Experience &mdash; From Enrollment to Support</span>
+      <span class="se-badge">Composite &middot; Simulated</span>
+    </div>
+    <div class="se-body">
+      <div class="se-step">
+        <div class="se-step-num">01</div>
+        <div class="se-step-title">School activates the program</div>
+        <p class="se-step-body">Student receives access through their school's Vasl enrollment. No separate sign-up. No insurance information. No intake form. Access is part of enrollment &mdash; like a school ID, not a medical appointment.</p>
+        <span class="se-step-tag">Same day</span>
+      </div>
+      <div class="se-step">
+        <div class="se-step-num">02</div>
+        <div class="se-step-title">Peer groups &mdash; immediately available</div>
+        <p class="se-step-body">70+ groups organized around shared identities and experiences. The student finds a group that feels like them &mdash; not a clinical category. First-gen stress. Queer identity. Grief. Racial trauma. Community before clinical care.</p>
+        <span class="se-step-tag">Day one</span>
+      </div>
+      <div class="se-step">
+        <div class="se-step-num">03</div>
+        <div class="se-step-title">Coach reaches out first</div>
+        <p class="se-step-body">The student is matched with a culturally trained coach who initiates contact. The student doesn't have to decide they need help. The relationship begins before the moment of crisis &mdash; so it's there when that moment comes.</p>
+        <span class="se-step-tag">Within 48 hours</span>
+      </div>
+      <div class="se-step">
+        <div class="se-step-num">04</div>
+        <div class="se-step-title">Therapy, if and when ready</div>
+        <p class="se-step-body">For the 20% of students whose needs require licensed clinical support, the transition is a warm handoff &mdash; not a cold referral. The clinician receives coaching context and VLAP signal data before the first session. The student doesn't start over.</p>
+        <span class="se-step-tag">Student-paced</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 06 &mdash; PRIVACY & COMPLIANCE
+════════════════════════════════════ -->
+<section id="compliance">
+  <div class="chapter-label reveal">Chapter 06 &mdash; Privacy & Compliance</div>
+
+  <div class="compliance-header">
+    <h2 class="compliance-headline reveal d1">
+      Who sees what.<br>
+      <em>Exactly.</em>
+    </h2>
+    <p class="compliance-intro reveal d2">
+      This is the question that matters most to students, parents, and legal teams simultaneously &mdash; and it deserves a specific answer, not a policy statement. The table below shows exactly who has access to what in the Vasl platform. There are no surprises. There are no exceptions to the access controls described here.
+    </p>
+  </div>
+
+  <!-- Access control table -->
+  <div class="sees-table reveal">
+    <div class="st-header">
+      <div class="st-h-cell">Data Type</div>
+      <div class="st-h-cell">Student</div>
+      <div class="st-h-cell">Vasl Coach</div>
+      <div class="st-h-cell">Licensed Clinician</div>
+      <div class="st-h-cell">School Admin / Counselor</div>
+    </div>
+
+    <div class="st-row">
+      <div class="st-cell">Check-in content & messages</div>
+      <div class="st-cell"><span class="st-yes">Sees own</span></div>
+      <div class="st-cell"><span class="st-yes">Yes &mdash; their members</span></div>
+      <div class="st-cell"><span class="st-yes">Yes &mdash; their patients</span></div>
+      <div class="st-cell"><span class="st-no">Never</span></div>
+    </div>
+    <div class="st-row">
+      <div class="st-cell">VLAP signal context</div>
+      <div class="st-cell"><span class="st-no">Never</span></div>
+      <div class="st-cell"><span class="st-limited">Supervisor summary only</span></div>
+      <div class="st-cell"><span class="st-yes">Full signal panel</span></div>
+      <div class="st-cell"><span class="st-no">Never</span></div>
+    </div>
+    <div class="st-row">
+      <div class="st-cell">Session notes & clinical records</div>
+      <div class="st-cell"><span class="st-no">Never</span></div>
+      <div class="st-cell"><span class="st-no">Never</span></div>
+      <div class="st-cell"><span class="st-yes">Yes &mdash; their patients</span></div>
+      <div class="st-cell"><span class="st-no">Never</span></div>
+    </div>
+    <div class="st-row">
+      <div class="st-cell">Peer group content</div>
+      <div class="st-cell"><span class="st-yes">Sees their groups</span></div>
+      <div class="st-cell"><span class="st-no">Not visible to coaches</span></div>
+      <div class="st-cell"><span class="st-no">Not visible to clinicians</span></div>
+      <div class="st-cell"><span class="st-no">Never</span></div>
+    </div>
+    <div class="st-row">
+      <div class="st-cell">Individual student identity + data</div>
+      <div class="st-cell"><span class="st-yes">Sees own</span></div>
+      <div class="st-cell"><span class="st-yes">Yes &mdash; their members</span></div>
+      <div class="st-cell"><span class="st-yes">Yes &mdash; their patients</span></div>
+      <div class="st-cell"><span class="st-no">Never</span></div>
+    </div>
+    <div class="st-row">
+      <div class="st-cell">Population-level aggregate data</div>
+      <div class="st-cell"><span class="st-no">Not applicable</span></div>
+      <div class="st-cell"><span class="st-no">Not applicable</span></div>
+      <div class="st-cell"><span class="st-no">Not applicable</span></div>
+      <div class="st-cell"><span class="st-yes">Yes &mdash; aggregate only, de-identified, min. cohort size required</span></div>
+    </div>
+  </div>
+
+  <!-- Compliance details -->
+  <div class="compliance-grid" style="margin-top: 60px;">
+    <div class="compliance-col">
+      <div class="comp-item reveal">
+        <div class="comp-label">FERPA</div>
+        <div class="comp-title">Student education records are fully protected &mdash; no individual data shared with school staff.</div>
+        <p class="comp-body">Vasl operates as a direct service provider to students &mdash; not as an agent of the school district for FERPA purposes. Student health records generated within the platform are protected under HIPAA, not FERPA, and are never disclosed to school administrators, teachers, or parents without explicit student consent. The platform is architected so that FERPA disclosure is structurally impossible &mdash; not merely policy-prohibited.</p>
+      </div>
+
+      <div class="comp-item reveal">
+        <div class="comp-label">HIPAA</div>
+        <div class="comp-title">Full HIPAA technical safeguards. BAA required for all district partnerships.</div>
+        <p class="comp-body">Vasl implements complete HIPAA technical safeguards across all platform components. A Business Associate Agreement is required for every district partnership before deployment. VLAP processes language in-memory without verbatim storage. Session records retained for HIPAA-required duration. Annual SOC 2 Type II audit. All staff with PHI access complete annual HIPAA training.</p>
+      </div>
+
+      <div class="comp-item reveal">
+        <div class="comp-label">WCAG 2.1 AA</div>
+        <div class="comp-title">Full accessibility compliance &mdash; every student can access the platform.</div>
+        <p class="comp-body">The Vasl platform meets WCAG 2.1 Level AA accessibility standards across all portals &mdash; Member App, Coach Portal, and Client Org Portal. Screen reader compatibility, keyboard navigation, sufficient color contrast, and alternative text are implemented and tested. Accessibility audits are conducted with each major platform release.</p>
+      </div>
+    </div>
+
+    <div class="compliance-col">
+      <div class="comp-item reveal">
+        <div class="comp-label">VLAP in the School Context</div>
+        <div class="comp-title">What VLAP does &mdash; and does not do &mdash; in a school deployment.</div>
+        <p class="comp-body">VLAP processes language that students share through the Vasl care channels &mdash; check-ins and coach messaging. It does not monitor peer group posts, social media, school email, or any channel outside the Vasl platform. VLAP signal context surfaces only to licensed clinicians &mdash; never to school counselors, administrators, or parents. School administrators see aggregate, de-identified population trend data through the Client Org Portal. No individual student signal data is visible to school staff under any circumstances.</p>
+      </div>
+
+      <div class="comp-item reveal">
+        <div class="comp-label">Medicaid Billing Compliance</div>
+        <div class="comp-title">Billing documentation meets state Medicaid requirements &mdash; reviewed by compliance counsel.</div>
+        <p class="comp-body">Vasl's school-based Medicaid billing documentation has been reviewed by healthcare compliance counsel for alignment with federal and state Medicaid requirements. CPT code mapping, provider credential documentation, and service record formats are designed to meet the specific requirements of school-based Medicaid programs. Districts receive compliance guidance for their state-specific Medicaid plan as part of deployment.</p>
+      </div>
+
+      <div class="comp-item reveal">
+        <div class="comp-label">Consent Architecture</div>
+        <div class="comp-title">Minor consent frameworks developed with legal counsel and community input.</div>
+        <p class="comp-body">Student consent is obtained at enrollment and revisited at each stage of data use. For minor students, consent frameworks are developed with legal counsel and adapted for the specific district's state law requirements &mdash; including states where minors can consent to their own mental health treatment. Parental consent is required where legally mandated. The framework is never buried in terms of service &mdash; it is presented clearly, in accessible language, at the point of enrollment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 07 &mdash; DEPLOYMENT
+════════════════════════════════════ -->
+<section id="deployment">
+  <div class="chapter-label reveal">Chapter 07 &mdash; Deployment</div>
+
+  <div class="deploy-header">
+    <h2 class="deploy-headline reveal d1">
+      What it actually<br>
+      looks like to<br>
+      <em>roll this out.</em>
+    </h2>
+    <p class="deploy-sub reveal d2">
+      Districts have implemented platforms before and been burned. Months of IT integration followed by low student adoption followed by vendor churn. Vasl is designed for the institutional reality schools operate in &mdash; lean IT teams, limited training budgets, and skeptical counselors who've seen this before. Here is exactly what deployment looks like.
+    </p>
+  </div>
+
+  <!-- Deployment timeline -->
+  <div class="deploy-timeline reveal">
+    <div class="dt-phase">
+      <div class="dt-dot"></div>
+      <div class="dt-week">Weeks 1&ndash;2</div>
+      <div class="dt-name">Scoping & Compliance</div>
+      <p class="dt-desc">Population assessment, Medicaid recovery modeling, BAA execution, FERPA compliance review, IT integration planning. No student data collected yet.</p>
+    </div>
+    <div class="dt-phase">
+      <div class="dt-dot"></div>
+      <div class="dt-week">Weeks 3&ndash;4</div>
+      <div class="dt-name">Counselor Briefing</div>
+      <p class="dt-desc">Counselor and administrator orientation. Who sees what. How escalations work. What Vasl does and doesn't replace. Questions answered before launch &mdash; not after.</p>
+    </div>
+    <div class="dt-phase">
+      <div class="dt-dot"></div>
+      <div class="dt-week">Weeks 4&ndash;6</div>
+      <div class="dt-name">Community Alignment</div>
+      <p class="dt-desc">Student focus groups to co-design the peer group ecosystem. Group names, community norms, and moderator selection &mdash; done with students, not for them.</p>
+    </div>
+    <div class="dt-phase">
+      <div class="dt-dot"></div>
+      <div class="dt-week">Weeks 6&ndash;8</div>
+      <div class="dt-name">Soft Launch</div>
+      <p class="dt-desc">Pilot cohort enrollment &mdash; typically 100&ndash;200 students. Coach matching, peer group launch, first check-ins. Vasl implementation lead on-site or accessible throughout.</p>
+    </div>
+    <div class="dt-phase">
+      <div class="dt-dot"></div>
+      <div class="dt-week">Month 3+</div>
+      <div class="dt-name">Full Deployment</div>
+      <p class="dt-desc">Full enrollment. Population dashboard active for administrators. First quarterly impact report generated. Medicaid billing export delivered to finance team.</p>
+    </div>
+  </div>
+
+  <!-- What you get -->
+  <div class="deploy-what reveal">
+    <div class="dw-item">
+      <div class="dw-label">Implementation Support</div>
+      <div class="dw-title">Dedicated implementation lead through your full first year.</div>
+      <p class="dw-body">A Vasl implementation lead is assigned to your district from contract signing through the end of year one. They handle IT integration, counselor briefings, student community alignment sessions, and the first billing cycle. You don't figure this out alone.</p>
+    </div>
+    <div class="dw-item">
+      <div class="dw-label">Counselor Training</div>
+      <div class="dw-title">Structured orientation, not a user manual.</div>
+      <p class="dw-body">School counselors receive structured orientation covering the platform architecture, the escalation workflow, the VLAP data they will and won't see, and the specific ways Vasl changes &mdash; and doesn't change &mdash; their daily work. Follow-up training available throughout the year.</p>
+    </div>
+    <div class="dw-item">
+      <div class="dw-label">Billing Infrastructure</div>
+      <div class="dw-title">First billing cycle supported by Vasl.</div>
+      <p class="dw-body">The first Medicaid billing cycle is completed with Vasl's compliance team walking alongside your finance team. Documentation, CPT code mapping, claim formatting, and submission guidance &mdash; so your team learns the process with support, not under pressure.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 08 &mdash; OUTCOMES
+════════════════════════════════════ -->
+<section id="outcomes">
+  <div class="chapter-label reveal">Chapter 08 &mdash; Outcomes</div>
+
+  <div class="outcomes-header">
+    <h2 class="outcomes-headline reveal d1">
+      What districts<br>
+      and students<br>
+      <em>actually see.</em>
+    </h2>
+    <p class="outcomes-intro reveal d2">
+      From active pilot deployments in school-based programs, university partnerships, and community health centers serving the same populations schools serve. Measurement methodology is fully documented and available upon request.
+    </p>
+  </div>
+
+  <div class="outcome-row reveal">
+    <div class="or-big">42<span class="or-unit">%</span></div>
+    <div>
+      <div class="or-title">Average PHQ-8 improvement at 90 days &mdash; across all pilot cohorts.</div>
+      <p class="or-body">Measured as the mean reduction in PHQ-8 depression symptom scores from pre-enrollment baseline to 90-day follow-up. Cohort: BIPOC, LGBTQ+, and first-generation youth ages 14&ndash;24. All active members at 90 days are included in the measurement &mdash; not a selected subset. The 42% figure is above the documented improvement rate for standard outpatient therapy at 12 weeks (28&ndash;34%).</p>
+    </div>
+    <div>
+      <div class="or-bench-label">Benchmark Context</div>
+      <div class="or-bench-item"><span class="orbi-label">Vasl 90-day</span>42% mean PHQ-8 improvement &mdash; all active members</div>
+      <div class="or-bench-item"><span class="orbi-label">Standard therapy</span>28&ndash;34% improvement at 12 weeks &mdash; outpatient benchmark</div>
+      <div class="or-bench-item"><span class="orbi-label">No treatment</span>Documented symptom progression over equivalent time period</div>
+    </div>
+  </div>
+
+  <div class="outcome-row reveal">
+    <div class="or-big">79.5<span class="or-unit">%</span></div>
+    <div>
+      <div class="or-title">Still actively engaged at 30 days &mdash; nearly three times the industry average.</div>
+      <p class="or-body">Retention is the most predictive metric in school-based mental health programs. A student who disengages at week two receives no clinical benefit from the program. Vasl's 79.5% 30-day retention reflects specific design decisions: proactive coach outreach, text-first access, peer community from day one, and cultural matching. Active defined as minimum one meaningful platform interaction in the 7 days prior to the 30-day mark.</p>
+    </div>
+    <div>
+      <div class="or-bench-label">Benchmark Context</div>
+      <div class="or-bench-item"><span class="orbi-label">Vasl 30-day</span>79.5% active at 30 days</div>
+      <div class="or-bench-item"><span class="orbi-label">Digital MH apps</span>40&ndash;50% &mdash; 30-day retention industry average</div>
+      <div class="or-bench-item"><span class="orbi-label">Traditional therapy</span>72% dropout before session three</div>
+    </div>
+  </div>
+
+  <div class="outcome-row reveal">
+    <div class="or-big">3<span class="or-unit">wks</span></div>
+    <div>
+      <div class="or-title">Median time to first meaningful support &mdash; versus 9 months nationally.</div>
+      <p class="or-body">The 3-week median is from enrollment to first substantive peer group exchange or coach interaction &mdash; not account activation. For many students, meaningful engagement begins same-day: a peer group post, a coach response, a check-in that goes somewhere. Three weeks is the median across all enrolled students, including those who engage more gradually.</p>
+    </div>
+    <div>
+      <div class="or-bench-label">Benchmark Context</div>
+      <div class="or-bench-item"><span class="orbi-label">Vasl median</span>3 weeks to first meaningful interaction</div>
+      <div class="or-bench-item"><span class="orbi-label">National avg.</span>9 months to first therapy appointment (SAMHSA)</div>
+      <div class="or-bench-item"><span class="orbi-label">School counselor</span>Weeks to months &mdash; depending on caseload</div>
+    </div>
+  </div>
+
+  <div class="outcome-row reveal">
+    <div class="or-big">80<span class="or-unit">%</span></div>
+    <div>
+      <div class="or-title">Needs resolved before clinical escalation &mdash; the prevention outcome that changes the cost model.</div>
+      <p class="or-body">Four out of five enrolled students have their behavioral health needs substantively addressed at the peer community or coaching tier &mdash; without requiring licensed therapy. 48% at the peer tier alone. 32% at the coaching tier. 20% progressing to licensed clinical care. For school districts, this ratio is what makes the Vasl model sustainable: the platform handles the volume, and your licensed clinical staff handles the complexity.</p>
+    </div>
+    <div>
+      <div class="or-bench-label">Tier Breakdown</div>
+      <div class="or-bench-item"><span class="orbi-label">Peer tier</span>48% of needs addressed through peer community</div>
+      <div class="or-bench-item"><span class="orbi-label">Coach tier</span>32% addressed through coaching relationship</div>
+      <div class="or-bench-item"><span class="orbi-label">Clinical tier</span>20% &mdash; appropriate escalation to licensed therapy</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 09 &mdash; PILOT PROGRAM
+════════════════════════════════════ -->
+<section id="pilot">
+  <div class="pilot-bg" aria-hidden="true">Pilot</div>
+  <div class="pilot-inner">
+    <div class="pilot-left">
+      <div class="chapter-label muted reveal">Chapter 09 &mdash; Start With a Pilot</div>
+      <h2 class="pilot-headline reveal d1">
+        Start with<br>
+        one school.<br>
+        <em>See what changes.</em>
+      </h2>
+      <p class="pilot-body reveal d2">
+        Every Vasl district partnership begins with a scoped pilot &mdash; typically one school, 100&ndash;300 students, one semester. By the end of the pilot, your district has measured outcomes, a Medicaid billing track record, counselor buy-in data, and a deployment model ready to scale. We do not ask you to commit to district-wide deployment before you've seen it work.
+      </p>
+      <div class="pilot-actions reveal d3">
+        <a href="contact.html?subject=School Pilot Request" class="btn-light">Request a Pilot</a>
+        <a href="outcomes.html" class="btn-ghost-light">Full outcomes data</a>
+      </div>
+    </div>
+
+    <div class="pilot-right reveal d2">
+      <div class="pilot-item">
+        <span class="pi-num">01</span>
+        <div>
+          <div class="pi-title">Scoping call &mdash; your population, your context</div>
+          <div class="pi-desc">We build the pilot model around your specific school, student population, counseling infrastructure, and available funding. The scoping call produces a custom Medicaid recovery estimate and a deployment plan.</div>
+        </div>
+      </div>
+      <div class="pilot-item">
+        <span class="pi-num">02</span>
+        <div>
+          <div class="pi-title">Counselor and administrator briefing &mdash; before any student sees the platform</div>
+          <div class="pi-desc">Your counselors and administrators get a full briefing on the platform architecture, the privacy model, and the escalation workflow before the first student enrolls. Questions answered. Concerns addressed. Skepticism welcomed.</div>
+        </div>
+      </div>
+      <div class="pilot-item">
+        <span class="pi-num">03</span>
+        <div>
+          <div class="pi-title">Student community alignment &mdash; groups built by students</div>
+          <div class="pi-desc">Before launch, we facilitate student focus groups to identify the peer group categories that reflect your specific student community's lived experiences. The groups are theirs &mdash; not a default library imposed on them.</div>
+        </div>
+      </div>
+      <div class="pilot-item">
+        <span class="pi-num">04</span>
+        <div>
+          <div class="pi-title">Pilot report &mdash; outcomes, billing, and scale recommendation</div>
+          <div class="pi-desc">At the end of the pilot semester, you receive a full outcomes report: PHQ-8 data, retention, time to support, Medicaid billing recovery achieved, counselor feedback, and a recommendation for district-wide deployment with the model already validated.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-sitemap">
+    <div class="fs-brand">
+      <a href="index.html" class="footer-logo">Vasl <span>Health</span></a>
+      <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
+      <a href="contact.html" class="fs-cta">Request a Demo &rarr;</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Platform</div>
+      <a href="platform.html">Platform Overview</a>
+      <a href="vlap.html">VLAP</a>
+      <a href="ai-model.html">AI Model</a>
+      <a href="technology.html">Technology</a>
+      <a href="peer-groups.html">Peer Groups</a>
+      <a href="teletherapy.html">Teletherapy</a>
+      <a href="prototype.html">Live Demo Portal</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Who We Serve</div>
+      <a href="for-schools.html">For Schools</a>
+      <a href="for-organizations.html">For Organizations</a>
+      <a href="outcomes.html">Outcomes</a>
+      <a href="clinical-outcomes.html">Clinical Outcomes</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Company</div>
+      <a href="about.html">About Vasl</a>
+      <a href="team.html">Team</a>
+      <a href="careers.html">Careers</a>
+      <a href="research.html">Research</a>
+      <a href="blog.html">Blog &amp; Insights</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Support &amp; Legal</div>
+      <a href="support.html">Help Center</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="baa.html">Business Associate Agreement</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 Vasl Health, Inc. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="baa.html">BAA</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── SCROLL REVEAL ─── -->
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.06, rootMargin: '0px 0px -24px 0px' });
+  reveals.forEach(el => io.observe(el));
+
+  window.addEventListener('load', () => {
+    reveals.forEach((el, i) => {
+      if (el.getBoundingClientRect().top < window.innerHeight) {
+        setTimeout(() => el.classList.add('visible'), i * 55);
+      }
+    });
+  });
+</script>
+</body>
+</html>
