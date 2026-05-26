@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Vasl Health Privacy Policy &mdash; how we collect, use, protect, and retain your information. HIPAA, FERPA, and SOC 2 Type II compliant.">
+<title>Privacy Policy &mdash; Vasl Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --warm-white:#FAF7F2;--parchment:#F0EAE0;--ink:#1C1C1C;
+  --ink-70:rgba(28,28,28,0.70);--ink-50:rgba(28,28,28,0.50);--ink-12:rgba(28,28,28,0.12);
+  --clay:#C4896F;--chalk:#E2DAD0;--deep-green:#2D4A3E;--dust:#8B7B6B;--charcoal:#222222;
+  --serif:'Newsreader',Georgia,serif;--sans:'IBM Plex Sans',sans-serif;--mono:'IBM Plex Mono',monospace;
+  --gutter:7vw;
+}
+body{background:var(--warm-white);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);display:flex;align-items:center;justify-content:space-between;background:rgba(250,247,242,0.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--ink-12);}
+.nav-logo{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:-0.02em;color:var(--ink);text-decoration:none;}
+.nav-logo span{color:var(--clay);font-style:italic;}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--dust);text-decoration:none;}
+.nav-links a:hover{color:var(--ink);}
+.nav-cta{font-family:var(--mono);font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--deep-green);border:1px solid var(--deep-green);padding:9px 20px;text-decoration:none;}
+.nav-cta:hover{background:var(--deep-green);color:var(--warm-white);}
+
+/* Document layout */
+.doc-header{padding:140px var(--gutter) 60px;border-bottom:1px solid var(--chalk);}
+.doc-kicker{font-family:var(--mono);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--dust);margin-bottom:20px;display:block;}
+.doc-title{font-family:var(--serif);font-size:clamp(40px,5vw,72px);font-weight:300;line-height:1.05;letter-spacing:-0.03em;color:var(--ink);margin-bottom:28px;}
+.doc-title em{font-style:italic;color:var(--clay);}
+.doc-meta{display:flex;gap:28px;flex-wrap:wrap;}
+.doc-meta-item{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dust);}
+.doc-compliance{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;}
+.doc-badge{font-family:var(--mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;padding:5px 12px;border:1px solid var(--deep-green);color:var(--deep-green);}
+
+.doc-layout{display:grid;grid-template-columns:220px 1fr;gap:0;max-width:1300px;padding:0 var(--gutter) 100px;}
+
+/* Sidebar ToC */
+.doc-toc{padding-top:52px;position:sticky;top:80px;align-self:start;}
+.toc-label{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--dust);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--chalk);}
+.toc-list{list-style:none;display:flex;flex-direction:column;gap:0;}
+.toc-item{border-bottom:1px solid var(--chalk);}
+.toc-item:last-child{border-bottom:none;}
+.toc-link{display:block;padding:9px 0;font-family:var(--mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--dust);text-decoration:none;line-height:1.4;transition:color 0.2s;}
+.toc-link:hover{color:var(--deep-green);}
+
+/* Document body */
+.doc-body{padding-top:52px;border-left:1px solid var(--chalk);padding-left:60px;}
+.doc-section{margin-bottom:60px;padding-bottom:60px;border-bottom:1px solid var(--chalk);}
+.doc-section:last-child{border-bottom:none;margin-bottom:0;}
+.section-anchor{display:block;padding-top:20px;margin-top:-20px;}
+.section-heading{font-family:var(--serif);font-size:28px;font-weight:400;color:var(--ink);margin-bottom:20px;line-height:1.2;letter-spacing:-0.015em;}
+.section-sub{font-family:var(--sans);font-size:16px;font-weight:500;color:var(--ink);margin-top:28px;margin-bottom:10px;}
+.doc-p{font-size:16px;font-weight:300;line-height:1.75;color:var(--ink-70);margin-bottom:16px;}
+.doc-p:last-child{margin-bottom:0;}
+.doc-p a{color:var(--deep-green);text-decoration:none;border-bottom:1px solid rgba(45,74,62,0.3);}
+.doc-ul{margin:12px 0 16px 0;display:flex;flex-direction:column;gap:6px;padding-left:0;}
+.doc-li{font-size:15px;font-weight:300;color:var(--ink-70);padding-left:20px;position:relative;line-height:1.65;}
+.doc-li::before{content:'\2014';position:absolute;left:0;color:var(--clay);font-size:12px;}
+.callout-block{padding:22px 26px;margin:20px 0;background:var(--parchment);border-left:3px solid var(--clay);}
+.callout-label{font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--clay);margin-bottom:8px;}
+.callout-text{font-size:14px;font-weight:300;line-height:1.7;color:var(--ink-70);}
+.retention-table{border:1px solid var(--chalk);overflow:hidden;margin:20px 0;}
+.rt-row{display:grid;grid-template-columns:160px 1fr;border-bottom:1px solid var(--chalk);}
+.rt-row:last-child{border-bottom:none;}
+.rt-label{padding:12px 16px;background:var(--parchment);border-right:1px solid var(--chalk);font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dust);display:flex;align-items:center;}
+.rt-value{padding:12px 16px;font-size:14px;font-weight:300;color:var(--ink-70);}
+.footer-logo span{color:var(--clay);font-style:italic;}
+.footer-nav a{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.32);text-decoration:none;}
+.footer-nav a:hover{color:var(--warm-white);}
+.footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+
+@media(max-width:900px){
+  .doc-layout{grid-template-columns:1fr;}
+  .doc-toc{display:none;}
+  .doc-body{border-left:none;padding-left:0;}
+}
+@media(max-width:600px){
+  :root{--gutter:5vw;}
+  .nav-links{display:none;}
+}
+
+  .ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
+  .ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.2s;}
+  .ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .ham-btn.open span:nth-child(2){opacity:0;}
+  .ham-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+  @media(max-width:780px){
+    .ham-btn{display:flex;}
+    .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--warm);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{font-size:22px;letter-spacing:0.04em;}
+    .nav-cta{display:none;}
+  }
+
+  footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);padding:0;}
+  .footer-sitemap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:0;padding:56px 7vw 40px;border-bottom:1px solid rgba(250,247,242,0.08);}
+  .fs-brand{padding-right:40px;}
+  .footer-logo{font-family:var(--serif);font-size:22px;color:var(--warm-white,#FAF7F2);letter-spacing:-0.02em;text-decoration:none;display:block;margin-bottom:12px;}
+  .footer-logo span{color:var(--clay,#C4896F);font-style:italic;}
+  .footer-mission{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.28);line-height:1.8;margin-bottom:20px;}
+  .fs-cta{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:var(--clay,#C4896F);border:1px solid rgba(196,137,111,0.40);padding:9px 18px;text-decoration:none;transition:all 0.18s;}
+  .fs-cta:hover{background:rgba(196,137,111,0.12);}
+  .fs-col{padding-left:32px;border-left:1px solid rgba(250,247,242,0.06);}
+  .fs-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,247,242,0.30);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(250,247,242,0.06);}
+  .fs-col a{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,247,242,0.45);text-decoration:none;margin-bottom:10px;transition:color 0.15s;}
+  .fs-col a:hover{color:var(--clay,#C4896F);}
+  .footer-bottom{padding:20px 7vw;display:flex;align-items:center;justify-content:space-between;}
+  .footer-copy{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,0.20);}
+  .footer-legal{display:flex;gap:20px;}
+  .footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+  .footer-legal a:hover{color:var(--clay,#C4896F);}
+  @media(max-width:1100px){.footer-sitemap{grid-template-columns:1fr 1fr 1fr;gap:32px;}.fs-brand{grid-column:1/-1;padding-right:0;}.fs-col{border-left:none;padding-left:0;}}
+  @media(max-width:680px){.footer-sitemap{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}}
+  @media(max-width:400px){.footer-sitemap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Vasl <span>Health</span></a>
+    <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="platform.html">Platform</a></li>
+    <li><a href="outcomes.html">Outcomes</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="baa.html" class="nav-cta">Request BAA</a>
+</nav>
+
+<div class="doc-header">
+  <span class="doc-kicker">Legal</span>
+  <h1 class="doc-title">Privacy <em>Policy</em></h1>
+  <div class="doc-meta">
+    <span class="doc-meta-item">Last Updated: May 2026</span>
+    <span class="doc-meta-item">Effective Date: January 1, 2025</span>
+  </div>
+  <div class="doc-compliance">
+    <span class="doc-badge">HIPAA Compliant</span>
+    <span class="doc-badge">FERPA Compliant</span>
+    <span class="doc-badge">SOC 2 Type II</span>
+  </div>
+</div>
+
+<div class="doc-layout">
+  <nav class="doc-toc">
+    <div class="toc-label">Contents</div>
+    <ul class="toc-list">
+      <li class="toc-item"><a href="#information-collection" class="toc-link">1. Information We Collect</a></li>
+      <li class="toc-item"><a href="#how-we-use" class="toc-link">2. How We Use Information</a></li>
+      <li class="toc-item"><a href="#data-security" class="toc-link">3. Data Security</a></li>
+      <li class="toc-item"><a href="#compliance" class="toc-link">4. Compliance Standards</a></li>
+      <li class="toc-item"><a href="#sharing" class="toc-link">5. Information Sharing</a></li>
+      <li class="toc-item"><a href="#retention" class="toc-link">6. Data Retention</a></li>
+      <li class="toc-item"><a href="#your-rights" class="toc-link">7. Your Rights</a></li>
+      <li class="toc-item"><a href="#changes" class="toc-link">8. Changes to This Policy</a></li>
+      <li class="toc-item"><a href="#contact-privacy" class="toc-link">9. Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="doc-body">
+
+    <div class="doc-section">
+      <p class="doc-p">Your privacy and data security are fundamental to how Vasl Health operates. This Privacy Policy describes how Vasl Health, Inc. ("Vasl Health," "we," "us," or "our") collects, uses, protects, and retains information when you use our platform and services. Please read this policy carefully before using our services.</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="information-collection"></span>
+      <h2 class="section-heading">1. Information We Collect</h2>
+
+      <div class="section-sub">Account Information</div>
+      <p class="doc-p">When you or your organization creates an account, we collect:</p>
+      <ul class="doc-ul">
+        <li class="doc-li">Name, email address, and role within your organization</li>
+        <li class="doc-li">Organization name, type, and size</li>
+        <li class="doc-li">Billing information, processed securely through our payment partners</li>
+        <li class="doc-li">Communication preferences and accessibility needs</li>
+      </ul>
+
+      <div class="section-sub">Usage Information</div>
+      <p class="doc-p">To improve our service and ensure platform security, we collect:</p>
+      <ul class="doc-ul">
+        <li class="doc-li">Login times, feature usage, and session duration</li>
+        <li class="doc-li">Device information including browser type, operating system, and IP address</li>
+        <li class="doc-li">Performance data and error logs</li>
+        <li class="doc-li">Anonymized interaction patterns with platform features</li>
+      </ul>
+
+      <div class="section-sub">Language Analysis Processing</div>
+      <div class="callout-block">
+        <div class="callout-label">How VLAP Processes Language</div>
+        <p class="callout-text">The Vasl Language Analysis Platform (VLAP) processes member language from care channels (daily check-ins and coach messaging) in-memory to generate dimensional signal profiles. Verbatim input text is not stored after processing. What is retained is a signal profile &mdash; not a transcript, not a quote, not a record of exact language. This is a HIPAA technical safeguard and cannot be overridden by organizational administrators. Individual signal data is accessible only to the assigned coach and licensed clinician.</p>
+      </div>
+      <p class="doc-p">We collect anonymized, aggregate insights from platform interactions to improve cultural responsiveness, including language pattern analysis and effectiveness metrics. Individual member language is processed in-memory only. No verbatim member language is retained after signal profile generation.</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="how-we-use"></span>
+      <h2 class="section-heading">2. How We Use Your Information</h2>
+
+      <div class="section-sub">Service Delivery</div>
+      <ul class="doc-ul">
+        <li class="doc-li">Provide personalized, culturally-responsive mental health support</li>
+        <li class="doc-li">Maintain user accounts and process billing</li>
+        <li class="doc-li">Offer technical support and customer service</li>
+        <li class="doc-li">Send important service updates and security notifications</li>
+      </ul>
+
+      <div class="section-sub">Platform Improvement</div>
+      <ul class="doc-ul">
+        <li class="doc-li">Enhance VLAP cultural responsiveness and signal detection accuracy</li>
+        <li class="doc-li">Develop new features based on user needs</li>
+        <li class="doc-li">Improve crisis detection and clinical escalation capabilities</li>
+        <li class="doc-li">Optimize platform performance and reliability</li>
+      </ul>
+
+      <div class="section-sub">Organizational Insights</div>
+      <p class="doc-p">For partner organizations, we provide aggregated, de-identified insights including population mental health trends, program effectiveness and outcome measurements, resource utilization and engagement metrics, and grant reporting and compliance documentation. These insights are never traceable to individual members.</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="data-security"></span>
+      <h2 class="section-heading">3. Data Security</h2>
+      <p class="doc-p">Vasl Health implements comprehensive technical and administrative safeguards to protect your information.</p>
+
+      <div class="section-sub">Encryption</div>
+      <p class="doc-p">All data is encrypted in transit using TLS 1.3 and at rest using AES-256 encryption. Care channel communications are encrypted at rest and accessible only to the assigned care team.</p>
+
+      <div class="section-sub">Infrastructure</div>
+      <p class="doc-p">The platform is hosted on SOC 2 Type II compliant cloud infrastructure with automated backups and documented recovery procedures.</p>
+
+      <div class="section-sub">Access Controls</div>
+      <p class="doc-p">Strict role-based access controls govern who can access which data within the platform. VLAP signal data is accessible only to the assigned coach (simplified AI Client Insights summary) and assigned licensed clinician (full dimensional profile). Multi-factor authentication is required for all clinical staff accounts. Regular access reviews are conducted quarterly.</p>
+
+      <div class="section-sub">Monitoring and Testing</div>
+      <p class="doc-p">24/7 security monitoring and intrusion detection are in place. Regular penetration testing, vulnerability assessments, and security audits are conducted by third-party security professionals. All results are reviewed by our security team and material findings are remediated within documented SLAs.</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="compliance"></span>
+      <h2 class="section-heading">4. Compliance Standards</h2>
+
+      <div class="section-sub">HIPAA Compliance</div>
+      <p class="doc-p">For healthcare organizations, Vasl Health operates as a HIPAA-compliant platform. Business Associate Agreements (BAAs) are required for all healthcare partner deployments and available upon request. Protected Health Information (PHI) is handled according to HIPAA Privacy and Security Rule requirements. Audit logs and access controls meet HIPAA Security Rule technical safeguard requirements. VLAP's in-memory processing architecture is a HIPAA technical safeguard: verbatim member language is not retained after signal profile generation.</p>
+
+      <div class="section-sub">FERPA Compliance</div>
+      <p class="doc-p">For educational institutions, Vasl Health operates as a direct service provider to students. Student health data generated through Vasl is classified as health information under HIPAA &mdash; not as an education record under FERPA &mdash; and is structurally inaccessible to school administrators under any circumstances. Parental consent processes for students under 18 are implemented in accordance with applicable law and institutional policy.</p>
+
+      <div class="section-sub">SOC 2 Type II</div>
+      <p class="doc-p">Our annual SOC 2 Type II audit covers security, availability, and confidentiality trust service criteria. The full audit report is available to institutional partners under NDA. Audit is conducted by an independent third-party auditor.</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="sharing"></span>
+      <h2 class="section-heading">5. Information Sharing</h2>
+
+      <p class="doc-p">Vasl Health does not sell, rent, or trade personal information to third parties for marketing or commercial purposes. We may share information only in the following specific circumstances:</p>
+
+      <div class="section-sub">Emergency Situations</div>
+      <p class="doc-p">If we detect imminent risk of harm through VLAP signal detection or direct member communication, our licensed clinical supervisor team initiates human review and may contact emergency services or designated contacts as required by law and our duty of care. Automated action is never taken in response to a clinical signal &mdash; human clinical judgment initiates every response.</p>
+
+      <div class="section-sub">Service Providers</div>
+      <p class="doc-p">Trusted vendors who help us operate our platform &mdash; including cloud hosting, payment processing, and customer support providers &mdash; operate under strict data protection agreements and are prohibited from using member data for any purpose other than providing services to Vasl Health.</p>
+
+      <div class="section-sub">Legal Requirements</div>
+      <p class="doc-p">When required by law, court order, or government regulation, we may disclose information as legally mandated. We will notify affected users where legally permitted to do so.</p>
+
+      <div class="section-sub">Aggregated Research Data</div>
+      <p class="doc-p">We may share anonymized, aggregated data for public health research purposes, with no individual identifiers. All such sharing is subject to minimum cohort size requirements to prevent re-identification by inference.</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="retention"></span>
+      <h2 class="section-heading">6. Data Retention</h2>
+
+      <div class="retention-table">
+        <div class="rt-row">
+          <div class="rt-label">Account Information</div>
+          <div class="rt-value">Retained for the duration of your account plus 7 years for compliance and legal requirements.</div>
+        </div>
+        <div class="rt-row">
+          <div class="rt-label">VLAP Signal Profiles</div>
+          <div class="rt-value">Signal profiles retained for the duration of the member's active enrollment and 90 days thereafter. Verbatim member language is never retained &mdash; only the dimensional signal profile generated from it.</div>
+        </div>
+        <div class="rt-row">
+          <div class="rt-label">Usage Analytics</div>
+          <div class="rt-value">Aggregated usage data retained for 3 years to support platform improvements and research.</div>
+        </div>
+        <div class="rt-row">
+          <div class="rt-label">Billing Information</div>
+          <div class="rt-value">Financial records retained for 7 years as required by accounting standards and tax regulations.</div>
+        </div>
+        <div class="rt-row">
+          <div class="rt-label">Account Deletion</div>
+          <div class="rt-value">Upon account deletion, personal information is permanently removed within 30 days, except where retention is required by law or for legitimate business purposes such as fraud prevention.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="your-rights"></span>
+      <h2 class="section-heading">7. Your Rights</h2>
+      <p class="doc-p">Subject to applicable law, you have the following rights regarding your personal information:</p>
+      <ul class="doc-ul">
+        <li class="doc-li"><strong>Access</strong> &mdash; Request a copy of the personal information we hold about you.</li>
+        <li class="doc-li"><strong>Correction</strong> &mdash; Update or correct inaccurate personal information in your account.</li>
+        <li class="doc-li"><strong>Deletion</strong> &mdash; Request deletion of your personal information, subject to legal retention requirements.</li>
+        <li class="doc-li"><strong>Portability</strong> &mdash; Export your data in a machine-readable format for transfer to another service.</li>
+        <li class="doc-li"><strong>Opt-out</strong> &mdash; Unsubscribe from marketing communications while maintaining service notifications.</li>
+        <li class="doc-li"><strong>Restriction</strong> &mdash; Request limitations on how we process your personal information.</li>
+      </ul>
+      <p class="doc-p">To exercise any of these rights, contact us at <a href="mailto:privacy@vaslhealth.com">privacy@vaslhealth.com</a>. We will respond within 30 days and may need to verify your identity for security purposes. For HIPAA-specific inquiries, contact <a href="mailto:hipaa@vaslhealth.com">hipaa@vaslhealth.com</a>. For FERPA-specific inquiries, contact <a href="mailto:ferpa@vaslhealth.com">ferpa@vaslhealth.com</a>.</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="changes"></span>
+      <h2 class="section-heading">8. Changes to This Policy</h2>
+      <p class="doc-p">We may update this Privacy Policy periodically to reflect changes in our practices, technology, or legal requirements. When we make significant changes, we will notify you via email at least 30 days before changes take effect, post a notice on our platform and website, and update the "Last Updated" date at the top of this policy. For material changes affecting HIPAA or FERPA compliance, we will provide additional notice as required by law.</p>
+      <p class="doc-p">Your continued use of Vasl Health after changes take effect constitutes acceptance of the updated policy.</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="contact-privacy"></span>
+      <h2 class="section-heading">9. Contact</h2>
+      <p class="doc-p">For general privacy questions: <a href="mailto:privacy@vaslhealth.com">privacy@vaslhealth.com</a> &mdash; response within 48 hours.</p>
+      <p class="doc-p">For HIPAA compliance questions: <a href="mailto:hipaa@vaslhealth.com">hipaa@vaslhealth.com</a></p>
+      <p class="doc-p">For FERPA compliance questions: <a href="mailto:ferpa@vaslhealth.com">ferpa@vaslhealth.com</a></p>
+      <p class="doc-p">Vasl Health, Inc. is a Delaware Public Benefit Corporation.</p>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-sitemap">
+    <div class="fs-brand">
+      <a href="index.html" class="footer-logo">Vasl <span>Health</span></a>
+      <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
+      <a href="contact.html" class="fs-cta">Request a Demo &rarr;</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Platform</div>
+      <a href="platform.html">Platform Overview</a>
+      <a href="vlap.html">VLAP</a>
+      <a href="ai-model.html">AI Model</a>
+      <a href="technology.html">Technology</a>
+      <a href="peer-groups.html">Peer Groups</a>
+      <a href="teletherapy.html">Teletherapy</a>
+      <a href="prototype.html">Live Demo Portal</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Who We Serve</div>
+      <a href="for-schools.html">For Schools</a>
+      <a href="for-organizations.html">For Organizations</a>
+      <a href="outcomes.html">Outcomes</a>
+      <a href="clinical-outcomes.html">Clinical Outcomes</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Company</div>
+      <a href="about.html">About Vasl</a>
+      <a href="team.html">Team</a>
+      <a href="careers.html">Careers</a>
+      <a href="research.html">Research</a>
+      <a href="blog.html">Blog &amp; Insights</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Support &amp; Legal</div>
+      <a href="support.html">Help Center</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="baa.html">Business Associate Agreement</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 Vasl Health, Inc. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="baa.html">BAA</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
