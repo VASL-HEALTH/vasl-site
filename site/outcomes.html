@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Vasl Health delivers measurable clinical outcomes and documented financial ROI for universities, health plans, and youth-serving organizations. Real pilot data. Honest methodology.">
+<title>Outcomes &mdash; Vasl Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  :root {
+    --warm-white:  #FAF7F2;
+    --parchment:   #F0EAE0;
+    --ink:         #1C1C1C;
+    --ink-70:      rgba(28,28,28,0.70);
+    --ink-50:      rgba(28,28,28,0.50);
+    --ink-25:      rgba(28,28,28,0.25);
+    --ink-12:      rgba(28,28,28,0.12);
+    --clay:        #C4896F;
+    --clay-light:  #E8C4AE;
+    --clay-pale:   #F5E6DC;
+    --deep-green:  #2D4A3E;
+    --dust:        #8B7B6B;
+    --chalk:       #E2DAD0;
+    --charcoal:    #222222;
+
+    --serif: 'Newsreader', Georgia, serif;
+    --sans:  'IBM Plex Sans', sans-serif;
+    --mono:  'IBM Plex Mono', monospace;
+    --gutter: 7vw;
+  }
+
+  body {
+    background: var(--warm-white);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: 999;
+    pointer-events: none; opacity: 0.028;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 256px;
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(22px);
+    transition: opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .d1 { transition-delay: 0.10s; } .d2 { transition-delay: 0.22s; }
+  .d3 { transition-delay: 0.34s; } .d4 { transition-delay: 0.46s; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px var(--gutter);
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(250,247,242,0.92);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--ink-12);
+  }
+  .nav-logo { font-family: var(--serif); font-size: 22px; font-weight: 400; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
+  .nav-logo span { color: var(--clay); font-style: italic; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { font-family: var(--mono); font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--dust); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+  .nav-cta { font-family: var(--mono); font-size: 10px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--deep-green); border: 1px solid var(--deep-green); padding: 9px 20px; text-decoration: none; transition: background 0.22s, color 0.22s; }
+  .nav-cta:hover { background: var(--deep-green); color: var(--warm-white); }
+
+  /* ─── SHARED ─── */
+  .chapter-label {
+    font-family: var(--mono); font-size: 10px; font-weight: 300; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--clay);
+    display: flex; align-items: center; gap: 12px; margin-bottom: 52px;
+  }
+  .chapter-label::after { content: ''; display: block; width: 36px; height: 1px; background: var(--clay); opacity: 0.45; }
+  .chapter-label.light { color: var(--clay-light); }
+  .chapter-label.light::after { background: var(--clay-light); }
+  .chapter-label.muted { color: rgba(250,247,242,0.35); }
+  .chapter-label.muted::after { background: rgba(250,247,242,0.35); }
+
+  section { padding: 130px var(--gutter); position: relative; }
+
+  .btn-dark { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--ink); color: var(--warm-white); padding: 16px 32px; text-decoration: none; display: inline-block; transition: background 0.22s; }
+  .btn-dark:hover { background: var(--deep-green); }
+  .btn-outline { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dust); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s; }
+  .btn-outline:hover { color: var(--ink); }
+  .btn-outline::after { content: '→'; font-size: 14px; }
+  .btn-light { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--warm-white); color: var(--ink); padding: 16px 32px; text-decoration: none; display: inline-block; transition: background 0.22s; }
+  .btn-light:hover { background: var(--clay-light); }
+  .btn-ghost-light { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250,247,242,0.40); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s; }
+  .btn-ghost-light:hover { color: var(--warm-white); }
+  .btn-ghost-light::after { content: '→'; }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 01 — THE PREVENTION ARGUMENT
+  ═══════════════════════════════════════════ */
+  #prevention {
+    min-height: 100vh;
+    padding-top: 180px; padding-bottom: 140px;
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--chalk);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 100px;
+    align-items: end;
+  }
+
+  .prev-left {}
+
+  .prev-kicker {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--dust); margin-bottom: 40px; display: block;
+  }
+
+  .prev-headline {
+    font-family: var(--serif);
+    font-size: clamp(48px, 5.8vw, 84px);
+    font-weight: 300; line-height: 1.03; letter-spacing: -0.03em;
+    color: var(--ink); margin-bottom: 48px;
+  }
+  .prev-headline em { font-style: italic; color: var(--clay); }
+
+  .prev-body {
+    font-size: 19px; font-weight: 300; line-height: 1.72;
+    color: var(--ink-70); max-width: 460px; margin-bottom: 52px;
+  }
+
+  .prev-actions { display: flex; align-items: center; gap: 32px; }
+
+  .prev-right {
+    border-left: 1px solid var(--chalk); padding-left: 80px;
+  }
+
+  /* ROI equation */
+  .roi-equation {
+    background: var(--ink); padding: 52px 44px; margin-bottom: 40px;
+  }
+
+  .re-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--clay-light); margin-bottom: 20px;
+  }
+
+  .re-line {
+    display: flex; align-items: baseline; gap: 16px; margin-bottom: 16px;
+  }
+
+  .re-num {
+    font-family: var(--serif); font-size: 80px; font-weight: 300;
+    color: var(--warm-white); line-height: 1; letter-spacing: -0.04em;
+  }
+
+  .re-unit {
+    font-family: var(--serif); font-size: 28px; font-weight: 300;
+    color: var(--clay-light); font-style: italic;
+  }
+
+  .re-desc {
+    font-size: 15px; font-weight: 300; line-height: 1.65;
+    color: rgba(250,247,242,0.52);
+  }
+
+  /* Source stack */
+  .source-stack { display: flex; flex-direction: column; gap: 0; }
+
+  .source-item {
+    padding: 24px 0; border-bottom: 1px solid var(--chalk);
+    display: grid; grid-template-columns: 100px 1fr; gap: 20px; align-items: start;
+  }
+  .source-item:last-child { border-bottom: none; }
+
+  .si-num {
+    font-family: var(--serif); font-size: 36px; font-weight: 300;
+    color: var(--clay); line-height: 1; letter-spacing: -0.03em;
+  }
+
+  .si-right {}
+  .si-label {
+    font-family: var(--sans); font-size: 15px; font-weight: 400;
+    color: var(--ink); margin-bottom: 4px; line-height: 1.35;
+  }
+  .si-source {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dust);
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 02 — CLINICAL OUTCOMES
+  ═══════════════════════════════════════════ */
+  #clinical {
+    background: var(--parchment);
+    padding-top: 150px; padding-bottom: 150px;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .clinical-header {
+    display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px;
+    align-items: end; margin-bottom: 90px;
+    padding-bottom: 60px; border-bottom: 1px solid var(--chalk);
+  }
+
+  .clinical-headline {
+    font-family: var(--serif); font-size: clamp(36px, 4vw, 54px);
+    font-weight: 300; line-height: 1.08; letter-spacing: -0.025em; color: var(--ink);
+  }
+  .clinical-headline em { font-style: italic; color: var(--clay); }
+
+  .clinical-intro {
+    font-size: 18px; font-weight: 300; line-height: 1.72; color: var(--ink-70);
+  }
+
+  /* Four outcome rows — full editorial width */
+  .outcome-row {
+    display: grid; grid-template-columns: 180px 1fr 1fr; gap: 0 60px;
+    padding: 60px 0; border-bottom: 1px solid var(--chalk); align-items: start;
+  }
+  .outcome-row:last-child { border-bottom: none; }
+
+  .or-num {
+    font-family: var(--serif); font-size: 80px; font-weight: 300;
+    color: var(--clay); line-height: 0.9; letter-spacing: -0.04em;
+  }
+  .or-unit {
+    font-family: var(--mono); font-size: 16px; font-weight: 300;
+    color: var(--clay); letter-spacing: 0.02em;
+  }
+
+  .or-mid {}
+
+  .or-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 12px;
+  }
+
+  .or-title {
+    font-family: var(--serif); font-size: 26px; font-weight: 400;
+    color: var(--ink); margin-bottom: 14px; line-height: 1.2; letter-spacing: -0.01em;
+  }
+
+  .or-body {
+    font-size: 15px; font-weight: 300; line-height: 1.7; color: var(--ink-70);
+  }
+
+  .or-right {}
+
+  .or-context-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--dust); margin-bottom: 14px;
+  }
+
+  .or-context-item {
+    padding: 14px 0; border-bottom: 1px solid var(--chalk);
+    display: grid; grid-template-columns: 100px 1fr; gap: 12px;
+  }
+  .or-context-item:last-child { border-bottom: none; }
+
+  .oci-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dust); padding-top: 2px; line-height: 1.5;
+  }
+
+  .oci-value {
+    font-size: 13px; font-weight: 300; line-height: 1.6; color: var(--ink-70);
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 03 — THE 80%
+  ═══════════════════════════════════════════ */
+  #eighty {
+    background: var(--charcoal);
+    color: var(--warm-white);
+    padding-top: 150px; padding-bottom: 150px;
+  }
+
+  .eighty-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0 120px; align-items: center;
+  }
+
+  .eighty-left {}
+
+  .eighty-num-block {
+    display: flex; align-items: baseline; gap: 0; margin-bottom: 36px;
+  }
+
+  .eighty-num {
+    font-family: var(--serif); font-size: clamp(100px, 14vw, 180px);
+    font-weight: 300; line-height: 0.9; letter-spacing: -0.04em; color: var(--warm-white);
+  }
+
+  .eighty-pct {
+    font-family: var(--serif); font-size: clamp(40px, 5vw, 72px);
+    font-weight: 300; color: var(--clay-light); font-style: italic; align-self: flex-start; padding-top: 12px;
+  }
+
+  .eighty-label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay-light); margin-bottom: 16px;
+  }
+
+  .eighty-title {
+    font-family: var(--serif); font-size: clamp(24px, 2.8vw, 38px);
+    font-weight: 300; line-height: 1.2; letter-spacing: -0.02em; color: var(--warm-white);
+    margin-bottom: 24px;
+  }
+  .eighty-title em { font-style: italic; color: var(--clay-light); }
+
+  .eighty-body {
+    font-size: 17px; font-weight: 300; line-height: 1.72;
+    color: rgba(250,247,242,0.58); max-width: 480px;
+  }
+
+  .eighty-right { padding-top: 8px; }
+
+  .eighty-breakdown {
+    border: 1px solid rgba(250,247,242,0.14); overflow: hidden;
+  }
+
+  .eb-header {
+    padding: 18px 32px; border-bottom: 1px solid rgba(250,247,242,0.1);
+    background: rgba(250,247,242,0.05);
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: rgba(250,247,242,0.38);
+  }
+
+  .eb-row {
+    padding: 28px 32px; border-bottom: 1px solid rgba(250,247,242,0.08);
+    display: grid; grid-template-columns: 72px 1fr; gap: 20px; align-items: start;
+  }
+  .eb-row:last-child { border-bottom: none; }
+
+  .eb-pct {
+    font-family: var(--serif); font-size: 36px; font-weight: 300;
+    color: var(--clay-light); line-height: 1; letter-spacing: -0.03em;
+  }
+
+  .eb-right {}
+  .eb-tier {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 6px;
+  }
+  .eb-desc {
+    font-size: 14px; font-weight: 300; line-height: 1.6;
+    color: rgba(250,247,242,0.55);
+  }
+
+  .eighty-pull {
+    margin-top: 40px;
+    border-left: 2px solid var(--clay);
+    padding: 24px 32px;
+    background: rgba(250,247,242,0.04);
+    font-family: var(--serif); font-size: 18px; font-style: italic;
+    font-weight: 300; line-height: 1.5; color: var(--warm-white);
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 04 — ROI BY STAKEHOLDER
+  ═══════════════════════════════════════════ */
+  #roi {
+    background: var(--warm-white);
+    padding-top: 150px; padding-bottom: 150px;
+    border-top: 1px solid var(--chalk); border-bottom: 1px solid var(--chalk);
+  }
+
+  .roi-header {
+    max-width: 720px; margin-bottom: 90px;
+  }
+
+  .roi-headline {
+    font-family: var(--serif); font-size: clamp(40px, 4.8vw, 68px);
+    font-weight: 300; line-height: 1.06; letter-spacing: -0.03em; color: var(--ink);
+    margin-bottom: 28px;
+  }
+  .roi-headline em { font-style: italic; color: var(--clay); }
+
+  .roi-sub {
+    font-size: 18px; font-weight: 300; line-height: 1.72;
+    color: var(--ink-70); max-width: 580px;
+  }
+
+  /* Stakeholder rows */
+  .stakeholder-row {
+    display: grid; grid-template-columns: 240px 1fr 1fr; gap: 0 60px;
+    padding: 72px 0; border-bottom: 1px solid var(--chalk); align-items: start;
+  }
+  .stakeholder-row:last-child { border-bottom: none; }
+
+  .sr-left {}
+
+  .sr-type {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .sr-type::before { content: ''; display: block; width: 16px; height: 1px; background: var(--clay); }
+
+  .sr-name {
+    font-family: var(--serif); font-size: 30px; font-weight: 400;
+    color: var(--ink); line-height: 1.15; letter-spacing: -0.015em; margin-bottom: 20px;
+  }
+
+  .sr-headline-num {
+    font-family: var(--serif); font-size: 52px; font-weight: 300;
+    color: var(--clay); line-height: 1; letter-spacing: -0.04em; margin-bottom: 6px;
+  }
+
+  .sr-headline-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dust);
+  }
+
+  .sr-mid {}
+
+  .sr-body {
+    font-size: 16px; font-weight: 300; line-height: 1.72;
+    color: var(--ink-70); margin-bottom: 24px;
+  }
+
+  .sr-pull {
+    font-family: var(--serif); font-size: 18px; font-style: italic;
+    font-weight: 300; color: var(--ink); line-height: 1.4;
+    border-left: 2px solid var(--clay-light); padding-left: 20px;
+  }
+
+  .sr-right {}
+
+  .sr-cost-table { display: flex; flex-direction: column; gap: 0; }
+
+  .sct-row {
+    padding: 16px 0; border-bottom: 1px solid var(--chalk);
+    display: grid; grid-template-columns: 140px 1fr; gap: 16px; align-items: baseline;
+  }
+  .sct-row:last-child { border-bottom: none; }
+
+  .sct-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dust); line-height: 1.5;
+  }
+
+  .sct-value {
+    font-size: 14px; font-weight: 300; line-height: 1.55; color: var(--ink-70);
+  }
+
+  .sct-value strong { font-weight: 500; color: var(--ink); }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 05 — MEASUREMENT & METHODOLOGY
+  ═══════════════════════════════════════════ */
+  #methodology {
+    background: var(--parchment);
+    padding-top: 150px; padding-bottom: 150px;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .meth-header {
+    display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px;
+    align-items: end; margin-bottom: 90px;
+    padding-bottom: 60px; border-bottom: 1px solid var(--chalk);
+  }
+
+  .meth-headline {
+    font-family: var(--serif); font-size: clamp(36px, 4vw, 54px);
+    font-weight: 300; line-height: 1.08; letter-spacing: -0.025em; color: var(--ink);
+  }
+  .meth-headline em { font-style: italic; color: var(--clay); }
+
+  .meth-intro {
+    font-size: 18px; font-weight: 300; line-height: 1.72; color: var(--ink-70);
+  }
+
+  /* Methodology items */
+  .meth-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0 100px; align-items: start;
+  }
+
+  .meth-col { display: flex; flex-direction: column; gap: 0; }
+
+  .meth-item {
+    padding: 44px 0; border-bottom: 1px solid var(--chalk);
+  }
+  .meth-item:first-child { padding-top: 0; }
+  .meth-item:last-child { border-bottom: none; }
+
+  .meth-item-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 14px;
+  }
+
+  .meth-item-title {
+    font-family: var(--serif); font-size: 22px; font-weight: 400;
+    color: var(--ink); margin-bottom: 12px; line-height: 1.25; letter-spacing: -0.01em;
+  }
+
+  .meth-item-body {
+    font-size: 14px; font-weight: 300; line-height: 1.7; color: var(--ink-70);
+  }
+
+  /* IRB callout */
+  .irb-callout {
+    margin-top: 80px; background: var(--ink); padding: 52px 60px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+  }
+
+  .irb-left {}
+
+  .irb-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--clay-light); margin-bottom: 16px;
+  }
+
+  .irb-headline {
+    font-family: var(--serif); font-size: clamp(24px, 2.5vw, 36px);
+    font-weight: 300; line-height: 1.2; letter-spacing: -0.02em; color: var(--warm-white);
+    margin-bottom: 12px;
+  }
+  .irb-headline em { font-style: italic; color: var(--clay-light); }
+
+  .irb-body {
+    font-size: 15px; font-weight: 300; line-height: 1.7;
+    color: rgba(250,247,242,0.50);
+  }
+
+  .irb-status {
+    margin-top: 16px; font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--clay); display: flex; align-items: center; gap: 8px;
+  }
+  .irb-status::before { content: '●'; font-size: 6px; }
+
+  .irb-right { display: flex; flex-direction: column; gap: 0; }
+
+  .irb-detail {
+    padding: 20px 0; border-bottom: 1px solid rgba(250,247,242,0.1);
+    display: grid; grid-template-columns: 120px 1fr; gap: 16px;
+  }
+  .irb-detail:last-child { border-bottom: none; }
+
+  .ird-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(250,247,242,0.30); padding-top: 2px;
+  }
+
+  .ird-value {
+    font-size: 13px; font-weight: 300; line-height: 1.6;
+    color: rgba(250,247,242,0.55);
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 06 — CUSTOM ANALYSIS
+  ═══════════════════════════════════════════ */
+  #custom {
+    background: var(--charcoal);
+    padding-top: 160px; padding-bottom: 160px;
+    overflow: hidden; position: relative;
+  }
+
+  .custom-bg {
+    position: absolute; bottom: -8vw; right: -4vw;
+    font-family: var(--serif); font-size: 36vw; font-weight: 300; font-style: italic;
+    color: rgba(250,247,242,0.018); pointer-events: none; user-select: none;
+    line-height: 1; letter-spacing: -0.05em;
+  }
+
+  .custom-inner {
+    position: relative; z-index: 2;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0 100px; align-items: start;
+  }
+
+  .custom-left {}
+
+  .custom-headline {
+    font-family: var(--serif); font-size: clamp(40px, 5vw, 68px);
+    font-weight: 300; line-height: 1.06; letter-spacing: -0.03em;
+    color: var(--warm-white); margin-bottom: 32px;
+  }
+  .custom-headline em { font-style: italic; color: var(--clay-light); }
+
+  .custom-body {
+    font-size: 18px; font-weight: 300; line-height: 1.72;
+    color: rgba(250,247,242,0.50); margin-bottom: 52px; max-width: 460px;
+  }
+
+  .custom-actions { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+
+  .custom-right { padding-top: 8px; display: flex; flex-direction: column; gap: 0; }
+
+  .custom-item {
+    padding: 28px 0; border-bottom: 1px solid rgba(250,247,242,0.09);
+    display: grid; grid-template-columns: 40px 1fr; gap: 20px; align-items: start;
+  }
+  .custom-item:last-child { border-bottom: none; }
+
+  .ci-num {
+    font-family: var(--mono); font-size: 10px; color: var(--clay-light); padding-top: 3px;
+  }
+
+  .ci-title {
+    font-family: var(--serif); font-size: 20px; font-weight: 400;
+    color: var(--warm-white); margin-bottom: 6px; line-height: 1.25;
+  }
+
+  .ci-desc {
+    font-size: 14px; font-weight: 300; color: rgba(250,247,242,0.42); line-height: 1.65;
+  }
+
+  /* ─── FOOTER ─── */
+  .footer-logo span { color: var(--clay); font-style: italic; }
+  .footer-nav a { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,247,242,0.30); text-decoration: none; transition: color 0.2s; }
+  .footer-nav a:hover { color: var(--warm-white); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1100px) {
+    #prevention { grid-template-columns: 1fr; gap: 80px; padding-top: 160px; }
+    .prev-right { border-left: none; padding-left: 0; border-top: 1px solid var(--chalk); padding-top: 60px; }
+    .clinical-header { grid-template-columns: 1fr; gap: 28px; }
+    .outcome-row { grid-template-columns: 1fr; gap: 36px; }
+    .or-num { font-size: 64px; }
+    .eighty-grid { grid-template-columns: 1fr; gap: 60px; }
+    .eighty-num { font-size: clamp(80px, 18vw, 140px); }
+    .roi-header { max-width: 100%; }
+    .stakeholder-row { grid-template-columns: 1fr; gap: 40px; }
+    .meth-header { grid-template-columns: 1fr; gap: 28px; }
+    .meth-grid { grid-template-columns: 1fr; gap: 0; }
+    .irb-callout { grid-template-columns: 1fr; gap: 40px; }
+    .custom-inner { grid-template-columns: 1fr; gap: 60px; }
+  }
+  @media (max-width: 768px) {
+    :root { --gutter: 5vw; }
+    .nav-links { display: none; }
+    .or-context-item { grid-template-columns: 1fr; gap: 4px; }
+    .sct-row { grid-template-columns: 1fr; gap: 4px; }
+    .irb-detail { grid-template-columns: 1fr; gap: 4px; }
+    .source-item { grid-template-columns: 80px 1fr; }
+  }
+  .footer-logo span{color:var(--clay);font-style:italic;}
+  .footer-nav a{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.32);text-decoration:none;}
+  .footer-nav a:hover{color:var(--warm-white);}
+  .footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+
+  .ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
+  .ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.2s;}
+  .ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .ham-btn.open span:nth-child(2){opacity:0;}
+  .ham-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+  @media(max-width:780px){
+    .ham-btn{display:flex;}
+    .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--warm);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{font-size:22px;letter-spacing:0.04em;}
+    .nav-cta{display:none;}
+  }
+
+  footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);padding:0;}
+  .footer-sitemap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:0;padding:56px 7vw 40px;border-bottom:1px solid rgba(250,247,242,0.08);}
+  .fs-brand{padding-right:40px;}
+  .footer-logo{font-family:var(--serif);font-size:22px;color:var(--warm-white,#FAF7F2);letter-spacing:-0.02em;text-decoration:none;display:block;margin-bottom:12px;}
+  .footer-logo span{color:var(--clay,#C4896F);font-style:italic;}
+  .footer-mission{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.28);line-height:1.8;margin-bottom:20px;}
+  .fs-cta{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:var(--clay,#C4896F);border:1px solid rgba(196,137,111,0.40);padding:9px 18px;text-decoration:none;transition:all 0.18s;}
+  .fs-cta:hover{background:rgba(196,137,111,0.12);}
+  .fs-col{padding-left:32px;border-left:1px solid rgba(250,247,242,0.06);}
+  .fs-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,247,242,0.30);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(250,247,242,0.06);}
+  .fs-col a{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,247,242,0.45);text-decoration:none;margin-bottom:10px;transition:color 0.15s;}
+  .fs-col a:hover{color:var(--clay,#C4896F);}
+  .footer-bottom{padding:20px 7vw;display:flex;align-items:center;justify-content:space-between;}
+  .footer-copy{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,0.20);}
+  .footer-legal{display:flex;gap:20px;}
+  .footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+  .footer-legal a:hover{color:var(--clay,#C4896F);}
+  @media(max-width:1100px){.footer-sitemap{grid-template-columns:1fr 1fr 1fr;gap:32px;}.fs-brand{grid-column:1/-1;padding-right:0;}.fs-col{border-left:none;padding-left:0;}}
+  @media(max-width:680px){.footer-sitemap{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}}
+  @media(max-width:400px){.footer-sitemap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="index.html" class="nav-logo">Vasl <span>Health</span></a>
+    <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="platform.html">Platform</a></li>
+    <li><a href="outcomes.html">Outcomes</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="#custom" class="nav-cta">Request Analysis</a>
+</nav>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 01 &mdash; THE PREVENTION ARGUMENT
+════════════════════════════════════ -->
+<section id="prevention">
+  <div class="prev-left">
+    <span class="prev-kicker reveal">Chapter 01 &mdash; The Prevention Argument</span>
+    <h1 class="prev-headline reveal d1">
+      Prevention that<br>
+      pays for itself.<br>
+      <em>Every time.</em>
+    </h1>
+    <p class="prev-body reveal d2">
+      The economics of mental health care are broken in a specific way: the system funds crisis response and underfunds prevention &mdash; even though every dollar spent on prevention saves multiples in downstream cost. Vasl is the infrastructure for the intervention that happens before the ER visit, before the psychiatric admission, before the student withdraws. The savings are documented. The math is not close.
+    </p>
+    <div class="prev-actions reveal d3">
+      <a href="#custom" class="btn-dark">Request Outcomes Analysis</a>
+      <a href="#clinical" class="btn-outline">See the data</a>
+    </div>
+  </div>
+
+  <div class="prev-right reveal d2">
+    <div class="roi-equation">
+      <div class="re-label">Prevention ROI &mdash; Documented Range</div>
+      <div class="re-line">
+        <div class="re-num">$10</div>
+        <div class="re-unit">saved per $1 invested</div>
+      </div>
+      <p class="re-desc">
+        In downstream cost reduction &mdash; across reduced emergency psychiatric visits, lower inpatient utilization, improved student retention, and decreased crisis intervention load on clinical staff. This is not a projected figure. It is the documented range from behavioral health prevention research and from Vasl's own pilot cohort financial analysis.
+      </p>
+    </div>
+
+    <div class="source-stack">
+      <div class="source-item">
+        <div class="si-num">$3.2K</div>
+        <div class="si-right">
+          <div class="si-label">Average cost of a single mental health ER visit that early intervention can prevent</div>
+          <div class="si-source">Low end of $3,200&ndash;$8,400 documented range</div>
+        </div>
+      </div>
+      <div class="source-item">
+        <div class="si-num">$35K</div>
+        <div class="si-right">
+          <div class="si-label">Per-week cost of inpatient psychiatric care &mdash; prevented in 4 out of 5 Vasl cases at the peer/coach tier</div>
+          <div class="si-source">Low end of $15,000&ndash;$35,000 documented range</div>
+        </div>
+      </div>
+      <div class="source-item">
+        <div class="si-num">$20B</div>
+        <div class="si-right">
+          <div class="si-label">Lost annually in U.S. tuition revenue due to mental health-related student dropout</div>
+          <div class="si-source">Active Minds, 2023 &mdash; leading cause of dropout</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 02 &mdash; CLINICAL OUTCOMES
+════════════════════════════════════ -->
+<section id="clinical">
+  <div class="chapter-label reveal">Chapter 02 &mdash; Clinical Outcomes</div>
+
+  <div class="clinical-header">
+    <h2 class="clinical-headline reveal d1">
+      Numbers from<br>
+      real pilot<br>
+      <em>cohorts.</em>
+    </h2>
+    <p class="clinical-intro reveal d2">
+      These figures are drawn from Vasl's deployed pilot programs &mdash; community health centers, school-based programs, and university partnerships. Not projected from comparable platforms. Not modeled from national averages. Measured from Vasl's own member population against pre-enrollment baselines and documented national benchmarks. The methodology is available in the full outcomes report upon request.
+    </p>
+  </div>
+
+  <!-- Outcome 01 &mdash; PHQ-8 -->
+  <div class="outcome-row reveal">
+    <div class="or-num">42<span class="or-unit">%</span></div>
+    <div class="or-mid">
+      <div class="or-label">Clinical Symptom Reduction</div>
+      <div class="or-title">Average PHQ-8 improvement across pilot cohorts at 90 days.</div>
+      <p class="or-body">Measured as the average reduction in Patient Health Questionnaire-8 depression symptom scores from pre-enrollment baseline to 90-day follow-up. Cohort: BIPOC, LGBTQ+, and first-generation youth ages 14&ndash;24. The PHQ-8 was selected as the outcome instrument because it is the most widely validated short-form depression screener &mdash; providing comparability with the existing evidence base while being suitable for non-clinical administration.</p>
+    </div>
+    <div class="or-right">
+      <div class="or-context-label">Measurement Detail</div>
+      <div class="or-context-item">
+        <span class="oci-label">Instrument</span>
+        <span class="oci-value">PHQ-8 (Patient Health Questionnaire, 8-item)</span>
+      </div>
+      <div class="or-context-item">
+        <span class="oci-label">Baseline</span>
+        <span class="oci-value">Pre-enrollment administration &mdash; prior to any Vasl engagement</span>
+      </div>
+      <div class="or-context-item">
+        <span class="oci-label">Follow-up</span>
+        <span class="oci-value">90-day re-administration &mdash; all active members</span>
+      </div>
+      <div class="or-context-item">
+        <span class="oci-label">Population</span>
+        <span class="oci-value">BIPOC, LGBTQ+, and first-gen youth ages 14&ndash;24. Multiple deployment sites.</span>
+      </div>
+      <div class="or-context-item">
+        <span class="oci-label">National context</span>
+        <span class="oci-value">Average PHQ-8 improvement in standard outpatient therapy at 12 weeks: 28&ndash;34%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Outcome 02 &mdash; Retention -->
+  <div class="outcome-row reveal">
+    <div class="or-num">79.5<span class="or-unit">%</span></div>
+    <div class="or-mid">
+      <div class="or-label">30-Day Retention</div>
+      <div class="or-title">Still actively engaged with the Vasl platform at 30 days from enrollment.</div>
+      <p class="or-body">Retention is the most predictive single metric in behavioral health platform outcomes &mdash; a member who disengages at week two derives almost no benefit from the clinical infrastructure they were enrolled in. Vasl's 79.5% 30-day retention reflects the specific design decisions made to remove barriers: proactive coach outreach, text-first access, peer community from day one, and cultural matching that eliminates the translation burden that drives early dropout.</p>
+    </div>
+    <div class="or-right">
+      <div class="or-context-label">Benchmark Comparison</div>
+      <div class="or-context-item">
+        <span class="oci-label">Vasl 30-day</span>
+        <span class="oci-value">79.5% active members &mdash; across all pilot cohorts</span>
+      </div>
+      <div class="or-context-item">
+        <span class="oci-label">Industry avg.</span>
+        <span class="oci-value">40&ndash;50% &mdash; 30-day retention industry average for digital behavioral health</span>
+      </div>
+      <div class="or-context-item">
+        <span class="oci-label">Traditional therapy</span>
+        <span class="oci-value">72% dropout rate before session three &mdash; underserved populations</span>
+      </div>
+      <div class="or-context-item">
+        <span class="oci-label">Definition</span>
+        <span class="oci-value">Active = minimum one meaningful platform interaction in the prior 7 days at the 30-day mark</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Outcome 03 &mdash; Time to Support -->
+  <div class="outcome-row reveal">
+    <div class="or-num">3<span class="or-unit">wks</span></div>
+    <div class="or-mid">
+      <div class="or-label">Time to First Support</div>
+      <div class="or-title">Median time from enrollment to first meaningful peer support interaction.</div>
+      <p class="or-body">The nine-month national average wait for mental health support in underserved communities is not a scheduling problem &mdash; it is a structural one. Vasl removes the appointment, the insurance requirement, the waitlist, and the intake form. The median three-week figure reflects the time from initial enrollment to a member's first substantive peer group exchange or coach interaction &mdash; not merely account activation. First contact is often same-day. Three weeks is the median to meaningful engagement.</p>
+    </div>
+    <div class="or-right">
+      <div class="or-context-label">Access Comparison</div>
+      <div class="or-context-item">
+        <span class="oci-label">Vasl median</span>
+        <span class="oci-value">3 weeks to first meaningful peer support interaction</span>
+      </div>
+      <div class="or-context-item">
+        <span class="oci-label">National avg.</span>
+        <span class="oci-value">9 months average wait for a therapy appointment &mdash; underserved communities (SAMHSA)</span>
+      </div>
+      <div class="or-context-item">
+        <span class="oci-label">Same-day</span>
+        <span class="oci-value">Peer group access and coach assignment available day-of enrollment for most deployments</span>
+      </div>
+      <div class="or-context-item">
+        <span class="oci-label">Definition</span>
+        <span class="oci-value">Meaningful interaction = peer group post, coach message exchange, or check-in response</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Outcome 04 &mdash; Access Speed -->
+  <div class="outcome-row reveal">
+    <div class="or-num">3<span class="or-unit">&times;</span></div>
+    <div class="or-mid">
+      <div class="or-label">Access Speed</div>
+      <div class="or-title">Faster time to any meaningful mental health support versus the national average for underserved populations.</div>
+      <p class="or-body">Three times faster is the conservative measure. For many members &mdash; those in communities where the average wait exceeds 12 months &mdash; the ratio is significantly higher. Speed matters not because faster is inherently better, but because delay has a clinical cost: symptoms progress, crises escalate, and the member who was ready to engage in week two is a different person by month nine. Early access is early intervention. Early intervention is prevention.</p>
+    </div>
+    <div class="or-right">
+      <div class="or-context-label">Why Speed Matters Clinically</div>
+      <div class="or-context-item">
+        <span class="oci-label">Symptom trajectory</span>
+        <span class="oci-value">Untreated depression and anxiety worsen over time &mdash; the 9-month wait is not neutral</span>
+      </div>
+      <div class="or-context-item">
+        <span class="oci-label">Crisis risk</span>
+        <span class="oci-value">Crisis probability increases significantly with each month of untreated distress in youth populations</span>
+      </div>
+      <div class="or-context-item">
+        <span class="oci-label">Engagement window</span>
+        <span class="oci-value">Youth are most receptive to support when distress is present &mdash; not after the moment has passed</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 03 &mdash; THE 80%
+════════════════════════════════════ -->
+<section id="eighty">
+  <div class="chapter-label light reveal">Chapter 03 &mdash; The Most Important Number</div>
+
+  <div class="eighty-grid">
+    <div class="eighty-left">
+      <div class="eighty-num-block reveal">
+        <div class="eighty-num">80</div>
+        <div class="eighty-pct">%</div>
+      </div>
+      <div class="eighty-label reveal d1">Needs Resolved Before Clinical Escalation</div>
+      <h2 class="eighty-title reveal d2">
+        Four out of five members<br>
+        never need to reach<br>
+        <em>licensed therapy.</em>
+      </h2>
+      <p class="eighty-body reveal d3">
+        This is not a claim that clinical care is unnecessary. It is a claim that the majority of behavioral health need exists in a space that peer community and coached support can genuinely address &mdash; if that infrastructure exists. For most communities, it doesn't. Vasl builds it. And when it exists, four out of five people who use it don't escalate to the clinical tier. That is not a platform outcome. That is a prevention outcome.
+      </p>
+      <blockquote class="eighty-pull reveal d4">
+        "The measure of a prevention platform is not how many people it sends to therapy. It's how many people it keeps from needing to go."
+      </blockquote>
+    </div>
+
+    <div class="eighty-right reveal d2">
+      <div class="eighty-breakdown">
+        <div class="eb-header">Member Need Resolution by Tier &mdash; Pilot Cohorts</div>
+
+        <div class="eb-row">
+          <div class="eb-pct">48<span style="font-size:18px">%</span></div>
+          <div class="eb-right">
+            <div class="eb-tier">Peer Community Tier</div>
+            <div class="eb-desc">Member need substantively addressed through peer group engagement alone. No coach or clinical intervention required beyond peer moderation. Community understanding was sufficient.</div>
+          </div>
+        </div>
+
+        <div class="eb-row">
+          <div class="eb-pct">32<span style="font-size:18px">%</span></div>
+          <div class="eb-right">
+            <div class="eb-tier">Coaching Tier</div>
+            <div class="eb-desc">Member need addressed through the combination of peer community and certified coach relationship. Regular coach contact &mdash; proactive and member-initiated &mdash; provided sufficient support without clinical escalation.</div>
+          </div>
+        </div>
+
+        <div class="eb-row">
+          <div class="eb-pct">20<span style="font-size:18px">%</span></div>
+          <div class="eb-right">
+            <div class="eb-tier">Clinical Tier</div>
+            <div class="eb-desc">Member progressed to licensed therapy &mdash; the appropriate step for the depth of clinical need present. Warm handoff from coaching relationship. VLAP signal context provided to clinician before first session.</div>
+          </div>
+        </div>
+      </div>
+
+      <blockquote style="margin-top:32px; border-left: 2px solid rgba(250,247,242,0.2); padding: 20px 24px; background: rgba(250,247,242,0.04);">
+        <p style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,247,242,0.35); margin-bottom: 10px;">What this means for cost</p>
+        <p style="font-family: var(--serif); font-size: 17px; font-style: italic; font-weight: 300; color: rgba(250,247,242,0.70); line-height: 1.5;">For every 100 members enrolled, approximately 20 will require licensed therapy. 80 will have their needs met at a dramatically lower cost per member &mdash; with measurably better retention and earlier intervention than they would have received through the standard referral pathway.</p>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 04 &mdash; ROI BY STAKEHOLDER
+════════════════════════════════════ -->
+<section id="roi">
+  <div class="chapter-label reveal">Chapter 04 &mdash; ROI by Stakeholder</div>
+
+  <div class="roi-header">
+    <h2 class="roi-headline reveal d1">
+      Prevention is the<br>
+      best <em>business model.</em><br>
+      For everyone.
+    </h2>
+    <p class="roi-sub reveal d2">
+      The financial case for Vasl looks different depending on who's doing the math. Universities measure in retained tuition revenue. Health plans measure in avoided utilization cost. Youth-serving organizations measure in demonstrated program impact to funders. Families measure in dollars they don't spend. The case is strong across all four.
+    </p>
+  </div>
+
+  <!-- Universities -->
+  <div class="stakeholder-row reveal">
+    <div class="sr-left">
+      <div class="sr-type">Stakeholder 01</div>
+      <div class="sr-name">Universities & Higher Ed</div>
+      <div class="sr-headline-num">$20B</div>
+      <div class="sr-headline-label">Lost annually in U.S. tuition<br>revenue to mental health dropout</div>
+    </div>
+    <div class="sr-mid">
+      <p class="sr-body">Mental health is the leading documented cause of student dropout in the United States. Each student who withdraws due to unaddressed mental health need represents not only a human cost &mdash; it represents $35,000&ndash;$55,000 in lost tuition revenue per year, plus the downstream cost of recruitment, re-enrollment support, and academic remediation. Universities that partner with Vasl are purchasing prevention at a fraction of that cost.</p>
+      <blockquote class="sr-pull">"The cost of Vasl for a 500-student cohort is less than the annual tuition revenue of two retained students. The math is not close."</blockquote>
+    </div>
+    <div class="sr-right">
+      <div class="sr-cost-table">
+        <div class="sct-row">
+          <span class="sct-label">Lost revenue per dropout</span>
+          <span class="sct-value"><strong>$35,000&ndash;$55,000</strong> in annual tuition revenue per mental health-related withdrawal</span>
+        </div>
+        <div class="sct-row">
+          <span class="sct-label">Vasl Pro (500 members)</span>
+          <span class="sct-value"><strong>$14,400/year</strong> &mdash; less than the tuition revenue of one retained student</span>
+        </div>
+        <div class="sct-row">
+          <span class="sct-label">Break-even</span>
+          <span class="sct-value">Vasl pays for itself with fewer than <strong>one retained student per year</strong> at a $35K tuition floor</span>
+        </div>
+        <div class="sct-row">
+          <span class="sct-label">Additional savings</span>
+          <span class="sct-value">Reduced campus crisis response costs, counseling center load reduction, Title IV compliance documentation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Health Plans -->
+  <div class="stakeholder-row reveal">
+    <div class="sr-left">
+      <div class="sr-type">Stakeholder 02</div>
+      <div class="sr-name">Health Plans & Medicaid</div>
+      <div class="sr-headline-num">$3.2K+</div>
+      <div class="sr-headline-label">Per mental health ER visit<br>that early intervention prevents</div>
+    </div>
+    <div class="sr-mid">
+      <p class="sr-body">A single mental health emergency department visit costs $3,200&ndash;$8,400. An inpatient psychiatric admission runs $15,000&ndash;$35,000 per week. These are not edge cases in an underserved population &mdash; they are the endpoint of a predictable trajectory that begins with unaddressed distress months or years earlier. Vasl is the intervention that changes the trajectory. Health plans that fund Vasl for their Medicaid populations are purchasing prevention at roughly $14&ndash;$40 per member per month &mdash; against a single avoidable ER visit that costs many multiples of the annual investment.</p>
+      <blockquote class="sr-pull">"One prevented inpatient admission funds a full year of Vasl for 50 members."</blockquote>
+    </div>
+    <div class="sr-right">
+      <div class="sr-cost-table">
+        <div class="sct-row">
+          <span class="sct-label">ER visit cost</span>
+          <span class="sct-value"><strong>$3,200&ndash;$8,400</strong> per mental health emergency visit</span>
+        </div>
+        <div class="sct-row">
+          <span class="sct-label">Inpatient cost</span>
+          <span class="sct-value"><strong>$15,000&ndash;$35,000</strong> per week for psychiatric inpatient care</span>
+        </div>
+        <div class="sct-row">
+          <span class="sct-label">Vasl cost</span>
+          <span class="sct-value"><strong>$3&ndash;8/member/month</strong> PMPM (schools $3&ndash;5 &middot; health systems $6&ndash;8) plus platform fee, amortized across enrolled members</span>
+        </div>
+        <div class="sct-row">
+          <span class="sct-label">80% rule</span>
+          <span class="sct-value">80% of member needs resolved before clinical escalation &mdash; documenting the utilization savings directly</span>
+        </div>
+        <div class="sct-row">
+          <span class="sct-label">Medicaid note</span>
+          <span class="sct-value">School-based Medicaid billing recovers ~50% of contract cost for Title I school district deployments</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Youth-Serving Orgs -->
+  <div class="stakeholder-row reveal">
+    <div class="sr-left">
+      <div class="sr-type">Stakeholder 03</div>
+      <div class="sr-name">Youth-Serving Organizations</div>
+      <div class="sr-headline-num">13.5&times;</div>
+      <div class="sr-headline-label">LTV:CAC ratio &mdash; documented<br>unit economics for institutional buyers</div>
+    </div>
+    <div class="sr-mid">
+      <p class="sr-body">YMCAs, Boys & Girls Clubs, community health centers, and faith-based youth organizations operate with two financial constraints: program budget pressure and funder accountability. Vasl addresses both. The platform's measurable outcomes &mdash; PHQ-8 improvement, retention, time to support &mdash; translate directly into the grant reporting and impact documentation that sustains program funding. The 13.5x LTV:CAC ratio reflects the long-term program value delivered against the cost of member acquisition and onboarding &mdash; documented across Vasl's community organization pilot partners.</p>
+      <blockquote class="sr-pull">"Funders want to see numbers. Vasl provides them &mdash; in the format grant applications actually require."</blockquote>
+    </div>
+    <div class="sr-right">
+      <div class="sr-cost-table">
+        <div class="sct-row">
+          <span class="sct-label">LTV:CAC</span>
+          <span class="sct-value"><strong>13.5&times;</strong> &mdash; documented ratio across community org deployments</span>
+        </div>
+        <div class="sct-row">
+          <span class="sct-label">Funder reporting</span>
+          <span class="sct-value">Quarterly impact reports auto-generated &mdash; PHQ-8 trends, engagement, ROI calculations &mdash; ready for board and grant presentations</span>
+        </div>
+        <div class="sct-row">
+          <span class="sct-label">IRB evidence</span>
+          <span class="sct-value">Active IRB study with University of Maryland generates peer-reviewed evidence available to partner orgs for grant applications</span>
+        </div>
+        <div class="sct-row">
+          <span class="sct-label">Crisis cost reduction</span>
+          <span class="sct-value">Documented reduction in crisis intervention events per enrolled member versus pre-Vasl baseline &mdash; available in full outcomes report</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Families -->
+  <div class="stakeholder-row reveal">
+    <div class="sr-left">
+      <div class="sr-type">Stakeholder 04</div>
+      <div class="sr-name">Families & Members</div>
+      <div class="sr-headline-num">$0</div>
+      <div class="sr-headline-label">Cost to members in<br>all partner programs</div>
+    </div>
+    <div class="sr-mid">
+      <p class="sr-body">The average uninsured or underinsured outpatient mental health treatment cost in the United States is $3,000&ndash;$5,000 per year &mdash; well beyond what most families in Vasl's target population can absorb. Vasl is funded entirely through organizational partnerships: the school, the health plan, the community org, the payer covers the contract. Members access the full platform &mdash; peer groups, coaching, licensed therapy when needed &mdash; at zero out-of-pocket cost. The financial barrier is not managed. It is eliminated.</p>
+      <blockquote class="sr-pull">"Access is not a billing question. It never should have been."</blockquote>
+    </div>
+    <div class="sr-right">
+      <div class="sr-cost-table">
+        <div class="sct-row">
+          <span class="sct-label">Cost to member</span>
+          <span class="sct-value"><strong>$0</strong> &mdash; in all Vasl partner program deployments</span>
+        </div>
+        <div class="sct-row">
+          <span class="sct-label">Without Vasl</span>
+          <span class="sct-value"><strong>$3,000&ndash;$5,000/year</strong> average cost of outpatient mental health treatment without insurance</span>
+        </div>
+        <div class="sct-row">
+          <span class="sct-label">Insurance req.</span>
+          <span class="sct-value">None. Membership through an org partner &mdash; not a billing relationship with the member</span>
+        </div>
+        <div class="sct-row">
+          <span class="sct-label">Privacy</span>
+          <span class="sct-value">Individual member data never shared with the funding organization. Members get private care. Organizations get aggregate data.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 05 &mdash; MEASUREMENT & METHODOLOGY
+════════════════════════════════════ -->
+<section id="methodology">
+  <div class="chapter-label reveal">Chapter 05 &mdash; Measurement & Methodology</div>
+
+  <div class="meth-header">
+    <h2 class="meth-headline reveal d1">
+      How the numbers<br>
+      are <em>generated.</em>
+    </h2>
+    <p class="meth-intro reveal d2">
+      Outcome claims without methodology are marketing. Every figure cited on this page has a defined measurement instrument, a documented population, a comparison benchmark, and an honest statement of what it does and doesn't establish. Here is how Vasl measures, reports, and &mdash; where appropriate &mdash; limits its claims.
+    </p>
+  </div>
+
+  <div class="meth-grid">
+    <div class="meth-col">
+      <div class="meth-item reveal">
+        <div class="meth-item-label">Clinical Measurement</div>
+        <div class="meth-item-title">PHQ-8 administered at enrollment and at 90 days &mdash; all active members.</div>
+        <p class="meth-item-body">The PHQ-8 is administered to all members at enrollment as a pre-intervention baseline. All members still active at 90 days complete a follow-up administration. The 42% improvement figure represents the mean PHQ-8 score change across this population &mdash; not a select subset. Members who disengage before 90 days are not included in the 90-day figure and are tracked separately in retention analysis.</p>
+      </div>
+
+      <div class="meth-item reveal">
+        <div class="meth-item-label">Retention Definition</div>
+        <div class="meth-item-title">Active = at least one meaningful interaction in the 7 days prior to the 30-day measurement point.</div>
+        <p class="meth-item-body">Active retention is defined as a minimum of one meaningful platform interaction &mdash; a peer group post, a coach message exchange, a completed check-in &mdash; in the 7 days prior to the 30-day measurement point. Account activation without interaction does not count. This is a more conservative definition than most digital health platforms use, which is why Vasl reports it explicitly.</p>
+      </div>
+
+      <div class="meth-item reveal">
+        <div class="meth-item-label">Time to Support</div>
+        <div class="meth-item-title">Median calculated from first substantive interaction &mdash; not account activation.</div>
+        <p class="meth-item-body">The 3-week median is calculated from the date of enrollment to the date of first substantive peer or coach interaction &mdash; not from account creation. Same-day access is frequently available; the 3-week median reflects the realistic engagement timeline across all members including those who activate accounts and engage more gradually.</p>
+      </div>
+    </div>
+
+    <div class="meth-col">
+      <div class="meth-item reveal">
+        <div class="meth-item-label">Population</div>
+        <div class="meth-item-title">All figures drawn from active pilot deployments &mdash; not modeled or projected.</div>
+        <p class="meth-item-body">Vasl's outcome figures are drawn from members enrolled in active pilot programs &mdash; community health centers, school-based programs, university partnerships &mdash; not from modeled projections or extrapolations from comparable platforms. The pilot population is majority BIPOC, LGBTQ+-inclusive, and ages 14&ndash;24. Generalizability to other populations should be assessed against the specific population and deployment context.</p>
+      </div>
+
+      <div class="meth-item reveal">
+        <div class="meth-item-label">Population Dashboard</div>
+        <div class="meth-item-title">Org administrators see aggregate, de-identified data &mdash; no individual member records.</div>
+        <p class="meth-item-body">The Client Org Portal provides administrators with real-time aggregate data on member engagement, trend indicators, and program-level outcomes. No individual member data &mdash; name, session content, VLAP signal, or clinical notes &mdash; is accessible to organizational administrators. Aggregate data requires a minimum cohort size before being surfaced to prevent de-identification by inference.</p>
+      </div>
+
+      <div class="meth-item reveal">
+        <div class="meth-item-label">Reporting</div>
+        <div class="meth-item-title">Quarterly impact reports generated automatically &mdash; formatted for board and grant reporting.</div>
+        <p class="meth-item-body">Partner organizations receive quarterly impact reports covering PHQ-8 trend data, engagement rates, peer group activity, clinical escalation rates, and ROI calculations against documented cost benchmarks. Reports are auto-generated from platform data and are formatted for the two primary external use cases: board presentations and grant applications. The IRB study with University of Maryland is generating peer-reviewed outcome evidence that will be available to partner organizations upon completion.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- IRB callout -->
+  <div class="irb-callout reveal">
+    <div class="irb-left">
+      <div class="irb-label">Active IRB Study &mdash; University of Maryland</div>
+      <h3 class="irb-headline">
+        Peer-reviewed evidence.<br>
+        <em>In production.</em>
+      </h3>
+      <p class="irb-body">Vasl's IRB-approved study with the University of Maryland is validating clinical signal accuracy and member outcome data from production deployments &mdash; generating peer-reviewed evidence that will be available to partner organizations for grant applications upon study completion.</p>
+      <div class="irb-status">Study in progress &middot; Results to be published upon completion</div>
+    </div>
+
+    <div class="irb-right">
+      <div class="irb-detail">
+        <span class="ird-label">Institution</span>
+        <span class="ird-value">University of Maryland &mdash; IRB-approved protocol</span>
+      </div>
+      <div class="irb-detail">
+        <span class="ird-label">Study focus</span>
+        <span class="ird-value">CulturalBERT-VLAP clinical signal accuracy and member outcome validation in production deployment</span>
+      </div>
+      <div class="irb-detail">
+        <span class="ird-label">Population</span>
+        <span class="ird-value">BIPOC, LGBTQ+, and first-generation youth in active Vasl pilot programs</span>
+      </div>
+      <div class="irb-detail">
+        <span class="ird-label">Evidence use</span>
+        <span class="ird-value">Peer-reviewed findings available to partner organizations for grant applications and funder reporting upon publication</span>
+      </div>
+      <div class="irb-detail">
+        <span class="ird-label">Status</span>
+        <span class="ird-value">Active &mdash; results to be published upon study completion</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 06 &mdash; CUSTOM ANALYSIS
+════════════════════════════════════ -->
+<section id="custom">
+  <div class="custom-bg" aria-hidden="true">ROI</div>
+  <div class="custom-inner">
+    <div class="custom-left">
+      <div class="chapter-label muted reveal">Chapter 06 &mdash; For Your Organization</div>
+      <h2 class="custom-headline reveal d1">
+        What does<br>
+        Vasl's ROI look like<br>
+        <em>for your population?</em>
+      </h2>
+      <p class="custom-body reveal d2">
+        The numbers above are aggregate across all pilot deployments. Your population, your cost baseline, and your funding structure will produce a different ROI calculation &mdash; and we'll build it with you. We provide a custom outcomes model based on your org size, population demographics, current mental health utilization costs, and available funding mechanisms.
+      </p>
+      <div class="custom-actions reveal d3">
+        <a href="contact.html?subject=Outcomes Analysis Request" class="btn-light">Request Outcomes Analysis</a>
+        <a href="platform.html" class="btn-ghost-light">Platform overview</a>
+      </div>
+    </div>
+
+    <div class="custom-right reveal d2">
+      <div class="custom-item">
+        <span class="ci-num">01</span>
+        <div>
+          <div class="ci-title">Population baseline assessment</div>
+          <div class="ci-desc">We document your current member population demographics, existing mental health utilization patterns, and current intervention costs &mdash; the baseline the ROI model builds from.</div>
+        </div>
+      </div>
+      <div class="custom-item">
+        <span class="ci-num">02</span>
+        <div>
+          <div class="ci-title">Cost scenario modeling</div>
+          <div class="ci-desc">We model three deployment scenarios &mdash; conservative, base, and optimistic &mdash; based on your member count, organizational type, and available payer or grant funding mechanisms.</div>
+        </div>
+      </div>
+      <div class="custom-item">
+        <span class="ci-num">03</span>
+        <div>
+          <div class="ci-title">Medicaid billing analysis</div>
+          <div class="ci-desc">For school districts and community health centers: we calculate your specific Medicaid billing recovery potential and net cost after billing &mdash; with documentation to support the billing claim.</div>
+        </div>
+      </div>
+      <div class="custom-item">
+        <span class="ci-num">04</span>
+        <div>
+          <div class="ci-title">Grant and funder documentation</div>
+          <div class="ci-desc">We provide IRB study data, pilot outcome reports, and the VLAP technical specification in formats designed for the grant applications and funder presentations your organization submits.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-sitemap">
+    <div class="fs-brand">
+      <a href="index.html" class="footer-logo">Vasl <span>Health</span></a>
+      <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
+      <a href="contact.html" class="fs-cta">Request a Demo &rarr;</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Platform</div>
+      <a href="platform.html">Platform Overview</a>
+      <a href="vlap.html">VLAP</a>
+      <a href="ai-model.html">AI Model</a>
+      <a href="technology.html">Technology</a>
+      <a href="peer-groups.html">Peer Groups</a>
+      <a href="teletherapy.html">Teletherapy</a>
+      <a href="prototype.html">Live Demo Portal</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Who We Serve</div>
+      <a href="for-schools.html">For Schools</a>
+      <a href="for-organizations.html">For Organizations</a>
+      <a href="outcomes.html">Outcomes</a>
+      <a href="clinical-outcomes.html">Clinical Outcomes</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Company</div>
+      <a href="about.html">About Vasl</a>
+      <a href="team.html">Team</a>
+      <a href="careers.html">Careers</a>
+      <a href="research.html">Research</a>
+      <a href="blog.html">Blog &amp; Insights</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Support &amp; Legal</div>
+      <a href="support.html">Help Center</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="baa.html">Business Associate Agreement</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 Vasl Health, Inc. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="baa.html">BAA</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── SCROLL REVEAL ─── -->
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.06, rootMargin: '0px 0px -24px 0px' });
+  reveals.forEach(el => io.observe(el));
+
+  window.addEventListener('load', () => {
+    reveals.forEach((el, i) => {
+      if (el.getBoundingClientRect().top < window.innerHeight) {
+        setTimeout(() => el.classList.add('visible'), i * 55);
+      }
+    });
+  });
+</script>
+</body>
+</html>
