@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peer Groups &mdash; Vasl Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  :root {
+    --warm-white:  #FAF7F2;
+    --parchment:   #F0EAE0;
+    --ink:         #1C1C1C;
+    --ink-70:      rgba(28,28,28,0.70);
+    --ink-50:      rgba(28,28,28,0.50);
+    --ink-25:      rgba(28,28,28,0.25);
+    --ink-12:      rgba(28,28,28,0.12);
+    --clay:        #C4896F;
+    --clay-light:  #E8C4AE;
+    --clay-pale:   #F5E6DC;
+    --deep-green:  #2D4A3E;
+    --dust:        #8B7B6B;
+    --chalk:       #E2DAD0;
+    --charcoal:    #222222;
+
+    --serif: 'Newsreader', Georgia, serif;
+    --sans:  'IBM Plex Sans', sans-serif;
+    --mono:  'IBM Plex Mono', monospace;
+    --gutter: 7vw;
+  }
+
+  body {
+    background: var(--warm-white);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: 999;
+    pointer-events: none; opacity: 0.028;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 256px;
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(22px);
+    transition: opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .d1 { transition-delay: 0.10s; } .d2 { transition-delay: 0.22s; }
+  .d3 { transition-delay: 0.34s; } .d4 { transition-delay: 0.46s; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px var(--gutter);
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(250,247,242,0.92);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--ink-12);
+  }
+  .nav-logo { font-family: var(--serif); font-size: 22px; font-weight: 400; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
+  .nav-logo span { color: var(--clay); font-style: italic; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { font-family: var(--mono); font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--dust); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+  .nav-cta { font-family: var(--mono); font-size: 10px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--deep-green); border: 1px solid var(--deep-green); padding: 9px 20px; text-decoration: none; transition: background 0.22s, color 0.22s; }
+  .nav-cta:hover { background: var(--deep-green); color: var(--warm-white); }
+
+  /* ─── SHARED ─── */
+  .chapter-label {
+    font-family: var(--mono); font-size: 10px; font-weight: 300; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--clay);
+    display: flex; align-items: center; gap: 12px; margin-bottom: 52px;
+  }
+  .chapter-label::after { content: ''; display: block; width: 36px; height: 1px; background: var(--clay); opacity: 0.45; }
+  .chapter-label.light { color: var(--clay-light); }
+  .chapter-label.light::after { background: var(--clay-light); }
+  .chapter-label.muted { color: rgba(250,247,242,0.35); }
+  .chapter-label.muted::after { background: rgba(250,247,242,0.35); }
+
+  section { padding: 130px var(--gutter); position: relative; }
+
+  .btn-dark { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--ink); color: var(--warm-white); padding: 16px 32px; text-decoration: none; display: inline-block; transition: background 0.22s; }
+  .btn-dark:hover { background: var(--deep-green); }
+  .btn-outline { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dust); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s; }
+  .btn-outline:hover { color: var(--ink); }
+  .btn-outline::after { content: '→'; font-size: 14px; }
+  .btn-light { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--warm-white); color: var(--ink); padding: 16px 32px; text-decoration: none; display: inline-block; transition: background 0.22s; }
+  .btn-light:hover { background: var(--clay-light); }
+  .btn-ghost-light { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250,247,242,0.40); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s; }
+  .btn-ghost-light:hover { color: var(--warm-white); }
+  .btn-ghost-light::after { content: '→'; }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 01 — WHY PEER COMES FIRST
+  ═══════════════════════════════════════════ */
+  #first {
+    min-height: 100vh;
+    padding-top: 180px; padding-bottom: 140px;
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--chalk);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 100px;
+    align-items: center;
+  }
+
+  .first-left {}
+
+  .first-kicker {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--dust); margin-bottom: 40px; display: block;
+  }
+
+  .first-headline {
+    font-family: var(--serif);
+    font-size: clamp(48px, 5.8vw, 84px);
+    font-weight: 300; line-height: 1.03; letter-spacing: -0.03em;
+    color: var(--ink); margin-bottom: 48px;
+  }
+  .first-headline em { font-style: italic; color: var(--clay); }
+
+  .first-body {
+    font-size: 19px; font-weight: 300; line-height: 1.72;
+    color: var(--ink-70); max-width: 460px; margin-bottom: 52px;
+  }
+
+  .first-actions { display: flex; align-items: center; gap: 32px; }
+
+  .first-right {
+    border-left: 1px solid var(--chalk); padding-left: 80px;
+    display: flex; flex-direction: column; gap: 0;
+  }
+
+  /* Opening voices — three member moments */
+  .voice-item {
+    padding: 36px 0; border-bottom: 1px solid var(--chalk);
+  }
+  .voice-item:first-child { padding-top: 0; }
+  .voice-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .voice-quote {
+    font-family: var(--serif); font-size: 20px; font-style: italic;
+    font-weight: 300; line-height: 1.45; color: var(--ink); margin-bottom: 14px;
+  }
+
+  .voice-context {
+    font-size: 14px; font-weight: 300; line-height: 1.65; color: var(--ink-50);
+    margin-bottom: 10px;
+  }
+
+  .voice-tag {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--clay);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .voice-tag::before { content: ''; display: block; width: 14px; height: 1px; background: var(--clay); }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 02 — THE CONVICTION
+  ═══════════════════════════════════════════ */
+  #conviction {
+    background: var(--deep-green);
+    color: var(--warm-white);
+    padding-top: 150px; padding-bottom: 150px;
+  }
+
+  .conviction-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0 120px; align-items: start;
+  }
+
+  .conviction-left {}
+
+  .conviction-headline {
+    font-family: var(--serif);
+    font-size: clamp(38px, 4.5vw, 64px);
+    font-weight: 300; line-height: 1.06; letter-spacing: -0.025em;
+    color: var(--warm-white); margin-bottom: 40px;
+  }
+  .conviction-headline em { font-style: italic; color: var(--clay-light); }
+
+  .conviction-body {
+    font-size: 18px; font-weight: 300; line-height: 1.75;
+    color: rgba(250,247,242,0.60); max-width: 480px; margin-bottom: 40px;
+  }
+
+  .conviction-pull {
+    border-left: 2px solid var(--clay);
+    padding: 24px 32px;
+    background: rgba(250,247,242,0.04);
+    font-family: var(--serif); font-size: 21px; font-style: italic;
+    font-weight: 300; line-height: 1.5; color: var(--warm-white);
+  }
+
+  .conviction-right { padding-top: 8px; }
+
+  .sequence-list { display: flex; flex-direction: column; gap: 0; }
+
+  .seq-item {
+    padding: 32px 0; border-bottom: 1px solid rgba(250,247,242,0.10);
+    display: grid; grid-template-columns: 48px 1fr; gap: 20px; align-items: start;
+  }
+  .seq-item:last-child { border-bottom: none; }
+
+  .seq-num {
+    font-family: var(--serif); font-size: 40px; font-weight: 300;
+    color: var(--clay-light); line-height: 1; letter-spacing: -0.04em;
+  }
+
+  .seq-right {}
+  .seq-title {
+    font-family: var(--serif); font-size: 21px; font-weight: 400;
+    color: var(--warm-white); margin-bottom: 10px; line-height: 1.25; letter-spacing: -0.01em;
+  }
+  .seq-body {
+    font-size: 14px; font-weight: 300; line-height: 1.7;
+    color: rgba(250,247,242,0.50); max-width: 380px;
+  }
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 03 — THE GROUPS
+  ═══════════════════════════════════════════ */
+  #groups {
+    background: var(--parchment);
+    padding-top: 150px; padding-bottom: 150px;
+    border-top: 1px solid var(--chalk); border-bottom: 1px solid var(--chalk);
+  }
+
+  .groups-header {
+    display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px;
+    align-items: end; margin-bottom: 90px;
+    padding-bottom: 60px; border-bottom: 1px solid var(--chalk);
+  }
+
+  .groups-headline {
+    font-family: var(--serif);
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 300; line-height: 1.08; letter-spacing: -0.025em; color: var(--ink);
+  }
+  .groups-headline em { font-style: italic; color: var(--clay); }
+
+  .groups-intro {
+    font-size: 18px; font-weight: 300; line-height: 1.72; color: var(--ink-70);
+  }
+
+  /* Featured groups — editorial rows, not cards */
+  .group-row {
+    display: grid; grid-template-columns: 260px 1fr 1fr; gap: 0 60px;
+    padding: 64px 0; border-bottom: 1px solid var(--chalk); align-items: start;
+  }
+  .group-row:last-child { border-bottom: none; }
+
+  .group-left {}
+
+  .group-community {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .group-community::before { content: ''; display: block; width: 16px; height: 1px; background: var(--clay); }
+
+  .group-name {
+    font-family: var(--serif); font-size: 30px; font-weight: 400;
+    color: var(--ink); line-height: 1.15; letter-spacing: -0.015em; margin-bottom: 20px;
+  }
+
+  .group-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .group-tag {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dust); border: 1px solid var(--chalk); padding: 4px 10px;
+  }
+
+  .group-mid {}
+
+  .group-scene {
+    font-family: var(--serif); font-size: 19px; font-style: italic;
+    font-weight: 300; line-height: 1.45; color: var(--ink); margin-bottom: 18px;
+  }
+
+  .group-desc {
+    font-size: 15px; font-weight: 300; line-height: 1.72; color: var(--ink-70);
+  }
+
+  .group-right { padding-top: 4px; }
+
+  .group-format-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--dust); margin-bottom: 16px;
+  }
+
+  .group-format-item {
+    padding: 14px 0; border-bottom: 1px solid var(--chalk);
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  .group-format-item:last-child { border-bottom: none; }
+
+  .gfi-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dust); flex-shrink: 0; min-width: 80px;
+  }
+  .gfi-value {
+    font-size: 14px; font-weight: 300; line-height: 1.5; color: var(--ink-70);
+  }
+
+  /* "And more" block */
+  .groups-more {
+    margin-top: 80px; padding-top: 60px; border-top: 1px solid var(--chalk);
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0;
+  }
+
+  .more-category {
+    padding: 36px 40px 36px 0; border-right: 1px solid var(--chalk);
+  }
+  .more-category:last-child { border-right: none; padding-right: 0; }
+  .more-category:nth-child(n+2) { padding-left: 40px; }
+
+  .more-cat-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 20px;
+  }
+
+  .more-cat-list { display: flex; flex-direction: column; gap: 0; }
+
+  .more-cat-item {
+    padding: 12px 0; border-bottom: 1px solid var(--chalk);
+    font-family: var(--serif); font-size: 17px; font-weight: 300; font-style: italic;
+    color: var(--ink);
+  }
+  .more-cat-item:last-child { border-bottom: none; }
+
+  .more-total {
+    margin-top: 52px; padding-top: 40px; border-top: 1px solid var(--chalk);
+    display: flex; align-items: baseline; gap: 24px;
+  }
+
+  .more-total-num {
+    font-family: var(--serif); font-size: 72px; font-weight: 300;
+    color: var(--clay); line-height: 1; letter-spacing: -0.04em;
+  }
+
+  .more-total-label {
+    font-size: 17px; font-weight: 300; color: var(--ink-70); max-width: 320px; line-height: 1.55;
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 04 — HOW IT WORKS
+  ═══════════════════════════════════════════ */
+  #howit {
+    background: var(--warm-white);
+    padding-top: 150px; padding-bottom: 150px;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .howit-header {
+    max-width: 720px; margin-bottom: 90px;
+  }
+
+  .howit-headline {
+    font-family: var(--serif);
+    font-size: clamp(40px, 4.8vw, 68px);
+    font-weight: 300; line-height: 1.06; letter-spacing: -0.03em; color: var(--ink);
+    margin-bottom: 28px;
+  }
+  .howit-headline em { font-style: italic; color: var(--clay); }
+
+  .howit-sub {
+    font-size: 18px; font-weight: 300; line-height: 1.72;
+    color: var(--ink-70); max-width: 580px;
+  }
+
+  /* Three pillars */
+  .pillar-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+    border-top: 1px solid var(--chalk);
+  }
+
+  .pillar {
+    padding: 60px 52px 60px 0; border-right: 1px solid var(--chalk);
+  }
+  .pillar:last-child { border-right: none; padding-right: 0; }
+  .pillar:nth-child(n+2) { padding-left: 52px; }
+
+  .pillar-num {
+    font-family: var(--serif); font-size: 64px; font-weight: 300;
+    color: var(--clay-light); line-height: 1; letter-spacing: -0.04em; margin-bottom: 24px;
+  }
+
+  .pillar-title {
+    font-family: var(--serif); font-size: 26px; font-weight: 400;
+    color: var(--ink); margin-bottom: 16px; line-height: 1.2; letter-spacing: -0.01em;
+  }
+
+  .pillar-body {
+    font-size: 15px; font-weight: 300; line-height: 1.72; color: var(--ink-70); margin-bottom: 24px;
+  }
+
+  .pillar-note {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--deep-green);
+    border: 1px solid var(--deep-green); padding: 5px 10px; display: inline-block;
+  }
+
+  /* Moderation detail — what human moderation actually means */
+  .moderation-block {
+    margin-top: 90px;
+    background: var(--parchment);
+    border: 1px solid var(--chalk);
+    overflow: hidden;
+  }
+
+  .mb-header {
+    background: var(--ink); padding: 20px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .mb-title {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: rgba(250,247,242,0.50);
+  }
+
+  .mb-badge {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--clay-light);
+    border: 1px solid rgba(196,137,111,0.35); padding: 3px 10px;
+  }
+
+  .mb-body {
+    padding: 52px 48px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;
+  }
+
+  .mb-left {}
+
+  .mb-headline {
+    font-family: var(--serif); font-size: clamp(24px, 2.5vw, 36px);
+    font-weight: 300; line-height: 1.2; letter-spacing: -0.02em;
+    color: var(--ink); margin-bottom: 20px;
+  }
+  .mb-headline em { font-style: italic; color: var(--clay); }
+
+  .mb-desc {
+    font-size: 15px; font-weight: 300; line-height: 1.72; color: var(--ink-70);
+  }
+
+  .mb-right { display: flex; flex-direction: column; gap: 0; }
+
+  .mb-item {
+    padding: 22px 0; border-bottom: 1px solid var(--chalk);
+    display: grid; grid-template-columns: 140px 1fr; gap: 20px;
+  }
+  .mb-item:last-child { border-bottom: none; }
+
+  .mb-item-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dust); padding-top: 3px; line-height: 1.5;
+  }
+
+  .mb-item-value {
+    font-size: 14px; font-weight: 300; line-height: 1.65; color: var(--ink-70);
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 05 — THE HANDOFF
+  ═══════════════════════════════════════════ */
+  #handoff {
+    background: var(--parchment);
+    padding-top: 150px; padding-bottom: 150px;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .handoff-header {
+    max-width: 720px; margin-bottom: 90px;
+  }
+
+  .handoff-headline {
+    font-family: var(--serif);
+    font-size: clamp(38px, 4.5vw, 64px);
+    font-weight: 300; line-height: 1.06; letter-spacing: -0.025em; color: var(--ink);
+    margin-bottom: 28px;
+  }
+  .handoff-headline em { font-style: italic; color: var(--clay); }
+
+  .handoff-sub {
+    font-size: 18px; font-weight: 300; line-height: 1.72;
+    color: var(--ink-70); max-width: 560px;
+  }
+
+  /* Handoff sequence — three stages with narrative */
+  .handoff-stages {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+    border-top: 1px solid var(--chalk);
+    position: relative;
+  }
+
+  /* Connecting arrow between stages */
+  .handoff-stages::before {
+    content: '';
+    position: absolute; top: 52px; left: calc(33.33% - 1px); right: calc(33.33% - 1px);
+    height: 1px; background: var(--clay-light); z-index: 0;
+  }
+
+  .handoff-stage {
+    padding: 48px 44px 48px 0; border-right: 1px solid var(--chalk); position: relative; z-index: 1;
+  }
+  .handoff-stage:last-child { border-right: none; padding-right: 0; }
+  .handoff-stage:nth-child(n+2) { padding-left: 44px; }
+
+  .hs-dot {
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--warm-white); border: 2px solid var(--clay);
+    margin-bottom: 24px; position: relative;
+  }
+  .handoff-stage:first-child .hs-dot { background: var(--clay); }
+
+  .hs-stage-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 14px;
+  }
+
+  .hs-name {
+    font-family: var(--serif); font-size: 28px; font-weight: 400;
+    color: var(--ink); margin-bottom: 18px; line-height: 1.15; letter-spacing: -0.015em;
+  }
+
+  .hs-body {
+    font-size: 15px; font-weight: 300; line-height: 1.72;
+    color: var(--ink-70); margin-bottom: 24px;
+  }
+
+  .hs-voice {
+    font-family: var(--serif); font-size: 17px; font-style: italic;
+    font-weight: 300; color: var(--ink); line-height: 1.45;
+    border-left: 2px solid var(--clay-light); padding-left: 20px;
+    margin-bottom: 14px;
+  }
+
+  .hs-voice-attr {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dust); padding-left: 22px;
+  }
+
+  /* The guarantee */
+  .handoff-guarantee {
+    margin-top: 80px; padding: 52px 60px; background: var(--ink);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+  }
+
+  .hg-headline {
+    font-family: var(--serif); font-size: clamp(26px, 2.8vw, 40px);
+    font-weight: 300; line-height: 1.15; letter-spacing: -0.02em; color: var(--warm-white);
+  }
+  .hg-headline em { font-style: italic; color: var(--clay-light); }
+
+  .hg-body {
+    font-size: 16px; font-weight: 300; line-height: 1.72;
+    color: rgba(250,247,242,0.52);
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 06 — BRING IT TO YOUR COMMUNITY
+  ═══════════════════════════════════════════ */
+  #bring {
+    background: var(--charcoal);
+    padding-top: 160px; padding-bottom: 160px;
+    overflow: hidden; position: relative;
+  }
+
+  .bring-bg {
+    position: absolute; bottom: -8vw; right: -3vw;
+    font-family: var(--serif); font-size: 36vw; font-weight: 300; font-style: italic;
+    color: rgba(250,247,242,0.018); pointer-events: none; user-select: none;
+    line-height: 1; letter-spacing: -0.05em;
+  }
+
+  .bring-inner {
+    position: relative; z-index: 2;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0 100px; align-items: start;
+  }
+
+  .bring-left {}
+
+  .bring-headline {
+    font-family: var(--serif); font-size: clamp(40px, 5vw, 70px);
+    font-weight: 300; line-height: 1.06; letter-spacing: -0.03em;
+    color: var(--warm-white); margin-bottom: 32px;
+  }
+  .bring-headline em { font-style: italic; color: var(--clay-light); }
+
+  .bring-body {
+    font-size: 18px; font-weight: 300; line-height: 1.72;
+    color: rgba(250,247,242,0.50); margin-bottom: 52px; max-width: 460px;
+  }
+
+  .bring-actions { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+
+  .bring-right { padding-top: 8px; }
+
+  .bring-list { display: flex; flex-direction: column; gap: 0; }
+
+  .bring-item {
+    padding: 28px 0; border-bottom: 1px solid rgba(250,247,242,0.09);
+    display: grid; grid-template-columns: 40px 1fr; gap: 20px; align-items: start;
+  }
+  .bring-item:last-child { border-bottom: none; }
+
+  .bi-num {
+    font-family: var(--mono); font-size: 10px; color: var(--clay-light); padding-top: 3px;
+  }
+
+  .bi-title {
+    font-family: var(--serif); font-size: 20px; font-weight: 400;
+    color: var(--warm-white); margin-bottom: 6px; line-height: 1.25;
+  }
+
+  .bi-desc {
+    font-size: 14px; font-weight: 300; color: rgba(250,247,242,0.42); line-height: 1.65;
+  }
+
+  /* ─── FOOTER ─── */
+  .footer-logo span { color: var(--clay); font-style: italic; }
+  .footer-nav a { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,247,242,0.30); text-decoration: none; transition: color 0.2s; }
+  .footer-nav a:hover { color: var(--warm-white); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1100px) {
+    #first { grid-template-columns: 1fr; gap: 80px; padding-top: 160px; }
+    .first-right { border-left: none; padding-left: 0; border-top: 1px solid var(--chalk); padding-top: 60px; }
+    .conviction-grid { grid-template-columns: 1fr; gap: 60px; }
+    .groups-header { grid-template-columns: 1fr; gap: 28px; }
+    .group-row { grid-template-columns: 1fr; gap: 40px; }
+    .group-left { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+    .groups-more { grid-template-columns: 1fr; }
+    .more-category { border-right: none; border-bottom: 1px solid var(--chalk); padding: 36px 0; }
+    .more-category:last-child { border-bottom: none; }
+    .more-category:nth-child(n) { padding-left: 0; }
+    .pillar-grid { grid-template-columns: 1fr; }
+    .pillar { border-right: none; border-bottom: 1px solid var(--chalk); padding: 52px 0; }
+    .pillar:last-child { border-bottom: none; }
+    .pillar:nth-child(n) { padding-left: 0; }
+    .mb-body { grid-template-columns: 1fr; gap: 40px; }
+    .handoff-stages { grid-template-columns: 1fr; }
+    .handoff-stages::before { display: none; }
+    .handoff-stage { border-right: none; border-bottom: 1px solid var(--chalk); padding: 44px 0; }
+    .handoff-stage:last-child { border-bottom: none; }
+    .handoff-stage:nth-child(n) { padding-left: 0; }
+    .handoff-guarantee { grid-template-columns: 1fr; gap: 32px; }
+    .bring-inner { grid-template-columns: 1fr; gap: 60px; }
+  }
+  @media (max-width: 768px) {
+    :root { --gutter: 5vw; }
+    .nav-links { display: none; }
+    .mb-item { grid-template-columns: 1fr; gap: 6px; }
+    .more-total { flex-direction: column; gap: 8px; }
+    .more-total-num { font-size: 52px; }
+  }
+  .footer-logo span{color:var(--clay);font-style:italic;}
+  .footer-nav a{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.32);text-decoration:none;}
+  .footer-nav a:hover{color:var(--warm-white);}
+  .footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+
+  .ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
+  .ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.2s;}
+  .ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .ham-btn.open span:nth-child(2){opacity:0;}
+  .ham-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+  @media(max-width:780px){
+    .ham-btn{display:flex;}
+    .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--warm);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{font-size:22px;letter-spacing:0.04em;}
+    .nav-cta{display:none;}
+  }
+
+  footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);padding:0;}
+  .footer-sitemap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:0;padding:56px 7vw 40px;border-bottom:1px solid rgba(250,247,242,0.08);}
+  .fs-brand{padding-right:40px;}
+  .footer-logo{font-family:var(--serif);font-size:22px;color:var(--warm-white,#FAF7F2);letter-spacing:-0.02em;text-decoration:none;display:block;margin-bottom:12px;}
+  .footer-logo span{color:var(--clay,#C4896F);font-style:italic;}
+  .footer-mission{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.28);line-height:1.8;margin-bottom:20px;}
+  .fs-cta{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:var(--clay,#C4896F);border:1px solid rgba(196,137,111,0.40);padding:9px 18px;text-decoration:none;transition:all 0.18s;}
+  .fs-cta:hover{background:rgba(196,137,111,0.12);}
+  .fs-col{padding-left:32px;border-left:1px solid rgba(250,247,242,0.06);}
+  .fs-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,247,242,0.30);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(250,247,242,0.06);}
+  .fs-col a{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,247,242,0.45);text-decoration:none;margin-bottom:10px;transition:color 0.15s;}
+  .fs-col a:hover{color:var(--clay,#C4896F);}
+  .footer-bottom{padding:20px 7vw;display:flex;align-items:center;justify-content:space-between;}
+  .footer-copy{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,0.20);}
+  .footer-legal{display:flex;gap:20px;}
+  .footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+  .footer-legal a:hover{color:var(--clay,#C4896F);}
+  @media(max-width:1100px){.footer-sitemap{grid-template-columns:1fr 1fr 1fr;gap:32px;}.fs-brand{grid-column:1/-1;padding-right:0;}.fs-col{border-left:none;padding-left:0;}}
+  @media(max-width:680px){.footer-sitemap{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}}
+  @media(max-width:400px){.footer-sitemap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="index.html" class="nav-logo">Vasl <span>Health</span></a>
+    <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="platform.html">Platform</a></li>
+    <li><a href="outcomes.html">Outcomes</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="#bring" class="nav-cta">Bring Vasl to Your Org</a>
+</nav>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 01 &mdash; WHY PEER COMES FIRST
+════════════════════════════════════ -->
+<section id="first">
+  <div class="first-left">
+    <span class="first-kicker reveal">Chapter 01 &mdash; Why Peer Comes First</span>
+    <h1 class="first-headline reveal d1">
+      Understanding<br>
+      before<br>
+      <em>intervention.</em>
+    </h1>
+    <p class="first-body reveal d2">
+      For most youth, the barrier to care isn't access. It's the belief that no one in the care system will actually understand them. Peer groups break that belief first. Not because they replace clinical support &mdash; but because they prove, before any clinician enters the room, that someone in this space already gets it.
+    </p>
+    <div class="first-actions reveal d3">
+      <a href="#groups" class="btn-dark">See the groups</a>
+      <a href="#bring" class="btn-outline">For organizations</a>
+    </div>
+  </div>
+
+  <div class="first-right reveal d2">
+    <div class="voice-item">
+      <p class="voice-quote">"I didn't think anyone else felt exactly like this. Then I read what someone else wrote and I was like &mdash; that's me. That's word for word me."</p>
+      <p class="voice-context">The moment of recognition that peer community provides &mdash; before any clinical relationship begins &mdash; is often the turning point that makes clinical engagement possible at all.</p>
+      <div class="voice-tag">First-Gen Focus group member &mdash; 19</div>
+    </div>
+
+    <div class="voice-item">
+      <p class="voice-quote">"I came for the group. I stayed because someone finally asked me how I was actually doing."</p>
+      <p class="voice-context">Peer groups create the relational context that makes the transition to coaching and clinical support feel like continuity rather than escalation.</p>
+      <div class="voice-tag">Healing in Community member &mdash; 16</div>
+    </div>
+
+    <div class="voice-item">
+      <p class="voice-quote">"It wasn't therapy. It was just people who knew."</p>
+      <p class="voice-context">That distinction matters more than any clinical argument for peer support. Sometimes the most therapeutic thing is simply not having to explain yourself from the beginning.</p>
+      <div class="voice-tag">Queer & Thriving member &mdash; 17</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 02 &mdash; THE CONVICTION
+════════════════════════════════════ -->
+<section id="conviction">
+  <div class="chapter-label light reveal">Chapter 02 &mdash; The Conviction</div>
+
+  <div class="conviction-grid">
+    <div class="conviction-left">
+      <h2 class="conviction-headline reveal d1">
+        Community is not<br>
+        a supplement to care.<br>
+        It's the <em>foundation</em><br>of it.
+      </h2>
+      <p class="conviction-body reveal d2">
+        The clinical system treats peer support as a complementary service &mdash; something to add after the real work begins. Vasl inverts that sequence. Peer community comes first, because it's where the trust that makes clinical care possible is built. A young person who has already found people who understand them is far more likely to take the next step.
+      </p>
+      <blockquote class="conviction-pull reveal d3">
+        "You don't need a diagnosis to deserve people who understand you. The community comes first. The care follows."
+      </blockquote>
+    </div>
+
+    <div class="conviction-right reveal d2">
+      <div class="sequence-list">
+        <div class="seq-item">
+          <div class="seq-num">01</div>
+          <div class="seq-right">
+            <div class="seq-title">Recognition &mdash; someone in this space already understands.</div>
+            <div class="seq-body">The first thing a peer group does is prove that lived experience is shared. That proof &mdash; that someone else's words match your own interior &mdash; is what makes the next step imaginable. You don't have to explain yourself from the beginning. That's already been done.</div>
+          </div>
+        </div>
+
+        <div class="seq-item">
+          <div class="seq-num">02</div>
+          <div class="seq-right">
+            <div class="seq-title">Trust &mdash; built before any clinical relationship begins.</div>
+            <div class="seq-body">Peer groups build the relational trust that makes clinical engagement feel like continuity rather than intrusion. A member who has already found their people inside the Vasl platform comes to coaching and therapy differently &mdash; less defended, more ready.</div>
+          </div>
+        </div>
+
+        <div class="seq-item">
+          <div class="seq-num">03</div>
+          <div class="seq-right">
+            <div class="seq-title">Readiness &mdash; the clinical door opens naturally, not as a referral.</div>
+            <div class="seq-body">The transition from peer group to coach to clinician is not an escalation. It is a deepening of the same relationship. By the time a member is ready for clinical support, they already belong to a community that will still be there after each session ends.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 03 &mdash; THE GROUPS
+════════════════════════════════════ -->
+<section id="groups">
+  <div class="chapter-label reveal">Chapter 03 &mdash; The Groups</div>
+
+  <div class="groups-header">
+    <h2 class="groups-headline reveal d1">
+      Built around<br>
+      who you <em>actually</em><br>
+      are.
+    </h2>
+    <p class="groups-intro reveal d2">
+      Every Vasl peer group is organized around a specific shared experience &mdash; not a diagnosis, not a risk category, not a demographic segment. The organizing principle is recognition: if a member reads the group's name and thinks "that's me," they're in the right place. Moderated by trained human moderators. Safe from the first message.
+    </p>
+  </div>
+
+  <!-- Group 01 &mdash; Healing in Community -->
+  <div class="group-row reveal">
+    <div class="group-left">
+      <div class="group-community">BIPOC Communities</div>
+      <div class="group-name">Healing in<br>Community</div>
+      <div class="group-tags">
+        <span class="group-tag">Black & Brown</span>
+        <span class="group-tag">Trauma</span>
+        <span class="group-tag">Healing</span>
+        <span class="group-tag">Community care</span>
+      </div>
+    </div>
+    <div class="group-mid">
+      <p class="group-scene">"Healing is not the absence of pain. It's the presence of people who don't need you to perform being okay."</p>
+      <p class="group-desc">A space that centers Black and brown experiences of healing &mdash; the kind that doesn't require code-switching, doesn't ask you to translate your pain into clinical language, and doesn't treat your cultural context as a complicating factor. Processing grief, racial trauma, family pressure, and collective weight &mdash; together, with people who carry the same things.</p>
+    </div>
+    <div class="group-right">
+      <div class="group-format-label">Group Format</div>
+      <div class="group-format-item">
+        <span class="gfi-label">Structure</span>
+        <span class="gfi-value">Open group with weekly facilitated theme. Drop-in welcome.</span>
+      </div>
+      <div class="group-format-item">
+        <span class="gfi-label">Moderation</span>
+        <span class="gfi-value">Two trained peer moderators. Community norms co-created at launch.</span>
+      </div>
+      <div class="group-format-item">
+        <span class="gfi-label">Language</span>
+        <span class="gfi-value">AAVE and code-switching fully welcomed. No translation required.</span>
+      </div>
+      <div class="group-format-item">
+        <span class="gfi-label">Access</span>
+        <span class="gfi-value">Available to all Vasl members. No application or screening.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Group 02 &mdash; Queer & Thriving -->
+  <div class="group-row reveal">
+    <div class="group-left">
+      <div class="group-community">LGBTQ+ Youth</div>
+      <div class="group-name">Queer &<br>Thriving</div>
+      <div class="group-tags">
+        <span class="group-tag">LGBTQ+</span>
+        <span class="group-tag">Identity</span>
+        <span class="group-tag">Affirmation</span>
+        <span class="group-tag">Coming out</span>
+      </div>
+    </div>
+    <div class="group-mid">
+      <p class="group-scene">"I spent so long being someone's concept of what I should be. This is the first place I didn't have to explain myself before I could just exist."</p>
+      <p class="group-desc">An explicitly affirming space for LGBTQ+ youth navigating identity, coming out, family response, political stressors, and the particular exhaustion of having to justify your existence in every other room. No explaining your pronouns. No defending your identity. Just people who already know.</p>
+    </div>
+    <div class="group-right">
+      <div class="group-format-label">Group Format</div>
+      <div class="group-format-item">
+        <span class="gfi-label">Structure</span>
+        <span class="gfi-value">Open group with identity-specific subgroups for trans youth, questioning members, and LGBTQ+ youth of color.</span>
+      </div>
+      <div class="group-format-item">
+        <span class="gfi-label">Moderation</span>
+        <span class="gfi-value">LGBTQ+-identified moderators. Anti-discrimination policy actively enforced.</span>
+      </div>
+      <div class="group-format-item">
+        <span class="gfi-label">Safety</span>
+        <span class="gfi-value">Private group &mdash; not visible to non-members. Anonymity supported.</span>
+      </div>
+      <div class="group-format-item">
+        <span class="gfi-label">Climate note</span>
+        <span class="gfi-value">Anti-LGBTQ+ political stressors are acknowledged and held &mdash; not minimized or reframed as manageable.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Group 03 &mdash; First-Gen Focus -->
+  <div class="group-row reveal">
+    <div class="group-left">
+      <div class="group-community">First-Generation</div>
+      <div class="group-name">First-Gen<br>Focus</div>
+      <div class="group-tags">
+        <span class="group-tag">First-gen</span>
+        <span class="group-tag">Academic pressure</span>
+        <span class="group-tag">Family</span>
+        <span class="group-tag">Immigration</span>
+      </div>
+    </div>
+    <div class="group-mid">
+      <p class="group-scene">"Nobody at home gets what college actually feels like. Nobody at school gets what home actually feels like. This is the only place both are true at once."</p>
+      <p class="group-desc">For first-generation college students navigating the pressures that no one in their family could have prepared them for &mdash; the guilt of leaving, the isolation of arriving, the impossible math of representing an entire family's sacrifice while still being eighteen and figuring out who you are. The weight is specific. The people here already know it.</p>
+    </div>
+    <div class="group-right">
+      <div class="group-format-label">Group Format</div>
+      <div class="group-format-item">
+        <span class="gfi-label">Structure</span>
+        <span class="gfi-value">Semester-paced themes. Academic stress cycles acknowledged and planned around.</span>
+      </div>
+      <div class="group-format-item">
+        <span class="gfi-label">Languages</span>
+        <span class="gfi-value">Multilingual threads available. Spanish, Tagalog, Somali, and more by deployment.</span>
+      </div>
+      <div class="group-format-item">
+        <span class="gfi-label">Subgroups</span>
+        <span class="gfi-value">Immigration-specific thread for undocumented and DACA youth available within the group.</span>
+      </div>
+      <div class="group-format-item">
+        <span class="gfi-label">Connection</span>
+        <span class="gfi-value">Active mentorship connections with older first-gen members who've already navigated what's ahead.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Group 04 &mdash; Black Joy Collective -->
+  <div class="group-row reveal">
+    <div class="group-left">
+      <div class="group-community">Black Community</div>
+      <div class="group-name">Black Joy<br>Collective</div>
+      <div class="group-tags">
+        <span class="group-tag">Black community</span>
+        <span class="group-tag">Joy</span>
+        <span class="group-tag">Excellence</span>
+        <span class="group-tag">Care</span>
+      </div>
+    </div>
+    <div class="group-mid">
+      <p class="group-scene">"Everyone wants us to talk about our pain. This is the place we get to talk about everything else &mdash; and that turns out to be healing too."</p>
+      <p class="group-desc">Healing includes celebration. Black Joy Collective centers the full range of Black experience &mdash; not only grief and trauma, but excellence, creativity, community care, and the specific pleasure of being in a room where your joy doesn't require explanation or performance. The healing in this space comes from being seen whole, not only seen suffering.</p>
+    </div>
+    <div class="group-right">
+      <div class="group-format-label">Group Format</div>
+      <div class="group-format-item">
+        <span class="gfi-label">Structure</span>
+        <span class="gfi-value">Celebration-forward alongside reflection. No obligation to center pain.</span>
+      </div>
+      <div class="group-format-item">
+        <span class="gfi-label">Events</span>
+        <span class="gfi-value">Monthly virtual group events including community showcases and collective reflection moments.</span>
+      </div>
+      <div class="group-format-item">
+        <span class="gfi-label">Tone</span>
+        <span class="gfi-value">Rooted in Black cultural tradition. AAVE fully welcomed. Dominant-culture normativity actively resisted.</span>
+      </div>
+      <div class="group-format-item">
+        <span class="gfi-label">Moderation</span>
+        <span class="gfi-value">Black-identified moderators. Community norms developed by founding members.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- And more -->
+  <div class="groups-more reveal">
+    <div class="more-category">
+      <div class="more-cat-label">Loss & Grief</div>
+      <div class="more-cat-list">
+        <div class="more-cat-item">Grief Without a Map</div>
+        <div class="more-cat-item">After the Loss</div>
+        <div class="more-cat-item">Sudden & Unexpected</div>
+      </div>
+    </div>
+    <div class="more-category">
+      <div class="more-cat-label">Identity & Belonging</div>
+      <div class="more-cat-list">
+        <div class="more-cat-item">Trans & Non-Binary Support</div>
+        <div class="more-cat-item">Immigrants & Diaspora</div>
+        <div class="more-cat-item">Men's Mental Health</div>
+        <div class="more-cat-item">Mixed Identity</div>
+      </div>
+    </div>
+    <div class="more-category">
+      <div class="more-cat-label">Life Pressure</div>
+      <div class="more-cat-list">
+        <div class="more-cat-item">Anxiety & Overthinking</div>
+        <div class="more-cat-item">Housing & Economic Stress</div>
+        <div class="more-cat-item">Mindful Mondays</div>
+        <div class="more-cat-item">Family Pressure</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="more-total reveal">
+    <div class="more-total-num">70<span style="font-size:36px; letter-spacing:0">+</span></div>
+    <div class="more-total-label">groups active across the platform &mdash; with new groups launched in partnership with each community organization we serve.</div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 04 &mdash; HOW IT WORKS
+════════════════════════════════════ -->
+<section id="howit">
+  <div class="chapter-label reveal">Chapter 04 &mdash; How It Works</div>
+
+  <div class="howit-header">
+    <h2 class="howit-headline reveal d1">
+      Safe space is not<br>
+      a promise.<br>
+      It's a <em>practice.</em>
+    </h2>
+    <p class="howit-sub reveal d2">
+      The safety of a Vasl peer group is built by human moderators, community norms developed with the members themselves, and a clinical support structure that is always present &mdash; and never intrusive. Here is what that looks like in practice.
+    </p>
+  </div>
+
+  <div class="pillar-grid">
+    <div class="pillar reveal">
+      <div class="pillar-num">01</div>
+      <div class="pillar-title">Trained human moderators &mdash; in every group, from day one.</div>
+      <p class="pillar-body">Every Vasl peer group has at least one trained peer moderator &mdash; a person, not a content filter. Moderators complete Vasl's moderation training, which covers de-escalation, cultural responsiveness, community norm facilitation, and the specific dynamics of mental health conversation in online spaces. They are present. They are accountable. They know the community they serve.</p>
+      <span class="pillar-note">Human moderation</span>
+    </div>
+
+    <div class="pillar reveal d1">
+      <div class="pillar-num">02</div>
+      <div class="pillar-title">Community norms built with members &mdash; not handed down from above.</div>
+      <p class="pillar-body">Vasl peer group norms are co-created at the group's launch by its founding members and moderators &mdash; not imposed by platform policy. The norms reflect the community's own understanding of what makes a space safe for them. This is not a philosophical preference. It is why the norms are respected: because they belong to the members who made them.</p>
+      <span class="pillar-note">Member-authored norms</span>
+    </div>
+
+    <div class="pillar reveal d2">
+      <div class="pillar-num">03</div>
+      <div class="pillar-title">Clinical oversight &mdash; present in the structure, not in the conversation.</div>
+      <p class="pillar-body">A licensed clinical supervisor oversees every peer group &mdash; reviewing moderator reports, supporting moderators through difficult situations, and maintaining the clinical accountability of the space. Members interact with each other and their moderators. The clinical oversight lives in the structure, not in the conversation itself. The group feels like community. It is also held by care.</p>
+      <span class="pillar-note">Clinical accountability</span>
+    </div>
+  </div>
+
+  <!-- Moderation detail -->
+  <div class="moderation-block reveal">
+    <div class="mb-header">
+      <span class="mb-title">Moderation Model &mdash; Vasl Peer Groups</span>
+      <span class="mb-badge">Human-led &middot; Clinically supervised</span>
+    </div>
+    <div class="mb-body">
+      <div class="mb-left">
+        <h3 class="mb-headline">
+          The safety layer is<br>
+          <em>human.</em> Always.
+        </h3>
+        <p class="mb-desc">
+          Vasl peer groups are not AI-moderated spaces. Content in peer groups is not scanned by VLAP or any automated system. What protects the community is a trained human moderator who knows the group, knows the members, and exercises judgment &mdash; not a filter that fires on keywords.<br><br>
+          VLAP processes language that members share through the care channels they've chosen &mdash; check-ins, coach messaging. Peer group conversation belongs to the community. Its safety is held by people.
+        </p>
+      </div>
+      <div class="mb-right">
+        <div class="mb-item">
+          <div class="mb-item-label">Moderation layer</div>
+          <div class="mb-item-value">Trained peer moderators &mdash; minimum one per group. Culturally matched to the community the group serves wherever possible.</div>
+        </div>
+        <div class="mb-item">
+          <div class="mb-item-label">Clinical layer</div>
+          <div class="mb-item-value">Licensed clinical supervisor accessible to every moderator. Escalation pathway documented and practiced &mdash; not improvised.</div>
+        </div>
+        <div class="mb-item">
+          <div class="mb-item-label">AI in this space</div>
+          <div class="mb-item-value">VLAP does not scan or monitor peer group posts. Members are not flagged by automated systems. Human moderators surface concerns to clinical oversight when their judgment warrants it.</div>
+        </div>
+        <div class="mb-item">
+          <div class="mb-item-label">Crisis response</div>
+          <div class="mb-item-value">Moderators are trained to recognize distress signals and escalate to clinical supervisors. 988 integration available. Response is human, direct, and without delay.</div>
+        </div>
+        <div class="mb-item">
+          <div class="mb-item-label">Member privacy</div>
+          <div class="mb-item-value">Group membership is not shared outside the group. Member activity in peer groups does not generate automated alerts or clinical flags.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 05 &mdash; THE HANDOFF
+════════════════════════════════════ -->
+<section id="handoff">
+  <div class="chapter-label reveal">Chapter 05 &mdash; The Handoff</div>
+
+  <div class="handoff-header">
+    <h2 class="handoff-headline reveal d1">
+      The group is not<br>
+      the destination.<br>
+      It's the <em>beginning.</em>
+    </h2>
+    <p class="handoff-sub reveal d2">
+      When a member is ready for more support, the transition from peer group to coach to clinical care happens as a deepening &mdash; not an escalation. The relationship continues. The community stays. No one is handed off to a stranger.
+    </p>
+  </div>
+
+  <div class="handoff-stages">
+    <div class="handoff-stage reveal">
+      <div class="hs-dot"></div>
+      <div class="hs-stage-label">Stage One</div>
+      <div class="hs-name">Peer Group</div>
+      <p class="hs-body">The entry point. The place where recognition happens first &mdash; before any clinical relationship begins. A member finds people who carry what they carry. The barrier to the next step drops not because someone pushed them, but because they've already seen what it looks like to be understood.</p>
+      <p class="hs-voice">"I came because someone in the group said exactly what I'd been thinking for two years. I stayed because they said the part after it too."</p>
+      <div class="hs-voice-attr">First-Gen Focus member &mdash; 20</div>
+    </div>
+
+    <div class="handoff-stage reveal d1">
+      <div class="hs-dot"></div>
+      <div class="hs-stage-label">Stage Two</div>
+      <div class="hs-name">Coach</div>
+      <p class="hs-body">The proactive relationship. A Vasl coach reaches out &mdash; not because a flag was triggered, but because the member is in the platform and deserves a person in their corner. The coach already knows the community. They show up already oriented, already present. No intake. No starting from zero.</p>
+      <p class="hs-voice">"She didn't ask me to explain myself. She already knew what I was navigating. I just had to tell her where I was in it."</p>
+      <div class="hs-voice-attr">Healing in Community member &mdash; 17</div>
+    </div>
+
+    <div class="handoff-stage reveal d2">
+      <div class="hs-dot"></div>
+      <div class="hs-stage-label">Stage Three</div>
+      <div class="hs-name">Clinical Care</div>
+      <p class="hs-body">The deepening. When a member is ready for licensed therapy, the transition is warm &mdash; not a referral to a separate system. The clinician receives VLAP signal context, coaching notes, and community history before the first session. The member doesn't explain themselves from the beginning. They continue a conversation already in progress.</p>
+      <p class="hs-voice">"She already knew about the group. She already knew about my coach. I didn't have to catch anyone up. That was the first time I didn't dread an appointment."</p>
+      <div class="hs-voice-attr">Queer & Thriving member &mdash; 18</div>
+    </div>
+  </div>
+
+  <div class="handoff-guarantee reveal">
+    <div>
+      <h3 class="hg-headline">
+        The peer group is still there<br>
+        <em>after every session.</em>
+      </h3>
+    </div>
+    <div>
+      <p class="hg-body">Clinical care is not the end of community. A member who begins therapy doesn't leave their peer group &mdash; they deepen into both simultaneously. The community remains the place where lived experience is held. The clinical relationship deepens the understanding of it. These are not competing spaces. They are two layers of the same care.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 06 &mdash; BRING IT TO YOUR COMMUNITY
+════════════════════════════════════ -->
+<section id="bring">
+  <div class="bring-bg" aria-hidden="true">Us</div>
+  <div class="bring-inner">
+    <div class="bring-left">
+      <div class="chapter-label muted reveal">Chapter 06 &mdash; For Organizations</div>
+      <h2 class="bring-headline reveal d1">
+        Launch the<br>
+        right groups for<br>
+        <em>your community.</em>
+      </h2>
+      <p class="bring-body reveal d2">
+        Vasl partners with community health centers, school-based programs, and youth-serving organizations to launch peer group infrastructure built specifically around their population. The groups carry the Vasl moderation model, clinical oversight structure, and platform safety architecture &mdash; but the community they serve is yours. We build with you, not for you.
+      </p>
+      <div class="bring-actions reveal d3">
+        <a href="contact.html" class="btn-light">Talk to Us</a>
+        <a href="platform.html" class="btn-ghost-light">Full platform overview</a>
+      </div>
+    </div>
+
+    <div class="bring-right reveal d2">
+      <div class="bring-list">
+        <div class="bring-item">
+          <span class="bi-num">01</span>
+          <div>
+            <div class="bi-title">Community needs assessment</div>
+            <div class="bi-desc">We work with your team to identify the specific lived experiences your population shares &mdash; and design group architecture around them, not around a default library.</div>
+          </div>
+        </div>
+
+        <div class="bring-item">
+          <span class="bi-num">02</span>
+          <div>
+            <div class="bi-title">Moderator recruitment and training</div>
+            <div class="bi-desc">We support your organization in identifying and training peer moderators drawn from within your community &mdash; people who know and are known by the members they'll serve.</div>
+          </div>
+        </div>
+
+        <div class="bring-item">
+          <span class="bi-num">03</span>
+          <div>
+            <div class="bi-title">Community norm facilitation</div>
+            <div class="bi-desc">Before each group launches, we facilitate a norm-setting process with founding members &mdash; so the community builds the rules that will govern it, not the platform.</div>
+          </div>
+        </div>
+
+        <div class="bring-item">
+          <span class="bi-num">04</span>
+          <div>
+            <div class="bi-title">Clinical supervision integration</div>
+            <div class="bi-desc">Your clinical team is integrated into the oversight structure from day one &mdash; so moderation support and escalation pathways are yours, not outsourced to a distant clinical team.</div>
+          </div>
+        </div>
+
+        <div class="bring-item">
+          <span class="bi-num">05</span>
+          <div>
+            <div class="bi-title">Ongoing group health reporting</div>
+            <div class="bi-desc">The Client Org Portal gives your administrators aggregate, de-identified data on group engagement, activity trends, and participation rates &mdash; without individual member identification.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-sitemap">
+    <div class="fs-brand">
+      <a href="index.html" class="footer-logo">Vasl <span>Health</span></a>
+      <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
+      <a href="contact.html" class="fs-cta">Request a Demo &rarr;</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Platform</div>
+      <a href="platform.html">Platform Overview</a>
+      <a href="vlap.html">VLAP</a>
+      <a href="ai-model.html">AI Model</a>
+      <a href="technology.html">Technology</a>
+      <a href="peer-groups.html">Peer Groups</a>
+      <a href="teletherapy.html">Teletherapy</a>
+      <a href="prototype.html">Live Demo Portal</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Who We Serve</div>
+      <a href="for-schools.html">For Schools</a>
+      <a href="for-organizations.html">For Organizations</a>
+      <a href="outcomes.html">Outcomes</a>
+      <a href="clinical-outcomes.html">Clinical Outcomes</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Company</div>
+      <a href="about.html">About Vasl</a>
+      <a href="team.html">Team</a>
+      <a href="careers.html">Careers</a>
+      <a href="research.html">Research</a>
+      <a href="blog.html">Blog &amp; Insights</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Support &amp; Legal</div>
+      <a href="support.html">Help Center</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="baa.html">Business Associate Agreement</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 Vasl Health, Inc. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="baa.html">BAA</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── SCROLL REVEAL ─── -->
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.06, rootMargin: '0px 0px -24px 0px' });
+  reveals.forEach(el => io.observe(el));
+
+  window.addEventListener('load', () => {
+    reveals.forEach((el, i) => {
+      if (el.getBoundingClientRect().top < window.innerHeight) {
+        setTimeout(() => el.classList.add('visible'), i * 60);
+      }
+    });
+  });
+</script>
+</body>
+</html>
