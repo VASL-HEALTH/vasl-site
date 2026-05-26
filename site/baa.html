@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Vasl Health Business Associate Agreement &mdash; HIPAA-required BAA for healthcare and school-based organizational deployments. Request execution at legal@vaslhealth.com.">
+<title>Business Associate Agreement &mdash; Vasl Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --warm-white:#FAF7F2;--parchment:#F0EAE0;--ink:#1C1C1C;
+  --ink-70:rgba(28,28,28,0.70);--ink-12:rgba(28,28,28,0.12);
+  --clay:#C4896F;--chalk:#E2DAD0;--deep-green:#2D4A3E;--dust:#8B7B6B;--charcoal:#222222;
+  --serif:'Newsreader',Georgia,serif;--sans:'IBM Plex Sans',sans-serif;--mono:'IBM Plex Mono',monospace;
+  --gutter:7vw;
+}
+body{background:var(--warm-white);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);display:flex;align-items:center;justify-content:space-between;background:rgba(250,247,242,0.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--ink-12);}
+.nav-logo{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:-0.02em;color:var(--ink);text-decoration:none;}
+.nav-logo span{color:var(--clay);font-style:italic;}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--dust);text-decoration:none;}
+.nav-links a:hover{color:var(--ink);}
+.nav-cta{font-family:var(--mono);font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--deep-green);border:1px solid var(--deep-green);padding:9px 20px;text-decoration:none;}
+.nav-cta:hover{background:var(--deep-green);color:var(--warm-white);}
+
+/* BAA request hero */
+.baa-hero{padding:140px var(--gutter) 80px;border-bottom:1px solid var(--chalk);display:grid;grid-template-columns:1fr 1fr;gap:0 80px;align-items:end;}
+.bh-left{}
+.bh-kicker{font-family:var(--mono);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--dust);margin-bottom:20px;display:block;}
+.bh-title{font-family:var(--serif);font-size:clamp(36px,4.5vw,66px);font-weight:300;line-height:1.05;letter-spacing:-0.03em;color:var(--ink);margin-bottom:28px;}
+.bh-title em{font-style:italic;color:var(--clay);}
+.bh-body{font-size:17px;font-weight:300;line-height:1.72;color:var(--ink-70);margin-bottom:32px;}
+.bh-cta{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:var(--ink);color:var(--warm-white);padding:16px 32px;text-decoration:none;display:inline-block;transition:background 0.22s;}
+.bh-cta:hover{background:var(--deep-green);}
+.bh-right{border-left:1px solid var(--chalk);padding-left:60px;}
+.bh-steps{display:flex;flex-direction:column;gap:0;}
+.bh-step{padding:18px 0;border-bottom:1px solid var(--chalk);display:grid;grid-template-columns:32px 1fr;gap:14px;align-items:start;}
+.bh-step:last-child{border-bottom:none;}
+.bh-step-num{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;color:var(--clay);font-weight:500;padding-top:2px;}
+.bh-step-text{font-size:14px;font-weight:300;color:var(--ink-70);line-height:1.6;}
+.bh-step-text strong{font-weight:500;color:var(--ink);}
+
+/* Doc layout */
+.doc-header{padding:80px var(--gutter) 48px;border-bottom:1px solid var(--chalk);background:var(--parchment);}
+.doc-kicker{font-family:var(--mono);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--dust);margin-bottom:16px;display:block;}
+.doc-title-sm{font-family:var(--serif);font-size:clamp(28px,3.5vw,48px);font-weight:300;line-height:1.1;letter-spacing:-0.025em;color:var(--ink);margin-bottom:20px;}
+.doc-title-sm em{font-style:italic;color:var(--clay);}
+.doc-meta{display:flex;gap:28px;flex-wrap:wrap;}
+.doc-meta-item{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dust);}
+.doc-layout{display:grid;grid-template-columns:220px 1fr;gap:0;max-width:1300px;padding:0 var(--gutter) 100px;}
+.doc-toc{padding-top:52px;position:sticky;top:80px;align-self:start;}
+.toc-label{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--dust);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--chalk);}
+.toc-list{list-style:none;display:flex;flex-direction:column;gap:0;}
+.toc-item{border-bottom:1px solid var(--chalk);}
+.toc-item:last-child{border-bottom:none;}
+.toc-link{display:block;padding:9px 0;font-family:var(--mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--dust);text-decoration:none;line-height:1.4;transition:color 0.2s;}
+.toc-link:hover{color:var(--deep-green);}
+.doc-body{padding-top:52px;border-left:1px solid var(--chalk);padding-left:60px;}
+.doc-section{margin-bottom:52px;padding-bottom:52px;border-bottom:1px solid var(--chalk);}
+.doc-section:last-child{border-bottom:none;margin-bottom:0;}
+.section-anchor{display:block;padding-top:20px;margin-top:-20px;}
+.section-heading{font-family:var(--serif);font-size:24px;font-weight:400;color:var(--ink);margin-bottom:16px;line-height:1.2;letter-spacing:-0.01em;}
+.section-sub{font-family:var(--sans);font-size:15px;font-weight:500;color:var(--ink);margin-top:22px;margin-bottom:10px;}
+.doc-p{font-size:15px;font-weight:300;line-height:1.75;color:var(--ink-70);margin-bottom:14px;}
+.doc-p:last-child{margin-bottom:0;}
+.doc-p a{color:var(--deep-green);text-decoration:none;border-bottom:1px solid rgba(45,74,62,0.3);}
+.doc-p strong{font-weight:500;color:var(--ink);}
+.doc-ul{margin:10px 0 14px 0;display:flex;flex-direction:column;gap:6px;}
+.doc-li{font-size:14px;font-weight:300;color:var(--ink-70);padding-left:20px;position:relative;line-height:1.65;}
+.doc-li::before{content:'\2014';position:absolute;left:0;color:var(--clay);font-size:12px;}
+.sig-block{margin-top:40px;padding:32px 36px;border:1px solid var(--chalk);display:grid;grid-template-columns:1fr 1fr;gap:0 40px;}
+.sig-col{}
+.sig-party{font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--clay);margin-bottom:16px;}
+.sig-line{border-bottom:1px solid var(--ink);margin-bottom:8px;height:36px;}
+.sig-label{font-family:var(--mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dust);margin-bottom:16px;}
+.note-block{padding:20px 24px;background:var(--parchment);border-left:3px solid var(--clay);margin:16px 0;}
+.note-label{font-family:var(--mono);font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:var(--clay);margin-bottom:8px;}
+.note-text{font-size:14px;font-weight:300;line-height:1.7;color:var(--ink-70);}
+.footer-logo span{color:var(--clay);font-style:italic;}
+.footer-nav a{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.32);text-decoration:none;}
+.footer-nav a:hover{color:var(--warm-white);}
+.footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+@media(max-width:900px){.baa-hero{grid-template-columns:1fr;gap:52px;}.bh-right{border-left:none;padding-left:0;border-top:1px solid var(--chalk);padding-top:40px;}.doc-layout{grid-template-columns:1fr;}.doc-toc{display:none;}.doc-body{border-left:none;padding-left:0;}.sig-block{grid-template-columns:1fr;}}
+@media(max-width:600px){:root{--gutter:5vw;}.nav-links{display:none;}}
+
+  .ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
+  .ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.2s;}
+  .ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .ham-btn.open span:nth-child(2){opacity:0;}
+  .ham-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+  @media(max-width:780px){
+    .ham-btn{display:flex;}
+    .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--warm);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{font-size:22px;letter-spacing:0.04em;}
+    .nav-cta{display:none;}
+  }
+
+  footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);padding:0;}
+  .footer-sitemap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:0;padding:56px 7vw 40px;border-bottom:1px solid rgba(250,247,242,0.08);}
+  .fs-brand{padding-right:40px;}
+  .footer-logo{font-family:var(--serif);font-size:22px;color:var(--warm-white,#FAF7F2);letter-spacing:-0.02em;text-decoration:none;display:block;margin-bottom:12px;}
+  .footer-logo span{color:var(--clay,#C4896F);font-style:italic;}
+  .footer-mission{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.28);line-height:1.8;margin-bottom:20px;}
+  .fs-cta{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:var(--clay,#C4896F);border:1px solid rgba(196,137,111,0.40);padding:9px 18px;text-decoration:none;transition:all 0.18s;}
+  .fs-cta:hover{background:rgba(196,137,111,0.12);}
+  .fs-col{padding-left:32px;border-left:1px solid rgba(250,247,242,0.06);}
+  .fs-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,247,242,0.30);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(250,247,242,0.06);}
+  .fs-col a{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,247,242,0.45);text-decoration:none;margin-bottom:10px;transition:color 0.15s;}
+  .fs-col a:hover{color:var(--clay,#C4896F);}
+  .footer-bottom{padding:20px 7vw;display:flex;align-items:center;justify-content:space-between;}
+  .footer-copy{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,0.20);}
+  .footer-legal{display:flex;gap:20px;}
+  .footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+  .footer-legal a:hover{color:var(--clay,#C4896F);}
+  @media(max-width:1100px){.footer-sitemap{grid-template-columns:1fr 1fr 1fr;gap:32px;}.fs-brand{grid-column:1/-1;padding-right:0;}.fs-col{border-left:none;padding-left:0;}}
+  @media(max-width:680px){.footer-sitemap{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}}
+  @media(max-width:400px){.footer-sitemap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Vasl <span>Health</span></a>
+    <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="platform.html">Platform</a></li>
+    <li><a href="outcomes.html">Outcomes</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="contact.html" class="nav-cta">Request BAA</a>
+</nav>
+
+<!-- REQUEST HERO -->
+<div class="baa-hero">
+  <div class="bh-left">
+    <span class="bh-kicker">Legal &middot; HIPAA</span>
+    <h1 class="bh-title">Business<br>Associate<br><em>Agreement</em></h1>
+    <p class="bh-body">A fully executed BAA is required for all Vasl Health healthcare and school-based organizational deployments. Execution takes place before platform access is granted. Request BAA execution below &mdash; our legal team responds within one business day.</p>
+    <a href="mailto:legal@vaslhealth.com?subject=BAA Execution Request" class="bh-cta">Request BAA Execution &rarr;</a>
+  </div>
+  <div class="bh-right">
+    <div class="bh-steps">
+      <div class="bh-step">
+        <div class="bh-step-num">01</div>
+        <div class="bh-step-text"><strong>Email legal@vaslhealth.com</strong> with "BAA Execution Request" in the subject line. Include your organization name, org type, and the name of your authorized signatory.</div>
+      </div>
+      <div class="bh-step">
+        <div class="bh-step-num">02</div>
+        <div class="bh-step-text"><strong>Receive our standard BAA</strong> within one business day &mdash; the template below. If your organization requires a custom BAA, attach it to your request and our legal team will review.</div>
+      </div>
+      <div class="bh-step">
+        <div class="bh-step-num">03</div>
+        <div class="bh-step-text"><strong>Execute via DocuSign</strong> or return a signed PDF. Vasl Health countersigns and returns a fully executed copy, which is retained in your organizational compliance record on the platform.</div>
+      </div>
+      <div class="bh-step">
+        <div class="bh-step-num">04</div>
+        <div class="bh-step-text"><strong>BAA on file before go-live.</strong> Platform access for organizational deployments is contingent on a fully executed BAA. Your implementation lead will confirm receipt before your deployment date.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BAA DOCUMENT -->
+<div class="doc-header">
+  <span class="doc-kicker">Standard Template &mdash; May 2026</span>
+  <h2 class="doc-title-sm">HIPAA Business Associate <em>Agreement</em></h2>
+  <div class="doc-meta">
+    <span class="doc-meta-item">45 C.F.R. Parts 160 and 164</span>
+    <span class="doc-meta-item">HITECH Act Compliant</span>
+    <span class="doc-meta-item">Last Updated: May 2026</span>
+  </div>
+</div>
+
+<div class="doc-layout">
+  <nav class="doc-toc">
+    <div class="toc-label">Contents</div>
+    <ul class="toc-list">
+      <li class="toc-item"><a href="#recitals" class="toc-link">Recitals</a></li>
+      <li class="toc-item"><a href="#definitions" class="toc-link">1. Definitions</a></li>
+      <li class="toc-item"><a href="#permitted-uses" class="toc-link">2. Permitted Uses</a></li>
+      <li class="toc-item"><a href="#ba-obligations" class="toc-link">3. BA Obligations</a></li>
+      <li class="toc-item"><a href="#ce-obligations" class="toc-link">4. CE Obligations</a></li>
+      <li class="toc-item"><a href="#term-termination" class="toc-link">5. Term & Termination</a></li>
+      <li class="toc-item"><a href="#miscellaneous" class="toc-link">6. Miscellaneous</a></li>
+      <li class="toc-item"><a href="#signatures" class="toc-link">Signatures</a></li>
+    </ul>
+  </nav>
+
+  <div class="doc-body">
+
+    <div class="doc-section">
+      <span class="section-anchor" id="recitals"></span>
+      <h2 class="section-heading">Recitals</h2>
+      <p class="doc-p">This Business Associate Agreement ("BAA" or "Agreement") is entered into between <strong>Vasl Health, Inc.</strong>, a Delaware Public Benefit Corporation ("Business Associate" or "BA"), and the organization executing this Agreement ("Covered Entity" or "CE"), effective as of the date of full execution.</p>
+      <p class="doc-p">Covered Entity is a Covered Entity as defined under the Health Insurance Portability and Accountability Act of 1996, as amended ("HIPAA"), and the regulations promulgated thereunder at 45 C.F.R. Parts 160 and 164 (the "HIPAA Rules"), including the Health Information Technology for Economic and Clinical Health Act ("HITECH Act").</p>
+      <p class="doc-p">Business Associate performs certain services for Covered Entity that involve the creation, receipt, maintenance, or transmission of Protected Health Information ("PHI"). This Agreement sets forth the terms and conditions under which Business Associate will handle PHI in connection with services provided to Covered Entity.</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="definitions"></span>
+      <h2 class="section-heading">1. Definitions</h2>
+      <p class="doc-p">Terms used but not defined in this Agreement shall have the meanings given in the HIPAA Rules. Key defined terms include:</p>
+      <div class="section-sub">Breach</div>
+      <p class="doc-p">Has the meaning given at 45 C.F.R. § 164.402 &mdash; the acquisition, access, use, or disclosure of PHI in a manner not permitted by the HIPAA Privacy Rule that compromises the security or privacy of PHI.</p>
+      <div class="section-sub">Business Associate</div>
+      <p class="doc-p">Vasl Health, Inc., acting in its capacity as a Business Associate as defined at 45 C.F.R. § 160.103.</p>
+      <div class="section-sub">Protected Health Information (PHI)</div>
+      <p class="doc-p">Individually identifiable health information created, received, maintained, or transmitted by Business Associate on behalf of Covered Entity, as defined at 45 C.F.R. § 160.103.</p>
+      <div class="section-sub">Services</div>
+      <p class="doc-p">The emotional health platform services provided by Vasl Health, Inc. to Covered Entity as described in the executed Service Agreement, including the Vasl Language Analysis Platform (VLAP), member care coordination, coaching services, and related organizational reporting.</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="permitted-uses"></span>
+      <h2 class="section-heading">2. Permitted Uses and Disclosures</h2>
+      <div class="section-sub">2.1 Services</div>
+      <p class="doc-p">Business Associate may use and disclose PHI as necessary to perform the Services described in the executed Service Agreement between the parties, and as required by law.</p>
+      <div class="section-sub">2.2 Additional Uses</div>
+      <p class="doc-p">Except as otherwise limited by this Agreement, Business Associate may use PHI for the proper management and administration of Business Associate, or to carry out the legal responsibilities of Business Associate. Business Associate may disclose PHI for the proper management and administration of Business Associate, provided that disclosures are required by law, or Business Associate obtains reasonable assurances from the recipient that the information will remain confidential and be used or further disclosed only as required by law or for the purpose for which it was disclosed.</p>
+      <div class="section-sub">2.3 De-Identified Data</div>
+      <p class="doc-p">Business Associate may create de-identified data from PHI in accordance with 45 C.F.R. § 164.514(b) and may use such de-identified data for platform improvement, research, and aggregate reporting purposes without restriction under this Agreement.</p>
+      <div class="section-sub">2.4 VLAP Processing</div>
+      <p class="doc-p">Business Associate's Vasl Language Analysis Platform (VLAP) processes member language in-memory. Verbatim member language is not retained as PHI after processing &mdash; only a dimensional signal profile is generated and retained. This in-memory processing architecture constitutes a technical safeguard under the HIPAA Security Rule and is not configurable by Covered Entity or its administrators.</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="ba-obligations"></span>
+      <h2 class="section-heading">3. Obligations of Business Associate</h2>
+      <div class="section-sub">3.1 Limits on Use and Disclosure</div>
+      <p class="doc-p">Business Associate shall not use or disclose PHI other than as permitted or required by this Agreement or as required by law. Business Associate shall use appropriate safeguards and, as applicable, comply with Subpart C of 45 C.F.R. Part 164 with respect to electronic PHI, to prevent use or disclosure of PHI other than as provided for by this Agreement.</p>
+      <div class="section-sub">3.2 Subcontractors</div>
+      <p class="doc-p">Business Associate shall, in accordance with 45 C.F.R. §§ 164.502(e)(1)(ii) and 164.308(b)(2), ensure that any subcontractors that create, receive, maintain, or transmit PHI on behalf of Business Associate agree to the same restrictions, conditions, and requirements that apply to Business Associate with respect to such information.</p>
+      <div class="section-sub">3.3 Breach Notification</div>
+      <p class="doc-p">Business Associate shall notify Covered Entity without unreasonable delay and in no case later than 60 days following discovery of a Breach of Unsecured PHI in accordance with 45 C.F.R. § 164.410. Notification shall include, to the extent possible, the identification of individuals whose PHI may have been involved, and any other available information required by 45 C.F.R. § 164.404(c).</p>
+      <div class="section-sub">3.4 Individual Rights</div>
+      <p class="doc-p">Business Associate shall, to the extent Business Associate maintains a designated record set, make available PHI in accordance with 45 C.F.R. § 164.524 (access), 164.526 (amendment), and 164.528 (accounting of disclosures). Business Associate shall provide requested information in a timely manner to allow Covered Entity to meet its obligations under the HIPAA Rules.</p>
+      <div class="section-sub">3.5 Availability to Government</div>
+      <p class="doc-p">Business Associate shall make its internal practices, books, and records available to the Secretary of the U.S. Department of Health and Human Services for purposes of determining compliance with the HIPAA Rules.</p>
+      <div class="section-sub">3.6 Return or Destruction of PHI</div>
+      <p class="doc-p">Upon termination of this Agreement, Business Associate shall, if feasible, return or destroy all PHI received from or on behalf of Covered Entity. If return or destruction is not feasible, Business Associate shall extend the protections of this Agreement to such PHI and limit further uses and disclosures to those purposes that make return or destruction infeasible.</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="ce-obligations"></span>
+      <h2 class="section-heading">4. Obligations of Covered Entity</h2>
+      <div class="section-sub">4.1 Notice of Privacy Practices</div>
+      <p class="doc-p">Covered Entity shall notify Business Associate of any limitation(s) in its Notice of Privacy Practices to the extent such limitation may affect Business Associate's use or disclosure of PHI.</p>
+      <div class="section-sub">4.2 Changes in Permission</div>
+      <p class="doc-p">Covered Entity shall notify Business Associate of any changes in, or revocation of, the permission by individuals to use or disclose their PHI, to the extent such changes affect Business Associate's permitted uses and disclosures.</p>
+      <div class="section-sub">4.3 Restrictions</div>
+      <p class="doc-p">Covered Entity shall notify Business Associate of any restriction on the use or disclosure of PHI that Covered Entity has agreed to or is required to abide by, to the extent such restriction affects Business Associate's use or disclosure of PHI.</p>
+      <div class="section-sub">4.4 Permissible Requests</div>
+      <p class="doc-p">Covered Entity shall not request Business Associate to use or disclose PHI in any manner that would not be permissible under the HIPAA Rules if done by Covered Entity.</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="term-termination"></span>
+      <h2 class="section-heading">5. Term and Termination</h2>
+      <div class="section-sub">5.1 Term</div>
+      <p class="doc-p">This Agreement shall be effective as of the date of full execution and shall continue until terminated as set forth herein or until the termination of the underlying Service Agreement between the parties.</p>
+      <div class="section-sub">5.2 Termination for Cause</div>
+      <p class="doc-p">Covered Entity may immediately terminate this Agreement and the underlying Service Agreement if Covered Entity determines that Business Associate has violated a material term of this Agreement and Business Associate has not cured the breach within 30 days of receiving written notice. Business Associate may terminate this Agreement if it determines that Covered Entity has violated a material term of this Agreement and such breach is not cured within 30 days of written notice.</p>
+      <div class="section-sub">5.3 Effect of Termination</div>
+      <p class="doc-p">The obligations of Business Associate under Section 3.6 (Return or Destruction of PHI) shall survive termination of this Agreement. The parties' obligations with respect to PHI created or received prior to termination shall continue as necessary to comply with the HIPAA Rules.</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="miscellaneous"></span>
+      <h2 class="section-heading">6. Miscellaneous</h2>
+      <div class="section-sub">6.1 Regulatory References</div>
+      <p class="doc-p">A reference in this Agreement to a section in the HIPAA Rules means the section in effect or as amended.</p>
+      <div class="section-sub">6.2 Amendment</div>
+      <p class="doc-p">The parties agree to take such action as is reasonably necessary to amend this Agreement from time to time as is necessary for compliance with the requirements of the HIPAA Rules. Amendments must be in writing and executed by authorized representatives of both parties.</p>
+      <div class="section-sub">6.3 Interpretation</div>
+      <p class="doc-p">This Agreement shall be interpreted as broadly as necessary to implement and comply with HIPAA and the HITECH Act. Any ambiguity in this Agreement shall be resolved in favor of a meaning that permits Covered Entity and Business Associate to comply with those requirements. The parties agree that if there is a conflict between this Agreement and the Service Agreement as to PHI, the terms of this Agreement shall govern.</p>
+      <div class="section-sub">6.4 Governing Law</div>
+      <p class="doc-p">This Agreement shall be governed by the laws of the State of Maryland, except to the extent preempted by federal law. Any disputes arising under this Agreement shall be resolved in accordance with the dispute resolution provisions of the underlying Service Agreement.</div>
+      <div class="section-sub">6.5 Entire Agreement</div>
+      <p class="doc-p">This Agreement, together with the Service Agreement, constitutes the entire agreement between the parties with respect to the subject matter hereof and supersedes all prior or contemporaneous agreements, representations, or understandings between the parties relating to PHI.</p>
+      <div class="section-sub">6.6 Contact for BAA Inquiries</div>
+      <p class="doc-p">For BAA execution, amendments, or compliance inquiries: <a href="mailto:legal@vaslhealth.com">legal@vaslhealth.com</a>. For HIPAA-specific questions: <a href="mailto:hipaa@vaslhealth.com">hipaa@vaslhealth.com</a>.</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="signatures"></span>
+      <h2 class="section-heading">Signatures</h2>
+      <div class="note-block">
+        <div class="note-label">Execution Note</div>
+        <p class="note-text">This BAA is executed electronically via DocuSign or by return of a signed PDF to legal@vaslhealth.com. Vasl Health countersigns and returns a fully executed copy. Digital signatures are legally binding under the Electronic Signatures in Global and National Commerce Act (E-SIGN Act).</p>
+      </div>
+      <p class="doc-p">IN WITNESS WHEREOF, the parties have executed this Business Associate Agreement as of the date of last signature below.</p>
+      <div class="sig-block">
+        <div class="sig-col">
+          <div class="sig-party">Business Associate</div>
+          <div class="sig-line"></div>
+          <div class="sig-label">Authorized Signature</div>
+          <div class="sig-line"></div>
+          <div class="sig-label">Printed Name & Title</div>
+          <div class="sig-line"></div>
+          <div class="sig-label">Date</div>
+          <p class="doc-p" style="margin-top:16px;font-size:14px;"><strong>Vasl Health, Inc.</strong><br>A Delaware Public Benefit Corporation</p>
+        </div>
+        <div class="sig-col">
+          <div class="sig-party">Covered Entity</div>
+          <div class="sig-line"></div>
+          <div class="sig-label">Authorized Signature</div>
+          <div class="sig-line"></div>
+          <div class="sig-label">Printed Name & Title</div>
+          <div class="sig-line"></div>
+          <div class="sig-label">Date</div>
+          <p class="doc-p" style="margin-top:16px;font-size:14px;"><strong>Organization Name:</strong> ___________________________<br><br><strong>Address:</strong> ___________________________</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-sitemap">
+    <div class="fs-brand">
+      <a href="index.html" class="footer-logo">Vasl <span>Health</span></a>
+      <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
+      <a href="contact.html" class="fs-cta">Request a Demo &rarr;</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Platform</div>
+      <a href="platform.html">Platform Overview</a>
+      <a href="vlap.html">VLAP</a>
+      <a href="ai-model.html">AI Model</a>
+      <a href="technology.html">Technology</a>
+      <a href="peer-groups.html">Peer Groups</a>
+      <a href="teletherapy.html">Teletherapy</a>
+      <a href="prototype.html">Live Demo Portal</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Who We Serve</div>
+      <a href="for-schools.html">For Schools</a>
+      <a href="for-organizations.html">For Organizations</a>
+      <a href="outcomes.html">Outcomes</a>
+      <a href="clinical-outcomes.html">Clinical Outcomes</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Company</div>
+      <a href="about.html">About Vasl</a>
+      <a href="team.html">Team</a>
+      <a href="careers.html">Careers</a>
+      <a href="research.html">Research</a>
+      <a href="blog.html">Blog &amp; Insights</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Support &amp; Legal</div>
+      <a href="support.html">Help Center</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="baa.html">Business Associate Agreement</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 Vasl Health, Inc. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="baa.html">BAA</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
