@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Vasl Health is building the first behavioral health platform designed by and for BIPOC, LGBTQ+, and first-generation youth &mdash; with AI trained on how they actually communicate.">
+<title>About &mdash; Vasl Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  :root {
+    --warm-white:  #FAF7F2;
+    --parchment:   #F0EAE0;
+    --ink:         #1C1C1C;
+    --ink-70:      rgba(28,28,28,0.70);
+    --ink-50:      rgba(28,28,28,0.50);
+    --ink-25:      rgba(28,28,28,0.25);
+    --ink-12:      rgba(28,28,28,0.12);
+    --clay:        #C4896F;
+    --clay-light:  #E8C4AE;
+    --clay-pale:   #F5E6DC;
+    --deep-green:  #2D4A3E;
+    --dust:        #8B7B6B;
+    --chalk:       #E2DAD0;
+    --charcoal:    #222222;
+
+    --serif: 'Newsreader', Georgia, serif;
+    --sans:  'IBM Plex Sans', sans-serif;
+    --mono:  'IBM Plex Mono', monospace;
+    --gutter: 7vw;
+  }
+
+  body {
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  .reveal {
+    transition: opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1);
+  }
+  .js-ready .reveal { opacity: 0; transform: translateY(22px); }
+  .js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
+  .d1 { transition-delay: 0.10s; } .d2 { transition-delay: 0.22s; }
+  .d3 { transition-delay: 0.34s; } .d4 { transition-delay: 0.46s; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px var(--gutter);
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(240,234,224,0.94);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--ink-12);
+  }
+  .nav-logo { font-family: var(--serif); font-size: 22px; font-weight: 400; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
+  .nav-logo span { color: var(--clay); font-style: italic; }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { font-family: var(--mono); font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--dust); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+  .nav-cta { font-family: var(--mono); font-size: 10px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--deep-green); border: 1px solid var(--deep-green); padding: 9px 20px; text-decoration: none; transition: background 0.22s, color 0.22s; }
+  .nav-cta:hover { background: var(--deep-green); color: var(--warm-white); }
+
+  /* ─── SHARED ─── */
+  .chapter-label {
+    font-family: var(--mono); font-size: 10px; font-weight: 300; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--clay);
+    display: flex; align-items: center; gap: 12px; margin-bottom: 52px;
+  }
+  .chapter-label::after { content: ''; display: block; width: 36px; height: 1px; background: var(--clay); opacity: 0.45; }
+  .chapter-label.light { color: var(--clay-light); }
+  .chapter-label.light::after { background: var(--clay-light); }
+  .chapter-label.muted { color: rgba(250,247,242,0.35); }
+  .chapter-label.muted::after { background: rgba(250,247,242,0.35); }
+
+  section { padding: 130px var(--gutter); position: relative; }
+
+  .btn-dark { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--ink); color: var(--warm-white); padding: 16px 32px; text-decoration: none; display: inline-block; transition: background 0.22s; }
+  .btn-dark:hover { background: var(--deep-green); }
+  .btn-outline { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dust); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s; }
+  .btn-outline:hover { color: var(--ink); }
+  .btn-outline::after { content: '→'; font-size: 14px; }
+  .btn-light { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--warm-white); color: var(--ink); padding: 16px 32px; text-decoration: none; display: inline-block; transition: background 0.22s; }
+  .btn-light:hover { background: var(--clay-light); }
+  .btn-ghost-light { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250,247,242,0.40); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s; }
+  .btn-ghost-light:hover { color: var(--warm-white); }
+  .btn-ghost-light::after { content: '→'; }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 01 — THE MISSION
+  ═══════════════════════════════════════════ */
+  #mission {
+    min-height: 100vh;
+    padding-top: 180px; padding-bottom: 140px;
+    background: var(--parchment);
+    border-bottom: 1px solid var(--chalk);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 100px;
+    align-items: end;
+  }
+
+  .mission-left {}
+
+  .mission-kicker {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--dust); margin-bottom: 40px; display: block;
+  }
+
+  .mission-headline {
+    font-family: var(--serif);
+    font-size: clamp(46px, 5.5vw, 82px);
+    font-weight: 300; line-height: 1.03; letter-spacing: -0.03em;
+    color: var(--ink); margin-bottom: 48px;
+  }
+  .mission-headline em { font-style: italic; color: var(--clay); }
+
+  .mission-statement {
+    font-size: 19px; font-weight: 300; line-height: 1.72;
+    color: var(--ink-70); max-width: 460px; margin-bottom: 52px;
+    border-left: 2px solid var(--clay); padding-left: 24px;
+  }
+
+  .mission-body {
+    font-size: 17px; font-weight: 300; line-height: 1.72;
+    color: var(--ink-70); max-width: 460px; margin-bottom: 52px;
+  }
+
+  .mission-actions { display: flex; align-items: center; gap: 32px; }
+
+  .mission-right {
+    border-left: 1px solid var(--chalk); padding-left: 80px;
+    display: flex; flex-direction: column; gap: 0;
+  }
+
+  /* Mission stats */
+  .mission-stat {
+    padding: 32px 0; border-bottom: 1px solid var(--chalk);
+    display: grid; grid-template-columns: 130px 1fr; gap: 24px; align-items: start;
+  }
+  .mission-stat:first-child { padding-top: 0; }
+  .mission-stat:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .ms-num {
+    font-family: var(--serif); font-size: 48px; font-weight: 300;
+    color: var(--clay); line-height: 1; letter-spacing: -0.04em;
+  }
+  .ms-right {}
+  .ms-label {
+    font-family: var(--sans); font-size: 16px; font-weight: 400; color: var(--ink);
+    line-height: 1.35; margin-bottom: 5px;
+  }
+  .ms-desc {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dust);
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 02 — OUR STORY
+  ═══════════════════════════════════════════ */
+  #story {
+    background: var(--charcoal);
+    color: var(--warm-white);
+    padding-top: 150px; padding-bottom: 150px;
+  }
+
+  .story-header { max-width: 720px; margin-bottom: 90px; }
+
+  .story-headline {
+    font-family: var(--serif); font-size: clamp(38px, 4.5vw, 64px);
+    font-weight: 300; line-height: 1.06; letter-spacing: -0.025em;
+    color: var(--warm-white); margin-bottom: 28px;
+  }
+  .story-headline em { font-style: italic; color: var(--clay-light); }
+
+  .story-sub {
+    font-size: 18px; font-weight: 300; line-height: 1.72;
+    color: rgba(250,247,242,0.55); max-width: 580px;
+  }
+
+  /* Timeline */
+  .timeline {
+    display: flex; flex-direction: column; gap: 0;
+    border-left: 1px solid rgba(196,137,111,0.35);
+    margin-left: 32px; position: relative;
+  }
+
+  .tl-item {
+    padding: 0 0 60px 52px; position: relative;
+  }
+  .tl-item:last-child { padding-bottom: 0; }
+
+  .tl-dot {
+    position: absolute; left: -7px; top: 6px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--charcoal); border: 2px solid var(--clay);
+  }
+  .tl-item:first-child .tl-dot { background: var(--clay); }
+
+  .tl-year {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 10px;
+  }
+
+  .tl-name {
+    font-family: var(--serif); font-size: 26px; font-weight: 400;
+    color: var(--warm-white); margin-bottom: 12px; line-height: 1.2; letter-spacing: -0.01em;
+  }
+
+  .tl-body {
+    font-size: 15px; font-weight: 300; line-height: 1.7;
+    color: rgba(250,247,242,0.52); max-width: 560px;
+  }
+
+  .tl-tag {
+    display: inline-block; margin-top: 14px;
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--clay-light);
+    border: 1px solid rgba(196,137,111,0.35); padding: 4px 10px;
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 03 — HOW VLAP WORKS
+  ═══════════════════════════════════════════ */
+  #howvlap {
+    background: var(--deep-green);
+    color: var(--warm-white);
+    padding-top: 150px; padding-bottom: 150px;
+  }
+
+  .vlap-header { max-width: 720px; margin-bottom: 90px; }
+
+  .vlap-headline {
+    font-family: var(--serif); font-size: clamp(38px, 4.5vw, 64px);
+    font-weight: 300; line-height: 1.06; letter-spacing: -0.025em;
+    color: var(--warm-white); margin-bottom: 28px;
+  }
+  .vlap-headline em { font-style: italic; color: var(--clay-light); }
+
+  .vlap-sub {
+    font-size: 18px; font-weight: 300; line-height: 1.72;
+    color: rgba(250,247,242,0.55); max-width: 640px; margin-bottom: 20px;
+  }
+
+  .vlap-note {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--clay-light);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .vlap-note::before { content: '→'; }
+
+  /* Signal examples */
+  .signal-examples {
+    display: flex; flex-direction: column; gap: 0;
+    border: 1px solid rgba(250,247,242,0.14);
+  }
+
+  .se-item {
+    border-bottom: 1px solid rgba(250,247,242,0.10);
+    overflow: hidden;
+  }
+  .se-item:last-child { border-bottom: none; }
+
+  .se-header {
+    padding: 20px 32px; background: rgba(250,247,242,0.05);
+    border-bottom: 1px solid rgba(250,247,242,0.08);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .se-pattern {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: rgba(250,247,242,0.38);
+  }
+
+  .se-codes { display: flex; gap: 6px; }
+  .se-code {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em;
+    color: var(--clay-light); border: 1px solid rgba(196,137,111,0.35); padding: 3px 8px;
+  }
+
+  .se-body {
+    padding: 28px 32px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  }
+
+  .se-col {
+    padding-right: 32px; border-right: 1px solid rgba(250,247,242,0.10);
+  }
+  .se-col:last-child { border-right: none; padding-right: 0; padding-left: 32px; }
+
+  .se-col-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em;
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  .se-col-label.utterance { color: rgba(250,247,242,0.38); }
+  .se-col-label.detection { color: var(--clay-light); }
+
+  .se-utterance {
+    font-family: var(--serif); font-size: 19px; font-style: italic;
+    font-weight: 300; color: var(--warm-white); line-height: 1.4;
+  }
+
+  .se-detection {
+    font-size: 14px; font-weight: 300; line-height: 1.65;
+    color: rgba(250,247,242,0.60);
+  }
+
+  .se-
+
+  .vlap-model-note {
+    margin-top: 40px; padding: 32px 36px;
+    border: 1px solid rgba(250,247,242,0.14);
+    background: rgba(250,247,242,0.04);
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px;
+  }
+
+  .vmn-stat {}
+  .vmn-num {
+    font-family: var(--serif); font-size: 44px; font-weight: 300;
+    color: var(--warm-white); line-height: 1; letter-spacing: -0.04em; margin-bottom: 6px;
+  }
+  .vmn-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(250,247,242,0.35); line-height: 1.55;
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 04 — PARTNERS
+  ═══════════════════════════════════════════ */
+  #partners {
+    background: var(--warm-white);
+    padding-top: 150px; padding-bottom: 150px;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .partners-header {
+    display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px;
+    align-items: end; margin-bottom: 90px;
+    padding-bottom: 60px; border-bottom: 1px solid var(--chalk);
+  }
+
+  .partners-headline {
+    font-family: var(--serif); font-size: clamp(36px, 4vw, 54px);
+    font-weight: 300; line-height: 1.08; letter-spacing: -0.025em; color: var(--ink);
+  }
+  .partners-headline em { font-style: italic; color: var(--clay); }
+
+  .partners-intro {
+    font-size: 18px; font-weight: 300; line-height: 1.72; color: var(--ink-70);
+  }
+
+  .partners-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0 80px;
+  }
+
+  .partners-col {}
+
+  .partners-col-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 28px;
+  }
+
+  .partner-list { display: flex; flex-direction: column; gap: 0; }
+
+  .partner-item {
+    padding: 24px 0; border-bottom: 1px solid var(--chalk);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: baseline;
+  }
+  .partner-item:last-child { border-bottom: none; }
+
+  .partner-name {
+    font-family: var(--serif); font-size: 19px; font-weight: 400;
+    color: var(--ink); letter-spacing: -0.01em;
+  }
+
+  .partner-desc {
+    font-size: 13px; font-weight: 300; color: var(--ink-50); line-height: 1.5;
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 05 — VALIDATION & COMPLIANCE
+  ═══════════════════════════════════════════ */
+  #compliance {
+    background: var(--parchment);
+    padding-top: 150px; padding-bottom: 150px;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .compliance-header {
+    display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px;
+    align-items: end; margin-bottom: 90px;
+    padding-bottom: 60px; border-bottom: 1px solid var(--chalk);
+  }
+
+  .compliance-headline {
+    font-family: var(--serif); font-size: clamp(36px, 4vw, 54px);
+    font-weight: 300; line-height: 1.08; letter-spacing: -0.025em; color: var(--ink);
+  }
+  .compliance-headline em { font-style: italic; color: var(--clay); }
+
+  .compliance-intro {
+    font-size: 18px; font-weight: 300; line-height: 1.72; color: var(--ink-70);
+  }
+
+  .compliance-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 0;
+    border: 1px solid var(--chalk);
+  }
+
+  .comp-item {
+    padding: 44px 44px; border-right: 1px solid var(--chalk); border-bottom: 1px solid var(--chalk);
+  }
+  .comp-item:nth-child(2n) { border-right: none; }
+  .comp-item:nth-last-child(-n+2) { border-bottom: none; }
+
+  .comp-label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 14px;
+  }
+
+  .comp-title {
+    font-family: var(--serif); font-size: 22px; font-weight: 400;
+    color: var(--ink); margin-bottom: 12px; line-height: 1.25; letter-spacing: -0.01em;
+  }
+
+  .comp-body {
+    font-size: 14px; font-weight: 300; line-height: 1.7; color: var(--ink-70);
+    margin-bottom: 18px;
+  }
+
+  .comp-details { display: flex; flex-direction: column; gap: 6px; }
+
+  .comp-detail {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--deep-green);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .comp-detail::before { content: '—'; color: var(--clay); }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 06 — WHAT WE VALUE
+  ═══════════════════════════════════════════ */
+  #values {
+    background: var(--warm-white);
+    padding-top: 150px; padding-bottom: 150px;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .values-header {
+    max-width: 720px; margin-bottom: 90px;
+  }
+
+  .values-headline {
+    font-family: var(--serif); font-size: clamp(40px, 4.8vw, 68px);
+    font-weight: 300; line-height: 1.06; letter-spacing: -0.03em; color: var(--ink);
+    margin-bottom: 24px;
+  }
+  .values-headline em { font-style: italic; color: var(--clay); }
+
+  .values-sub {
+    font-size: 18px; font-weight: 300; line-height: 1.72;
+    color: var(--ink-70); max-width: 560px;
+  }
+
+  .values-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+    border-top: 1px solid var(--chalk);
+  }
+
+  .value-item {
+    padding: 52px 44px 52px 0; border-right: 1px solid var(--chalk);
+    border-bottom: 1px solid var(--chalk);
+  }
+  .value-item:nth-child(3n) { border-right: none; padding-right: 0; }
+  .value-item:nth-child(3n+2) { padding-left: 44px; }
+  .value-item:nth-child(3n+3) { padding-left: 44px; }
+  .value-item:nth-last-child(-n+3) { border-bottom: none; }
+
+  .value-num {
+    font-family: var(--serif); font-size: 52px; font-weight: 300;
+    color: var(--clay-light); line-height: 1; letter-spacing: -0.04em; margin-bottom: 18px;
+  }
+
+  .value-title {
+    font-family: var(--serif); font-size: 21px; font-weight: 400;
+    color: var(--ink); margin-bottom: 12px; line-height: 1.2; letter-spacing: -0.01em;
+  }
+
+  .value-body {
+    font-size: 14px; font-weight: 300; line-height: 1.7; color: var(--ink-70);
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 07 — RECOGNITION & JOIN
+  ═══════════════════════════════════════════ */
+  #recognition {
+    background: var(--ink);
+    padding-top: 160px; padding-bottom: 160px;
+    overflow: hidden; position: relative;
+  }
+
+  .rec-bg {
+    position: absolute; bottom: -6vw; right: -3vw;
+    font-family: var(--serif); font-size: 36vw; font-weight: 300; font-style: italic;
+    color: rgba(250,247,242,0.018); pointer-events: none; user-select: none;
+    line-height: 1; letter-spacing: -0.05em;
+  }
+
+  .rec-inner {
+    position: relative; z-index: 2;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0 100px; align-items: start;
+  }
+
+  .rec-left {}
+
+  .rec-headline {
+    font-family: var(--serif); font-size: clamp(40px, 5vw, 68px);
+    font-weight: 300; line-height: 1.06; letter-spacing: -0.03em;
+    color: var(--warm-white); margin-bottom: 32px;
+  }
+  .rec-headline em { font-style: italic; color: var(--clay-light); }
+
+  .rec-body {
+    font-size: 18px; font-weight: 300; line-height: 1.72;
+    color: rgba(250,247,242,0.50); margin-bottom: 52px; max-width: 460px;
+  }
+
+  .rec-actions { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+
+  .rec-right { padding-top: 8px; }
+
+  /* Impact stats */
+  .impact-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: rgba(250,247,242,0.12); margin-bottom: 40px;
+  }
+
+  .impact-cell {
+    background: var(--ink); padding: 32px 28px;
+  }
+
+  .impact-num {
+    font-family: var(--serif); font-size: 52px; font-weight: 300;
+    color: var(--warm-white); line-height: 1; letter-spacing: -0.04em; margin-bottom: 6px;
+  }
+
+  .impact-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(250,247,242,0.35); line-height: 1.55;
+  }
+
+  .impact-bench {
+    font-size: 12px; font-weight: 300; color: rgba(250,247,242,0.28);
+    margin-top: 4px;
+  }
+
+  /* ─── FOOTER ─── */
+
+  .footer-logo-col {}
+  .footer-logo span { color: var(--clay); font-style: italic; }
+  .footer-nav a { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250,247,242,0.32); text-decoration: none; transition: color 0.2s; }
+  .footer-nav a:hover { color: var(--warm-white); }
+  .footer-legal a { font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250,247,242,0.22); text-decoration: none; transition: color 0.2s; }
+  .footer-legal a:hover { color: var(--warm-white); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1100px) {
+    #mission { grid-template-columns: 1fr; gap: 80px; padding-top: 160px; }
+    .mission-right { border-left: none; padding-left: 0; border-top: 1px solid var(--chalk); padding-top: 60px; }
+    .mission-stat { grid-template-columns: 80px 1fr; }
+    .partners-header { grid-template-columns: 1fr; gap: 28px; }
+    .partners-grid { grid-template-columns: 1fr; gap: 60px; }
+    .compliance-header { grid-template-columns: 1fr; gap: 28px; }
+    .compliance-grid { grid-template-columns: 1fr; }
+    .comp-item { border-right: none; }
+    .comp-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--chalk); }
+    .comp-item:last-child { border-bottom: none; }
+    .values-header { max-width: 100%; }
+    .values-grid { grid-template-columns: 1fr 1fr; }
+    .value-item:nth-child(3n) { border-right: 1px solid var(--chalk); padding-right: 44px; padding-left: 0; }
+    .value-item:nth-child(3n+2) { padding-left: 44px; }
+    .value-item:nth-child(3n+3) { padding-left: 44px; }
+    .value-item:nth-child(2n) { border-right: none; }
+    .value-item:nth-last-child(-n+2) { border-bottom: none; }
+    .rec-inner { grid-template-columns: 1fr; gap: 60px; }
+    .se-body { grid-template-columns: 1fr; }
+    .se-col { border-right: none; padding-right: 0; border-bottom: 1px solid rgba(250,247,242,0.1); padding-bottom: 20px; }
+    .se-col:last-child { border-bottom: none; padding-left: 0; padding-bottom: 0; padding-top: 20px; }
+    .vlap-model-note { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    :root { --gutter: 5vw; }
+    .nav-links { display: none; }
+    .values-grid { grid-template-columns: 1fr; }
+    .value-item { border-right: none; padding: 40px 0; }
+    .value-item:nth-child(n) { padding-left: 0; }
+    .impact-stats { grid-template-columns: 1fr; }
+    .vlap-model-note { grid-template-columns: 1fr; }
+  }
+
+  .ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
+  .ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.2s;}
+  .ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .ham-btn.open span:nth-child(2){opacity:0;}
+  .ham-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+  @media(max-width:780px){
+    .ham-btn{display:flex;}
+    .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--warm);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{font-size:22px;letter-spacing:0.04em;}
+    .nav-cta{display:none;}
+  }
+
+  footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);padding:0;}
+  .footer-sitemap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:0;padding:56px 7vw 40px;border-bottom:1px solid rgba(250,247,242,0.08);}
+  .fs-brand{padding-right:40px;}
+  .footer-logo{font-family:var(--serif);font-size:22px;color:var(--warm-white,#FAF7F2);letter-spacing:-0.02em;text-decoration:none;display:block;margin-bottom:12px;}
+  .footer-logo span{color:var(--clay,#C4896F);font-style:italic;}
+  .footer-mission{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.28);line-height:1.8;margin-bottom:20px;}
+  .fs-cta{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:var(--clay,#C4896F);border:1px solid rgba(196,137,111,0.40);padding:9px 18px;text-decoration:none;transition:all 0.18s;}
+  .fs-cta:hover{background:rgba(196,137,111,0.12);}
+  .fs-col{padding-left:32px;border-left:1px solid rgba(250,247,242,0.06);}
+  .fs-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,247,242,0.30);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(250,247,242,0.06);}
+  .fs-col a{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,247,242,0.45);text-decoration:none;margin-bottom:10px;transition:color 0.15s;}
+  .fs-col a:hover{color:var(--clay,#C4896F);}
+  .footer-bottom{padding:20px 7vw;display:flex;align-items:center;justify-content:space-between;}
+  .footer-copy{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,0.20);}
+  .footer-legal{display:flex;gap:20px;}
+  .footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+  .footer-legal a:hover{color:var(--clay,#C4896F);}
+  @media(max-width:1100px){.footer-sitemap{grid-template-columns:1fr 1fr 1fr;gap:32px;}.fs-brand{grid-column:1/-1;padding-right:0;}.fs-col{border-left:none;padding-left:0;}}
+  @media(max-width:680px){.footer-sitemap{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}}
+  @media(max-width:400px){.footer-sitemap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="index.html" class="nav-logo">Vasl <span>Health</span></a>
+    <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="platform.html">Platform</a></li>
+    <li><a href="outcomes.html">Outcomes</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="contact.html" class="nav-cta">Contact Us</a>
+</nav>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 01 &mdash; THE MISSION
+════════════════════════════════════ -->
+<section id="mission">
+  <div class="mission-left">
+    <span class="mission-kicker reveal">Chapter 01 &mdash; Our Mission</span>
+    <h1 class="mission-headline reveal d1">
+      Built for the youth<br>
+      every other platform<br>
+      was <em>built without.</em>
+    </h1>
+
+    <p class="mission-statement reveal d2">
+      To eliminate mental health disparities by building AI that understands how diverse youth actually communicate about distress, trauma, and healing.
+    </p>
+
+    <p class="mission-body reveal d2">
+      We are building the first behavioral health platform designed by and for BIPOC, LGBTQ+, and first-generation youth communities. Not retrofitted. Not translated. Built from inside the language, the culture, and the lived experience &mdash; from the beginning.
+    </p>
+
+    <div class="mission-actions reveal d3">
+      <a href="#story" class="btn-dark">Our story</a>
+      <a href="contact.html" class="btn-outline">Partner with us</a>
+    </div>
+  </div>
+
+  <div class="mission-right reveal d2">
+    <div class="mission-stat">
+      <div class="ms-num">42<span style="font-size:22px">+</span></div>
+      <div class="ms-right">
+        <div class="ms-label">Culturally specific distress signals detected across five behavioral dimensions</div>
+        <div class="ms-desc">CulturalBERT-VLAP signal taxonomy</div>
+      </div>
+    </div>
+    <div class="mission-stat">
+      <div class="ms-num">2,400<span style="font-size:18px">+</span></div>
+      <div class="ms-right">
+        <div class="ms-label">AAVE and youth vernacular tokens in the CulturalBERT-VLAP model vocabulary</div>
+        <div class="ms-desc">Community-sourced, clinically annotated</div>
+      </div>
+    </div>
+    <div class="mission-stat">
+      <div class="ms-num">94<span style="font-size:22px">%</span></div>
+      <div class="ms-right">
+        <div class="ms-label">Sensitivity on high-distress signal detection &mdash; clinical validation in progress</div>
+        <div class="ms-desc">IRB study active &middot; University of Maryland</div>
+      </div>
+    </div>
+    <div class="mission-stat">
+      <div class="ms-num">$0</div>
+      <div class="ms-right">
+        <div class="ms-label">Cost to members in all partner program deployments</div>
+        <div class="ms-desc">Org and payer funded &middot; Access is not a billing question</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 02 &mdash; OUR STORY
+════════════════════════════════════ -->
+<section id="story">
+  <div class="chapter-label light reveal">Chapter 02 &mdash; Our Story</div>
+
+  <div class="story-header">
+    <h2 class="story-headline reveal d1">
+      A realization that<br>
+      became a <em>refusal.</em>
+    </h2>
+    <p class="story-sub reveal d2">
+      Vasl Health was built from a specific observation: existing mental health AI doesn't understand how BIPOC, LGBTQ+, and first-generation youth actually communicate about distress. Generic models are trained on majority-White internet text. They consistently miss AAVE, code-switching, youth vernacular, and the coded language communities develop when the dominant culture's vocabulary isn't safe, available, or accurate. The gap isn't fine-tuning. It's architecture. We built something different.
+    </p>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2023</div>
+      <div class="tl-name">The Founding Insight</div>
+      <p class="tl-body">Our founders discovered that mainstream AI models consistently missed culturally coded distress signals &mdash; producing dangerous gaps in clinical awareness for diverse youth populations. The problem wasn't access to AI. It was that the AI available had never been trained on the communities it was being deployed to serve. That realization became the mandate: build the language model that should have existed already.</p>
+      <span class="tl-tag">The Gap Identified</span>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2024</div>
+      <div class="tl-name">VLAP Development</div>
+      <p class="tl-body">We began developing CulturalBERT-VLAP &mdash; the Vasl Language Analysis Platform &mdash; training a BERT-architecture model on 198,000+ culturally specific mental health language samples drawn from BIPOC and LGBTQ+ youth communities. Every training sample was clinically annotated by licensed clinicians with community competency training. The 2,400+ token vocabulary extension was built from community language &mdash; not from clinical corpora or majority-population datasets.</p>
+      <span class="tl-tag">CulturalBERT-VLAP V1</span>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2025</div>
+      <div class="tl-name">Pilot Success</div>
+      <p class="tl-body">Pilot programs across community health centers, school-based programs, and university partnerships demonstrated 79.5% 30-day retention &mdash; nearly three times the industry average &mdash; and 42% improvement in PHQ-8 depression scores at 90 days. The data proved what the framework promised: when the platform understands how youth actually communicate, they actually stay. An IRB study with the University of Maryland began validating clinical signal accuracy in production deployment.</p>
+      <span class="tl-tag">79.5% Retention &middot; 42% PHQ-8 Improvement</span>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2026</div>
+      <div class="tl-name">National Scale</div>
+      <p class="tl-body">Expanding partnerships with healthcare systems, school districts, and community organizations to bring the Vasl platform and VLAP clinical interpretation infrastructure to communities nationwide. Mayo Clinic Platform_Accelerate program participant. IRB study ongoing. Behavioral health data infrastructure being developed with Mayo Clinic Platform to support VLAP model development, validation, and LEP population baseline work across a two-year arc.</p>
+      <span class="tl-tag">Mayo Clinic Platform_Accelerate &middot; National Expansion</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 03 &mdash; HOW VLAP WORKS
+════════════════════════════════════ -->
+<section id="howvlap">
+  <div class="chapter-label light reveal">Chapter 03 &mdash; How VLAP Works</div>
+
+  <div class="vlap-header">
+    <h2 class="vlap-headline reveal d1">
+      The language youth<br>
+      actually use.<br>
+      <em>Finally read correctly.</em>
+    </h2>
+    <p class="vlap-sub reveal d2">
+      CulturalBERT-VLAP &mdash; the Vasl Language Analysis Platform &mdash; detects culturally specific distress signals across five behavioral dimensions. It processes language youth share through their care channels and surfaces interpretive context to licensed clinicians before sessions begin. It does not diagnose. It does not prescribe. It does not respond to members. It is a precision interpretation instrument &mdash; clinician-facing only.
+    </p>
+    <p class="vlap-note reveal d3">Signal context surfaces to licensed clinicians only &mdash; never to members, school staff, or administrators</p>
+  </div>
+
+  <div class="signal-examples reveal">
+
+    <div class="se-item">
+      <div class="se-header">
+        <span class="se-pattern">Pattern &mdash; AAVE Indirect Hopelessness</span>
+        <div class="se-codes"><span class="se-code">HOP-03</span><span class="se-code">CCM-09</span></div>
+      </div>
+      <div class="se-body">
+        <div class="se-col">
+          <div class="se-col-label utterance">What the member said</div>
+          <div class="se-utterance">"idk why i even try anymore tbh, can't keep doing this no more fr."</div>
+        </div>
+        <div class="se-col">
+          <div class="se-col-label detection">What VLAP detects &mdash; surfaced to clinician</div>
+          <div class="se-detection">Indirect hopelessness expressed through AAVE construction. "No more fr" is an authenticity escalator &mdash; not informal emphasis. Standard NLP classifies this as low-confidence text and generates no signal. VLAP reads: sustained distress beneath a vernacular frame. HOP-03 + CCM-09 flagged. Clinician receives dimensional context before next session.</div>
+        </div>
+      </div>
+      <div class="se-footer">Non-diagnostic &middot; Clinician-facing only &middot; Human review initiates all clinical response</div>
+    </div>
+
+    <div class="se-item">
+      <div class="se-header">
+        <span class="se-pattern">Pattern &mdash; Pre-Disclosure Minimization</span>
+        <div class="se-codes"><span class="se-code">CCM-04</span><span class="se-code">ISO-04</span></div>
+      </div>
+      <div class="se-body">
+        <div class="se-col">
+          <div class="se-col-label utterance">What the member said</div>
+          <div class="se-utterance">"it's not that deep but lowkey been struggling since school started."</div>
+        </div>
+        <div class="se-col">
+          <div class="se-col-label detection">What VLAP detects &mdash; surfaced to clinician</div>
+          <div class="se-detection">CCM-04: pre-disclosure minimization pattern. "It's not that deep but" is a documented pre-disclosure frame in youth language &mdash; a hedge before authentic disclosure. Standard models reduce signal weight at the minimization phrase. VLAP increases it: the hedge is the signal. Clinician arrives prepared to open this specific thread.</div>
+        </div>
+      </div>
+      <div class="se-footer">Non-diagnostic &middot; Clinician-facing only &middot; Human review initiates all clinical response</div>
+    </div>
+
+    <div class="se-item">
+      <div class="se-header">
+        <span class="se-pattern">Pattern &mdash; Coded Self-Harm Language</span>
+        <div class="se-codes"><span class="se-code">SHA-03</span><span class="se-code">CRS-02</span></div>
+      </div>
+      <div class="se-body">
+        <div class="se-col">
+          <div class="se-col-label utterance">What the member said</div>
+          <div class="se-utterance">"been thinking about unaliving lately ngl."</div>
+        </div>
+        <div class="se-col">
+          <div class="se-col-label detection">What VLAP detects &mdash; surfaced to clinician</div>
+          <div class="se-detection">"Unaliving" is a coded community term for self-harm ideation &mdash; developed to avoid content filters. It does not exist in standard NLP training data. It is in the VLAP vocabulary. SHA-03 + CRS-02 detected. Signal surfaced for immediate clinical supervisor review. A licensed human clinician determines the response &mdash; not the platform.</div>
+        </div>
+      </div>
+      <div class="se-footer">Critical priority &middot; Surfaced for immediate clinical supervisor review &middot; Human determination of response &middot; 90-minute human SLA</div>
+    </div>
+
+  </div>
+
+  <div class="vlap-model-note reveal">
+    <div class="vmn-stat">
+      <div class="vmn-num">198K<span style="font-size:18px">+</span></div>
+      <div class="vmn-label">Culturally-specific<br>training samples</div>
+    </div>
+    <div class="vmn-stat">
+      <div class="vmn-num">5</div>
+      <div class="vmn-label">Behavioral signal<br>dimensions analyzed</div>
+    </div>
+    <div class="vmn-stat">
+      <div class="vmn-num">0</div>
+      <div class="vmn-label">Diagnostic outputs.<br>Ever.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 04 &mdash; PARTNERS
+════════════════════════════════════ -->
+<section id="partners">
+  <div class="chapter-label reveal">Chapter 04 &mdash; Trusted Partners</div>
+
+  <div class="partners-header">
+    <h2 class="partners-headline reveal d1">
+      Organizations<br>
+      that share<br>
+      <em>the commitment.</em>
+    </h2>
+    <p class="partners-intro reveal d2">
+      Vasl works with healthcare systems, research institutions, and community organizations that are already doing the work of mental health equity &mdash; and need the platform infrastructure to do it better. These are not logo partnerships. They are active deployments, research collaborations, and clinical validation relationships.
+    </p>
+  </div>
+
+  <div class="partners-grid">
+    <div class="partners-col reveal">
+      <div class="partners-col-label">Healthcare & Research</div>
+      <div class="partner-list">
+        <div class="partner-item">
+          <div class="partner-name">University of Maryland</div>
+          <div class="partner-desc">Active IRB study validating VLAP clinical signal accuracy in production deployment</div>
+        </div>
+        <div class="partner-item">
+          <div class="partner-name">University of Baltimore</div>
+          <div class="partner-desc">Clinical validation and outcomes research partnership</div>
+        </div>
+        <div class="partner-item">
+          <div class="partner-name">Mayo Clinic Platform_Accelerate</div>
+          <div class="partner-desc">Behavioral health data infrastructure for VLAP model development and LEP population baseline work</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="partners-col reveal d1">
+      <div class="partners-col-label">Community Organizations</div>
+      <div class="partner-list">
+        <div class="partner-item">
+          <div class="partner-name">Thread YMCA</div>
+          <div class="partner-desc">Youth mentorship and behavioral health support programs</div>
+        </div>
+        <div class="partner-item">
+          <div class="partner-name">Boys & Girls Clubs</div>
+          <div class="partner-desc">Youth development and mental health support integration</div>
+        </div>
+        <div class="partner-item">
+          <div class="partner-name">Enoch Pratt Library</div>
+          <div class="partner-desc">Community access and digital equity programming</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 05 &mdash; VALIDATION & COMPLIANCE
+════════════════════════════════════ -->
+<section id="compliance">
+  <div class="chapter-label reveal">Chapter 05 &mdash; Validation & Compliance</div>
+
+  <div class="compliance-header">
+    <h2 class="compliance-headline reveal d1">
+      The standards<br>
+      the work<br>
+      <em>requires.</em>
+    </h2>
+    <p class="compliance-intro reveal d2">
+      Clinical platforms serving minors, Medicaid populations, and school-based programs operate in one of the most demanding compliance environments in software. Vasl is built for that environment &mdash; not retrofitted for it. Every standard below is structural, not policy-based.
+    </p>
+  </div>
+
+  <div class="compliance-grid reveal">
+    <div class="comp-item">
+      <div class="comp-label">HIPAA</div>
+      <div class="comp-title">Full technical safeguard implementation. BAA required for all partners.</div>
+      <p class="comp-body">Complete HIPAA technical safeguards across all platform components. Business Associate Agreement required before any partner deployment. Annual SOC 2 Type II audit. VLAP processes language in-memory without verbatim storage. All staff with PHI access complete annual HIPAA training.</p>
+      <div class="comp-details">
+        <span class="comp-detail">PHI protection protocols</span>
+        <span class="comp-detail">Audit logging and access controls</span>
+        <span class="comp-detail">Staff HIPAA training &mdash; annual</span>
+      </div>
+    </div>
+
+    <div class="comp-item">
+      <div class="comp-label">FERPA</div>
+      <div class="comp-title">Student education records protected. No individual data shared with school staff.</div>
+      <p class="comp-body">Vasl operates as a direct service provider to students &mdash; not as an agent of the school district. Student health records are protected under HIPAA architecture and never disclosed to administrators, teachers, or parents without explicit student consent. FERPA-compliant data handling for all school and university partnerships.</p>
+      <div class="comp-details">
+        <span class="comp-detail">Educational record security</span>
+        <span class="comp-detail">Parental consent processes &mdash; minor-specific</span>
+        <span class="comp-detail">No individual data to school administrators</span>
+      </div>
+    </div>
+
+    <div class="comp-item">
+      <div class="comp-label">SOC 2 Type II</div>
+      <div class="comp-title">Annual third-party security audit. Full report available under NDA.</div>
+      <p class="comp-body">SOC 2 Type II certification covering security, availability, and confidentiality trust service criteria. Independent third-party audit conducted annually. Report available to clinical and institutional partners under NDA upon request. Processing integrity and confidentiality measures fully documented.</p>
+      <div class="comp-details">
+        <span class="comp-detail">Security and availability controls</span>
+        <span class="comp-detail">Processing integrity</span>
+        <span class="comp-detail">Confidentiality measures</span>
+      </div>
+    </div>
+
+    <div class="comp-item">
+      <div class="comp-label">WCAG 2.1 AA</div>
+      <div class="comp-title">Full accessibility compliance across all platform portals.</div>
+      <p class="comp-body">The Vasl platform meets WCAG 2.1 Level AA accessibility standards across all portals &mdash; Member App, Coach Portal, and Client Org Portal. Screen reader compatibility, keyboard navigation, sufficient color contrast, and alternative text are implemented and tested. Accessibility audits conducted with each major platform release.</p>
+      <div class="comp-details">
+        <span class="comp-detail">Screen reader compatibility</span>
+        <span class="comp-detail">Full keyboard navigation</span>
+        <span class="comp-detail">Color contrast standards &mdash; all portals</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 06 &mdash; WHAT WE VALUE
+════════════════════════════════════ -->
+<section id="values">
+  <div class="chapter-label reveal">Chapter 06 &mdash; What We Value</div>
+
+  <div class="values-header">
+    <h2 class="values-headline reveal d1">
+      What guides<br>
+      every decision<br>
+      we <em>make.</em>
+    </h2>
+    <p class="values-sub reveal d2">
+      Not principles on a wall. The standards by which we evaluate every product decision, partnership, and architectural choice &mdash; applied before we build, not explained after.
+    </p>
+  </div>
+
+  <div class="values-grid">
+    <div class="value-item reveal">
+      <div class="value-num">01</div>
+      <div class="value-title">Cultural Authenticity</div>
+      <p class="value-body">We build with and for the communities we serve &mdash; not for a generalized version of them. Authentic representation isn't a design requirement. It's the reason the platform works differently from everything built before it.</p>
+    </div>
+
+    <div class="value-item reveal d1">
+      <div class="value-num">02</div>
+      <div class="value-title">Evidence-Based</div>
+      <p class="value-body">Every feature is backed by rigorous research, clinical validation, and real-world outcomes data. Claims are stated with methodology. IRB study data, not projected benchmarks. The 42% and 79.5% figures are from deployed cohorts, measured against pre-enrollment baselines.</p>
+    </div>
+
+    <div class="value-item reveal d2">
+      <div class="value-num">03</div>
+      <div class="value-title">Community-Centered</div>
+      <p class="value-body">Youth voices guide our development process. Not as a consultation checkbox &mdash; as a structural requirement. The peer group norms, the VLAP training corpus, the care model sequencing: all shaped in active partnership with the communities the platform serves.</p>
+    </div>
+
+    <div class="value-item reveal">
+      <div class="value-num">04</div>
+      <div class="value-title">Privacy First</div>
+      <p class="value-body">We protect user data with the highest security standards &mdash; and maintain complete transparency about what the platform does and doesn't do with it. VLAP processes language in-memory without verbatim storage. Individual member data never reaches school staff or org administrators. The architecture enforces this. Policy does not.</p>
+    </div>
+
+    <div class="value-item reveal d1">
+      <div class="value-num">05</div>
+      <div class="value-title">Health Equity</div>
+      <p class="value-body">Written into the Delaware Public Benefit Corporation charter &mdash; not the marketing copy. The commitment to advancing health equity for communities of color, LGBTQ+ individuals, and low-income and underserved families is a legal obligation that survives every growth stage and investor conversation.</p>
+    </div>
+
+    <div class="value-item reveal d2">
+      <div class="value-num">06</div>
+      <div class="value-title">Human in the Loop</div>
+      <p class="value-body">AI informs. Humans decide. Always. No automated clinical action follows from VLAP output. No alert fires without a human reviewing it. The platform is designed so that clinical judgment is never delegated to an algorithm &mdash; and this boundary is architectural, not a policy preference.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 07 &mdash; RECOGNITION & JOIN
+════════════════════════════════════ -->
+<section id="recognition">
+  <div class="rec-bg" aria-hidden="true">Vasl</div>
+  <div class="rec-inner">
+    <div class="rec-left">
+      <div class="chapter-label muted reveal">Chapter 07 &mdash; The Impact So Far</div>
+      <h2 class="rec-headline reveal d1">
+        What the data<br>
+        says &mdash; and what<br>
+        <em>comes next.</em>
+      </h2>
+      <p class="rec-body reveal d2">
+        The numbers below are from active pilot deployments &mdash; not projected, not benchmarked from comparable platforms. Measured from Vasl's own member population. The work is ongoing. The IRB study is active. The scale is beginning. If your organization is ready to be part of what comes next, we want to hear from you.
+      </p>
+      <div class="rec-actions reveal d3">
+        <a href="contact.html" class="btn-light">Partner With Us</a>
+        <a href="careers.html" class="btn-ghost-light">View Careers</a>
+      </div>
+    </div>
+
+    <div class="rec-right reveal d2">
+      <div class="impact-stats">
+        <div class="impact-cell">
+          <div class="impact-num">79.5<span style="font-size:24px">%</span></div>
+          <div class="impact-label">30-Day Retention</div>
+          <div class="impact-bench">vs. 40&ndash;50% industry average</div>
+        </div>
+        <div class="impact-cell">
+          <div class="impact-num">42<span style="font-size:24px">%</span></div>
+          <div class="impact-label">PHQ-8 Improvement</div>
+          <div class="impact-bench">90-day cohort measurement</div>
+        </div>
+        <div class="impact-cell">
+          <div class="impact-num">94<span style="font-size:24px">%</span></div>
+          <div class="impact-label">Signal Sensitivity</div>
+          <div class="impact-bench">High-distress detection accuracy</div>
+        </div>
+        <div class="impact-cell">
+          <div class="impact-num">3<span style="font-size:24px">wks</span></div>
+          <div class="impact-label">Median to First Support</div>
+          <div class="impact-bench">vs. 9 months nationally</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-sitemap">
+    <div class="fs-brand">
+      <a href="index.html" class="footer-logo">Vasl <span>Health</span></a>
+      <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
+      <a href="contact.html" class="fs-cta">Request a Demo &rarr;</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Platform</div>
+      <a href="platform.html">Platform Overview</a>
+      <a href="vlap.html">VLAP</a>
+      <a href="ai-model.html">AI Model</a>
+      <a href="technology.html">Technology</a>
+      <a href="peer-groups.html">Peer Groups</a>
+      <a href="teletherapy.html">Teletherapy</a>
+      <a href="prototype.html">Live Demo Portal</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Who We Serve</div>
+      <a href="for-schools.html">For Schools</a>
+      <a href="for-organizations.html">For Organizations</a>
+      <a href="outcomes.html">Outcomes</a>
+      <a href="clinical-outcomes.html">Clinical Outcomes</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Company</div>
+      <a href="about.html">About Vasl</a>
+      <a href="team.html">Team</a>
+      <a href="careers.html">Careers</a>
+      <a href="research.html">Research</a>
+      <a href="blog.html">Blog &amp; Insights</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Support &amp; Legal</div>
+      <a href="support.html">Help Center</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="baa.html">Business Associate Agreement</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 Vasl Health, Inc. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="baa.html">BAA</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js-ready');
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.06, rootMargin: '0px 0px -24px 0px' });
+  reveals.forEach(el => io.observe(el));
+  window.addEventListener('load', () => {
+    reveals.forEach((el, i) => {
+      if (el.getBoundingClientRect().top < window.innerHeight) {
+        setTimeout(() => el.classList.add('visible'), i * 55);
+      }
+    });
+  });
+</script>
+</body>
+</html>
