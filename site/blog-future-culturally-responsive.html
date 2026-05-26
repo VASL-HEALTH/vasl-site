@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Community-centered design is not a feature. It is the prerequisite for building mental health technology that actually works for the communities most in need.">
+<title>The Future of Mental Health Must Be Culturally Responsive &mdash; Vasl Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --warm-white:#FAF7F2;--parchment:#F0EAE0;--ink:#1C1C1C;
+  --ink-70:rgba(28,28,28,0.70);--ink-50:rgba(28,28,28,0.50);--ink-12:rgba(28,28,28,0.12);
+  --clay:#C4896F;--clay-light:#E8C4AE;--clay-pale:#F5E6DC;
+  --deep-green:#2D4A3E;--dust:#8B7B6B;--chalk:#E2DAD0;--charcoal:#222222;
+  --serif:'Newsreader',Georgia,serif;--sans:'IBM Plex Sans',sans-serif;--mono:'IBM Plex Mono',monospace;
+  --gutter:7vw;
+}
+body{background:var(--warm-white);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);display:flex;align-items:center;justify-content:space-between;background:rgba(250,247,242,0.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--ink-12);}
+.nav-logo{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:-0.02em;color:var(--ink);text-decoration:none;}
+.nav-logo span{color:var(--clay);font-style:italic;}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--dust);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--ink);}
+.nav-cta{font-family:var(--mono);font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--deep-green);border:1px solid var(--deep-green);padding:9px 20px;text-decoration:none;transition:background 0.22s,color 0.22s;}
+.nav-cta:hover{background:var(--deep-green);color:var(--warm-white);}
+
+/* Article layout */
+.article-header{padding:140px var(--gutter) 72px;border-bottom:1px solid var(--chalk);max-width:1400px;}
+.ah-breadcrumb{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dust);margin-bottom:32px;display:flex;align-items:center;gap:10px;}
+.ah-breadcrumb a{color:var(--dust);text-decoration:none;}
+.ah-breadcrumb a:hover{color:var(--ink);}
+.ah-breadcrumb-sep{color:var(--chalk);}
+.ah-category{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--clay);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.ah-category::before{content:'';display:block;width:20px;height:1px;background:var(--clay);}
+.ah-title{font-family:var(--serif);font-size:clamp(36px,5vw,72px);font-weight:300;line-height:1.06;letter-spacing:-0.03em;color:var(--ink);margin-bottom:28px;max-width:900px;}
+.ah-title em{font-style:italic;color:var(--clay);}
+.ah-deck{font-size:20px;font-weight:300;line-height:1.65;color:var(--ink-70);max-width:680px;margin-bottom:40px;}
+.ah-meta{display:flex;align-items:center;gap:20px;padding-top:28px;border-top:1px solid var(--chalk);flex-wrap:wrap;}
+.ah-author{display:flex;align-items:center;gap:12px;}
+.ah-avatar{width:40px;height:40px;border-radius:8px;background:var(--deep-green);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:17px;color:var(--warm-white);}
+.ah-author-name{font-size:14px;font-weight:500;color:var(--ink);}
+.ah-author-role{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dust);}
+.ah-meta-divider{width:1px;height:32px;background:var(--chalk);}
+.ah-meta-item{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dust);}
+
+/* Body layout */
+.article-body-wrap{padding:80px var(--gutter) 100px;max-width:1400px;display:grid;grid-template-columns:1fr 320px;gap:0 80px;align-items:start;}
+.article-content{}
+.article-sidebar{position:sticky;top:90px;}
+
+/* Article content */
+.ac p{font-size:18px;font-weight:300;line-height:1.80;color:var(--ink-70);margin-bottom:28px;}
+.ac p:last-child{margin-bottom:0;}
+.ac h2{font-family:var(--serif);font-size:30px;font-weight:400;color:var(--ink);margin:56px 0 20px;line-height:1.2;letter-spacing:-0.02em;}
+.ac h3{font-family:var(--serif);font-size:22px;font-weight:400;color:var(--ink);margin:36px 0 14px;line-height:1.2;letter-spacing:-0.01em;}
+.ac strong{font-weight:500;color:var(--ink);}
+.ac em{font-style:italic;}
+.ac a{color:var(--deep-green);text-decoration:none;border-bottom:1px solid rgba(45,74,62,0.3);}
+
+/* Pull quote */
+.pull-quote{margin:52px 0;padding:36px 44px;border-left:3px solid var(--clay);background:var(--clay-pale);}
+.pq-text{font-family:var(--serif);font-size:24px;font-weight:300;font-style:italic;color:var(--ink);line-height:1.45;letter-spacing:-0.01em;}
+.pq-attr{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dust);margin-top:14px;}
+
+/* Stat call-out */
+.stat-callout{margin:44px 0;padding:32px 36px;border:1px solid var(--chalk);background:var(--parchment);}
+.sc-num{font-family:var(--serif);font-size:56px;font-weight:300;color:var(--clay);line-height:1;letter-spacing:-0.04em;margin-bottom:8px;}
+.sc-label{font-size:15px;font-weight:500;color:var(--ink);margin-bottom:6px;}
+.sc-sub{font-size:13px;font-weight:300;color:var(--ink-70);line-height:1.6;}
+
+/* Sidebar */
+.as-section{margin-bottom:40px;padding-bottom:40px;border-bottom:1px solid var(--chalk);}
+.as-section:last-child{border-bottom:none;margin-bottom:0;}
+.as-label{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--clay);margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--chalk);}
+.as-stat{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--chalk);}
+.as-stat:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.as-stat-num{font-family:var(--serif);font-size:36px;font-weight:300;color:var(--ink);line-height:1;letter-spacing:-0.03em;margin-bottom:6px;}
+.as-stat-label{font-size:13px;font-weight:300;color:var(--ink-70);line-height:1.5;}
+.as-stat-caveat{font-family:var(--mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dust);margin-top:4px;}
+
+/* Related articles */
+.related-item{display:block;text-decoration:none;padding:14px 0;border-bottom:1px solid var(--chalk);transition:opacity 0.2s;}
+.related-item:last-child{border-bottom:none;}
+.related-item:hover{opacity:0.70;}
+.ri-cat{font-family:var(--mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--clay);margin-bottom:5px;}
+.ri-title{font-family:var(--serif);font-size:15px;font-weight:400;color:var(--ink);line-height:1.3;}
+
+/* CTA */
+.article-cta{margin:80px var(--gutter) 0;padding:60px 80px;background:var(--deep-green);display:grid;grid-template-columns:1fr auto;gap:0 60px;align-items:center;}
+.cta-headline{font-family:var(--serif);font-size:clamp(26px,3vw,42px);font-weight:300;line-height:1.1;letter-spacing:-0.02em;color:var(--warm-white);}
+.cta-headline em{font-style:italic;color:var(--clay-light);}
+.cta-body{font-size:16px;font-weight:300;color:rgba(250,247,242,0.58);margin-top:12px;line-height:1.65;}
+.cta-btn{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:var(--warm-white);color:var(--ink);padding:16px 32px;text-decoration:none;white-space:nowrap;display:inline-block;transition:background 0.22s;flex-shrink:0;}
+.cta-btn:hover{background:var(--clay-light);}
+.footer-logo span{color:var(--clay);font-style:italic;}
+.footer-nav a{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.32);text-decoration:none;}
+.footer-nav a:hover{color:var(--warm-white);}
+.footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+@media(max-width:1100px){.article-body-wrap{grid-template-columns:1fr;}.article-sidebar{position:static;padding-top:60px;border-top:1px solid var(--chalk);}.article-cta{grid-template-columns:1fr;padding:44px;}.}
+@media(max-width:768px){:root{--gutter:5vw;}.nav-links{display:none;}.article-cta{padding:36px;}.}
+
+  .ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
+  .ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.2s;}
+  .ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .ham-btn.open span:nth-child(2){opacity:0;}
+  .ham-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+  @media(max-width:780px){
+    .ham-btn{display:flex;}
+    .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--warm);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{font-size:22px;letter-spacing:0.04em;}
+    .nav-cta{display:none;}
+  }
+
+  footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);padding:0;}
+  .footer-sitemap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:0;padding:56px 7vw 40px;border-bottom:1px solid rgba(250,247,242,0.08);}
+  .fs-brand{padding-right:40px;}
+  .footer-logo{font-family:var(--serif);font-size:22px;color:var(--warm-white,#FAF7F2);letter-spacing:-0.02em;text-decoration:none;display:block;margin-bottom:12px;}
+  .footer-logo span{color:var(--clay,#C4896F);font-style:italic;}
+  .footer-mission{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.28);line-height:1.8;margin-bottom:20px;}
+  .fs-cta{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:var(--clay,#C4896F);border:1px solid rgba(196,137,111,0.40);padding:9px 18px;text-decoration:none;transition:all 0.18s;}
+  .fs-cta:hover{background:rgba(196,137,111,0.12);}
+  .fs-col{padding-left:32px;border-left:1px solid rgba(250,247,242,0.06);}
+  .fs-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,247,242,0.30);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(250,247,242,0.06);}
+  .fs-col a{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,247,242,0.45);text-decoration:none;margin-bottom:10px;transition:color 0.15s;}
+  .fs-col a:hover{color:var(--clay,#C4896F);}
+  .footer-bottom{padding:20px 7vw;display:flex;align-items:center;justify-content:space-between;}
+  .footer-copy{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,0.20);}
+  .footer-legal{display:flex;gap:20px;}
+  .footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+  .footer-legal a:hover{color:var(--clay,#C4896F);}
+  @media(max-width:1100px){.footer-sitemap{grid-template-columns:1fr 1fr 1fr;gap:32px;}.fs-brand{grid-column:1/-1;padding-right:0;}.fs-col{border-left:none;padding-left:0;}}
+  @media(max-width:680px){.footer-sitemap{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}}
+  @media(max-width:400px){.footer-sitemap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Vasl <span>Health</span></a>
+    <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="platform.html">Platform</a></li>
+    <li><a href="outcomes.html">Outcomes</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="contact.html" class="nav-cta">Request a Demo</a>
+</nav>
+
+<div class="article-header">
+  <div class="ah-breadcrumb">
+    <a href="index.html">Vasl Health</a>
+    <span class="ah-breadcrumb-sep">&rsaquo;</span>
+    <a href="blog.html">Insights</a>
+    <span class="ah-breadcrumb-sep">&rsaquo;</span>
+    <span>Community</span>
+  </div>
+  <div class="ah-category">Community</div>
+  <h1 class="ah-title">The Future of Mental Health<br>Must Be <em>Culturally Responsive</em></h1>
+  <p class="ah-deck">Building with communities &mdash; not just for them &mdash; is not a design principle. It is the only methodology that produces technology that actually works.</p>
+  <div class="ah-meta">
+    <div class="ah-author">
+      <div class="ah-avatar">R</div>
+      <div>
+        <div class="ah-author-name">Rodney Bell</div>
+        <div class="ah-author-role">Founder & CEO, Vasl Health</div>
+      </div>
+    </div>
+    <div class="ah-meta-divider"></div>
+    <span class="ah-meta-item">February 2026</span>
+    <div class="ah-meta-divider"></div>
+    <span class="ah-meta-item">6 min read</span>
+    <div class="ah-meta-divider"></div>
+    <span class="ah-meta-item">Community</span>
+  </div>
+</div>
+
+<div class="article-body-wrap">
+  <div class="article-content ac">
+    
+<p>The phrase &ldquo;culturally responsive&rdquo; has become common enough in behavioral health conversations that it risks losing the weight it deserves. It is used to describe training curricula, clinical frameworks, technology platforms, and organizational values &mdash; often with more aspiration than specificity. What it means in practice, when applied rigorously to the design of mental health technology, is both clearer and more demanding than most usage suggests.</p>
+
+<p>Culturally responsive design is not a feature. It is a methodology. It determines not just what you build but how you build it, with whom, and on what timeline. It has implications for data collection, for annotation, for model validation, for clinical protocol design, and for the organizational relationships that make all of the above possible. Getting it right takes longer and costs more than building for a default population and adapting afterward. And it is the only approach that produces technology that actually works for the communities it is supposed to serve.</p>
+
+<h2>Building With vs. Building For</h2>
+
+<p>The distinction that matters most in culturally responsive design is the difference between building with communities and building for them. Building for a community means identifying its characteristics, its needs, its barriers to care, and designing a solution to address those characteristics from the outside. Building with a community means integrating community members into the design process itself &mdash; as data sources, as annotators, as validators, as ongoing advisors who can identify when the technology is reading them wrong.</p>
+
+<p>This distinction has concrete implications for AI development. A model built for BIPOC youth uses existing literature on how BIPOC youth communicate distress to inform its design. A model built with BIPOC youth collects its training data through structured partnerships with those communities, uses community members to validate its vocabulary, and builds feedback loops that allow community evolution of language to be incorporated into ongoing model updates.</p>
+
+<div class="pull-quote">
+  <div class="pq-text">&ldquo;Community engagement is not a checkbox in the design process. It is the design process. You cannot understand how a community communicates distress without sustained relationships with people from that community &mdash; not datasets about them.&rdquo;</div>
+  <div class="pq-attr">Rodney Bell &mdash; Founder & CEO, Vasl Health</div>
+</div>
+
+<p>The 2,400+ AAVE and youth vernacular tokens in Vasl&rsquo;s vocabulary extension were not compiled from academic literature about Black American English. They were gathered through structured engagement with youth from the communities the model serves, reviewed by licensed clinicians with community competency, and validated against actual usage before inclusion. The process was slow, expensive, and the only one that produces a vocabulary that actually represents how people communicate.</p>
+
+<h2>Cultural Responsiveness Is Not Translation</h2>
+
+<p>One of the most common misunderstandings about culturally responsive technology is that it is primarily a translation problem. If we make the interface available in Spanish, offer bilingual coaches, add some cultural references to the content library &mdash; have we achieved cultural responsiveness?</p>
+
+<p>We have not. Translation is access. Cultural responsiveness is alignment. A Spanish-language interface that processes mental health language through a model trained on majority-White English text has fixed the language of the interface without fixing the cultural competency of the clinical intelligence underneath it. The user can read the interface. The interface still cannot read them.</p>
+
+<p>Cultural alignment requires that the clinical intelligence &mdash; the model, the instruments, the assessment framework &mdash; has been built on data that represents the communication patterns of the community being served. This is true for NLP models. It is also true for clinical instruments: the PHQ-9, the most widely used depression screening tool in the United States, was validated primarily on adult, majority-White populations and systematically underestimates depression severity in BIPOC youth when applied without cultural context.</p>
+
+<h2>What This Means for the Next Generation of Platforms</h2>
+
+<p>The next generation of mental health technology that will actually close equity gaps will share several characteristics. It will be built on community-partnered data, not general corpora. It will use clinical instruments with validated cultural appropriateness for the populations being served. It will integrate AI that has been trained specifically on the communication patterns of those populations. And it will treat cultural responsiveness as a continuous process &mdash; updating vocabulary, refining models, and maintaining community relationships &mdash; rather than a milestone that is achieved and checked off.</p>
+
+<p>This is a higher bar than the current market has generally met. Most platforms operating in this space have built access solutions &mdash; real and valuable, but not sufficient. The next step is alignment solutions: technology that is not just reachable by underserved communities but genuinely legible to them and genuinely capable of reading them in return.</p>
+
+<p>Retention data makes the case empirically. Vasl&rsquo;s 79.5% 30-day retention rate in pilot cohorts &mdash; across BIPOC, LGBTQ+, and first-generation youth populations &mdash; compared to 40&ndash;50% industry average is not primarily a product design achievement. It is a design alignment achievement. When young people feel that the platform actually understands how they communicate, they remain engaged with it. When they do not feel understood, they leave. Retention is the market signal for cultural alignment, and it is a signal the field has not been reading carefully enough.</p>
+
+<p>The future of mental health technology that serves everyone is not the future in which every existing tool is made more accessible. It is the future in which the tools themselves are rebuilt to be genuinely responsive to the communities they claim to serve. That rebuilding is the work of this generation of behavioral health companies &mdash; and it requires accepting that the slower, more expensive, community-partnered path is the only one that leads where the field needs to go.</p>
+
+  </div>
+  <aside class="article-sidebar">
+    <div class="as-section">
+      <div class="as-label">Key Data Points</div>
+      <div class="as-stat"><div class="as-stat-num">2,400+</div><div class="as-stat-label">AAVE and youth vernacular tokens added to CulturalBERT-VLAP through community-partnered vocabulary development</div></div>
+<div class="as-stat"><div class="as-stat-num">5</div><div class="as-stat-label">Cultural community cohorts represented in the VLAP clinical annotation process</div></div>
+<div class="as-stat"><div class="as-stat-num">79.5%</div><div class="as-stat-label">30-day retention in Vasl pilot cohorts &mdash; communities who feel seen stay engaged</div><div class="as-stat-caveat">Pilot aggregate</div></div>
+
+    </div>
+    <div class="as-section">
+      <div class="as-label">Related Articles</div>
+      <a href="blog-other-diagnosis.html" class="related-item"><div class="ri-cat">Community</div><div class="ri-title">The Other Diagnosis: Understanding Identity-Based Stress</div></a>
+<a href="blog-healing-great-divide.html" class="related-item"><div class="ri-cat">Health Equity</div><div class="ri-title">Healing the Great Divide</div></a>
+<a href="blog-mental-health-equity-crisis.html" class="related-item"><div class="ri-cat">Health Equity</div><div class="ri-title">The Mental Health Equity Crisis</div></a>
+
+    </div>
+  </aside>
+</div>
+
+<div class="article-cta">
+  <div>
+    <div class="cta-headline">See Vasl Health<br>in <em>action.</em></div>
+    <p class="cta-body">A 45-minute call with an implementation lead &mdash; not a sales pitch. We come prepared with context specific to your organization and population.</p>
+  </div>
+  <a href="contact.html" class="cta-btn">Request a Demo &rarr;</a>
+</div>
+
+<footer>
+  <div class="footer-sitemap">
+    <div class="fs-brand">
+      <a href="index.html" class="footer-logo">Vasl <span>Health</span></a>
+      <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
+      <a href="contact.html" class="fs-cta">Request a Demo &rarr;</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Platform</div>
+      <a href="platform.html">Platform Overview</a>
+      <a href="vlap.html">VLAP</a>
+      <a href="ai-model.html">AI Model</a>
+      <a href="technology.html">Technology</a>
+      <a href="peer-groups.html">Peer Groups</a>
+      <a href="teletherapy.html">Teletherapy</a>
+      <a href="prototype.html">Live Demo Portal</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Who We Serve</div>
+      <a href="for-schools.html">For Schools</a>
+      <a href="for-organizations.html">For Organizations</a>
+      <a href="outcomes.html">Outcomes</a>
+      <a href="clinical-outcomes.html">Clinical Outcomes</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Company</div>
+      <a href="about.html">About Vasl</a>
+      <a href="team.html">Team</a>
+      <a href="careers.html">Careers</a>
+      <a href="research.html">Research</a>
+      <a href="blog.html">Blog &amp; Insights</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Support &amp; Legal</div>
+      <a href="support.html">Help Center</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="baa.html">Business Associate Agreement</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 Vasl Health, Inc. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="baa.html">BAA</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
