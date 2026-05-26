@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Join Vasl Health &mdash; we're hiring engineers, clinical researchers, and operators committed to building culturally fluent behavioral health technology for underserved communities.">
+<title>Careers &mdash; Vasl Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  :root {
+    --warm-white:  #FAF7F2;
+    --parchment:   #F0EAE0;
+    --ink:         #1C1C1C;
+    --ink-70:      rgba(28,28,28,0.70);
+    --ink-50:      rgba(28,28,28,0.50);
+    --ink-25:      rgba(28,28,28,0.25);
+    --ink-12:      rgba(28,28,28,0.12);
+    --clay:        #C4896F;
+    --clay-light:  #E8C4AE;
+    --clay-pale:   #F5E6DC;
+    --deep-green:  #2D4A3E;
+    --dust:        #8B7B6B;
+    --chalk:       #E2DAD0;
+    --charcoal:    #222222;
+
+    --serif: 'Newsreader', Georgia, serif;
+    --sans:  'IBM Plex Sans', sans-serif;
+    --mono:  'IBM Plex Mono', monospace;
+    --gutter: 7vw;
+  }
+
+  body {
+    background: var(--warm-white);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  .reveal {
+    transition: opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1);
+  }
+  .js-ready .reveal { opacity: 0; transform: translateY(22px); }
+  .js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
+  .d1 { transition-delay: 0.10s; } .d2 { transition-delay: 0.22s; }
+  .d3 { transition-delay: 0.34s; } .d4 { transition-delay: 0.46s; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px var(--gutter);
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(250,247,242,0.92);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--ink-12);
+  }
+  .nav-logo { font-family: var(--serif); font-size: 22px; font-weight: 400; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
+  .nav-logo span { color: var(--clay); font-style: italic; }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { font-family: var(--mono); font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--dust); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+  .nav-cta { font-family: var(--mono); font-size: 10px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--deep-green); border: 1px solid var(--deep-green); padding: 9px 20px; text-decoration: none; transition: background 0.22s, color 0.22s; }
+  .nav-cta:hover { background: var(--deep-green); color: var(--warm-white); }
+
+  /* ─── SHARED ─── */
+  .chapter-label {
+    font-family: var(--mono); font-size: 10px; font-weight: 300; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--clay);
+    display: flex; align-items: center; gap: 12px; margin-bottom: 52px;
+  }
+  .chapter-label::after { content: ''; display: block; width: 36px; height: 1px; background: var(--clay); opacity: 0.45; }
+  .chapter-label.light { color: var(--clay-light); }
+  .chapter-label.light::after { background: var(--clay-light); }
+  .chapter-label.muted { color: rgba(250,247,242,0.35); }
+  .chapter-label.muted::after { background: rgba(250,247,242,0.35); }
+
+  section { padding: 130px var(--gutter); position: relative; }
+
+  .btn-dark { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--ink); color: var(--warm-white); padding: 16px 32px; text-decoration: none; display: inline-block; transition: background 0.22s; }
+  .btn-dark:hover { background: var(--deep-green); }
+  .btn-outline { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dust); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s; }
+  .btn-outline:hover { color: var(--ink); }
+  .btn-outline::after { content: '→'; font-size: 14px; }
+  .btn-green { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--warm-white); color: var(--ink); padding: 16px 32px; text-decoration: none; display: inline-block; transition: background 0.22s; }
+  .btn-green:hover { background: var(--clay-light); }
+  .btn-ghost-green { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250,247,242,0.40); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s; }
+  .btn-ghost-green:hover { color: var(--warm-white); }
+  .btn-ghost-green::after { content: '→'; }
+  .btn-light { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--warm-white); color: var(--ink); padding: 16px 32px; text-decoration: none; display: inline-block; transition: background 0.22s; }
+  .btn-light:hover { background: var(--clay-light); }
+  .btn-ghost-light { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250,247,242,0.40); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s; }
+  .btn-ghost-light:hover { color: var(--warm-white); }
+  .btn-ghost-light::after { content: '→'; }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 01 — WHY THIS WORK
+  ═══════════════════════════════════════════ */
+  #why {
+    min-height: 100vh;
+    padding-top: 180px; padding-bottom: 140px;
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--chalk);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 100px;
+    align-items: end;
+  }
+
+  .why-left {}
+
+  .why-kicker {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--dust); margin-bottom: 40px; display: block;
+  }
+
+  .why-headline {
+    font-family: var(--serif);
+    font-size: clamp(46px, 5.5vw, 82px);
+    font-weight: 300; line-height: 1.03; letter-spacing: -0.03em;
+    color: var(--ink); margin-bottom: 48px;
+  }
+  .why-headline em { font-style: italic; color: var(--clay); }
+
+  .why-body {
+    font-size: 19px; font-weight: 300; line-height: 1.72;
+    color: var(--ink-70); max-width: 460px; margin-bottom: 52px;
+  }
+
+  .why-actions { display: flex; align-items: center; gap: 32px; }
+
+  .why-right {
+    border-left: 1px solid var(--chalk); padding-left: 80px;
+    display: flex; flex-direction: column; gap: 0;
+  }
+
+  /* CEO quote */
+  .ceo-quote {
+    padding: 36px 40px; background: var(--parchment); border: 1px solid var(--chalk);
+    margin-bottom: 32px;
+  }
+
+  .cq-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 14px;
+  }
+
+  .cq-text {
+    font-family: var(--serif); font-size: 20px; font-style: italic;
+    font-weight: 300; line-height: 1.5; color: var(--ink); margin-bottom: 14px;
+  }
+
+  .cq-attr {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dust);
+  }
+
+  /* What makes it different */
+  .why-distinctions { display: flex; flex-direction: column; gap: 0; }
+
+  .wd-item {
+    padding: 20px 0; border-bottom: 1px solid var(--chalk);
+    display: grid; grid-template-columns: 36px 1fr; gap: 14px; align-items: start;
+  }
+  .wd-item:last-child { border-bottom: none; }
+
+  .wd-num {
+    font-family: var(--mono); font-size: 10px; color: var(--clay); padding-top: 3px;
+  }
+
+  .wd-title {
+    font-family: var(--sans); font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 4px;
+  }
+
+  .wd-body {
+    font-size: 13px; font-weight: 300; color: var(--ink-50); line-height: 1.6;
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 02 — OPEN POSITIONS
+  ═══════════════════════════════════════════ */
+  #positions {
+    background: var(--deep-green);
+    color: var(--warm-white);
+    padding-top: 150px; padding-bottom: 150px;
+  }
+
+  .positions-header {
+    display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px;
+    align-items: end; margin-bottom: 90px;
+    padding-bottom: 60px; border-bottom: 1px solid rgba(250,247,242,0.12);
+  }
+
+  .positions-headline {
+    font-family: var(--serif); font-size: clamp(36px, 4vw, 56px);
+    font-weight: 300; line-height: 1.08; letter-spacing: -0.025em; color: var(--warm-white);
+  }
+  .positions-headline em { font-style: italic; color: var(--clay-light); }
+
+  .positions-intro {
+    font-size: 18px; font-weight: 300; line-height: 1.72; color: rgba(250,247,242,0.58);
+  }
+
+  /* Role cards — editorial rows */
+  .role-row {
+    padding: 64px 0; border-bottom: 1px solid rgba(250,247,242,0.12);
+  }
+  .role-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .role-header {
+    display: grid; grid-template-columns: 1fr auto; gap: 40px;
+    align-items: start; margin-bottom: 40px;
+  }
+
+  .role-meta {}
+
+  .role-tags { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+
+  .role-tag {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 4px 10px; border: 1px solid;
+  }
+  .role-tag.dept { color: var(--clay-light); border-color: rgba(196,137,111,0.35); }
+  .role-tag.loc { color: rgba(250,247,242,0.40); border-color: rgba(250,247,242,0.18); }
+  .role-tag.type { color: rgba(250,247,242,0.40); border-color: rgba(250,247,242,0.18); }
+  .role-tag.featured { color: var(--warm-white); border-color: rgba(250,247,242,0.35); background: rgba(250,247,242,0.08); }
+
+  .role-title {
+    font-family: var(--serif); font-size: 32px; font-weight: 400;
+    color: var(--warm-white); line-height: 1.15; letter-spacing: -0.015em;
+  }
+
+  .role-salary {
+    text-align: right;
+  }
+
+  .role-salary-num {
+    font-family: var(--serif); font-size: 22px; font-weight: 300;
+    color: var(--warm-white); line-height: 1.2; margin-bottom: 4px;
+    letter-spacing: -0.02em;
+  }
+
+  .role-salary-label {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(250,247,242,0.35);
+  }
+
+  .role-body {
+    font-size: 16px; font-weight: 300; line-height: 1.72;
+    color: rgba(250,247,242,0.58); max-width: 640px; margin-bottom: 40px;
+  }
+
+  /* Role details grid */
+  .role-details {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border: 1px solid rgba(250,247,242,0.12); overflow: hidden;
+    margin-bottom: 36px;
+  }
+
+  .rd-col {
+    padding: 28px 32px; border-right: 1px solid rgba(250,247,242,0.10);
+  }
+  .rd-col:last-child { border-right: none; }
+
+  .rd-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay-light); margin-bottom: 16px;
+  }
+
+  .rd-list { display: flex; flex-direction: column; gap: 8px; }
+
+  .rd-item {
+    font-size: 13px; font-weight: 300; line-height: 1.55;
+    color: rgba(250,247,242,0.60);
+    display: flex; align-items: baseline; gap: 10px;
+  }
+  .rd-item::before { content: '—'; color: var(--clay); font-size: 10px; flex-shrink: 0; }
+
+  .role-
+
+  /* General interest role */
+  .role-row.general {
+    background: rgba(250,247,242,0.04);
+    border-radius: 0; padding: 44px 40px;
+    margin-top: 40px; border-bottom: none;
+  }
+
+  .general-roles {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border: 1px solid rgba(250,247,242,0.12); overflow: hidden;
+    margin: 24px 0 32px;
+  }
+
+  .gr-item {
+    padding: 16px 24px; border-bottom: 1px solid rgba(250,247,242,0.08);
+    border-right: 1px solid rgba(250,247,242,0.08);
+    font-size: 13px; font-weight: 300; color: rgba(250,247,242,0.60);
+  }
+  .gr-item:nth-child(2n) { border-right: none; }
+  .gr-item:nth-last-child(-n+2) { border-bottom: none; }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 03 — WHAT THE WORK LOOKS LIKE
+  ═══════════════════════════════════════════ */
+  #culture {
+    background: var(--parchment);
+    padding-top: 150px; padding-bottom: 150px;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .culture-header {
+    display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px;
+    align-items: end; margin-bottom: 90px;
+    padding-bottom: 60px; border-bottom: 1px solid var(--chalk);
+  }
+
+  .culture-headline {
+    font-family: var(--serif); font-size: clamp(36px, 4vw, 54px);
+    font-weight: 300; line-height: 1.08; letter-spacing: -0.025em; color: var(--ink);
+  }
+  .culture-headline em { font-style: italic; color: var(--clay); }
+
+  .culture-intro {
+    font-size: 18px; font-weight: 300; line-height: 1.72; color: var(--ink-70);
+  }
+
+  .culture-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+    border-top: 1px solid var(--chalk);
+  }
+
+  .culture-item {
+    padding: 52px 44px 52px 0; border-right: 1px solid var(--chalk); border-bottom: 1px solid var(--chalk);
+  }
+  .culture-item:nth-child(3n) { border-right: none; padding-right: 0; }
+  .culture-item:nth-child(3n+2) { padding-left: 44px; }
+  .culture-item:nth-child(3n+3) { padding-left: 44px; }
+  .culture-item:nth-last-child(-n+3) { border-bottom: none; }
+
+  .ci-num {
+    font-family: var(--serif); font-size: 52px; font-weight: 300;
+    color: var(--clay-light); line-height: 1; letter-spacing: -0.04em; margin-bottom: 18px;
+  }
+
+  .ci-title {
+    font-family: var(--serif); font-size: 20px; font-weight: 400;
+    color: var(--ink); margin-bottom: 10px; line-height: 1.2; letter-spacing: -0.01em;
+  }
+
+  .ci-body {
+    font-size: 14px; font-weight: 300; line-height: 1.7; color: var(--ink-70);
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 04 — BENEFITS
+  ═══════════════════════════════════════════ */
+  #benefits {
+    background: var(--warm-white);
+    padding-top: 150px; padding-bottom: 150px;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .benefits-header {
+    max-width: 720px; margin-bottom: 90px;
+  }
+
+  .benefits-headline {
+    font-family: var(--serif); font-size: clamp(40px, 4.8vw, 64px);
+    font-weight: 300; line-height: 1.06; letter-spacing: -0.03em; color: var(--ink);
+    margin-bottom: 24px;
+  }
+  .benefits-headline em { font-style: italic; color: var(--clay); }
+
+  .benefits-sub {
+    font-size: 18px; font-weight: 300; line-height: 1.72;
+    color: var(--ink-70); max-width: 560px;
+  }
+
+  .benefits-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  }
+
+  .benefit-row {
+    padding: 44px 52px 44px 0; border-bottom: 1px solid var(--chalk); border-right: 1px solid var(--chalk);
+    display: grid; grid-template-columns: 160px 1fr; gap: 32px; align-items: start;
+  }
+  .benefit-row:nth-child(2n) { border-right: none; padding-right: 0; padding-left: 52px; }
+  .benefit-row:nth-last-child(-n+2) { border-bottom: none; }
+
+  .br-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--clay); padding-top: 4px; line-height: 1.5;
+  }
+
+  .br-content {}
+
+  .br-title {
+    font-family: var(--serif); font-size: 19px; font-weight: 400;
+    color: var(--ink); margin-bottom: 10px; line-height: 1.25; letter-spacing: -0.01em;
+  }
+
+  .br-items { display: flex; flex-direction: column; gap: 5px; }
+
+  .br-item {
+    font-size: 13px; font-weight: 300; line-height: 1.55; color: var(--ink-70);
+    display: flex; align-items: baseline; gap: 10px;
+  }
+  .br-item::before { content: '—'; color: var(--clay); font-size: 9px; flex-shrink: 0; }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 05 — HIRING PROCESS
+  ═══════════════════════════════════════════ */
+  #process {
+    background: var(--charcoal);
+    color: var(--warm-white);
+    padding-top: 150px; padding-bottom: 150px;
+  }
+
+  .process-header { max-width: 720px; margin-bottom: 90px; }
+
+  .process-headline {
+    font-family: var(--serif); font-size: clamp(38px, 4.5vw, 62px);
+    font-weight: 300; line-height: 1.06; letter-spacing: -0.025em;
+    color: var(--warm-white); margin-bottom: 28px;
+  }
+  .process-headline em { font-style: italic; color: var(--clay-light); }
+
+  .process-sub {
+    font-size: 18px; font-weight: 300; line-height: 1.72;
+    color: rgba(250,247,242,0.55); max-width: 580px;
+  }
+
+  /* Steps */
+  .process-steps {
+    display: flex; flex-direction: column; gap: 0;
+    border-left: 1px solid rgba(196,137,111,0.35);
+    margin-left: 28px;
+  }
+
+  .ps-item {
+    padding: 0 0 52px 48px; position: relative;
+  }
+  .ps-item:last-child { padding-bottom: 0; }
+
+  .ps-dot {
+    position: absolute; left: -7px; top: 5px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--charcoal); border: 2px solid var(--clay);
+  }
+  .ps-item:first-child .ps-dot { background: var(--clay); }
+
+  .ps-header {
+    display: flex; align-items: baseline; gap: 16px; margin-bottom: 10px;
+  }
+
+  .ps-num {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay);
+  }
+
+  .ps-timeline {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(250,247,242,0.30);
+  }
+
+  .ps-name {
+    font-family: var(--serif); font-size: 24px; font-weight: 400;
+    color: var(--warm-white); margin-bottom: 10px; line-height: 1.2; letter-spacing: -0.01em;
+  }
+
+  .ps-body {
+    font-size: 14px; font-weight: 300; line-height: 1.7;
+    color: rgba(250,247,242,0.52); max-width: 560px;
+  }
+
+  /* Commitments */
+  .process-commitments {
+    margin-top: 72px; padding: 44px 48px;
+    border: 1px solid rgba(250,247,242,0.12);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+  }
+
+  .pc-item {}
+  .pc-title {
+    font-family: var(--serif); font-size: 18px; font-weight: 400;
+    color: var(--warm-white); margin-bottom: 6px; line-height: 1.25;
+  }
+  .pc-body {
+    font-size: 13px; font-weight: 300; color: rgba(250,247,242,0.45); line-height: 1.65;
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 06 — DEI COMMITMENT
+  ═══════════════════════════════════════════ */
+  #dei {
+    background: var(--parchment);
+    padding-top: 150px; padding-bottom: 150px;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .dei-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0 100px; align-items: start;
+  }
+
+  .dei-left { position: sticky; top: 140px; }
+
+  .dei-headline {
+    font-family: var(--serif); font-size: clamp(36px, 4vw, 54px);
+    font-weight: 300; line-height: 1.08; letter-spacing: -0.025em; color: var(--ink);
+    margin-bottom: 28px;
+  }
+  .dei-headline em { font-style: italic; color: var(--clay); }
+
+  .dei-body {
+    font-size: 17px; font-weight: 300; line-height: 1.72; color: var(--ink-70); margin-bottom: 40px;
+  }
+
+  /* DEI stats */
+  .dei-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: var(--chalk); margin-bottom: 32px;
+  }
+
+  .dei-stat {
+    background: var(--parchment); padding: 28px 24px;
+  }
+
+  .dei-stat-num {
+    font-family: var(--serif); font-size: 40px; font-weight: 300;
+    color: var(--clay); line-height: 1; letter-spacing: -0.04em; margin-bottom: 6px;
+  }
+
+  .dei-stat-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dust); line-height: 1.55;
+  }
+
+  .dei-right { display: flex; flex-direction: column; gap: 0; }
+
+  .dei-item {
+    padding: 36px 0; border-bottom: 1px solid var(--chalk);
+  }
+  .dei-item:first-child { padding-top: 0; }
+  .dei-item:last-child { border-bottom: none; }
+
+  .dei-item-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 12px;
+  }
+
+  .dei-item-title {
+    font-family: var(--serif); font-size: 21px; font-weight: 400;
+    color: var(--ink); margin-bottom: 10px; line-height: 1.25; letter-spacing: -0.01em;
+  }
+
+  .dei-item-body {
+    font-size: 14px; font-weight: 300; line-height: 1.7; color: var(--ink-70);
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 07 — FAQ
+  ═══════════════════════════════════════════ */
+  #faq {
+    background: var(--ink);
+    padding-top: 150px; padding-bottom: 150px;
+    overflow: hidden; position: relative;
+  }
+
+  .faq-bg {
+    position: absolute; bottom: -8vw; right: -4vw;
+    font-family: var(--serif); font-size: 36vw; font-weight: 300; font-style: italic;
+    color: rgba(250,247,242,0.018); pointer-events: none; user-select: none;
+    line-height: 1; letter-spacing: -0.05em;
+  }
+
+  .faq-inner {
+    position: relative; z-index: 2;
+    display: grid; grid-template-columns: 1fr 1.6fr; gap: 0 80px; align-items: start;
+  }
+
+  .faq-left { position: sticky; top: 140px; }
+
+  .faq-headline {
+    font-family: var(--serif); font-size: clamp(36px, 4vw, 54px);
+    font-weight: 300; line-height: 1.08; letter-spacing: -0.025em;
+    color: var(--warm-white); margin-bottom: 24px;
+  }
+  .faq-headline em { font-style: italic; color: var(--clay-light); }
+
+  .faq-sub {
+    font-size: 16px; font-weight: 300; line-height: 1.72;
+    color: rgba(250,247,242,0.50); margin-bottom: 40px;
+  }
+
+  .faq-cta {
+    display: flex; flex-direction: column; gap: 14px; align-items: flex-start;
+  }
+
+  .faq-right { display: flex; flex-direction: column; gap: 0; }
+
+  .faq-item {
+    padding: 32px 0; border-bottom: 1px solid rgba(250,247,242,0.10);
+  }
+  .faq-item:first-child { padding-top: 0; }
+  .faq-item:last-child { border-bottom: none; }
+
+  .faq-q {
+    font-family: var(--serif); font-size: 20px; font-weight: 400;
+    color: var(--warm-white); margin-bottom: 12px; line-height: 1.25; letter-spacing: -0.01em;
+  }
+
+  .faq-a {
+    font-size: 14px; font-weight: 300; line-height: 1.7;
+    color: rgba(250,247,242,0.55);
+  }
+
+  /* ─── FOOTER ─── */
+  .footer-logo-col {}
+  .footer-logo span { color: var(--clay); font-style: italic; }
+  .footer-nav a { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250,247,242,0.32); text-decoration: none; transition: color 0.2s; }
+  .footer-nav a:hover { color: var(--warm-white); }
+  .footer-legal a { font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250,247,242,0.22); text-decoration: none; transition: color 0.2s; }
+  .footer-legal a:hover { color: var(--warm-white); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1100px) {
+    #why { grid-template-columns: 1fr; gap: 80px; padding-top: 160px; }
+    .why-right { border-left: none; padding-left: 0; border-top: 1px solid var(--chalk); padding-top: 60px; }
+    .positions-header { grid-template-columns: 1fr; gap: 28px; }
+    .role-header { grid-template-columns: 1fr; gap: 16px; }
+    .role-salary { text-align: left; }
+    .role-details { grid-template-columns: 1fr; }
+    .rd-col { border-right: none; border-bottom: 1px solid rgba(250,247,242,0.1); }
+    .rd-col:last-child { border-bottom: none; }
+    .general-roles { grid-template-columns: 1fr; }
+    .gr-item { border-right: none; }
+    .culture-header { grid-template-columns: 1fr; gap: 28px; }
+    .culture-grid { grid-template-columns: 1fr 1fr; }
+    .culture-item:nth-child(3n) { border-right: 1px solid var(--chalk); padding-right: 44px; padding-left: 0; }
+    .culture-item:nth-child(3n+2) { padding-left: 44px; }
+    .culture-item:nth-child(3n+3) { padding-left: 44px; }
+    .culture-item:nth-child(2n) { border-right: none; }
+    .culture-item:nth-last-child(-n+2) { border-bottom: none; }
+    .benefits-grid { grid-template-columns: 1fr; }
+    .benefit-row { border-right: none; padding: 44px 0; }
+    .benefit-row:nth-child(2n) { padding-left: 0; border-right: none; }
+    .benefit-row:nth-last-child(-n+2) { border-bottom: 1px solid var(--chalk); }
+    .benefit-row:last-child { border-bottom: none; }
+    .process-commitments { grid-template-columns: 1fr; }
+    .dei-grid { grid-template-columns: 1fr; gap: 60px; }
+    .dei-left { position: static; }
+    .faq-inner { grid-template-columns: 1fr; gap: 60px; }
+    .faq-left { position: static; }
+  }
+  @media (max-width: 768px) {
+    :root { --gutter: 5vw; }
+    .nav-links { display: none; }
+    .culture-grid { grid-template-columns: 1fr; }
+    .culture-item { border-right: none; padding: 40px 0; }
+    .culture-item:nth-child(n) { padding-left: 0; }
+    .dei-stats { grid-template-columns: 1fr; }
+    .benefit-row { grid-template-columns: 1fr; gap: 8px; }
+  }
+
+  .ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
+  .ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.2s;}
+  .ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .ham-btn.open span:nth-child(2){opacity:0;}
+  .ham-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+  @media(max-width:780px){
+    .ham-btn{display:flex;}
+    .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--warm);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{font-size:22px;letter-spacing:0.04em;}
+    .nav-cta{display:none;}
+  }
+
+  footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);padding:0;}
+  .footer-sitemap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:0;padding:56px 7vw 40px;border-bottom:1px solid rgba(250,247,242,0.08);}
+  .fs-brand{padding-right:40px;}
+  .footer-logo{font-family:var(--serif);font-size:22px;color:var(--warm-white,#FAF7F2);letter-spacing:-0.02em;text-decoration:none;display:block;margin-bottom:12px;}
+  .footer-logo span{color:var(--clay,#C4896F);font-style:italic;}
+  .footer-mission{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.28);line-height:1.8;margin-bottom:20px;}
+  .fs-cta{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:var(--clay,#C4896F);border:1px solid rgba(196,137,111,0.40);padding:9px 18px;text-decoration:none;transition:all 0.18s;}
+  .fs-cta:hover{background:rgba(196,137,111,0.12);}
+  .fs-col{padding-left:32px;border-left:1px solid rgba(250,247,242,0.06);}
+  .fs-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,247,242,0.30);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(250,247,242,0.06);}
+  .fs-col a{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,247,242,0.45);text-decoration:none;margin-bottom:10px;transition:color 0.15s;}
+  .fs-col a:hover{color:var(--clay,#C4896F);}
+  .footer-bottom{padding:20px 7vw;display:flex;align-items:center;justify-content:space-between;}
+  .footer-copy{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,0.20);}
+  .footer-legal{display:flex;gap:20px;}
+  .footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+  .footer-legal a:hover{color:var(--clay,#C4896F);}
+  @media(max-width:1100px){.footer-sitemap{grid-template-columns:1fr 1fr 1fr;gap:32px;}.fs-brand{grid-column:1/-1;padding-right:0;}.fs-col{border-left:none;padding-left:0;}}
+  @media(max-width:680px){.footer-sitemap{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}}
+  @media(max-width:400px){.footer-sitemap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="index.html" class="nav-logo">Vasl <span>Health</span></a>
+    <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="platform.html">Platform</a></li>
+    <li><a href="outcomes.html">Outcomes</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="#positions" class="nav-cta">View Positions</a>
+</nav>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 01 &mdash; WHY THIS WORK
+════════════════════════════════════ -->
+<section id="why">
+  <div class="why-left">
+    <span class="why-kicker reveal">Careers at Vasl Health</span>
+    <h1 class="why-headline reveal d1">
+      The most necessary<br>
+      work in health<br>
+      technology <em>right now.</em>
+    </h1>
+    <p class="why-body reveal d2">
+      The behavioral health system was designed around people who already had access &mdash; and then pointed at everyone else. Vasl is building the infrastructure that was never built for the communities that needed it most. That work requires specific expertise, deep commitment, and the willingness to build something that hasn't existed before. If that's the work you want to do, we want to hear from you.
+    </p>
+    <div class="why-actions reveal d3">
+      <a href="#positions" class="btn-dark">View Open Positions</a>
+      <a href="#culture" class="btn-outline">Our culture</a>
+    </div>
+  </div>
+
+  <div class="why-right reveal d2">
+    <div class="ceo-quote">
+      <div class="cq-label">From the Founder</div>
+      <p class="cq-text">"Building technology for diverse communities requires diverse teams. Our differences aren't just welcomed &mdash; they're essential to our success."</p>
+      <div class="cq-attr">Rodney Bell &mdash; Founder & CEO</div>
+    </div>
+
+    <div class="why-distinctions">
+      <div class="wd-item">
+        <span class="wd-num">01</span>
+        <div>
+          <div class="wd-title">The problem is architecture, not access</div>
+          <div class="wd-body">The gap isn't that underserved youth can't find mental health support. It's that every tool in the field was built for a different population. Fixing that requires building something new, not improving what exists.</div>
+        </div>
+      </div>
+      <div class="wd-item">
+        <span class="wd-num">02</span>
+        <div>
+          <div class="wd-title">The outcomes are real and documented</div>
+          <div class="wd-body">79.5% 30-day retention. 42% PHQ-8 improvement. 3 weeks to first support versus 9 months nationally. These are from deployed pilot cohorts &mdash; not projections. The platform works.</div>
+        </div>
+      </div>
+      <div class="wd-item">
+        <span class="wd-num">03</span>
+        <div>
+          <div class="wd-title">The governance matches the mission</div>
+          <div class="wd-body">Delaware Public Benefit Corporation. The commitment to serving underserved communities is in the charter &mdash; not the pitch deck. That's who you'd be building for, legally and operationally.</div>
+        </div>
+      </div>
+      <div class="wd-item">
+        <span class="wd-num">04</span>
+        <div>
+          <div class="wd-title">The institutional validation is serious</div>
+          <div class="wd-body">Mayo Clinic Platform_Accelerate. IRB study with University of Maryland. Senior Medical Advisor from Johns Hopkins. This is not a startup claiming clinical credibility. It is one with it.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 02 &mdash; OPEN POSITIONS
+════════════════════════════════════ -->
+<section id="positions">
+  <div class="chapter-label light reveal">Chapter 02 &mdash; Open Positions</div>
+
+  <div class="positions-header">
+    <h2 class="positions-headline reveal d1">
+      Two roles open.<br>
+      <em>Both essential.</em>
+    </h2>
+    <p class="positions-intro reveal d2">
+      We hire when we have a specific need and a specific role that a specific person is right for. We don't hire to fill headcount. The two roles below are the work we need done now &mdash; and we've described them with enough precision that you'll know whether you're that person before you apply.
+    </p>
+  </div>
+
+  <!-- Senior AI/ML Engineer -->
+  <div class="role-row reveal">
+    <div class="role-header">
+      <div class="role-meta">
+        <div class="role-tags">
+          <span class="role-tag dept">Engineering</span>
+          <span class="role-tag loc">Remote / San Francisco</span>
+          <span class="role-tag type">Full-time</span>
+          <span class="role-tag featured">Featured</span>
+        </div>
+        <div class="role-title">Senior AI/ML Engineer</div>
+      </div>
+      <div class="role-salary">
+        <div class="role-salary-num">$180K&ndash;$250K</div>
+        <div class="role-salary-label">Base + equity + benefits</div>
+      </div>
+    </div>
+
+    <p class="role-body">Lead the development of CulturalBERT-VLAP and Vasl's next-generation behavioral signal detection systems. This is not an NLP role that happens to touch healthcare &mdash; it is a healthcare-first AI role that requires deep NLP expertise. The model you build will be read by licensed clinicians before they see youth in crisis. That responsibility shapes every architectural decision.</p>
+
+    <div class="role-details">
+      <div class="rd-col">
+        <div class="rd-label">What You'll Do</div>
+        <div class="rd-list">
+          <div class="rd-item">Design and implement advanced ML models for culturally specific behavioral signal detection</div>
+          <div class="rd-item">Lead development of CulturalBERT-VLAP &mdash; extend the model vocabulary, signal taxonomy, and inference pipeline</div>
+          <div class="rd-item">Build culturally-aware NLP systems that understand AAVE, code-switching, and youth vernacular</div>
+          <div class="rd-item">Collaborate with clinical team to ensure AI safety, non-diagnostic output, and clinician-appropriate signal framing</div>
+          <div class="rd-item">Design and implement bias monitoring across demographic subgroups &mdash; this is an operational gate, not a metric</div>
+          <div class="rd-item">Optimize model performance for real-time, HIPAA-compliant deployment at clinical scale</div>
+        </div>
+      </div>
+      <div class="rd-col">
+        <div class="rd-label">What We're Looking For</div>
+        <div class="rd-list">
+          <div class="rd-item">5+ years ML/AI engineering &mdash; healthcare or NLP context strongly preferred</div>
+          <div class="rd-item">Deep expertise in Python, PyTorch or TensorFlow, and cloud platforms (AWS/GCP)</div>
+          <div class="rd-item">Transformer architecture fluency &mdash; fine-tuning, model optimization, BERT-family models specifically</div>
+          <div class="rd-item">MLOps experience: model deployment, monitoring, and production maintenance</div>
+          <div class="rd-item">HIPAA technical safeguard knowledge &mdash; in-memory processing, PHI handling, audit requirements</div>
+          <div class="rd-item">PhD in ML/AI or equivalent production experience &mdash; publications in NLP/ML a plus</div>
+          <div class="rd-item">Experience with multilingual or cross-cultural AI systems a significant bonus</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="role-footer">
+      <a href="mailto:careers@vaslhealth.com?subject=Application: Senior AI/ML Engineer" class="btn-green">Apply Now</a>
+      <span style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250,247,242,0.40);">careers@vaslhealth.com &middot; Subject: Senior AI/ML Engineer</span>
+    </div>
+  </div>
+
+  <!-- Clinical Data Scientist -->
+  <div class="role-row reveal">
+    <div class="role-header">
+      <div class="role-meta">
+        <div class="role-tags">
+          <span class="role-tag dept">Research</span>
+          <span class="role-tag loc">Remote / Boston</span>
+          <span class="role-tag type">Full-time</span>
+          <span class="role-tag featured">Featured</span>
+        </div>
+        <div class="role-title">Clinical Data Scientist</div>
+      </div>
+      <div class="role-salary">
+        <div class="role-salary-num">$150K&ndash;$200K</div>
+        <div class="role-salary-label">Base + equity + benefits</div>
+      </div>
+    </div>
+
+    <p class="role-body">Bridge clinical expertise with data science to validate CulturalBERT-VLAP's signal accuracy, conduct outcome studies, and ensure the platform delivers measurable behavioral health improvements for the populations it serves. The active IRB study with the University of Maryland is the immediate context for this role &mdash; you will be working with real clinical data from real deployed cohorts, under real IRB oversight, with real peer-reviewed publication as an output.</p>
+
+    <div class="role-details">
+      <div class="rd-col">
+        <div class="rd-label">What You'll Do</div>
+        <div class="rd-list">
+          <div class="rd-item">Design and execute clinical validation studies for the VLAP signal taxonomy &mdash; in partnership with the University of Maryland IRB study</div>
+          <div class="rd-item">Analyze real-world evidence to measure platform clinical effectiveness &mdash; PHQ-8 trends, retention, escalation rates, subgroup parity</div>
+          <div class="rd-item">Develop and maintain bias monitoring methodology &mdash; demographic disaggregation of FPR/FNR across BIPOC, LGBTQ+, and first-gen cohorts</div>
+          <div class="rd-item">Collaborate with clinical leadership to establish and validate outcome metrics</div>
+          <div class="rd-item">Prepare data for HL7 FHIR-compliant integration with Mayo Clinic Platform data infrastructure</div>
+          <div class="rd-item">Publish research findings in peer-reviewed journals &mdash; IRB study publication is a primary deliverable</div>
+        </div>
+      </div>
+      <div class="rd-col">
+        <div class="rd-label">What We're Looking For</div>
+        <div class="rd-list">
+          <div class="rd-item">PhD in Clinical Psychology, Biostatistics, Epidemiology, or related field &mdash; active licensure a significant plus</div>
+          <div class="rd-item">3+ years clinical research or healthcare data science &mdash; published research strongly preferred</div>
+          <div class="rd-item">Strong statistical analysis skills in R and/or Python &mdash; clinical trial design experience</div>
+          <div class="rd-item">Familiarity with healthcare data standards: HL7, FHIR, HIPAA Safe Harbor de-identification</div>
+          <div class="rd-item">Knowledge of mental health assessment tools &mdash; PHQ-8/9, GAD-7, PCL-5, AUDIT, DAST</div>
+          <div class="rd-item">IRB protocol experience &mdash; study design, submission, ongoing compliance</div>
+          <div class="rd-item">Background in culturally responsive research methodology a strong bonus</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="role-footer">
+      <a href="mailto:careers@vaslhealth.com?subject=Application: Clinical Data Scientist" class="btn-green">Apply Now</a>
+      <span style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250,247,242,0.40);">careers@vaslhealth.com &middot; Subject: Clinical Data Scientist</span>
+    </div>
+  </div>
+
+  <!-- General interest -->
+  <div class="role-row general reveal">
+    <div class="role-header">
+      <div class="role-meta">
+        <div class="role-tags">
+          <span class="role-tag loc">Remote</span>
+          <span class="role-tag type">Various</span>
+        </div>
+        <div class="role-title">Don't See Your Role?</div>
+      </div>
+    </div>
+
+    <p class="role-body">We're actively planning roles across multiple functions. If your background aligns with the work Vasl is doing, we want to hear from you now &mdash; before the role is posted.</p>
+
+    <div class="general-roles">
+      <div class="gr-item">Product Manager &mdash; AI/ML Products</div>
+      <div class="gr-item">DevOps Engineer &mdash; Healthcare Infrastructure</div>
+      <div class="gr-item">UX Researcher &mdash; Mental Health Applications</div>
+      <div class="gr-item">Clinical Affairs Manager</div>
+      <div class="gr-item">Business Development &mdash; Healthcare Partnerships</div>
+      <div class="gr-item">Customer Success Manager &mdash; Enterprise</div>
+    </div>
+
+    <div class="role-footer">
+      <a href="mailto:careers@vaslhealth.com?subject=General Interest" class="btn-ghost-green">Express Interest</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 03 &mdash; WHAT THE WORK LOOKS LIKE
+════════════════════════════════════ -->
+<section id="culture">
+  <div class="chapter-label reveal">Chapter 03 &mdash; What the Work Looks Like</div>
+
+  <div class="culture-header">
+    <h2 class="culture-headline reveal d1">
+      The culture<br>
+      the mission<br>
+      <em>requires.</em>
+    </h2>
+    <p class="culture-intro reveal d2">
+      We don't have a culture deck. We have six things that are true about how this team works &mdash; derived from the nature of the problem, not from a values workshop. They're not aspirational. They describe the environment you'd be joining.
+    </p>
+  </div>
+
+  <div class="culture-grid">
+    <div class="culture-item reveal">
+      <div class="ci-num">01</div>
+      <div class="ci-title">Impact is the metric that matters</div>
+      <p class="ci-body">Every decision &mdash; architectural, clinical, operational &mdash; is evaluated against one question: does this improve outcomes for the communities we serve? Not engagement, not retention for its own sake, not platform growth. Clinical impact for youth who had no prior access to care that worked for them.</p>
+    </div>
+    <div class="culture-item reveal d1">
+      <div class="ci-num">02</div>
+      <div class="ci-title">Evidence over assumption</div>
+      <p class="ci-body">We ground the work in rigorous research, IRB study data, and clinical validation. When we make a claim about the platform &mdash; 79.5% retention, 42% PHQ-8 improvement &mdash; it comes with a methodology note. We apply the same standard internally: build on evidence, document what we don't know yet, and publish what we find.</p>
+    </div>
+    <div class="culture-item reveal d2">
+      <div class="ci-num">03</div>
+      <div class="ci-title">The communities we serve are in the room</div>
+      <p class="ci-body">Design decisions, peer group architecture, VLAP training corpus annotation &mdash; all shaped in active partnership with the communities the platform serves. This is structural, not consultative. Youth voices are not solicited at the end of the design process. They are part of it from the beginning.</p>
+    </div>
+    <div class="culture-item reveal">
+      <div class="ci-num">04</div>
+      <div class="ci-title">Remote-first and genuinely flexible</div>
+      <p class="ci-body">100% remote. Flexible hours &mdash; clinical platform operations don't require synchronous standups. We have team members across time zones. What we care about is the work produced and the contribution to the mission, not presence in a particular location or time window.</p>
+    </div>
+    <div class="culture-item reveal d1">
+      <div class="ci-num">05</div>
+      <div class="ci-title">Clinical rigor is everyone's responsibility</div>
+      <p class="ci-body">Engineers read the clinical literature. Product makes decisions with the CMO's input. Data scientists work alongside clinical researchers. The boundary between "technical team" and "clinical team" is deliberately permeable &mdash; because the platform's value is at the intersection of those disciplines, not in either one alone.</p>
+    </div>
+    <div class="culture-item reveal d2">
+      <div class="ci-num">06</div>
+      <div class="ci-title">Human in the loop &mdash; including in how we work</div>
+      <p class="ci-body">We build AI that informs human clinical judgment. We apply the same principle internally: tools support the work, people make the decisions. We use 20% time for research and passion projects. We attend conferences. We publish. The learning culture isn't a benefit &mdash; it's operational.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 04 &mdash; BENEFITS
+════════════════════════════════════ -->
+<section id="benefits">
+  <div class="chapter-label reveal">Chapter 04 &mdash; Benefits</div>
+
+  <div class="benefits-header">
+    <h2 class="benefits-headline reveal d1">
+      We take care of the team<br>
+      so the team can <em>focus.</em>
+    </h2>
+    <p class="benefits-sub reveal d2">
+      The benefits below are real, competitive, and designed around sustainable work on a hard problem. No foosball tables. No vague "unlimited PTO" that no one actually uses. Specific, documented, and yours from day one.
+    </p>
+  </div>
+
+  <div class="benefits-grid">
+    <div class="benefit-row reveal">
+      <div class="br-label">Compensation</div>
+      <div class="br-content">
+        <div class="br-title">Top-10% market salaries. Transparent bands. Equity that means something.</div>
+        <div class="br-items">
+          <div class="br-item">Competitive base salaries &mdash; top 10% of market for each role and level</div>
+          <div class="br-item">Equity participation &mdash; meaningful stake in company growth</div>
+          <div class="br-item">Annual performance bonuses</div>
+          <div class="br-item">Transparent salary bands &mdash; no negotiation games</div>
+          <div class="br-item">Regular compensation reviews against market benchmarks</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="benefit-row reveal d1">
+      <div class="br-label">Health & Wellbeing</div>
+      <div class="br-content">
+        <div class="br-title">Premium coverage. Mental health support that includes the platform we're building.</div>
+        <div class="br-items">
+          <div class="br-item">Premium health, dental, and vision insurance &mdash; fully covered</div>
+          <div class="br-item">Mental health support &mdash; including full access to the Vasl platform</div>
+          <div class="br-item">$2,000 annual wellness stipend</div>
+          <div class="br-item">Flexible PTO with genuine encouragement to use it</div>
+          <div class="br-item">16 weeks paid parental leave</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="benefit-row reveal">
+      <div class="br-label">Work Environment</div>
+      <div class="br-content">
+        <div class="br-title">Remote-first. Well-equipped. Quarterly in-person time.</div>
+        <div class="br-items">
+          <div class="br-item">100% remote &mdash; flexible hours, genuine asynchronous culture</div>
+          <div class="br-item">$3,000 home office setup budget &mdash; spend it on what you actually need</div>
+          <div class="br-item">Latest MacBook Pro or equivalent PC of your choice</div>
+          <div class="br-item">Co-working space stipend for those who want it</div>
+          <div class="br-item">Quarterly team retreats &mdash; in-person time that's substantive, not performative</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="benefit-row reveal d1">
+      <div class="br-label">Learning & Growth</div>
+      <div class="br-content">
+        <div class="br-title">$5,000 annually. Conferences, publications, open source, research.</div>
+        <div class="br-items">
+          <div class="br-item">$5,000 annual learning and development budget &mdash; no approval required for reasonable use</div>
+          <div class="br-item">Conference attendance and speaking opportunities supported</div>
+          <div class="br-item">Research publication support &mdash; time, co-authorship, and submission assistance</div>
+          <div class="br-item">20% time for passion projects and research exploration</div>
+          <div class="br-item">Open source contribution time &mdash; structured, not just permitted</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="benefit-row reveal">
+      <div class="br-label">Flexibility</div>
+      <div class="br-content">
+        <div class="br-title">Sabbatical at year four. Volunteer time. Arrangements that fit real life.</div>
+        <div class="br-items">
+          <div class="br-item">Sabbatical program &mdash; 4 weeks paid after 4 years of service</div>
+          <div class="br-item">40 hours annual volunteer time off &mdash; paid, self-directed</div>
+          <div class="br-item">Flexible work arrangements for caregiving, health, and life</div>
+          <div class="br-item">Employee referral bonuses</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="benefit-row reveal d1">
+      <div class="br-label">Visa & Legal</div>
+      <div class="br-content">
+        <div class="br-title">We sponsor. We support long-term.</div>
+        <div class="br-items">
+          <div class="br-item">H-1B, O-1, and other work visa sponsorship for exceptional candidates</div>
+          <div class="br-item">Green card support for long-term team members</div>
+          <div class="br-item">International contractor arrangements available for select roles</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 05 &mdash; HIRING PROCESS
+════════════════════════════════════ -->
+<section id="process">
+  <div class="chapter-label light reveal">Chapter 05 &mdash; The Hiring Process</div>
+
+  <div class="process-header">
+    <h2 class="process-headline reveal d1">
+      Transparent, respectful,<br>
+      and designed to help<br>
+      <em>you succeed.</em>
+    </h2>
+    <p class="process-sub reveal d2">
+      Six steps. Two to three weeks total. You'll always know where you stand, what comes next, and what we're evaluating. The assessments reflect real work &mdash; not abstract puzzles designed to stress-test your composure under pressure.
+    </p>
+  </div>
+
+  <div class="process-steps">
+    <div class="ps-item reveal">
+      <div class="ps-dot"></div>
+      <div class="ps-header">
+        <span class="ps-num">Step 01</span>
+        <span class="ps-timeline">3&ndash;5 business days</span>
+      </div>
+      <div class="ps-name">Application Review</div>
+      <p class="ps-body">We review your application within 5 business days. We are looking for relevant experience, evidence of the specific expertise the role requires, and genuine alignment with the mission. We read cover letters when they're substantive. Generic applications get generic responses.</p>
+    </div>
+
+    <div class="ps-item reveal">
+      <div class="ps-dot"></div>
+      <div class="ps-header">
+        <span class="ps-num">Step 02</span>
+        <span class="ps-timeline">30 minutes</span>
+      </div>
+      <div class="ps-name">Initial Conversation</div>
+      <p class="ps-body">A 30-minute call with our talent team. We'll discuss your background, what draws you to this work specifically, and answer your questions about the role, the team, and the platform. This is a conversation, not a screen &mdash; we're not checking boxes, we're learning about you.</p>
+    </div>
+
+    <div class="ps-item reveal">
+      <div class="ps-dot"></div>
+      <div class="ps-header">
+        <span class="ps-num">Step 03</span>
+        <span class="ps-timeline">1&ndash;2 hours</span>
+      </div>
+      <div class="ps-name">Technical or Domain Assessment</div>
+      <p class="ps-body">A role-specific assessment that reflects actual work you'd do at Vasl. For engineering: a take-home involving NLP/ML architecture and clinical data handling. For research: a study design or analysis task using the kind of data we work with. We scope these carefully to respect your time. We provide feedback regardless of outcome.</p>
+    </div>
+
+    <div class="ps-item reveal">
+      <div class="ps-dot"></div>
+      <div class="ps-header">
+        <span class="ps-num">Step 04</span>
+        <span class="ps-timeline">2&ndash;3 hours</span>
+      </div>
+      <div class="ps-name">Team Interviews</div>
+      <p class="ps-body">Meet the people you'd work alongside most closely &mdash; engineers, clinical team members, product leads. These conversations focus on how you think through problems, how you collaborate across clinical and technical disciplines, and how you'd navigate the specific challenges the role involves. You'll also have time to ask them about the actual texture of the work.</p>
+    </div>
+
+    <div class="ps-item reveal">
+      <div class="ps-dot"></div>
+      <div class="ps-header">
+        <span class="ps-num">Step 05</span>
+        <span class="ps-timeline">45 minutes</span>
+      </div>
+      <div class="ps-name">Leadership Conversation</div>
+      <p class="ps-body">A final conversation with Vasl leadership about vision, mission, and how you'd contribute to the next phase of the platform's development. This is also your best opportunity to ask the hardest questions &mdash; about the business, the challenges, the decisions we've made that we'd make differently, and the ones we stand behind.</p>
+    </div>
+
+    <div class="ps-item reveal">
+      <div class="ps-dot"></div>
+      <div class="ps-header">
+        <span class="ps-num">Step 06</span>
+        <span class="ps-timeline">2&ndash;3 days</span>
+      </div>
+      <div class="ps-name">Offer & Onboarding</div>
+      <p class="ps-body">A competitive offer within 2&ndash;3 days of the final conversation. We don't lowball and expect negotiation &mdash; we lead with the right number. Onboarding is comprehensive: clinical context, platform architecture, team introductions, and the specific context you need to start contributing meaningfully in week one.</p>
+    </div>
+  </div>
+
+  <div class="process-commitments reveal">
+    <div class="pc-item">
+      <div class="pc-title">We respect your time</div>
+      <p class="pc-body">Interviews are focused and purposeful. Assessments are scoped to reflect real work, not maximize our evaluation surface area. We don't extend processes unnecessarily.</p>
+    </div>
+    <div class="pc-item">
+      <div class="pc-title">We communicate clearly</div>
+      <p class="pc-body">You'll know where you stand at every stage. If we're not moving forward, we'll tell you promptly &mdash; and, where possible, tell you why. Ghosting is not a practice we tolerate internally or externally.</p>
+    </div>
+    <div class="pc-item">
+      <div class="pc-title">Assessments reflect real work</div>
+      <p class="pc-body">Our technical challenges are derived from problems we've actually encountered. We're evaluating how you think, not whether you can perform under artificial stress conditions.</p>
+    </div>
+    <div class="pc-item">
+      <div class="pc-title">We accommodate different needs</div>
+      <p class="pc-body">Tell us what you need to show up fully in this process &mdash; scheduling accommodations, accessibility requirements, alternative assessment formats. We'll make it work.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 06 &mdash; DEI COMMITMENT
+════════════════════════════════════ -->
+<section id="dei">
+  <div class="chapter-label reveal">Chapter 06 &mdash; Diversity, Equity & Inclusion</div>
+
+  <div class="dei-grid">
+    <div class="dei-left reveal">
+      <h2 class="dei-headline">
+        Our mission to serve<br>
+        diverse communities<br>
+        starts with building<br>
+        <em>a diverse team.</em>
+      </h2>
+      <p class="dei-body">Different perspectives don't just make us stronger &mdash; for Vasl specifically, they make the product better. The VLAP signal taxonomy was built by people who understood the communities whose language it reads. The care model was designed by clinicians who have spent careers inside those communities. That specificity is the product. It requires the team to reflect it.</p>
+
+      <div class="dei-stats">
+        <div class="dei-stat">
+          <div class="dei-stat-num">60<span style="font-size:20px">%</span></div>
+          <div class="dei-stat-label">Women & non-binary<br>team members</div>
+        </div>
+        <div class="dei-stat">
+          <div class="dei-stat-num">45<span style="font-size:20px">%</span></div>
+          <div class="dei-stat-label">Underrepresented<br>minorities</div>
+        </div>
+        <div class="dei-stat">
+          <div class="dei-stat-num">30<span style="font-size:20px">%</span></div>
+          <div class="dei-stat-label">First-generation<br>college attendees</div>
+        </div>
+        <div class="dei-stat">
+          <div class="dei-stat-num">15<span style="font-size:14px">+</span></div>
+          <div class="dei-stat-label">Countries<br>represented</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dei-right">
+      <div class="dei-item reveal">
+        <div class="dei-item-label">Lived Experience as Expertise</div>
+        <div class="dei-item-title">We actively recruit from the communities we serve.</div>
+        <p class="dei-item-body">We partner with HBCUs, Hispanic-Serving Institutions, and community colleges to build inclusive talent pipelines. For many roles, lived experience in the communities Vasl serves is not just valued &mdash; it is expertise. A first-generation college student who navigated mental health without culturally responsive support understands something about this problem that no credential fully substitutes for.</p>
+      </div>
+
+      <div class="dei-item reveal">
+        <div class="dei-item-label">Pay Equity</div>
+        <div class="dei-item-title">We audit regularly and publish the results internally.</div>
+        <p class="dei-item-body">Transparent salary bands are published internally. Regular pay equity audits compare compensation across gender, race, and background &mdash; with findings shared with the full team. We don't conduct these audits to demonstrate compliance. We conduct them because pay equity is a minimum standard for an organization committed to equity in everything else it does.</p>
+      </div>
+
+      <div class="dei-item reveal">
+        <div class="dei-item-label">Career Development</div>
+        <div class="dei-item-title">Mentorship, sponsorship, and advancement &mdash; not just access.</div>
+        <p class="dei-item-body">We provide structured mentorship and sponsorship for team members from underrepresented backgrounds &mdash; not as a separate program, but as part of how we develop everyone. We promote from within when the person is ready, not when it's convenient. Advancement paths are documented and revisited in every performance review.</p>
+      </div>
+
+      <div class="dei-item reveal">
+        <div class="dei-item-label">Inclusive Hiring</div>
+        <div class="dei-item-title">An equal opportunity employer &mdash; and we mean it structurally.</div>
+        <p class="dei-item-body">Vasl Health is an equal opportunity employer. We actively accommodate different needs throughout the hiring process. We use structured interview rubrics to reduce evaluator bias. We apply the same standards we hold the platform to &mdash; evidence-based, documented, and open to correction when we get it wrong.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 07 &mdash; FAQ
+════════════════════════════════════ -->
+<section id="faq">
+  <div class="faq-bg" aria-hidden="true">Work</div>
+  <div class="faq-inner">
+    <div class="faq-left">
+      <div class="chapter-label muted reveal">Chapter 07 &mdash; FAQ</div>
+      <h2 class="faq-headline reveal d1">
+        Questions we<br>
+        <em>actually get.</em>
+      </h2>
+      <p class="faq-sub reveal d2">Answers to the things candidates ask before deciding whether to apply. If your question isn't here, email us.</p>
+      <div class="faq-cta reveal d3">
+        <a href="mailto:careers@vaslhealth.com" class="btn-light">Email Us</a>
+        <a href="#positions" class="btn-ghost-light">View positions</a>
+      </div>
+    </div>
+
+    <div class="faq-right reveal d2">
+      <div class="faq-item">
+        <div class="faq-q">Is the work genuinely remote, or is there an expectation to relocate?</div>
+        <p class="faq-a">Genuinely remote. We have team members across time zones and we build our processes around asynchronous work. The posted locations (San Francisco, Boston) indicate where leadership is concentrated &mdash; they are not requirements. We do quarterly in-person retreats and occasional team onsite work, for which we cover travel and accommodation.</p>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What does work-life balance actually look like here?</div>
+        <p class="faq-a">Flexible hours, genuine PTO, and a leadership team that models taking time off &mdash; including mental health days. We have an unlimited PTO policy, but we also set minimum expectations for actual vacation time taken. The mission is urgent. That doesn't mean burnout is a virtue.</p>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Do you sponsor visas?</div>
+        <p class="faq-a">Yes. We sponsor H-1B and O-1 visas, and we support green card applications for long-term team members. We handle the process and costs. If you're on a visa and this creates specific timeline requirements for your application, let us know early in the process.</p>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What does career progression look like?</div>
+        <p class="faq-a">We promote from within when the person is ready &mdash; which we evaluate based on documented criteria, not tenure. Growth paths for every role are written down and revisited in every performance review. Many of our senior team members have grown significantly within their time at Vasl. We build people up, not just toward the next title.</p>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">How does the 20% time work in practice?</div>
+        <p class="faq-a">It's actual calendar time &mdash; not "use it when you can find it." One day per week is protected for research, passion projects, open source contributions, or exploration adjacent to your core role. Some of our best platform features have come from 20% projects. We take it seriously operationally, not just in the benefits description.</p>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">How long does the hiring process take?</div>
+        <p class="faq-a">Typically 2&ndash;3 weeks from application to offer. We move quickly while being thorough. If something creates a timeline constraint on your end &mdash; another offer, a visa deadline, a job transition &mdash; tell us early and we'll do our best to accommodate it.</p>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What if I don't see a role that fits?</div>
+        <p class="faq-a">Email us. We're actively planning roles across clinical affairs, product management, DevOps, UX research, and business development. If your background is genuinely relevant to Vasl's work and you express that specifically, we'll read it seriously and respond.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-sitemap">
+    <div class="fs-brand">
+      <a href="index.html" class="footer-logo">Vasl <span>Health</span></a>
+      <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
+      <a href="contact.html" class="fs-cta">Request a Demo &rarr;</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Platform</div>
+      <a href="platform.html">Platform Overview</a>
+      <a href="vlap.html">VLAP</a>
+      <a href="ai-model.html">AI Model</a>
+      <a href="technology.html">Technology</a>
+      <a href="peer-groups.html">Peer Groups</a>
+      <a href="teletherapy.html">Teletherapy</a>
+      <a href="prototype.html">Live Demo Portal</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Who We Serve</div>
+      <a href="for-schools.html">For Schools</a>
+      <a href="for-organizations.html">For Organizations</a>
+      <a href="outcomes.html">Outcomes</a>
+      <a href="clinical-outcomes.html">Clinical Outcomes</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Company</div>
+      <a href="about.html">About Vasl</a>
+      <a href="team.html">Team</a>
+      <a href="careers.html">Careers</a>
+      <a href="research.html">Research</a>
+      <a href="blog.html">Blog &amp; Insights</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Support &amp; Legal</div>
+      <a href="support.html">Help Center</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="baa.html">Business Associate Agreement</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 Vasl Health, Inc. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="baa.html">BAA</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js-ready');
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.06, rootMargin: '0px 0px -24px 0px' });
+  reveals.forEach(el => io.observe(el));
+  window.addEventListener('load', () => {
+    reveals.forEach((el, i) => {
+      if (el.getBoundingClientRect().top < window.innerHeight) {
+        setTimeout(() => el.classList.add('visible'), i * 50);
+      }
+    });
+  });
+</script>
+</body>
+</html>
