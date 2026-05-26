@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Vasl Health pricing &mdash; Starter at $480/month, Pro at $1,200/month, and Enterprise for larger deployments. Simple, transparent, designed for schools and organizations.">
+<title>Pricing &mdash; Vasl Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --warm-white:#FAF7F2;--parchment:#F0EAE0;--ink:#1C1C1C;
+  --ink-70:rgba(28,28,28,0.70);--ink-50:rgba(28,28,28,0.50);--ink-12:rgba(28,28,28,0.12);
+  --clay:#C4896F;--clay-light:#E8C4AE;--clay-pale:#F5E6DC;
+  --deep-green:#2D4A3E;--dust:#8B7B6B;--chalk:#E2DAD0;--charcoal:#222222;
+  --serif:'Newsreader',Georgia,serif;--sans:'IBM Plex Sans',sans-serif;--mono:'IBM Plex Mono',monospace;
+  --gutter:7vw;
+}
+body{background:var(--warm-white);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;overflow-x:hidden;}
+.reveal{transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1),transform 0.9s cubic-bezier(0.16,1,0.3,1);}
+.js-ready .reveal{opacity:0;transform:translateY(20px);}
+.js-ready .reveal.visible{opacity:1;transform:translateY(0);}
+.d1{transition-delay:0.08s;}.d2{transition-delay:0.16s;}.d3{transition-delay:0.24s;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);display:flex;align-items:center;justify-content:space-between;background:rgba(250,247,242,0.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--ink-12);}
+.nav-logo{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:-0.02em;color:var(--ink);text-decoration:none;}
+.nav-logo span{color:var(--clay);font-style:italic;}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--dust);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--ink);}
+.nav-cta{font-family:var(--mono);font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--deep-green);border:1px solid var(--deep-green);padding:9px 20px;text-decoration:none;transition:background 0.22s,color 0.22s;}
+.nav-cta:hover{background:var(--deep-green);color:var(--warm-white);}
+section{padding:130px var(--gutter);position:relative;}
+.chapter-label{font-family:var(--mono);font-size:10px;font-weight:300;letter-spacing:0.16em;text-transform:uppercase;color:var(--clay);display:flex;align-items:center;gap:12px;margin-bottom:52px;}
+.chapter-label::after{content:'';display:block;width:36px;height:1px;background:var(--clay);opacity:0.45;}
+.chapter-label.muted{color:rgba(250,247,242,0.35);}
+.chapter-label.muted::after{background:rgba(250,247,242,0.35);}
+.btn-dark{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:var(--ink);color:var(--warm-white);padding:16px 32px;text-decoration:none;display:inline-block;transition:background 0.22s;}
+.btn-dark:hover{background:var(--deep-green);}
+.btn-green{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:var(--deep-green);color:var(--warm-white);padding:16px 32px;text-decoration:none;display:inline-block;transition:background 0.22s;}
+.btn-green:hover{background:#243D33;}
+.btn-outline{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink);border:1px solid var(--chalk);padding:16px 32px;text-decoration:none;display:inline-block;transition:all 0.22s;}
+.btn-outline:hover{border-color:var(--ink);}
+.btn-ghost{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dust);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:color 0.2s;}
+.btn-ghost:hover{color:var(--ink);}
+.btn-ghost::after{content:'\2192';}
+.btn-light{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:var(--warm-white);color:var(--ink);padding:16px 32px;text-decoration:none;display:inline-block;transition:background 0.22s;}
+.btn-light:hover{background:var(--clay-light);}
+.btn-ghost-light{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.40);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:color 0.2s;}
+.btn-ghost-light:hover{color:var(--warm-white);}
+.btn-ghost-light::after{content:'\2192';}
+
+/* ═══ HERO ═══ */
+#hero{padding-top:160px;padding-bottom:100px;background:var(--warm-white);border-bottom:1px solid var(--chalk);}
+.hero-headline{font-family:var(--serif);font-size:clamp(46px,5.5vw,80px);font-weight:300;line-height:1.03;letter-spacing:-0.03em;color:var(--ink);margin-bottom:24px;max-width:800px;}
+.hero-headline em{font-style:italic;color:var(--clay);}
+.hero-sub{font-size:19px;font-weight:300;line-height:1.72;color:var(--ink-70);max-width:600px;margin-bottom:20px;}
+.hero-note{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dust);}
+
+/* ═══ PLANS ═══ */
+#plans{background:var(--warm-white);padding-top:0;padding-bottom:0;}
+
+.plan-row{
+  border-top:1px solid var(--chalk);
+  display:grid;grid-template-columns:280px 1fr 1fr;gap:0;
+  padding:80px var(--gutter);
+}
+.plan-row:last-child{border-bottom:1px solid var(--chalk);}
+.plan-row.featured{background:var(--deep-green);}
+
+/* Plan ID column */
+.plan-id{}
+.plan-tier{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:12px;}
+.plan-row:not(.featured) .plan-tier{color:var(--clay);}
+.plan-row.featured .plan-tier{color:var(--clay-light);}
+.plan-name{font-family:var(--serif);font-size:36px;font-weight:300;line-height:1;letter-spacing:-0.03em;margin-bottom:16px;}
+.plan-row:not(.featured) .plan-name{color:var(--ink);}
+.plan-row.featured .plan-name{color:var(--warm-white);}
+.plan-price-block{margin-bottom:20px;}
+.plan-price{font-family:var(--serif);font-size:52px;font-weight:300;line-height:1;letter-spacing:-0.04em;}
+.plan-row:not(.featured) .plan-price{color:var(--ink);}
+.plan-row.featured .plan-price{color:var(--warm-white);}
+.plan-price-period{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;margin-top:4px;}
+.plan-row:not(.featured) .plan-price-period{color:var(--dust);}
+.plan-row.featured .plan-price-period{color:rgba(250,247,242,0.40);}
+.plan-pmpm{margin-top:14px;margin-bottom:20px;padding:14px 16px;border:1px solid;}
+.plan-row:not(.featured) .plan-pmpm{border-color:var(--chalk);background:var(--parchment);}
+.plan-row.featured .plan-pmpm{border-color:rgba(250,247,242,0.15);background:rgba(250,247,242,0.06);}
+.pmpm-label{font-family:var(--mono);font-size:8px;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:8px;}
+.plan-row:not(.featured) .pmpm-label{color:var(--clay);}
+.plan-row.featured .pmpm-label{color:var(--clay-light);}
+.pmpm-row{font-size:13px;font-weight:300;padding:5px 0;border-bottom:1px solid;display:flex;justify-content:space-between;align-items:baseline;}
+.plan-row:not(.featured) .pmpm-row{color:var(--ink-70);border-color:var(--chalk);}
+.plan-row.featured .pmpm-row{color:rgba(250,247,242,0.55);border-color:rgba(250,247,242,0.08);}
+.pmpm-row:last-child{border-bottom:none;}
+.pmpm-val{font-family:var(--mono);font-size:12px;font-weight:500;}
+.plan-row:not(.featured) .pmpm-val{color:var(--ink);}
+.plan-row.featured .pmpm-val{color:var(--warm-white);}
+.plan-capacity{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;padding:6px 14px;border:1px solid;display:inline-block;margin-bottom:24px;}
+.plan-row:not(.featured) .plan-capacity{color:var(--deep-green);border-color:var(--deep-green);}
+.plan-row.featured .plan-capacity{color:rgba(250,247,242,0.60);border-color:rgba(250,247,242,0.25);}
+.plan-cta{display:flex;flex-direction:column;gap:12px;}
+
+/* Features columns */
+.plan-features-col{padding-left:52px;border-left:1px solid;}
+.plan-row:not(.featured) .plan-features-col{border-color:var(--chalk);}
+.plan-row.featured .plan-features-col{border-color:rgba(250,247,242,0.12);}
+.plan-features-col:last-child{padding-left:52px;}
+
+.pfc-label{font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid;}
+.plan-row:not(.featured) .pfc-label{color:var(--dust);border-color:var(--chalk);}
+.plan-row.featured .pfc-label{color:rgba(250,247,242,0.35);border-color:rgba(250,247,242,0.12);}
+
+.pf-list{display:flex;flex-direction:column;gap:0;}
+.pf-item{padding:10px 0;border-bottom:1px solid;font-size:14px;font-weight:300;display:flex;align-items:baseline;gap:10px;line-height:1.55;}
+.pf-item:last-child{border-bottom:none;}
+.plan-row:not(.featured) .pf-item{color:var(--ink-70);border-color:var(--chalk);}
+.plan-row.featured .pf-item{color:rgba(250,247,242,0.65);border-color:rgba(250,247,242,0.08);}
+.pf-item::before{font-size:10px;flex-shrink:0;}
+.plan-row:not(.featured) .pf-item::before{content:'\2192';color:var(--clay);}
+.plan-row.featured .pf-item::before{content:'\2192';color:var(--clay-light);}
+.pf-item strong{font-weight:500;}
+.plan-row:not(.featured) .pf-item strong{color:var(--ink);}
+.plan-row.featured .pf-item strong{color:var(--warm-white);}
+
+.featured-badge{display:inline-block;font-family:var(--mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;background:var(--clay);color:var(--warm-white);padding:3px 10px;margin-bottom:12px;}
+
+/* ═══ COMPARISON ═══ */
+#compare{background:var(--parchment);padding-top:100px;padding-bottom:100px;border-top:1px solid var(--chalk);}
+.compare-header{max-width:720px;margin-bottom:60px;}
+.compare-headline{font-family:var(--serif);font-size:clamp(32px,3.8vw,52px);font-weight:300;line-height:1.08;letter-spacing:-0.025em;color:var(--ink);margin-bottom:20px;}
+.compare-headline em{font-style:italic;color:var(--clay);}
+.compare-sub{font-size:17px;font-weight:300;line-height:1.72;color:var(--ink-70);}
+
+.compare-table{border:1px solid var(--chalk);overflow:hidden;}
+.ct-header{display:grid;grid-template-columns:1fr 120px 120px 120px;background:var(--ink);}
+.cth{padding:14px 18px;font-family:var(--mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(250,247,242,0.40);border-right:1px solid rgba(250,247,242,0.08);}
+.cth:last-child{border-right:none;}
+.ct-row{display:grid;grid-template-columns:1fr 120px 120px 120px;border-top:1px solid var(--chalk);}
+.ct-row.section-row{background:var(--parchment);}
+.ctc{padding:13px 18px;font-size:13px;font-weight:300;color:var(--ink-70);border-right:1px solid var(--chalk);display:flex;align-items:center;}
+.ctc:last-child{border-right:none;}
+.ctc:first-child{font-weight:400;color:var(--ink);}
+.ct-row.section-row .ctc:first-child{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--clay);font-weight:400;}
+.ctc-yes{font-family:var(--mono);font-size:11px;color:var(--deep-green);}
+.ctc-no{font-family:var(--mono);font-size:11px;color:var(--chalk);}
+.ctc-custom{font-family:var(--mono);font-size:9px;letter-spacing:0.06em;color:var(--clay);}
+.ctc-mid{text-align:center;justify-content:center;}
+
+/* ═══ MEDICAID NOTE ═══ */
+#medicaid-note{background:var(--deep-green);color:var(--warm-white);padding-top:90px;padding-bottom:90px;}
+.mn-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 80px;align-items:center;}
+.mn-headline{font-family:var(--serif);font-size:clamp(32px,3.8vw,52px);font-weight:300;line-height:1.08;letter-spacing:-0.025em;color:var(--warm-white);margin-bottom:24px;}
+.mn-headline em{font-style:italic;color:var(--clay-light);}
+.mn-body{font-size:17px;font-weight:300;line-height:1.72;color:rgba(250,247,242,0.58);margin-bottom:32px;}
+.mn-math{background:rgba(250,247,242,0.06);border:1px solid rgba(250,247,242,0.12);padding:32px 36px;}
+.mm-label{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--clay-light);margin-bottom:18px;}
+.mm-row{display:flex;align-items:baseline;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(250,247,242,0.08);font-size:14px;font-weight:300;color:rgba(250,247,242,0.55);}
+.mm-row:last-child{border-bottom:none;padding-top:16px;margin-top:4px;}
+.mm-val{font-family:var(--mono);font-weight:500;color:var(--warm-white);}
+.mm-row:last-child .mm-val{font-family:var(--serif);font-size:28px;font-weight:300;color:var(--warm-white);letter-spacing:-0.03em;}
+
+/* ═══ FAQ ═══ */
+#faq{background:var(--warm-white);padding-top:100px;padding-bottom:100px;border-top:1px solid var(--chalk);}
+.faq-header{max-width:600px;margin-bottom:60px;}
+.faq-headline{font-family:var(--serif);font-size:clamp(30px,3.5vw,48px);font-weight:300;line-height:1.1;letter-spacing:-0.025em;color:var(--ink);margin-bottom:16px;}
+.faq-headline em{font-style:italic;color:var(--clay);}
+.faq-list{display:flex;flex-direction:column;gap:0;max-width:800px;}
+.faq-item{padding:28px 0;border-bottom:1px solid var(--chalk);}
+.faq-item:first-child{padding-top:0;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{font-family:var(--serif);font-size:20px;font-weight:400;color:var(--ink);margin-bottom:12px;line-height:1.3;letter-spacing:-0.01em;}
+.faq-a{font-size:15px;font-weight:300;line-height:1.72;color:var(--ink-70);}
+.faq-a a{color:var(--deep-green);text-decoration:none;border-bottom:1px solid rgba(45,74,62,0.3);}
+
+/* ═══ CTA ═══ */
+#cta{background:var(--ink);color:var(--warm-white);padding-top:100px;padding-bottom:100px;}
+.cta-inner{display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+.cta-headline{font-family:var(--serif);font-size:clamp(30px,3.8vw,52px);font-weight:300;line-height:1.1;letter-spacing:-0.025em;color:var(--warm-white);}
+.cta-headline em{font-style:italic;color:var(--clay-light);}
+.cta-actions{display:flex;align-items:center;gap:20px;flex-wrap:wrap;flex-shrink:0;}
+.footer-logo span{color:var(--clay);font-style:italic;}
+.footer-nav a{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.32);text-decoration:none;transition:color 0.2s;}
+.footer-nav a:hover{color:var(--warm-white);}
+.footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+@media(max-width:1100px){
+  .plan-row{grid-template-columns:220px 1fr;gap:0 40px;padding:60px var(--gutter);}
+  .plan-features-col:last-child{display:none;}
+  .ct-header,.ct-row{grid-template-columns:1fr 100px 100px 100px;}
+  .mn-grid{grid-template-columns:1fr;gap:52px;}
+}
+@media(max-width:768px){
+  :root{--gutter:5vw;}
+  .nav-links{display:none;}
+  .plan-row{grid-template-columns:1fr;}
+  .plan-features-col{border-left:none;padding-left:0;border-top:1px solid;}
+  .plan-row:not(.featured) .plan-features-col{border-color:var(--chalk);}
+  .plan-row.featured .plan-features-col{border-color:rgba(250,247,242,0.12);}
+  .plan-features-col:last-child{display:block;}
+  .ct-header,.ct-row{grid-template-columns:1fr 80px 80px;}
+  .cth:last-child,.ctc:last-child{display:none;}
+}
+
+  .ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
+  .ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.2s;}
+  .ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .ham-btn.open span:nth-child(2){opacity:0;}
+  .ham-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+  @media(max-width:780px){
+    .ham-btn{display:flex;}
+    .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--warm);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{font-size:22px;letter-spacing:0.04em;}
+    .nav-cta{display:none;}
+  }
+
+  footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);padding:0;}
+  .footer-sitemap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:0;padding:56px 7vw 40px;border-bottom:1px solid rgba(250,247,242,0.08);}
+  .fs-brand{padding-right:40px;}
+  .footer-logo{font-family:var(--serif);font-size:22px;color:var(--warm-white,#FAF7F2);letter-spacing:-0.02em;text-decoration:none;display:block;margin-bottom:12px;}
+  .footer-logo span{color:var(--clay,#C4896F);font-style:italic;}
+  .footer-mission{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.28);line-height:1.8;margin-bottom:20px;}
+  .fs-cta{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:var(--clay,#C4896F);border:1px solid rgba(196,137,111,0.40);padding:9px 18px;text-decoration:none;transition:all 0.18s;}
+  .fs-cta:hover{background:rgba(196,137,111,0.12);}
+  .fs-col{padding-left:32px;border-left:1px solid rgba(250,247,242,0.06);}
+  .fs-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,247,242,0.30);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(250,247,242,0.06);}
+  .fs-col a{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,247,242,0.45);text-decoration:none;margin-bottom:10px;transition:color 0.15s;}
+  .fs-col a:hover{color:var(--clay,#C4896F);}
+  .footer-bottom{padding:20px 7vw;display:flex;align-items:center;justify-content:space-between;}
+  .footer-copy{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,0.20);}
+  .footer-legal{display:flex;gap:20px;}
+  .footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+  .footer-legal a:hover{color:var(--clay,#C4896F);}
+  @media(max-width:1100px){.footer-sitemap{grid-template-columns:1fr 1fr 1fr;gap:32px;}.fs-brand{grid-column:1/-1;padding-right:0;}.fs-col{border-left:none;padding-left:0;}}
+  @media(max-width:680px){.footer-sitemap{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}}
+  @media(max-width:400px){.footer-sitemap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Vasl <span>Health</span></a>
+    <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="platform.html">Platform</a></li>
+    <li><a href="outcomes.html">Outcomes</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="contact.html" class="nav-cta">Request a Demo</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="chapter-label reveal">Pricing</div>
+  <h1 class="hero-headline reveal d1">
+    Three plans. No hidden fees.<br>
+    <em>Transparent from day one.</em>
+  </h1>
+  <p class="hero-sub reveal d2">Every plan has two components: a platform fee that covers your deployment and a per member per month (PMPM) fee based on your organization type. Schools and non-profits pay $3&ndash;5 PMPM. Health systems and enterprise deployments pay $6&ndash;8 PMPM. No usage charges, no feature unlocks, no per-session fees. Enterprise pricing is scoped to your deployment.</p>
+  <p class="hero-note reveal d3">All plans billed annually &middot; PMPM billed monthly &middot; BAA included &middot; Implementation support included</p>
+</section>
+
+<!-- PLANS -->
+<section id="plans" style="padding:0;">
+
+  <!-- STARTER -->
+  <div class="plan-row reveal">
+    <div class="plan-id">
+      <div class="plan-tier">Plan 01</div>
+      <div class="plan-name">Starter</div>
+      <div class="plan-price-block">
+        <div class="plan-price">$480</div>
+        <div class="plan-price-period">Platform fee &middot; per month &middot; billed annually</div>
+      </div>
+      <div class="plan-pmpm">
+        <div class="pmpm-label">+ Per Member Per Month</div>
+        <div class="pmpm-row"><span>Schools & Non-Profits</span><span class="pmpm-val">$3&ndash;5</span></div>
+        <div class="pmpm-row"><span>Health Systems</span><span class="pmpm-val">$6&ndash;8</span></div>
+      </div>
+      <div class="plan-capacity">Up to 100 members</div>
+      <div class="plan-cta">
+        <a href="contact.html" class="btn-outline">Get Started</a>
+        <a href="contact.html" class="btn-ghost">Talk to us first</a>
+      </div>
+    </div>
+    <div class="plan-features-col">
+      <div class="pfc-label">Platform & Care</div>
+      <div class="pf-list">
+        <div class="pf-item"><strong>Member App</strong> &mdash; peer community, daily check-in, Empowerment Kit, crisis resources</div>
+        <div class="pf-item"><strong>Culturally matched coaching</strong> &mdash; Vasl certified coaches assigned to your member population</div>
+        <div class="pf-item"><strong>PHQ-8 and GAD-7</strong> onboarding assessments with member profile access</div>
+        <div class="pf-item"><strong>AI Client Insights</strong> &mdash; VLAP-powered coach dashboard with mood trend alerts</div>
+        <div class="pf-item"><strong>Peer group library</strong> &mdash; six standard peer communities plus one custom group</div>
+        <div class="pf-item"><strong>Crisis escalation protocol</strong> &mdash; 90-minute clinical supervisor response SLA</div>
+        <div class="pf-item"><strong>988 and Crisis Text Line</strong> integration in Member App</div>
+      </div>
+    </div>
+    <div class="plan-features-col">
+      <div class="pfc-label">Operations & Support</div>
+      <div class="pf-list">
+        <div class="pf-item"><strong>Implementation support</strong> &mdash; dedicated implementation lead through launch</div>
+        <div class="pf-item"><strong>Standard org dashboard</strong> &mdash; aggregate population data, mood distribution, engagement trends</div>
+        <div class="pf-item"><strong>HIPAA BAA</strong> &mdash; included for all org deployments</div>
+        <div class="pf-item"><strong>Email support</strong> &mdash; 2-hour response time business days</div>
+        <div class="pf-item"><strong>Monthly outcomes report</strong> &mdash; aggregate de-identified summary</div>
+        <div class="pf-item"><strong>Compliance documentation</strong> &mdash; FERPA alignment letter, privacy policy, standard BAA</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRO -->
+  <div class="plan-row featured reveal">
+    <div class="plan-id">
+      <div class="featured-badge">Most Common</div>
+      <div class="plan-tier">Plan 02</div>
+      <div class="plan-name">Pro</div>
+      <div class="plan-price-block">
+        <div class="plan-price">$1,200</div>
+        <div class="plan-price-period">Platform fee &middot; per month &middot; billed annually</div>
+      </div>
+      <div class="plan-pmpm">
+        <div class="pmpm-label">+ Per Member Per Month</div>
+        <div class="pmpm-row"><span>Schools & Non-Profits</span><span class="pmpm-val">$3&ndash;5</span></div>
+        <div class="pmpm-row"><span>Health Systems</span><span class="pmpm-val">$6&ndash;8</span></div>
+      </div>
+      <div class="plan-capacity">Up to 500 members</div>
+      <div class="plan-cta">
+        <a href="contact.html" class="btn-light">Get Started</a>
+        <a href="contact.html" class="btn-ghost-light">Talk to us first</a>
+      </div>
+    </div>
+    <div class="plan-features-col">
+      <div class="pfc-label">Everything in Starter, Plus</div>
+      <div class="pf-list">
+        <div class="pf-item"><strong>Full VLAP dimensional signal panel</strong> &mdash; complete pre-session signal profile for licensed clinicians</div>
+        <div class="pf-item"><strong>Clinician portal</strong> &mdash; licensed clinician dashboard with cultural context notes and coaching history integration</div>
+        <div class="pf-item"><strong>Medicaid billing documentation export</strong> &mdash; monthly claim-ready export with CPT codes and provider credentials</div>
+        <div class="pf-item"><strong>PHQ-8 and GAD-7 cohort trend analysis</strong> &mdash; population-level assessment trend reporting</div>
+        <div class="pf-item"><strong>Expanded peer group library</strong> &mdash; up to five custom peer groups for your specific population</div>
+        <div class="pf-item"><strong>Session booking</strong> &mdash; in-platform coaching session scheduling with availability management</div>
+      </div>
+    </div>
+    <div class="plan-features-col">
+      <div class="pfc-label">Operations & Support</div>
+      <div class="pf-list">
+        <div class="pf-item"><strong>Named Customer Success Manager</strong> &mdash; dedicated CSM for ongoing support and quarterly business reviews</div>
+        <div class="pf-item"><strong>Priority support</strong> &mdash; 1-hour email response, same-day phone for clinical escalations</div>
+        <div class="pf-item"><strong>Advanced outcomes reporting</strong> &mdash; subgroup breakdowns, longitudinal trend analysis, grant-ready export format</div>
+        <div class="pf-item"><strong>First billing cycle support</strong> &mdash; Vasl compliance team walks alongside your finance team through the first Medicaid submission</div>
+        <div class="pf-item"><strong>Staff orientation sessions</strong> &mdash; clinical and administrative staff briefings included, not charged separately</div>
+        <div class="pf-item"><strong>SOC 2 Type II report</strong> &mdash; available under NDA for institutional compliance review</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENTERPRISE -->
+  <div class="plan-row reveal">
+    <div class="plan-id">
+      <div class="plan-tier">Plan 03</div>
+      <div class="plan-name">Enterprise</div>
+      <div class="plan-price-block">
+        <div class="plan-price" style="font-size:36px;letter-spacing:-0.02em;">Custom</div>
+        <div class="plan-price-period">Platform fee &middot; scoped to your deployment</div>
+      </div>
+      <div class="plan-pmpm">
+        <div class="pmpm-label">+ Per Member Per Month</div>
+        <div class="pmpm-row"><span>Health Systems & Enterprise</span><span class="pmpm-val">$6&ndash;8</span></div>
+      </div>
+      <div class="plan-capacity">500+ members</div>
+      <div class="plan-cta">
+        <a href="contact.html" class="btn-dark">Contact Us</a>
+        <a href="mailto:sales@vaslhealth.com" class="btn-ghost">sales@vaslhealth.com</a>
+      </div>
+    </div>
+    <div class="plan-features-col">
+      <div class="pfc-label">Everything in Pro, Plus</div>
+      <div class="pf-list">
+        <div class="pf-item"><strong>Unlimited member capacity</strong> &mdash; no per-member cap; pricing scales with your deployment</div>
+        <div class="pf-item"><strong>Custom VLAP vocabulary development</strong> &mdash; model vocabulary extension for community-specific language patterns unique to your population</div>
+        <div class="pf-item"><strong>EHR integration</strong> &mdash; HL7 FHIR-compatible data export for connection to your existing electronic health record system</div>
+        <div class="pf-item"><strong>API access</strong> &mdash; programmatic access to population-level aggregate data for your own reporting infrastructure</div>
+        <div class="pf-item"><strong>Custom peer group architecture</strong> &mdash; unlimited peer groups with custom moderation and facilitator assignment</div>
+        <div class="pf-item"><strong>Research partnership options</strong> &mdash; IRB study co-design and joint publication for health system and university partners</div>
+      </div>
+    </div>
+    <div class="plan-features-col">
+      <div class="pfc-label">Operations & Support</div>
+      <div class="pf-list">
+        <div class="pf-item"><strong>Dedicated implementation team</strong> &mdash; multi-person implementation team for complex, multi-site deployments</div>
+        <div class="pf-item"><strong>Committed SLA</strong> &mdash; contractual uptime, response time, and clinical escalation commitments</div>
+        <div class="pf-item"><strong>Custom reporting</strong> &mdash; bespoke reporting infrastructure built to your board, grant funder, or regulatory requirements</div>
+        <div class="pf-item"><strong>Executive business reviews</strong> &mdash; quarterly reviews with Vasl leadership, not just account management</div>
+        <div class="pf-item"><strong>Preferred pricing</strong> &mdash; multi-year and multi-site contracts priced below standard per-site rates</div>
+        <div class="pf-item"><strong>Security review support</strong> &mdash; Vasl technical team available for vendor security questionnaires and enterprise IT review</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- COMPARISON -->
+<section id="compare">
+  <div class="chapter-label reveal">Feature Comparison</div>
+  <div class="compare-header">
+    <h2 class="compare-headline reveal d1">
+      What's in<br>
+      <em>each plan.</em>
+    </h2>
+    <p class="compare-sub reveal d2">A complete side-by-side of every feature across all three plans. If you have a question about a specific feature, contact us &mdash; we'll give you a direct answer, not a sales pitch.</p>
+  </div>
+
+  <div class="compare-table reveal">
+    <div class="ct-header">
+      <div class="cth">Feature</div>
+      <div class="cth ctc-mid">Starter</div>
+      <div class="cth ctc-mid">Pro</div>
+      <div class="cth ctc-mid">Enterprise</div>
+    </div>
+
+    <div class="ct-row section-row"><div class="ctc" style="grid-column:1/-1;">Pricing Structure</div></div>
+    <div class="ct-row"><div class="ctc">Platform fee (monthly, billed annually)</div><div class="ctc ctc-mid">$480</div><div class="ctc ctc-mid">$1,200</div><div class="ctc ctc-mid"><span class="ctc-custom">Custom</span></div></div>
+    <div class="ct-row"><div class="ctc">PMPM &mdash; Schools & Non-Profits</div><div class="ctc ctc-mid">$3&ndash;5</div><div class="ctc ctc-mid">$3&ndash;5</div><div class="ctc ctc-mid"><span class="ctc-no">&mdash;</span></div></div>
+    <div class="ct-row"><div class="ctc">PMPM &mdash; Health Systems & Enterprise</div><div class="ctc ctc-mid">$6&ndash;8</div><div class="ctc ctc-mid">$6&ndash;8</div><div class="ctc ctc-mid">$6&ndash;8</div></div>
+    <div class="ct-row"><div class="ctc">Member capacity</div><div class="ctc ctc-mid">Up to 100</div><div class="ctc ctc-mid">Up to 500</div><div class="ctc ctc-mid"><span class="ctc-custom">Unlimited</span></div></div>
+
+    <div class="ct-row section-row"><div class="ctc" style="grid-column:1/-1;">Member Experience</div></div>
+    <div class="ct-row"><div class="ctc">Member App &mdash; peer community, check-in, Empowerment Kit</div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div></div>
+    <div class="ct-row"><div class="ctc">Culturally matched coaching (Vasl certified coaches)</div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div></div>
+    <div class="ct-row"><div class="ctc">PHQ-8 and GAD-7 onboarding assessments</div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div></div>
+    <div class="ct-row"><div class="ctc">988 and Crisis Text Line integration</div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div></div>
+    <div class="ct-row"><div class="ctc">In-platform session booking</div><div class="ctc ctc-mid"><span class="ctc-no">&mdash;</span></div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div></div>
+
+    <div class="ct-row section-row"><div class="ctc" style="grid-column:1/-1;">VLAP Clinical Intelligence</div></div>
+    <div class="ct-row"><div class="ctc">AI Client Insights &mdash; coach dashboard mood trend alerts</div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div></div>
+    <div class="ct-row"><div class="ctc">Full VLAP dimensional signal panel for clinicians</div><div class="ctc ctc-mid"><span class="ctc-no">&mdash;</span></div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div></div>
+    <div class="ct-row"><div class="ctc">Crisis signal escalation &mdash; 90-min clinical supervisor SLA</div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div></div>
+    <div class="ct-row"><div class="ctc">Custom VLAP vocabulary for specific community language</div><div class="ctc ctc-mid"><span class="ctc-no">&mdash;</span></div><div class="ctc ctc-mid"><span class="ctc-no">&mdash;</span></div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div></div>
+
+    <div class="ct-row section-row"><div class="ctc" style="grid-column:1/-1;">Operations & Reporting</div></div>
+    <div class="ct-row"><div class="ctc">Standard org dashboard &mdash; aggregate population data</div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div></div>
+    <div class="ct-row"><div class="ctc">Advanced outcomes reporting with subgroup breakdown</div><div class="ctc ctc-mid"><span class="ctc-no">&mdash;</span></div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div></div>
+    <div class="ct-row"><div class="ctc">Medicaid billing documentation export</div><div class="ctc ctc-mid"><span class="ctc-no">&mdash;</span></div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div></div>
+    <div class="ct-row"><div class="ctc">EHR integration (HL7 FHIR)</div><div class="ctc ctc-mid"><span class="ctc-no">&mdash;</span></div><div class="ctc ctc-mid"><span class="ctc-no">&mdash;</span></div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div></div>
+    <div class="ct-row"><div class="ctc">API access to aggregate data</div><div class="ctc ctc-mid"><span class="ctc-no">&mdash;</span></div><div class="ctc ctc-mid"><span class="ctc-no">&mdash;</span></div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div></div>
+
+    <div class="ct-row section-row"><div class="ctc" style="grid-column:1/-1;">Support & Implementation</div></div>
+    <div class="ct-row"><div class="ctc">HIPAA BAA</div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div></div>
+    <div class="ct-row"><div class="ctc">Implementation support</div><div class="ctc ctc-mid">Standard</div><div class="ctc ctc-mid">Priority</div><div class="ctc ctc-mid"><span class="ctc-custom">Dedicated team</span></div></div>
+    <div class="ct-row"><div class="ctc">Customer Success Manager</div><div class="ctc ctc-mid"><span class="ctc-no">&mdash;</span></div><div class="ctc ctc-mid">Named CSM</div><div class="ctc ctc-mid"><span class="ctc-custom">Dedicated CSM</span></div></div>
+    <div class="ct-row"><div class="ctc">Support response time</div><div class="ctc ctc-mid">2 hours</div><div class="ctc ctc-mid">1 hour</div><div class="ctc ctc-mid"><span class="ctc-custom">Committed SLA</span></div></div>
+    <div class="ct-row"><div class="ctc">SOC 2 Type II report (under NDA)</div><div class="ctc ctc-mid"><span class="ctc-no">&mdash;</span></div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div><div class="ctc ctc-mid"><span class="ctc-yes">✓</span></div></div>
+  </div>
+</section>
+
+<!-- MEDICAID NOTE -->
+<section id="medicaid-note">
+  <div class="mn-grid">
+    <div class="reveal">
+      <div class="chapter-label light">For Schools & Title I Districts</div>
+      <h2 class="mn-headline">
+        Medicaid billing can<br>
+        recover up to<br>
+        <em>50% of cost.</em>
+      </h2>
+      <p class="mn-body">For Title I school districts with high Medicaid-eligible student populations, school-based Medicaid billing for qualifying Vasl services can recover approximately half the total contract cost. At Pro plan scale with 500 students, the net district cost after billing recovery is approximately $19,200/year &mdash; around $38 per student per year. Vasl provides all billing documentation; your finance team submits the claims.</p>
+      <a href="help/billing.html" class="btn-ghost-light" style="margin-top:8px;">See full billing guide</a>
+    </div>
+    <div class="mn-math reveal d1">
+      <div class="mm-label">Title I District &middot; Pro Plan &middot; 500 Students &middot; Sample Calculation</div>
+      <div class="mm-row"><span>Platform fee (Pro &middot; annual)</span><span class="mm-val">$14,400</span></div>
+      <div class="mm-row"><span>PMPM &mdash; schools ($4 avg &times; 500 &times; 12)</span><span class="mm-val">$24,000</span></div>
+      <div class="mm-row"><span>Total annual cost</span><span class="mm-val">$38,400</span></div>
+      <div class="mm-row"><span>Medicaid recovery estimate (~50%)</span><span class="mm-val">~$19,200</span></div>
+      <div class="mm-row"><span>Additional funding (Title IV-A, ESSER)</span><span class="mm-val">Variable</span></div>
+      <div class="mm-row"><span>Net annual district cost</span><span class="mm-val">~$19,200</span></div>
+      <div class="mm-row"><span>Net cost per student per year</span><span class="mm-val">~$38</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="chapter-label reveal">Pricing FAQ</div>
+  <div class="faq-header">
+    <h2 class="faq-headline reveal d1">
+      Questions we<br>
+      <em>actually get.</em>
+    </h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item reveal">
+      <div class="faq-q">What counts as a "member"?</div>
+      <p class="faq-a">A member is any individual enrolled in your Vasl deployment &mdash; a student, a health plan member, or a community org participant who has created an account and accepted terms. Unused capacity doesn't roll over. If you consistently run under or over your plan capacity, we'll work with you on the right sizing before your next renewal.</p>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">Is implementation support really included, or is it a separate cost?</div>
+      <p class="faq-a">Included &mdash; no separate implementation fee. Your dedicated implementation lead is included in the contract for the duration of the first year. Staff orientation sessions, first billing cycle support (Pro and Enterprise), compliance documentation, and launch support are all included. The only thing not included is work that falls genuinely outside the scope of a normal deployment &mdash; like a multi-site healthcare system integration or custom EHR build, which we'd scope separately.</p>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">Can we start with Starter and upgrade to Pro?</div>
+      <p class="faq-a">Yes. We pro-rate the upgrade and your implementation lead stays consistent across the transition. Most organizations that upgrade do so after their first Medicaid billing cycle demonstrates the ROI at Pro scale. We'll flag when your member utilization suggests you'd benefit from Pro features &mdash; we don't wait until you're over capacity to have that conversation.</p>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">Do you offer non-profit pricing?</div>
+      <p class="faq-a">The Starter plan at $480/month is designed specifically for non-profit program budgets &mdash; up to 100 members, full platform access, implementation support included. For non-profits with more than 100 members and grant funding that covers Pro, we work on a case-by-case basis. Contact us and tell us about your program &mdash; we've found ways to make the math work for mission-aligned organizations more often than the standard pricing suggests.</p>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">What does "billed annually" mean &mdash; can we pay monthly?</div>
+      <p class="faq-a">Standard contracts are billed annually. Monthly billing is available for organizations with budget cycle constraints that make annual payment impractical &mdash; contact us. Monthly billing is at a 10% premium over the annual rate. For non-profits with quarterly grant disbursements, we've structured payment schedules that align with funding cycles.</p>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">What's in the Enterprise pricing conversation?</div>
+      <p class="faq-a">Enterprise pricing is scoped based on member capacity, organizational complexity, and the specific features your deployment requires. We start with a scoping conversation &mdash; not a pricing deck &mdash; and build a proposal based on what you actually need. Multi-site and multi-year commitments are priced at a discount from what the per-site Pro rate would total. Contact <a href="mailto:sales@vaslhealth.com">sales@vaslhealth.com</a> to start the conversation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="chapter-label muted reveal">Ready?</div>
+  <div class="cta-inner">
+    <h2 class="cta-headline reveal d1">
+      Start with a<br>
+      <em>conversation.</em>
+    </h2>
+    <div class="cta-actions reveal d2">
+      <a href="contact.html" class="btn-light">Request a Demo</a>
+      <a href="mailto:sales@vaslhealth.com" class="btn-ghost-light">sales@vaslhealth.com</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-sitemap">
+    <div class="fs-brand">
+      <a href="index.html" class="footer-logo">Vasl <span>Health</span></a>
+      <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
+      <a href="contact.html" class="fs-cta">Request a Demo &rarr;</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Platform</div>
+      <a href="platform.html">Platform Overview</a>
+      <a href="vlap.html">VLAP</a>
+      <a href="ai-model.html">AI Model</a>
+      <a href="technology.html">Technology</a>
+      <a href="peer-groups.html">Peer Groups</a>
+      <a href="teletherapy.html">Teletherapy</a>
+      <a href="prototype.html">Live Demo Portal</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Who We Serve</div>
+      <a href="for-schools.html">For Schools</a>
+      <a href="for-organizations.html">For Organizations</a>
+      <a href="outcomes.html">Outcomes</a>
+      <a href="clinical-outcomes.html">Clinical Outcomes</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Company</div>
+      <a href="about.html">About Vasl</a>
+      <a href="team.html">Team</a>
+      <a href="careers.html">Careers</a>
+      <a href="research.html">Research</a>
+      <a href="blog.html">Blog &amp; Insights</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Support &amp; Legal</div>
+      <a href="support.html">Help Center</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="baa.html">Business Associate Agreement</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 Vasl Health, Inc. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="baa.html">BAA</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js-ready');
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+  reveals.forEach(el => io.observe(el));
+  window.addEventListener('load', () => {
+    reveals.forEach((el, i) => {
+      if (el.getBoundingClientRect().top < window.innerHeight) {
+        setTimeout(() => el.classList.add('visible'), i * 40);
+      }
+    });
+  });
+</script>
+</body>
+</html>
