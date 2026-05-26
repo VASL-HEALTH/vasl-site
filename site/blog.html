@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Thought leadership on mental health equity, culturally-responsive AI, and building technology that serves underserved communities.">
+<title>Insights & Research &mdash; Vasl Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --warm-white:#FAF7F2;--parchment:#F0EAE0;--ink:#1C1C1C;
+  --ink-70:rgba(28,28,28,0.70);--ink-50:rgba(28,28,28,0.50);--ink-12:rgba(28,28,28,0.12);
+  --clay:#C4896F;--clay-light:#E8C4AE;--clay-pale:#F5E6DC;
+  --deep-green:#2D4A3E;--dust:#8B7B6B;--chalk:#E2DAD0;--charcoal:#222222;
+  --serif:'Newsreader',Georgia,serif;--sans:'IBM Plex Sans',sans-serif;--mono:'IBM Plex Mono',monospace;
+  --gutter:7vw;
+}
+body{background:var(--warm-white);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;overflow-x:hidden;}
+
+.reveal{transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1),transform 0.9s cubic-bezier(0.16,1,0.3,1);}
+.js-ready .reveal{opacity:0;transform:translateY(18px);}
+.js-ready .reveal.visible{opacity:1;transform:translateY(0);}
+.d1{transition-delay:0.08s;}.d2{transition-delay:0.16s;}.d3{transition-delay:0.24s;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);display:flex;align-items:center;justify-content:space-between;background:rgba(250,247,242,0.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--ink-12);}
+.nav-logo{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:-0.02em;color:var(--ink);text-decoration:none;}
+.nav-logo span{color:var(--clay);font-style:italic;}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--dust);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--ink);}
+.nav-cta{font-family:var(--mono);font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--deep-green);border:1px solid var(--deep-green);padding:9px 20px;text-decoration:none;transition:background 0.22s,color 0.22s;}
+.nav-cta:hover{background:var(--deep-green);color:var(--warm-white);}
+
+/* ═══ MASTHEAD ═══ */
+#masthead{
+  padding-top:140px;padding-bottom:60px;
+  padding-left:var(--gutter);padding-right:var(--gutter);
+  border-bottom:3px solid var(--ink);
+  display:grid;grid-template-columns:1fr auto;align-items:end;gap:40px;
+}
+.masthead-left{}
+.masthead-kicker{font-family:var(--mono);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--dust);margin-bottom:16px;display:block;}
+.masthead-title{font-family:var(--serif);font-size:clamp(52px,7vw,110px);font-weight:300;line-height:0.95;letter-spacing:-0.04em;color:var(--ink);}
+.masthead-title em{font-style:italic;color:var(--clay);}
+.masthead-right{text-align:right;padding-bottom:8px;}
+.masthead-desc{font-size:15px;font-weight:300;line-height:1.65;color:var(--ink-70);max-width:320px;margin-left:auto;margin-bottom:16px;}
+.masthead-meta{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dust);}
+
+/* Date strip */
+.date-strip{
+  padding:10px var(--gutter);border-bottom:1px solid var(--chalk);
+  display:flex;align-items:center;justify-content:space-between;
+  font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dust);
+}
+.ds-right{display:flex;gap:24px;}
+
+/* ═══ FEATURED ═══ */
+#featured{
+  padding:80px var(--gutter);
+  border-bottom:1px solid var(--chalk);
+  display:grid;grid-template-columns:1fr 340px;gap:0 80px;align-items:start;
+}
+.feat-label{font-family:var(--mono);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--clay);margin-bottom:24px;display:flex;align-items:center;gap:10px;}
+.feat-label::before{content:'';display:block;width:28px;height:1px;background:var(--clay);}
+.feat-category{font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--dust);margin-bottom:16px;}
+.feat-headline{font-family:var(--serif);font-size:clamp(32px,4vw,56px);font-weight:300;line-height:1.08;letter-spacing:-0.025em;color:var(--ink);margin-bottom:20px;}
+.feat-headline em{font-style:italic;color:var(--clay);}
+.feat-desc{font-size:16px;font-weight:300;line-height:1.75;color:var(--ink-70);margin-bottom:28px;max-width:560px;}
+.feat-author{display:flex;align-items:center;gap:12px;margin-bottom:28px;}
+.feat-author-avatar{width:36px;height:36px;border-radius:8px;background:var(--deep-green);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:15px;font-weight:400;color:var(--warm-white);}
+.feat-author-name{font-size:13px;font-weight:500;color:var(--ink);}
+.feat-author-role{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dust);}
+.feat-meta{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dust);margin-bottom:32px;display:flex;gap:16px;}
+.feat-cta{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:var(--ink);color:var(--warm-white);padding:14px 28px;text-decoration:none;display:inline-block;transition:background 0.22s;}
+.feat-cta:hover{background:var(--deep-green);}
+
+/* Featured sidebar stats */
+.feat-sidebar{border-left:1px solid var(--chalk);padding-left:52px;}
+.fs-label{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--dust);margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--chalk);}
+.fs-stat{padding:20px 0;border-bottom:1px solid var(--chalk);}
+.fs-stat:last-child{border-bottom:none;}
+.fs-num{font-family:var(--serif);font-size:44px;font-weight:300;color:var(--clay);line-height:1;letter-spacing:-0.04em;margin-bottom:6px;}
+.fs-metric{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:4px;}
+.fs-sub{font-size:12px;font-weight:300;color:var(--ink-50);}
+
+/* ═══ ARTICLES ═══ */
+#articles{padding:0 var(--gutter) 100px;}
+
+/* Filter bar */
+.filter-bar{
+  padding:28px 0;border-bottom:1px solid var(--chalk);
+  display:flex;align-items:center;gap:4px;
+  position:sticky;top:62px;z-index:50;
+  background:var(--warm-white);
+}
+.filter-btn{
+  font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;
+  padding:7px 16px;border:1px solid transparent;cursor:pointer;
+  background:transparent;color:var(--dust);transition:all 0.18s;font-family:var(--mono);
+}
+.filter-btn:hover{color:var(--ink);border-color:var(--chalk);}
+.filter-btn.active{background:var(--ink);color:var(--warm-white);border-color:var(--ink);}
+.filter-count{margin-left:auto;font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dust);}
+
+/* Article list */
+.article-list{display:flex;flex-direction:column;gap:0;}
+
+.article-row{
+  padding:44px 0;border-bottom:1px solid var(--chalk);
+  display:grid;grid-template-columns:200px 1fr 160px;gap:0 48px;align-items:start;
+  text-decoration:none;color:inherit;transition:opacity 0.2s;
+}
+.article-row:hover{opacity:0.80;}
+.article-row:first-child{padding-top:40px;}
+.article-row:last-child{border-bottom:none;}
+.article-row.hidden{display:none;}
+
+.ar-meta{}
+.ar-category{font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--clay);margin-bottom:6px;}
+.ar-read-time{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dust);margin-bottom:12px;}
+.ar-tags{display:flex;flex-direction:column;gap:5px;margin-top:12px;}
+.ar-tag{font-family:var(--mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dust);border:1px solid var(--chalk);padding:3px 9px;display:inline-block;width:fit-content;}
+
+.ar-body{}
+.ar-title{font-family:var(--serif);font-size:clamp(22px,2.4vw,32px);font-weight:300;line-height:1.15;letter-spacing:-0.02em;color:var(--ink);margin-bottom:12px;}
+.ar-desc{font-size:15px;font-weight:300;line-height:1.72;color:var(--ink-70);}
+
+.ar-right{text-align:right;}
+.ar-author-name{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px;}
+.ar-date{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dust);margin-bottom:16px;}
+.ar-arrow{font-family:var(--mono);font-size:16px;color:var(--clay);}
+
+/* ═══ NEWSLETTER ═══ */
+#newsletter{
+  background:var(--parchment);border-top:1px solid var(--chalk);
+  padding:80px var(--gutter);
+  display:grid;grid-template-columns:1fr 1fr;gap:0 80px;align-items:center;
+}
+.nl-left{}
+.nl-label{font-family:var(--mono);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--clay);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.nl-label::after{content:'';display:block;width:28px;height:1px;background:var(--clay);opacity:0.5;}
+.nl-headline{font-family:var(--serif);font-size:clamp(28px,3.2vw,44px);font-weight:300;line-height:1.1;letter-spacing:-0.025em;color:var(--ink);margin-bottom:16px;}
+.nl-headline em{font-style:italic;color:var(--clay);}
+.nl-desc{font-size:16px;font-weight:300;line-height:1.72;color:var(--ink-70);}
+.nl-right{}
+.nl-form{display:flex;flex-direction:column;gap:12px;}
+.nl-input{width:100%;padding:14px 18px;border:1px solid var(--chalk);background:var(--warm-white);font-family:var(--sans);font-size:15px;font-weight:300;color:var(--ink);outline:none;transition:border-color 0.2s;border-radius:0;}
+.nl-input::placeholder{color:var(--dust);}
+.nl-input:focus{border-color:var(--deep-green);}
+.nl-submit{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:var(--ink);color:var(--warm-white);padding:14px 28px;border:none;cursor:pointer;transition:background 0.22s;align-self:flex-start;}
+.nl-submit:hover{background:var(--deep-green);}
+.nl-note{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dust);margin-top:8px;}
+
+/* FOOTER */
+.footer-logo span{color:var(--clay);font-style:italic;}
+.footer-nav a{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.32);text-decoration:none;transition:color 0.2s;}
+.footer-nav a:hover{color:var(--warm-white);}
+.footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+.footer-legal a:hover{color:var(--warm-white);}
+
+@media(max-width:1100px){
+  #masthead{grid-template-columns:1fr;gap:28px;}
+  .masthead-right{text-align:left;}
+  .masthead-desc{margin-left:0;}
+  #featured{grid-template-columns:1fr;}
+  .feat-sidebar{border-left:none;padding-left:0;border-top:1px solid var(--chalk);padding-top:40px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;}
+  .fs-label{grid-column:1/-1;}
+  .fs-stat{border-right:1px solid var(--chalk);padding-right:24px;padding-left:0;}
+  .fs-stat:last-child{border-right:none;}
+  .article-row{grid-template-columns:160px 1fr;gap:0 32px;}
+  .ar-right{display:none;}
+  #newsletter{grid-template-columns:1fr;gap:44px;}
+}
+@media(max-width:768px){
+  :root{--gutter:5vw;}
+  .nav-links{display:none;}
+  .masthead-title{font-size:clamp(44px,10vw,72px);}
+  .article-row{grid-template-columns:1fr;}
+  .ar-meta{display:flex;gap:12px;align-items:center;}
+  .ar-tags{flex-direction:row;flex-wrap:wrap;}
+  .feat-sidebar{grid-template-columns:1fr;}
+  .fs-stat{border-right:none;border-bottom:1px solid var(--chalk);}
+}
+
+  .ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
+  .ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.2s;}
+  .ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .ham-btn.open span:nth-child(2){opacity:0;}
+  .ham-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+  @media(max-width:780px){
+    .ham-btn{display:flex;}
+    .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--warm);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{font-size:22px;letter-spacing:0.04em;}
+    .nav-cta{display:none;}
+  }
+
+  footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);padding:0;}
+  .footer-sitemap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:0;padding:56px 7vw 40px;border-bottom:1px solid rgba(250,247,242,0.08);}
+  .fs-brand{padding-right:40px;}
+  .footer-logo{font-family:var(--serif);font-size:22px;color:var(--warm-white,#FAF7F2);letter-spacing:-0.02em;text-decoration:none;display:block;margin-bottom:12px;}
+  .footer-logo span{color:var(--clay,#C4896F);font-style:italic;}
+  .footer-mission{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.28);line-height:1.8;margin-bottom:20px;}
+  .fs-cta{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:var(--clay,#C4896F);border:1px solid rgba(196,137,111,0.40);padding:9px 18px;text-decoration:none;transition:all 0.18s;}
+  .fs-cta:hover{background:rgba(196,137,111,0.12);}
+  .fs-col{padding-left:32px;border-left:1px solid rgba(250,247,242,0.06);}
+  .fs-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,247,242,0.30);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(250,247,242,0.06);}
+  .fs-col a{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,247,242,0.45);text-decoration:none;margin-bottom:10px;transition:color 0.15s;}
+  .fs-col a:hover{color:var(--clay,#C4896F);}
+  .footer-bottom{padding:20px 7vw;display:flex;align-items:center;justify-content:space-between;}
+  .footer-copy{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,0.20);}
+  .footer-legal{display:flex;gap:20px;}
+  .footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+  .footer-legal a:hover{color:var(--clay,#C4896F);}
+  @media(max-width:1100px){.footer-sitemap{grid-template-columns:1fr 1fr 1fr;gap:32px;}.fs-brand{grid-column:1/-1;padding-right:0;}.fs-col{border-left:none;padding-left:0;}}
+  @media(max-width:680px){.footer-sitemap{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}}
+  @media(max-width:400px){.footer-sitemap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Vasl <span>Health</span></a>
+    <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="platform.html">Platform</a></li>
+    <li><a href="outcomes.html">Outcomes</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="contact.html" class="nav-cta">Request a Demo</a>
+</nav>
+
+<!-- MASTHEAD -->
+<div id="masthead">
+  <div class="masthead-left">
+    <span class="masthead-kicker">Vasl Health &middot; Insights & Research</span>
+    <div class="masthead-title">
+      Insights &<br>
+      <em>Research</em>
+    </div>
+  </div>
+  <div class="masthead-right">
+    <p class="masthead-desc">Thought leadership on mental health equity, culturally-responsive AI, and building technology that serves underserved communities.</p>
+    <div class="masthead-meta">Vasl Health &middot; May 2026</div>
+  </div>
+</div>
+
+<!-- DATE STRIP -->
+<div class="date-strip">
+  <span>Latest &mdash; May 2026</span>
+  <div class="ds-right">
+    <span>Mental Health Equity</span>
+    <span>Culturally-Responsive AI</span>
+    <span>Health Policy</span>
+  </div>
+</div>
+
+<!-- FEATURED -->
+<div id="featured" class="reveal">
+  <div>
+    <div class="feat-label">Featured Research</div>
+    <div class="feat-category">Health Equity &middot; 15 min read</div>
+    <h2 class="feat-headline">
+      The Mental Health Equity Crisis:<br>
+      How Cultural AI Can<br>
+      <em>Bridge the Gap</em>
+    </h2>
+    <p class="feat-desc">Traditional mental health solutions continue to fail BIPOC and LGBTQ+ youth. Our research examines why culturally-responsive AI isn't just better &mdash; it's the structural prerequisite for closing the equity gap in mental healthcare. The tools we're using were built for someone else, and the outcomes prove it.</p>
+    <div class="feat-author">
+      <div class="feat-author-avatar">R</div>
+      <div>
+        <div class="feat-author-name">Rodney Bell</div>
+        <div class="feat-author-role">Founder & CEO, Vasl Health</div>
+      </div>
+    </div>
+    <div class="feat-meta">
+      <span>April 20, 2026</span>
+      <span>&middot;</span>
+      <span>15 min read</span>
+    </div>
+    <a href="blog-mental-health-equity-crisis.html" class="feat-cta">Read Full Article &rarr;</a>
+  </div>
+
+  <div class="feat-sidebar">
+    <div class="fs-label">Key Findings</div>
+    <div class="fs-stat">
+      <div class="fs-num">79.5<span style="font-size:22px">%</span></div>
+      <div class="fs-metric">30-day retention</div>
+      <div class="fs-sub">Culturally-responsive AI vs. 25% on traditional platforms</div>
+    </div>
+    <div class="fs-stat">
+      <div class="fs-num">42<span style="font-size:22px">%</span></div>
+      <div class="fs-metric">PHQ-8 improvement</div>
+      <div class="fs-sub">Average at 90 days vs. onboarding baseline</div>
+    </div>
+    <div class="fs-stat">
+      <div class="fs-num">3<span style="font-size:22px">&times;</span></div>
+      <div class="fs-metric">Faster time to first support</div>
+      <div class="fs-sub">Versus national average for underserved populations</div>
+    </div>
+  </div>
+</div>
+
+<!-- ARTICLES -->
+<section id="articles">
+
+  <!-- Filter bar -->
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterArticles('all', this)">All</button>
+    <button class="filter-btn" onclick="filterArticles('research', this)">Research</button>
+    <button class="filter-btn" onclick="filterArticles('health-equity', this)">Health Equity</button>
+    <button class="filter-btn" onclick="filterArticles('technology', this)">Technology</button>
+    <button class="filter-btn" onclick="filterArticles('community', this)">Community</button>
+    <span class="filter-count" id="article-count">6 articles</span>
+  </div>
+
+  <div class="article-list">
+
+    <a href="blog-healing-great-divide.html" class="article-row reveal" data-category="health-equity">
+      <div class="ar-meta">
+        <div class="ar-category">Health Equity</div>
+        <div class="ar-read-time">8 min read</div>
+        <div class="ar-tags">
+          <span class="ar-tag">Medicaid</span>
+          <span class="ar-tag">Community Health</span>
+        </div>
+      </div>
+      <div class="ar-body">
+        <div class="ar-title">Healing the Great Divide</div>
+        <p class="ar-desc">Exploring the systemic barriers that prevent equitable mental health care and how culturally-responsive technology can bridge these gaps for underserved communities. A structural analysis &mdash; not an optimistic overview.</p>
+      </div>
+      <div class="ar-right">
+        <div class="ar-author-name">Rodney Bell</div>
+        <div class="ar-date">May 2026</div>
+        <div class="ar-arrow">&rarr;</div>
+      </div>
+    </a>
+
+    <a href="blog-bridging-chasm.html" class="article-row reveal" data-category="research">
+      <div class="ar-meta">
+        <div class="ar-category">Research</div>
+        <div class="ar-read-time">12 min read</div>
+        <div class="ar-tags">
+          <span class="ar-tag">VLAP</span>
+          <span class="ar-tag">Clinical Research</span>
+        </div>
+      </div>
+      <div class="ar-body">
+        <div class="ar-title">Bridging the Chasm: Health Equity in Mental Health AI</div>
+        <p class="ar-desc">A deep dive into the research behind culturally-responsive AI and how VLAP technology addresses the unique linguistic and cultural patterns of BIPOC and LGBTQ+ youth. Why 23% of the relevant vocabulary is invisible to standard NLP models.</p>
+      </div>
+      <div class="ar-right">
+        <div class="ar-author-name">Rodney Bell</div>
+        <div class="ar-date">April 2026</div>
+        <div class="ar-arrow">&rarr;</div>
+      </div>
+    </a>
+
+    <a href="blog-medicaid-populations.html" class="article-row reveal" data-category="technology">
+      <div class="ar-meta">
+        <div class="ar-category">Technology</div>
+        <div class="ar-read-time">10 min read</div>
+        <div class="ar-tags">
+          <span class="ar-tag">Medicaid Billing</span>
+          <span class="ar-tag">Healthcare Policy</span>
+        </div>
+      </div>
+      <div class="ar-body">
+        <div class="ar-title">Why Medicaid Populations Are Central to Mental Health Innovation</div>
+        <p class="ar-desc">Understanding how Medicaid billing structures can support culturally-responsive mental health platforms and create sustainable pathways to care for underserved communities. The policy architecture that makes scale possible.</p>
+      </div>
+      <div class="ar-right">
+        <div class="ar-author-name">Rodney Bell</div>
+        <div class="ar-date">March 2026</div>
+        <div class="ar-arrow">&rarr;</div>
+      </div>
+    </a>
+
+    <a href="blog-future-culturally-responsive.html" class="article-row reveal" data-category="community">
+      <div class="ar-meta">
+        <div class="ar-category">Community</div>
+        <div class="ar-read-time">6 min read</div>
+        <div class="ar-tags">
+          <span class="ar-tag">Community-Centered Design</span>
+          <span class="ar-tag">Cultural Competency</span>
+        </div>
+      </div>
+      <div class="ar-body">
+        <div class="ar-title">The Future of Mental Health Must Be Culturally Responsive</div>
+        <p class="ar-desc">Why the next generation of mental health technology needs to be built with and for the communities it serves &mdash; not just deployed to them. The difference between inclusion and design.</p>
+      </div>
+      <div class="ar-right">
+        <div class="ar-author-name">Rodney Bell</div>
+        <div class="ar-date">February 2026</div>
+        <div class="ar-arrow">&rarr;</div>
+      </div>
+    </a>
+
+    <a href="blog-crisis-without-solving.html" class="article-row reveal" data-category="research">
+      <div class="ar-meta">
+        <div class="ar-category">Research</div>
+        <div class="ar-read-time">9 min read</div>
+        <div class="ar-tags">
+          <span class="ar-tag">Youth Mental Health</span>
+          <span class="ar-tag">Systems Change</span>
+        </div>
+      </div>
+      <div class="ar-body">
+        <div class="ar-title">The Crisis We Keep Describing Without Solving</div>
+        <p class="ar-desc">An analysis of why traditional approaches to the youth mental health crisis continue to fall short &mdash; and what it actually takes to build solutions that work for the communities most affected. The gap between describing the problem and building the answer.</p>
+      </div>
+      <div class="ar-right">
+        <div class="ar-author-name">Rodney Bell</div>
+        <div class="ar-date">January 2026</div>
+        <div class="ar-arrow">&rarr;</div>
+      </div>
+    </a>
+
+    <a href="blog-other-diagnosis.html" class="article-row reveal" data-category="community">
+      <div class="ar-meta">
+        <div class="ar-category">Community</div>
+        <div class="ar-read-time">7 min read</div>
+        <div class="ar-tags">
+          <span class="ar-tag">Identity & Mental Health</span>
+          <span class="ar-tag">Diagnostic Innovation</span>
+        </div>
+      </div>
+      <div class="ar-body">
+        <div class="ar-title">The Other Diagnosis: Understanding Identity-Based Stress</div>
+        <p class="ar-desc">How cultural identity intersects with mental health diagnosis and why traditional assessment tools often miss the full picture for BIPOC and LGBTQ+ youth. The signals that standard instruments were never built to catch.</p>
+      </div>
+      <div class="ar-right">
+        <div class="ar-author-name">Rodney Bell</div>
+        <div class="ar-date">December 2025</div>
+        <div class="ar-arrow">&rarr;</div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<div id="newsletter">
+  <div class="nl-left reveal">
+    <div class="nl-label">Stay Informed</div>
+    <h2 class="nl-headline">
+      Research delivered<br>
+      to your <em>inbox.</em>
+    </h2>
+    <p class="nl-desc">Monthly insights on mental health equity, culturally-responsive AI, and the research behind Vasl Health. For clinicians, administrators, researchers, and anyone building in this space.</p>
+  </div>
+  <div class="nl-right reveal d1">
+    <form class="nl-form" onsubmit="handleNewsletter(event)">
+      <input type="email" class="nl-input" id="nl-email" placeholder="your@email.com" required>
+      <button type="submit" class="nl-submit">Subscribe &rarr;</button>
+      <div class="nl-note">Monthly &middot; No spam &middot; Unsubscribe anytime</div>
+    </form>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-sitemap">
+    <div class="fs-brand">
+      <a href="index.html" class="footer-logo">Vasl <span>Health</span></a>
+      <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
+      <a href="contact.html" class="fs-cta">Request a Demo &rarr;</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Platform</div>
+      <a href="platform.html">Platform Overview</a>
+      <a href="vlap.html">VLAP</a>
+      <a href="ai-model.html">AI Model</a>
+      <a href="technology.html">Technology</a>
+      <a href="peer-groups.html">Peer Groups</a>
+      <a href="teletherapy.html">Teletherapy</a>
+      <a href="prototype.html">Live Demo Portal</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Who We Serve</div>
+      <a href="for-schools.html">For Schools</a>
+      <a href="for-organizations.html">For Organizations</a>
+      <a href="outcomes.html">Outcomes</a>
+      <a href="clinical-outcomes.html">Clinical Outcomes</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Company</div>
+      <a href="about.html">About Vasl</a>
+      <a href="team.html">Team</a>
+      <a href="careers.html">Careers</a>
+      <a href="research.html">Research</a>
+      <a href="blog.html">Blog &amp; Insights</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Support &amp; Legal</div>
+      <a href="support.html">Help Center</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="baa.html">Business Associate Agreement</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 Vasl Health, Inc. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="baa.html">BAA</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js-ready');
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+  reveals.forEach(el => io.observe(el));
+  window.addEventListener('load', () => {
+    reveals.forEach((el, i) => {
+      if (el.getBoundingClientRect().top < window.innerHeight) {
+        setTimeout(() => el.classList.add('visible'), i * 40);
+      }
+    });
+  });
+
+  function filterArticles(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const rows = document.querySelectorAll('.article-row');
+    let visible = 0;
+    rows.forEach(row => {
+      if (cat === 'all' || row.dataset.category === cat) {
+        row.classList.remove('hidden');
+        visible++;
+      } else {
+        row.classList.add('hidden');
+      }
+    });
+    document.getElementById('article-count').textContent = visible + ' article' + (visible !== 1 ? 's' : '');
+  }
+
+  function handleNewsletter(e) {
+    e.preventDefault();
+    const form = e.target;
+    form.innerHTML = '<p style="font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--deep-green);padding:16px 0;">Subscribed — we’ll be in touch. Wire this form to your email provider before go-live.</p>';
+  }
+</script>
+</body>
+</html>
