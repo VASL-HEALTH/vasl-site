@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="CulturalBERT-VLAP &mdash; the Vasl Language Analysis Platform. Technical architecture, training methodology, clinical validation, and institutional partnership documentation for health system and research evaluators.">
+<title>Technology &mdash; CulturalBERT-VLAP &mdash; Vasl Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  :root {
+    --warm-white:  #FAF7F2;
+    --parchment:   #F0EAE0;
+    --ink:         #1C1C1C;
+    --ink-70:      rgba(28,28,28,0.70);
+    --ink-50:      rgba(28,28,28,0.50);
+    --ink-25:      rgba(28,28,28,0.25);
+    --ink-12:      rgba(28,28,28,0.12);
+    --clay:        #C4896F;
+    --clay-light:  #E8C4AE;
+    --clay-pale:   #F5E6DC;
+    --deep-green:  #2D4A3E;
+    --deep-green-2:#243D33;
+    --dust:        #8B7B6B;
+    --chalk:       #E2DAD0;
+    --charcoal:    #222222;
+
+    --serif: 'Newsreader', Georgia, serif;
+    --sans:  'IBM Plex Sans', sans-serif;
+    --mono:  'IBM Plex Mono', monospace;
+    --gutter: 7vw;
+  }
+
+  body {
+    background: var(--warm-white);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  .reveal {
+    transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+  }
+  .js-ready .reveal { opacity: 0; transform: translateY(20px); }
+  .js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
+  .d1 { transition-delay: 0.08s; } .d2 { transition-delay: 0.16s; }
+  .d3 { transition-delay: 0.24s; } .d4 { transition-delay: 0.32s; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px var(--gutter);
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(250,247,242,0.93);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--ink-12);
+  }
+  .nav-logo { font-family: var(--serif); font-size: 22px; font-weight: 400; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
+  .nav-logo span { color: var(--clay); font-style: italic; }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { font-family: var(--mono); font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--dust); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+  .nav-cta { font-family: var(--mono); font-size: 10px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--deep-green); border: 1px solid var(--deep-green); padding: 9px 20px; text-decoration: none; transition: background 0.22s, color 0.22s; }
+  .nav-cta:hover { background: var(--deep-green); color: var(--warm-white); }
+
+  /* ─── SHARED ─── */
+  section { padding: 130px var(--gutter); position: relative; }
+
+  .chapter-label {
+    font-family: var(--mono); font-size: 10px; font-weight: 300; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--clay);
+    display: flex; align-items: center; gap: 12px; margin-bottom: 52px;
+  }
+  .chapter-label::after { content: ''; display: block; width: 36px; height: 1px; background: var(--clay); opacity: 0.45; }
+  .chapter-label.light { color: var(--clay-light); }
+  .chapter-label.light::after { background: var(--clay-light); }
+  .chapter-label.muted { color: rgba(250,247,242,0.35); }
+  .chapter-label.muted::after { background: rgba(250,247,242,0.35); }
+
+  .section-sub {
+    font-family: var(--serif); font-size: 19px; font-weight: 400;
+    color: var(--ink); margin-bottom: 16px; margin-top: 44px;
+    line-height: 1.25; letter-spacing: -0.01em;
+  }
+  .section-sub:first-of-type { margin-top: 0; }
+
+  .btn-dark { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--ink); color: var(--warm-white); padding: 16px 32px; text-decoration: none; display: inline-block; transition: background 0.22s; }
+  .btn-dark:hover { background: var(--deep-green); }
+  .btn-outline-dark { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); border: 1px solid var(--ink); padding: 16px 32px; text-decoration: none; display: inline-block; transition: all 0.22s; }
+  .btn-outline-dark:hover { background: var(--ink); color: var(--warm-white); }
+  .btn-ghost { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dust); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s; }
+  .btn-ghost:hover { color: var(--ink); }
+  .btn-ghost::after { content: '→'; }
+  .btn-light { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--warm-white); color: var(--ink); padding: 16px 32px; text-decoration: none; display: inline-block; transition: background 0.22s; }
+  .btn-light:hover { background: var(--clay-light); }
+  .btn-ghost-light { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250,247,242,0.40); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s; }
+  .btn-ghost-light:hover { color: var(--warm-white); }
+  .btn-ghost-light::after { content: '→'; }
+
+  /* ─── SPEC ROWS (reusable table) ─── */
+  .spec-table { border: 1px solid var(--chalk); overflow: hidden; margin: 28px 0; }
+  .st-row { display: grid; grid-template-columns: 180px 1fr; gap: 0; border-bottom: 1px solid var(--chalk); }
+  .st-row:last-child { border-bottom: none; }
+  .st-label { padding: 14px 18px; background: var(--parchment); border-right: 1px solid var(--chalk); font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dust); display: flex; align-items: center; }
+  .st-value { padding: 14px 18px; font-size: 14px; font-weight: 300; color: var(--ink-70); }
+  .st-value strong { font-weight: 500; color: var(--ink); }
+
+  /* ─── DARK SPEC TABLE ─── */
+  .spec-table-dark { border: 1px solid rgba(250,247,242,0.12); overflow: hidden; margin: 28px 0; }
+  .std-row { display: grid; grid-template-columns: 180px 1fr; gap: 0; border-bottom: 1px solid rgba(250,247,242,0.1); }
+  .std-row:last-child { border-bottom: none; }
+  .std-label { padding: 14px 18px; background: rgba(250,247,242,0.04); border-right: 1px solid rgba(250,247,242,0.1); font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,247,242,0.35); display: flex; align-items: center; }
+  .std-value { padding: 14px 18px; font-size: 14px; font-weight: 300; color: rgba(250,247,242,0.60); }
+  .std-value strong { font-weight: 500; color: var(--warm-white); }
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 01 — HERO
+  ═══════════════════════════════════════════ */
+  #hero {
+    min-height: 100vh; padding-top: 160px; padding-bottom: 120px;
+    background: var(--warm-white);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0 80px; align-items: end;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .hero-left {}
+
+  .hero-kicker {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--dust); margin-bottom: 36px; display: block;
+  }
+
+  .hero-headline {
+    font-family: var(--serif); font-size: clamp(46px, 5.5vw, 80px);
+    font-weight: 300; line-height: 1.03; letter-spacing: -0.03em;
+    color: var(--ink); margin-bottom: 44px;
+  }
+  .hero-headline em { font-style: italic; color: var(--clay); }
+
+  .hero-body {
+    font-size: 19px; font-weight: 300; line-height: 1.72;
+    color: var(--ink-70); max-width: 480px; margin-bottom: 48px;
+  }
+
+  .hero-actions { display: flex; align-items: center; gap: 28px; }
+
+  .hero-right {
+    border-left: 1px solid var(--chalk); padding-left: 72px;
+    display: flex; flex-direction: column; gap: 0;
+  }
+
+  /* Accuracy block */
+  .accuracy-block {
+    padding: 40px 44px; background: var(--deep-green); margin-bottom: 1px;
+    position: relative; overflow: hidden;
+  }
+  .accuracy-block::before {
+    content: '94';
+    position: absolute; right: -20px; bottom: -40px;
+    font-family: var(--serif); font-size: 200px; font-weight: 300; font-style: italic;
+    color: rgba(250,247,242,0.04); line-height: 1; pointer-events: none;
+  }
+  .ab-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--clay-light); margin-bottom: 12px; }
+  .ab-num { font-family: var(--serif); font-size: 72px; font-weight: 300; color: var(--warm-white); line-height: 1; letter-spacing: -0.04em; margin-bottom: 10px; }
+  .ab-num span { font-size: 36px; }
+  .ab-desc { font-size: 14px; font-weight: 300; color: rgba(250,247,242,0.55); line-height: 1.6; }
+  .ab-caveat { font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,247,242,0.25); margin-top: 10px; }
+
+  /* Quick stats */
+  .hero-stats { display: flex; flex-direction: column; gap: 0; }
+  .hs-row { padding: 20px 0; border-bottom: 1px solid var(--chalk); display: grid; grid-template-columns: 100px 1fr; gap: 16px; align-items: baseline; }
+  .hs-row:last-child { border-bottom: none; }
+  .hs-num { font-family: var(--serif); font-size: 32px; font-weight: 300; color: var(--clay); line-height: 1; letter-spacing: -0.03em; }
+  .hs-label { font-size: 13px; font-weight: 300; color: var(--ink-70); }
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 02 — THE PROBLEM
+  ═══════════════════════════════════════════ */
+  #problem {
+    background: var(--charcoal);
+    color: var(--warm-white);
+    padding-top: 130px; padding-bottom: 130px;
+  }
+
+  .problem-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0 80px; align-items: start;
+  }
+
+  .problem-headline {
+    font-family: var(--serif); font-size: clamp(36px, 4.2vw, 58px);
+    font-weight: 300; line-height: 1.08; letter-spacing: -0.025em;
+    color: var(--warm-white); margin-bottom: 32px;
+  }
+  .problem-headline em { font-style: italic; color: var(--clay-light); }
+
+  .problem-body {
+    font-size: 17px; font-weight: 300; line-height: 1.72;
+    color: rgba(250,247,242,0.58); margin-bottom: 24px;
+  }
+
+  /* Failure examples */
+  .failure-panels { display: flex; flex-direction: column; gap: 0; }
+
+  .fp-item {
+    padding: 24px 0; border-bottom: 1px solid rgba(250,247,242,0.10);
+  }
+  .fp-item:last-child { border-bottom: none; }
+
+  .fp-utterance {
+    font-family: var(--serif); font-size: 17px; font-style: italic;
+    color: var(--warm-white); margin-bottom: 12px; line-height: 1.45;
+  }
+
+  .fp-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px;
+  }
+
+  .fp-col-label {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .fp-col.standard .fp-col-label { color: rgba(250,247,242,0.25); }
+  .fp-col.vlap .fp-col-label { color: var(--clay-light); }
+
+  .fp-read {
+    font-size: 13px; font-weight: 300; color: rgba(250,247,242,0.55); line-height: 1.55;
+  }
+  .fp-col.vlap .fp-read { color: rgba(250,247,242,0.80); }
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 03 — ARCHITECTURE
+  ═══════════════════════════════════════════ */
+  #architecture {
+    background: var(--warm-white);
+    padding-top: 130px; padding-bottom: 130px;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .arch-header {
+    display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px;
+    align-items: end; margin-bottom: 90px;
+    padding-bottom: 60px; border-bottom: 1px solid var(--chalk);
+  }
+
+  .arch-headline {
+    font-family: var(--serif); font-size: clamp(34px, 4vw, 52px);
+    font-weight: 300; line-height: 1.08; letter-spacing: -0.025em; color: var(--ink);
+  }
+  .arch-headline em { font-style: italic; color: var(--clay); }
+
+  .arch-intro {
+    font-size: 18px; font-weight: 300; line-height: 1.72; color: var(--ink-70);
+  }
+
+  /* Layer diagram */
+  .arch-layers { display: flex; flex-direction: column; gap: 0; margin-bottom: 60px; }
+
+  .arch-layer {
+    display: grid; grid-template-columns: 44px 1fr; gap: 0;
+    border: 1px solid var(--chalk); border-bottom: none;
+  }
+  .arch-layer:last-child { border-bottom: 1px solid var(--chalk); }
+
+  .al-num {
+    border-right: 1px solid var(--chalk); background: var(--parchment);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    color: var(--clay); writing-mode: vertical-rl; text-transform: uppercase;
+    padding: 20px 0;
+  }
+
+  .al-body { padding: 22px 28px; }
+  .al-title { font-family: var(--sans); font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+  .al-desc { font-size: 14px; font-weight: 300; color: var(--ink-70); line-height: 1.65; }
+  .al-tech { font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--clay); margin-top: 8px; }
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 04 — TRAINING METHODOLOGY
+  ═══════════════════════════════════════════ */
+  #training {
+    background: var(--parchment);
+    padding-top: 130px; padding-bottom: 130px;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .training-header { max-width: 720px; margin-bottom: 90px; }
+
+  .training-headline {
+    font-family: var(--serif); font-size: clamp(36px, 4.2vw, 58px);
+    font-weight: 300; line-height: 1.08; letter-spacing: -0.025em; color: var(--ink);
+    margin-bottom: 24px;
+  }
+  .training-headline em { font-style: italic; color: var(--clay); }
+
+  .training-sub {
+    font-size: 18px; font-weight: 300; line-height: 1.72; color: var(--ink-70); max-width: 600px;
+  }
+
+  .training-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border: 1px solid var(--chalk); overflow: hidden;
+  }
+
+  .tg-col {
+    padding: 44px 40px; border-right: 1px solid var(--chalk);
+  }
+  .tg-col:last-child { border-right: none; }
+
+  .tg-col-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 24px;
+    padding-bottom: 16px; border-bottom: 1px solid var(--chalk);
+  }
+
+  .tg-stat { margin-bottom: 28px; }
+  .tg-stat:last-child { margin-bottom: 0; }
+  .tg-stat-num {
+    font-family: var(--serif); font-size: 48px; font-weight: 300;
+    color: var(--ink); line-height: 1; letter-spacing: -0.04em; margin-bottom: 6px;
+  }
+  .tg-stat-label { font-size: 14px; font-weight: 300; color: var(--ink-70); line-height: 1.55; }
+
+  .tg-item { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--chalk); }
+  .tg-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .tg-item-title { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+  .tg-item-body { font-size: 13px; font-weight: 300; color: var(--ink-70); line-height: 1.6; }
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 05 — SIGNAL TAXONOMY
+  ═══════════════════════════════════════════ */
+  #taxonomy {
+    background: var(--deep-green);
+    color: var(--warm-white);
+    padding-top: 130px; padding-bottom: 130px;
+  }
+
+  .tax-header {
+    display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px;
+    align-items: end; margin-bottom: 80px;
+    padding-bottom: 60px; border-bottom: 1px solid rgba(250,247,242,0.12);
+  }
+
+  .tax-headline {
+    font-family: var(--serif); font-size: clamp(34px, 4vw, 52px);
+    font-weight: 300; line-height: 1.08; letter-spacing: -0.025em; color: var(--warm-white);
+  }
+  .tax-headline em { font-style: italic; color: var(--clay-light); }
+
+  .tax-intro {
+    font-size: 18px; font-weight: 300; line-height: 1.72; color: rgba(250,247,242,0.58);
+  }
+
+  /* Dimension panels */
+  .dimensions { display: flex; flex-direction: column; gap: 0; }
+
+  .dim-panel {
+    padding: 44px 0; border-bottom: 1px solid rgba(250,247,242,0.12);
+    display: grid; grid-template-columns: 120px 1fr 1fr; gap: 0 60px; align-items: start;
+  }
+  .dim-panel:last-child { border-bottom: none; }
+
+  .dim-code-col {}
+  .dim-code {
+    font-family: var(--serif); font-size: 52px; font-weight: 300; font-style: italic;
+    color: var(--clay-light); line-height: 1; letter-spacing: -0.04em;
+  }
+  .dim-signals {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(250,247,242,0.30); margin-top: 8px;
+  }
+
+  .dim-main {}
+  .dim-name {
+    font-family: var(--sans); font-size: 18px; font-weight: 500;
+    color: var(--warm-white); margin-bottom: 10px; line-height: 1.2;
+  }
+  .dim-desc {
+    font-size: 14px; font-weight: 300; color: rgba(250,247,242,0.58); line-height: 1.72;
+  }
+
+  .dim-examples {}
+  .dim-ex-label {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--clay-light); margin-bottom: 12px;
+  }
+  .dim-ex-item {
+    font-family: var(--serif); font-size: 14px; font-style: italic;
+    color: rgba(250,247,242,0.70); padding: 10px 0; border-bottom: 1px solid rgba(250,247,242,0.08);
+    line-height: 1.5;
+  }
+  .dim-ex-item:last-child { border-bottom: none; }
+  .dim-ex-note { font-size: 11px; font-style: normal; font-weight: 300; color: rgba(250,247,242,0.35); margin-top: 3px; }
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 06 — VALIDATION
+  ═══════════════════════════════════════════ */
+  #validation {
+    background: var(--warm-white);
+    padding-top: 130px; padding-bottom: 130px;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .val-header { max-width: 720px; margin-bottom: 90px; }
+  .val-headline {
+    font-family: var(--serif); font-size: clamp(36px, 4.2vw, 58px);
+    font-weight: 300; line-height: 1.08; letter-spacing: -0.025em; color: var(--ink);
+    margin-bottom: 24px;
+  }
+  .val-headline em { font-style: italic; color: var(--clay); }
+  .val-sub { font-size: 18px; font-weight: 300; line-height: 1.72; color: var(--ink-70); max-width: 600px; }
+
+  .val-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+
+  .val-col { padding: 48px 52px 48px 0; border-right: 1px solid var(--chalk); }
+  .val-col:last-child { border-right: none; padding-right: 0; padding-left: 52px; }
+
+  .val-col-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 28px;
+    padding-bottom: 16px; border-bottom: 1px solid var(--chalk);
+  }
+
+  .val-metric { margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid var(--chalk); }
+  .val-metric:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .val-metric-num {
+    font-family: var(--serif); font-size: 48px; font-weight: 300;
+    color: var(--ink); line-height: 1; letter-spacing: -0.04em; margin-bottom: 8px;
+  }
+  .val-metric-label { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+  .val-metric-body { font-size: 13px; font-weight: 300; color: var(--ink-70); line-height: 1.65; }
+
+  /* IRB note */
+  .irb-note {
+    margin-top: 60px; padding: 36px 44px;
+    border: 1px solid var(--chalk); background: var(--parchment);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0 60px;
+  }
+
+  .irb-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 12px;
+  }
+
+  .irb-body {
+    font-size: 15px; font-weight: 300; color: var(--ink-70); line-height: 1.72;
+  }
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 07 — CLINICAL INTEGRATION
+  ═══════════════════════════════════════════ */
+  #clinical {
+    background: var(--charcoal);
+    color: var(--warm-white);
+    padding-top: 130px; padding-bottom: 130px;
+  }
+
+  .clin-header {
+    display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px;
+    align-items: end; margin-bottom: 80px;
+    padding-bottom: 60px; border-bottom: 1px solid rgba(250,247,242,0.12);
+  }
+
+  .clin-headline {
+    font-family: var(--serif); font-size: clamp(34px, 4vw, 52px);
+    font-weight: 300; line-height: 1.08; letter-spacing: -0.025em; color: var(--warm-white);
+  }
+  .clin-headline em { font-style: italic; color: var(--clay-light); }
+
+  .clin-intro { font-size: 18px; font-weight: 300; line-height: 1.72; color: rgba(250,247,242,0.58); }
+
+  /* Flow */
+  .clin-flow { display: flex; flex-direction: column; gap: 0; border-left: 1px solid rgba(196,137,111,0.35); margin-left: 24px; margin-bottom: 60px; }
+
+  .cf-item { padding: 0 0 44px 44px; position: relative; }
+  .cf-item:last-child { padding-bottom: 0; }
+  .cf-dot { position: absolute; left: -7px; top: 6px; width: 14px; height: 14px; border-radius: 50%; background: var(--charcoal); border: 2px solid var(--clay); }
+  .cf-num { font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay); margin-bottom: 8px; }
+  .cf-title { font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--warm-white); margin-bottom: 8px; line-height: 1.2; letter-spacing: -0.01em; }
+  .cf-body { font-size: 14px; font-weight: 300; color: rgba(250,247,242,0.52); line-height: 1.7; max-width: 600px; }
+
+  /* Does/doesn't */
+  .clin-does {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border: 1px solid rgba(250,247,242,0.12); overflow: hidden;
+  }
+
+  .cd-col { padding: 32px 36px; }
+  .cd-col:first-child { border-right: 1px solid rgba(250,247,242,0.12); background: rgba(196,137,111,0.06); }
+  .cd-col:last-child { background: rgba(45,74,62,0.15); }
+
+  .cd-header {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; margin-bottom: 18px;
+  }
+  .cd-col:first-child .cd-header { color: var(--clay-light); }
+  .cd-col:last-child .cd-header { color: rgba(122,184,130,0.8); }
+
+  .cd-item {
+    font-size: 14px; font-weight: 300; color: rgba(250,247,242,0.55);
+    padding: 9px 0; border-bottom: 1px solid rgba(250,247,242,0.08);
+    display: flex; align-items: baseline; gap: 10px; line-height: 1.55;
+  }
+  .cd-item:last-child { border-bottom: none; }
+  .cd-item::before { font-size: 10px; flex-shrink: 0; }
+  .cd-col:first-child .cd-item::before { content: '✕'; color: var(--clay-light); }
+  .cd-col:last-child .cd-item::before { content: '→'; color: rgba(122,184,130,0.7); }
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 08 — SECURITY
+  ═══════════════════════════════════════════ */
+  #security {
+    background: var(--parchment);
+    padding-top: 130px; padding-bottom: 130px;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .sec-header { max-width: 720px; margin-bottom: 90px; }
+  .sec-headline {
+    font-family: var(--serif); font-size: clamp(36px, 4.2vw, 58px);
+    font-weight: 300; line-height: 1.08; letter-spacing: -0.025em; color: var(--ink);
+    margin-bottom: 24px;
+  }
+  .sec-headline em { font-style: italic; color: var(--clay); }
+  .sec-sub { font-size: 18px; font-weight: 300; line-height: 1.72; color: var(--ink-70); max-width: 600px; }
+
+  .sec-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; border-top: 1px solid var(--chalk); }
+
+  .sec-item {
+    padding: 44px 40px 44px 0; border-right: 1px solid var(--chalk); border-bottom: 1px solid var(--chalk);
+  }
+  .sec-item:nth-child(3n) { border-right: none; padding-right: 0; }
+  .sec-item:nth-child(3n+2) { padding-left: 40px; }
+  .sec-item:nth-child(3n+3) { padding-left: 40px; }
+  .sec-item:nth-last-child(-n+3) { border-bottom: none; }
+
+  .si-code {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 14px;
+  }
+  .si-title {
+    font-family: var(--serif); font-size: 20px; font-weight: 400;
+    color: var(--ink); margin-bottom: 10px; line-height: 1.2; letter-spacing: -0.01em;
+  }
+  .si-body { font-size: 14px; font-weight: 300; color: var(--ink-70); line-height: 1.7; }
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 09 — INSTITUTIONAL PARTNERSHIPS
+  ═══════════════════════════════════════════ */
+  #partnerships {
+    background: var(--warm-white);
+    padding-top: 130px; padding-bottom: 130px;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .part-header { max-width: 720px; margin-bottom: 90px; }
+  .part-headline {
+    font-family: var(--serif); font-size: clamp(36px, 4.2vw, 58px);
+    font-weight: 300; line-height: 1.08; letter-spacing: -0.025em; color: var(--ink);
+    margin-bottom: 24px;
+  }
+  .part-headline em { font-style: italic; color: var(--clay); }
+  .part-sub { font-size: 18px; font-weight: 300; line-height: 1.72; color: var(--ink-70); max-width: 600px; }
+
+  .part-list { display: flex; flex-direction: column; gap: 0; }
+
+  .part-item {
+    padding: 52px 0; border-bottom: 1px solid var(--chalk);
+    display: grid; grid-template-columns: 200px 1fr auto; gap: 0 60px; align-items: start;
+  }
+  .part-item:first-child { padding-top: 0; }
+  .part-item:last-child { border-bottom: none; }
+
+  .part-logo-area {}
+  .part-org { font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--ink); line-height: 1.2; letter-spacing: -0.01em; margin-bottom: 6px; }
+  .part-type { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--clay); }
+
+  .part-body {}
+  .part-relationship { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 10px; }
+  .part-desc { font-size: 14px; font-weight: 300; color: var(--ink-70); line-height: 1.7; }
+
+  .part-status {}
+  .part-status-badge {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 5px 12px; border: 1px solid;
+    white-space: nowrap;
+  }
+  .psb-active { color: var(--deep-green); border-color: var(--deep-green); }
+  .psb-advisory { color: var(--clay); border-color: var(--clay); }
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 10 — ACCESS
+  ═══════════════════════════════════════════ */
+  #access {
+    background: var(--deep-green);
+    color: var(--warm-white);
+    padding-top: 130px; padding-bottom: 130px;
+    overflow: hidden; position: relative;
+  }
+
+  .access-bg {
+    position: absolute; bottom: -10vw; right: -4vw;
+    font-family: var(--serif); font-size: 40vw; font-weight: 300; font-style: italic;
+    color: rgba(250,247,242,0.015); pointer-events: none; user-select: none; line-height: 1;
+  }
+
+  .access-inner {
+    position: relative; z-index: 2;
+    display: grid; grid-template-columns: 1fr 1.6fr; gap: 0 80px; align-items: start;
+  }
+
+  .access-left { position: sticky; top: 140px; }
+
+  .access-headline {
+    font-family: var(--serif); font-size: clamp(36px, 4.2vw, 58px);
+    font-weight: 300; line-height: 1.08; letter-spacing: -0.025em;
+    color: var(--warm-white); margin-bottom: 28px;
+  }
+  .access-headline em { font-style: italic; color: var(--clay-light); }
+  .access-body { font-size: 17px; font-weight: 300; line-height: 1.72; color: rgba(250,247,242,0.55); margin-bottom: 40px; }
+
+  .access-docs { display: flex; flex-direction: column; gap: 0; }
+
+  .access-doc {
+    padding: 24px 0; border-bottom: 1px solid rgba(250,247,242,0.10);
+    display: flex; align-items: baseline; justify-content: space-between; gap: 20px;
+  }
+  .access-doc:last-child { border-bottom: none; }
+
+  .ad-left {}
+  .ad-title { font-family: var(--sans); font-size: 15px; font-weight: 500; color: var(--warm-white); margin-bottom: 4px; }
+  .ad-desc { font-size: 13px; font-weight: 300; color: rgba(250,247,242,0.42); line-height: 1.55; }
+
+  .ad-req {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(250,247,242,0.30); white-space: nowrap; flex-shrink: 0;
+  }
+
+  /* ─── FOOTER ─── */
+  .footer-logo span { color: var(--clay); font-style: italic; }
+  .footer-nav a { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250,247,242,0.32); text-decoration: none; transition: color 0.2s; }
+  .footer-nav a:hover { color: var(--warm-white); }
+  .footer-legal a { font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250,247,242,0.22); text-decoration: none; }
+  .footer-legal a:hover { color: var(--warm-white); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1100px) {
+    #hero { grid-template-columns: 1fr; gap: 70px; }
+    .hero-right { border-left: none; padding-left: 0; border-top: 1px solid var(--chalk); padding-top: 50px; }
+    .problem-grid { grid-template-columns: 1fr; gap: 60px; }
+    .arch-header { grid-template-columns: 1fr; gap: 28px; }
+    .tax-header { grid-template-columns: 1fr; gap: 28px; }
+    .dim-panel { grid-template-columns: 80px 1fr; gap: 0 40px; }
+    .dim-examples { display: none; }
+    .val-grid { grid-template-columns: 1fr; }
+    .val-col { border-right: none; padding: 44px 0; border-bottom: 1px solid var(--chalk); }
+    .val-col:last-child { border-bottom: none; padding-left: 0; }
+    .irb-note { grid-template-columns: 1fr; gap: 32px; }
+    .clin-header { grid-template-columns: 1fr; gap: 28px; }
+    .clin-does { grid-template-columns: 1fr; }
+    .cd-col:first-child { border-right: none; border-bottom: 1px solid rgba(250,247,242,0.12); }
+    .sec-grid { grid-template-columns: 1fr 1fr; }
+    .sec-item:nth-child(3n) { border-right: 1px solid var(--chalk); padding-right: 40px; padding-left: 0; }
+    .sec-item:nth-child(2n) { border-right: none; }
+    .sec-item:nth-child(3n+2) { padding-left: 40px; }
+    .sec-item:nth-child(3n+3) { padding-left: 40px; }
+    .part-item { grid-template-columns: 1fr 1fr; gap: 20px; }
+    .part-status { grid-column: 2; }
+    .access-inner { grid-template-columns: 1fr; gap: 60px; }
+    .access-left { position: static; }
+  }
+  @media (max-width: 768px) {
+    :root { --gutter: 5vw; }
+    .nav-links { display: none; }
+    .training-grid { grid-template-columns: 1fr; }
+    .tg-col { border-right: none; border-bottom: 1px solid var(--chalk); }
+    .tg-col:last-child { border-bottom: none; }
+    .dim-panel { grid-template-columns: 1fr; gap: 16px; }
+    .sec-grid { grid-template-columns: 1fr; }
+    .sec-item { border-right: none; padding: 40px 0; }
+    .sec-item:nth-child(n) { padding-left: 0; border-right: none; }
+    .part-item { grid-template-columns: 1fr; }
+  }
+
+  .ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
+  .ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.2s;}
+  .ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .ham-btn.open span:nth-child(2){opacity:0;}
+  .ham-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+  @media(max-width:780px){
+    .ham-btn{display:flex;}
+    .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--warm);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{font-size:22px;letter-spacing:0.04em;}
+    .nav-cta{display:none;}
+  }
+
+  footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);padding:0;}
+  .footer-sitemap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:0;padding:56px 7vw 40px;border-bottom:1px solid rgba(250,247,242,0.08);}
+  .fs-brand{padding-right:40px;}
+  .footer-logo{font-family:var(--serif);font-size:22px;color:var(--warm-white,#FAF7F2);letter-spacing:-0.02em;text-decoration:none;display:block;margin-bottom:12px;}
+  .footer-logo span{color:var(--clay,#C4896F);font-style:italic;}
+  .footer-mission{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.28);line-height:1.8;margin-bottom:20px;}
+  .fs-cta{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:var(--clay,#C4896F);border:1px solid rgba(196,137,111,0.40);padding:9px 18px;text-decoration:none;transition:all 0.18s;}
+  .fs-cta:hover{background:rgba(196,137,111,0.12);}
+  .fs-col{padding-left:32px;border-left:1px solid rgba(250,247,242,0.06);}
+  .fs-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,247,242,0.30);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(250,247,242,0.06);}
+  .fs-col a{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,247,242,0.45);text-decoration:none;margin-bottom:10px;transition:color 0.15s;}
+  .fs-col a:hover{color:var(--clay,#C4896F);}
+  .footer-bottom{padding:20px 7vw;display:flex;align-items:center;justify-content:space-between;}
+  .footer-copy{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,0.20);}
+  .footer-legal{display:flex;gap:20px;}
+  .footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+  .footer-legal a:hover{color:var(--clay,#C4896F);}
+  @media(max-width:1100px){.footer-sitemap{grid-template-columns:1fr 1fr 1fr;gap:32px;}.fs-brand{grid-column:1/-1;padding-right:0;}.fs-col{border-left:none;padding-left:0;}}
+  @media(max-width:680px){.footer-sitemap{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}}
+  @media(max-width:400px){.footer-sitemap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Vasl <span>Health</span></a>
+    <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="platform.html">Platform</a></li>
+    <li><a href="outcomes.html">Outcomes</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="contact.html" class="nav-cta">Request Evaluation</a>
+</nav>
+
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="hero-left">
+    <span class="hero-kicker reveal">CulturalBERT-VLAP &middot; Vasl Language Analysis Platform</span>
+    <h1 class="hero-headline reveal d1">
+      The clinical AI<br>
+      the field was<br>
+      <em>missing.</em>
+    </h1>
+    <p class="hero-body reveal d2">
+      Standard NLP models are trained on majority-White internet text. They were never designed to read how BIPOC, LGBTQ+, and first-generation youth communicate distress &mdash; and they consistently fail to. CulturalBERT-VLAP was built specifically for those communities. Not adapted. Built.
+    </p>
+    <div class="hero-actions reveal d3">
+      <a href="contact.html" class="btn-dark">Request Technical Evaluation</a>
+      <a href="#access" class="btn-ghost">Documentation access</a>
+    </div>
+  </div>
+
+  <div class="hero-right reveal d2">
+    <div class="accuracy-block">
+      <div class="ab-label">High-Distress Signal Sensitivity</div>
+      <div class="ab-num">94<span>%</span></div>
+      <p class="ab-desc">On high-distress signal detection in active IRB validation with the University of Maryland. Results to be published upon study completion.</p>
+      <div class="ab-caveat">Active validation &middot; Results pending &middot; Non-diagnostic output</div>
+    </div>
+    <div class="hero-stats">
+      <div class="hs-row">
+        <div class="hs-num">198k<span style="font-size:16px">+</span></div>
+        <div class="hs-label">Culturally specific mental health language samples in the training corpus</div>
+      </div>
+      <div class="hs-row">
+        <div class="hs-num">2,400<span style="font-size:16px">+</span></div>
+        <div class="hs-label">AAVE and youth vernacular tokens added beyond standard BERT vocabulary</div>
+      </div>
+      <div class="hs-row">
+        <div class="hs-num">42</div>
+        <div class="hs-label">Distress signals across 5 behavioral dimensions</div>
+      </div>
+      <div class="hs-row">
+        <div class="hs-num">5</div>
+        <div class="hs-label">Cultural communities represented in the training annotation cohort</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ THE PROBLEM ═══ -->
+<section id="problem">
+  <div class="chapter-label muted reveal">Chapter 01 &mdash; The Problem Standard NLP Cannot Solve</div>
+
+  <div class="problem-grid">
+    <div class="reveal d1">
+      <h2 class="problem-headline">
+        The model<br>
+        never learned<br>
+        <em>their language.</em>
+      </h2>
+      <p class="problem-body">General-purpose NLP models &mdash; including large language models &mdash; are trained on internet text that skews heavily toward majority-White, educated, English-speaking populations. The result is a systematic blind spot: the specific ways BIPOC, LGBTQ+, and first-generation youth signal emotional distress are consistently misread, deprioritized, or missed entirely.</p>
+      <p class="problem-body">This isn't a model failure in the traditional sense. These models perform well on the populations they were trained for. The failure is in deploying them, uncorrected, for populations they were never trained on &mdash; and expecting accurate clinical signal detection to follow.</p>
+      <p class="problem-body">The gap isn't theoretical. In clinical practice, it means a youth saying "lowkey been struggling fr" is read as casual. A pre-disclosure minimization pattern ("it's not that deep but...") reduces the model's confidence instead of increasing it. Community-developed coded language &mdash; terms built specifically to avoid content filters &mdash; registers as noise. Standard models consistently miss these signals in the communities that most need them caught.</p>
+    </div>
+
+    <div class="failure-panels reveal d2">
+      <div class="fp-item">
+        <div class="fp-utterance">"lowkey been struggling fr, ain't nobody understand what I'm going through"</div>
+        <div class="fp-row">
+          <div class="fp-col standard">
+            <div class="fp-col-label">Standard NLP reads</div>
+            <div class="fp-read">Low confidence signal. "lowkey" reduces severity weight. Grammatical irregularity reduces confidence further. Output: insufficient signal for flagging.</div>
+          </div>
+          <div class="fp-col vlap">
+            <div class="fp-col-label">CulturalBERT-VLAP reads</div>
+            <div class="fp-read">CCM-09 pre-disclosure minimization. "fr" authenticity escalator contradicting the minimization hedge. HOP-03 isolation framing in AAVE. Elevated signal &mdash; surfaces to care team.</div>
+          </div>
+        </div>
+      </div>
+      <div class="fp-item">
+        <div class="fp-utterance">"it's not that deep but lowkey been struggling since school started."</div>
+        <div class="fp-row">
+          <div class="fp-col standard">
+            <div class="fp-col-label">Standard NLP reads</div>
+            <div class="fp-read">Negation ("not that deep") reduces signal weight. Mild concern flagged, low priority.</div>
+          </div>
+          <div class="fp-col vlap">
+            <div class="fp-col-label">CulturalBERT-VLAP reads</div>
+            <div class="fp-read">CCM-04 classic pre-disclosure frame. Negation before authentic disclosure is the signal, not evidence against it. ISO-04 temporal onset marker &mdash; distress tied to a specific starting point.</div>
+          </div>
+        </div>
+      </div>
+      <div class="fp-item">
+        <div class="fp-utterance">"been thinking about unaliving lately ngl."</div>
+        <div class="fp-row">
+          <div class="fp-col standard">
+            <div class="fp-col-label">Standard NLP reads</div>
+            <div class="fp-read">"unaliving" not in vocabulary. Processed as unknown token or misclassified. Crisis signal missed entirely.</div>
+          </div>
+          <div class="fp-col vlap">
+            <div class="fp-col-label">CulturalBERT-VLAP reads</div>
+            <div class="fp-read">SHA-03 coded suicidal ideation &mdash; "unaliving" is in the extended vocabulary. "ngl" sincerity marker confirms non-performative. CRS-02 elevated priority. Immediate clinical supervisor review triggered.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ ARCHITECTURE ═══ -->
+<section id="architecture">
+  <div class="chapter-label reveal">Chapter 02 &mdash; CulturalBERT-VLAP Architecture</div>
+
+  <div class="arch-header">
+    <h2 class="arch-headline reveal d1">
+      Built on BERT.<br>
+      Fine-tuned for<br>
+      <em>cultural fluency.</em>
+    </h2>
+    <p class="arch-intro reveal d2">CulturalBERT-VLAP is a BERT-architecture language model fine-tuned on a purpose-built corpus of culturally specific mental health language. The base BERT architecture was selected for its bidirectional context processing &mdash; essential for reading the layered meaning in code-switching, minimization patterns, and culturally framed expressions where individual words carry different weight depending on surrounding context. The model was then extended with a culturally specific vocabulary and fine-tuned against a clinically annotated training corpus.</p>
+  </div>
+
+  <div class="arch-layers reveal">
+    <div class="arch-layer">
+      <div class="al-num">Foundation</div>
+      <div class="al-body">
+        <div class="al-title">BERT Base Architecture &mdash; Bidirectional Transformer</div>
+        <p class="al-desc">The bidirectional encoding layer processes the full context window simultaneously in both directions &mdash; unlike unidirectional models that read left-to-right. This is architecturally necessary for cultural signal detection: the meaning of "lowkey" depends entirely on what follows it, and the clinical significance of a minimization hedge ("it's not that deep but") only becomes clear in context of what comes after the conjunction.</p>
+        <div class="al-tech">BERT-base &middot; 12 layers &middot; 768 hidden dimensions &middot; 12 attention heads</div>
+      </div>
+    </div>
+    <div class="arch-layer">
+      <div class="al-num">Extension</div>
+      <div class="al-body">
+        <div class="al-title">Vocabulary Extension &mdash; 2,400+ Cultural Tokens</div>
+        <p class="al-desc">Standard BERT vocabulary was extended with 2,400+ AAVE terms, youth vernacular expressions, code-switching patterns, and community-developed coded language &mdash; including terms built specifically to circumvent content filters (e.g., "unaliving"). This extension was compiled through community engagement with BIPOC and LGBTQ+ youth populations and validated by licensed clinicians with relevant community competency. Without this extension, approximately 23% of the training corpus would be processed as unknown tokens by the base model.</p>
+        <div class="al-tech">Community-sourced &middot; Clinically validated &middot; Continuously updated</div>
+      </div>
+    </div>
+    <div class="arch-layer">
+      <div class="al-num">Training</div>
+      <div class="al-body">
+        <div class="al-title">Fine-Tuning on Culturally Specific Mental Health Corpus</div>
+        <p class="al-desc">The extended BERT model was fine-tuned on 198,000+ annotated language samples drawn from the communities VLAP serves &mdash; not web-scraped text, but specifically collected and clinically annotated mental health communication. Each sample was labeled by licensed clinicians with community competency training against the 42-signal taxonomy across five behavioral dimensions. The fine-tuning process was conducted in multiple phases with inter-annotator agreement validation.</p>
+        <div class="al-tech">198,000+ samples &middot; Multi-phase fine-tuning &middot; IAA validation across annotation cohort</div>
+      </div>
+    </div>
+    <div class="arch-layer">
+      <div class="al-num">Output</div>
+      <div class="al-body">
+        <div class="al-title">Dimensional Signal Profiling &mdash; Non-Diagnostic Output Layer</div>
+        <p class="al-desc">The model output layer generates dimensional signal profiles across the five-dimension taxonomy &mdash; not diagnostic outputs, not severity scores, and not clinical recommendations. The output is an interpretive context package: which signal patterns are present, their dimensional classification, and cultural interpretation notes that help clinicians understand what the patterns typically indicate in the communities that produce them. Every output includes a non-diagnostic disclaimer and is designed to support clinical judgment, not substitute for it.</p>
+        <div class="al-tech">Non-diagnostic &middot; Interpretive context &middot; 42-signal taxonomy &middot; Clinician-surfaced only</div>
+      </div>
+    </div>
+    <div class="arch-layer">
+      <div class="al-num">Processing</div>
+      <div class="al-body">
+        <div class="al-title">In-Memory Processing &mdash; No Verbatim Storage</div>
+        <p class="al-desc">VLAP processes member language in-memory. Verbatim input text is not stored after signal profile generation. The retained output is a dimensional signal profile &mdash; not a transcript, not a quote, not a record of the member's exact language. This architectural constraint is a HIPAA technical safeguard, not a configurable setting. It cannot be disabled by organizational administrators or overridden by clinical staff.</p>
+        <div class="al-tech">In-memory inference &middot; No PHI retention post-processing &middot; HIPAA technical safeguard</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ TRAINING ═══ -->
+<section id="training">
+  <div class="chapter-label reveal">Chapter 03 &mdash; Training Methodology</div>
+
+  <div class="training-header">
+    <h2 class="training-headline reveal d1">
+      A corpus built<br>
+      from inside the<br>
+      <em>communities.</em>
+    </h2>
+    <p class="training-sub reveal d2">The training data for CulturalBERT-VLAP was not web-scraped, crowd-sourced generically, or assembled from existing open datasets. It was specifically collected from and with the communities the model serves &mdash; and annotated by licensed clinicians who have worked within those communities.</p>
+  </div>
+
+  <div class="training-grid reveal">
+    <div class="tg-col">
+      <div class="tg-col-label">Corpus Scale</div>
+      <div class="tg-stat">
+        <div class="tg-stat-num">198k<span style="font-size:24px">+</span></div>
+        <div class="tg-stat-label">Total annotated language samples</div>
+      </div>
+      <div class="tg-stat">
+        <div class="tg-stat-num">2,400<span style="font-size:24px">+</span></div>
+        <div class="tg-stat-label">Extended vocabulary tokens beyond BERT base</div>
+      </div>
+      <div class="tg-stat">
+        <div class="tg-stat-num">5</div>
+        <div class="tg-stat-label">Cultural community cohorts represented in annotation</div>
+      </div>
+      <div class="tg-stat">
+        <div class="tg-stat-num">42</div>
+        <div class="tg-stat-label">Distress signal patterns in the taxonomy</div>
+      </div>
+    </div>
+    <div class="tg-col">
+      <div class="tg-col-label">Methodology</div>
+      <div class="tg-item">
+        <div class="tg-item-title">Community-partnered data collection</div>
+        <p class="tg-item-body">Language samples were collected in partnership with community organizations serving BIPOC, LGBTQ+, and first-generation youth populations &mdash; not scraped from public platforms. Consent protocols, anonymization procedures, and community review were built into the collection process.</p>
+      </div>
+      <div class="tg-item">
+        <div class="tg-item-title">Clinical annotation with community competency requirement</div>
+        <p class="tg-item-body">All training samples were annotated by licensed clinicians with documented community competency training in the relevant population cohorts. Inter-annotator agreement was validated across the annotation cohort before samples were included in training data.</p>
+      </div>
+      <div class="tg-item">
+        <div class="tg-item-title">Vocabulary development through community engagement</div>
+        <p class="tg-item-body">The 2,400+ vocabulary extension was compiled through structured engagement with youth from the target communities &mdash; not through generic web scraping. Vocabulary candidates were reviewed for clinical accuracy by the annotation cohort before inclusion.</p>
+      </div>
+      <div class="tg-item">
+        <div class="tg-item-title">Bias monitoring integrated into training</div>
+        <p class="tg-item-body">False positive and false negative rates were disaggregated by demographic subgroup throughout training &mdash; not as a post-hoc audit but as an operational gate. Signal detection performance must meet minimum parity thresholds across BIPOC, LGBTQ+, and first-generation subgroups for a model version to be deployed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ TAXONOMY ═══ -->
+<section id="taxonomy">
+  <div class="chapter-label light reveal">Chapter 04 &mdash; The 5-Dimensional Signal Taxonomy</div>
+
+  <div class="tax-header">
+    <h2 class="tax-headline reveal d1">
+      42 signals.<br>
+      <em>Five dimensions.</em>
+    </h2>
+    <p class="tax-intro reveal d2">The VLAP signal taxonomy was developed through clinical annotation of the training corpus &mdash; identifying recurring patterns of culturally framed distress expression that standard clinical instruments and general NLP models systematically miss. The taxonomy is not static. It is updated as language evolves, with community input informing additions and revisions through a structured clinical review process.</p>
+  </div>
+
+  <div class="dimensions">
+    <div class="dim-panel reveal">
+      <div class="dim-code-col">
+        <div class="dim-code">HOP</div>
+        <div class="dim-signals">8 signals</div>
+      </div>
+      <div class="dim-main">
+        <div class="dim-name">Hopelessness & Pessimism</div>
+        <p class="dim-desc">Indirect hopelessness, temporal compression, and "no point" framing expressed through AAVE, coded youth language, and minimization patterns. Standard models read these as low-confidence signals. CulturalBERT-VLAP reads them as the primary signal. The cultural norm of underreporting &mdash; particularly prevalent in BIPOC male youth populations &mdash; means direct expressions of hopelessness are less common than coded expressions. HOP signals are most clinically significant when combined with CCM modifiers.</p>
+      </div>
+      <div class="dim-examples">
+        <div class="dim-ex-label">Signal Examples</div>
+        <div class="dim-ex-item">
+          "Just gotta make it through this week"
+          <div class="dim-ex-note">HOP-05 &middot; Acutely compressed future horizon</div>
+        </div>
+        <div class="dim-ex-item">
+          "ain't nobody care anyway so"
+          <div class="dim-ex-note">HOP-03 &middot; AAVE relational hopelessness + ISO co-occurrence</div>
+        </div>
+        <div class="dim-ex-item">
+          "what's even the point fr"
+          <div class="dim-ex-note">HOP-07 &middot; Direct futility + authenticity marker</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dim-panel reveal">
+      <div class="dim-code-col">
+        <div class="dim-code">ISO</div>
+        <div class="dim-signals">9 signals</div>
+      </div>
+      <div class="dim-main">
+        <div class="dim-name">Social Isolation</div>
+        <p class="dim-desc">Withdrawal signals, relational distancing, and absence of connection framed as normal or preferred. ISO signals are particularly significant for BIPOC and LGBTQ+ youth whose support networks are often culturally specific and difficult to replace &mdash; the stakes of isolation are higher. Critically, ISO signals frequently appear as positively framed statements ("I'm good, just been staying to myself") that read as fine to general models but register as relational withdrawal in cultural context.</p>
+      </div>
+      <div class="dim-examples">
+        <div class="dim-ex-label">Signal Examples</div>
+        <div class="dim-ex-item">
+          "I don't really fw people like that no more"
+          <div class="dim-ex-note">ISO-01 &middot; Broad relational withdrawal &middot; temporal marker</div>
+        </div>
+        <div class="dim-ex-item">
+          "been keeping to myself, it's fine tho"
+          <div class="dim-ex-note">ISO-04 &middot; Withdrawal with minimization &middot; CCM co-occurrence</div>
+        </div>
+        <div class="dim-ex-item">
+          "my people don't really get it"
+          <div class="dim-ex-note">ISO-07 &middot; Perceived community disconnect</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dim-panel reveal">
+      <div class="dim-code-col">
+        <div class="dim-code">SHA</div>
+        <div class="dim-signals">7 signals</div>
+      </div>
+      <div class="dim-main">
+        <div class="dim-name">Self-Harm Adjacent</div>
+        <p class="dim-desc">Coded self-harm and suicidal ideation language &mdash; including community-developed terms built specifically to circumvent content filters. The SHA dimension required the most extensive vocabulary extension: terms like "unaliving," "sewerslide," and others circulating within youth online communities to communicate suicidal ideation while avoiding automated detection. Standard models with standard vocabularies have zero coverage of these terms. SHA-category signals are the highest-stakes VLAP detections and receive the most conservative threshold settings &mdash; lower false negative rates, higher false positive tolerance.</p>
+      </div>
+      <div class="dim-examples">
+        <div class="dim-ex-label">Signal Examples</div>
+        <div class="dim-ex-item">
+          "been thinking about unaliving lately ngl"
+          <div class="dim-ex-note">SHA-03 &middot; Coded SI + CRS-02 sincerity marker</div>
+        </div>
+        <div class="dim-ex-item">
+          "tired of being here honestly"
+          <div class="dim-ex-note">SHA-01 &middot; Indirect ideation &middot; ambiguous but elevated</div>
+        </div>
+        <div class="dim-ex-item">
+          "what if I just didn't show up anymore"
+          <div class="dim-ex-note">SHA-05 &middot; Disappearance ideation framing</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dim-panel reveal">
+      <div class="dim-code-col">
+        <div class="dim-code">CRS</div>
+        <div class="dim-signals">6 signals</div>
+      </div>
+      <div class="dim-main">
+        <div class="dim-name">Crisis Risk Signals</div>
+        <p class="dim-desc">Acute distress patterns including perceived burdensomeness, escalating hopelessness with sincerity markers, and suicidal ideation confirmed by authenticity escalators. CRS signals operate as a multiplier on co-occurring signals &mdash; a SHA signal becomes a clinical priority when paired with a CRS sincerity marker. CRS-category detections trigger immediate surfacing to Vasl's licensed clinical supervisor team with a 90-minute human response SLA. No automated action is taken; human clinical judgment determines every response.</p>
+      </div>
+      <div class="dim-examples">
+        <div class="dim-ex-label">Signal Examples</div>
+        <div class="dim-ex-item">
+          "everyone would be better off without me fr"
+          <div class="dim-ex-note">CRS-01 &middot; Perceived burdensomeness + authenticity marker</div>
+        </div>
+        <div class="dim-ex-item">
+          "ngl I'm not doing good at all"
+          <div class="dim-ex-note">CRS-02 &middot; Sincerity marker &middot; escalates co-occurring signals</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dim-panel reveal">
+      <div class="dim-code-col">
+        <div class="dim-code">CCM</div>
+        <div class="dim-signals">12 signals</div>
+      </div>
+      <div class="dim-main">
+        <div class="dim-name">Cultural Context Modifiers</div>
+        <p class="dim-desc">The CCM dimension is the most architecturally significant of the five &mdash; and the most clinically important. CCM signals don't indicate distress directly; they modify how other signals should be interpreted. Pre-disclosure minimization (CCM-04) paired with an ISO signal means the withdrawal is more significant than it appears. Spiritual deflection (CCM-12) may indicate either genuine resilience or disclosure avoidance. Code-switching (CCM-08) indicates the member is speaking to a perceived authority audience &mdash; context that changes what they're willing to disclose. Standard models have no equivalent to the CCM dimension; they read utterances at face value without cultural framing.</p>
+      </div>
+      <div class="dim-examples">
+        <div class="dim-ex-label">Signal Examples</div>
+        <div class="dim-ex-item">
+          "it's not that deep but..."
+          <div class="dim-ex-note">CCM-04 &middot; Pre-disclosure minimization &middot; increases confidence</div>
+        </div>
+        <div class="dim-ex-item">
+          "God got me. That's all I'm saying."
+          <div class="dim-ex-note">CCM-12 &middot; Spiritual closure &middot; may signal avoidance</div>
+        </div>
+        <div class="dim-ex-item">
+          "lowkey" &middot; "kinda" &middot; "I guess"
+          <div class="dim-ex-note">CCM-09 &middot; Minimization hedges &middot; signal: underreporting of severity</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ VALIDATION ═══ -->
+<section id="validation">
+  <div class="chapter-label reveal">Chapter 05 &mdash; Validation & Accuracy</div>
+
+  <div class="val-header">
+    <h2 class="val-headline reveal d1">
+      Validated against<br>
+      real clinical<br>
+      <em>populations.</em>
+    </h2>
+    <p class="val-sub reveal d2">VLAP's accuracy claims are grounded in active IRB-approved clinical research with the University of Maryland &mdash; not internal testing, not synthetic benchmarks, and not general NLP performance metrics that don't account for cultural signal specificity.</p>
+  </div>
+
+  <div class="val-grid">
+    <div class="val-col reveal">
+      <div class="val-col-label">Accuracy Metrics</div>
+      <div class="val-metric">
+        <div class="val-metric-num">~94<span style="font-size:24px">%</span></div>
+        <div class="val-metric-label">High-distress signal sensitivity</div>
+        <p class="val-metric-body">VLAP's ability to detect high-distress signals when they are present in member language &mdash; measured against clinician-adjudicated ground truth in the IRB study cohort. Sensitivity is optimized conservatively for SHA and CRS dimensions: we accept more false positives to minimize missed crisis signals.</p>
+      </div>
+      <div class="val-metric">
+        <div class="val-metric-num">23<span style="font-size:24px">%</span></div>
+        <div class="val-metric-label">Standard NLP vocabulary gap</div>
+        <p class="val-metric-body">Percentage of the VLAP training corpus that would be processed as unknown tokens by a standard BERT model without the extended vocabulary &mdash; representing the portion of culturally specific language that standard models are structurally unable to read.</p>
+      </div>
+    </div>
+    <div class="val-col reveal d1">
+      <div class="val-col-label">Validation Approach</div>
+      <div class="val-metric">
+        <div class="val-metric-label">Active IRB Study &mdash; University of Maryland</div>
+        <p class="val-metric-body">VLAP signal accuracy is being validated through an IRB-approved clinical study with the University of Maryland, using production deployment data from live Vasl cohorts. The study compares VLAP signal output against clinician-adjudicated gold-standard assessments of the same member language. Results will be published in peer-reviewed literature upon study completion.</p>
+      </div>
+      <div class="val-metric">
+        <div class="val-metric-label">Demographic Bias Monitoring</div>
+        <p class="val-metric-body">False positive and false negative rates are disaggregated across BIPOC, LGBTQ+, and first-generation subgroups in both the training validation and the IRB study. Parity thresholds are enforced operationally &mdash; a model version that meets aggregate accuracy targets but fails subgroup parity is not deployed. Bias monitoring is an ongoing production gate, not a one-time evaluation.</p>
+      </div>
+      <div class="val-metric">
+        <div class="val-metric-label">What Sensitivity Means &mdash; and Doesn't</div>
+        <p class="val-metric-body">Sensitivity measures how consistently VLAP detects signals when they are present &mdash; not the rate at which all surfaced signals are clinically significant in a given instance. A high-sensitivity threshold means more signals are surfaced, which is appropriate for a clinical support tool. The clinical significance of any specific signal is always determined through human clinical review, not by the model.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="irb-note reveal">
+    <div>
+      <div class="irb-label">IRB Study &mdash; University of Maryland</div>
+      <p class="irb-body">The active IRB study is currently in the data collection and preliminary analysis phase. Results will be published in a peer-reviewed journal upon completion. The study protocol and preliminary design documentation are available to institutional evaluators under NDA. Contact clinical@vaslhealth.com to request access.</p>
+    </div>
+    <div>
+      <div class="irb-label">Medical Advisory &mdash; Senior Clinical Oversight</div>
+      <p class="irb-body">Vasl Health's clinical validation approach is overseen by its Senior Medical Advisor, <strong>Panagis Galiatsatos, MD, MHS</strong> &mdash; Assistant Professor of Medicine at Johns Hopkins University School of Medicine. Dr. Galiatsatos provides clinical oversight on VLAP's signal detection methodology, accuracy validation approach, and non-diagnostic output framing.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ CLINICAL INTEGRATION ═══ -->
+<section id="clinical">
+  <div class="chapter-label muted reveal">Chapter 06 &mdash; Clinical Integration Model</div>
+
+  <div class="clin-header">
+    <h2 class="clin-headline reveal d1">
+      Surfaces to<br>
+      clinicians.<br>
+      <em>Never to members.</em>
+    </h2>
+    <p class="clin-intro reveal d2">VLAP is a clinical decision-support tool, not a member-facing AI. It operates entirely behind the clinical layer &mdash; invisible to the people whose language it processes. Every signal it surfaces is directed to a licensed clinician or certified coach, reviewed by a human, and responded to through human clinical judgment. The platform is built so that automated action in response to a clinical signal is architecturally impossible.</p>
+  </div>
+
+  <div class="clin-flow reveal">
+    <div class="cf-item">
+      <div class="cf-dot"></div>
+      <div class="cf-num">Step 01</div>
+      <div class="cf-title">Member check-in or coach message</div>
+      <p class="cf-body">VLAP processes only language shared through Vasl's care channels &mdash; daily check-ins and coach messaging threads. Peer group posts, external social media, school email, and any other channel are not processed.</p>
+    </div>
+    <div class="cf-item">
+      <div class="cf-dot"></div>
+      <div class="cf-num">Step 02</div>
+      <div class="cf-title">In-memory VLAP inference</div>
+      <p class="cf-body">CulturalBERT-VLAP processes the language against the 42-signal taxonomy. In-memory only &mdash; verbatim text is not retained after processing. Output: a dimensional signal profile.</p>
+    </div>
+    <div class="cf-item">
+      <div class="cf-dot"></div>
+      <div class="cf-num">Step 03</div>
+      <div class="cf-title">AI Client Insights surface to coach dashboard</div>
+      <p class="cf-body">Coaches see a simplified surface of VLAP output in the AI Client Insights panel: plain-language pattern alerts and mood trajectory summaries for their active members. No dimensional codes, no clinical jargon.</p>
+    </div>
+    <div class="cf-item">
+      <div class="cf-dot"></div>
+      <div class="cf-num">Step 04</div>
+      <div class="cf-title">Full dimensional panel surfaces to licensed clinician</div>
+      <p class="cf-body">When a member is connected to a licensed clinician, the pre-session view includes the full VLAP dimensional signal profile &mdash; dimensional codes, pattern descriptions, cultural interpretation notes, and coaching context. Accessible only to licensed clinicians.</p>
+    </div>
+    <div class="cf-item">
+      <div class="cf-dot"></div>
+      <div class="cf-num">Step 05</div>
+      <div class="cf-title">CRS signals surface to clinical supervisor &mdash; 90-minute SLA</div>
+      <p class="cf-body">Crisis Risk Signal detections are surfaced immediately to Vasl's licensed clinical supervisor team. A licensed clinician reviews the signal and determines the appropriate response. No automated action. Human judgment initiates every response.</p>
+    </div>
+  </div>
+
+  <div class="clin-does reveal">
+    <div class="cd-col">
+      <div class="cd-header">VLAP Does Not</div>
+      <div class="cd-item">Respond to members or generate therapeutic messages</div>
+      <div class="cd-item">Diagnose or suggest diagnoses to any party</div>
+      <div class="cd-item">Make clinical decisions or recommendations</div>
+      <div class="cd-item">Initiate contact with members automatically</div>
+      <div class="cd-item">Take automated action in response to crisis signals</div>
+      <div class="cd-item">Scan peer group posts or external channels</div>
+      <div class="cd-item">Store verbatim member language after processing</div>
+      <div class="cd-item">Surface individual signal data to school or org administrators</div>
+    </div>
+    <div class="cd-col">
+      <div class="cd-header">VLAP Does</div>
+      <div class="cd-item">Detect culturally specific distress signals in care-channel language</div>
+      <div class="cd-item">Surface dimensional signal profiles to coaches and clinicians</div>
+      <div class="cd-item">Flag crisis signals for immediate human clinical supervisor review</div>
+      <div class="cd-item">Provide pre-session cultural context to licensed clinicians</div>
+      <div class="cd-item">Support coaches with AI Client Insights summaries</div>
+      <div class="cd-item">Enable aggregate, de-identified population trend data for org dashboards</div>
+      <div class="cd-item">Process in-memory without verbatim PHI retention</div>
+      <div class="cd-item">Operate entirely behind the clinical layer &mdash; invisible to members</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ SECURITY ═══ -->
+<section id="security">
+  <div class="chapter-label reveal">Chapter 07 &mdash; Security Architecture</div>
+
+  <div class="sec-header">
+    <h2 class="sec-headline reveal d1">
+      Built for<br>
+      <em>clinical data.</em>
+    </h2>
+    <p class="sec-sub reveal d2">VLAP processes the most sensitive category of user data &mdash; mental health language from youth in underserved communities. The security architecture was designed specifically for HIPAA-regulated, school-based, and community health deployment contexts. Every constraint below is architectural, not configurable.</p>
+  </div>
+
+  <div class="sec-grid">
+    <div class="sec-item reveal">
+      <div class="si-code">01 &middot; Data Handling</div>
+      <div class="si-title">In-Memory Processing</div>
+      <p class="si-body">VLAP processes member language in-memory. Verbatim input text is not stored after signal profile generation. The retained output is a dimensional signal profile &mdash; not a transcript, not a quote. This is a HIPAA technical safeguard, not a configurable setting.</p>
+    </div>
+    <div class="sec-item reveal d1">
+      <div class="si-code">02 &middot; HIPAA</div>
+      <div class="si-title">Full Technical Safeguard Implementation</div>
+      <p class="si-body">HIPAA Security Rule technical safeguards implemented across all platform components &mdash; encryption in transit and at rest, access controls, audit logging, and automatic logoff. Business Associate Agreement required for all organizational deployments. Annual third-party security audit.</p>
+    </div>
+    <div class="sec-item reveal d2">
+      <div class="si-code">03 &middot; Certification</div>
+      <div class="si-title">SOC 2 Type II</div>
+      <p class="si-body">Annual SOC 2 Type II audit covering security, availability, and confidentiality trust service criteria. Full audit report available to institutional evaluators under NDA. Audit conducted by an independent third-party auditor.</p>
+    </div>
+    <div class="sec-item reveal">
+      <div class="si-code">04 &middot; Access Control</div>
+      <div class="si-title">Role-Based Signal Access</div>
+      <p class="si-body">Individual VLAP signal context is accessible only to the assigned coach (AI Client Insights summary) and the assigned licensed clinician (full dimensional profile). School staff, org administrators, and Vasl team members outside clinical supervisory functions have zero access to individual signal data &mdash; architecturally enforced.</p>
+    </div>
+    <div class="sec-item reveal d1">
+      <div class="si-code">05 &middot; FERPA</div>
+      <div class="si-title">School-Based Deployment</div>
+      <p class="si-body">For school district deployments, Vasl operates as a direct service provider to students. Student health data generated in Vasl is classified as health information under HIPAA &mdash; not as an education record under FERPA &mdash; and is structurally inaccessible to school administrators under any circumstances.</p>
+    </div>
+    <div class="sec-item reveal d2">
+      <div class="si-code">06 &middot; Aggregate Data</div>
+      <div class="si-title">De-Identification by Architecture</div>
+      <p class="si-body">Population-level aggregate signal trends surfaced to org administrators use minimum cohort size enforcement to prevent de-identification by inference. Individual member contributions to aggregate data are never discernible. This constraint applies to all org-level reporting, without exception.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ PARTNERSHIPS ═══ -->
+<section id="partnerships">
+  <div class="chapter-label reveal">Chapter 08 &mdash; Institutional Partnerships</div>
+
+  <div class="part-header">
+    <h2 class="part-headline reveal d1">
+      Validated by<br>
+      the institutions<br>
+      <em>that matter.</em>
+    </h2>
+    <p class="part-sub reveal d2">VLAP's clinical credibility is grounded in active institutional partnerships &mdash; not aspirational affiliations or advisory relationships that don't involve actual work. The partnerships listed below involve ongoing operational collaboration, active research, or formal clinical oversight.</p>
+  </div>
+
+  <div class="part-list">
+    <div class="part-item reveal">
+      <div class="part-logo-area">
+        <div class="part-org">Mayo Clinic Platform</div>
+        <div class="part-type">Health System &mdash; Research Accelerator</div>
+      </div>
+      <div class="part-body">
+        <div class="part-relationship">Mayo Clinic Platform_Accelerate &mdash; Active Participant</div>
+        <p class="part-desc">Vasl Health is an active participant in the Mayo Clinic Platform_Accelerate program, which provides access to de-identified patient data infrastructure and clinical research partnership. Vasl is engaged in a two-year data collaboration &mdash; Year 1 focused on behavioral health signal model development using longitudinal HL7 FHIR-formatted data (BH encounters, ICD-10 codes for mood/anxiety/trauma/SUD, standardized assessments, demographics/SDoH), with Year 2 targeting prospective validation of CulturalBERT-VLAP signal accuracy against clinical ground truth. Primary contact: Asia Smith, MPH, Program Success Manager.</p>
+      </div>
+      <div class="part-status"><span class="part-status-badge psb-active">Active</span></div>
+    </div>
+
+    <div class="part-item reveal">
+      <div class="part-logo-area">
+        <div class="part-org">University of Maryland</div>
+        <div class="part-type">Research University &mdash; IRB Study</div>
+      </div>
+      <div class="part-body">
+        <div class="part-relationship">Active IRB Study &mdash; VLAP Clinical Signal Validation</div>
+        <p class="part-desc">An IRB-approved clinical study is in progress with the University of Maryland validating CulturalBERT-VLAP's signal detection accuracy against clinician-adjudicated ground truth assessments. The study uses production deployment data from live Vasl cohorts. Results will be published in a peer-reviewed journal upon completion. The study represents the first formal independent validation of VLAP's culturally specific signal detection capabilities.</p>
+      </div>
+      <div class="part-status"><span class="part-status-badge psb-active">IRB Active</span></div>
+    </div>
+
+    <div class="part-item reveal">
+      <div class="part-logo-area">
+        <div class="part-org">Johns Hopkins University</div>
+        <div class="part-type">Medical School &mdash; Senior Medical Advisor</div>
+      </div>
+      <div class="part-body">
+        <div class="part-relationship">Senior Medical Advisory &mdash; Clinical Validation Oversight</div>
+        <p class="part-desc">Panagis Galiatsatos, MD, MHS &mdash; Assistant Professor of Medicine at Johns Hopkins University School of Medicine &mdash; serves as Vasl Health's Senior Medical Advisor. Dr. Galiatsatos provides clinical oversight on VLAP's signal detection methodology, accuracy validation approach, non-diagnostic output framing, and the clinical governance of the platform's care coordination model. His advisory role involves active participation in clinical review, not nominal affiliation.</p>
+      </div>
+      <div class="part-status"><span class="part-status-badge psb-advisory">Advisory</span></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ ACCESS ═══ -->
+<section id="access">
+  <div class="access-bg" aria-hidden="true">Access</div>
+  <div class="access-inner">
+    <div class="access-left">
+      <div class="chapter-label muted reveal">Chapter 09 &mdash; Documentation Access</div>
+      <h2 class="access-headline reveal d1">
+        Evaluate<br>
+        the model<br>
+        <em>directly.</em>
+      </h2>
+      <p class="access-body reveal d2">Vasl Health provides full technical documentation to qualified institutional evaluators &mdash; health systems, research institutions, school district technology teams, and health plan medical directors. All documentation is available under NDA. Contact clinical@vaslhealth.com or use the form below to initiate an evaluation request.</p>
+      <div class="reveal d3" style="display:flex;flex-direction:column;gap:14px;align-items:flex-start;">
+        <a href="contact.html" class="btn-light">Request Evaluation Package</a>
+        <a href="mailto:clinical@vaslhealth.com" class="btn-ghost-light">clinical@vaslhealth.com</a>
+      </div>
+    </div>
+
+    <div class="access-docs reveal d2">
+      <div class="access-doc">
+        <div class="ad-left">
+          <div class="ad-title">VLAP Technical Specification</div>
+          <div class="ad-desc">37-page model specification &mdash; architecture, training methodology, signal taxonomy with full annotation guidelines, inference pipeline, bias monitoring protocol, and performance benchmarks.</div>
+        </div>
+        <div class="ad-req">NDA Required</div>
+      </div>
+      <div class="access-doc">
+        <div class="ad-left">
+          <div class="ad-title">IRB Study Protocol</div>
+          <div class="ad-desc">University of Maryland IRB study design, methodology, data collection protocol, and preliminary validation framework. Results pending publication.</div>
+        </div>
+        <div class="ad-req">NDA Required</div>
+      </div>
+      <div class="access-doc">
+        <div class="ad-left">
+          <div class="ad-title">SOC 2 Type II Report</div>
+          <div class="ad-desc">Full annual third-party security audit report covering security, availability, and confidentiality trust service criteria.</div>
+        </div>
+        <div class="ad-req">NDA Required</div>
+      </div>
+      <div class="access-doc">
+        <div class="ad-left">
+          <div class="ad-title">HIPAA Technical Safeguards Documentation</div>
+          <div class="ad-desc">Complete HIPAA Security Rule implementation documentation &mdash; technical safeguards, PHI handling protocols, BAA template, and breach notification procedures.</div>
+        </div>
+        <div class="ad-req">Available on Request</div>
+      </div>
+      <div class="access-doc">
+        <div class="ad-left">
+          <div class="ad-title">Mayo Clinic Platform_Accelerate Collaboration Brief</div>
+          <div class="ad-desc">Overview of the two-year data collaboration scope, data domains, formats (HL7 FHIR / CSV / JSON), HIPAA Safe Harbor de-identification specifications, and Year 1/Year 2 objectives.</div>
+        </div>
+        <div class="ad-req">NDA Required</div>
+      </div>
+      <div class="access-doc">
+        <div class="ad-left">
+          <div class="ad-title">Pilot Outcome Data</div>
+          <div class="ad-desc">Aggregate outcomes from deployed pilot cohorts &mdash; PHQ-8 improvement, 30-day retention, session engagement, and clinical escalation rates. De-identified, aggregate only.</div>
+        </div>
+        <div class="ad-req">Available on Request</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-sitemap">
+    <div class="fs-brand">
+      <a href="index.html" class="footer-logo">Vasl <span>Health</span></a>
+      <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
+      <a href="contact.html" class="fs-cta">Request a Demo &rarr;</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Platform</div>
+      <a href="platform.html">Platform Overview</a>
+      <a href="vlap.html">VLAP</a>
+      <a href="ai-model.html">AI Model</a>
+      <a href="technology.html">Technology</a>
+      <a href="peer-groups.html">Peer Groups</a>
+      <a href="teletherapy.html">Teletherapy</a>
+      <a href="prototype.html">Live Demo Portal</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Who We Serve</div>
+      <a href="for-schools.html">For Schools</a>
+      <a href="for-organizations.html">For Organizations</a>
+      <a href="outcomes.html">Outcomes</a>
+      <a href="clinical-outcomes.html">Clinical Outcomes</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Company</div>
+      <a href="about.html">About Vasl</a>
+      <a href="team.html">Team</a>
+      <a href="careers.html">Careers</a>
+      <a href="research.html">Research</a>
+      <a href="blog.html">Blog &amp; Insights</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Support &amp; Legal</div>
+      <a href="support.html">Help Center</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="baa.html">Business Associate Agreement</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 Vasl Health, Inc. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="baa.html">BAA</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js-ready');
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+  reveals.forEach(el => io.observe(el));
+  window.addEventListener('load', () => {
+    reveals.forEach((el, i) => {
+      if (el.getBoundingClientRect().top < window.innerHeight) {
+        setTimeout(() => el.classList.add('visible'), i * 40);
+      }
+    });
+  });
+</script>
+</body>
+</html>
