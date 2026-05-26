@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A deep dive into the research behind culturally-responsive AI and how VLAP addresses the linguistic and cultural patterns standard NLP systems miss.">
+<title>Bridging the Chasm: Health Equity in Mental Health AI &mdash; Vasl Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --warm-white:#FAF7F2;--parchment:#F0EAE0;--ink:#1C1C1C;
+  --ink-70:rgba(28,28,28,0.70);--ink-50:rgba(28,28,28,0.50);--ink-12:rgba(28,28,28,0.12);
+  --clay:#C4896F;--clay-light:#E8C4AE;--clay-pale:#F5E6DC;
+  --deep-green:#2D4A3E;--dust:#8B7B6B;--chalk:#E2DAD0;--charcoal:#222222;
+  --serif:'Newsreader',Georgia,serif;--sans:'IBM Plex Sans',sans-serif;--mono:'IBM Plex Mono',monospace;
+  --gutter:7vw;
+}
+body{background:var(--warm-white);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);display:flex;align-items:center;justify-content:space-between;background:rgba(250,247,242,0.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--ink-12);}
+.nav-logo{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:-0.02em;color:var(--ink);text-decoration:none;}
+.nav-logo span{color:var(--clay);font-style:italic;}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--dust);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--ink);}
+.nav-cta{font-family:var(--mono);font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--deep-green);border:1px solid var(--deep-green);padding:9px 20px;text-decoration:none;transition:background 0.22s,color 0.22s;}
+.nav-cta:hover{background:var(--deep-green);color:var(--warm-white);}
+
+/* Article layout */
+.article-header{padding:140px var(--gutter) 72px;border-bottom:1px solid var(--chalk);max-width:1400px;}
+.ah-breadcrumb{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dust);margin-bottom:32px;display:flex;align-items:center;gap:10px;}
+.ah-breadcrumb a{color:var(--dust);text-decoration:none;}
+.ah-breadcrumb a:hover{color:var(--ink);}
+.ah-breadcrumb-sep{color:var(--chalk);}
+.ah-category{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--clay);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.ah-category::before{content:'';display:block;width:20px;height:1px;background:var(--clay);}
+.ah-title{font-family:var(--serif);font-size:clamp(36px,5vw,72px);font-weight:300;line-height:1.06;letter-spacing:-0.03em;color:var(--ink);margin-bottom:28px;max-width:900px;}
+.ah-title em{font-style:italic;color:var(--clay);}
+.ah-deck{font-size:20px;font-weight:300;line-height:1.65;color:var(--ink-70);max-width:680px;margin-bottom:40px;}
+.ah-meta{display:flex;align-items:center;gap:20px;padding-top:28px;border-top:1px solid var(--chalk);flex-wrap:wrap;}
+.ah-author{display:flex;align-items:center;gap:12px;}
+.ah-avatar{width:40px;height:40px;border-radius:8px;background:var(--deep-green);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:17px;color:var(--warm-white);}
+.ah-author-name{font-size:14px;font-weight:500;color:var(--ink);}
+.ah-author-role{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dust);}
+.ah-meta-divider{width:1px;height:32px;background:var(--chalk);}
+.ah-meta-item{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dust);}
+
+/* Body layout */
+.article-body-wrap{padding:80px var(--gutter) 100px;max-width:1400px;display:grid;grid-template-columns:1fr 320px;gap:0 80px;align-items:start;}
+.article-content{}
+.article-sidebar{position:sticky;top:90px;}
+
+/* Article content */
+.ac p{font-size:18px;font-weight:300;line-height:1.80;color:var(--ink-70);margin-bottom:28px;}
+.ac p:last-child{margin-bottom:0;}
+.ac h2{font-family:var(--serif);font-size:30px;font-weight:400;color:var(--ink);margin:56px 0 20px;line-height:1.2;letter-spacing:-0.02em;}
+.ac h3{font-family:var(--serif);font-size:22px;font-weight:400;color:var(--ink);margin:36px 0 14px;line-height:1.2;letter-spacing:-0.01em;}
+.ac strong{font-weight:500;color:var(--ink);}
+.ac em{font-style:italic;}
+.ac a{color:var(--deep-green);text-decoration:none;border-bottom:1px solid rgba(45,74,62,0.3);}
+
+/* Pull quote */
+.pull-quote{margin:52px 0;padding:36px 44px;border-left:3px solid var(--clay);background:var(--clay-pale);}
+.pq-text{font-family:var(--serif);font-size:24px;font-weight:300;font-style:italic;color:var(--ink);line-height:1.45;letter-spacing:-0.01em;}
+.pq-attr{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dust);margin-top:14px;}
+
+/* Stat call-out */
+.stat-callout{margin:44px 0;padding:32px 36px;border:1px solid var(--chalk);background:var(--parchment);}
+.sc-num{font-family:var(--serif);font-size:56px;font-weight:300;color:var(--clay);line-height:1;letter-spacing:-0.04em;margin-bottom:8px;}
+.sc-label{font-size:15px;font-weight:500;color:var(--ink);margin-bottom:6px;}
+.sc-sub{font-size:13px;font-weight:300;color:var(--ink-70);line-height:1.6;}
+
+/* Sidebar */
+.as-section{margin-bottom:40px;padding-bottom:40px;border-bottom:1px solid var(--chalk);}
+.as-section:last-child{border-bottom:none;margin-bottom:0;}
+.as-label{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--clay);margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--chalk);}
+.as-stat{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--chalk);}
+.as-stat:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.as-stat-num{font-family:var(--serif);font-size:36px;font-weight:300;color:var(--ink);line-height:1;letter-spacing:-0.03em;margin-bottom:6px;}
+.as-stat-label{font-size:13px;font-weight:300;color:var(--ink-70);line-height:1.5;}
+.as-stat-caveat{font-family:var(--mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dust);margin-top:4px;}
+
+/* Related articles */
+.related-item{display:block;text-decoration:none;padding:14px 0;border-bottom:1px solid var(--chalk);transition:opacity 0.2s;}
+.related-item:last-child{border-bottom:none;}
+.related-item:hover{opacity:0.70;}
+.ri-cat{font-family:var(--mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--clay);margin-bottom:5px;}
+.ri-title{font-family:var(--serif);font-size:15px;font-weight:400;color:var(--ink);line-height:1.3;}
+
+/* CTA */
+.article-cta{margin:80px var(--gutter) 0;padding:60px 80px;background:var(--deep-green);display:grid;grid-template-columns:1fr auto;gap:0 60px;align-items:center;}
+.cta-headline{font-family:var(--serif);font-size:clamp(26px,3vw,42px);font-weight:300;line-height:1.1;letter-spacing:-0.02em;color:var(--warm-white);}
+.cta-headline em{font-style:italic;color:var(--clay-light);}
+.cta-body{font-size:16px;font-weight:300;color:rgba(250,247,242,0.58);margin-top:12px;line-height:1.65;}
+.cta-btn{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:var(--warm-white);color:var(--ink);padding:16px 32px;text-decoration:none;white-space:nowrap;display:inline-block;transition:background 0.22s;flex-shrink:0;}
+.cta-btn:hover{background:var(--clay-light);}
+.footer-logo span{color:var(--clay);font-style:italic;}
+.footer-nav a{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.32);text-decoration:none;}
+.footer-nav a:hover{color:var(--warm-white);}
+.footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+@media(max-width:1100px){.article-body-wrap{grid-template-columns:1fr;}.article-sidebar{position:static;padding-top:60px;border-top:1px solid var(--chalk);}.article-cta{grid-template-columns:1fr;padding:44px;}.}
+@media(max-width:768px){:root{--gutter:5vw;}.nav-links{display:none;}.article-cta{padding:36px;}.}
+
+  .ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
+  .ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.2s;}
+  .ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .ham-btn.open span:nth-child(2){opacity:0;}
+  .ham-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+  @media(max-width:780px){
+    .ham-btn{display:flex;}
+    .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--warm);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{font-size:22px;letter-spacing:0.04em;}
+    .nav-cta{display:none;}
+  }
+
+  footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);padding:0;}
+  .footer-sitemap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:0;padding:56px 7vw 40px;border-bottom:1px solid rgba(250,247,242,0.08);}
+  .fs-brand{padding-right:40px;}
+  .footer-logo{font-family:var(--serif);font-size:22px;color:var(--warm-white,#FAF7F2);letter-spacing:-0.02em;text-decoration:none;display:block;margin-bottom:12px;}
+  .footer-logo span{color:var(--clay,#C4896F);font-style:italic;}
+  .footer-mission{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.28);line-height:1.8;margin-bottom:20px;}
+  .fs-cta{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:var(--clay,#C4896F);border:1px solid rgba(196,137,111,0.40);padding:9px 18px;text-decoration:none;transition:all 0.18s;}
+  .fs-cta:hover{background:rgba(196,137,111,0.12);}
+  .fs-col{padding-left:32px;border-left:1px solid rgba(250,247,242,0.06);}
+  .fs-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,247,242,0.30);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(250,247,242,0.06);}
+  .fs-col a{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,247,242,0.45);text-decoration:none;margin-bottom:10px;transition:color 0.15s;}
+  .fs-col a:hover{color:var(--clay,#C4896F);}
+  .footer-bottom{padding:20px 7vw;display:flex;align-items:center;justify-content:space-between;}
+  .footer-copy{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,0.20);}
+  .footer-legal{display:flex;gap:20px;}
+  .footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+  .footer-legal a:hover{color:var(--clay,#C4896F);}
+  @media(max-width:1100px){.footer-sitemap{grid-template-columns:1fr 1fr 1fr;gap:32px;}.fs-brand{grid-column:1/-1;padding-right:0;}.fs-col{border-left:none;padding-left:0;}}
+  @media(max-width:680px){.footer-sitemap{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}}
+  @media(max-width:400px){.footer-sitemap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Vasl <span>Health</span></a>
+    <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="platform.html">Platform</a></li>
+    <li><a href="outcomes.html">Outcomes</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="contact.html" class="nav-cta">Request a Demo</a>
+</nav>
+
+<div class="article-header">
+  <div class="ah-breadcrumb">
+    <a href="index.html">Vasl Health</a>
+    <span class="ah-breadcrumb-sep">&rsaquo;</span>
+    <a href="blog.html">Insights</a>
+    <span class="ah-breadcrumb-sep">&rsaquo;</span>
+    <span>Research</span>
+  </div>
+  <div class="ah-category">Research</div>
+  <h1 class="ah-title">Bridging the Chasm:<br>Health Equity in <em>Mental Health AI</em></h1>
+  <p class="ah-deck">Standard NLP models miss nearly a quarter of culturally specific distress language. Here is the research behind why &mdash; and what building a model that actually reads it requires.</p>
+  <div class="ah-meta">
+    <div class="ah-author">
+      <div class="ah-avatar">R</div>
+      <div>
+        <div class="ah-author-name">Rodney Bell</div>
+        <div class="ah-author-role">Founder & CEO, Vasl Health</div>
+      </div>
+    </div>
+    <div class="ah-meta-divider"></div>
+    <span class="ah-meta-item">April 2026</span>
+    <div class="ah-meta-divider"></div>
+    <span class="ah-meta-item">12 min read</span>
+    <div class="ah-meta-divider"></div>
+    <span class="ah-meta-item">Research</span>
+  </div>
+</div>
+
+<div class="article-body-wrap">
+  <div class="article-content ac">
+    
+<p>The behavioral health AI market has a validation problem. Most platforms that use artificial intelligence to support mental health care have deployed models trained on data that does not represent the populations most in need of that care. This is not a secret. The research literature on algorithmic bias in health AI has been growing for years. What the market has been slower to produce is a rigorous account of what actually solving the problem requires &mdash; not in principle, but in practice.</p>
+
+<p>This piece is an attempt at that account.</p>
+
+<h2>What Standard NLP Models Actually Miss</h2>
+
+<p>Large language models and NLP classifiers learn their representations of language from training data. The dominant internet text corpora used to train these models &mdash; Common Crawl, Wikipedia, Reddit, and similar sources &mdash; are skewed heavily toward English-language, majority-White, educated users. This is not a controversial finding. It is documented in the NLP literature and acknowledged, at various levels of specificity, by most major AI labs.</p>
+
+<p>The consequence for mental health AI is specific and serious. A model trained on these corpora learns how one demographic segment communicates emotional distress. It learns the words, the structures, the hedging patterns, the directness levels that characterize distress expression in that segment. When it is deployed to identify distress in populations who communicate differently &mdash; BIPOC youth, LGBTQ+ youth, first-generation youth, communities where AAVE is the primary spoken dialect &mdash; it is reading a language it was not taught.</p>
+
+<div class="stat-callout">
+  <div class="sc-num">23%</div>
+  <div class="sc-label">Vocabulary gap in standard NLP models</div>
+  <div class="sc-sub">Approximately 23% of the culturally specific language in Vasl&rsquo;s training corpus would be processed as unknown tokens by a standard BERT model without vocabulary extension &mdash; not misread, but invisible to the model entirely.</div>
+</div>
+
+<p>The 23% figure comes from Vasl&rsquo;s own corpus analysis: approximately one in four words or phrases in our culturally specific mental health training data would be processed as unknown tokens by a standard BERT model. This is not a rounding error. It means that a standard model has no semantic representation of roughly one quarter of the language BIPOC and LGBTQ+ youth use to communicate their emotional state.</p>
+
+<h2>The Vocabulary Extension Problem</h2>
+
+<p>The most visible component of the vocabulary gap is coded language &mdash; terms that communities develop, often deliberately, to communicate in ways that automated systems cannot read. &ldquo;Unaliving&rdquo; &mdash; a term used primarily by LGBTQ+ youth to communicate suicidal ideation without triggering content moderation &mdash; is the most widely cited example. But it is far from the only one.</p>
+
+<p>Community-developed coded language evolves continuously in response to platform moderation, cultural drift, and community need. Any model that addresses this problem through a one-time vocabulary extension will be partially out of date before the extension is complete. Solving the vocabulary problem requires ongoing community engagement, not a static fix.</p>
+
+<p>Vasl&rsquo;s approach to vocabulary extension for CulturalBERT-VLAP involved structured engagement with youth from the target communities. Vocabulary candidates were reviewed and validated by licensed clinicians with documented community competency before inclusion. The current extension covers 2,400+ AAVE and youth vernacular tokens. It is updated through an ongoing community engagement process rather than treated as a solved problem.</p>
+
+<h2>Why Bidirectional Context Matters</h2>
+
+<p>The vocabulary gap is the most visible part of the problem, but it is not the most structurally significant. The deeper challenge is cultural context &mdash; the way in which the meaning of words shifts based on surrounding language, and the way in which cultural patterns of communication change what a word means in a clinical context.</p>
+
+<p>The word &ldquo;lowkey&rdquo; is a useful example. In standard internet text, &ldquo;lowkey&rdquo; functions as a minimizer &mdash; &ldquo;I lowkey want pizza&rdquo; means something like &ldquo;I somewhat want pizza.&rdquo; Standard NLP models learn this usage and apply it in mental health contexts: &ldquo;lowkey been struggling&rdquo; reads as &ldquo;somewhat struggling,&rdquo; reducing the distress signal weight.</p>
+
+<p>In AAVE-dominant speech in mental health contexts, &ldquo;lowkey&rdquo; functions as a pre-disclosure modifier &mdash; a signal that what follows is genuine and serious, delivered in a register that minimizes social risk. The same word, in the same surface position in a sentence, means the opposite of what a standard model would interpret it to mean.</p>
+
+<div class="pull-quote">
+  <div class="pq-text">&ldquo;The problem is not just missing vocabulary. It is missing the cultural framework that determines what words mean in context. A model trained on different cultural contexts cannot borrow that framework &mdash; it has to be built from different data.&rdquo;</div>
+  <div class="pq-attr">Rodney Bell &mdash; Founder & CEO, Vasl Health</div>
+</div>
+
+<p>This is why CulturalBERT-VLAP is built on the BERT bidirectional transformer architecture. Bidirectional encoding processes the full context window simultaneously in both directions, which is architecturally necessary for reading the layered meaning in pre-disclosure patterns, code-switching, and culturally framed minimization. Unidirectional models cannot do this reliably.</p>
+
+<h2>What Independent Validation Requires</h2>
+
+<p>Vasl is conducting an active IRB-approved study with the University of Maryland validating CulturalBERT-VLAP&rsquo;s signal detection accuracy against clinician-adjudicated ground truth. The study uses production deployment data from live Vasl cohorts. Preliminary findings indicate approximately 94% sensitivity on high-distress signal detection. Results will be published in a peer-reviewed journal upon study completion.</p>
+
+<p>We are not reporting that figure as a settled number. It is preliminary, the study is ongoing, and the publication process involves additional review. We report it because it represents the current state of what we know &mdash; and because being specific and honest about the state of validation is what responsible AI deployment in clinical contexts requires.</p>
+
+<p>The broader point is methodological: any mental health AI platform that makes accuracy claims without independent IRB-approved validation against clinician-adjudicated ground truth is making claims that cannot be evaluated. The field needs a higher standard for what counts as validated performance, particularly for AI systems deployed with underserved populations who have the least recourse if the system fails.</p>
+
+<h2>The Research Gap the Field Needs to Close</h2>
+
+<p>There is substantial research literature on algorithmic bias in health AI. There is significantly less published research on specific, validated approaches to building culturally competent clinical AI for mental health applications. The IRB study Vasl is conducting with the University of Maryland is, to our knowledge, one of the first independent validations of a culturally specific mental health NLP model against a clinically annotated ground truth in deployed populations.</p>
+
+<p>That gap &mdash; between the problem being well-documented and the solutions being rigorously validated &mdash; is the chasm the field needs to bridge. Building that bridge requires the time and resources to do community-partnered research correctly. It requires accepting slower development timelines in exchange for better validation. And it requires transparency about what is known, what is preliminary, and what remains to be established.</p>
+
+  </div>
+  <aside class="article-sidebar">
+    <div class="as-section">
+      <div class="as-label">Key Data Points</div>
+      <div class="as-stat"><div class="as-stat-num">23%</div><div class="as-stat-label">Of culturally specific mental health language processed as unknown tokens by standard NLP models</div><div class="as-stat-caveat">Vasl training corpus analysis</div></div>
+<div class="as-stat"><div class="as-stat-num">198k+</div><div class="as-stat-label">Clinically annotated training samples in the CulturalBERT-VLAP corpus &mdash; community-sourced, not web-scraped</div></div>
+<div class="as-stat"><div class="as-stat-num">~94%</div><div class="as-stat-label">VLAP high-distress signal sensitivity in active IRB validation with University of Maryland</div><div class="as-stat-caveat">Preliminary &middot; Results pending</div></div>
+
+    </div>
+    <div class="as-section">
+      <div class="as-label">Related Articles</div>
+      <a href="blog-mental-health-equity-crisis.html" class="related-item"><div class="ri-cat">Health Equity</div><div class="ri-title">The Mental Health Equity Crisis</div></a>
+<a href="blog-medicaid-populations.html" class="related-item"><div class="ri-cat">Technology</div><div class="ri-title">Why Medicaid Populations Are Central</div></a>
+<a href="blog-crisis-without-solving.html" class="related-item"><div class="ri-cat">Research</div><div class="ri-title">The Crisis We Keep Describing Without Solving</div></a>
+
+    </div>
+  </aside>
+</div>
+
+<div class="article-cta">
+  <div>
+    <div class="cta-headline">See Vasl Health<br>in <em>action.</em></div>
+    <p class="cta-body">A 45-minute call with an implementation lead &mdash; not a sales pitch. We come prepared with context specific to your organization and population.</p>
+  </div>
+  <a href="contact.html" class="cta-btn">Request a Demo &rarr;</a>
+</div>
+
+<footer>
+  <div class="footer-sitemap">
+    <div class="fs-brand">
+      <a href="index.html" class="footer-logo">Vasl <span>Health</span></a>
+      <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
+      <a href="contact.html" class="fs-cta">Request a Demo &rarr;</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Platform</div>
+      <a href="platform.html">Platform Overview</a>
+      <a href="vlap.html">VLAP</a>
+      <a href="ai-model.html">AI Model</a>
+      <a href="technology.html">Technology</a>
+      <a href="peer-groups.html">Peer Groups</a>
+      <a href="teletherapy.html">Teletherapy</a>
+      <a href="prototype.html">Live Demo Portal</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Who We Serve</div>
+      <a href="for-schools.html">For Schools</a>
+      <a href="for-organizations.html">For Organizations</a>
+      <a href="outcomes.html">Outcomes</a>
+      <a href="clinical-outcomes.html">Clinical Outcomes</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Company</div>
+      <a href="about.html">About Vasl</a>
+      <a href="team.html">Team</a>
+      <a href="careers.html">Careers</a>
+      <a href="research.html">Research</a>
+      <a href="blog.html">Blog &amp; Insights</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Support &amp; Legal</div>
+      <a href="support.html">Help Center</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="baa.html">Business Associate Agreement</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 Vasl Health, Inc. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="baa.html">BAA</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
