@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Vasl Health's clinical research &mdash; active IRB study with University of Maryland, Mayo Clinic Platform_Accelerate data collaboration, and peer-reviewed publication in progress.">
+<title>Research &mdash; Vasl Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --warm-white:#FAF7F2;--parchment:#F0EAE0;--ink:#1C1C1C;
+  --ink-70:rgba(28,28,28,0.70);--ink-50:rgba(28,28,28,0.50);--ink-12:rgba(28,28,28,0.12);
+  --clay:#C4896F;--clay-light:#E8C4AE;--clay-pale:#F5E6DC;
+  --deep-green:#2D4A3E;--dust:#8B7B6B;--chalk:#E2DAD0;--charcoal:#222222;
+  --serif:'Newsreader',Georgia,serif;--sans:'IBM Plex Sans',sans-serif;--mono:'IBM Plex Mono',monospace;
+  --gutter:7vw;
+}
+body{background:var(--warm-white);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;overflow-x:hidden;}
+.reveal{transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1),transform 0.9s cubic-bezier(0.16,1,0.3,1);}
+.js-ready .reveal{opacity:0;transform:translateY(20px);}
+.js-ready .reveal.visible{opacity:1;transform:translateY(0);}
+.d1{transition-delay:0.08s;}.d2{transition-delay:0.16s;}.d3{transition-delay:0.24s;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);display:flex;align-items:center;justify-content:space-between;background:rgba(250,247,242,0.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--ink-12);}
+.nav-logo{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:-0.02em;color:var(--ink);text-decoration:none;}
+.nav-logo span{color:var(--clay);font-style:italic;}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--dust);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--ink);}
+.nav-cta{font-family:var(--mono);font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--deep-green);border:1px solid var(--deep-green);padding:9px 20px;text-decoration:none;transition:background 0.22s,color 0.22s;}
+.nav-cta:hover{background:var(--deep-green);color:var(--warm-white);}
+section{padding:130px var(--gutter);position:relative;}
+.chapter-label{font-family:var(--mono);font-size:10px;font-weight:300;letter-spacing:0.16em;text-transform:uppercase;color:var(--clay);display:flex;align-items:center;gap:12px;margin-bottom:52px;}
+.chapter-label::after{content:'';display:block;width:36px;height:1px;background:var(--clay);opacity:0.45;}
+.chapter-label.light{color:var(--clay-light);}.chapter-label.light::after{background:var(--clay-light);}
+.chapter-label.muted{color:rgba(250,247,242,0.35);}.chapter-label.muted::after{background:rgba(250,247,242,0.35);}
+.btn-dark{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:var(--ink);color:var(--warm-white);padding:16px 32px;text-decoration:none;display:inline-block;transition:background 0.22s;}
+.btn-dark:hover{background:var(--deep-green);}
+.btn-ghost{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dust);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:color 0.2s;}
+.btn-ghost:hover{color:var(--ink);}
+.btn-ghost::after{content:'\2192';}
+.btn-light{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:var(--warm-white);color:var(--ink);padding:16px 32px;text-decoration:none;display:inline-block;transition:background 0.22s;}
+.btn-light:hover{background:var(--clay-light);}
+.btn-ghost-light{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.40);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:color 0.2s;}
+.btn-ghost-light:hover{color:var(--warm-white);}
+.btn-ghost-light::after{content:'\2192';}
+
+/* ═══ HERO ═══ */
+#hero{min-height:80vh;padding-top:160px;padding-bottom:120px;background:var(--warm-white);border-bottom:1px solid var(--chalk);display:grid;grid-template-columns:1fr 1fr;gap:0 80px;align-items:end;}
+.hero-kicker{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--dust);margin-bottom:36px;display:block;}
+.hero-headline{font-family:var(--serif);font-size:clamp(46px,5.5vw,80px);font-weight:300;line-height:1.03;letter-spacing:-0.03em;color:var(--ink);margin-bottom:36px;}
+.hero-headline em{font-style:italic;color:var(--clay);}
+.hero-body{font-size:18px;font-weight:300;line-height:1.72;color:var(--ink-70);max-width:480px;margin-bottom:44px;}
+.hero-actions{display:flex;align-items:center;gap:28px;}
+.hero-right{border-left:1px solid var(--chalk);padding-left:72px;}
+
+/* Status summary */
+.status-summary{display:flex;flex-direction:column;gap:0;}
+.ss-item{padding:22px 0;border-bottom:1px solid var(--chalk);display:grid;grid-template-columns:100px 1fr;gap:16px;align-items:start;}
+.ss-item:first-child{padding-top:0;}
+.ss-item:last-child{border-bottom:none;}
+.ss-status{font-family:var(--mono);font-size:8px;letter-spacing:0.12em;text-transform:uppercase;padding:4px 10px;border:1px solid;display:inline-block;margin-top:2px;}
+.ss-active{color:var(--deep-green);border-color:var(--deep-green);}
+.ss-pending{color:var(--clay);border-color:var(--clay);}
+.ss-right{}
+.ss-title{font-family:var(--sans);font-size:14px;font-weight:500;color:var(--ink);margin-bottom:4px;}
+.ss-desc{font-size:13px;font-weight:300;color:var(--ink-70);line-height:1.55;}
+
+/* ═══ ACTIVE RESEARCH ═══ */
+#active{background:var(--parchment);padding-top:130px;padding-bottom:130px;border-bottom:1px solid var(--chalk);}
+.active-header{max-width:720px;margin-bottom:80px;}
+.active-headline{font-family:var(--serif);font-size:clamp(36px,4.2vw,58px);font-weight:300;line-height:1.08;letter-spacing:-0.025em;color:var(--ink);margin-bottom:24px;}
+.active-headline em{font-style:italic;color:var(--clay);}
+.active-sub{font-size:18px;font-weight:300;line-height:1.72;color:var(--ink-70);}
+
+/* Study card — editorial row */
+.study-row{padding:60px 0;border-bottom:1px solid var(--chalk);display:grid;grid-template-columns:180px 1fr;gap:0 60px;}
+.study-row:first-of-type{padding-top:0;}
+.study-row:last-of-type{border-bottom:none;padding-bottom:0;}
+.sr-left{}
+.sr-status-badge{font-family:var(--mono);font-size:8px;letter-spacing:0.12em;text-transform:uppercase;padding:5px 12px;border:1px solid;display:inline-block;margin-bottom:14px;}
+.sr-active{color:var(--deep-green);border-color:var(--deep-green);}
+.sr-pending{color:var(--clay);border-color:var(--clay);}
+.sr-type{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dust);margin-bottom:14px;}
+.sr-link{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--deep-green);text-decoration:none;display:flex;align-items:center;gap:5px;margin-top:20px;transition:color 0.2s;}
+.sr-link::after{content:'\2192';}
+.sr-link:hover{color:var(--ink);}
+.sr-right{}
+.sr-title{font-family:var(--serif);font-size:28px;font-weight:400;color:var(--ink);margin-bottom:14px;line-height:1.2;letter-spacing:-0.015em;}
+.sr-desc{font-size:16px;font-weight:300;color:var(--ink-70);line-height:1.72;margin-bottom:24px;}
+.sr-details{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--chalk);overflow:hidden;}
+.srd-item{padding:14px 18px;border-right:1px solid var(--chalk);border-bottom:1px solid var(--chalk);}
+.srd-item:nth-child(2n){border-right:none;}
+.srd-item:nth-last-child(-n+2){border-bottom:none;}
+.srd-label{font-family:var(--mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dust);margin-bottom:5px;}
+.srd-value{font-size:14px;font-weight:300;color:var(--ink-70);}
+.srd-value strong{font-weight:500;color:var(--ink);}
+
+/* ═══ FOUNDATION ═══ */
+#foundation{background:var(--deep-green);color:var(--warm-white);padding-top:130px;padding-bottom:130px;}
+.found-header{display:grid;grid-template-columns:1fr 1.6fr;gap:80px;align-items:end;margin-bottom:80px;padding-bottom:60px;border-bottom:1px solid rgba(250,247,242,0.12);}
+.found-headline{font-family:var(--serif);font-size:clamp(36px,4.2vw,58px);font-weight:300;line-height:1.08;letter-spacing:-0.025em;color:var(--warm-white);}
+.found-headline em{font-style:italic;color:var(--clay-light);}
+.found-intro{font-size:18px;font-weight:300;line-height:1.72;color:rgba(250,247,242,0.58);}
+.found-partners{display:flex;flex-direction:column;gap:0;}
+.fp-item{padding:44px 0;border-bottom:1px solid rgba(250,247,242,0.12);display:grid;grid-template-columns:200px 1fr auto;gap:0 60px;align-items:start;}
+.fp-item:first-child{padding-top:0;}
+.fp-item:last-child{border-bottom:none;padding-bottom:0;}
+.fp-org-name{font-family:var(--serif);font-size:22px;font-weight:400;color:var(--warm-white);margin-bottom:6px;line-height:1.2;letter-spacing:-0.01em;}
+.fp-org-type{font-family:var(--mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(250,247,242,0.30);}
+.fp-body{}
+.fp-relationship{font-size:15px;font-weight:500;color:var(--warm-white);margin-bottom:10px;}
+.fp-desc{font-size:14px;font-weight:300;color:rgba(250,247,242,0.58);line-height:1.7;}
+.fp-badge{font-family:var(--mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(250,247,242,0.25);color:rgba(250,247,242,0.55);white-space:nowrap;}
+
+/* ═══ APPROACH ═══ */
+#approach{background:var(--warm-white);padding-top:130px;padding-bottom:130px;border-bottom:1px solid var(--chalk);}
+.appr-header{max-width:720px;margin-bottom:80px;}
+.appr-headline{font-family:var(--serif);font-size:clamp(36px,4.2vw,58px);font-weight:300;line-height:1.08;letter-spacing:-0.025em;color:var(--ink);margin-bottom:24px;}
+.appr-headline em{font-style:italic;color:var(--clay);}
+.appr-sub{font-size:18px;font-weight:300;line-height:1.72;color:var(--ink-70);}
+.appr-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--chalk);}
+.appr-item{padding:44px 44px 44px 0;border-right:1px solid var(--chalk);border-bottom:1px solid var(--chalk);}
+.appr-item:nth-child(2n){border-right:none;padding-right:0;padding-left:44px;}
+.appr-item:nth-last-child(-n+2){border-bottom:none;}
+.ai-num{font-family:var(--serif);font-size:52px;font-weight:300;color:var(--clay-light);line-height:1;letter-spacing:-0.04em;margin-bottom:16px;}
+.ai-title{font-family:var(--serif);font-size:20px;font-weight:400;color:var(--ink);margin-bottom:10px;line-height:1.25;letter-spacing:-0.01em;}
+.ai-body{font-size:14px;font-weight:300;color:var(--ink-70);line-height:1.72;}
+
+/* ═══ PUBLICATION ═══ */
+#publication{background:var(--parchment);padding-top:130px;padding-bottom:130px;border-bottom:1px solid var(--chalk);}
+.pub-header{max-width:720px;margin-bottom:80px;}
+.pub-headline{font-family:var(--serif);font-size:clamp(36px,4.2vw,58px);font-weight:300;line-height:1.08;letter-spacing:-0.025em;color:var(--ink);margin-bottom:24px;}
+.pub-headline em{font-style:italic;color:var(--clay);}
+.pub-sub{font-size:18px;font-weight:300;line-height:1.72;color:var(--ink-70);}
+.pub-note{border:1px solid var(--chalk);padding:36px 44px;background:var(--warm-white);margin-bottom:52px;}
+.pn-label{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--clay);margin-bottom:14px;}
+.pn-title{font-family:var(--serif);font-size:24px;font-weight:400;color:var(--ink);margin-bottom:14px;line-height:1.2;letter-spacing:-0.01em;}
+.pn-desc{font-size:15px;font-weight:300;color:var(--ink-70);line-height:1.72;margin-bottom:20px;}
+.pn-details{display:flex;gap:24px;flex-wrap:wrap;}
+.pnd-item{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dust);}
+.pub-forthcoming{font-size:16px;font-weight:300;color:var(--ink-70);line-height:1.72;}
+.pub-forthcoming strong{font-weight:500;color:var(--ink);}
+
+/* ═══ COLLABORATE ═══ */
+#collaborate{background:var(--ink);color:var(--warm-white);padding-top:130px;padding-bottom:130px;overflow:hidden;position:relative;}
+.collab-bg{position:absolute;bottom:-10vw;right:-4vw;font-family:var(--serif);font-size:40vw;font-weight:300;font-style:italic;color:rgba(250,247,242,0.015);pointer-events:none;line-height:1;}
+.collab-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1.6fr;gap:0 80px;align-items:start;}
+.collab-left{position:sticky;top:140px;}
+.collab-headline{font-family:var(--serif);font-size:clamp(34px,4.5vw,58px);font-weight:300;line-height:1.08;letter-spacing:-0.025em;color:var(--warm-white);margin-bottom:28px;}
+.collab-headline em{font-style:italic;color:var(--clay-light);}
+.collab-body{font-size:17px;font-weight:300;line-height:1.72;color:rgba(250,247,242,0.55);margin-bottom:36px;}
+.collab-actions{display:flex;flex-direction:column;gap:14px;align-items:flex-start;}
+.collab-right{display:flex;flex-direction:column;gap:0;}
+.cr-item{padding:32px 0;border-bottom:1px solid rgba(250,247,242,0.10);}
+.cr-item:first-child{padding-top:0;}
+.cr-item:last-child{border-bottom:none;}
+.cr-label{font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--clay-light);margin-bottom:10px;}
+.cr-title{font-family:var(--serif);font-size:20px;font-weight:400;color:var(--warm-white);margin-bottom:10px;line-height:1.2;letter-spacing:-0.01em;}
+.cr-body{font-size:14px;font-weight:300;color:rgba(250,247,242,0.52);line-height:1.7;}
+.footer-logo span{color:var(--clay);font-style:italic;}
+.footer-nav a{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.32);text-decoration:none;transition:color 0.2s;}
+.footer-nav a:hover{color:var(--warm-white);}
+.footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+.footer-legal a:hover{color:var(--warm-white);}
+
+@media(max-width:1100px){
+  #hero{grid-template-columns:1fr;gap:70px;}
+  .hero-right{border-left:none;padding-left:0;border-top:1px solid var(--chalk);padding-top:50px;}
+  .found-header{grid-template-columns:1fr;gap:28px;}
+  .fp-item{grid-template-columns:1fr 1fr;gap:20px;}
+  .fp-badge{grid-column:2;margin-top:0;}
+  .fp-org-name{font-size:18px;}
+  .appr-grid{grid-template-columns:1fr;}
+  .appr-item{border-right:none;padding:44px 0;border-bottom:1px solid var(--chalk);}
+  .appr-item:nth-child(2n){padding-left:0;}
+  .appr-item:nth-last-child(-n+2){border-bottom:none;}
+  .sr-details{grid-template-columns:1fr;}
+  .srd-item{border-right:none;}
+  .collab-inner{grid-template-columns:1fr;gap:60px;}
+  .collab-left{position:static;}
+}
+@media(max-width:768px){
+  :root{--gutter:5vw;}
+  .nav-links{display:none;}
+  .study-row{grid-template-columns:1fr;}
+  .fp-item{grid-template-columns:1fr;}
+}
+
+  .ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
+  .ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.2s;}
+  .ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .ham-btn.open span:nth-child(2){opacity:0;}
+  .ham-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+  @media(max-width:780px){
+    .ham-btn{display:flex;}
+    .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--warm);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{font-size:22px;letter-spacing:0.04em;}
+    .nav-cta{display:none;}
+  }
+
+  footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);padding:0;}
+  .footer-sitemap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:0;padding:56px 7vw 40px;border-bottom:1px solid rgba(250,247,242,0.08);}
+  .fs-brand{padding-right:40px;}
+  .footer-logo{font-family:var(--serif);font-size:22px;color:var(--warm-white,#FAF7F2);letter-spacing:-0.02em;text-decoration:none;display:block;margin-bottom:12px;}
+  .footer-logo span{color:var(--clay,#C4896F);font-style:italic;}
+  .footer-mission{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.28);line-height:1.8;margin-bottom:20px;}
+  .fs-cta{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:var(--clay,#C4896F);border:1px solid rgba(196,137,111,0.40);padding:9px 18px;text-decoration:none;transition:all 0.18s;}
+  .fs-cta:hover{background:rgba(196,137,111,0.12);}
+  .fs-col{padding-left:32px;border-left:1px solid rgba(250,247,242,0.06);}
+  .fs-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,247,242,0.30);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(250,247,242,0.06);}
+  .fs-col a{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,247,242,0.45);text-decoration:none;margin-bottom:10px;transition:color 0.15s;}
+  .fs-col a:hover{color:var(--clay,#C4896F);}
+  .footer-bottom{padding:20px 7vw;display:flex;align-items:center;justify-content:space-between;}
+  .footer-copy{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,0.20);}
+  .footer-legal{display:flex;gap:20px;}
+  .footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+  .footer-legal a:hover{color:var(--clay,#C4896F);}
+  @media(max-width:1100px){.footer-sitemap{grid-template-columns:1fr 1fr 1fr;gap:32px;}.fs-brand{grid-column:1/-1;padding-right:0;}.fs-col{border-left:none;padding-left:0;}}
+  @media(max-width:680px){.footer-sitemap{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}}
+  @media(max-width:400px){.footer-sitemap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Vasl <span>Health</span></a>
+    <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="platform.html">Platform</a></li>
+    <li><a href="outcomes.html">Outcomes</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="contact.html" class="nav-cta">Research Inquiries</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div>
+    <span class="hero-kicker reveal">Research & Clinical Validation</span>
+    <h1 class="hero-headline reveal d1">
+      Evidence in<br>
+      progress. <em>Honest</em><br>
+      about where we are.
+    </h1>
+    <p class="hero-body reveal d2">Vasl's research program is in its early stages &mdash; which is the honest description of where we are. We have one active IRB study, one active data collaboration with Mayo Clinic Platform, and a clinical advisory relationship with Johns Hopkins. Peer-reviewed publication is in progress. That's what we know. It's enough to build on.</p>
+    <div class="hero-actions reveal d3">
+      <a href="#active" class="btn-dark">Active Research</a>
+      <a href="mailto:research@vaslhealth.com" class="btn-ghost">Research inquiries</a>
+    </div>
+  </div>
+
+  <div class="hero-right reveal d2">
+    <div class="status-summary">
+      <div class="ss-item">
+        <span class="ss-status ss-active">Active</span>
+        <div class="ss-right">
+          <div class="ss-title">IRB Study &mdash; University of Maryland</div>
+          <div class="ss-desc">VLAP signal detection accuracy validation against clinician-adjudicated ground truth. Results pending peer-reviewed publication.</div>
+        </div>
+      </div>
+      <div class="ss-item">
+        <span class="ss-status ss-active">Active</span>
+        <div class="ss-right">
+          <div class="ss-title">Mayo Clinic Platform_Accelerate</div>
+          <div class="ss-desc">Two-year data collaboration &mdash; Year 1 model development, Year 2 prospective validation. HL7 FHIR behavioral health data infrastructure.</div>
+        </div>
+      </div>
+      <div class="ss-item">
+        <span class="ss-status ss-active">Active</span>
+        <div class="ss-right">
+          <div class="ss-title">Senior Medical Advisory &mdash; Johns Hopkins</div>
+          <div class="ss-desc">Clinical oversight on VLAP methodology, accuracy validation approach, and non-diagnostic output framing by Dr. Panagis Galiatsatos, MD, MHS.</div>
+        </div>
+      </div>
+      <div class="ss-item">
+        <span class="ss-status ss-pending">Pending</span>
+        <div class="ss-right">
+          <div class="ss-title">Peer-Reviewed Publication</div>
+          <div class="ss-desc">IRB study results will be published in a peer-reviewed journal upon study completion. Timeline subject to study progress.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTIVE RESEARCH -->
+<section id="active">
+  <div class="chapter-label reveal">Chapter 01 &mdash; Active Research</div>
+  <div class="active-header">
+    <h2 class="active-headline reveal d1">
+      Two active<br>
+      <em>collaborations.</em>
+    </h2>
+    <p class="active-sub reveal d2">Both are operational &mdash; not announced, not aspirational. The University of Maryland IRB study is in active data collection. The Mayo Clinic Platform_Accelerate collaboration is in its first year of a two-year arc. These are the two research foundations that underpin every VLAP accuracy claim on this site.</p>
+  </div>
+
+  <!-- UMD Study -->
+  <div class="study-row reveal">
+    <div class="sr-left">
+      <span class="sr-status-badge sr-active">Active &middot; IRB</span>
+      <div class="sr-type">Clinical Validation</div>
+      <a href="mailto:research@vaslhealth.com?subject=UMD IRB Study Inquiry" class="sr-link">Request documentation</a>
+    </div>
+    <div class="sr-right">
+      <div class="sr-title">VLAP Clinical Signal Validation Study &mdash; University of Maryland</div>
+      <p class="sr-desc">An IRB-approved study validating CulturalBERT-VLAP's signal detection accuracy against clinician-adjudicated ground truth assessments. The study uses production deployment data from live Vasl cohorts &mdash; real members, real language, real clinical annotations by licensed clinicians with community competency training. This is the primary independent validation of VLAP's culturally specific signal detection capabilities. Results will be published in a peer-reviewed journal upon study completion.</p>
+      <div class="sr-details">
+        <div class="srd-item">
+          <div class="srd-label">Institution</div>
+          <div class="srd-value"><strong>University of Maryland</strong></div>
+        </div>
+        <div class="srd-item">
+          <div class="srd-label">Study Type</div>
+          <div class="srd-value">IRB-approved observational validation study</div>
+        </div>
+        <div class="srd-item">
+          <div class="srd-label">Data Source</div>
+          <div class="srd-value">Production deployment data from live Vasl cohorts &mdash; de-identified</div>
+        </div>
+        <div class="srd-item">
+          <div class="srd-label">Primary Outcome</div>
+          <div class="srd-value">VLAP signal sensitivity vs. clinician-adjudicated ground truth</div>
+        </div>
+        <div class="srd-item">
+          <div class="srd-label">Preliminary Finding</div>
+          <div class="srd-value"><strong>~94% sensitivity</strong> on high-distress signal detection &mdash; preliminary, pending publication</div>
+        </div>
+        <div class="srd-item">
+          <div class="srd-label">Status</div>
+          <div class="srd-value">Active data collection &middot; Results pending peer-reviewed publication</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mayo Clinic -->
+  <div class="study-row reveal">
+    <div class="sr-left">
+      <span class="sr-status-badge sr-active">Active &middot; Year 1</span>
+      <div class="sr-type">Data Collaboration</div>
+      <a href="mailto:research@vaslhealth.com?subject=Mayo Clinic Collaboration Inquiry" class="sr-link">Request brief</a>
+    </div>
+    <div class="sr-right">
+      <div class="sr-title">Mayo Clinic Platform_Accelerate &mdash; Two-Year Data Collaboration</div>
+      <p class="sr-desc">Vasl Health is an active participant in the Mayo Clinic Platform_Accelerate program. The collaboration provides access to de-identified behavioral health data infrastructure for VLAP model development and validation. The two-year arc is structured specifically to support CulturalBERT-VLAP's NLP training, validation, and LEP (Limited English Proficiency) population baseline work &mdash; with Year 1 focused on model development and Year 2 on prospective validation.</p>
+      <div class="sr-details">
+        <div class="srd-item">
+          <div class="srd-label">Partner</div>
+          <div class="srd-value"><strong>Mayo Clinic Platform_Accelerate</strong></div>
+        </div>
+        <div class="srd-item">
+          <div class="srd-label">Vasl Contact</div>
+          <div class="srd-value">Asia Smith, MPH &mdash; Program Success Manager</div>
+        </div>
+        <div class="srd-item">
+          <div class="srd-label">Data Domains</div>
+          <div class="srd-value">BH encounters, ICD-10 (mood/anxiety/trauma/SUD), PHQ-9/GAD-7/PCL-5/AUDIT/DAST, demographics/SDoH</div>
+        </div>
+        <div class="srd-item">
+          <div class="srd-label">Format</div>
+          <div class="srd-value">HL7 FHIR or CSV/JSON &middot; HIPAA Safe Harbor de-identification &middot; 12&ndash;36 months longitudinal</div>
+        </div>
+        <div class="srd-item">
+          <div class="srd-label">Year 1 Objective</div>
+          <div class="srd-value">VLAP model development using behavioral health signal data</div>
+        </div>
+        <div class="srd-item">
+          <div class="srd-label">Year 2 Objective</div>
+          <div class="srd-value">Prospective validation of CulturalBERT-VLAP signal accuracy</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDATION -->
+<section id="foundation">
+  <div class="chapter-label light reveal">Chapter 02 &mdash; Research Foundation</div>
+  <div class="found-header">
+    <h2 class="found-headline reveal d1">
+      Institutional<br>
+      <em>grounding.</em>
+    </h2>
+    <p class="found-intro reveal d2">The research program is grounded in three active institutional relationships &mdash; each with a specific, documented role. These are not advisory relationships in name only. Each involves ongoing operational work, clinical oversight, or data access that directly informs VLAP's development and validation.</p>
+  </div>
+
+  <div class="found-partners">
+    <div class="fp-item reveal">
+      <div>
+        <div class="fp-org-name">Mayo Clinic</div>
+        <div class="fp-org-type">Health System &middot; Research Accelerator</div>
+      </div>
+      <div class="fp-body">
+        <div class="fp-relationship">Mayo Clinic Platform_Accelerate &mdash; Active Participant</div>
+        <p class="fp-desc">Access to de-identified behavioral health data infrastructure for CulturalBERT-VLAP model development and validation. Two-year structured collaboration &mdash; Year 1 model development, Year 2 prospective validation. Provides the data scale necessary for VLAP's NLP training on longitudinal behavioral health signals at clinical population level.</p>
+      </div>
+      <span class="fp-badge">Active &middot; Year 1</span>
+    </div>
+
+    <div class="fp-item reveal">
+      <div>
+        <div class="fp-org-name">University of Maryland</div>
+        <div class="fp-org-type">Research University &middot; IRB Study</div>
+      </div>
+      <div class="fp-body">
+        <div class="fp-relationship">Active IRB Study &mdash; VLAP Signal Validation</div>
+        <p class="fp-desc">Independent academic validation of VLAP signal detection accuracy through an IRB-approved study comparing CulturalBERT-VLAP output against clinician-adjudicated ground truth. The study represents the first formal independent validation of VLAP's culturally specific signal detection capabilities. Results will be published in peer-reviewed literature upon completion.</p>
+      </div>
+      <span class="fp-badge">IRB Active</span>
+    </div>
+
+    <div class="fp-item reveal">
+      <div>
+        <div class="fp-org-name">Johns Hopkins University</div>
+        <div class="fp-org-type">Medical School &middot; Clinical Advisory</div>
+      </div>
+      <div class="fp-body">
+        <div class="fp-relationship">Senior Medical Advisor &mdash; Clinical Validation Oversight</div>
+        <p class="fp-desc"><strong>Panagis Galiatsatos, MD, MHS</strong> &mdash; Assistant Professor of Medicine at Johns Hopkins University School of Medicine &mdash; serves as Vasl Health's Senior Medical Advisor. Dr. Galiatsatos provides clinical oversight on VLAP's signal detection methodology, accuracy validation approach, non-diagnostic output framing, and the clinical governance of the platform's care coordination model. Active involvement &mdash; not nominal affiliation.</p>
+      </div>
+      <span class="fp-badge">Advisory</span>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section id="approach">
+  <div class="chapter-label reveal">Chapter 03 &mdash; Research Principles</div>
+  <div class="appr-header">
+    <h2 class="appr-headline reveal d1">
+      How we conduct<br>
+      <em>research.</em>
+    </h2>
+    <p class="appr-sub reveal d2">Four principles that govern every research decision Vasl makes &mdash; from the design of the IRB study to the way we report preliminary findings. These aren't aspirational values. They're constraints that shape the work.</p>
+  </div>
+
+  <div class="appr-grid">
+    <div class="appr-item reveal">
+      <div class="ai-num">01</div>
+      <div class="ai-title">We report what we know &mdash; not what we expect to find</div>
+      <p class="ai-body">Every outcome claim on this site is drawn from actual pilot data or active IRB research, not projected from internal estimates or aspirational targets. Where findings are preliminary &mdash; specifically VLAP signal accuracy &mdash; that is stated explicitly, with the caveat that results are pending peer-reviewed publication. We don't report IRB study findings before the study is complete.</p>
+    </div>
+    <div class="appr-item reveal d1">
+      <div class="ai-num">02</div>
+      <div class="ai-title">Community engagement is design, not consultation</div>
+      <p class="ai-body">The VLAP training corpus was built in partnership with the communities whose language it reads &mdash; not assembled from web-scraped data and checked with communities afterward. Vocabulary candidates were community-sourced. Annotation protocols were reviewed by clinicians with documented community competency. Research priorities are informed by community needs. This is the structural difference between studying a community and studying with it.</p>
+    </div>
+    <div class="appr-item reveal">
+      <div class="ai-num">03</div>
+      <div class="ai-title">Bias monitoring is an operational gate, not a post-hoc audit</div>
+      <p class="ai-body">False positive and false negative rates are disaggregated by demographic subgroup throughout model development &mdash; not checked after a model version is deployed. A model version that meets aggregate accuracy targets but fails subgroup parity thresholds across BIPOC, LGBTQ+, or first-generation subgroups is not deployed. This standard is applied to the IRB validation study as a primary research outcome, not a secondary analysis.</p>
+    </div>
+    <div class="appr-item reveal d1">
+      <div class="ai-num">04</div>
+      <div class="ai-title">IRB oversight applies to every human subjects research activity</div>
+      <p class="ai-body">All research involving human subjects data &mdash; including the University of Maryland validation study and any future studies using Vasl deployment data &mdash; operates under IRB approval with informed consent, data privacy protection, and ongoing compliance monitoring. Institutional oversight is a minimum standard, not a credential for marketing purposes. The full IRB study protocol is available to qualified institutional evaluators under NDA.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATION -->
+<section id="publication">
+  <div class="chapter-label reveal">Chapter 04 &mdash; Publication Status</div>
+  <div class="pub-header">
+    <h2 class="pub-headline reveal d1">
+      In progress.<br>
+      Not yet <em>published.</em>
+    </h2>
+    <p class="pub-sub reveal d2">Vasl Health does not currently have peer-reviewed publications. The IRB study with the University of Maryland is the primary vehicle for the first peer-reviewed publication. Here is what is in progress and when it is expected.</p>
+  </div>
+
+  <div class="pub-note reveal">
+    <div class="pn-label">In Progress &mdash; Pending Publication</div>
+    <div class="pn-title">VLAP Cultural Signal Detection Validation &mdash; University of Maryland IRB Study</div>
+    <p class="pn-desc">The primary planned publication is the peer-reviewed results of the active University of Maryland IRB study &mdash; validating CulturalBERT-VLAP's signal detection accuracy against clinician-adjudicated ground truth in deployed pilot cohorts. The study uses production data from live Vasl deployments across BIPOC, LGBTQ+, and first-generation youth populations. Results will be submitted to a peer-reviewed journal upon study completion.</p>
+    <div class="pn-details">
+      <div class="pnd-item">Status: Active data collection</div>
+      <div class="pnd-item">&middot;</div>
+      <div class="pnd-item">Institution: University of Maryland</div>
+      <div class="pnd-item">&middot;</div>
+      <div class="pnd-item">Target: Peer-reviewed journal submission upon completion</div>
+    </div>
+  </div>
+
+  <p class="pub-forthcoming reveal">Study protocol and preliminary design documentation are available to institutional evaluators under NDA. Contact <a href="mailto:research@vaslhealth.com" style="color:var(--deep-green);text-decoration:none;border-bottom:1px solid rgba(45,74,62,0.3)">research@vaslhealth.com</a> to request access. We will update this page when the study is submitted for publication and when it is published.</p>
+</section>
+
+<!-- COLLABORATE -->
+<section id="collaborate">
+  <div class="collab-bg" aria-hidden="true">Research</div>
+  <div class="collab-inner">
+    <div class="collab-left">
+      <div class="chapter-label muted reveal">Collaborate</div>
+      <h2 class="collab-headline reveal d1">
+        Interested in<br>
+        working on<br>
+        <em>this together?</em>
+      </h2>
+      <p class="collab-body reveal d2">We are actively interested in research partnerships with academic institutions, health systems, and community organizations working on behavioral health equity, culturally-responsive AI, and clinical NLP. We bring the platform infrastructure, production deployment data, and community relationships. We're looking for partners who bring research rigor, clinical expertise, and institutional oversight.</p>
+      <div class="collab-actions reveal d3">
+        <a href="mailto:research@vaslhealth.com" class="btn-light">Contact Research Team</a>
+        <a href="technology.html" class="btn-ghost-light">VLAP technical documentation</a>
+      </div>
+    </div>
+
+    <div class="collab-right reveal d2">
+      <div class="cr-item">
+        <div class="cr-label">What We Bring</div>
+        <div class="cr-title">Platform, data, and community</div>
+        <p class="cr-body">Production deployment data from live Vasl cohorts &mdash; BIPOC, LGBTQ+, and first-generation youth populations. The CulturalBERT-VLAP model and its 42-signal taxonomy. Community relationships built through years of co-design. The Mayo Clinic Platform data infrastructure for behavioral health signal data at scale.</p>
+      </div>
+      <div class="cr-item">
+        <div class="cr-label">What We're Looking For</div>
+        <div class="cr-title">Research rigor and institutional infrastructure</div>
+        <p class="cr-body">IRB-approved research protocols. Clinical expertise in behavioral health, NLP for mental health, or health equity research. Academic partners with experience in community-based participatory research. Peer-reviewed publication capacity and journal relationships in behavioral health, health equity, or clinical AI.</p>
+      </div>
+      <div class="cr-item">
+        <div class="cr-label">Documentation Available</div>
+        <div class="cr-title">Under NDA to qualified partners</div>
+        <p class="cr-body">37-page VLAP technical specification. University of Maryland IRB study protocol. Signal taxonomy with full annotation guidelines. Bias monitoring methodology and demographic disaggregation approach. Pilot cohort outcome data (aggregate, de-identified). Mayo Clinic Platform_Accelerate collaboration brief.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-sitemap">
+    <div class="fs-brand">
+      <a href="index.html" class="footer-logo">Vasl <span>Health</span></a>
+      <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
+      <a href="contact.html" class="fs-cta">Request a Demo &rarr;</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Platform</div>
+      <a href="platform.html">Platform Overview</a>
+      <a href="vlap.html">VLAP</a>
+      <a href="ai-model.html">AI Model</a>
+      <a href="technology.html">Technology</a>
+      <a href="peer-groups.html">Peer Groups</a>
+      <a href="teletherapy.html">Teletherapy</a>
+      <a href="prototype.html">Live Demo Portal</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Who We Serve</div>
+      <a href="for-schools.html">For Schools</a>
+      <a href="for-organizations.html">For Organizations</a>
+      <a href="outcomes.html">Outcomes</a>
+      <a href="clinical-outcomes.html">Clinical Outcomes</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Company</div>
+      <a href="about.html">About Vasl</a>
+      <a href="team.html">Team</a>
+      <a href="careers.html">Careers</a>
+      <a href="research.html">Research</a>
+      <a href="blog.html">Blog &amp; Insights</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Support &amp; Legal</div>
+      <a href="support.html">Help Center</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="baa.html">Business Associate Agreement</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 Vasl Health, Inc. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="baa.html">BAA</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js-ready');
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+  reveals.forEach(el => io.observe(el));
+  window.addEventListener('load', () => {
+    reveals.forEach((el, i) => {
+      if (el.getBoundingClientRect().top < window.innerHeight) {
+        setTimeout(() => el.classList.add('visible'), i * 40);
+      }
+    });
+  });
+</script>
+</body>
+</html>
