@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Vasl Health Terms of Service &mdash; the legal agreement governing use of the Vasl Health platform and services.">
+<title>Terms of Service &mdash; Vasl Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --warm-white:#FAF7F2;--parchment:#F0EAE0;--ink:#1C1C1C;
+  --ink-70:rgba(28,28,28,0.70);--ink-12:rgba(28,28,28,0.12);
+  --clay:#C4896F;--chalk:#E2DAD0;--deep-green:#2D4A3E;--dust:#8B7B6B;--charcoal:#222222;
+  --serif:'Newsreader',Georgia,serif;--sans:'IBM Plex Sans',sans-serif;--mono:'IBM Plex Mono',monospace;
+  --gutter:7vw;
+}
+body{background:var(--warm-white);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);display:flex;align-items:center;justify-content:space-between;background:rgba(250,247,242,0.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--ink-12);}
+.nav-logo{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:-0.02em;color:var(--ink);text-decoration:none;}
+.nav-logo span{color:var(--clay);font-style:italic;}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--dust);text-decoration:none;}
+.nav-links a:hover{color:var(--ink);}
+.nav-cta{font-family:var(--mono);font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--deep-green);border:1px solid var(--deep-green);padding:9px 20px;text-decoration:none;}
+.nav-cta:hover{background:var(--deep-green);color:var(--warm-white);}
+.doc-header{padding:140px var(--gutter) 60px;border-bottom:1px solid var(--chalk);}
+.doc-kicker{font-family:var(--mono);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--dust);margin-bottom:20px;display:block;}
+.doc-title{font-family:var(--serif);font-size:clamp(40px,5vw,72px);font-weight:300;line-height:1.05;letter-spacing:-0.03em;color:var(--ink);margin-bottom:28px;}
+.doc-title em{font-style:italic;color:var(--clay);}
+.doc-meta{display:flex;gap:28px;flex-wrap:wrap;}
+.doc-meta-item{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dust);}
+.doc-layout{display:grid;grid-template-columns:220px 1fr;gap:0;max-width:1300px;padding:0 var(--gutter) 100px;}
+.doc-toc{padding-top:52px;position:sticky;top:80px;align-self:start;}
+.toc-label{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--dust);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--chalk);}
+.toc-list{list-style:none;display:flex;flex-direction:column;gap:0;}
+.toc-item{border-bottom:1px solid var(--chalk);}
+.toc-item:last-child{border-bottom:none;}
+.toc-link{display:block;padding:9px 0;font-family:var(--mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--dust);text-decoration:none;line-height:1.4;transition:color 0.2s;}
+.toc-link:hover{color:var(--deep-green);}
+.doc-body{padding-top:52px;border-left:1px solid var(--chalk);padding-left:60px;}
+.doc-section{margin-bottom:56px;padding-bottom:56px;border-bottom:1px solid var(--chalk);}
+.doc-section:last-child{border-bottom:none;margin-bottom:0;}
+.section-anchor{display:block;padding-top:20px;margin-top:-20px;}
+.section-heading{font-family:var(--serif);font-size:26px;font-weight:400;color:var(--ink);margin-bottom:18px;line-height:1.2;letter-spacing:-0.015em;}
+.section-sub{font-family:var(--sans);font-size:15px;font-weight:500;color:var(--ink);margin-top:24px;margin-bottom:10px;}
+.doc-p{font-size:16px;font-weight:300;line-height:1.75;color:var(--ink-70);margin-bottom:14px;}
+.doc-p:last-child{margin-bottom:0;}
+.doc-p a{color:var(--deep-green);text-decoration:none;border-bottom:1px solid rgba(45,74,62,0.3);}
+.doc-ul{margin:10px 0 14px 0;display:flex;flex-direction:column;gap:6px;}
+.doc-li{font-size:15px;font-weight:300;color:var(--ink-70);padding-left:20px;position:relative;line-height:1.65;}
+.doc-li::before{content:'\2014';position:absolute;left:0;color:var(--clay);font-size:12px;}
+.warning-block{padding:22px 26px;margin:16px 0;background:var(--parchment);border-left:3px solid var(--clay);}
+.warning-label{font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--clay);margin-bottom:8px;}
+.warning-text{font-size:14px;font-weight:300;line-height:1.7;color:var(--ink-70);}
+.caps-block{font-size:14px;font-weight:400;color:var(--ink);line-height:1.65;margin:10px 0;}
+.footer-logo span{color:var(--clay);font-style:italic;}
+.footer-nav a{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.32);text-decoration:none;}
+.footer-nav a:hover{color:var(--warm-white);}
+.footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+@media(max-width:900px){.doc-layout{grid-template-columns:1fr;}.doc-toc{display:none;}.doc-body{border-left:none;padding-left:0;}}
+@media(max-width:600px){:root{--gutter:5vw;}.nav-links{display:none;}}
+
+  .ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
+  .ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.2s;}
+  .ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .ham-btn.open span:nth-child(2){opacity:0;}
+  .ham-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+  @media(max-width:780px){
+    .ham-btn{display:flex;}
+    .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--warm);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{font-size:22px;letter-spacing:0.04em;}
+    .nav-cta{display:none;}
+  }
+
+  footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);padding:0;}
+  .footer-sitemap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:0;padding:56px 7vw 40px;border-bottom:1px solid rgba(250,247,242,0.08);}
+  .fs-brand{padding-right:40px;}
+  .footer-logo{font-family:var(--serif);font-size:22px;color:var(--warm-white,#FAF7F2);letter-spacing:-0.02em;text-decoration:none;display:block;margin-bottom:12px;}
+  .footer-logo span{color:var(--clay,#C4896F);font-style:italic;}
+  .footer-mission{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.28);line-height:1.8;margin-bottom:20px;}
+  .fs-cta{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:var(--clay,#C4896F);border:1px solid rgba(196,137,111,0.40);padding:9px 18px;text-decoration:none;transition:all 0.18s;}
+  .fs-cta:hover{background:rgba(196,137,111,0.12);}
+  .fs-col{padding-left:32px;border-left:1px solid rgba(250,247,242,0.06);}
+  .fs-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,247,242,0.30);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(250,247,242,0.06);}
+  .fs-col a{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,247,242,0.45);text-decoration:none;margin-bottom:10px;transition:color 0.15s;}
+  .fs-col a:hover{color:var(--clay,#C4896F);}
+  .footer-bottom{padding:20px 7vw;display:flex;align-items:center;justify-content:space-between;}
+  .footer-copy{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,0.20);}
+  .footer-legal{display:flex;gap:20px;}
+  .footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+  .footer-legal a:hover{color:var(--clay,#C4896F);}
+  @media(max-width:1100px){.footer-sitemap{grid-template-columns:1fr 1fr 1fr;gap:32px;}.fs-brand{grid-column:1/-1;padding-right:0;}.fs-col{border-left:none;padding-left:0;}}
+  @media(max-width:680px){.footer-sitemap{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}}
+  @media(max-width:400px){.footer-sitemap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Vasl <span>Health</span></a>
+    <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="platform.html">Platform</a></li>
+    <li><a href="outcomes.html">Outcomes</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="baa.html" class="nav-cta">Request BAA</a>
+</nav>
+
+<div class="doc-header">
+  <span class="doc-kicker">Legal</span>
+  <h1 class="doc-title">Terms of <em>Service</em></h1>
+  <div class="doc-meta">
+    <span class="doc-meta-item">Effective Date: January 1, 2024</span>
+    <span class="doc-meta-item">Last Updated: May 2026</span>
+  </div>
+</div>
+
+<div class="doc-layout">
+  <nav class="doc-toc">
+    <div class="toc-label">Contents</div>
+    <ul class="toc-list">
+      <li class="toc-item"><a href="#acceptance" class="toc-link">1. Acceptance of Terms</a></li>
+      <li class="toc-item"><a href="#services" class="toc-link">2. Description of Services</a></li>
+      <li class="toc-item"><a href="#eligibility" class="toc-link">3. Eligibility</a></li>
+      <li class="toc-item"><a href="#user-responsibilities" class="toc-link">4. User Responsibilities</a></li>
+      <li class="toc-item"><a href="#privacy-data" class="toc-link">5. Privacy & Data</a></li>
+      <li class="toc-item"><a href="#clinical-disclaimer" class="toc-link">6. Clinical Disclaimer</a></li>
+      <li class="toc-item"><a href="#intellectual-property" class="toc-link">7. Intellectual Property</a></li>
+      <li class="toc-item"><a href="#payment-billing" class="toc-link">8. Payment & Billing</a></li>
+      <li class="toc-item"><a href="#termination" class="toc-link">9. Termination</a></li>
+      <li class="toc-item"><a href="#limitation-liability" class="toc-link">10. Limitation of Liability</a></li>
+      <li class="toc-item"><a href="#governing-law" class="toc-link">11. Governing Law</a></li>
+      <li class="toc-item"><a href="#changes" class="toc-link">12. Changes to Terms</a></li>
+      <li class="toc-item"><a href="#contact" class="toc-link">13. Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="doc-body">
+
+    <div class="doc-section">
+      <p class="doc-p">Please read these Terms of Service carefully before using Vasl Health's platform and services. By accessing or using Vasl Health's platform, services, or website (collectively, the "Services"), you agree to be bound by these Terms and Conditions ("Terms"). If you do not agree to these Terms, please do not use our Services. These Terms constitute a legally binding agreement between you and Vasl Health, Inc. ("Vasl Health," "we," "us," or "our").</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="acceptance"></span>
+      <h2 class="section-heading">1. Acceptance of Terms</h2>
+      <p class="doc-p">By accessing or using the Services, you represent that you have read, understood, and agree to be bound by these Terms. If you are accepting these Terms on behalf of an organization, you represent that you have the authority to bind that organization to these Terms.</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="services"></span>
+      <h2 class="section-heading">2. Description of Services</h2>
+      <p class="doc-p">Vasl Health provides a culturally-responsive emotional health platform that includes:</p>
+      <ul class="doc-ul">
+        <li class="doc-li">Member App providing peer community, daily check-ins, culturally matched coaching, and crisis resources</li>
+        <li class="doc-li">Vasl Language Analysis Platform (VLAP) &mdash; a proprietary AI clinical decision-support tool that processes member language in-memory to generate dimensional signal profiles for licensed clinicians and certified coaches</li>
+        <li class="doc-li">Clinical outcome tracking and population-level reporting for organizational administrators</li>
+        <li class="doc-li">Crisis detection and human clinical escalation protocol with 90-minute licensed supervisor response SLA</li>
+        <li class="doc-li">Organizational portals for coach management, clinical coordination, and compliance documentation</li>
+      </ul>
+      <p class="doc-p">Our Services are designed to supplement, not replace, professional mental health care and are used in conjunction with appropriate clinical oversight. VLAP is a clinical decision-support tool &mdash; it is not a diagnostic system and does not replace clinical judgment.</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="eligibility"></span>
+      <h2 class="section-heading">3. Eligibility and Registration</h2>
+      <div class="section-sub">3.1 Age Requirements</div>
+      <p class="doc-p">You must be at least 13 years old to use our Services. Users under 18 must have parental or guardian consent. Organizational deployments in school settings must implement appropriate consent processes in compliance with COPPA, FERPA, and applicable state law.</p>
+      <div class="section-sub">3.2 Organizational Users</div>
+      <p class="doc-p">Organizations using our Services must have appropriate licenses and authorizations to provide or coordinate mental health services in their jurisdiction. Execution of a Business Associate Agreement is required for all healthcare and school-based organizational deployments.</p>
+      <div class="section-sub">3.3 Account Registration</div>
+      <p class="doc-p">You agree to provide accurate, current, and complete information during registration and to update such information as necessary to keep it accurate.</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="user-responsibilities"></span>
+      <h2 class="section-heading">4. User Responsibilities</h2>
+      <p class="doc-p">As a user of our Services, you agree to:</p>
+      <ul class="doc-ul">
+        <li class="doc-li">Use the Services only for lawful purposes</li>
+        <li class="doc-li">Provide accurate and truthful information</li>
+        <li class="doc-li">Maintain the confidentiality of your account credentials</li>
+        <li class="doc-li">Respect the privacy and rights of other users</li>
+        <li class="doc-li">Not attempt to circumvent security measures or access controls</li>
+        <li class="doc-li">Not use the Services to harm others or yourself</li>
+        <li class="doc-li">Comply with all applicable laws and regulations, including HIPAA and FERPA where applicable</li>
+      </ul>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="privacy-data"></span>
+      <h2 class="section-heading">5. Privacy and Data Protection</h2>
+      <p class="doc-p">Your privacy is governed by our <a href="privacy.html">Privacy Policy</a>, which is incorporated into these Terms by reference. Please review the Privacy Policy carefully.</p>
+      <div class="section-sub">5.1 HIPAA Compliance</div>
+      <p class="doc-p">For healthcare organizations, we maintain HIPAA compliance. Business Associate Agreements are required for all healthcare and school-based deployments. BAA execution is handled through <a href="mailto:legal@vaslhealth.com">legal@vaslhealth.com</a>.</p>
+      <div class="section-sub">5.2 Data Security</div>
+      <p class="doc-p">We implement HIPAA-required technical safeguards to protect your data, including encryption in transit and at rest, role-based access controls, audit logging, and automatic session management. VLAP processes member language in-memory &mdash; verbatim text is not retained after signal profile generation.</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="clinical-disclaimer"></span>
+      <h2 class="section-heading">6. Clinical Disclaimer</h2>
+      <div class="warning-block">
+        <div class="warning-label">Important Medical Disclaimer</div>
+        <p class="warning-text">Vasl Health is not a substitute for professional medical or mental health care. Our Services are designed to supplement mental health care and should not replace consultation with qualified healthcare professionals. VLAP is a clinical decision-support tool &mdash; it does not diagnose, prescribe, or make clinical recommendations. All clinical decisions are made by licensed professionals.</p>
+      </div>
+      <div class="section-sub">6.1 Emergency Situations</div>
+      <p class="doc-p">If you are experiencing a mental health emergency or having thoughts of self-harm, contact emergency services immediately. Call 911, call or text 988 (Suicide and Crisis Lifeline), or go to your nearest emergency room. Vasl's VLAP crisis signal detection and 90-minute human clinical supervisor response SLA are supplements to &mdash; not substitutes for &mdash; emergency services.</p>
+      <div class="section-sub">6.2 Clinical Oversight</div>
+      <p class="doc-p">VLAP surfaces signal profiles to licensed clinicians and certified coaches to support clinical judgment. All high-risk signals are reviewed by a licensed clinical supervisor. Automated action is never taken in response to a clinical signal &mdash; human clinical judgment initiates every response.</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="intellectual-property"></span>
+      <h2 class="section-heading">7. Intellectual Property</h2>
+      <p class="doc-p">All content, features, and functionality of our Services &mdash; including but not limited to text, graphics, logos, software, CulturalBERT-VLAP technology, the five-dimensional signal taxonomy, and all associated documentation &mdash; are owned by Vasl Health and protected by copyright, trademark, and other applicable intellectual property laws.</p>
+      <div class="section-sub">7.1 Limited License</div>
+      <p class="doc-p">We grant you a limited, non-exclusive, non-transferable, revocable license to use our Services in accordance with these Terms. This license does not include the right to sublicense, reproduce, distribute, modify, or create derivative works of any Vasl Health intellectual property.</p>
+      <div class="section-sub">7.2 User Content</div>
+      <p class="doc-p">You retain ownership of content you provide through the Services. You grant Vasl Health a limited license to process and use such content solely to provide the Services, including VLAP signal analysis for clinical and safety purposes. This license is subject to the data handling constraints described in the Privacy Policy and applicable BAA.</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="payment-billing"></span>
+      <h2 class="section-heading">8. Payment and Billing</h2>
+      <div class="section-sub">8.1 Fees</div>
+      <p class="doc-p">Fees for our Services consist of a monthly platform fee and a per member per month (PMPM) fee based on organization type. Current pricing is described at <a href="pricing.html">vaslhealth.com/pricing</a>. All pricing is subject to the terms of your executed Order Form or Service Agreement.</p>
+      <div class="section-sub">8.2 Payment Terms</div>
+      <p class="doc-p">Platform fees are billed annually. PMPM fees are billed monthly based on enrolled member count. We accept major credit cards and ACH transfers for organizational accounts. Invoices are due net 30 unless otherwise specified in your Service Agreement.</p>
+      <div class="section-sub">8.3 Medicaid Billing</div>
+      <p class="doc-p">For eligible organizations, Vasl Health provides Medicaid billing documentation including CPT codes and service records. The organization is responsible for submitting claims to the applicable Medicaid program. Vasl Health does not submit claims on behalf of organizations and does not guarantee any specific reimbursement rate or outcome.</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="termination"></span>
+      <h2 class="section-heading">9. Termination</h2>
+      <div class="section-sub">9.1 Termination by You</div>
+      <p class="doc-p">You may terminate your account at any time by contacting our support team at <a href="mailto:support@vaslhealth.com">support@vaslhealth.com</a> or through your account settings. Termination of an organizational account is governed by the terms of your executed Service Agreement.</p>
+      <div class="section-sub">9.2 Termination by Us</div>
+      <p class="doc-p">We may terminate or suspend your access to our Services if you violate these Terms, for nonpayment, or for other legitimate business reasons, with appropriate notice when possible. For organizational accounts, we will provide at least 30 days notice except in cases of material breach or nonpayment.</p>
+      <div class="section-sub">9.3 Effect of Termination</div>
+      <p class="doc-p">Upon termination, your right to use our Services ceases. We will provide data export options in accordance with applicable law and our data retention policies. Member data is handled in accordance with the Privacy Policy and applicable BAA upon account termination.</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="limitation-liability"></span>
+      <h2 class="section-heading">10. Limitation of Liability</h2>
+      <p class="caps-block">TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, VASL HEALTH SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO LOSS OF PROFITS, DATA, GOODWILL, OR USE, ARISING FROM OR RELATED TO THESE TERMS OR THE SERVICES, EVEN IF VASL HEALTH HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</p>
+      <p class="doc-p">Our total liability to you for all claims arising from or relating to these Terms or our Services shall not exceed the amount you paid us in the twelve (12) months immediately preceding the claim.</p>
+      <div class="section-sub">10.1 Clinical Limitations</div>
+      <p class="doc-p">While VLAP is designed to detect high-risk situations with high sensitivity, no automated system can guarantee the prevention of all adverse outcomes. Clinical oversight and professional judgment remain essential. Vasl Health's liability for clinical outcomes is limited to the extent described in your executed Service Agreement and applicable BAA.</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="governing-law"></span>
+      <h2 class="section-heading">11. Governing Law and Dispute Resolution</h2>
+      <p class="doc-p">These Terms are governed by the laws of the State of Maryland, United States, without regard to its conflict of law provisions.</p>
+      <p class="doc-p">Any disputes arising from these Terms or our Services shall be resolved through binding arbitration conducted in accordance with the rules of the American Arbitration Association. Arbitration shall take place in Maryland. You waive any right to a jury trial or class action proceeding with respect to any claim arising under these Terms.</p>
+      <p class="doc-p">Nothing in this Section prevents either party from seeking injunctive or other equitable relief in a court of competent jurisdiction where necessary to protect intellectual property rights or confidential information.</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="changes"></span>
+      <h2 class="section-heading">12. Changes to Terms</h2>
+      <p class="doc-p">We may update these Terms from time to time. We will notify you of material changes by posting the updated Terms on our website, sending email notification to registered users, and providing in-platform notifications. Material changes will be provided with at least 30 days notice before taking effect.</p>
+      <p class="doc-p">Your continued use of our Services after changes become effective constitutes acceptance of the updated Terms. If you do not agree to the updated Terms, you must discontinue use of the Services before the effective date of the changes.</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="contact"></span>
+      <h2 class="section-heading">13. Contact</h2>
+      <p class="doc-p">For questions about these Terms: <a href="mailto:legal@vaslhealth.com">legal@vaslhealth.com</a></p>
+      <p class="doc-p">For BAA execution requests: <a href="mailto:legal@vaslhealth.com">legal@vaslhealth.com</a></p>
+      <p class="doc-p">For general support: <a href="mailto:support@vaslhealth.com">support@vaslhealth.com</a></p>
+      <p class="doc-p">Vasl Health, Inc. is a Delaware Public Benefit Corporation.</p>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-sitemap">
+    <div class="fs-brand">
+      <a href="index.html" class="footer-logo">Vasl <span>Health</span></a>
+      <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
+      <a href="contact.html" class="fs-cta">Request a Demo &rarr;</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Platform</div>
+      <a href="platform.html">Platform Overview</a>
+      <a href="vlap.html">VLAP</a>
+      <a href="ai-model.html">AI Model</a>
+      <a href="technology.html">Technology</a>
+      <a href="peer-groups.html">Peer Groups</a>
+      <a href="teletherapy.html">Teletherapy</a>
+      <a href="prototype.html">Live Demo Portal</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Who We Serve</div>
+      <a href="for-schools.html">For Schools</a>
+      <a href="for-organizations.html">For Organizations</a>
+      <a href="outcomes.html">Outcomes</a>
+      <a href="clinical-outcomes.html">Clinical Outcomes</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Company</div>
+      <a href="about.html">About Vasl</a>
+      <a href="team.html">Team</a>
+      <a href="careers.html">Careers</a>
+      <a href="research.html">Research</a>
+      <a href="blog.html">Blog &amp; Insights</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Support &amp; Legal</div>
+      <a href="support.html">Help Center</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="baa.html">Business Associate Agreement</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 Vasl Health, Inc. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="baa.html">BAA</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
