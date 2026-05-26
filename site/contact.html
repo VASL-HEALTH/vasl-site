@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Get in touch with Vasl Health &mdash; schedule a demo, ask about implementation, or connect with our clinical, education, or community partnerships team.">
+<title>Contact &mdash; Vasl Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --warm-white:#FAF7F2;--parchment:#F0EAE0;--ink:#1C1C1C;
+  --ink-70:rgba(28,28,28,0.70);--ink-50:rgba(28,28,28,0.50);--ink-12:rgba(28,28,28,0.12);
+  --clay:#C4896F;--clay-light:#E8C4AE;--clay-pale:#F5E6DC;
+  --deep-green:#2D4A3E;--dust:#8B7B6B;--chalk:#E2DAD0;--charcoal:#222222;
+  --serif:'Newsreader',Georgia,serif;--sans:'IBM Plex Sans',sans-serif;--mono:'IBM Plex Mono',monospace;
+  --gutter:7vw;
+}
+body{background:var(--warm-white);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;overflow-x:hidden;}
+.reveal{transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1),transform 0.9s cubic-bezier(0.16,1,0.3,1);}
+.js-ready .reveal{opacity:0;transform:translateY(18px);}
+.js-ready .reveal.visible{opacity:1;transform:translateY(0);}
+.d1{transition-delay:0.08s;}.d2{transition-delay:0.16s;}.d3{transition-delay:0.24s;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);display:flex;align-items:center;justify-content:space-between;background:rgba(250,247,242,0.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--ink-12);}
+.nav-logo{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:-0.02em;color:var(--ink);text-decoration:none;}
+.nav-logo span{color:var(--clay);font-style:italic;}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--dust);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--ink);}
+.nav-cta{font-family:var(--mono);font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--deep-green);border:1px solid var(--deep-green);padding:9px 20px;text-decoration:none;transition:background 0.22s,color 0.22s;}
+.nav-cta:hover{background:var(--deep-green);color:var(--warm-white);}
+
+/* ═══ HERO ═══ */
+#hero{
+  padding-top:160px;padding-bottom:100px;
+  padding-left:var(--gutter);padding-right:var(--gutter);
+  border-bottom:1px solid var(--chalk);
+  display:grid;grid-template-columns:1fr 1fr;gap:0 80px;align-items:end;
+}
+.hero-kicker{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--dust);margin-bottom:28px;display:block;}
+.hero-headline{font-family:var(--serif);font-size:clamp(48px,6vw,88px);font-weight:300;line-height:1.02;letter-spacing:-0.03em;color:var(--ink);margin-bottom:36px;}
+.hero-headline em{font-style:italic;color:var(--clay);}
+.hero-body{font-size:18px;font-weight:300;line-height:1.72;color:var(--ink-70);max-width:460px;}
+
+/* Contact channels */
+.channels{display:flex;flex-direction:column;gap:0;}
+.channel-item{padding:20px 0;border-bottom:1px solid var(--chalk);}
+.channel-item:first-child{padding-top:0;}
+.channel-item:last-child{border-bottom:none;}
+.ch-purpose{font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--clay);margin-bottom:6px;}
+.ch-title{font-family:var(--sans);font-size:15px;font-weight:500;color:var(--ink);margin-bottom:4px;}
+.ch-email{font-family:var(--mono);font-size:11px;letter-spacing:0.04em;color:var(--deep-green);text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:color 0.2s;}
+.ch-email:hover{color:var(--ink);}
+.ch-email::after{content:'\2192';font-size:10px;}
+.ch-note{font-size:12px;font-weight:300;color:var(--ink-50);margin-top:4px;}
+
+/* ═══ FORM ═══ */
+#form-section{
+  padding:100px var(--gutter);
+  background:var(--parchment);
+  border-bottom:1px solid var(--chalk);
+  display:grid;grid-template-columns:1fr 1.6fr;gap:0 80px;align-items:start;
+}
+.form-left{position:sticky;top:100px;}
+.fl-label{font-family:var(--mono);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--clay);margin-bottom:24px;display:flex;align-items:center;gap:10px;}
+.fl-label::after{content:'';display:block;width:28px;height:1px;background:var(--clay);opacity:0.5;}
+.fl-headline{font-family:var(--serif);font-size:clamp(30px,3.5vw,48px);font-weight:300;line-height:1.1;letter-spacing:-0.025em;color:var(--ink);margin-bottom:20px;}
+.fl-headline em{font-style:italic;color:var(--clay);}
+.fl-body{font-size:16px;font-weight:300;line-height:1.72;color:var(--ink-70);margin-bottom:28px;}
+.fl-points{display:flex;flex-direction:column;gap:10px;}
+.fl-point{font-size:14px;font-weight:300;color:var(--ink-70);display:flex;align-items:baseline;gap:10px;}
+.fl-point::before{content:'\2192';font-size:10px;color:var(--clay);flex-shrink:0;}
+
+/* Form */
+.demo-form{display:flex;flex-direction:column;gap:16px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.form-group{display:flex;flex-direction:column;gap:6px;}
+.form-label{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dust);}
+.form-label span{color:var(--clay);margin-left:2px;}
+.form-input,.form-select,.form-textarea{
+  width:100%;padding:13px 16px;
+  border:1px solid var(--chalk);background:var(--warm-white);
+  font-family:var(--sans);font-size:15px;font-weight:300;color:var(--ink);
+  outline:none;transition:border-color 0.2s;appearance:none;border-radius:0;
+}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--dust);}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--deep-green);}
+.form-select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238B7B6B' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;cursor:pointer;}
+.form-select option{background:var(--warm-white);color:var(--ink);}
+.form-textarea{resize:vertical;min-height:100px;}
+.form-checkboxes{display:flex;flex-direction:column;gap:10px;}
+.form-checkbox{display:flex;align-items:flex-start;gap:10px;cursor:pointer;}
+.form-checkbox input{margin-top:3px;accent-color:var(--deep-green);flex-shrink:0;}
+.form-checkbox-label{font-size:14px;font-weight:300;color:var(--ink-70);line-height:1.55;}
+.form-divider{height:1px;background:var(--chalk);}
+.form-submit{
+  font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;
+  background:var(--ink);color:var(--warm-white);padding:16px 32px;
+  border:none;cursor:pointer;transition:background 0.22s;align-self:flex-start;margin-top:4px;
+}
+.form-submit:hover{background:var(--deep-green);}
+.form-privacy{font-family:var(--mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--dust);margin-top:10px;}
+.form-privacy a{color:var(--deep-green);text-decoration:none;border-bottom:1px solid rgba(45,74,62,0.3);}
+
+/* ═══ FAQ ═══ */
+#faq{
+  padding:100px var(--gutter);
+  background:var(--warm-white);
+  border-bottom:1px solid var(--chalk);
+  display:grid;grid-template-columns:1fr 1.8fr;gap:0 80px;align-items:start;
+}
+.faq-left{position:sticky;top:100px;}
+.faq-headline{font-family:var(--serif);font-size:clamp(30px,3.5vw,48px);font-weight:300;line-height:1.1;letter-spacing:-0.025em;color:var(--ink);margin-bottom:20px;}
+.faq-headline em{font-style:italic;color:var(--clay);}
+.faq-sub{font-size:16px;font-weight:300;line-height:1.72;color:var(--ink-70);margin-bottom:28px;}
+.faq-support-link{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--deep-green);text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:color 0.2s;}
+.faq-support-link::after{content:'\2192';}
+.faq-support-link:hover{color:var(--ink);}
+.faq-right{display:flex;flex-direction:column;gap:0;}
+.faq-item{padding:28px 0;border-bottom:1px solid var(--chalk);}
+.faq-item:first-child{padding-top:0;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{font-family:var(--serif);font-size:20px;font-weight:400;color:var(--ink);margin-bottom:12px;line-height:1.3;letter-spacing:-0.01em;}
+.faq-a{font-size:15px;font-weight:300;line-height:1.72;color:var(--ink-70);}
+.faq-a a{color:var(--deep-green);text-decoration:none;border-bottom:1px solid rgba(45,74,62,0.3);}
+
+/* ═══ FOOTER ═══ */
+.footer-logo span{color:var(--clay);font-style:italic;}
+.footer-nav a{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.32);text-decoration:none;transition:color 0.2s;}
+.footer-nav a:hover{color:var(--warm-white);}
+.footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+.footer-legal a:hover{color:var(--warm-white);}
+
+@media(max-width:1100px){
+  #hero{grid-template-columns:1fr;gap:60px;}
+  #form-section{grid-template-columns:1fr;gap:52px;}
+  .form-left{position:static;}
+  #faq{grid-template-columns:1fr;gap:52px;}
+  .faq-left{position:static;}
+}
+@media(max-width:768px){
+  :root{--gutter:5vw;}
+  .nav-links{display:none;}
+  .form-row{grid-template-columns:1fr;}
+}
+
+  .ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
+  .ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.2s;}
+  .ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .ham-btn.open span:nth-child(2){opacity:0;}
+  .ham-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+  @media(max-width:780px){
+    .ham-btn{display:flex;}
+    .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--warm);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{font-size:22px;letter-spacing:0.04em;}
+    .nav-cta{display:none;}
+  }
+
+  footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);padding:0;}
+  .footer-sitemap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:0;padding:56px 7vw 40px;border-bottom:1px solid rgba(250,247,242,0.08);}
+  .fs-brand{padding-right:40px;}
+  .footer-logo{font-family:var(--serif);font-size:22px;color:var(--warm-white,#FAF7F2);letter-spacing:-0.02em;text-decoration:none;display:block;margin-bottom:12px;}
+  .footer-logo span{color:var(--clay,#C4896F);font-style:italic;}
+  .footer-mission{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.28);line-height:1.8;margin-bottom:20px;}
+  .fs-cta{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:var(--clay,#C4896F);border:1px solid rgba(196,137,111,0.40);padding:9px 18px;text-decoration:none;transition:all 0.18s;}
+  .fs-cta:hover{background:rgba(196,137,111,0.12);}
+  .fs-col{padding-left:32px;border-left:1px solid rgba(250,247,242,0.06);}
+  .fs-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,247,242,0.30);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(250,247,242,0.06);}
+  .fs-col a{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,247,242,0.45);text-decoration:none;margin-bottom:10px;transition:color 0.15s;}
+  .fs-col a:hover{color:var(--clay,#C4896F);}
+  .footer-bottom{padding:20px 7vw;display:flex;align-items:center;justify-content:space-between;}
+  .footer-copy{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,0.20);}
+  .footer-legal{display:flex;gap:20px;}
+  .footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+  .footer-legal a:hover{color:var(--clay,#C4896F);}
+  @media(max-width:1100px){.footer-sitemap{grid-template-columns:1fr 1fr 1fr;gap:32px;}.fs-brand{grid-column:1/-1;padding-right:0;}.fs-col{border-left:none;padding-left:0;}}
+  @media(max-width:680px){.footer-sitemap{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}}
+  @media(max-width:400px){.footer-sitemap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Vasl <span>Health</span></a>
+    <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="platform.html">Platform</a></li>
+    <li><a href="outcomes.html">Outcomes</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="#form-section" class="nav-cta">Schedule Demo</a>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div>
+    <span class="hero-kicker reveal">Get in Touch</span>
+    <h1 class="hero-headline reveal d1">
+      Let's talk<br>
+      about your<br>
+      <em>community.</em>
+    </h1>
+    <p class="hero-body reveal d2">Every Vasl conversation starts with your specific context &mdash; your population, your existing infrastructure, what outcomes you need. We don't pitch generically. Use the form below to schedule a demo or reach the right team directly.</p>
+  </div>
+
+  <div class="channels reveal d2">
+    <div class="channel-item">
+      <div class="ch-purpose">General</div>
+      <div class="ch-title">Questions & General Inquiries</div>
+      <a href="mailto:hello@vaslhealth.com" class="ch-email">hello@vaslhealth.com</a>
+      <div class="ch-note">Response within 24 hours &middot; Monday&ndash;Friday</div>
+    </div>
+    <div class="channel-item">
+      <div class="ch-purpose">Healthcare</div>
+      <div class="ch-title">Healthcare & Clinical Partnerships</div>
+      <a href="mailto:healthcare@vaslhealth.com" class="ch-email">healthcare@vaslhealth.com</a>
+      <div class="ch-note">Clinical team response &middot; HIPAA-compliant discussions &middot; BAA execution</div>
+    </div>
+    <div class="channel-item">
+      <div class="ch-purpose">Education</div>
+      <div class="ch-title">School & University Partnerships</div>
+      <a href="mailto:education@vaslhealth.com" class="ch-email">education@vaslhealth.com</a>
+      <div class="ch-note">FERPA compliance &middot; Medicaid billing setup &middot; Title I districts</div>
+    </div>
+    <div class="channel-item">
+      <div class="ch-purpose">Community</div>
+      <div class="ch-title">Non-Profits & Community Organizations</div>
+      <a href="mailto:community@vaslhealth.com" class="ch-email">community@vaslhealth.com</a>
+      <div class="ch-note">Grant documentation &middot; Starter plan &middot; Mission-aligned deployments</div>
+    </div>
+    <div class="channel-item">
+      <div class="ch-purpose">Research</div>
+      <div class="ch-title">Academic & Research Partnerships</div>
+      <a href="mailto:research@vaslhealth.com" class="ch-email">research@vaslhealth.com</a>
+      <div class="ch-note">IRB study access &middot; VLAP technical documentation &middot; NDA required</div>
+    </div>
+    <div class="channel-item">
+      <div class="ch-purpose">Press</div>
+      <div class="ch-title">Media & Press</div>
+      <a href="mailto:press@vaslhealth.com" class="ch-email">press@vaslhealth.com</a>
+      <div class="ch-note">Press kit available &middot; Interview scheduling &middot; Founder availability</div>
+    </div>
+  </div>
+</div>
+
+<!-- FORM -->
+<div id="form-section">
+  <div class="form-left">
+    <div class="fl-label reveal">Schedule a Demo</div>
+    <h2 class="fl-headline reveal d1">
+      A 45-minute<br>
+      conversation,<br>
+      not a <em>pitch deck.</em>
+    </h2>
+    <p class="fl-body reveal d2">We come prepared with context specific to your org type, population, and existing infrastructure. You'll talk to an implementation lead &mdash; not a sales representative. The goal is to determine fit, not close a deal.</p>
+    <div class="fl-points reveal d3">
+      <div class="fl-point">45-minute call with a Vasl implementation lead</div>
+      <div class="fl-point">Platform walkthrough tailored to your org type</div>
+      <div class="fl-point">Pricing and deployment timeline specific to your context</div>
+      <div class="fl-point">Response within one business day of submission</div>
+    </div>
+  </div>
+
+  <form class="demo-form reveal d1" onsubmit="handleSubmit(event)">
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label" for="first-name">First Name <span>*</span></label>
+        <input type="text" id="first-name" name="first_name" class="form-input" placeholder="Amara" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="last-name">Last Name <span>*</span></label>
+        <input type="text" id="last-name" name="last_name" class="form-input" placeholder="Johnson" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="email">Work Email <span>*</span></label>
+      <input type="email" id="email" name="email" class="form-input" placeholder="you@organization.edu" required>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label" for="org-name">Organization Name <span>*</span></label>
+        <input type="text" id="org-name" name="org_name" class="form-input" placeholder="State University System" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="role">Your Role <span>*</span></label>
+        <input type="text" id="role" name="role" class="form-input" placeholder="VP Student Affairs" required>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label" for="org-type">Organization Type <span>*</span></label>
+        <select id="org-type" name="org_type" class="form-select" required>
+          <option value="" disabled selected>Select type</option>
+          <option>University / College</option>
+          <option>K-12 School District</option>
+          <option>Community Health Center / FQHC</option>
+          <option>Health Plan / Managed Care</option>
+          <option>Hospital / Health System</option>
+          <option>Non-Profit / Youth Organization</option>
+          <option>Government Agency</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="pop-size">Estimated Population Size</label>
+        <select id="pop-size" name="pop_size" class="form-select">
+          <option value="" disabled selected>Select size</option>
+          <option>Under 100</option>
+          <option>100 &ndash; 500</option>
+          <option>500 &ndash; 1,000</option>
+          <option>1,000 &ndash; 5,000</option>
+          <option>5,000 &ndash; 10,000</option>
+          <option>Over 10,000</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">What interests you most? <span>*</span></label>
+      <div class="form-checkboxes">
+        <label class="form-checkbox"><input type="checkbox" name="interest" value="cultural-ai"><span class="form-checkbox-label">Culturally-responsive AI and VLAP signal detection</span></label>
+        <label class="form-checkbox"><input type="checkbox" name="interest" value="peer-community"><span class="form-checkbox-label">Peer community and coaching infrastructure</span></label>
+        <label class="form-checkbox"><input type="checkbox" name="interest" value="medicaid"><span class="form-checkbox-label">Medicaid billing integration and cost recovery</span></label>
+        <label class="form-checkbox"><input type="checkbox" name="interest" value="crisis"><span class="form-checkbox-label">Crisis detection and clinical escalation protocol</span></label>
+        <label class="form-checkbox"><input type="checkbox" name="interest" value="outcomes"><span class="form-checkbox-label">Clinical outcomes data and IRB validation</span></label>
+        <label class="form-checkbox"><input type="checkbox" name="interest" value="compliance"><span class="form-checkbox-label">HIPAA / FERPA compliance and security documentation</span></label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="timeline">Implementation Timeline</label>
+      <select id="timeline" name="timeline" class="form-select">
+        <option value="" disabled selected>Select timeline</option>
+        <option>Ready to move immediately</option>
+        <option>1&ndash;3 months</option>
+        <option>3&ndash;6 months</option>
+        <option>6&ndash;12 months</option>
+        <option>Exploring options &mdash; no firm timeline</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="additional">Anything else we should know?</label>
+      <textarea id="additional" name="additional" class="form-textarea" placeholder="Your current mental health infrastructure, specific population challenges, grant funding context, or any questions you want addressed in the demo."></textarea>
+    </div>
+
+    <div class="form-divider"></div>
+
+    <label class="form-checkbox">
+      <input type="checkbox" name="updates">
+      <span class="form-checkbox-label">I'd like to receive occasional research updates and platform news from Vasl Health.</span>
+    </label>
+
+    <button type="submit" class="form-submit">Schedule Demo &rarr;</button>
+    <div class="form-privacy">By submitting, you agree to our <a href="privacy.html">Privacy Policy</a>. We use this information to prepare your demo and follow up with relevant resources only.</div>
+  </form>
+</div>
+
+<!-- FAQ -->
+<div id="faq">
+  <div class="faq-left">
+    <h2 class="faq-headline reveal d1">
+      Common<br>
+      <em>questions.</em>
+    </h2>
+    <p class="faq-sub reveal d2">If your question isn't here, email us directly &mdash; we give direct answers, not sales responses.</p>
+    <a href="mailto:hello@vaslhealth.com" class="faq-support-link reveal d3">hello@vaslhealth.com</a>
+  </div>
+
+  <div class="faq-right">
+    <div class="faq-item reveal">
+      <div class="faq-q">How long does implementation take?</div>
+      <p class="faq-a">Six weeks from contract signature to first member enrollment &mdash; consistently, across org types. Week 1&ndash;2: scoping and configuration. Week 3&ndash;4: staff orientation and clinical briefing. Week 5&ndash;6: member enrollment opens with your implementation lead available for real-time support. Your organization doesn't need a dedicated technology team to deploy.</p>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">What does pricing look like?</div>
+      <p class="faq-a">Two components: a platform fee and a per member per month (PMPM) fee. Starter is $480/month platform fee for up to 100 members. Pro is $1,200/month for up to 500 members. PMPM is $3&ndash;5 for schools and non-profits, $6&ndash;8 for health systems and enterprise. Enterprise is scoped based on deployment size and requirements. See the full <a href="pricing.html">pricing page</a> for a complete breakdown.</p>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">What compliance standards does Vasl meet?</div>
+      <p class="faq-a">HIPAA technical safeguards &mdash; full implementation across all platform components. BAA required for all organizational deployments and included in every contract. FERPA-aligned architecture for school deployments &mdash; student health data is structurally inaccessible to school administrators. SOC 2 Type II &mdash; annual third-party audit. Full compliance documentation is available under NDA for institutional review.</p>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">Can we do a pilot before committing to a full deployment?</div>
+      <p class="faq-a">Yes &mdash; and we recommend it. The scoping conversation helps us design a pilot that's large enough to produce meaningful outcome data but small enough to manage as a proof of concept. We'll discuss pilot structure, timeline, and success metrics during your demo.</p>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">Can Vasl help with grant funding?</div>
+      <p class="faq-a">We provide grant documentation &mdash; IRB study data, pilot outcome reports, VLAP technical overview, and compliance documentation &mdash; in formats designed for grant applications. For school districts, we also support Medicaid billing setup and Title IV-A documentation. We don't write grants on your behalf, but we make sure you have the outcome evidence grant funders need to see.</p>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">What happens after I submit this form?</div>
+      <p class="faq-a">You'll receive an acknowledgment email immediately. An implementation lead &mdash; not a sales representative &mdash; will follow up within one business day to schedule your demo at a time that works. We'll review what you submitted before the call so we come prepared with context specific to your org type and population.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-sitemap">
+    <div class="fs-brand">
+      <a href="index.html" class="footer-logo">Vasl <span>Health</span></a>
+      <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
+      <a href="contact.html" class="fs-cta">Request a Demo &rarr;</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Platform</div>
+      <a href="platform.html">Platform Overview</a>
+      <a href="vlap.html">VLAP</a>
+      <a href="ai-model.html">AI Model</a>
+      <a href="technology.html">Technology</a>
+      <a href="peer-groups.html">Peer Groups</a>
+      <a href="teletherapy.html">Teletherapy</a>
+      <a href="prototype.html">Live Demo Portal</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Who We Serve</div>
+      <a href="for-schools.html">For Schools</a>
+      <a href="for-organizations.html">For Organizations</a>
+      <a href="outcomes.html">Outcomes</a>
+      <a href="clinical-outcomes.html">Clinical Outcomes</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Company</div>
+      <a href="about.html">About Vasl</a>
+      <a href="team.html">Team</a>
+      <a href="careers.html">Careers</a>
+      <a href="research.html">Research</a>
+      <a href="blog.html">Blog &amp; Insights</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Support &amp; Legal</div>
+      <a href="support.html">Help Center</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="baa.html">Business Associate Agreement</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 Vasl Health, Inc. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="baa.html">BAA</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js-ready');
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+  reveals.forEach(el => io.observe(el));
+  window.addEventListener('load', () => {
+    reveals.forEach((el, i) => {
+      if (el.getBoundingClientRect().top < window.innerHeight) {
+        setTimeout(() => el.classList.add('visible'), i * 40);
+      }
+    });
+  });
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const firstName = document.getElementById('first-name').value;
+    const lastName = document.getElementById('last-name').value;
+    const email = document.getElementById('email').value;
+    const org = document.getElementById('org-name').value;
+    const role = document.getElementById('role').value;
+    const orgType = document.getElementById('org-type').value;
+    const popSize = document.getElementById('pop-size').value;
+    const timeline = document.getElementById('timeline').value;
+    const additional = document.getElementById('additional').value;
+    const interests = [...document.querySelectorAll('input[name="interest"]:checked')].map(i => i.value).join(', ');
+
+    const subject = encodeURIComponent(`Demo Request — ${org}`);
+    const body = encodeURIComponent(
+      `Name: ${firstName} ${lastName}\nEmail: ${email}\nOrganization: ${org}\nRole: ${role}\nOrg Type: ${orgType}\nPopulation Size: ${popSize || 'Not specified'}\nTimeline: ${timeline || 'Not specified'}\nInterests: ${interests || 'Not specified'}\n\nAdditional Information:\n${additional || 'None provided'}`
+    );
+    window.location.href = `mailto:hello@vaslhealth.com?subject=${subject}&body=${body}`;
+  }
+</script>
+</body>
+</html>
