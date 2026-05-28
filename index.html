@@ -1,11 +1,1654 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="0; url=demo/">
-<title>Vasl Health — Redirecting...</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Vasl Health &mdash; the first behavioral health platform built on how BIPOC, LGBTQ+, and underserved youth actually speak. Culturally grounded care for the communities that need it most.">
+<title>Vasl Health &mdash; Language Is Care</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  :root {
+    --warm-white:  #FAF7F2;
+    --parchment:   #F0EAE0;
+    --ink:         #1C1C1C;
+    --ink-70:      rgba(28,28,28,0.70);
+    --ink-50:      rgba(28,28,28,0.50);
+    --ink-25:      rgba(28,28,28,0.25);
+    --ink-12:      rgba(28,28,28,0.12);
+    --clay:        #C4896F;
+    --clay-light:  #E8C4AE;
+    --clay-pale:   #F5E6DC;
+    --deep-green:  #2D4A3E;
+    --dust:        #8B7B6B;
+    --chalk:       #E2DAD0;
+    --charcoal:    #222222;
+
+    --serif: 'Newsreader', Georgia, serif;
+    --sans:  'IBM Plex Sans', sans-serif;
+    --mono:  'IBM Plex Mono', monospace;
+    --gutter: 7vw;
+  }
+
+  body {
+    background: var(--warm-white);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: 999;
+    pointer-events: none; opacity: 0.028;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 256px;
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(22px);
+    transition: opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .d1 { transition-delay: 0.10s; } .d2 { transition-delay: 0.22s; }
+  .d3 { transition-delay: 0.34s; } .d4 { transition-delay: 0.46s; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px var(--gutter);
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(250,247,242,0.92);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--ink-12);
+  }
+  .nav-logo { font-family: var(--serif); font-size: 22px; font-weight: 400; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
+  .nav-logo span { color: var(--clay); font-style: italic; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { font-family: var(--mono); font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--dust); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta { font-family: var(--mono); font-size: 10px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--deep-green); border: 1px solid var(--deep-green); padding: 9px 20px; text-decoration: none; transition: background 0.22s, color 0.22s; }
+  .nav-cta:hover { background: var(--deep-green); color: var(--warm-white); }
+
+  /* ─── SHARED ─── */
+  .chapter-label {
+    font-family: var(--mono); font-size: 10px; font-weight: 300; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--clay);
+    display: flex; align-items: center; gap: 12px; margin-bottom: 52px;
+  }
+  .chapter-label::after { content: ''; display: block; width: 36px; height: 1px; background: var(--clay); opacity: 0.45; }
+  .chapter-label.light { color: var(--clay-light); }
+  .chapter-label.light::after { background: var(--clay-light); }
+  .chapter-label.muted { color: rgba(250,247,242,0.35); }
+  .chapter-label.muted::after { background: rgba(250,247,242,0.35); }
+
+  section { padding: 130px var(--gutter); position: relative; }
+
+  .btn-dark { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--ink); color: var(--warm-white); padding: 16px 32px; text-decoration: none; display: inline-block; transition: background 0.22s; }
+  .btn-dark:hover { background: var(--deep-green); }
+  .btn-outline { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dust); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s; }
+  .btn-outline:hover { color: var(--ink); }
+  .btn-outline::after { content: '→'; font-size: 14px; }
+  .btn-light { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--warm-white); color: var(--ink); padding: 16px 32px; text-decoration: none; display: inline-block; transition: background 0.22s; }
+  .btn-light:hover { background: var(--clay-light); }
+  .btn-ghost-light { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250,247,242,0.40); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s; }
+  .btn-ghost-light:hover { color: var(--warm-white); }
+  .btn-ghost-light::after { content: '→'; }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 01 — OPENING
+  ═══════════════════════════════════════════ */
+  #hero {
+    min-height: 100vh;
+    padding-top: 180px; padding-bottom: 140px;
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--chalk);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 80px;
+    align-items: start;
+  }
+
+  .hero-left {}
+
+  .hero-eyebrow {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--dust); margin-bottom: 40px; display: block;
+  }
+
+  .hero-headline {
+    font-family: var(--serif);
+    font-size: clamp(52px, 6.2vw, 92px);
+    font-weight: 300; line-height: 1.02; letter-spacing: -0.03em;
+    color: var(--ink); margin-bottom: 52px;
+  }
+  .hero-headline em { font-style: italic; color: var(--clay); }
+
+  .hero-body {
+    font-size: 19px; font-weight: 300; line-height: 1.72;
+    color: var(--ink-70); max-width: 460px; margin-bottom: 56px;
+  }
+
+  .hero-actions { display: flex; align-items: center; gap: 32px; }
+
+  .hero-right {
+    border-left: 1px solid var(--chalk);
+    padding-left: 72px;
+    display: flex; flex-direction: column; gap: 0;
+  }
+
+  .misread-pair {
+    padding: 28px 0; border-bottom: 1px solid var(--chalk);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  }
+  .misread-pair:first-child { padding-top: 0; }
+  .misread-pair:last-child { border-bottom: none; }
+
+  .mp-col-head {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--dust); margin-bottom: 12px;
+  }
+  .mp-said {
+    font-family: var(--serif); font-size: 17px; font-style: italic;
+    font-weight: 400; line-height: 1.45; color: var(--ink-70);
+  }
+  .mp-meant {
+    font-family: var(--serif); font-size: 17px; font-style: italic;
+    font-weight: 400; line-height: 1.45; color: var(--deep-green);
+  }
+
+  .hero-stats {
+    display: flex; gap: 40px; padding-top: 40px;
+    border-top: 1px solid var(--chalk);
+  }
+  .hs-item {}
+  .hs-num {
+    font-family: var(--serif); font-size: 38px; font-weight: 300;
+    color: var(--ink); line-height: 1; letter-spacing: -0.03em; margin-bottom: 4px;
+  }
+  .hs-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dust); line-height: 1.5;
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 02 — THERAPY LAST
+  ═══════════════════════════════════════════ */
+  #therapylast {
+    background: var(--charcoal);
+    color: var(--warm-white);
+    padding-top: 150px; padding-bottom: 150px;
+  }
+
+  .tl-header { max-width: 720px; margin-bottom: 90px; }
+
+  .tl-headline {
+    font-family: var(--serif); font-size: clamp(40px, 5vw, 72px);
+    font-weight: 300; line-height: 1.05; letter-spacing: -0.03em;
+    color: var(--warm-white); margin-bottom: 28px;
+  }
+  .tl-headline em { font-style: italic; color: var(--clay-light); }
+
+  .tl-sub {
+    font-size: 18px; font-weight: 300; line-height: 1.72;
+    color: rgba(250,247,242,0.55); max-width: 580px;
+  }
+
+  /* Comparison table */
+  .compare-table {
+    border: 1px solid rgba(250,247,242,0.12);
+    overflow: hidden;
+  }
+
+  .ct-header {
+    display: grid; grid-template-columns: 200px 1fr 1fr;
+    border-bottom: 1px solid rgba(250,247,242,0.12);
+  }
+
+  .ct-h-cell {
+    padding: 20px 28px; border-right: 1px solid rgba(250,247,242,0.12);
+  }
+  .ct-h-cell:last-child { border-right: none; }
+
+  .ct-h-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: rgba(250,247,242,0.35);
+  }
+
+  .ct-h-name {
+    font-family: var(--serif); font-size: 20px; font-weight: 400;
+    color: var(--warm-white); margin-top: 6px; line-height: 1.2;
+  }
+  .ct-h-name em { font-style: italic; color: var(--clay-light); }
+
+  .ct-row {
+    display: grid; grid-template-columns: 200px 1fr 1fr;
+    border-bottom: 1px solid rgba(250,247,242,0.08);
+  }
+  .ct-row:last-child { border-bottom: none; }
+  .ct-row:hover { background: rgba(250,247,242,0.03); }
+
+  .ct-cell {
+    padding: 22px 28px; border-right: 1px solid rgba(250,247,242,0.08);
+    display: flex; align-items: center;
+  }
+  .ct-cell:last-child { border-right: none; }
+
+  .ct-metric {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: rgba(250,247,242,0.38); line-height: 1.5;
+  }
+
+  .ct-old {
+    font-size: 14px; font-weight: 300; line-height: 1.55;
+    color: rgba(250,247,242,0.42);
+  }
+
+  .ct-vasl {
+    font-size: 14px; font-weight: 300; line-height: 1.55;
+    color: rgba(250,247,242,0.80);
+  }
+  .ct-vasl strong {
+    font-weight: 500; color: var(--warm-white);
+  }
+
+  /* continuum strip */
+  .continuum-strip {
+    margin-top: 80px;
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 0; border: 1px solid rgba(250,247,242,0.12);
+    position: relative;
+  }
+
+  .cs-step {
+    padding: 32px 28px; border-right: 1px solid rgba(250,247,242,0.10);
+    position: relative;
+  }
+  .cs-step:last-child { border-right: none; }
+
+  .cs-num {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 10px;
+  }
+
+  .cs-name {
+    font-family: var(--serif); font-size: 18px; font-weight: 400;
+    color: var(--warm-white); margin-bottom: 8px; line-height: 1.2;
+  }
+
+  .cs-desc {
+    font-size: 12px; font-weight: 300; line-height: 1.6;
+    color: rgba(250,247,242,0.42);
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 03 — THE PLATFORM
+  ═══════════════════════════════════════════ */
+  #platform {
+    background: var(--parchment);
+    padding-top: 150px; padding-bottom: 150px;
+    border-top: 1px solid var(--chalk); border-bottom: 1px solid var(--chalk);
+  }
+
+  .platform-header {
+    display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px;
+    align-items: end; margin-bottom: 90px;
+    padding-bottom: 60px; border-bottom: 1px solid var(--chalk);
+  }
+
+  .platform-headline {
+    font-family: var(--serif); font-size: clamp(36px, 4vw, 56px);
+    font-weight: 300; line-height: 1.08; letter-spacing: -0.025em; color: var(--ink);
+  }
+  .platform-headline em { font-style: italic; color: var(--clay); }
+
+  .platform-intro {
+    font-size: 18px; font-weight: 300; line-height: 1.72; color: var(--ink-70);
+  }
+
+  .platform-layers {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+    border-top: 1px solid var(--chalk);
+  }
+
+  .pl-layer {
+    padding: 52px 44px 52px 0; border-right: 1px solid var(--chalk);
+  }
+  .pl-layer:last-child { border-right: none; padding-right: 0; }
+  .pl-layer:nth-child(n+2) { padding-left: 44px; }
+
+  .pl-num {
+    font-family: var(--serif); font-size: 60px; font-weight: 300;
+    color: var(--clay-light); line-height: 1; letter-spacing: -0.04em; margin-bottom: 18px;
+  }
+
+  .pl-who {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 12px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .pl-who::before { content: ''; display: block; width: 12px; height: 1px; background: var(--clay); }
+
+  .pl-name {
+    font-family: var(--serif); font-size: 22px; font-weight: 400;
+    color: var(--ink); margin-bottom: 12px; line-height: 1.2; letter-spacing: -0.01em;
+  }
+
+  .pl-desc {
+    font-size: 14px; font-weight: 300; line-height: 1.7; color: var(--dust); margin-bottom: 20px;
+  }
+
+  .pl-link {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--deep-green); text-decoration: none;
+    display: flex; align-items: center; gap: 6px; transition: gap 0.2s;
+  }
+  .pl-link:hover { gap: 12px; }
+  .pl-link::after { content: '→'; }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 04 — THE INTELLIGENCE LAYER
+  ═══════════════════════════════════════════ */
+  #intelligence {
+    background: var(--deep-green);
+    color: var(--warm-white);
+    padding-top: 150px; padding-bottom: 150px;
+  }
+
+  .intel-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0 120px; align-items: start;
+  }
+
+  .intel-left {}
+
+  .intel-headline {
+    font-family: var(--serif); font-size: clamp(38px, 4.5vw, 64px);
+    font-weight: 300; line-height: 1.06; letter-spacing: -0.025em;
+    color: var(--warm-white); margin-bottom: 40px;
+  }
+  .intel-headline em { font-style: italic; color: var(--clay-light); }
+
+  .intel-body {
+    font-size: 17px; font-weight: 300; line-height: 1.75;
+    color: rgba(250,247,242,0.60); max-width: 480px; margin-bottom: 40px;
+  }
+
+  .intel-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: rgba(250,247,242,0.12); margin-bottom: 40px;
+  }
+
+  .intel-stat {
+    background: var(--deep-green); padding: 28px 28px;
+  }
+
+  .is-num {
+    font-family: var(--serif); font-size: 40px; font-weight: 300;
+    color: var(--warm-white); line-height: 1; letter-spacing: -0.04em; margin-bottom: 6px;
+  }
+
+  .is-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(250,247,242,0.38); line-height: 1.55;
+  }
+
+  .intel-cta {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--clay-light); text-decoration: none;
+    display: flex; align-items: center; gap: 10px; transition: gap 0.2s;
+  }
+  .intel-cta:hover { gap: 16px; }
+  .intel-cta::after { content: '→'; font-size: 13px; }
+
+  .intel-right { padding-top: 8px; }
+
+  /* Signal panels — three examples */
+  .signal-trio { display: flex; flex-direction: column; gap: 0; border: 1px solid rgba(250,247,242,0.14); }
+
+  .st-item {
+    padding: 28px 32px; border-bottom: 1px solid rgba(250,247,242,0.10);
+  }
+  .st-item:last-child { border-bottom: none; }
+
+  .st-codes { display: flex; gap: 6px; margin-bottom: 14px; }
+
+  .st-code {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em;
+    color: var(--clay-light); border: 1px solid rgba(196,137,111,0.35); padding: 3px 8px;
+  }
+
+  .st-utterance {
+    font-family: var(--serif); font-size: 18px; font-style: italic;
+    font-weight: 300; color: var(--warm-white); line-height: 1.4; margin-bottom: 12px;
+  }
+
+  .st-interp {
+    font-size: 13px; font-weight: 300; line-height: 1.65;
+    color: rgba(250,247,242,0.50);
+  }
+
+  .st-
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 05 — FOR SCHOOLS & DISTRICTS
+  ═══════════════════════════════════════════ */
+  #schools {
+    background: var(--warm-white);
+    padding-top: 150px; padding-bottom: 150px;
+    border-top: 1px solid var(--chalk); border-bottom: 1px solid var(--chalk);
+  }
+
+  .schools-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0 100px; align-items: start;
+  }
+
+  .schools-left { position: sticky; top: 140px; }
+
+  .schools-headline {
+    font-family: var(--serif); font-size: clamp(36px, 4.2vw, 58px);
+    font-weight: 300; line-height: 1.08; letter-spacing: -0.025em; color: var(--ink);
+    margin-bottom: 28px;
+  }
+  .schools-headline em { font-style: italic; color: var(--clay); }
+
+  .schools-body {
+    font-size: 17px; font-weight: 300; line-height: 1.72;
+    color: var(--ink-70); margin-bottom: 40px;
+  }
+
+  /* Medicaid callout */
+  .medicaid-block {
+    background: var(--ink); padding: 36px 36px;
+    display: flex; flex-direction: column; gap: 0;
+  }
+
+  .mb-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay-light); margin-bottom: 12px;
+  }
+
+  .mb-num {
+    font-family: var(--serif); font-size: 52px; font-weight: 300;
+    color: var(--warm-white); line-height: 1; letter-spacing: -0.04em; margin-bottom: 8px;
+  }
+
+  .mb-desc {
+    font-size: 14px; font-weight: 300; line-height: 1.65;
+    color: rgba(250,247,242,0.50); margin-bottom: 16px;
+  }
+
+  .mb-note {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--clay);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .mb-note::before { content: '●'; font-size: 6px; }
+
+  .schools-right {}
+
+  .school-item {
+    padding: 44px 0; border-bottom: 1px solid var(--chalk);
+  }
+  .school-item:first-child { padding-top: 0; }
+  .school-item:last-child { border-bottom: none; }
+
+  .si-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 14px;
+  }
+
+  .si-title {
+    font-family: var(--serif); font-size: 24px; font-weight: 400;
+    color: var(--ink); margin-bottom: 12px; line-height: 1.25; letter-spacing: -0.01em;
+  }
+
+  .si-body {
+    font-size: 15px; font-weight: 300; line-height: 1.7;
+    color: var(--ink-70); max-width: 420px;
+  }
+
+  /* school stats row */
+  .school-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+    border: 1px solid var(--chalk); margin-bottom: 60px;
+  }
+
+  .ss-cell {
+    padding: 32px 28px; border-right: 1px solid var(--chalk);
+  }
+  .ss-cell:last-child { border-right: none; }
+
+  .ss-num {
+    font-family: var(--serif); font-size: 40px; font-weight: 300;
+    color: var(--ink); line-height: 1; letter-spacing: -0.03em; margin-bottom: 6px;
+  }
+
+  .ss-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dust); line-height: 1.55;
+  }
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 06 — OUTCOMES
+  ═══════════════════════════════════════════ */
+  #outcomes {
+    background: var(--parchment);
+    padding-top: 150px; padding-bottom: 150px;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .outcomes-header {
+    display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px;
+    align-items: end; margin-bottom: 90px;
+    padding-bottom: 60px; border-bottom: 1px solid var(--chalk);
+  }
+
+  .outcomes-headline {
+    font-family: var(--serif); font-size: clamp(36px, 4vw, 54px);
+    font-weight: 300; line-height: 1.08; letter-spacing: -0.025em; color: var(--ink);
+  }
+  .outcomes-headline em { font-style: italic; color: var(--clay); }
+
+  .outcomes-intro {
+    font-size: 18px; font-weight: 300; line-height: 1.72; color: var(--ink-70);
+  }
+
+  .outcomes-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+    border-top: 1px solid var(--chalk);
+  }
+
+  .outcome-item {
+    padding: 56px 52px 56px 0; border-right: 1px solid var(--chalk);
+  }
+  .outcome-item:last-child { border-right: none; padding-right: 0; }
+  .outcome-item:nth-child(n+2) { padding-left: 52px; }
+
+  .oi-num {
+    font-family: var(--serif); font-size: 80px; font-weight: 300;
+    color: var(--clay); line-height: 1; letter-spacing: -0.04em; margin-bottom: 16px;
+  }
+
+  .oi-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--dust); margin-bottom: 12px;
+  }
+
+  .oi-desc {
+    font-size: 15px; font-weight: 300; line-height: 1.7; color: var(--ink-70);
+  }
+
+  .oi-note {
+    margin-top: 14px; font-family: var(--mono); font-size: 9px;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--deep-green);
+    border: 1px solid var(--deep-green); padding: 4px 10px; display: inline-block;
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 07 — VOICES
+  ═══════════════════════════════════════════ */
+  #voices {
+    background: var(--warm-white);
+    padding-top: 150px; padding-bottom: 150px;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .voices-header { max-width: 640px; margin-bottom: 90px; }
+
+  .voices-headline {
+    font-family: var(--serif); font-size: clamp(38px, 4.5vw, 60px);
+    font-weight: 300; line-height: 1.06; letter-spacing: -0.025em; color: var(--ink);
+  }
+  .voices-headline em { font-style: italic; color: var(--clay); }
+
+  .voices-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+    border-top: 1px solid var(--chalk);
+  }
+
+  .voice-card {
+    padding: 52px 48px 52px 0; border-right: 1px solid var(--chalk);
+  }
+  .voice-card:last-child { border-right: none; padding-right: 0; }
+  .voice-card:nth-child(n+2) { padding-left: 48px; }
+
+  .vc-persona {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 24px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .vc-persona::before { content: ''; display: block; width: 16px; height: 1px; background: var(--clay); }
+
+  .vc-quote {
+    font-family: var(--serif); font-size: 21px; font-style: italic;
+    font-weight: 300; line-height: 1.45; color: var(--ink); margin-bottom: 24px;
+  }
+
+  .vc-context {
+    font-size: 14px; font-weight: 300; line-height: 1.65;
+    color: var(--ink-50); margin-bottom: 20px;
+  }
+
+  .vc-attr {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dust);
+  }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 08 — PARTNERS
+  ═══════════════════════════════════════════ */
+  #partners {
+    background: var(--parchment);
+    padding-top: 100px; padding-bottom: 100px;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .partners-inner {
+    display: grid; grid-template-columns: 200px 1fr; gap: 60px; align-items: center;
+  }
+
+  .partners-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--dust);
+  }
+
+  .partners-list {
+    display: flex; align-items: center; gap: 0; flex-wrap: wrap;
+    border-left: 1px solid var(--chalk);
+  }
+
+  .partner-name {
+    padding: 16px 32px; border-right: 1px solid var(--chalk);
+    font-family: var(--serif); font-size: 17px; font-weight: 400;
+    color: var(--ink-50); white-space: nowrap;
+    transition: color 0.2s;
+  }
+  .partner-name:last-child { border-right: none; }
+  .partner-name:hover { color: var(--ink); }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 09 — PRICING
+  ═══════════════════════════════════════════ */
+  #pricing {
+    background: var(--warm-white);
+    padding-top: 150px; padding-bottom: 150px;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .pricing-header {
+    display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px;
+    align-items: end; margin-bottom: 80px;
+    padding-bottom: 60px; border-bottom: 1px solid var(--chalk);
+  }
+
+  .pricing-headline {
+    font-family: var(--serif); font-size: clamp(34px, 3.8vw, 52px);
+    font-weight: 300; line-height: 1.1; letter-spacing: -0.025em; color: var(--ink);
+  }
+  .pricing-headline em { font-style: italic; color: var(--clay); }
+
+  .pricing-intro {
+    font-size: 17px; font-weight: 300; line-height: 1.72; color: var(--ink-70);
+  }
+
+  /* Pricing tiers — three editorial columns */
+  .pricing-tiers {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+    border: 1px solid var(--chalk);
+  }
+
+  .tier {
+    padding: 52px 44px; border-right: 1px solid var(--chalk);
+    display: flex; flex-direction: column;
+  }
+  .tier:last-child { border-right: none; }
+  .tier.featured { background: var(--ink); }
+
+  .tier-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay); margin-bottom: 16px;
+  }
+  .tier.featured .tier-label { color: var(--clay-light); }
+
+  .tier-name {
+    font-family: var(--serif); font-size: 28px; font-weight: 400;
+    color: var(--ink); margin-bottom: 8px; line-height: 1.15; letter-spacing: -0.01em;
+  }
+  .tier.featured .tier-name { color: var(--warm-white); }
+
+  .tier-tagline {
+    font-size: 14px; font-weight: 300; line-height: 1.6;
+    color: var(--dust); margin-bottom: 32px;
+  }
+  .tier.featured .tier-tagline { color: rgba(250,247,242,0.48); }
+
+  .tier-price {
+    font-family: var(--serif); font-size: 52px; font-weight: 300;
+    color: var(--ink); line-height: 1; letter-spacing: -0.04em; margin-bottom: 4px;
+  }
+  .tier.featured .tier-price { color: var(--warm-white); }
+
+  .tier-period {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dust); margin-bottom: 10px;
+  }
+  .tier.featured .tier-period { color: rgba(250,247,242,0.38); }
+  .tier-pmpm {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--clay); line-height: 1.9;
+    margin-bottom: 20px; padding: 10px 14px;
+    border: 1px solid var(--chalk); background: var(--parchment);
+  }
+  .tier.featured .tier-pmpm { border-color: rgba(250,247,242,0.15); background: rgba(250,247,242,0.07); color: var(--clay-light); }
+
+  .tier-divider {
+    height: 1px; background: var(--chalk); margin-bottom: 28px;
+  }
+  .tier.featured .tier-divider { background: rgba(250,247,242,0.12); }
+
+  .tier-features { display: flex; flex-direction: column; gap: 0; flex: 1; }
+
+  .tf-item {
+    padding: 12px 0; border-bottom: 1px solid var(--chalk);
+    display: flex; align-items: baseline; gap: 12px;
+    font-size: 14px; font-weight: 300; line-height: 1.55; color: var(--ink-70);
+  }
+  .tier.featured .tf-item { border-color: rgba(250,247,242,0.10); color: rgba(250,247,242,0.58); }
+  .tf-item:last-child { border-bottom: none; }
+
+  .tf-item::before { content: '—'; font-family: var(--mono); font-size: 10px; color: var(--clay); flex-shrink: 0; }
+  .tier.featured .tf-item::before { color: var(--clay-light); }
+
+  .tier-cta {
+    margin-top: 36px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 14px 28px; text-decoration: none;
+    display: inline-block; text-align: center; transition: background 0.22s, color 0.22s;
+  }
+
+  .tier-cta.dark { background: var(--ink); color: var(--warm-white); }
+  .tier-cta.dark:hover { background: var(--deep-green); }
+  .tier-cta.light { background: var(--warm-white); color: var(--ink); }
+  .tier-cta.light:hover { background: var(--clay-light); }
+  .tier-cta.outline { border: 1px solid var(--chalk); color: var(--dust); background: transparent; }
+  .tier-cta.outline:hover { border-color: var(--ink); color: var(--ink); }
+
+  .pricing-note {
+    margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--chalk);
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--dust);
+    display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+  }
+
+  .pricing-note-item { display: flex; align-items: center; gap: 6px; }
+  .pricing-note-item::before { content: '·'; color: var(--clay); font-size: 14px; }
+
+
+  /* ═══════════════════════════════════════════
+     CHAPTER 10 — THE ASK
+  ═══════════════════════════════════════════ */
+  #ask {
+    background: var(--charcoal);
+    padding-top: 160px; padding-bottom: 160px;
+    overflow: hidden; position: relative;
+  }
+
+  .ask-bg {
+    position: absolute; bottom: -6vw; right: -3vw;
+    font-family: var(--serif); font-size: 38vw; font-weight: 300; font-style: italic;
+    color: rgba(250,247,242,0.018); pointer-events: none; user-select: none;
+    line-height: 1; letter-spacing: -0.05em;
+  }
+
+  .ask-inner {
+    position: relative; z-index: 2;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0 100px; align-items: start;
+  }
+
+  .ask-left {}
+
+  .ask-headline {
+    font-family: var(--serif); font-size: clamp(42px, 5.2vw, 74px);
+    font-weight: 300; line-height: 1.06; letter-spacing: -0.03em;
+    color: var(--warm-white); margin-bottom: 32px;
+  }
+  .ask-headline em { font-style: italic; color: var(--clay-light); }
+
+  .ask-body {
+    font-size: 18px; font-weight: 300; line-height: 1.72;
+    color: rgba(250,247,242,0.50); margin-bottom: 52px; max-width: 460px;
+  }
+
+  .ask-actions { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+
+  .ask-right { padding-top: 8px; display: flex; flex-direction: column; gap: 0; }
+
+  .ask-item {
+    padding: 28px 0; border-bottom: 1px solid rgba(250,247,242,0.09);
+    display: grid; grid-template-columns: 40px 1fr; gap: 20px; align-items: start;
+  }
+  .ask-item:last-child { border-bottom: none; }
+
+  .ai-num {
+    font-family: var(--mono); font-size: 10px; color: var(--clay-light); padding-top: 3px;
+  }
+
+  .ai-title {
+    font-family: var(--serif); font-size: 20px; font-weight: 400;
+    color: var(--warm-white); margin-bottom: 6px; line-height: 1.25;
+  }
+
+  .ai-desc {
+    font-size: 14px; font-weight: 300; color: rgba(250,247,242,0.42); line-height: 1.65;
+  }
+
+  /* ─── FOOTER ─── */
+  .footer-logo span { color: var(--clay); font-style: italic; }
+  .footer-nav a { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250,247,242,0.32); text-decoration: none; transition: color 0.2s; }
+  .footer-nav a:hover { color: var(--warm-white); }
+  .footer-legal a { font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250,247,242,0.22); text-decoration: none; transition: color 0.2s; }
+  .footer-legal a:hover { color: var(--warm-white); }
+
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1100px) {
+    #hero { grid-template-columns: 1fr; gap: 80px; padding-top: 160px; }
+    .hero-right { border-left: none; padding-left: 0; border-top: 1px solid var(--chalk); padding-top: 60px; }
+    .misread-pair { grid-template-columns: 1fr; gap: 12px; }
+    .hero-stats { flex-wrap: wrap; }
+    .compare-table { overflow-x: auto; }
+    .ct-header, .ct-row { grid-template-columns: 140px 1fr 1fr; }
+    .continuum-strip { grid-template-columns: 1fr 1fr 1fr; }
+    .cs-step:nth-child(4) { border-top: 1px solid rgba(250,247,242,0.10); }
+    .cs-step:nth-child(3) { border-right: none; }
+    .platform-header { grid-template-columns: 1fr; gap: 28px; }
+    .platform-layers { grid-template-columns: 1fr 1fr; }
+    .pl-layer:nth-child(2) { border-right: none; }
+    .pl-layer:nth-child(3) { padding-left: 0; border-right: 1px solid var(--chalk); border-top: 1px solid var(--chalk); }
+    .pl-layer:nth-child(4) { border-right: none; border-top: 1px solid var(--chalk); }
+    .intel-grid { grid-template-columns: 1fr; gap: 60px; }
+    .schools-grid { grid-template-columns: 1fr; gap: 60px; }
+    .schools-left { position: static; }
+    .school-stats { grid-template-columns: 1fr 1fr; }
+    .outcomes-header { grid-template-columns: 1fr; gap: 28px; }
+    .outcomes-grid { grid-template-columns: 1fr; }
+    .outcome-item { border-right: none; border-bottom: 1px solid var(--chalk); padding: 52px 0; }
+    .outcome-item:last-child { border-bottom: none; }
+    .outcome-item:nth-child(n) { padding-left: 0; }
+    .voices-grid { grid-template-columns: 1fr; }
+    .voice-card { border-right: none; border-bottom: 1px solid var(--chalk); padding: 48px 0; }
+    .voice-card:last-child { border-bottom: none; }
+    .voice-card:nth-child(n) { padding-left: 0; }
+    .partners-inner { grid-template-columns: 1fr; gap: 28px; }
+    .partners-list { border-left: none; border-top: 1px solid var(--chalk); padding-top: 28px; }
+    .pricing-header { grid-template-columns: 1fr; gap: 28px; }
+    .pricing-tiers { grid-template-columns: 1fr; }
+    .tier { border-right: none; border-bottom: 1px solid var(--chalk); }
+    .tier.featured { border-color: rgba(250,247,242,0.12); }
+    .tier:last-child { border-bottom: none; }
+    .ask-inner { grid-template-columns: 1fr; gap: 60px; }
+  }
+
+  @media (max-width: 768px) {
+    :root { --gutter: 5vw; }
+    .nav-links { display: none; }
+    .continuum-strip { grid-template-columns: 1fr; }
+    .cs-step { border-right: none; border-bottom: 1px solid rgba(250,247,242,0.1); }
+    .cs-step:last-child { border-bottom: none; }
+    .school-stats { grid-template-columns: 1fr 1fr; }
+    .intel-stats { grid-template-columns: 1fr; }
+    .ct-header, .ct-row { grid-template-columns: 120px 1fr 1fr; font-size: 13px; }
+    .platform-layers { grid-template-columns: 1fr; }
+    .pl-layer:nth-child(n) { border-right: none; border-bottom: 1px solid var(--chalk); padding: 40px 0; }
+    .pl-layer:nth-child(n) { padding-left: 0; }
+    .pl-layer:last-child { border-bottom: none; }
+  }
+
+  .ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
+  .ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.2s;}
+  .ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .ham-btn.open span:nth-child(2){opacity:0;}
+  .ham-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+  @media(max-width:780px){
+    .ham-btn{display:flex;}
+    .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--warm);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{font-size:22px;letter-spacing:0.04em;}
+    .nav-cta{display:none;}
+  }
+
+  footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);padding:0;}
+  .footer-sitemap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:0;padding:56px 7vw 40px;border-bottom:1px solid rgba(250,247,242,0.08);}
+  .fs-brand{padding-right:40px;}
+  .footer-logo{font-family:var(--serif);font-size:22px;color:var(--warm-white,#FAF7F2);letter-spacing:-0.02em;text-decoration:none;display:block;margin-bottom:12px;}
+  .footer-logo span{color:var(--clay,#C4896F);font-style:italic;}
+  .footer-mission{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.28);line-height:1.8;margin-bottom:20px;}
+  .fs-cta{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:var(--clay,#C4896F);border:1px solid rgba(196,137,111,0.40);padding:9px 18px;text-decoration:none;transition:all 0.18s;}
+  .fs-cta:hover{background:rgba(196,137,111,0.12);}
+  .fs-col{padding-left:32px;border-left:1px solid rgba(250,247,242,0.06);}
+  .fs-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,247,242,0.30);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(250,247,242,0.06);}
+  .fs-col a{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,247,242,0.45);text-decoration:none;margin-bottom:10px;transition:color 0.15s;}
+  .fs-col a:hover{color:var(--clay,#C4896F);}
+  .footer-bottom{padding:20px 7vw;display:flex;align-items:center;justify-content:space-between;}
+  .footer-copy{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,0.20);}
+  .footer-legal{display:flex;gap:20px;}
+  .footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+  .footer-legal a:hover{color:var(--clay,#C4896F);}
+  @media(max-width:1100px){.footer-sitemap{grid-template-columns:1fr 1fr 1fr;gap:32px;}.fs-brand{grid-column:1/-1;padding-right:0;}.fs-col{border-left:none;padding-left:0;}}
+  @media(max-width:680px){.footer-sitemap{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}}
+  @media(max-width:400px){.footer-sitemap{grid-template-columns:1fr;}}
+</style>
 </head>
 <body>
-<p>Redirecting to <a href="demo/">Vasl Health VLAP Demo</a>...</p>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="index.html" class="nav-logo">Vasl <span>Health</span></a>
+    <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="platform.html">Platform</a></li>
+    <li><a href="outcomes.html">Outcomes</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="#ask" class="nav-cta">Request a Demo</a>
+</nav>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 01 &mdash; OPENING
+════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-left">
+    <span class="hero-eyebrow reveal">Behavioral Health &middot; Community Language &middot; Precision Interpretation</span>
+    <h1 class="hero-headline reveal d1">
+      The system heard<br>
+      the words.<br>
+      It missed <em>everything</em><br>else.
+    </h1>
+    <p class="hero-body reveal d2">
+      Vasl Health is the first behavioral health platform built on how BIPOC, LGBTQ+, and underserved youth actually speak. Not translated into clinical language &mdash; understood in their own. Peer community, culturally trained coaches, licensed therapy, and the AI that reads what standard systems have always missed.
+    </p>
+    <div class="hero-actions reveal d3">
+      <a href="#ask" class="btn-dark">Request a Demo</a>
+      <a href="about.html" class="btn-outline">Our mission</a>
+    </div>
+  </div>
+
+  <div class="hero-right reveal d2">
+    <div class="misread-pair">
+      <div>
+        <div class="mp-col-head">What was said</div>
+        <p class="mp-said">"I'm dead tired of everything."</p>
+      </div>
+      <div>
+        <div class="mp-col-head">What it meant</div>
+        <p class="mp-meant">"I haven't slept in four days and no one's noticed."</p>
+      </div>
+    </div>
+    <div class="misread-pair">
+      <div>
+        <div class="mp-col-head">What was said</div>
+        <p class="mp-said">"On god I can't do this no more."</p>
+      </div>
+      <div>
+        <div class="mp-col-head">What it meant</div>
+        <p class="mp-meant">"I'm asking someone to take this seriously."</p>
+      </div>
+    </div>
+    <div class="misread-pair">
+      <div>
+        <div class="mp-col-head">What was said</div>
+        <p class="mp-said">"been thinking about unaliving lately ngl."</p>
+      </div>
+      <div>
+        <div class="mp-col-head">What it meant</div>
+        <p class="mp-meant">What it was. Standard AI had no vocabulary for it. VLAP did.</p>
+      </div>
+    </div>
+
+    <div class="hero-stats reveal d3">
+      <div class="hs-item">
+        <div class="hs-num">9<span style="font-size:20px">mo</span></div>
+        <div class="hs-label">Avg. wait for therapy<br>in underserved communities</div>
+      </div>
+      <div class="hs-item">
+        <div class="hs-num">$0</div>
+        <div class="hs-label">Cost to members &mdash;<br>payer or org funded</div>
+      </div>
+      <div class="hs-item">
+        <div class="hs-num">79.5<span style="font-size:20px">%</span></div>
+        <div class="hs-label">Still active<br>at 30 days</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 02 &mdash; THERAPY LAST
+════════════════════════════════════ -->
+<section id="therapylast">
+  <div class="chapter-label light reveal">Chapter 02 &mdash; Therapy Last. Not Therapy Never.</div>
+
+  <div class="tl-header">
+    <h2 class="tl-headline reveal d1">
+      The standard model<br>
+      sends you to therapy<br>
+      when things fall apart.<br>
+      <em>We build what comes<br>before that.</em>
+    </h2>
+    <p class="tl-sub reveal d2">
+      Most people who need mental health support never reach a therapist. Not because they don't want to &mdash; because the system places therapy at the end of a long road of logistics, cost, and cultural mismatch. Vasl inverts this. Peer community and coaching are the first step, available the same day. Therapy is there when it's right &mdash; not when it's the only option left.
+    </p>
+  </div>
+
+  <div class="compare-table reveal">
+    <div class="ct-header">
+      <div class="ct-h-cell"><span class="ct-h-label">Comparison</span></div>
+      <div class="ct-h-cell">
+        <div class="ct-h-label">The Old Model</div>
+        <div class="ct-h-name">Therapy <em>First</em></div>
+      </div>
+      <div class="ct-h-cell">
+        <div class="ct-h-label">The Vasl Model</div>
+        <div class="ct-h-name">Therapy <em>Last</em></div>
+      </div>
+    </div>
+
+    <div class="ct-row">
+      <div class="ct-cell"><span class="ct-metric">Wait Time</span></div>
+      <div class="ct-cell"><span class="ct-old">9 months average to see a therapist</span></div>
+      <div class="ct-cell"><span class="ct-vasl"><strong>Same day</strong> &mdash; coaching and peer community from day one</span></div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-cell"><span class="ct-metric">Cost</span></div>
+      <div class="ct-cell"><span class="ct-old">$150&ndash;300 per session, rarely covered</span></div>
+      <div class="ct-cell"><span class="ct-vasl"><strong>Free to members</strong> &mdash; org or payer funded</span></div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-cell"><span class="ct-metric">Cultural Fit</span></div>
+      <div class="ct-cell"><span class="ct-old">English-first, western clinical lens</span></div>
+      <div class="ct-cell"><span class="ct-vasl"><strong>Culturally matched</strong>, multilingual, community-built</span></div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-cell"><span class="ct-metric">Entry Point</span></div>
+      <div class="ct-cell"><span class="ct-old">Must already be in crisis</span></div>
+      <div class="ct-cell"><span class="ct-vasl"><strong>Come before crisis</strong> &mdash; support is there before the breaking point</span></div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-cell"><span class="ct-metric">Language Intelligence</span></div>
+      <div class="ct-cell"><span class="ct-old">Trained on majority-White internet text. Misreads AAVE, queer vernacular, coded language.</span></div>
+      <div class="ct-cell"><span class="ct-vasl"><strong>CulturalBERT-VLAP</strong> &mdash; 2,400+ community-specific tokens. Reads language as it's actually spoken.</span></div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-cell"><span class="ct-metric">Retention</span></div>
+      <div class="ct-cell"><span class="ct-old">72% drop out before their third session</span></div>
+      <div class="ct-cell"><span class="ct-vasl"><strong>79.5% still active</strong> at 30 days across pilot cohorts</span></div>
+    </div>
+  </div>
+
+  <div class="continuum-strip reveal">
+    <div class="cs-step">
+      <div class="cs-num">Step 01</div>
+      <div class="cs-name">Peer Community</div>
+      <div class="cs-desc">70+ groups organized around shared identities. Join, read, share &mdash; zero friction. Human moderated.</div>
+    </div>
+    <div class="cs-step">
+      <div class="cs-num">Step 02</div>
+      <div class="cs-name">Daily Check-Ins</div>
+      <div class="cs-desc">A 45-second check-in that goes somewhere &mdash; directly to the coaching team who knows this member.</div>
+    </div>
+    <div class="cs-step">
+      <div class="cs-num">Step 03</div>
+      <div class="cs-name">Culturally Matched Coach</div>
+      <div class="cs-desc">Assigned same day. Proactively reaches out. Already oriented &mdash; no intake, no starting from zero.</div>
+    </div>
+    <div class="cs-step">
+      <div class="cs-num">Step 04</div>
+      <div class="cs-name">Licensed Therapy</div>
+      <div class="cs-desc">When the member is ready. Warm handoff &mdash; VLAP signal context and coaching notes travel with them.</div>
+    </div>
+    <div class="cs-step">
+      <div class="cs-num">Step 05</div>
+      <div class="cs-name">Crisis Support</div>
+      <div class="cs-desc">Human-initiated, always. 988 integration. Licensed clinical supervisor review before any action.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 03 &mdash; THE PLATFORM
+════════════════════════════════════ -->
+<section id="platform">
+  <div class="chapter-label reveal">Chapter 03 &mdash; The Platform</div>
+
+  <div class="platform-header">
+    <h2 class="platform-headline reveal d1">
+      Four layers.<br>
+      One <em>continuum.</em>
+    </h2>
+    <p class="platform-intro reveal d2">
+      Vasl is not a single tool &mdash; it's the infrastructure of care. Four interconnected layers that work together so that no one falls through the space between them. Each layer has a distinct audience, a distinct purpose, and a distinct design. Together, they are the full continuum.
+    </p>
+  </div>
+
+  <div class="platform-layers">
+    <div class="pl-layer reveal">
+      <div class="pl-num">01</div>
+      <div class="pl-who">Youth Members</div>
+      <div class="pl-name">Member App</div>
+      <p class="pl-desc">Text-first. No app required. Peer groups, daily check-ins, coach messaging, session booking. In the member's language, on their terms, from day one.</p>
+      <a href="features.html#member" class="pl-link">Member layer</a>
+    </div>
+
+    <div class="pl-layer reveal d1">
+      <div class="pl-num">02</div>
+      <div class="pl-who">Certified Coaches</div>
+      <div class="pl-name">Coach Layer</div>
+      <p class="pl-desc">Proactive. Culturally matched. Available 7 days a week, 365 days a year. The relationship that's there before it's needed &mdash; and ready when it is.</p>
+      <a href="features.html#coach" class="pl-link">Coach layer</a>
+    </div>
+
+    <div class="pl-layer reveal d2">
+      <div class="pl-num">03</div>
+      <div class="pl-who">Licensed Clinicians</div>
+      <div class="pl-name">Coach Portal</div>
+      <p class="pl-desc">VLAP signal context before every session. Session notes, outcome tracking, caseload management. Clinicians enter the room already understanding who's in it.</p>
+      <a href="features.html#clinician" class="pl-link">Clinician layer</a>
+    </div>
+
+    <div class="pl-layer reveal d3">
+      <div class="pl-num">04</div>
+      <div class="pl-who">Orgs & Payers</div>
+      <div class="pl-name">Client Org Portal</div>
+      <p class="pl-desc">Aggregate, de-identified population data. No individual records. Real-time insight into where need is rising &mdash; before it becomes a crisis to manage.</p>
+      <a href="features.html#org" class="pl-link">Org layer</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 04 &mdash; THE INTELLIGENCE LAYER
+════════════════════════════════════ -->
+<section id="intelligence">
+  <div class="chapter-label light reveal">Chapter 04 &mdash; The Intelligence Layer</div>
+
+  <div class="intel-grid">
+    <div class="intel-left">
+      <h2 class="intel-headline reveal d1">
+        AI that doesn't<br>
+        make youth<br>
+        <em>translate themselves.</em>
+      </h2>
+      <p class="intel-body reveal d2">
+        CulturalBERT-VLAP is the first NLP model trained on community-specific mental health language &mdash; AAVE, queer vernacular, coded youth language, pre-disclosure patterns. It reads what standard models were never built to see. Non-diagnostic. Non-prescriptive. Clinician-facing only.
+      </p>
+
+      <div class="intel-stats reveal d3">
+        <div class="intel-stat">
+          <div class="is-num">94<span style="font-size:20px">%</span></div>
+          <div class="is-label">Sensitivity on<br>high-distress signals</div>
+        </div>
+        <div class="intel-stat">
+          <div class="is-num">2,400<span style="font-size:16px">+</span></div>
+          <div class="is-label">Community-specific<br>vocabulary tokens</div>
+        </div>
+        <div class="intel-stat">
+          <div class="is-num">42<span style="font-size:20px">+</span></div>
+          <div class="is-label">Cultural signals<br>across 5 dimensions</div>
+        </div>
+        <div class="intel-stat">
+          <div class="is-num">0</div>
+          <div class="is-label">Diagnostic outputs.<br>Ever.</div>
+        </div>
+      </div>
+
+      <a href="ai-model.html" class="intel-cta reveal d4">Full technical overview &mdash; CulturalBERT-VLAP</a>
+    </div>
+
+    <div class="intel-right reveal d2">
+      <div class="signal-trio">
+        <div class="st-item">
+          <div class="st-codes">
+            <span class="st-code">HOP-03</span>
+            <span class="st-code">CCM-09</span>
+          </div>
+          <div class="st-utterance">"idk why i even try anymore tbh, can't keep doing this no more fr."</div>
+          <div class="st-interp">Indirect hopelessness expressed through AAVE construction. "No more fr" is an authenticity escalator. Standard NLP classifies as informal text &mdash; no signal generated. VLAP reads: sustained distress beneath a vernacular frame.</div>
+        </div>
+
+        <div class="st-item">
+          <div class="st-codes">
+            <span class="st-code">SHA-03</span>
+            <span class="st-code">CRS-02</span>
+          </div>
+          <div class="st-utterance">"been thinking about unaliving lately ngl."</div>
+          <div class="st-interp">"Unaliving" is a youth-community coded term for self-harm ideation &mdash; developed specifically to avoid content filters. It does not exist in standard NLP training data. It exists in VLAP's vocabulary. "Ngl" (not gonna lie) is an authenticity marker &mdash; not casual language.</div>
+        </div>
+
+        <div class="st-item">
+          <div class="st-codes">
+            <span class="st-code">CCM-04</span>
+            <span class="st-code">ISO-04</span>
+          </div>
+          <div class="st-utterance">"it's not that deep but lowkey been struggling since school started."</div>
+          <div class="st-interp">Pre-disclosure minimization: "not that deep but" increases contextual weight on what follows. Standard models reduce signal at the hedge. VLAP reads the hedge as the signal &mdash; a documented pre-disclosure pattern in youth language.</div>
+        </div>
+
+        <div class="st-footer">Non-diagnostic &middot; Clinician-facing only &middot; Human review initiates all responses</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 05 &mdash; FOR SCHOOLS
+════════════════════════════════════ -->
+<section id="schools">
+  <div class="chapter-label reveal">Chapter 05 &mdash; For Schools & Districts</div>
+
+  <div class="school-stats reveal">
+    <div class="ss-cell">
+      <div class="ss-num">1 in 5</div>
+      <div class="ss-label">Students with untreated<br>mental health conditions</div>
+    </div>
+    <div class="ss-cell">
+      <div class="ss-num">9<span style="font-size:22px">mo</span></div>
+      <div class="ss-label">Average wait to see<br>a school counselor</div>
+    </div>
+    <div class="ss-cell">
+      <div class="ss-num">3<span style="font-size:22px">wks</span></div>
+      <div class="ss-label">Median time to first<br>peer support on Vasl</div>
+    </div>
+    <div class="ss-cell">
+      <div class="ss-num">$26B</div>
+      <div class="ss-label">Annual cost of student<br>mental health to U.S. institutions</div>
+    </div>
+  </div>
+
+  <div class="schools-grid">
+    <div class="schools-left">
+      <h2 class="schools-headline reveal d1">
+        The emotional health<br>
+        layer your district<br>
+        <em>already can't afford<br>to skip.</em>
+      </h2>
+      <p class="schools-body reveal d2">
+        One in five students is navigating a mental health condition. Your counselors are carrying caseloads designed for a different era. Vasl gives every student a culturally-safe first step &mdash; and gives your clinical team population-level insight into where need is rising before it becomes a crisis to manage.
+      </p>
+
+      <div class="medicaid-block reveal d3">
+        <div class="mb-label">School-Based Medicaid Billing</div>
+        <div class="mb-num">~50<span style="font-size:26px">%</span></div>
+        <div class="mb-desc">of Vasl contract cost recoverable through school-based Medicaid billing for Title I districts. Vasl provides the documentation and billing codes your finance team needs.</div>
+        <div class="mb-note">Average net district cost after billing: under $18 per student per year</div>
+      </div>
+    </div>
+
+    <div class="schools-right">
+      <div class="school-item reveal">
+        <div class="si-label">FERPA-Compliant by Design</div>
+        <div class="si-title">No student conversation data shared with parents, teachers, or administrators.</div>
+        <p class="si-body">Vasl never surfaces individual student data to school staff. VLAP signal context flows only to the licensed clinician supervising the student's care &mdash; not to counselors, administrators, or parents. Students get private space. Districts get compliance. That's the architecture, not a policy position.</p>
+      </div>
+
+      <div class="school-item reveal">
+        <div class="si-label">Population-Level Intelligence</div>
+        <div class="si-title">See where need is rising &mdash; before it becomes an absence, a suspension, or a crisis.</div>
+        <p class="si-body">The Client Org Portal gives district administrators aggregate, de-identified trend data across the student population &mdash; engagement patterns, peer group activity shifts, signal dimension trends by cohort. No individual student records. The insight that lets a district allocate clinical resources toward need rather than toward proximity.</p>
+      </div>
+
+      <div class="school-item reveal">
+        <div class="si-label">Every Student, Same Day</div>
+        <div class="si-title">Peer support and coaching from the first day of enrollment &mdash; not the first day of crisis.</div>
+        <p class="si-body">The 9-month wait is a national average. With Vasl, the median time to first peer support is 3 weeks. Students access 70+ peer groups, daily check-ins, and a culturally matched coaching relationship from the day their school activates the program. No waitlist. No insurance requirement. No intake form.</p>
+      </div>
+
+      <div class="school-item reveal">
+        <div class="si-label">Compliance Stack</div>
+        <div class="si-title">FERPA &middot; HIPAA &middot; WCAG 2.1 AA &middot; Medicaid Billing Ready</div>
+        <p class="si-body">Built for the compliance environment schools actually operate in &mdash; not retrofitted from a consumer app. BAA available for all district partnerships. Annual SOC 2 Type II audit. IRB study active with University of Maryland validating clinical signal accuracy in production deployment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 06 &mdash; OUTCOMES
+════════════════════════════════════ -->
+<section id="outcomes">
+  <div class="chapter-label reveal">Chapter 06 &mdash; Outcomes</div>
+
+  <div class="outcomes-header">
+    <h2 class="outcomes-headline reveal d1">
+      What the<br>
+      data <em>says.</em>
+    </h2>
+    <p class="outcomes-intro reveal d2">
+      Across pilot cohorts &mdash; community health centers, school-based programs, and university partnerships. Not projections. Not benchmarks from comparable platforms. Vasl's own deployment data, measured against pre-enrollment baselines and national averages.
+    </p>
+  </div>
+
+  <div class="outcomes-grid">
+    <div class="outcome-item reveal">
+      <div class="oi-num">42<span style="font-size:40px">%</span></div>
+      <div class="oi-label">Clinical Outcome</div>
+      <p class="oi-desc">Average PHQ-8 improvement across pilot cohorts &mdash; measured at 60 days from enrollment against pre-enrollment baseline. Population: BIPOC, LGBTQ+, and first-generation youth ages 14&ndash;24.</p>
+      <span class="oi-note">60-day measurement</span>
+    </div>
+
+    <div class="outcome-item reveal d1">
+      <div class="oi-num">79.5<span style="font-size:40px">%</span></div>
+      <div class="oi-label">Retention</div>
+      <p class="oi-desc">Still active on the platform at 30 days from enrollment. Industry average for digital behavioral health platforms: 40&ndash;50%. Traditional therapy dropout rate before session three: 72%.</p>
+      <span class="oi-note">vs. 40&ndash;50% industry average</span>
+    </div>
+
+    <div class="outcome-item reveal d2">
+      <div class="oi-num">3<span style="font-size:40px">wks</span></div>
+      <div class="oi-label">Time to Support</div>
+      <p class="oi-desc">Median time from enrollment to first meaningful peer support interaction &mdash; across all pilot cohorts. National average time to first therapist appointment in underserved communities: 9 months.</p>
+      <span class="oi-note">vs. 9 months nationally</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 07 &mdash; VOICES
+════════════════════════════════════ -->
+<section id="voices">
+  <div class="chapter-label reveal">Chapter 07 &mdash; Voices</div>
+
+  <div class="voices-header reveal d1">
+    <h2 class="voices-headline">
+      Real difference.<br>
+      <em>In the moments<br>that mattered.</em>
+    </h2>
+  </div>
+
+  <div class="voices-grid">
+    <div class="voice-card reveal">
+      <div class="vc-persona">Youth Member &mdash; University of Maryland, Junior</div>
+      <p class="vc-quote">"I didn't think a mental health platform would actually understand how I talk. Vasl doesn't make me feel like I have to translate myself."</p>
+      <p class="vc-context">The translation burden &mdash; the labor of converting your interior into clinical language before you can even begin to be heard &mdash; is what keeps most people from seeking support. This member describes its absence.</p>
+      <div class="vc-attr">Active member &mdash; 8 months enrolled</div>
+    </div>
+
+    <div class="voice-card reveal d1">
+      <div class="vc-persona">School Counselor &mdash; High School, Baltimore</div>
+      <p class="vc-quote">"I finally have a tool that helps me see who needs support before they end up in my office in crisis."</p>
+      <p class="vc-context">The shift from reactive to proactive care is the difference between a counselor managing crises and a counselor preventing them. The population-level insight from Vasl's org portal changes what a school counselor can see &mdash; and when.</p>
+      <div class="vc-attr">Pilot program &mdash; 6-month deployment</div>
+    </div>
+
+    <div class="voice-card reveal d2">
+      <div class="vc-persona">First-Gen College Student</div>
+      <p class="vc-quote">"My parents don't believe in therapy. Vasl gave me somewhere to go that didn't feel clinical or scary &mdash; just real."</p>
+      <p class="vc-context">For communities where therapy carries generational stigma, the entry point matters as much as the support itself. Peer community first &mdash; with clinical care available, not required &mdash; removes the label before it becomes a barrier.</p>
+      <div class="vc-attr">Amara K. &mdash; First-Gen Focus group member</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 08 &mdash; PARTNERS
+════════════════════════════════════ -->
+<section id="partners">
+  <div class="partners-inner">
+    <div class="partners-label reveal">Trusted by community organizations, universities, and health systems</div>
+    <div class="partners-list reveal d1">
+      <span class="partner-name">Thread YMCA</span>
+      <span class="partner-name">Enoch Pratt Library</span>
+      <span class="partner-name">University of Maryland</span>
+      <span class="partner-name">University of Baltimore</span>
+      <span class="partner-name">Boys & Girls Clubs</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 09 &mdash; PRICING
+════════════════════════════════════ -->
+<section id="pricing">
+  <div class="chapter-label reveal">Chapter 09 &mdash; Pricing</div>
+
+  <div class="pricing-header">
+    <h2 class="pricing-headline reveal d1">
+      Organizations pay.<br>
+      Members access<br>
+      Vasl <em>for free.</em>
+    </h2>
+    <p class="pricing-intro reveal d2">
+      Every pricing tier includes full member access at zero cost to the individual. The platform is funded through organizational partnerships &mdash; health systems, payers, school districts, and community organizations &mdash; so the communities who need it most never encounter a billing question. Three tiers. No hidden fees. No per-session charges.
+    </p>
+  </div>
+
+  <div class="pricing-tiers reveal">
+    <!-- Starter -->
+    <div class="tier">
+      <div class="tier-label">Starter</div>
+      <div class="tier-name">Community Launch</div>
+      <div class="tier-tagline">For small youth orgs, community centers, and organizations ready to pilot Vasl with a focused cohort.</div>
+      <div class="tier-price">$480</div>
+      <div class="tier-period">Platform fee &middot; per month &middot; billed annually</div>
+      <div class="tier-pmpm">+ $3&ndash;5 per member / month &middot; schools &amp; non-profits<br>+ $6&ndash;8 per member / month &middot; health systems</div>
+      <div class="tier-divider"></div>
+      <div class="tier-features">
+        <div class="tf-item">Up to 100 members</div>
+        <div class="tf-item">3 moderated peer groups</div>
+        <div class="tf-item">Crisis escalation &mdash; 90-min clinical supervisor SLA</div>
+        <div class="tf-item">Certified coaching access &mdash; unlimited</div>
+        <div class="tf-item">Outcomes dashboard &mdash; basic</div>
+        <div class="tf-item">Email support</div>
+      </div>
+      <a href="contact.html?subject=Starter Pilot" class="tier-cta dark">Start a Pilot</a>
+    </div>
+
+    <!-- Pro &mdash; featured -->
+    <div class="tier featured">
+      <div class="tier-label">Pro</div>
+      <div class="tier-name">Full Program</div>
+      <div class="tier-tagline">For organizations running a full behavioral health program &mdash; with the complete Vasl platform for their population.</div>
+      <div class="tier-price">$1,200</div>
+      <div class="tier-period">Platform fee &middot; per month &middot; billed annually</div>
+      <div class="tier-pmpm">+ $3&ndash;5 per member / month &middot; schools &amp; non-profits<br>+ $6&ndash;8 per member / month &middot; health systems</div>
+      <div class="tier-divider"></div>
+      <div class="tier-features">
+        <div class="tf-item">Up to 500 members</div>
+        <div class="tf-item">Unlimited peer groups</div>
+        <div class="tf-item">Medicaid billing documentation export</div>
+        <div class="tf-item">VLAP signal context &mdash; full clinician dashboard</div>
+        <div class="tf-item">Full analytics and population outcomes</div>
+        <div class="tf-item">Priority support + Customer Success Manager</div>
+        <div class="tf-item">Medicaid billing documentation included</div>
+      </div>
+      <a href="contact.html?subject=Pro Plan" class="tier-cta light">Get Started</a>
+    </div>
+
+    <!-- Enterprise -->
+    <div class="tier">
+      <div class="tier-label">Enterprise</div>
+      <div class="tier-name">Health System Scale</div>
+      <div class="tier-tagline">For health systems, state agencies, and large multi-site organizations deploying Vasl across populations.</div>
+      <div class="tier-price" style="font-size: 36px; padding-top: 8px; margin-bottom: 12px;">Custom</div>
+      <div class="tier-period">Platform fee scoped to deployment</div>
+      <div class="tier-pmpm">+ $6&ndash;8 per member / month &middot; health systems &amp; enterprise</div>
+      <div class="tier-divider"></div>
+      <div class="tier-features">
+        <div class="tf-item">Unlimited members</div>
+        <div class="tf-item">Multi-site management and administration</div>
+        <div class="tf-item">Custom CulturalBERT-VLAP fine-tuning for population</div>
+        <div class="tf-item">SSO + SCIM provisioning</div>
+        <div class="tf-item">Dedicated implementation and success team</div>
+        <div class="tf-item">BAA + full compliance documentation package</div>
+      </div>
+      <a href="contact.html?subject=Enterprise" class="tier-cta outline">Contact Sales</a>
+    </div>
+  </div>
+
+  <div class="pricing-note reveal">
+    <span class="pricing-note-item">No commitment required for pilot</span>
+    <span class="pricing-note-item">HIPAA-compliant inquiry</span>
+    <span class="pricing-note-item">Response within 1 business day</span>
+    <span class="pricing-note-item">Nonprofit pricing available</span>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     CHAPTER 10 &mdash; THE ASK
+════════════════════════════════════ -->
+<section id="ask">
+  <div class="ask-bg" aria-hidden="true">Vasl</div>
+  <div class="ask-inner">
+    <div class="ask-left">
+      <div class="chapter-label muted reveal">Chapter 10 &mdash; The Work Starts Here</div>
+      <h2 class="ask-headline reveal d1">
+        Ready to bring<br>
+        Vasl to your<br>
+        <em>community?</em>
+      </h2>
+      <p class="ask-body reveal d2">
+        We don't do generic demos. Every walkthrough is configured around your population, your partners, and the care gap you're trying to close. Tell us who you serve and we'll show you exactly what Vasl looks like for them.
+      </p>
+      <div class="ask-actions reveal d3">
+        <a href="contact.html" class="btn-light">Request a Demo</a>
+        <a href="about.html" class="btn-ghost-light">Our mission</a>
+      </div>
+    </div>
+
+    <div class="ask-right reveal d2">
+      <div class="ask-item">
+        <span class="ai-num">01</span>
+        <div>
+          <div class="ai-title">Population walkthrough</div>
+          <div class="ai-desc">We configure the demo around your specific community &mdash; age cohort, cultural context, org type &mdash; so you see exactly what your members would experience.</div>
+        </div>
+      </div>
+      <div class="ask-item">
+        <span class="ai-num">02</span>
+        <div>
+          <div class="ai-title">VLAP signal demonstration</div>
+          <div class="ai-desc">Walk through the Coach Portal with signal examples drawn from your population's language context &mdash; see what a clinician sees before a session begins.</div>
+        </div>
+      </div>
+      <div class="ask-item">
+        <span class="ai-num">03</span>
+        <div>
+          <div class="ai-title">Org Portal data review</div>
+          <div class="ai-desc">Review the Client Org Portal configured to your organization type &mdash; health center, school district, payer &mdash; with aggregate data reflecting your population profile.</div>
+        </div>
+      </div>
+      <div class="ask-item">
+        <span class="ai-num">04</span>
+        <div>
+          <div class="ai-title">Deployment and compliance planning</div>
+          <div class="ai-desc">Walk through the implementation roadmap, compliance documentation requirements, and the community alignment process with a Vasl implementation lead.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-sitemap">
+    <div class="fs-brand">
+      <a href="index.html" class="footer-logo">Vasl <span>Health</span></a>
+      <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
+      <a href="contact.html" class="fs-cta">Request a Demo &rarr;</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Platform</div>
+      <a href="platform.html">Platform Overview</a>
+      <a href="vlap.html">VLAP</a>
+      <a href="ai-model.html">AI Model</a>
+      <a href="technology.html">Technology</a>
+      <a href="peer-groups.html">Peer Groups</a>
+      <a href="teletherapy.html">Teletherapy</a>
+      <a href="prototype.html">Live Demo Portal</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Who We Serve</div>
+      <a href="for-schools.html">For Schools</a>
+      <a href="for-organizations.html">For Organizations</a>
+      <a href="outcomes.html">Outcomes</a>
+      <a href="clinical-outcomes.html">Clinical Outcomes</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Company</div>
+      <a href="about.html">About Vasl</a>
+      <a href="team.html">Team</a>
+      <a href="careers.html">Careers</a>
+      <a href="research.html">Research</a>
+      <a href="blog.html">Blog &amp; Insights</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Support &amp; Legal</div>
+      <a href="support.html">Help Center</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="baa.html">Business Associate Agreement</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 Vasl Health, Inc. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="baa.html">BAA</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── SCROLL REVEAL ─── -->
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.06, rootMargin: '0px 0px -24px 0px' });
+  reveals.forEach(el => io.observe(el));
+
+  window.addEventListener('load', () => {
+    reveals.forEach((el, i) => {
+      if (el.getBoundingClientRect().top < window.innerHeight) {
+        setTimeout(() => el.classList.add('visible'), i * 55);
+      }
+    });
+  });
+</script>
 </body>
 </html>
