@@ -1,13 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Meet the team behind Vasl Health &mdash; deep clinical roots, mission-locked governance, and the specific expertise to build what this platform requires.">
-<title>Our Team &mdash; Vasl Health</title>
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="description" content="Meet the team behind Vasl Health — deep clinical roots, mission-locked governance, and the specific expertise to build what this platform requires.">
+<title>Our Team — Vasl Health</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -410,10 +408,23 @@
   }
 
   /* ─── FOOTER ─── */
+  footer {
+    background: var(--charcoal); border-top: 1px solid rgba(250,247,242,0.08);
+    padding: 48px var(--gutter);
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; align-items: start;
+  }
+  .footer-col-head { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(250,247,242,0.28); margin-bottom: 20px; }
   .footer-logo-col {}
+  .footer-logo { font-family: var(--serif); font-size: 22px; color: var(--warm-white); letter-spacing: -0.02em; text-decoration: none; display: block; margin-bottom: 10px; }
   .footer-logo span { color: var(--clay); font-style: italic; }
+  .footer-mission-line { font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250,247,242,0.20); line-height: 1.7; }
+  .footer-nav { display: flex; flex-direction: column; gap: 10px; list-style: none; }
   .footer-nav a { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250,247,242,0.32); text-decoration: none; transition: color 0.2s; }
   .footer-nav a:hover { color: var(--warm-white); }
+  .footer-compliance { font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250,247,242,0.20); line-height: 1.9; margin-top: 24px; }
+  .footer-bottom { grid-column: 1 / -1; border-top: 1px solid rgba(250,247,242,0.08); padding-top: 28px; display: flex; align-items: center; justify-content: space-between; }
+  .footer-copy { font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; color: rgba(250,247,242,0.18); }
+  .footer-legal { display: flex; gap: 20px; }
   .footer-legal a { font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250,247,242,0.22); text-decoration: none; transition: color 0.2s; }
   .footer-legal a:hover { color: var(--warm-white); }
 
@@ -425,46 +436,15 @@
     .person-initial { width: 60px; height: 60px; font-size: 26px; }
     .section-header { grid-template-columns: 1fr; gap: 28px; }
     .join-inner { grid-template-columns: 1fr; gap: 60px; }
+    footer { grid-template-columns: 1fr 1fr; }
+    .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
   }
   @media (max-width: 768px) {
     :root { --gutter: 5vw; }
     .nav-links { display: none; }
     .ts-item { grid-template-columns: 1fr; gap: 4px; }
+    footer { grid-template-columns: 1fr; }
   }
-
-  .ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
-  .ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.2s;}
-  .ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
-  .ham-btn.open span:nth-child(2){opacity:0;}
-  .ham-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
-  @media(max-width:780px){
-    .ham-btn{display:flex;}
-    .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--warm);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
-    .nav-links.open{display:flex;}
-    .nav-links a{font-size:22px;letter-spacing:0.04em;}
-    .nav-cta{display:none;}
-  }
-
-  footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);padding:0;}
-  .footer-sitemap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:0;padding:56px 7vw 40px;border-bottom:1px solid rgba(250,247,242,0.08);}
-  .fs-brand{padding-right:40px;}
-  .footer-logo{font-family:var(--serif);font-size:22px;color:var(--warm-white,#FAF7F2);letter-spacing:-0.02em;text-decoration:none;display:block;margin-bottom:12px;}
-  .footer-logo span{color:var(--clay,#C4896F);font-style:italic;}
-  .footer-mission{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.28);line-height:1.8;margin-bottom:20px;}
-  .fs-cta{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:var(--clay,#C4896F);border:1px solid rgba(196,137,111,0.40);padding:9px 18px;text-decoration:none;transition:all 0.18s;}
-  .fs-cta:hover{background:rgba(196,137,111,0.12);}
-  .fs-col{padding-left:32px;border-left:1px solid rgba(250,247,242,0.06);}
-  .fs-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,247,242,0.30);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(250,247,242,0.06);}
-  .fs-col a{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,247,242,0.45);text-decoration:none;margin-bottom:10px;transition:color 0.15s;}
-  .fs-col a:hover{color:var(--clay,#C4896F);}
-  .footer-bottom{padding:20px 7vw;display:flex;align-items:center;justify-content:space-between;}
-  .footer-copy{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,0.20);}
-  .footer-legal{display:flex;gap:20px;}
-  .footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
-  .footer-legal a:hover{color:var(--clay,#C4896F);}
-  @media(max-width:1100px){.footer-sitemap{grid-template-columns:1fr 1fr 1fr;gap:32px;}.fs-brand{grid-column:1/-1;padding-right:0;}.fs-col{border-left:none;padding-left:0;}}
-  @media(max-width:680px){.footer-sitemap{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}}
-  @media(max-width:400px){.footer-sitemap{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -472,23 +452,20 @@
 <!-- ─── NAV ─── -->
 <nav>
   <a href="index.html" class="nav-logo">Vasl <span>Health</span></a>
-    <ul class="nav-links">
+  <ul class="nav-links">
     <li><a href="about.html">About</a></li>
-    <li><a href="platform.html">Platform</a></li>
+    <li><a href="team.html" class="active">Team</a></li>
+    <li><a href="ai-model.html">Technology</a></li>
     <li><a href="outcomes.html">Outcomes</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="team.html">Team</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="for-schools.html">For Schools</a></li>
+    <li><a href="for-organizations.html">For Orgs</a></li>
   </ul>
-  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
   <a href="contact.html" class="nav-cta">Contact Us</a>
 </nav>
 
 
 <!-- ═══════════════════════════════════
-     CHAPTER 01 &mdash; THE TEAM
+     CHAPTER 01 — THE TEAM
 ════════════════════════════════════ -->
 <section id="intro">
   <div class="intro-left">
@@ -507,25 +484,25 @@
     <div class="pbc-block">
       <div class="pbc-label">Delaware Public Benefit Corporation</div>
       <div class="pbc-title">Mission-locked governance. Not just a pitch.</div>
-      <p class="pbc-body">Vasl Health's commitment to advancing health equity for communities of color, LGBTQ+ individuals, and low-income and underserved families is written into our corporate charter &mdash; legally binding at every stage of growth. This is not a values statement. It is the document.</p>
+      <p class="pbc-body">Vasl Health's commitment to advancing health equity for communities of color, LGBTQ+ individuals, and low-income and underserved families is written into our corporate charter — legally binding at every stage of growth. This is not a values statement. It is the document.</p>
     </div>
 
     <div class="team-summary">
       <div class="ts-item">
         <span class="ts-label">Leadership</span>
-        <span class="ts-value">Rodney Bell &middot; Kacy Keys</span>
+        <span class="ts-value">Rodney Bell · Kacy Keys</span>
       </div>
       <div class="ts-item">
-        <span class="ts-label">Clinical</span>
-        <span class="ts-value">Paula Bruce &middot; Janice Nishiyama &middot; Marcie Johnson</span>
+        <span class="ts-label">Clinical & Data</span>
+        <span class="ts-value">Hants Williams · Paula Bruce · Janice Nishiyama · Marcie Johnson</span>
       </div>
       <div class="ts-item">
         <span class="ts-label">Advisory</span>
-        <span class="ts-value">Panagis Galiatsatos &middot; Johns Hopkins Medicine</span>
+        <span class="ts-value">Panagis Galiatsatos · Johns Hopkins Medicine</span>
       </div>
       <div class="ts-item">
         <span class="ts-label">Structure</span>
-        <span class="ts-value">Delaware PBC &middot; Techstars alumni &middot; IRB active</span>
+        <span class="ts-value">Delaware PBC · Techstars alumni · IRB active</span>
       </div>
     </div>
   </div>
@@ -533,10 +510,10 @@
 
 
 <!-- ═══════════════════════════════════
-     CHAPTER 02 &mdash; LEADERSHIP
+     CHAPTER 02 — LEADERSHIP
 ════════════════════════════════════ -->
 <section id="leadership">
-  <div class="chapter-label reveal">Chapter 02 &mdash; Leadership</div>
+  <div class="chapter-label reveal">Chapter 02 — Leadership</div>
 
   <div class="section-header">
     <h2 class="section-headline reveal d1">
@@ -545,7 +522,7 @@
       <em>institutions.</em>
     </h2>
     <p class="section-intro reveal d2">
-      Vasl Health was founded by people who came to this work from the outside &mdash; from investment banking, from law, from real estate development &mdash; and who recognized, specifically because of that vantage point, what the standard approach to mental health for underserved communities was missing. Their backgrounds in capital markets and institutional development are not incidental to the platform. They are why it is built to scale, structured to sustain, and governed to last.
+      Vasl Health was founded by people who came to this work from the outside — from investment banking, from law, from real estate development — and who recognized, specifically because of that vantage point, what the standard approach to mental health for underserved communities was missing. Their backgrounds in capital markets and institutional development are not incidental to the platform. They are why it is built to scale, structured to sustain, and governed to last.
     </p>
   </div>
 
@@ -556,7 +533,7 @@
       <div class="person-name">Rodney Bell</div>
       <div class="person-title">Founder & CEO</div>
       <div class="person-credentials">
-        <span class="person-cred">Investment banking &mdash; M&A and capital markets</span>
+        <span class="person-cred">Investment banking — M&A and capital markets</span>
         <span class="person-cred">Fintech founder for underserved communities</span>
         <span class="person-cred">Techstars alumni</span>
       </div>
@@ -565,7 +542,7 @@
     <div class="person-mid">
       <div class="person-section-label">Background</div>
       <p class="person-bio">Rodney came to Vasl Health through two distinct lenses: first as an investment banker who spent years in M&A and capital markets, understanding how institutions are built and capitalized; then as a fintech founder who recognized that the same communities he'd watched financial services ignore were being equally failed by the mental health system.</p>
-      <p class="person-bio">The founding insight at Vasl isn't that mental health care for underserved youth needs better technology. It's that the technology that exists was built for the wrong population &mdash; trained on the wrong language, designed around the wrong entry points, and governed by incentives that don't extend to communities without purchasing power. Rodney's background in institutional finance gives him an unusual ability to see both the structural problem and the structural solution simultaneously.</p>
+      <p class="person-bio">The founding insight at Vasl isn't that mental health care for underserved youth needs better technology. It's that the technology that exists was built for the wrong population — trained on the wrong language, designed around the wrong entry points, and governed by incentives that don't extend to communities without purchasing power. Rodney's background in institutional finance gives him an unusual ability to see both the structural problem and the structural solution simultaneously.</p>
       <blockquote class="person-pull">"The gap isn't access. The gap is architecture. Every other platform was built for someone else and then pointed at communities that needed something different from the beginning."</blockquote>
     </div>
 
@@ -573,19 +550,19 @@
       <div class="person-detail-label">Background Detail</div>
       <div class="person-detail-item">
         <div class="pdi-label">Prior background</div>
-        <div class="pdi-value">M&A investment banking and capital markets &mdash; the institutional fluency that shapes how Vasl is structured, funded, and governed</div>
+        <div class="pdi-value">M&A investment banking and capital markets — the institutional fluency that shapes how Vasl is structured, funded, and governed</div>
       </div>
       <div class="person-detail-item">
         <div class="pdi-label">Founder experience</div>
-        <div class="pdi-value">Previously founded a fintech platform focused on financial access for underserved communities &mdash; the direct predecessor to Vasl's community-equity focus</div>
+        <div class="pdi-value">Previously founded a fintech platform focused on financial access for underserved communities — the direct predecessor to Vasl's community-equity focus</div>
       </div>
       <div class="person-detail-item">
         <div class="pdi-label">Accelerator</div>
-        <div class="pdi-value">Techstars alumni &mdash; institutional startup training and network</div>
+        <div class="pdi-value">Techstars alumni — institutional startup training and network</div>
       </div>
       <div class="person-detail-item">
         <div class="pdi-label">Current role</div>
-        <div class="pdi-value">Founder & CEO &mdash; Vasl Health, Inc. Also serves as COO and VP at Next Play, Inc., a nonprofit venture accelerator focused on athlete entrepreneurship and post-career leadership</div>
+        <div class="pdi-value">Founder & CEO — Vasl Health, Inc. Also serves as COO and VP at Next Play, Inc., a nonprofit venture accelerator focused on athlete entrepreneurship and post-career leadership</div>
       </div>
     </div>
   </div>
@@ -600,14 +577,14 @@
         <span class="person-cred">Founder & CEO, Praxis Development Group</span>
         <span class="person-cred">$1B+ real estate development portfolio</span>
         <span class="person-cred">JD, UC Berkeley School of Law</span>
-        <span class="person-cred">Techstars alumni &middot; UCLA TechQuity cohort</span>
+        <span class="person-cred">Techstars alumni · UCLA TechQuity cohort</span>
       </div>
     </div>
 
     <div class="person-mid">
       <div class="person-section-label">Background</div>
-      <p class="person-bio">Kacy Keys brings to Vasl Health something rare in the health technology space: the specific operational discipline of someone who has built at scale in the physical world. As Founder and CEO of Praxis Development Group &mdash; a real estate development firm with a portfolio exceeding $1 billion in assets &mdash; she has navigated the institutional, regulatory, and community dynamics of large-scale development projects through some of the most complex urban environments in California.</p>
-      <p class="person-bio">Her background includes time at the LA Mayor's Office, Allen Matkins, JH Snyder, and Seritage Growth Properties &mdash; a career arc that built fluency in the intersection of law, policy, community impact, and capital. At Vasl, that background translates directly: the platform operates at the intersection of healthcare regulation, community trust, institutional partnership, and technology scale &mdash; exactly the terrain Kacy has spent a career navigating.</p>
+      <p class="person-bio">Kacy Keys brings to Vasl Health something rare in the health technology space: the specific operational discipline of someone who has built at scale in the physical world. As Founder and CEO of Praxis Development Group — a real estate development firm with a portfolio exceeding $1 billion in assets — she has navigated the institutional, regulatory, and community dynamics of large-scale development projects through some of the most complex urban environments in California.</p>
+      <p class="person-bio">Her background includes time at the LA Mayor's Office, Allen Matkins, JH Snyder, and Seritage Growth Properties — a career arc that built fluency in the intersection of law, policy, community impact, and capital. At Vasl, that background translates directly: the platform operates at the intersection of healthcare regulation, community trust, institutional partnership, and technology scale — exactly the terrain Kacy has spent a career navigating.</p>
       <blockquote class="person-pull">"Every major development project I've worked on required understanding who the community was, what they actually needed, and how to build something that outlasted the funding cycle. Mental health equity requires exactly the same discipline."</blockquote>
     </div>
 
@@ -615,19 +592,19 @@
       <div class="person-detail-label">Background Detail</div>
       <div class="person-detail-item">
         <div class="pdi-label">Current company</div>
-        <div class="pdi-value">Founder & CEO, Praxis Development Group &mdash; $1B+ real estate development portfolio across Los Angeles</div>
+        <div class="pdi-value">Founder & CEO, Praxis Development Group — $1B+ real estate development portfolio across Los Angeles</div>
       </div>
       <div class="person-detail-item">
         <div class="pdi-label">Legal background</div>
-        <div class="pdi-value">JD, UC Berkeley School of Law &mdash; practice background in real estate, regulatory compliance, and institutional transactions</div>
+        <div class="pdi-value">JD, UC Berkeley School of Law — practice background in real estate, regulatory compliance, and institutional transactions</div>
       </div>
       <div class="person-detail-item">
         <div class="pdi-label">Prior roles</div>
-        <div class="pdi-value">LA Mayor's Office &middot; Allen Matkins &middot; JH Snyder &middot; Seritage Growth Properties &middot; USC Dollinger program</div>
+        <div class="pdi-value">LA Mayor's Office · Allen Matkins · JH Snyder · Seritage Growth Properties · USC Dollinger program</div>
       </div>
       <div class="person-detail-item">
         <div class="pdi-label">Accelerators</div>
-        <div class="pdi-value">Techstars alumni &middot; UCLA TechQuity cohort &mdash; community-focused technology development</div>
+        <div class="pdi-value">Techstars alumni · UCLA TechQuity cohort — community-focused technology development</div>
       </div>
     </div>
   </div>
@@ -635,10 +612,10 @@
 
 
 <!-- ═══════════════════════════════════
-     CHAPTER 03 &mdash; CLINICAL LEADERSHIP
+     CHAPTER 03 — CLINICAL LEADERSHIP
 ════════════════════════════════════ -->
 <section id="clinical">
-  <div class="chapter-label light reveal">Chapter 03 &mdash; Clinical Leadership</div>
+  <div class="chapter-label light reveal">Chapter 03 — Clinical Leadership</div>
 
   <div class="section-header on-green">
     <h2 class="section-headline on-green reveal d1">
@@ -647,8 +624,58 @@
       <em>these communities.</em>
     </h2>
     <p class="section-intro on-green reveal d2">
-      The clinical leadership team does not provide therapy to Vasl members. They provide the clinical architecture, oversight, and expertise that makes every element of the platform clinically sound &mdash; from the VLAP signal taxonomy to the coaching training framework to the warm handoff protocol. Their decades of practice within the specific communities Vasl serves are what the platform's clinical credibility is built on.
+      The clinical leadership team does not provide therapy to Vasl members. They provide the clinical architecture, oversight, and expertise that makes every element of the platform clinically sound — from the VLAP signal taxonomy to the coaching training framework to the warm handoff protocol. Their decades of practice within the specific communities Vasl serves are what the platform's clinical credibility is built on.
     </p>
+  </div>
+
+  <!-- Hants Williams -->
+  <div class="person-row on-green reveal">
+    <div>
+      <div class="person-initial clay">H</div>
+      <div class="person-name">Hants Williams</div>
+      <div class="person-title">Head of Data Science</div>
+      <div class="person-credentials">
+        <span class="person-cred">PhD, Duke University</span>
+        <span class="person-cred">Nurse-scientist who became a data expert</span>
+        <span class="person-cred">15 years across hospitals, research labs, startups, higher education</span>
+      </div>
+    </div>
+
+    <div class="person-mid">
+      <div class="person-section-label">Role at Vasl</div>
+      <p class="person-bio">Hants is the head of data science for VLAP v2. That means he owns the architecture that determines whether the model's clinical signal detection actually works in real clinical settings — not in research conditions, but in the messy reality of physician notes, billing data, and the gap between what gets documented and what a clinician actually sees.</p>
+      <p class="person-bio">He came to Vasl from Fordham University, where he led data strategy and governance across the entire university system. Before that: a faculty line at Stony Brook leading research and advanced-data activities across health professions and medicine. Before that: fifteen years building digital health tools that touched 8M+ members, patient-reported outcome measures now used millions of times across 30+ states, data products that helped early-stage companies raise $15M+. He earned a PhD from Duke. A postdoctoral fellowship in pain genetics at Maryland. Ten years writing Python in production health systems.</p>
+      <p class="person-bio">The reason Hants matters to Vasl is this: he's a nurse-scientist who became a data expert. He didn't learn clinical work from papers. He learned it in hospitals, in research labs, in the conversations between data teams and the clinicians who have to live with what the models produce. He can smell when a result looks good on paper but breaks in practice.</p>
+      <blockquote class="person-pull">"The validation you need isn't the one that gets published. It's the one that changes how a clinician sits with a young person who's struggling."</blockquote>
+    </div>
+
+    <div class="person-right">
+      <div class="person-detail-label">Profile</div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Credential</div>
+        <div class="pdi-value">PhD, Duke University — data science and research methodology</div>
+      </div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Training</div>
+        <div class="pdi-value">Postdoctoral fellowship, University of Maryland — pain genetics and clinical data analysis</div>
+      </div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Faculty</div>
+        <div class="pdi-value">Stony Brook University — research leadership across Health Professions and Medicine schools</div>
+      </div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Current role</div>
+        <div class="pdi-value">Executive Director of Data Governance and Data Strategy, Fordham University</div>
+      </div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Experience</div>
+        <div class="pdi-value">15 years across hospitals, research labs, digital-health startups, higher education · 8M+ members across digital health tools · Patient-reported outcome measure deployed across 30+ states · Data products supporting $15M+ in venture funding · 10 years hands-on Python in production systems</div>
+      </div>
+      <div class="person-detail-item">
+        <div class="pdi-label">Role at Vasl</div>
+        <div class="pdi-value">Head of Data Science — VLAP v2 architecture, Mayo Clinic validation framework, vocabulary gap analysis, clinical signal governance</div>
+      </div>
+    </div>
   </div>
 
   <!-- Paula Bruce -->
@@ -658,7 +685,7 @@
       <div class="person-name">Paula Bruce, PhD</div>
       <div class="person-title">Chief Medical Officer</div>
       <div class="person-credentials">
-        <span class="person-cred">Clinical & forensic psychologist &mdash; 30 years</span>
+        <span class="person-cred">Clinical & forensic psychologist — 30 years</span>
         <span class="person-cred">Founder, PBA Psychology Group</span>
         <span class="person-cred">Specializes in BIPOC, LGBTQ+, and racial trauma</span>
       </div>
@@ -666,8 +693,8 @@
 
     <div class="person-mid">
       <div class="person-section-label">Clinical Role at Vasl</div>
-      <p class="person-bio">As Chief Medical Officer, Dr. Bruce provides the clinical authority and oversight framework for the Vasl platform &mdash; from the VLAP signal taxonomy design to the clinical escalation protocols to the coaching training standards. Her 30 years of practice specializing in culturally competent care for BIPOC and LGBTQ+ communities is the foundation on which Vasl's clinical model is built.</p>
-      <p class="person-bio">As founder of PBA Psychology Group, Dr. Bruce has spent decades developing clinical approaches to racial trauma, identity-based stress, and the specific distress presentations that standard clinical instruments consistently misread in communities of color. That body of practice is what makes the VLAP signal taxonomy clinically grounded &mdash; not theoretically, but from decades of direct clinical observation of exactly what the platform is built to detect.</p>
+      <p class="person-bio">As Chief Medical Officer, Dr. Bruce provides the clinical authority and oversight framework for the Vasl platform — from the VLAP signal taxonomy design to the clinical escalation protocols to the coaching training standards. Her 30 years of practice specializing in culturally competent care for BIPOC and LGBTQ+ communities is the foundation on which Vasl's clinical model is built.</p>
+      <p class="person-bio">As founder of PBA Psychology Group, Dr. Bruce has spent decades developing clinical approaches to racial trauma, identity-based stress, and the specific distress presentations that standard clinical instruments consistently misread in communities of color. That body of practice is what makes the VLAP signal taxonomy clinically grounded — not theoretically, but from decades of direct clinical observation of exactly what the platform is built to detect.</p>
       <blockquote class="person-pull">"The gap between what standard clinical tools measure and what BIPOC and LGBTQ+ youth are actually communicating is not a data problem. It's a presence problem. The tools were built by people who weren't in the room."</blockquote>
     </div>
 
@@ -675,19 +702,19 @@
       <div class="person-detail-label">Clinical Profile</div>
       <div class="person-detail-item">
         <div class="pdi-label">Credential</div>
-        <div class="pdi-value">PhD &mdash; Clinical & Forensic Psychology &middot; 30 years of licensed practice</div>
+        <div class="pdi-value">PhD — Clinical & Forensic Psychology · 30 years of licensed practice</div>
       </div>
       <div class="person-detail-item">
         <div class="pdi-label">Practice</div>
-        <div class="pdi-value">Founder, PBA Psychology Group &mdash; practice specializing in BIPOC, LGBTQ+, and racial trauma clinical care</div>
+        <div class="pdi-value">Founder, PBA Psychology Group — practice specializing in BIPOC, LGBTQ+, and racial trauma clinical care</div>
       </div>
       <div class="person-detail-item">
         <div class="pdi-label">Clinical expertise</div>
-        <div class="pdi-value">Racial trauma &middot; Intergenerational trauma &middot; Identity-based stress &middot; Culturally competent forensic psychology</div>
+        <div class="pdi-value">Racial trauma · Intergenerational trauma · Identity-based stress · Culturally competent forensic psychology</div>
       </div>
       <div class="person-detail-item">
         <div class="pdi-label">Role at Vasl</div>
-        <div class="pdi-value">Chief Medical Officer &mdash; clinical architecture, VLAP signal taxonomy oversight, clinical escalation protocol design, coaching training standards</div>
+        <div class="pdi-value">Chief Medical Officer — clinical architecture, VLAP signal taxonomy oversight, clinical escalation protocol design, coaching training standards</div>
       </div>
     </div>
   </div>
@@ -707,28 +734,28 @@
 
     <div class="person-mid">
       <div class="person-section-label">Clinical Role at Vasl</div>
-      <p class="person-bio">As Clinical Officer, Dr. Nishiyama provides clinical operational oversight &mdash; translating the platform's clinical architecture into the day-to-day protocols, training frameworks, and quality standards that govern how the Vasl care model functions in deployment. Her work bridges the gap between clinical theory and clinical practice at scale.</p>
-      <p class="person-bio">Dr. Nishiyama's clinical practice focuses on trauma-informed care and anxiety disorders &mdash; with deep specialization in the specific presentations that diverse cultural backgrounds produce. Her work with immigrant and diaspora youth, where distress manifests through cultural norms around stoicism, family loyalty, and collectivist values rather than through the language of Western clinical instruments, has directly shaped the VLAP Cultural Context Modifier (CCM) signal dimension.</p>
-      <blockquote class="person-pull">"The most important clinical skill is knowing what you're not hearing. For many of the youth Vasl serves, the real communication is in the frame around what they say &mdash; not in what they say directly."</blockquote>
+      <p class="person-bio">As Clinical Officer, Dr. Nishiyama provides clinical operational oversight — translating the platform's clinical architecture into the day-to-day protocols, training frameworks, and quality standards that govern how the Vasl care model functions in deployment. Her work bridges the gap between clinical theory and clinical practice at scale.</p>
+      <p class="person-bio">Dr. Nishiyama's clinical practice focuses on trauma-informed care and anxiety disorders — with deep specialization in the specific presentations that diverse cultural backgrounds produce. Her work with immigrant and diaspora youth, where distress manifests through cultural norms around stoicism, family loyalty, and collectivist values rather than through the language of Western clinical instruments, has directly shaped the VLAP Cultural Context Modifier (CCM) signal dimension.</p>
+      <blockquote class="person-pull">"The most important clinical skill is knowing what you're not hearing. For many of the youth Vasl serves, the real communication is in the frame around what they say — not in what they say directly."</blockquote>
     </div>
 
     <div class="person-right">
       <div class="person-detail-label">Clinical Profile</div>
       <div class="person-detail-item">
         <div class="pdi-label">Credential</div>
-        <div class="pdi-value">PhD &mdash; Licensed Clinical Psychologist &middot; PBA Psychology Group</div>
+        <div class="pdi-value">PhD — Licensed Clinical Psychologist · PBA Psychology Group</div>
       </div>
       <div class="person-detail-item">
         <div class="pdi-label">Clinical expertise</div>
-        <div class="pdi-value">Trauma-informed care &middot; Anxiety disorders &middot; Culturally competent care for immigrant and diaspora communities</div>
+        <div class="pdi-value">Trauma-informed care · Anxiety disorders · Culturally competent care for immigrant and diaspora communities</div>
       </div>
       <div class="person-detail-item">
         <div class="pdi-label">Population focus</div>
-        <div class="pdi-value">AAPI communities &middot; Immigrant families &middot; Collectivist cultural frameworks &middot; First-generation youth</div>
+        <div class="pdi-value">AAPI communities · Immigrant families · Collectivist cultural frameworks · First-generation youth</div>
       </div>
       <div class="person-detail-item">
         <div class="pdi-label">Role at Vasl</div>
-        <div class="pdi-value">Clinical Officer &mdash; operational protocols, coaching training oversight, clinical quality standards, CCM signal dimension development</div>
+        <div class="pdi-value">Clinical Officer — operational protocols, coaching training oversight, clinical quality standards, CCM signal dimension development</div>
       </div>
     </div>
   </div>
@@ -740,7 +767,7 @@
       <div class="person-name">Marcie Johnson, PhD</div>
       <div class="person-title">Chief Clinical Director</div>
       <div class="person-credentials">
-        <span class="person-cred">Clinical psychologist &middot; PhD, University of Iowa</span>
+        <span class="person-cred">Clinical psychologist · PhD, University of Iowa</span>
         <span class="person-cred">Neuropsychology & CBT specialist</span>
         <span class="person-cred">Lifespan practice: individual, group & assessment</span>
       </div>
@@ -748,8 +775,8 @@
 
     <div class="person-mid">
       <div class="person-section-label">Clinical Role at Vasl</div>
-      <p class="person-bio">As Chief Clinical Director, Dr. Johnson provides the evidence-based clinical framework that governs the Vasl platform's treatment model &mdash; ensuring every element, from the care sequencing to the VLAP signal taxonomy to the coaching intervention protocols, is grounded in validated clinical science. Her specialization in neuropsychology and cognitive behavioral therapy gives Vasl's model its clinical rigor.</p>
-      <p class="person-bio">Dr. Johnson's practice spans the full lifespan &mdash; individual sessions, group therapy, and comprehensive psychological assessment &mdash; across diverse populations. Her neuropsychological expertise is particularly relevant to how Vasl's platform understands the relationship between language, cognition, and emotional state: the clinical basis for why language-based signal detection is a valid proxy for behavioral health risk.</p>
+      <p class="person-bio">As Chief Clinical Director, Dr. Johnson provides the evidence-based clinical framework that governs the Vasl platform's treatment model — ensuring every element, from the care sequencing to the VLAP signal taxonomy to the coaching intervention protocols, is grounded in validated clinical science. Her specialization in neuropsychology and cognitive behavioral therapy gives Vasl's model its clinical rigor.</p>
+      <p class="person-bio">Dr. Johnson's practice spans the full lifespan — individual sessions, group therapy, and comprehensive psychological assessment — across diverse populations. Her neuropsychological expertise is particularly relevant to how Vasl's platform understands the relationship between language, cognition, and emotional state: the clinical basis for why language-based signal detection is a valid proxy for behavioral health risk.</p>
       <blockquote class="person-pull">"Evidence-based care and culturally responsive care are not in tension. The evidence is clear: culturally matched care produces better outcomes. Building that into the platform architecture is simply good clinical science."</blockquote>
     </div>
 
@@ -757,19 +784,19 @@
       <div class="person-detail-label">Clinical Profile</div>
       <div class="person-detail-item">
         <div class="pdi-label">Credential</div>
-        <div class="pdi-value">PhD, University of Iowa &mdash; Clinical Psychology &middot; Neuropsychology specialization</div>
+        <div class="pdi-value">PhD, University of Iowa — Clinical Psychology · Neuropsychology specialization</div>
       </div>
       <div class="person-detail-item">
         <div class="pdi-label">Clinical expertise</div>
-        <div class="pdi-value">Neuropsychology &middot; Cognitive Behavioral Therapy &middot; Psychological assessment &middot; Group therapy &middot; Lifespan practice</div>
+        <div class="pdi-value">Neuropsychology · Cognitive Behavioral Therapy · Psychological assessment · Group therapy · Lifespan practice</div>
       </div>
       <div class="person-detail-item">
         <div class="pdi-label">Practice scope</div>
-        <div class="pdi-value">Individual, group, and psychological assessment across the lifespan &mdash; diverse cultural populations</div>
+        <div class="pdi-value">Individual, group, and psychological assessment across the lifespan — diverse cultural populations</div>
       </div>
       <div class="person-detail-item">
         <div class="pdi-label">Role at Vasl</div>
-        <div class="pdi-value">Chief Clinical Director &mdash; evidence-based framework, treatment model governance, clinical protocol validation, outcome measurement design</div>
+        <div class="pdi-value">Chief Clinical Director — evidence-based framework, treatment model governance, clinical protocol validation, outcome measurement design</div>
       </div>
     </div>
   </div>
@@ -777,10 +804,10 @@
 
 
 <!-- ═══════════════════════════════════
-     CHAPTER 04 &mdash; MEDICAL ADVISORY
+     CHAPTER 04 — MEDICAL ADVISORY
 ════════════════════════════════════ -->
 <section id="advisory">
-  <div class="chapter-label reveal">Chapter 04 &mdash; Medical Advisory</div>
+  <div class="chapter-label reveal">Chapter 04 — Medical Advisory</div>
 
   <div class="section-header">
     <h2 class="section-headline reveal d1">
@@ -789,7 +816,7 @@
       <em>what we claim.</em>
     </h2>
     <p class="section-intro reveal d2">
-      Advisory relationships at Vasl are not credential collections. They are active engagements with researchers and clinicians whose specific expertise provides independent validation of the platform's clinical approach &mdash; and whose institutional affiliations signal to the health systems, payers, and academic partners Vasl works with that the science behind this platform has been reviewed by peers.
+      Advisory relationships at Vasl are not credential collections. They are active engagements with researchers and clinicians whose specific expertise provides independent validation of the platform's clinical approach — and whose institutional affiliations signal to the health systems, payers, and academic partners Vasl works with that the science behind this platform has been reviewed by peers.
     </p>
   </div>
 
@@ -813,25 +840,25 @@
 
     <div class="person-mid">
       <div class="person-section-label">Advisory Role at Vasl</div>
-      <p class="person-bio">Dr. Galiatsatos is one of the most prominent voices in American health equity &mdash; a practicing pulmonologist, an Associate Professor at Johns Hopkins School of Medicine, and Co-Chair of the Hopkins Health Equity Steering Committee. His work sits at the precise intersection where clinical medicine, community health, and institutional accountability meet. His 100+ peer-reviewed publications span community medicine, social determinants of health, and health equity interventions.</p>
-      <p class="person-bio">As Senior Medical Advisor to Vasl Health, Dr. Galiatsatos provides strategic clinical guidance for the platform's community medicine approach and health equity methodology. His co-founding of Medicine for the Greater Good &mdash; a national initiative dedicated to health equity through community engagement &mdash; reflects the same conviction that underlies Vasl: that equitable health outcomes require meeting communities where they are, in the language they speak, through the channels they trust.</p>
-      <p class="person-bio">His affiliation with Johns Hopkins provides Vasl with access to one of the most respected clinical research networks in the country &mdash; and signals to health system and payer partners that the platform's clinical methodology has been reviewed and endorsed at the highest level of academic medicine.</p>
-      <blockquote class="person-pull">"Health equity isn't a specialty. It's the standard we should be measuring every healthcare intervention against &mdash; including the AI we deploy in clinical settings."</blockquote>
+      <p class="person-bio">Dr. Galiatsatos is one of the most prominent voices in American health equity — a practicing pulmonologist, an Associate Professor at Johns Hopkins School of Medicine, and Co-Chair of the Hopkins Health Equity Steering Committee. His work sits at the precise intersection where clinical medicine, community health, and institutional accountability meet. His 100+ peer-reviewed publications span community medicine, social determinants of health, and health equity interventions.</p>
+      <p class="person-bio">As Senior Medical Advisor to Vasl Health, Dr. Galiatsatos provides strategic clinical guidance for the platform's community medicine approach and health equity methodology. His co-founding of Medicine for the Greater Good — a national initiative dedicated to health equity through community engagement — reflects the same conviction that underlies Vasl: that equitable health outcomes require meeting communities where they are, in the language they speak, through the channels they trust.</p>
+      <p class="person-bio">His affiliation with Johns Hopkins provides Vasl with access to one of the most respected clinical research networks in the country — and signals to health system and payer partners that the platform's clinical methodology has been reviewed and endorsed at the highest level of academic medicine.</p>
+      <blockquote class="person-pull">"Health equity isn't a specialty. It's the standard we should be measuring every healthcare intervention against — including the AI we deploy in clinical settings."</blockquote>
     </div>
 
     <div class="person-right">
       <div class="person-detail-label">Profile</div>
       <div class="person-detail-item">
         <div class="pdi-label">Institution</div>
-        <div class="pdi-value">Associate Professor, Johns Hopkins School of Medicine &mdash; Department of Medicine</div>
+        <div class="pdi-value">Associate Professor, Johns Hopkins School of Medicine — Department of Medicine</div>
       </div>
       <div class="person-detail-item">
         <div class="pdi-label">Equity leadership</div>
-        <div class="pdi-value">Co-Chair, Hopkins Health Equity Steering Committee &mdash; institutional leadership of Hopkins' equity research and clinical agenda</div>
+        <div class="pdi-value">Co-Chair, Hopkins Health Equity Steering Committee — institutional leadership of Hopkins' equity research and clinical agenda</div>
       </div>
       <div class="person-detail-item">
         <div class="pdi-label">Initiative</div>
-        <div class="pdi-value">Co-Founder, Medicine for the Greater Good &mdash; national initiative advancing health equity through community engagement and clinical innovation</div>
+        <div class="pdi-value">Co-Founder, Medicine for the Greater Good — national initiative advancing health equity through community engagement and clinical innovation</div>
       </div>
       <div class="person-detail-item">
         <div class="pdi-label">Research output</div>
@@ -839,7 +866,7 @@
       </div>
       <div class="person-detail-item">
         <div class="pdi-label">Role at Vasl</div>
-        <div class="pdi-value">Senior Medical Advisor &mdash; community medicine methodology, health equity framework, clinical advisory for payer and health system partnerships</div>
+        <div class="pdi-value">Senior Medical Advisor — community medicine methodology, health equity framework, clinical advisory for payer and health system partnerships</div>
       </div>
     </div>
   </div>
@@ -847,20 +874,20 @@
 
 
 <!-- ═══════════════════════════════════
-     CHAPTER 05 &mdash; JOIN THE MISSION
+     CHAPTER 05 — JOIN THE MISSION
 ════════════════════════════════════ -->
 <section id="join">
   <div class="join-bg" aria-hidden="true">Team</div>
   <div class="join-inner">
     <div class="join-left">
-      <div class="chapter-label muted reveal">Chapter 05 &mdash; Join Us</div>
+      <div class="chapter-label muted reveal">Chapter 05 — Join Us</div>
       <h2 class="join-headline reveal d1">
         We're building<br>
         the team this<br>
         work <em>deserves.</em>
       </h2>
       <p class="join-body reveal d2">
-        Vasl is growing. We are looking for people who bring specific expertise &mdash; clinical, technical, community, operational &mdash; and who understand that building for underserved communities is not a charitable gesture. It is the most demanding, most consequential, and most necessary work in health technology right now.
+        Vasl is growing. We are looking for people who bring specific expertise — clinical, technical, community, operational — and who understand that building for underserved communities is not a charitable gesture. It is the most demanding, most consequential, and most necessary work in health technology right now.
       </p>
       <div class="join-actions reveal d3">
         <a href="careers.html" class="btn-light">View Open Positions</a>
@@ -871,7 +898,7 @@
     <div class="join-right reveal d2">
       <div class="join-note">
         <div class="jn-label">Equal Opportunity Statement</div>
-        <p class="jn-text">Vasl Health is an equal opportunity employer committed to building a team that reflects the communities we serve. We actively seek applicants from BIPOC, LGBTQ+, first-generation, and other underrepresented backgrounds &mdash; not as a diversity metric, but because the work requires the specific knowledge that lived experience produces. If you have that experience and this mission speaks to you, we want to hear from you.</p>
+        <p class="jn-text">Vasl Health is an equal opportunity employer committed to building a team that reflects the communities we serve. We actively seek applicants from BIPOC, LGBTQ+, first-generation, and other underrepresented backgrounds — not as a diversity metric, but because the work requires the specific knowledge that lived experience produces. If you have that experience and this mission speaks to you, we want to hear from you.</p>
       </div>
     </div>
   </div>
@@ -880,54 +907,49 @@
 
 <!-- ─── FOOTER ─── -->
 <footer>
-  <div class="footer-sitemap">
-    <div class="fs-brand">
-      <a href="index.html" class="footer-logo">Vasl <span>Health</span></a>
-      <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
-      <a href="contact.html" class="fs-cta">Request a Demo &rarr;</a>
-    </div>
-    <div class="fs-col">
-      <div class="fs-head">Platform</div>
-      <a href="platform.html">Platform Overview</a>
-      <a href="vlap.html">VLAP</a>
-      <a href="ai-model.html">AI Model</a>
-      <a href="technology.html">Technology</a>
-      <a href="peer-groups.html">Peer Groups</a>
-      <a href="teletherapy.html">Teletherapy</a>
-      <a href="prototype.html">Live Demo Portal</a>
-    </div>
-    <div class="fs-col">
-      <div class="fs-head">Who We Serve</div>
-      <a href="for-schools.html">For Schools</a>
-      <a href="for-organizations.html">For Organizations</a>
-      <a href="outcomes.html">Outcomes</a>
-      <a href="clinical-outcomes.html">Clinical Outcomes</a>
-      <a href="pricing.html">Pricing</a>
-    </div>
-    <div class="fs-col">
-      <div class="fs-head">Company</div>
-      <a href="about.html">About Vasl</a>
-      <a href="team.html">Team</a>
-      <a href="careers.html">Careers</a>
-      <a href="research.html">Research</a>
-      <a href="blog.html">Blog &amp; Insights</a>
-      <a href="contact.html">Contact</a>
-    </div>
-    <div class="fs-col">
-      <div class="fs-head">Support &amp; Legal</div>
-      <a href="support.html">Help Center</a>
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="terms.html">Terms of Service</a>
-      <a href="baa.html">Business Associate Agreement</a>
-      <a href="accessibility.html">Accessibility</a>
+  <div class="footer-logo-col">
+    <a href="index.html" class="footer-logo">Vasl <span>Health</span></a>
+    <div class="footer-mission-line">
+      Language is culture, not pathology.<br>
+      Interpretation is care.<br>
+      Delaware Public Benefit Corporation.
     </div>
   </div>
+
+  <div>
+    <div class="footer-col-head">Platform</div>
+    <ul class="footer-nav">
+      <li><a href="platform.html">Platform Overview</a></li>
+      <li><a href="ai-model.html">Technology — VLAP</a></li>
+      <li><a href="peer-groups.html">Peer Groups</a></li>
+      <li><a href="outcomes.html">Outcomes</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+    </ul>
+  </div>
+
+  <div>
+    <div class="footer-col-head">Company & Legal</div>
+    <ul class="footer-nav">
+      <li><a href="about.html">About</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="careers.html">Careers</a></li>
+      <li><a href="privacy.html">Privacy Policy</a></li>
+    </ul>
+    <div class="footer-compliance">
+      HIPAA · FERPA · SOC 2 Type II<br>
+      IRB Study Active · Delaware PBC
+    </div>
+  </div>
+
   <div class="footer-bottom">
-    <div class="footer-copy">&copy; 2026 Vasl Health, Inc. All rights reserved.</div>
+    <div class="footer-copy">© 2026 Vasl Health, Inc. All rights reserved.</div>
     <div class="footer-legal">
       <a href="privacy.html">Privacy</a>
       <a href="terms.html">Terms</a>
       <a href="baa.html">BAA</a>
+      <a href="accessibility.html">Accessibility</a>
     </div>
   </div>
 </footer>
