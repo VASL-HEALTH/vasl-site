@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Vasl Health Accessibility Statement &mdash; our commitment to WCAG 2.1 AA accessibility standards across the platform.">
+<title>Accessibility &mdash; Vasl Health</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --warm-white:#FAF7F2;--parchment:#F0EAE0;--ink:#1C1C1C;
+  --ink-70:rgba(28,28,28,0.70);--ink-50:rgba(28,28,28,0.50);--ink-12:rgba(28,28,28,0.12);
+  --clay:#C4896F;--chalk:#E2DAD0;--deep-green:#2D4A3E;--dust:#8B7B6B;--charcoal:#222222;
+  --serif:'Newsreader',Georgia,serif;--sans:'IBM Plex Sans',sans-serif;--mono:'IBM Plex Mono',monospace;
+  --gutter:7vw;
+}
+body{background:var(--warm-white);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);display:flex;align-items:center;justify-content:space-between;background:rgba(250,247,242,0.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--ink-12);}
+.nav-logo{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:-0.02em;color:var(--ink);text-decoration:none;}
+.nav-logo span{color:var(--clay);font-style:italic;}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--dust);text-decoration:none;}
+.nav-links a:hover{color:var(--ink);}
+.nav-cta{font-family:var(--mono);font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--deep-green);border:1px solid var(--deep-green);padding:9px 20px;text-decoration:none;}
+.nav-cta:hover{background:var(--deep-green);color:var(--warm-white);}
+
+.doc-header{padding:140px var(--gutter) 60px;border-bottom:1px solid var(--chalk);}
+.doc-kicker{font-family:var(--mono);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--dust);margin-bottom:20px;display:block;}
+.doc-title{font-family:var(--serif);font-size:clamp(40px,5vw,72px);font-weight:300;line-height:1.05;letter-spacing:-0.03em;color:var(--ink);margin-bottom:28px;}
+.doc-title em{font-style:italic;color:var(--clay);}
+.doc-meta{display:flex;gap:28px;flex-wrap:wrap;}
+.doc-meta-item{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dust);}
+.doc-compliance{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;}
+.doc-badge{font-family:var(--mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;padding:5px 12px;border:1px solid var(--deep-green);color:var(--deep-green);}
+
+.doc-layout{display:grid;grid-template-columns:220px 1fr;gap:0;max-width:1300px;padding:0 var(--gutter) 100px;}
+
+.doc-toc{padding-top:52px;position:sticky;top:80px;align-self:start;}
+.toc-label{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--dust);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--chalk);}
+.toc-list{list-style:none;display:flex;flex-direction:column;gap:0;}
+.toc-item{border-bottom:1px solid var(--chalk);}
+.toc-item:last-child{border-bottom:none;}
+.toc-link{display:block;padding:9px 0;font-family:var(--mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--dust);text-decoration:none;line-height:1.4;transition:color 0.2s;}
+.toc-link:hover{color:var(--deep-green);}
+
+.doc-body{padding-top:52px;border-left:1px solid var(--chalk);padding-left:60px;}
+.doc-section{margin-bottom:60px;padding-bottom:60px;border-bottom:1px solid var(--chalk);}
+.doc-section:last-child{border-bottom:none;margin-bottom:0;}
+.section-anchor{display:block;padding-top:20px;margin-top:-20px;}
+.section-heading{font-family:var(--serif);font-size:28px;font-weight:400;color:var(--ink);margin-bottom:20px;line-height:1.2;letter-spacing:-0.015em;}
+.section-sub{font-family:var(--sans);font-size:16px;font-weight:500;color:var(--ink);margin-top:28px;margin-bottom:10px;}
+.doc-p{font-size:16px;font-weight:300;line-height:1.75;color:var(--ink-70);margin-bottom:16px;}
+.doc-p:last-child{margin-bottom:0;}
+.doc-p a{color:var(--deep-green);text-decoration:none;border-bottom:1px solid rgba(45,74,62,0.3);}
+.doc-ul{margin:12px 0 16px 0;display:flex;flex-direction:column;gap:6px;padding-left:0;}
+.doc-li{font-size:15px;font-weight:300;color:var(--ink-70);padding-left:20px;position:relative;line-height:1.65;}
+.doc-li::before{content:'\2014';position:absolute;left:0;color:var(--clay);font-size:12px;}
+.callout-block{padding:22px 26px;margin:20px 0;background:var(--parchment);border-left:3px solid var(--clay);}
+.callout-label{font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--clay);margin-bottom:8px;}
+.callout-text{font-size:14px;font-weight:300;line-height:1.7;color:var(--ink-70);}
+.footer-logo span{color:var(--clay);font-style:italic;}
+.footer-nav a{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.32);text-decoration:none;}
+.footer-nav a:hover{color:var(--warm-white);}
+.footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+
+@media(max-width:900px){
+  .doc-layout{grid-template-columns:1fr;}
+  .doc-toc{display:none;}
+  .doc-body{border-left:none;padding-left:0;}
+}
+@media(max-width:600px){
+  :root{--gutter:5vw;}
+  .nav-links{display:none;}
+}
+
+  .ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
+  .ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.2s;}
+  .ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .ham-btn.open span:nth-child(2){opacity:0;}
+  .ham-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+  @media(max-width:780px){
+    .ham-btn{display:flex;}
+    .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--warm);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{font-size:22px;letter-spacing:0.04em;}
+    .nav-cta{display:none;}
+  }
+
+  footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);padding:0;}
+  .footer-sitemap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:0;padding:56px 7vw 40px;border-bottom:1px solid rgba(250,247,242,0.08);}
+  .fs-brand{padding-right:40px;}
+  .footer-logo{font-family:var(--serif);font-size:22px;color:var(--warm-white,#FAF7F2);letter-spacing:-0.02em;text-decoration:none;display:block;margin-bottom:12px;}
+  .footer-logo span{color:var(--clay,#C4896F);font-style:italic;}
+  .footer-mission{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.28);line-height:1.8;margin-bottom:20px;}
+  .fs-cta{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:var(--clay,#C4896F);border:1px solid rgba(196,137,111,0.40);padding:9px 18px;text-decoration:none;transition:all 0.18s;}
+  .fs-cta:hover{background:rgba(196,137,111,0.12);}
+  .fs-col{padding-left:32px;border-left:1px solid rgba(250,247,242,0.06);}
+  .fs-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,247,242,0.30);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(250,247,242,0.06);}
+  .fs-col a{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,247,242,0.45);text-decoration:none;margin-bottom:10px;transition:color 0.15s;}
+  .fs-col a:hover{color:var(--clay,#C4896F);}
+  .footer-bottom{padding:20px 7vw;display:flex;align-items:center;justify-content:space-between;}
+  .footer-copy{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,0.20);}
+  .footer-legal{display:flex;gap:20px;}
+  .footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+  .footer-legal a:hover{color:var(--clay,#C4896F);}
+  @media(max-width:1100px){.footer-sitemap{grid-template-columns:1fr 1fr 1fr;gap:32px;}.fs-brand{grid-column:1/-1;padding-right:0;}.fs-col{border-left:none;padding-left:0;}}
+  @media(max-width:680px){.footer-sitemap{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}}
+  @media(max-width:400px){.footer-sitemap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Vasl <span>Health</span></a>
+    <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="platform.html">Platform</a></li>
+    <li><a href="outcomes.html">Outcomes</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="baa.html" class="nav-cta">Request BAA</a>
+</nav>
+
+<div class="doc-header">
+  <span class="doc-kicker">Legal</span>
+  <h1 class="doc-title">Accessibility <em>Statement</em></h1>
+  <div class="doc-meta">
+    <span class="doc-meta-item">Last Updated: July 2026</span>
+  </div>
+  <div class="doc-compliance">
+    <span class="doc-badge">WCAG 2.1 AA Target</span>
+  </div>
+</div>
+
+<div class="doc-layout">
+  <nav class="doc-toc">
+    <div class="toc-label">Contents</div>
+    <ul class="toc-list">
+      <li class="toc-item"><a href="#commitment" class="toc-link">1. Our Commitment</a></li>
+      <li class="toc-item"><a href="#standards" class="toc-link">2. Standards We Follow</a></li>
+      <li class="toc-item"><a href="#ongoing-work" class="toc-link">3. Ongoing Work</a></li>
+      <li class="toc-item"><a href="#feedback" class="toc-link">4. Feedback &amp; Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="doc-body">
+
+    <div class="doc-section">
+      <p class="doc-p">Vasl Health is committed to making our platform and public site usable by everyone, including people who rely on assistive technology. This statement describes that commitment and how to reach us if something isn't working for you.</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="commitment"></span>
+      <h2 class="section-heading">1. Our Commitment</h2>
+      <p class="doc-p">Vasl Health is committed to WCAG 2.1 AA accessibility standards across all platform properties &mdash; the public site, the member, coach, and clinician portals, and organizational dashboards. Accessibility is treated as an ongoing responsibility, not a one-time audit, and is factored into design and engineering decisions as the platform evolves.</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="standards"></span>
+      <h2 class="section-heading">2. Standards We Follow</h2>
+      <p class="doc-p">We design and build against the Web Content Accessibility Guidelines (WCAG) 2.1, Level AA, published by the World Wide Web Consortium (W3C). These guidelines cover areas including:</p>
+      <ul class="doc-ul">
+        <li class="doc-li">Keyboard navigability for all interactive elements</li>
+        <li class="doc-li">Sufficient color contrast between text and background</li>
+        <li class="doc-li">Descriptive text alternatives for non-text content</li>
+        <li class="doc-li">Predictable, consistent navigation and page structure</li>
+        <li class="doc-li">Compatibility with screen readers and other assistive technology</li>
+      </ul>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="ongoing-work"></span>
+      <h2 class="section-heading">3. Ongoing Work</h2>
+      <div class="callout-block">
+        <div class="callout-label">Known Limitations</div>
+        <p class="callout-text">No platform is perfectly accessible at every moment. Some pages and components are still being brought fully in line with our WCAG 2.1 AA target. If you encounter a barrier, please tell us &mdash; reports directly shape what we prioritize next.</p>
+      </div>
+      <p class="doc-p">We review accessibility as part of our regular design and development process and welcome outside feedback as a way of catching issues our internal review misses.</p>
+    </div>
+
+    <div class="doc-section">
+      <span class="section-anchor" id="feedback"></span>
+      <h2 class="section-heading">4. Feedback &amp; Contact</h2>
+      <p class="doc-p">If you experience any difficulty accessing content or using any part of the Vasl Health platform or website, please contact us at <a href="mailto:accessibility@vaslhealth.com">accessibility@vaslhealth.com</a>. Please include the page or feature involved and, if possible, the assistive technology and browser you were using &mdash; this helps us reproduce and fix the issue faster.</p>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-sitemap">
+    <div class="fs-brand">
+      <a href="index.html" class="footer-logo">Vasl <span>Health</span></a>
+      <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
+      <a href="contact.html" class="fs-cta">Request a Demo &rarr;</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Platform</div>
+      <a href="platform.html">Platform Overview</a>
+      <a href="vlap.html">VLAP</a>
+      <a href="ai-model.html">AI Model</a>
+      <a href="technology.html">Technology</a>
+      <a href="peer-groups.html">Peer Groups</a>
+      <a href="teletherapy.html">Teletherapy</a>
+      <a href="prototype.html">Live Demo Portal</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Who We Serve</div>
+      <a href="for-schools.html">For Schools</a>
+      <a href="for-organizations.html">For Organizations</a>
+      <a href="outcomes.html">Outcomes</a>
+      <a href="clinical-outcomes.html">Clinical Outcomes</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Company</div>
+      <a href="about.html">About Vasl</a>
+      <a href="team.html">Team</a>
+      <a href="careers.html">Careers</a>
+      <a href="research.html">Research</a>
+      <a href="blog.html">Blog &amp; Insights</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Support &amp; Legal</div>
+      <a href="support.html">Help Center</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="baa.html">Business Associate Agreement</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 Vasl Health, Inc. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="baa.html">BAA</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
