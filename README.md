@@ -14,7 +14,7 @@ Each subdirectory deploys independently on Netlify.
 Push to `main` → Netlify auto-deploys all three sites.
 
 ### Netlify Setup (one-time per site)
-1. New site → Import from GitHub → `Vaslhealth/vasl-site`
+1. New site → Import from GitHub → `VASL-HEALTH/vasl-site`
 2. Set **Base directory** to `site/`, `prototype/`, or `demo/`
 3. Set **Publish directory** same as base directory
 4. Leave build command empty (static HTML — no build needed)
