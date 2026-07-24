@@ -1656,6 +1656,10 @@
     });
   }, { threshold: 0.5 });
   fills.forEach(f => fillIO.observe(f));
+  function toggleNav() {
+    document.querySelector('.nav-links').classList.toggle('open');
+    document.getElementById('ham-btn').classList.toggle('open');
+  }
 </script>
 </body>
 </html>

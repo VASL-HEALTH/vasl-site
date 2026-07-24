@@ -72,6 +72,11 @@
   .nav-links a:hover, .nav-links a.active { color: var(--ink); }
   .nav-cta { font-family: var(--mono); font-size: 10px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--deep-green); border: 1px solid var(--deep-green); padding: 9px 20px; text-decoration: none; transition: background 0.22s, color 0.22s; }
   .nav-cta:hover { background: var(--deep-green); color: var(--warm-white); }
+  .ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
+  .ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.2s;}
+  .ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .ham-btn.open span:nth-child(2){opacity:0;}
+  .ham-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
 
   /* ─── SHARED ─── */
   .chapter-label {
@@ -414,7 +419,7 @@
   footer {
     background: var(--charcoal); border-top: 1px solid rgba(250,247,242,0.08);
     padding: 48px var(--gutter);
-    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; align-items: start;
+    display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr; gap: 32px; align-items: start;
   }
   .footer-col-head { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(250,247,242,0.28); margin-bottom: 20px; }
   .footer-logo-col {}
@@ -439,12 +444,16 @@
     .person-initial { width: 60px; height: 60px; font-size: 26px; }
     .section-header { grid-template-columns: 1fr; gap: 28px; }
     .join-inner { grid-template-columns: 1fr; gap: 60px; }
-    footer { grid-template-columns: 1fr 1fr; }
+    footer { grid-template-columns: 1fr 1fr 1fr; }
     .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
   }
   @media (max-width: 768px) {
     :root { --gutter: 5vw; }
-    .nav-links { display: none; }
+    .ham-btn{display:flex;}
+    .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--warm-white);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{font-size:22px;letter-spacing:0.04em;}
+    .nav-cta{display:none;}
     .ts-item { grid-template-columns: 1fr; gap: 4px; }
     footer { grid-template-columns: 1fr; }
   }
@@ -457,12 +466,15 @@
   <a href="index.html" class="nav-logo">Vasl <span>Health</span></a>
   <ul class="nav-links">
     <li><a href="about.html">About</a></li>
-    <li><a href="team.html" class="active">Team</a></li>
-    <li><a href="ai-model.html">Technology</a></li>
+    <li><a href="platform.html">Platform</a></li>
     <li><a href="outcomes.html">Outcomes</a></li>
-    <li><a href="for-schools.html">For Schools</a></li>
-    <li><a href="for-organizations.html">For Orgs</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="team.html" class="active">Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
   </ul>
+  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
   <a href="contact.html" class="nav-cta">Contact Us</a>
 </nav>
 
@@ -923,22 +935,46 @@
     <div class="footer-col-head">Platform</div>
     <ul class="footer-nav">
       <li><a href="platform.html">Platform Overview</a></li>
-      <li><a href="ai-model.html">Technology — VLAP</a></li>
+      <li><a href="vlap.html">VLAP</a></li>
+      <li><a href="ai-model.html">AI Model</a></li>
+      <li><a href="technology.html">Technology</a></li>
       <li><a href="peer-groups.html">Peer Groups</a></li>
+      <li><a href="teletherapy.html">Teletherapy</a></li>
+      <li><a href="prototype.html">Live Demo Portal</a></li>
+    </ul>
+  </div>
+
+  <div>
+    <div class="footer-col-head">Who We Serve</div>
+    <ul class="footer-nav">
+      <li><a href="for-schools.html">For Schools</a></li>
+      <li><a href="for-organizations.html">For Organizations</a></li>
       <li><a href="outcomes.html">Outcomes</a></li>
+      <li><a href="clinical-outcomes.html">Clinical Outcomes</a></li>
       <li><a href="pricing.html">Pricing</a></li>
     </ul>
   </div>
 
   <div>
-    <div class="footer-col-head">Company & Legal</div>
+    <div class="footer-col-head">Company</div>
     <ul class="footer-nav">
-      <li><a href="about.html">About</a></li>
+      <li><a href="about.html">About Vasl</a></li>
       <li><a href="team.html">Team</a></li>
-      <li><a href="blog.html">Blog</a></li>
-      <li><a href="contact.html">Contact</a></li>
       <li><a href="careers.html">Careers</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="blog.html">Blog &amp; Insights</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+
+  <div>
+    <div class="footer-col-head">Support &amp; Legal</div>
+    <ul class="footer-nav">
+      <li><a href="support.html">Help Center</a></li>
       <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="terms.html">Terms of Service</a></li>
+      <li><a href="baa.html">Business Associate Agreement</a></li>
+      <li><a href="accessibility.html">Accessibility</a></li>
     </ul>
     <div class="footer-compliance">
       HIPAA · FERPA · SOC 2 Type II<br>
@@ -971,6 +1007,10 @@
       }
     });
   });
+  function toggleNav() {
+    document.querySelector('.nav-links').classList.toggle('open');
+    document.getElementById('ham-btn').classList.toggle('open');
+  }
 </script>
 </body>
 </html>

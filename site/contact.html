@@ -500,6 +500,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
     );
     window.location.href = `mailto:hello@vaslhealth.com?subject=${subject}&body=${body}`;
   }
+  function toggleNav() {
+    document.querySelector('.nav-links').classList.toggle('open');
+    document.getElementById('ham-btn').classList.toggle('open');
+  }
 </script>
 </body>
 </html>
