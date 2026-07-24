@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Vasl Health + VLAP is infrastructure, not burden — the clinical decision-support layer that makes evidence-based behavioral health care possible for underserved youth, not an additional task on top of it.">
+<title>Infrastructure, Not Burden — Vasl Health + VLAP</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --warm-white:#FAF7F2;--parchment:#F0EAE0;--ink:#1C1C1C;
+  --ink-70:rgba(28,28,28,0.70);--ink-50:rgba(28,28,28,0.50);--ink-12:rgba(28,28,28,0.12);
+  --clay:#C4896F;--clay-light:#E8C4AE;--clay-pale:#F5E6DC;
+  --deep-green:#2D4A3E;--dust:#8B7B6B;--chalk:#E2DAD0;--charcoal:#222222;
+  --serif:'Newsreader',Georgia,serif;--sans:'IBM Plex Sans',sans-serif;--mono:'IBM Plex Mono',monospace;
+  --gutter:7vw;
+}
+body{background:var(--warm-white);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;overflow-x:hidden;}
+.reveal{transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1),transform 0.9s cubic-bezier(0.16,1,0.3,1);}
+.js-ready .reveal{opacity:0;transform:translateY(20px);}
+.js-ready .reveal.visible{opacity:1;transform:translateY(0);}
+.d1{transition-delay:0.08s;}.d2{transition-delay:0.16s;}.d3{transition-delay:0.24s;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);display:flex;align-items:center;justify-content:space-between;background:rgba(250,247,242,0.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--ink-12);}
+.nav-logo{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:-0.02em;color:var(--ink);text-decoration:none;}
+.nav-logo span{color:var(--clay);font-style:italic;}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--dust);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--ink);}
+.nav-cta{font-family:var(--mono);font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--deep-green);border:1px solid var(--deep-green);padding:9px 20px;text-decoration:none;transition:background 0.22s,color 0.22s;}
+.nav-cta:hover{background:var(--deep-green);color:var(--warm-white);}
+section{padding:130px var(--gutter);position:relative;}
+.chapter-label{font-family:var(--mono);font-size:10px;font-weight:300;letter-spacing:0.16em;text-transform:uppercase;color:var(--clay);display:flex;align-items:center;gap:12px;margin-bottom:52px;}
+.chapter-label::after{content:'';display:block;width:36px;height:1px;background:var(--clay);opacity:0.45;}
+.chapter-label.light{color:var(--clay-light);}
+.chapter-label.light::after{background:var(--clay-light);}
+.chapter-label.muted{color:rgba(250,247,242,0.35);}
+.chapter-label.muted::after{background:rgba(250,247,242,0.35);}
+.btn-dark{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:var(--ink);color:var(--warm-white);padding:16px 32px;text-decoration:none;display:inline-block;transition:background 0.22s;}
+.btn-dark:hover{background:var(--deep-green);}
+.btn-outline{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink);border:1px solid var(--ink);padding:16px 32px;text-decoration:none;display:inline-block;transition:all 0.22s;}
+.btn-outline:hover{background:var(--ink);color:var(--warm-white);}
+.btn-ghost{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dust);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:color 0.2s;}
+.btn-ghost:hover{color:var(--ink);}
+.btn-ghost::after{content:'\2192';}
+.btn-light{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:var(--warm-white);color:var(--ink);padding:16px 32px;text-decoration:none;display:inline-block;transition:background 0.22s;}
+.btn-light:hover{background:var(--clay-light);}
+.btn-ghost-light{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.40);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:color 0.2s;}
+.btn-ghost-light:hover{color:var(--warm-white);}
+.btn-ghost-light::after{content:'\2192';}
+
+/* ═══ HERO ═══ */
+#hero{min-height:100vh;padding-top:160px;padding-bottom:120px;background:var(--warm-white);border-bottom:1px solid var(--chalk);display:grid;grid-template-columns:1fr 1fr;gap:0 80px;align-items:end;}
+.hero-kicker{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--dust);margin-bottom:36px;display:block;}
+.hero-headline{font-family:var(--serif);font-size:clamp(42px,5vw,72px);font-weight:300;line-height:1.05;letter-spacing:-0.03em;color:var(--ink);margin-bottom:36px;}
+.hero-headline em{font-style:italic;color:var(--clay);}
+.hero-body{font-size:19px;font-weight:300;line-height:1.72;color:var(--ink-70);max-width:480px;margin-bottom:48px;}
+.hero-actions{display:flex;align-items:center;gap:28px;}
+.hero-right{border-left:1px solid var(--chalk);padding-left:72px;}
+.analogy-list{display:flex;flex-direction:column;gap:0;}
+.al-item{padding:22px 0;border-bottom:1px solid var(--chalk);display:grid;grid-template-columns:110px 1fr;gap:16px;align-items:start;}
+.al-item:last-child{border-bottom:none;}
+.al-label{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--clay);padding-top:3px;}
+.al-desc{font-size:14px;font-weight:300;color:var(--ink-70);line-height:1.6;}
+
+/* ═══ PARADIGM SHIFT (dark) ═══ */
+#paradigm{background:var(--charcoal);color:var(--warm-white);padding-top:130px;padding-bottom:130px;}
+.para-inner{max-width:820px;}
+.para-headline{font-family:var(--serif);font-size:clamp(34px,4vw,54px);font-weight:300;line-height:1.1;letter-spacing:-0.025em;color:var(--warm-white);margin-bottom:32px;}
+.para-headline em{font-style:italic;color:var(--clay-light);}
+.para-body{font-size:18px;font-weight:300;line-height:1.75;color:rgba(250,247,242,0.62);margin-bottom:22px;}
+.para-body:last-child{margin-bottom:0;}
+.para-body strong{color:var(--warm-white);font-weight:500;}
+
+/* ═══ VALUE STACK ═══ */
+#value{background:var(--warm-white);padding-top:130px;padding-bottom:130px;border-bottom:1px solid var(--chalk);}
+.value-header{max-width:680px;margin-bottom:72px;}
+.value-headline{font-family:var(--serif);font-size:clamp(34px,4vw,54px);font-weight:300;line-height:1.1;letter-spacing:-0.025em;color:var(--ink);}
+.value-headline em{font-style:italic;color:var(--clay);}
+.value-list{display:flex;flex-direction:column;gap:0;}
+.value-item{padding:30px 0;border-bottom:1px solid var(--chalk);display:grid;grid-template-columns:64px 1fr;gap:24px;align-items:start;}
+.value-item:first-child{padding-top:0;}
+.value-item:last-child{border-bottom:none;padding-bottom:0;}
+.vi-num{font-family:var(--serif);font-size:32px;font-weight:300;color:var(--clay-light);line-height:1;letter-spacing:-0.03em;}
+.vi-title{font-family:var(--serif);font-size:21px;font-weight:400;color:var(--ink);margin-bottom:8px;letter-spacing:-0.01em;}
+.vi-desc{font-size:15px;font-weight:300;color:var(--ink-70);line-height:1.65;}
+
+/* ═══ THE FLOW (dark) ═══ */
+#flow{background:var(--deep-green);color:var(--warm-white);padding-top:110px;padding-bottom:110px;text-align:center;}
+.flow-statement{font-family:var(--serif);font-size:clamp(26px,3.2vw,40px);font-weight:300;font-style:italic;line-height:1.35;color:var(--warm-white);max-width:780px;margin:0 auto 56px;}
+.flow-row{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;}
+.flow-step{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--warm-white);border:1px solid rgba(250,247,242,0.35);padding:14px 24px;border-radius:2px;}
+.flow-arrow{font-family:var(--mono);font-size:16px;color:var(--clay-light);}
+
+/* ═══ STAKEHOLDERS ═══ */
+#stakeholders{background:var(--parchment);padding-top:130px;padding-bottom:130px;border-bottom:1px solid var(--chalk);}
+.sh-header{max-width:680px;margin-bottom:72px;}
+.sh-headline{font-family:var(--serif);font-size:clamp(34px,4vw,54px);font-weight:300;line-height:1.1;letter-spacing:-0.025em;color:var(--ink);}
+.sh-headline em{font-style:italic;color:var(--clay);}
+.sh-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--chalk);}
+.sh-card{background:var(--parchment);padding:36px 40px;}
+.sh-card-label{font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--clay);margin-bottom:14px;}
+.sh-card-title{font-family:var(--serif);font-size:22px;font-weight:400;color:var(--ink);margin-bottom:12px;letter-spacing:-0.01em;}
+.sh-card-desc{font-size:14px;font-weight:300;color:var(--ink-70);line-height:1.6;}
+
+/* ═══ GUIDING PRINCIPLE ═══ */
+#principle{background:var(--ink);color:var(--warm-white);padding-top:130px;padding-bottom:130px;text-align:center;}
+.principle-label{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(250,247,242,0.4);margin-bottom:28px;}
+.principle-headline{font-family:var(--serif);font-size:clamp(36px,5vw,64px);font-weight:300;font-style:italic;line-height:1.12;letter-spacing:-0.02em;color:var(--warm-white);max-width:820px;margin:0 auto 32px;}
+.principle-headline em{color:var(--clay-light);}
+.principle-body{font-size:17px;font-weight:300;line-height:1.75;color:rgba(250,247,242,0.60);max-width:600px;margin:0 auto;}
+
+/* ═══ CTA ═══ */
+#cta{background:var(--deep-green);color:var(--warm-white);padding-top:130px;padding-bottom:130px;overflow:hidden;position:relative;}
+.cta-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1.4fr;gap:0 80px;align-items:center;}
+.cta-headline{font-family:var(--serif);font-size:clamp(34px,4.2vw,58px);font-weight:300;line-height:1.08;letter-spacing:-0.025em;color:var(--warm-white);margin-bottom:26px;}
+.cta-headline em{font-style:italic;color:var(--clay-light);}
+.cta-body{font-size:17px;font-weight:300;line-height:1.72;color:rgba(250,247,242,0.60);margin-bottom:36px;}
+.cta-actions{display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+.cta-right{border-left:1px solid rgba(250,247,242,0.14);padding-left:64px;display:flex;flex-direction:column;gap:0;}
+.cta-item{padding:18px 0;border-bottom:1px solid rgba(250,247,242,0.12);}
+.cta-item:last-child{border-bottom:none;}
+.ci-label{font-family:var(--mono);font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(250,247,242,0.35);margin-bottom:6px;}
+.ci-text{font-size:14px;font-weight:300;color:rgba(250,247,242,0.68);line-height:1.6;}
+
+@media(max-width:1100px){
+  #hero{grid-template-columns:1fr;gap:70px;}
+  .hero-right{border-left:none;padding-left:0;border-top:1px solid var(--chalk);padding-top:50px;}
+  .sh-grid{grid-template-columns:1fr;}
+  .cta-inner{grid-template-columns:1fr;gap:60px;}
+  .cta-right{border-left:none;padding-left:0;border-top:1px solid rgba(250,247,242,0.14);padding-top:36px;}
+}
+@media(max-width:768px){
+  :root{--gutter:5vw;}
+  .nav-links{display:none;}
+  .value-item{grid-template-columns:1fr;gap:8px;}
+  .flow-row{flex-direction:column;}
+  .flow-arrow{transform:rotate(90deg);}
+}
+
+.ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
+.ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.2s;}
+.ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.ham-btn.open span:nth-child(2){opacity:0;}
+.ham-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+@media(max-width:780px){
+  .ham-btn{display:flex;}
+  .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--warm-white);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+  .nav-links.open{display:flex;}
+  .nav-links a{font-size:22px;letter-spacing:0.04em;}
+  .nav-cta{display:none;}
+}
+
+footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);padding:0;}
+.footer-sitemap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:0;padding:56px 7vw 40px;border-bottom:1px solid rgba(250,247,242,0.08);}
+.fs-brand{padding-right:40px;}
+.footer-logo{font-family:var(--serif);font-size:22px;color:var(--warm-white);letter-spacing:-0.02em;text-decoration:none;display:block;margin-bottom:12px;}
+.footer-logo span{color:var(--clay);font-style:italic;}
+.footer-mission{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.28);line-height:1.8;margin-bottom:20px;}
+.fs-cta{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:var(--clay);border:1px solid rgba(196,137,111,0.40);padding:9px 18px;text-decoration:none;transition:all 0.18s;}
+.fs-cta:hover{background:rgba(196,137,111,0.12);}
+.fs-col{padding-left:32px;border-left:1px solid rgba(250,247,242,0.06);}
+.fs-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,247,242,0.30);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(250,247,242,0.06);}
+.fs-col a{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,247,242,0.45);text-decoration:none;margin-bottom:10px;transition:color 0.15s;}
+.fs-col a:hover{color:var(--clay);}
+.footer-bottom{padding:20px 7vw;display:flex;align-items:center;justify-content:space-between;}
+.footer-copy{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,0.20);}
+.footer-legal{display:flex;gap:20px;}
+.footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+.footer-legal a:hover{color:var(--clay);}
+@media(max-width:1100px){.footer-sitemap{grid-template-columns:1fr 1fr 1fr;gap:32px;}.fs-brand{grid-column:1/-1;padding-right:0;}.fs-col{border-left:none;padding-left:0;}}
+@media(max-width:680px){.footer-sitemap{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}}
+@media(max-width:400px){.footer-sitemap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Vasl <span>Health</span></a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="platform.html">Platform</a></li>
+    <li><a href="outcomes.html">Outcomes</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="contact.html" class="nav-cta">Request a Demo</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div>
+    <span class="hero-kicker reveal">Vasl Health + VLAP</span>
+    <h1 class="hero-headline reveal d1">
+      Infrastructure,<br>
+      not <em>burden.</em>
+    </h1>
+    <p class="hero-body reveal d2">Infrastructure that powers evidence-based behavioral health care for underserved youth. Not additional work &mdash; foundational support.</p>
+    <div class="hero-actions reveal d3">
+      <a href="contact.html" class="btn-dark">Request a Demo</a>
+      <a href="#value" class="btn-ghost">See the value stack</a>
+    </div>
+  </div>
+  <div class="hero-right reveal d2">
+    <div class="analogy-list">
+      <div class="al-item">
+        <div class="al-label">EHR</div>
+        <div class="al-desc">Isn't extra documentation &mdash; it's the backbone clinicians work within.</div>
+      </div>
+      <div class="al-item">
+        <div class="al-label">Lab Systems</div>
+        <div class="al-desc">Aren't extra testing &mdash; they're the intelligence layer that informs decisions.</div>
+      </div>
+      <div class="al-item">
+        <div class="al-label">VLAP</div>
+        <div class="al-desc">Isn't extra assessment &mdash; it's real-time clinical decision support that clinicians rely on to do their best work.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER 01 — THE PARADIGM SHIFT -->
+<section id="paradigm">
+  <div class="chapter-label light reveal">Chapter 01 &mdash; The Paradigm Shift</div>
+  <div class="para-inner">
+    <h2 class="para-headline reveal d1">
+      Not an add-on.<br>
+      <em>The foundation.</em>
+    </h2>
+    <p class="para-body reveal d2">Current perception: behavioral health platforms add layers &mdash; more data entry, more staff burden, more operational drag. But this misses the point entirely.</p>
+    <p class="para-body reveal d3"><strong>Vasl/VLAP isn't a tool clinicians use in addition to care; it's the infrastructure that makes evidence-based care possible.</strong></p>
+  </div>
+</section>
+
+<!-- CHAPTER 02 — THE VALUE STACK -->
+<section id="value">
+  <div class="chapter-label reveal">Chapter 02 &mdash; The Value Stack</div>
+  <div class="value-header">
+    <h2 class="value-headline reveal d1">
+      What the<br>
+      infrastructure <em>delivers.</em>
+    </h2>
+  </div>
+  <div class="value-list">
+    <div class="value-item reveal">
+      <div class="vi-num">01</div>
+      <div>
+        <div class="vi-title">Earlier Detection</div>
+        <p class="vi-desc">Identifies distress signals before they escalate to crisis, enabling preventive intervention.</p>
+      </div>
+    </div>
+    <div class="value-item reveal">
+      <div class="vi-num">02</div>
+      <div>
+        <div class="vi-title">Better Triage</div>
+        <p class="vi-desc">Right intervention at the right time with data-informed clinical judgment.</p>
+      </div>
+    </div>
+    <div class="value-item reveal">
+      <div class="vi-num">03</div>
+      <div>
+        <div class="vi-title">Clinical Confidence</div>
+        <p class="vi-desc">Clinicians make decisions backed by evidence, not intuition alone.</p>
+      </div>
+    </div>
+    <div class="value-item reveal">
+      <div class="vi-num">04</div>
+      <div>
+        <div class="vi-title">Staff Efficiency</div>
+        <p class="vi-desc">Reduces manual screening burden; frees clinicians for what they do best: direct care.</p>
+      </div>
+    </div>
+    <div class="value-item reveal">
+      <div class="vi-num">05</div>
+      <div>
+        <div class="vi-title">Outcomes Accountability</div>
+        <p class="vi-desc">Measurable distress trajectories justify funding, improve retention, and prove impact.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER 03 — THE FLOW -->
+<section id="flow">
+  <div class="chapter-label light reveal" style="justify-content:center;">Chapter 03 &mdash; The Flow</div>
+  <p class="flow-statement reveal d1">None of these happen &ldquo;in addition to&rdquo; care. They're the condition of evidence-based care.</p>
+  <div class="flow-row reveal d2">
+    <div class="flow-step">Real-time screening</div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step">Distress detection</div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step">Clinician alert</div>
+  </div>
+</section>
+
+<!-- CHAPTER 04 — FOR EVERY STAKEHOLDER -->
+<section id="stakeholders">
+  <div class="chapter-label reveal">Chapter 04 &mdash; For Every Stakeholder</div>
+  <div class="sh-header">
+    <h2 class="sh-headline reveal d1">
+      Infrastructure that<br>
+      works for <em>everyone in the room.</em>
+    </h2>
+  </div>
+  <div class="sh-grid">
+    <div class="sh-card reveal">
+      <div class="sh-card-label">01</div>
+      <div class="sh-card-title">Clinicians</div>
+      <p class="sh-card-desc">Data-informed decisions. Fewer missed cases. More time for direct care.</p>
+    </div>
+    <div class="sh-card reveal d1">
+      <div class="sh-card-label">02</div>
+      <div class="sh-card-title">Funders &amp; Leaders</div>
+      <p class="sh-card-desc">Cost avoidance, labor efficiency, measurable outcomes, liability reduction.</p>
+    </div>
+    <div class="sh-card reveal d2">
+      <div class="sh-card-label">03</div>
+      <div class="sh-card-title">Clinical Partners</div>
+      <p class="sh-card-desc">Sustainable model. Outcomes-driven care. No additional operational burden.</p>
+    </div>
+    <div class="sh-card reveal d3">
+      <div class="sh-card-label">04</div>
+      <div class="sh-card-title">Young People &amp; Families</div>
+      <p class="sh-card-desc">Earlier support, better outcomes, care that actually works.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER 05 — OUR GUIDING PRINCIPLE -->
+<section id="principle">
+  <div class="principle-label reveal">Chapter 05 &mdash; Our Guiding Principle</div>
+  <h2 class="principle-headline reveal d1">Therapy Last, <em>Not Therapy Never.</em></h2>
+  <p class="principle-body reveal d2">We believe in prevention, early support, and the full spectrum of care. Vasl/VLAP removes the barriers between young people and the support they need &mdash; when they need it.</p>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-inner">
+    <div>
+      <div class="chapter-label muted reveal">Ready to Talk</div>
+      <h2 class="cta-headline reveal d1">
+        Infrastructure,<br>
+        not <em>extra work.</em>
+      </h2>
+      <p class="cta-body reveal d2">See exactly how VLAP fits into your existing clinical workflow &mdash; not as an additional task, but as the decision support layer underneath it.</p>
+      <div class="cta-actions reveal d3">
+        <a href="contact.html" class="btn-light">Request a Demo</a>
+        <a href="technology.html" class="btn-ghost-light">See the technology</a>
+      </div>
+    </div>
+    <div class="cta-right reveal d2">
+      <div class="cta-item">
+        <div class="ci-label">Response Time</div>
+        <div class="ci-text">We respond to all demo requests within one business day.</div>
+      </div>
+      <div class="cta-item">
+        <div class="ci-label">What to Expect</div>
+        <div class="ci-text">A 45-minute call with a Vasl implementation lead &mdash; not a sales representative.</div>
+      </div>
+      <div class="cta-item">
+        <div class="ci-label">No Commitment Required</div>
+        <div class="ci-text">The scoping conversation is free, and we don't charge for evaluation.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-sitemap">
+    <div class="fs-brand">
+      <a href="index.html" class="footer-logo">Vasl <span>Health</span></a>
+      <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
+      <a href="contact.html" class="fs-cta">Request a Demo &rarr;</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Platform</div>
+      <a href="platform.html">Platform Overview</a>
+      <a href="vlap.html">VLAP</a>
+      <a href="ai-model.html">AI Model</a>
+      <a href="technology.html">Technology</a>
+      <a href="infrastructure.html">Infrastructure, Not Burden</a>
+      <a href="peer-groups.html">Peer Groups</a>
+      <a href="teletherapy.html">Teletherapy</a>
+      <a href="prototype.html">Live Demo Portal</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Who We Serve</div>
+      <a href="for-schools.html">For Schools</a>
+      <a href="for-organizations.html">For Organizations</a>
+      <a href="outcomes.html">Outcomes</a>
+      <a href="clinical-outcomes.html">Clinical Outcomes</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Company</div>
+      <a href="about.html">About Vasl</a>
+      <a href="team.html">Team</a>
+      <a href="careers.html">Careers</a>
+      <a href="research.html">Research</a>
+      <a href="blog.html">Blog &amp; Insights</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Support &amp; Legal</div>
+      <a href="support.html">Help Center</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="baa.html">Business Associate Agreement</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 Vasl Health, Inc. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="baa.html">BAA</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js-ready');
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.06, rootMargin: '0px 0px -24px 0px' });
+  reveals.forEach(el => io.observe(el));
+  window.addEventListener('load', () => {
+    reveals.forEach((el, i) => {
+      if (el.getBoundingClientRect().top < window.innerHeight) {
+        setTimeout(() => el.classList.add('visible'), i * 55);
+      }
+    });
+  });
+  function toggleNav() {
+    document.querySelector('.nav-links').classList.toggle('open');
+    document.getElementById('ham-btn').classList.toggle('open');
+  }
+</script>
+</body>
+</html>
