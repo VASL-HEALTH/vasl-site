@@ -1786,6 +1786,10 @@
   }, { threshold: 0.3 });
   bars.forEach(b => { const w = b.style.width; b.style.width = '0'; setTimeout(() => barIO.observe(b), 100); });
   setTimeout(() => bars.forEach(b => { if (b.getBoundingClientRect().top < window.innerHeight) { b.style.width = b.getAttribute('style').match(/width: (\S+)/)?.[1] || b.style.width; }}), 200);
+  function toggleNav() {
+    document.querySelector('.nav-links').classList.toggle('open');
+    document.getElementById('ham-btn').classList.toggle('open');
+  }
 </script>
 </body>
 </html>
