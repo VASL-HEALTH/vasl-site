@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="What Vasl sees, and what it never does — a plain-language guide for parents and young people to what our technology reads, what it looks for, and what happens next.">
+<title>For Families — What Vasl Reads, and What It Never Does — Vasl Health</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --warm-white:#FAF7F2;--parchment:#F0EAE0;--ink:#1C1C1C;
+  --ink-70:rgba(28,28,28,0.70);--ink-50:rgba(28,28,28,0.50);--ink-12:rgba(28,28,28,0.12);
+  --clay:#C4896F;--clay-light:#E8C4AE;--clay-pale:#F5E6DC;
+  --deep-green:#2D4A3E;--dust:#8B7B6B;--chalk:#E2DAD0;--charcoal:#222222;
+  --serif:'Newsreader',Georgia,serif;--sans:'IBM Plex Sans',sans-serif;--mono:'IBM Plex Mono',monospace;
+  --gutter:7vw;
+}
+body{background:var(--warm-white);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.7;overflow-x:hidden;}
+.reveal{transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1),transform 0.9s cubic-bezier(0.16,1,0.3,1);}
+.js-ready .reveal{opacity:0;transform:translateY(20px);}
+.js-ready .reveal.visible{opacity:1;transform:translateY(0);}
+.d1{transition-delay:0.08s;}.d2{transition-delay:0.16s;}.d3{transition-delay:0.24s;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);display:flex;align-items:center;justify-content:space-between;background:rgba(250,247,242,0.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--ink-12);}
+.nav-logo{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:-0.02em;color:var(--ink);text-decoration:none;}
+.nav-logo span{color:var(--clay);font-style:italic;}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--dust);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--ink);}
+.nav-cta{font-family:var(--mono);font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--deep-green);border:1px solid var(--deep-green);padding:9px 20px;text-decoration:none;transition:background 0.22s,color 0.22s;}
+.nav-cta:hover{background:var(--deep-green);color:var(--warm-white);}
+section{padding:110px var(--gutter);position:relative;}
+.chapter-label{font-family:var(--mono);font-size:10px;font-weight:300;letter-spacing:0.16em;text-transform:uppercase;color:var(--clay);display:flex;align-items:center;gap:12px;margin-bottom:40px;}
+.chapter-label::after{content:'';display:block;width:36px;height:1px;background:var(--clay);opacity:0.45;}
+.btn-dark{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:var(--ink);color:var(--warm-white);padding:16px 32px;text-decoration:none;display:inline-block;transition:background 0.22s;}
+.btn-dark:hover{background:var(--deep-green);}
+.btn-outline{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink);border:1px solid var(--ink);padding:16px 32px;text-decoration:none;display:inline-block;transition:all 0.22s;}
+.btn-outline:hover{background:var(--ink);color:var(--warm-white);}
+
+/* HERO */
+#hero{padding-top:170px;padding-bottom:90px;background:var(--warm-white);border-bottom:1px solid var(--chalk);}
+.hero-inner{max-width:760px;}
+.hero-kicker{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--dust);margin-bottom:32px;display:block;}
+.hero-headline{font-family:var(--serif);font-size:clamp(38px,4.6vw,60px);font-weight:300;line-height:1.12;letter-spacing:-0.02em;color:var(--ink);margin-bottom:28px;}
+.hero-headline em{font-style:italic;color:var(--clay);}
+.hero-body{font-size:20px;font-weight:300;line-height:1.75;color:var(--ink-70);}
+
+/* Q&A SECTIONS */
+.qa-section{border-bottom:1px solid var(--chalk);}
+.qa-section:nth-child(even){background:var(--parchment);}
+.qa-inner{max-width:760px;}
+.qa-q{font-family:var(--serif);font-size:clamp(26px,3vw,38px);font-weight:400;line-height:1.2;letter-spacing:-0.015em;color:var(--ink);margin-bottom:22px;}
+.qa-q em{font-style:italic;color:var(--clay);}
+.qa-a{font-size:18px;font-weight:300;line-height:1.8;color:var(--ink-70);}
+.qa-a strong{color:var(--ink);font-weight:500;}
+
+/* CLOSING */
+#closing{background:var(--deep-green);color:var(--warm-white);text-align:center;}
+.closing-inner{max-width:600px;margin:0 auto;}
+.closing-headline{font-family:var(--serif);font-size:clamp(28px,3.4vw,42px);font-weight:300;font-style:italic;line-height:1.3;color:var(--warm-white);margin-bottom:24px;}
+.closing-body{font-size:17px;font-weight:300;line-height:1.75;color:rgba(250,247,242,0.68);margin-bottom:32px;}
+.closing-email{font-family:var(--mono);font-size:16px;color:var(--clay-light);text-decoration:underline;}
+
+@media(max-width:768px){
+  :root{--gutter:6vw;}
+  .nav-links{display:none;}
+}
+
+.ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
+.ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.2s;}
+.ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.ham-btn.open span:nth-child(2){opacity:0;}
+.ham-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+@media(max-width:780px){
+  .ham-btn{display:flex;}
+  .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--warm-white);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+  .nav-links.open{display:flex;}
+  .nav-links a{font-size:22px;letter-spacing:0.04em;}
+  .nav-cta{display:none;}
+}
+
+footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);padding:0;}
+.footer-sitemap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:0;padding:56px 7vw 40px;border-bottom:1px solid rgba(250,247,242,0.08);}
+.fs-brand{padding-right:40px;}
+.footer-logo{font-family:var(--serif);font-size:22px;color:var(--warm-white);letter-spacing:-0.02em;text-decoration:none;display:block;margin-bottom:12px;}
+.footer-logo span{color:var(--clay);font-style:italic;}
+.footer-mission{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.28);line-height:1.8;margin-bottom:20px;}
+.fs-cta{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:var(--clay);border:1px solid rgba(196,137,111,0.40);padding:9px 18px;text-decoration:none;transition:all 0.18s;}
+.fs-cta:hover{background:rgba(196,137,111,0.12);}
+.fs-col{padding-left:32px;border-left:1px solid rgba(250,247,242,0.06);}
+.fs-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,247,242,0.30);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(250,247,242,0.06);}
+.fs-col a{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,247,242,0.45);text-decoration:none;margin-bottom:10px;transition:color 0.15s;}
+.fs-col a:hover{color:var(--clay);}
+.footer-bottom{padding:20px 7vw;display:flex;align-items:center;justify-content:space-between;}
+.footer-copy{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,0.20);}
+.footer-legal{display:flex;gap:20px;}
+.footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+.footer-legal a:hover{color:var(--clay);}
+@media(max-width:1100px){.footer-sitemap{grid-template-columns:1fr 1fr 1fr;gap:32px;}.fs-brand{grid-column:1/-1;padding-right:0;}.fs-col{border-left:none;padding-left:0;}}
+@media(max-width:680px){.footer-sitemap{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}}
+@media(max-width:400px){.footer-sitemap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Vasl <span>Health</span></a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="platform.html">Platform</a></li>
+    <li><a href="outcomes.html">Outcomes</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="contact.html" class="nav-cta">Contact Us</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-inner">
+    <span class="hero-kicker reveal">For Families</span>
+    <h1 class="hero-headline reveal d1">What Vasl sees,<br>and what it <em>never does.</em></h1>
+    <p class="hero-body reveal d2">If your young person uses Vasl, here&rsquo;s exactly what our technology does &mdash; in plain language, because you deserve to know.</p>
+  </div>
+</section>
+
+<section class="qa-section">
+  <div class="qa-inner">
+    <h2 class="qa-q reveal d1">What it <em>reads.</em></h2>
+    <p class="qa-a reveal d2">Only what members share on Vasl &mdash; their check-ins, messages in peer groups, and conversations with their coach. Vasl does not read texts, social media, school accounts, browsing history, or anything outside the platform. Ever.</p>
+  </div>
+</section>
+
+<section class="qa-section">
+  <div class="qa-inner">
+    <h2 class="qa-q reveal d1">What it <em>looks for.</em></h2>
+    <p class="qa-a reveal d2">Patterns that suggest a young person might be struggling &mdash; even when they say it sideways, the way people actually do. Our technology is built to understand how young people from many communities really talk, so nobody gets flagged for slang and nobody gets missed for code.</p>
+  </div>
+</section>
+
+<section class="qa-section">
+  <div class="qa-inner">
+    <h2 class="qa-q reveal d1">What happens <em>next.</em></h2>
+    <p class="qa-a reveal d2">A human, every time. If something looks concerning, it goes to a licensed clinician &mdash; a real person with real training &mdash; who looks at the whole picture before anything happens. Usually &ldquo;what happens&rdquo; is simply that a coach checks in warmly.</p>
+  </div>
+</section>
+
+<section class="qa-section">
+  <div class="qa-inner">
+    <h2 class="qa-q reveal d1">What it <em>never does.</em></h2>
+    <p class="qa-a reveal d2">It never diagnoses. It never punishes. It never calls the police. It never tells the school what your young person said. Schools and organizations see overall trends only &mdash; like &ldquo;stress is rising this month&rdquo; &mdash; never names, never conversations.</p>
+  </div>
+</section>
+
+<section id="closing">
+  <div class="closing-inner">
+    <p class="closing-headline reveal d1">Questions? Ask us anything.</p>
+    <p class="closing-body reveal d2">Consent forms are written in plain language, and you can withdraw at any time.</p>
+    <a href="mailto:privacy@vaslhealth.com" class="closing-email reveal d3">privacy@vaslhealth.com</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-sitemap">
+    <div class="fs-brand">
+      <a href="index.html" class="footer-logo">Vasl <span>Health</span></a>
+      <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
+      <a href="contact.html" class="fs-cta">Request a Demo &rarr;</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Platform</div>
+      <a href="platform.html">Platform Overview</a>
+      <a href="vlap.html">VLAP</a>
+      <a href="ai-model.html">AI Model</a>
+      <a href="technology.html">Technology</a>
+      <a href="infrastructure.html">Infrastructure, Not Burden</a>
+      <a href="health-systems.html">VLAP for Health Systems</a>
+      <a href="peer-groups.html">Peer Groups</a>
+      <a href="teletherapy.html">Teletherapy</a>
+      <a href="prototype.html">Live Demo Portal</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Who We Serve</div>
+      <a href="for-schools.html">For Schools</a>
+      <a href="for-organizations.html">For Organizations</a>
+      <a href="health-systems.html">For Health Systems</a>
+      <a href="outcomes.html">Outcomes</a>
+      <a href="clinical-outcomes.html">Clinical Outcomes</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Company</div>
+      <a href="about.html">About Vasl</a>
+      <a href="team.html">Team</a>
+      <a href="careers.html">Careers</a>
+      <a href="research.html">Research</a>
+      <a href="blog.html">Blog &amp; Insights</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Support &amp; Legal</div>
+      <a href="support.html">Help Center</a>
+      <a href="for-families.html">For Families</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="baa.html">Business Associate Agreement</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 Vasl Health, Inc. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="baa.html">BAA</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js-ready');
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.06, rootMargin: '0px 0px -24px 0px' });
+  reveals.forEach(el => io.observe(el));
+  window.addEventListener('load', () => {
+    reveals.forEach((el, i) => {
+      if (el.getBoundingClientRect().top < window.innerHeight) {
+        setTimeout(() => el.classList.add('visible'), i * 55);
+      }
+    });
+  });
+  function toggleNav() {
+    document.querySelector('.nav-links').classList.toggle('open');
+    document.getElementById('ham-btn').classList.toggle('open');
+  }
+</script>
+</body>
+</html>
