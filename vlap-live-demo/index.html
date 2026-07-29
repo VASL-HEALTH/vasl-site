@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VLAP Live Demo — Vasl Health</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧭</text></svg>">
+<style>
+  :root {
+    --bg: #0b1210;
+    --panel: #121c19;
+    --panel-border: rgba(255,255,255,0.08);
+    --teal: #0E7A72;
+    --teal-bright: #14a89c;
+    --saffron: #E8961E;
+    --terracotta: #B5533C;
+    --text: #eef4f2;
+    --text-dim: rgba(238,244,242,0.62);
+    --text-faint: rgba(238,244,242,0.4);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'IBM Plex Sans', -apple-system, Segoe UI, sans-serif;
+    background: radial-gradient(circle at 20% -10%, #103029 0%, var(--bg) 55%);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 40px 20px 80px; }
+  header { margin-bottom: 28px; }
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--teal-bright); margin-bottom: 10px;
+  }
+  h1 { font-size: 28px; margin: 0 0 10px; line-height: 1.25; }
+  .lede { color: var(--text-dim); font-size: 15px; line-height: 1.6; max-width: 62ch; }
+
+  .notice {
+    margin-top: 18px; padding: 14px 16px; border-radius: 10px;
+    background: rgba(232,150,30,0.08); border: 1px solid rgba(232,150,30,0.3);
+    font-size: 13px; line-height: 1.55; color: rgba(238,244,242,0.85);
+  }
+  .notice b { color: var(--saffron); }
+
+  .panel {
+    background: var(--panel); border: 1px solid var(--panel-border);
+    border-radius: 14px; padding: 20px; margin-top: 22px;
+  }
+  textarea {
+    width: 100%; min-height: 100px; resize: vertical;
+    background: rgba(255,255,255,0.04); border: 1px solid var(--panel-border);
+    border-radius: 10px; color: var(--text); padding: 12px 14px;
+    font-family: inherit; font-size: 14.5px; line-height: 1.5;
+  }
+  textarea:focus { outline: none; border-color: var(--teal-bright); }
+  .row { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; gap: 12px; }
+  .char-count { font-size: 12px; color: var(--text-faint); font-family: 'IBM Plex Mono', monospace; }
+  button#analyze {
+    background: var(--teal); color: #fff; border: none; border-radius: 9px;
+    padding: 11px 22px; font-size: 14.5px; font-weight: 600; cursor: pointer;
+    transition: background 0.15s;
+  }
+  button#analyze:hover:not(:disabled) { background: var(--teal-bright); }
+  button#analyze:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .examples { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .example-chip {
+    font-size: 12px; padding: 6px 11px; border-radius: 999px;
+    background: rgba(255,255,255,0.05); border: 1px solid var(--panel-border);
+    color: var(--text-dim); cursor: pointer;
+  }
+  .example-chip:hover { border-color: var(--teal-bright); color: var(--text); }
+
+  #results { display: none; margin-top: 22px; }
+  #error-box {
+    display: none; margin-top: 18px; padding: 14px 16px; border-radius: 10px;
+    background: rgba(181,83,60,0.1); border: 1px solid rgba(181,83,60,0.4);
+    font-size: 13.5px; color: #ffb4a3;
+  }
+
+  .tier-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 7px 14px; border-radius: 999px; font-weight: 700;
+    font-size: 13px; letter-spacing: 0.5px; text-transform: uppercase;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .tier-clear   { background: rgba(14,122,114,0.18); color: #4fd8c9; border: 1px solid rgba(14,122,114,0.4); }
+  .tier-monitor { background: rgba(232,150,30,0.15); color: #f4b94a; border: 1px solid rgba(232,150,30,0.4); }
+  .tier-high    { background: rgba(181,83,60,0.18); color: #ff9478; border: 1px solid rgba(181,83,60,0.45); }
+  .tier-crisis  { background: rgba(220,50,50,0.2); color: #ff6b6b; border: 1px solid rgba(220,50,50,0.5); }
+
+  .response-panel {
+    margin-top: 14px; padding: 14px 16px; border-radius: 10px;
+    background: rgba(255,255,255,0.04); border: 1px solid var(--panel-border);
+  }
+  .response-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-faint); margin-bottom: 6px; }
+  .response-text { font-size: 13.5px; color: rgba(238,244,242,0.9); line-height: 1.6; font-style: italic; }
+
+  .section-title {
+    font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+    color: var(--text-faint); margin: 22px 0 10px;
+  }
+  .signal-card {
+    padding: 12px 14px; border-radius: 9px; background: rgba(255,255,255,0.035);
+    border: 1px solid var(--panel-border); margin-bottom: 8px;
+  }
+  .signal-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+  .signal-code { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--teal-bright); font-weight: 700; }
+  .signal-conf { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--text-faint); }
+  .signal-label { font-size: 13.5px; margin-top: 3px; }
+  .signal-meta { font-size: 11.5px; color: var(--text-faint); margin-top: 4px; }
+  .risk-pill {
+    display: inline-block; font-size: 9.5px; padding: 2px 7px; border-radius: 999px;
+    font-family: 'IBM Plex Mono', monospace; text-transform: uppercase; letter-spacing: 0.5px;
+    margin-left: 6px; border: 1px solid var(--panel-border); color: var(--text-dim);
+  }
+  .no-signals { font-size: 13px; color: var(--text-faint); font-style: italic; }
+
+  .combo-card {
+    padding: 10px 14px; border-radius: 9px; margin-bottom: 8px;
+    background: rgba(220,50,50,0.08); border: 1px solid rgba(220,50,50,0.3);
+    font-size: 12.5px; color: rgba(238,244,242,0.85);
+  }
+  .combo-rule { font-family: 'IBM Plex Mono', monospace; color: #ff9478; font-weight: 700; margin-right: 6px; }
+
+  .meta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+  .meta-item {
+    background: rgba(255,255,255,0.03); border: 1px solid var(--panel-border);
+    border-radius: 8px; padding: 10px 12px;
+  }
+  .meta-item .k { font-size: 10px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-faint); margin-bottom: 4px; }
+  .meta-item .v { font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: var(--text); word-break: break-all; }
+
+  .tokens { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .token { font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 3px 8px; border-radius: 6px; background: rgba(255,255,255,0.06); color: var(--text-dim); }
+
+  footer { margin-top: 44px; font-size: 12px; color: var(--text-faint); line-height: 1.6; }
+  footer a { color: var(--teal-bright); }
+
+  .spinner {
+    display: inline-block; width: 14px; height: 14px; border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff;
+    animation: spin 0.7s linear infinite; margin-right: 8px; vertical-align: -2px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">VLAP · Vasl Language Analysis Platform</div>
+    <h1>Live VLAP demo — real engine, isolated path</h1>
+    <p class="lede">
+      Type a message below and it's scored by the actual VLAP inference engine —
+      the same 47-signal, 6-category taxonomy running in production — not a
+      scripted or hardcoded response. This page calls a dedicated, unauthenticated
+      demo endpoint that never writes to any clinical record and never reaches a
+      real coach or clinician queue.
+    </p>
+    <div class="notice">
+      <b>This is a working draft.</b> VLAP's signal taxonomy is
+      <a href="https://github.com/VASL-HEALTH/VASL-PLATFORM/blob/main/docs/VLAP_TAXONOMY_v1.0.md" style="color:inherit">pending independent clinical review and validation</a>
+      — not yet a validated clinical instrument. Nothing you type here is stored,
+      reviewed by a person, or used for anything beyond generating the result shown
+      on this page.
+    </div>
+  </header>
+
+  <div class="panel">
+    <textarea id="message" maxlength="1000" placeholder="Type a message the way a member might send it during a check-in…"></textarea>
+    <div class="examples">
+      <span class="example-chip" data-text="Hey just checking in, had a good day today!">clear example</span>
+      <span class="example-chip" data-text="It's probably not a big deal but I've kinda been struggling lately, ngl.">borderline example</span>
+      <span class="example-chip" data-text="Another one of my friends got shot, we got evicted so we've been staying with different people.">unrelated/context example</span>
+    </div>
+    <div class="row">
+      <span class="char-count"><span id="char-count">0</span>/1000</span>
+      <button id="analyze">Analyze with VLAP</button>
+    </div>
+  </div>
+
+  <div id="error-box"></div>
+
+  <div id="results">
+    <div class="panel">
+      <div id="tier-badge" class="tier-badge">CLEAR</div>
+      <div class="response-panel">
+        <div class="response-label">Member-facing response</div>
+        <div class="response-text" id="response-text"></div>
+      </div>
+
+      <div class="section-title">Detected signals</div>
+      <div id="signals-panel"></div>
+
+      <div class="section-title" id="combo-title" style="display:none">Escalation rules triggered</div>
+      <div id="combo-panel"></div>
+
+      <div class="section-title">Cultural context</div>
+      <div class="meta-grid" id="cultural-panel"></div>
+
+      <div class="section-title">Inference metadata</div>
+      <div class="meta-grid" id="meta-panel"></div>
+    </div>
+  </div>
+
+  <footer>
+    Backend: <code>vlap-service</code> (real production engine, isolated demo endpoint) ·
+    Taxonomy: <a href="https://github.com/VASL-HEALTH/VASL-PLATFORM/blob/main/docs/VLAP_TAXONOMY_v1.0.md">docs/VLAP_TAXONOMY_v1.0.md</a> ·
+    <a href="https://gotovasl.com">gotovasl.com</a>
+  </footer>
+</div>
+
+<script>
+const API_URL = "https://vlap-service-production.up.railway.app/api/vlap/demo/analyze";
+
+const messageEl = document.getElementById("message");
+const charCountEl = document.getElementById("char-count");
+const analyzeBtn = document.getElementById("analyze");
+const errorBox = document.getElementById("error-box");
+const resultsEl = document.getElementById("results");
+
+messageEl.addEventListener("input", () => {
+  charCountEl.textContent = messageEl.value.length;
+});
+
+document.querySelectorAll(".example-chip").forEach(chip => {
+  chip.addEventListener("click", () => {
+    messageEl.value = chip.dataset.text;
+    charCountEl.textContent = messageEl.value.length;
+    messageEl.focus();
+  });
+});
+
+function tierClass(tier) {
+  return { clear: "tier-clear", monitor: "tier-monitor", high: "tier-high", crisis: "tier-crisis" }[tier] || "tier-clear";
+}
+
+function renderSignals(signals) {
+  const panel = document.getElementById("signals-panel");
+  panel.innerHTML = "";
+  if (!signals || signals.length === 0) {
+    panel.innerHTML = '<div class="no-signals">No signals detected.</div>';
+    return;
+  }
+  signals.forEach(s => {
+    const card = document.createElement("div");
+    card.className = "signal-card";
+    card.innerHTML = `
+      <div class="signal-top">
+        <span><span class="signal-code">${s.code}</span><span class="risk-pill">${s.risk_level}</span></span>
+        <span class="signal-conf">confidence ${s.confidence}</span>
+      </div>
+      <div class="signal-label">${s.label}</div>
+      <div class="signal-meta">${s.dimension}</div>
+    `;
+    panel.appendChild(card);
+  });
+}
+
+function renderCombo(rules) {
+  const title = document.getElementById("combo-title");
+  const panel = document.getElementById("combo-panel");
+  panel.innerHTML = "";
+  if (!rules || rules.length === 0) {
+    title.style.display = "none";
+    return;
+  }
+  title.style.display = "block";
+  rules.forEach(r => {
+    const card = document.createElement("div");
+    card.className = "combo-card";
+    card.innerHTML = `<span class="combo-rule">${r.rule}</span>${r.reason}`;
+    panel.appendChild(card);
+  });
+}
+
+function renderCultural(ctx) {
+  const panel = document.getElementById("cultural-panel");
+  panel.innerHTML = `
+    <div class="meta-item"><div class="k">Register</div><div class="v">${ctx.register}</div></div>
+    <div class="meta-item"><div class="k">Confidence</div><div class="v">${ctx.register_confidence}</div></div>
+    <div class="meta-item"><div class="k">Modifiers</div><div class="v">${(ctx.modifiers || []).join(", ") || "none"}</div></div>
+  `;
+  if (ctx.aave_tokens_detected && ctx.aave_tokens_detected.length) {
+    const tokens = document.createElement("div");
+    tokens.className = "tokens";
+    tokens.innerHTML = ctx.aave_tokens_detected.map(t => `<span class="token">${t}</span>`).join("");
+    panel.appendChild(tokens);
+  }
+}
+
+function renderMeta(r) {
+  const panel = document.getElementById("meta-panel");
+  panel.innerHTML = `
+    <div class="meta-item"><div class="k">Model version</div><div class="v">${r.model_version}</div></div>
+    <div class="meta-item"><div class="k">Inference ID</div><div class="v">${r.inference_id}</div></div>
+    <div class="meta-item"><div class="k">Latency</div><div class="v">${r.latency_ms}ms</div></div>
+    <div class="meta-item"><div class="k">Risk score</div><div class="v">${r.risk_score}</div></div>
+  `;
+}
+
+async function analyze() {
+  const text = messageEl.value.trim();
+  errorBox.style.display = "none";
+  if (!text) {
+    errorBox.textContent = "Type a message first.";
+    errorBox.style.display = "block";
+    return;
+  }
+
+  analyzeBtn.disabled = true;
+  analyzeBtn.innerHTML = '<span class="spinner"></span>Analyzing…';
+
+  try {
+    const resp = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ content: text }),
+    });
+
+    if (resp.status === 429) {
+      throw new Error("Rate limit reached — please wait a bit before trying again.");
+    }
+    if (!resp.ok) {
+      const body = await resp.json().catch(() => ({}));
+      throw new Error(body.detail || `Request failed (${resp.status})`);
+    }
+
+    const r = await resp.json();
+
+    const badge = document.getElementById("tier-badge");
+    badge.className = "tier-badge " + tierClass(r.risk_tier);
+    badge.textContent = r.risk_tier.toUpperCase();
+
+    document.getElementById("response-text").textContent = r.member_facing_response;
+    renderSignals(r.signals);
+    renderCombo(r.combination_rules_triggered);
+    renderCultural(r.cultural_context);
+    renderMeta(r);
+
+    resultsEl.style.display = "block";
+    resultsEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  } catch (err) {
+    errorBox.textContent = "Couldn't reach VLAP: " + err.message;
+    errorBox.style.display = "block";
+  } finally {
+    analyzeBtn.disabled = false;
+    analyzeBtn.textContent = "Analyze with VLAP";
+  }
+}
+
+analyzeBtn.addEventListener("click", analyze);
+messageEl.addEventListener("keydown", e => {
+  if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) analyze();
+});
+</script>
+</body>
+</html>
