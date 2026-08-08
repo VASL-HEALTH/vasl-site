@@ -1,0 +1,134 @@
+# Deploy gotovasl.com (site/) to S3 + CloudFront.
+#
+# Replaces the Netlify auto-deploy for the `gotovasl` site. Infrastructure
+# lives in VASL-PLATFORM/infra/aws/static-sites (bucket, distribution, and the
+# OIDC role this workflow assumes).
+#
+# Auth is OIDC — no AWS keys in repo secrets. The role's trust policy pins
+# this repo AND refs/heads/main, so a PR branch cannot publish to the live
+# site even though this workflow file would be present on it.
+#
+# Only site/ is deployed. prototype/ and vlap-live-demo/ are separate Netlify
+# sites in this same repo and are deliberately out of scope here.
+
+name: Deploy marketing site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - '.github/workflows/deploy-site.yml'
+  workflow_dispatch:
+    inputs:
+      invalidate_all:
+        description: 'Invalidate the entire distribution (/*) instead of just HTML'
+        type: boolean
+        default: false
+
+concurrency:
+  # Never let two deploys interleave their sync + invalidation.
+  group: deploy-marketing-site
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  id-token: write   # required to mint the OIDC token
+
+env:
+  AWS_REGION: us-east-1
+  BUCKET: vasl-marketing-site
+  DISTRIBUTION_ID: ${{ vars.MARKETING_DISTRIBUTION_ID }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fail fast if the distribution ID is not configured
+        run: |
+          if [ -z "${DISTRIBUTION_ID}" ]; then
+            echo "::error::Repo variable MARKETING_DISTRIBUTION_ID is unset."
+            echo "Set it to the CloudFront distribution ID from:"
+            echo "  terraform -chdir=infra/aws/static-sites output distribution_id"
+            exit 1
+          fi
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::558215002439:role/vasl-marketing-site-deploy
+          aws-region: ${{ env.AWS_REGION }}
+
+      # Two passes, because Cache-Control differs by asset class and it is the
+      # only thing making CloudFront behave like Netlify did.
+      #
+      # Pass 1 — fingerprinted/static assets. Safe to cache hard: a changed
+      # image gets a changed filename, or is caught by the invalidation below.
+      - name: Sync static assets (long cache)
+        run: |
+          aws s3 sync site/ "s3://${BUCKET}/" \
+            --delete \
+            --exclude '*.html' \
+            --cache-control 'public,max-age=31536000,immutable' \
+            --no-progress
+
+      # Pass 2 — HTML last, so a page is never live before the asset it needs.
+      # `public,max-age=0,must-revalidate` is exactly what Netlify served on
+      # gotovasl.com (verified against the live response 2026-08-08); CloudFront's
+      # CachingOptimized policy honors the origin header, so behavior matches.
+      - name: Sync HTML (must-revalidate)
+        run: |
+          aws s3 sync site/ "s3://${BUCKET}/" \
+            --delete \
+            --exclude '*' \
+            --include '*.html' \
+            --cache-control 'public,max-age=0,must-revalidate' \
+            --content-type 'text/html; charset=utf-8' \
+            --no-progress
+
+      - name: Invalidate CloudFront
+        id: invalidate
+        run: |
+          if [ "${{ inputs.invalidate_all }}" = "true" ]; then
+            PATHS='/*'
+          else
+            PATHS='/ /*.html /help/*'
+          fi
+          echo "Invalidating: ${PATHS}"
+          ID=$(aws cloudfront create-invalidation \
+                 --distribution-id "${DISTRIBUTION_ID}" \
+                 --paths ${PATHS} \
+                 --query 'Invalidation.Id' --output text)
+          echo "id=${ID}" >> "$GITHUB_OUTPUT"
+
+      - name: Wait for invalidation to complete
+        run: |
+          aws cloudfront wait invalidation-completed \
+            --distribution-id "${DISTRIBUTION_ID}" \
+            --id "${{ steps.invalidate.outputs.id }}"
+
+      # Post-deploy proof. Hits the distribution directly so it is meaningful
+      # both before and after the DNS cutover.
+      - name: Smoke-test the deployed site
+        run: |
+          HOST=$(aws cloudfront get-distribution \
+                   --id "${DISTRIBUTION_ID}" \
+                   --query 'Distribution.DomainName' --output text)
+          fail=0
+          check() { # path  expected-status  label
+            code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 20 "https://${HOST}$1")
+            if [ "$code" = "$2" ]; then
+              printf 'ok    %-24s %s (%s)\n' "$1" "$code" "$3"
+            else
+              printf 'FAIL  %-24s %s, want %s (%s)\n' "$1" "$code" "$2" "$3"; fail=1
+            fi
+          }
+          check /                    200 'apex serves index'
+          check /index.html          200 'explicit index'
+          check /about               200 'pretty URL -> about.html'
+          check /about.html          200 'explicit .html'
+          check /help/billing.html   200 'nested page'
+          check /404.html            404 'error page returns 404'
+          check /no-such-page-xyz    404 'missing page returns 404, not 403'
+          exit $fail

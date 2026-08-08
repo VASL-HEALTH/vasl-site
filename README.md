@@ -33,3 +33,16 @@ vasl-site/
   prototype/     ← prototype.gotovasl.com (single HTML file)
   demo/          ← demo.gotovasl.com (single HTML file)
 ```
+
+## Deployment (site/ → AWS)
+
+`site/` (gotovasl.com) deploys to **S3 + CloudFront**, not Netlify, via
+`.github/workflows/deploy-site.yml` on every push to `main` that touches
+`site/`. Infrastructure lives in
+[`VASL-PLATFORM/infra/aws/static-sites`](https://github.com/VASL-HEALTH/VASL-PLATFORM/tree/main/infra/aws/static-sites).
+
+The workflow authenticates with GitHub OIDC — there are no AWS keys in repo
+secrets. It needs one repo variable, `MARKETING_DISTRIBUTION_ID`, set to the
+`distribution_id` Terraform output.
+
+`prototype/` and `vlap-live-demo/` are still Netlify sites and are unaffected.
