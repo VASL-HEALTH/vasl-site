@@ -129,6 +129,6 @@ jobs:
           check /about               200 'pretty URL -> about.html'
           check /about.html          200 'explicit .html'
           check /help/billing.html   200 'nested page'
-          check /404.html            404 'error page returns 404'
+          check /404.html            200 'error page itself is a real file'
           check /no-such-page-xyz    404 'missing page returns 404, not 403'
           exit $fail
