@@ -63,7 +63,7 @@ def git_lastmod(path: Path) -> str:
     """Last commit date for the file. Falls back to today for untracked files."""
     try:
         out = subprocess.run(
-            ["git", "log", "-1", "--format=%cs", "--", str(path.relative_to(ROOT))],
+            ["git", "log", "-1", "--format=%cs", "--", path.relative_to(ROOT).as_posix()],
             cwd=ROOT,
             capture_output=True,
             text=True,
@@ -79,7 +79,7 @@ def git_lastmod(path: Path) -> str:
 def build() -> str:
     rows = []
     for path in sorted(SITE.rglob("*.html")):
-        rel = str(path.relative_to(SITE))
+        rel = path.relative_to(SITE).as_posix()
         html = path.read_text(encoding="utf-8", errors="ignore")
         if re.search(r'name=["\']robots["\'][^>]*content=["\'][^"\']*noindex', html, re.I):
             continue

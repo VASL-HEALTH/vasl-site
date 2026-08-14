@@ -312,7 +312,7 @@ ANCHOR = re.compile(r'(<link rel="apple-touch-icon"[^>]*>)')
 
 
 def process(path: Path) -> tuple:
-    rel = str(path.relative_to(SITE))
+    rel = path.relative_to(SITE).as_posix()
     original = path.read_text(encoding="utf-8")
     html = strip_existing(original)
     block = build_block(rel, html)
@@ -322,7 +322,10 @@ def process(path: Path) -> tuple:
     elif "</head>" in html:
         new = html.replace("</head>", block + "\n</head>", 1)
     else:
-        return rel, False, "no <head> anchor — skipped"
+        # No place to put the block. Return None for content so main() can tell
+        # this apart from "unchanged" — returning the reason as a string here
+        # made main() print the entire file as the skip reason.
+        return rel, False, None
 
     changed = new != original
     return rel, changed, new
@@ -333,8 +336,8 @@ def main() -> int:
     pending = []
     for path in sorted(SITE.rglob("*.html")):
         rel, changed, result = process(path)
-        if isinstance(result, str) and not changed:
-            print(f"  skip  {rel}  ({result})")
+        if result is None:
+            print(f"  skip  {rel}  (no <head> anchor)")
             continue
         if changed:
             pending.append((path, result))
