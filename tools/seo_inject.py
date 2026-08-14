@@ -52,7 +52,7 @@ NOINDEX = {
 # ~150 chars, buyer-facing, no diagnostic claims.
 MISSING_DESC = {
     "ai-model.html": (
-        "CulturalBERT is the language model behind Vasl — trained on how Black, Latino, "
+        "VLAP is the language model behind Vasl — trained on how Black, Latino, "
         "and first-generation youth actually describe distress. Detection, not diagnosis."
     ),
     "platform.html": (

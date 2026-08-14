@@ -68,8 +68,8 @@ REWRITES = {
         "diagnose.",
     ),
     "ai-model.html": (
-        "CulturalBERT: AI Trained on How Youth Actually Speak",
-        "Standard clinical NLP misreads AAVE and youth vernacular. CulturalBERT is "
+        "VLAP: AI Trained on How Youth Actually Speak",
+        "Standard clinical NLP misreads AAVE and youth vernacular. VLAP is "
         "trained on it directly — 2,400+ tokens, six signal categories, no "
         "diagnostic output.",
     ),
