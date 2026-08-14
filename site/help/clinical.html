@@ -420,44 +420,49 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
       <span class="section-anchor" id="reading-codes"></span>
       <h2 class="section-heading">Reading dimensional codes</h2>
 
-      <p class="section-body">Each signal in the panel is labeled with a two-part code &mdash; a dimension abbreviation and a signal number. Here's a reference for all five dimensions and what each covers clinically.</p>
+      <p class="section-body">Each signal in the panel is labeled with a two-part code &mdash; a category abbreviation and a signal number. Here's a reference for all six categories and what each covers clinically.</p>
 
       <div class="code-table">
         <div class="ct-header">
           <div class="cth">Code</div>
-          <div class="cth">Dimension</div>
+          <div class="cth">Category</div>
           <div class="cth">Clinical Relevance</div>
         </div>
         <div class="ct-row">
           <div class="ctc">HOP</div>
-          <div class="ctc">Hopelessness & Pessimism</div>
-          <div class="ctc">Indirect hopelessness and temporal compression &mdash; the future narrowing. In AAVE and youth vernacular, these often appear through minimization or casual phrasing that standard models deprioritize. Pay particular attention to HOP signals combined with CCM pre-disclosure modifiers.</div>
-        </div>
-        <div class="ct-row">
-          <div class="ctc">ISO</div>
-          <div class="ctc">Social Isolation</div>
-          <div class="ctc">Relational withdrawal and disconnection from community. ISO signals are particularly significant for BIPOC and LGBTQ+ youth whose support networks are often culturally specific and hard to replace. Sustained ISO signals without active coaching contact warrant proactive outreach.</div>
+          <div class="ctc">Hopelessness & Futility</div>
+          <div class="ctc">Indirect hopelessness and temporal compression &mdash; the future narrowing. In AAVE and youth vernacular, these often appear through minimization or casual phrasing that standard models deprioritize. Pay particular attention to HOP signals combined with CCM pre-disclosure modifiers &mdash; that combination escalates to High risk under VLAP's rules.</div>
         </div>
         <div class="ct-row">
           <div class="ctc">SHA</div>
-          <div class="ctc">Self-Harm Adjacent</div>
-          <div class="ctc">Coded self-harm and suicidal ideation language &mdash; including community-developed terms not found in standard NLP vocabularies. SHA signals always warrant same-session exploration. SHA combined with CRS signals triggers clinical supervisor review.</div>
-        </div>
-        <div class="ct-row">
-          <div class="ctc">CRS</div>
-          <div class="ctc">Crisis Risk Signals</div>
-          <div class="ctc">Acute distress patterns: perceived burdensomeness, hopelessness with sincerity markers, suicidal ideation confirmed by authenticity escalators. CRS signals are surfaced immediately for clinical supervisor review &mdash; do not wait for your next scheduled session if a CRS flag appears in your panel.</div>
+          <div class="ctc">Coded Suicidal Ideation</div>
+          <div class="ctc">Explicit and coded self-harm and suicidal ideation language &mdash; including community-developed terms not found in standard NLP vocabularies. Most SHA signals warrant same-session exploration. SHA combined with any HOP signal, or SHA-02/SHA-05/SHA-08 alone, always escalates to High risk and immediate clinical supervisor review.</div>
         </div>
         <div class="ct-row">
           <div class="ctc">CCM</div>
-          <div class="ctc">Cultural Context Modifiers</div>
-          <div class="ctc">Patterns that modify how other signals should be read: pre-disclosure minimization ("it's not that deep but"), spiritual deflection, code-switching, and family-loyalty framing. CCM signals are often the most clinically important &mdash; they tell you how the member is packaging what they're actually communicating.</div>
+          <div class="ctc">Minimization & Disclosure Suppression</div>
+          <div class="ctc">Patterns that modify how other signals should be read: pre-disclosure minimization ("it's not that deep but"), gallows humor, asking-for-a-friend framing, and topic drops. CCM signals are often the most clinically important &mdash; they tell you how the member is packaging what they're actually communicating.</div>
+        </div>
+        <div class="ct-row">
+          <div class="ctc">ISO</div>
+          <div class="ctc">Social Isolation & Withdrawal</div>
+          <div class="ctc">Relational withdrawal and disconnection from community. ISO signals are particularly significant for Black, Latino, and LGBTQ+ youth whose support networks are often culturally specific and hard to replace. Family estrangement (ISO-06) always escalates to High risk. Sustained ISO signals without active coaching contact warrant proactive outreach.</div>
+        </div>
+        <div class="ct-row">
+          <div class="ctc">TRM</div>
+          <div class="ctc">Trauma & Acute Stressor Markers</div>
+          <div class="ctc">Social determinants of mental health &mdash; community violence, housing instability, police contact, school push-out, cumulative loss, and parentification. Most TRM signals are not independently actionable; they are contextual elevators that increase the significance of co-occurring HOP, SHA, or ISO signals.</div>
+        </div>
+        <div class="ct-row">
+          <div class="ctc">PFE</div>
+          <div class="ctc">Protective Factor Erosion</div>
+          <div class="ctc">Indicates a previously present protective factor &mdash; a trusted adult, a faith community, a peer network, an achievement identity, aspirational goals &mdash; has been removed. Most clinically significant as a longitudinal marker across sessions and in combination with HOP or SHA signals.</div>
         </div>
       </div>
 
       <div class="callout info">
         <div class="callout-label">On Signal Numbering (e.g., ISO-04)</div>
-        <p class="callout-text">The number after the dimension code (ISO-04, HOP-03) identifies a specific signal pattern within that dimension &mdash; not a severity ranking. ISO-09 is not more severe than ISO-01. The full taxonomy with all 42 signal pattern descriptions is in the VLAP technical specification, available to licensed clinicians from the clinical team.</p>
+        <p class="callout-text">The number after the category code (ISO-04, HOP-03) identifies a specific signal pattern within that category &mdash; not a severity ranking. ISO-06 is not "more severe" than ISO-01 by virtue of its number; risk level is stated explicitly for every signal. The full taxonomy with all 47 signal definitions, risk levels, and escalation rules is in the VLAP technical specification, available to licensed clinicians from the clinical team.</p>
       </div>
     </div>
 
@@ -490,7 +495,7 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
           <div class="step-num">03</div>
           <div>
             <div class="step-title">Identify CCM signals &mdash; they change how you read everything else</div>
-            <p class="step-body">Cultural Context Modifier signals tell you about the frame the member is using to communicate. A pre-disclosure minimization pattern (CCM-04) paired with an ISO signal means the withdrawal may be more significant than it appears. A spiritual deflection pattern (CCM-12) may signal either genuine resilience or an area the member has decided not to open &mdash; both are worth exploring.</p>
+            <p class="step-body">Cultural Context Modifier signals tell you about the frame the member is using to communicate. A pre-disclosure minimization pattern (CCM-04) paired with an ISO signal means the withdrawal may be more significant than it appears. A topic-drop pattern (CCM-06) &mdash; the member raises something and then withdraws from it &mdash; may signal a failed disclosure the member is still holding. Both are worth a gentle, non-pressuring reopening.</p>
           </div>
         </div>
         <div class="step-item">
@@ -517,8 +522,8 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
       </div>
 
       <div class="callout info">
-        <div class="callout-label">Example &mdash; CCM spiritual deflection, recurring</div>
-        <p class="callout-text" style="font-style:italic;">"You've mentioned leaning on your faith through a lot of this. Has that been feeling like enough, or is there stuff it hasn't been able to reach?" &mdash; honors the coping while gently opening the door to what's underneath.</p>
+        <div class="callout-label">Example &mdash; CCM-06 topic drop, recurring</div>
+        <p class="callout-text" style="font-style:italic;">"You started to say something a couple weeks back and moved past it &mdash; no pressure at all, but I'm still here if you want to come back to it." &mdash; acknowledges the earlier withdrawal and creates a safe reopening, without pushing.</p>
       </div>
     </div>
 
@@ -544,23 +549,23 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
     <!-- CRISIS SIGNALS -->
     <div class="content-section">
       <span class="section-anchor" id="crisis-signals"></span>
-      <h2 class="section-heading">Crisis signals &mdash; CRS flags</h2>
+      <h2 class="section-heading">Crisis signals &mdash; High-risk escalations</h2>
 
-      <p class="section-body">CRS-category signals &mdash; Crisis Risk Signals &mdash; receive separate handling. When a CRS-level signal is detected, it is surfaced to Vasl's licensed clinical supervisor team for human review, with a 90-minute response SLA. The clinical supervisor determines the appropriate action. No automated contact is made with the member.</p>
+      <p class="section-body">Individual signals and signal combinations that meet High-risk escalation criteria receive separate handling. VLAP's escalation rules define exactly which combinations trigger this &mdash; for example, any SHA signal combined with any HOP signal, SHA-02/SHA-05/SHA-08 alone, or ISO-06 combined with any SHA signal. When a High-risk escalation is detected, it is surfaced to Vasl's licensed clinical supervisor team for human review, with a 90-minute response SLA. The clinical supervisor determines the appropriate action. No automated contact is made with the member.</p>
 
       <div class="step-list">
         <div class="step-item">
           <div class="step-num">01</div>
           <div>
-            <div class="step-title">CRS signals appear in your panel marked as critical priority</div>
-            <p class="step-body">In your pre-session panel, CRS signals appear separately from other dimensional signals and are labeled with a priority indicator. They will also appear in your AI Client Insights view as a "Requires review" flag for the relevant member.</p>
+            <div class="step-title">High-risk escalations appear in your panel marked as critical priority</div>
+            <p class="step-body">In your pre-session panel, signals that trigger a High-risk escalation appear separately from other signals and are labeled with a priority indicator. They will also appear in your AI Client Insights view as a "Requires review" flag for the relevant member.</p>
           </div>
         </div>
         <div class="step-item">
           <div class="step-num">02</div>
           <div>
             <div class="step-title">Clinical supervisor has already been notified</div>
-            <p class="step-body">By the time you see a CRS flag in your panel, the Vasl clinical supervisor team has already received the signal for review. You do not need to trigger a separate notification &mdash; but you should be aware that your session with this member may already be in the clinical supervisor's awareness.</p>
+            <p class="step-body">By the time you see a High-risk escalation flag in your panel, the Vasl clinical supervisor team has already received the signal for review. You do not need to trigger a separate notification &mdash; but you should be aware that your session with this member may already be in the clinical supervisor's awareness.</p>
           </div>
         </div>
         <div class="step-item">

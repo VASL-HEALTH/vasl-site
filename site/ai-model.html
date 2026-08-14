@@ -364,6 +364,15 @@
     font-size: 13px; font-weight: 300; line-height: 1.5; color: var(--ink-70);
   }
 
+  .tax-signal-risk {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 2px 7px; border-radius: 2px; flex-shrink: 0;
+  }
+  .tsr-high { background: rgba(196,90,60,0.14); color: #a8492c; }
+  .tsr-mod { background: rgba(184,140,60,0.14); color: #8a6520; }
+  .tsr-low { background: var(--chalk); color: var(--dust); }
+  .tsr-var { background: rgba(90,120,150,0.14); color: #3f6a87; }
+
   .tax-row-right {}
 
   .tax-example-label {
@@ -978,14 +987,14 @@
           <div class="miss-num">Pattern 01 &mdash; AAVE Hopelessness Constructions</div>
           <div class="miss-utterance">"idk why i even try anymore tbh, can't keep doing this no more fr."</div>
           <div class="miss-standard">Classified as informal or low-confidence text. No distress signal fired. Member not flagged.</div>
-          <div class="miss-vlap">VLAP reads: indirect hopelessness (HOP-03) + AAVE register modifier (CCM-09). Signal confidence high. Surfaced to clinician with interpretive context.</div>
+          <div class="miss-vlap">VLAP reads: AAVE futility construction (HOP-03) + AAVE minimization construction (CCM-02). Signal confidence high. Surfaced to clinician with interpretive context.</div>
         </div>
 
         <div class="miss-item">
           <div class="miss-num">Pattern 02 &mdash; Coded Self-Harm Language</div>
           <div class="miss-utterance">"been thinking about unaliving lately ngl."</div>
           <div class="miss-standard">Token "unaliving" absent from vocabulary. Statement classified as neutral or ambiguous. No signal generated.</div>
-          <div class="miss-vlap">VLAP reads: coded self-harm ideation (SHA-03) + time-context marker (CRS-02). Surfaced immediately to clinical supervisor for human review.</div>
+          <div class="miss-vlap">VLAP reads: unaliving and derivatives (SHA-02). High-risk signal &mdash; surfaced immediately to clinical supervisor for human review per escalation rules.</div>
         </div>
 
         <div class="miss-item">
@@ -1015,157 +1024,202 @@
 
   <div class="tax-header">
     <h2 class="tax-headline reveal d1">
-      42 signals.<br>
-      5 dimensions.<br>
+      47 signals.<br>
+      6 categories.<br>
       <em>Zero diagnostic<br>outputs.</em>
     </h2>
     <p class="tax-intro reveal d2">
-      The Cultural Signal Taxonomy V1 defines every signal CulturalBERT is trained to detect. Each signal has a clinical definition, a community-language annotation, and a confidence weighting methodology. None produce a diagnosis. All surface as interpretive context for a licensed clinician &mdash; who decides what to do with them.
+      The VLAP Distress Signal Taxonomy (v1.0) defines every signal CulturalBERT is trained to detect. Each signal has a clinical definition, a community-language annotation, and a risk-level weighting. None produce a diagnosis. All surface as interpretive context for a licensed clinician &mdash; who decides what to do with them. Full clinical notes, escalation rules, and validation status for every signal are documented in the <a href="technology.html" style="color:var(--clay);text-decoration:underline;">Technology deep-dive</a>.
     </p>
   </div>
 
-  <!-- HOP -->
   <div class="tax-row reveal">
     <div class="tax-row-left">
-      <div class="tax-code">HOP-01 &ndash; HOP-08</div>
-      <div class="tax-count">8</div>
-      <div class="tax-name">Hopelessness & Despair</div>
+      <div class="tax-code">HOP-01 &ndash; HOP-09</div>
+      <div class="tax-count">9</div>
+      <div class="tax-name">Hopelessness & Futility</div>
     </div>
     <div class="tax-row-mid">
-      <p class="tax-desc">Signals in this dimension detect language that expresses the loss of forward possibility &mdash; direct statements, AAVE constructions, and the performative positivity patterns that mask despair beneath apparent calm. This dimension is particularly sensitive to the temporal collapse language common in youth expressing serious distress.</p>
+      <p class="tax-desc">The Beck Hopelessness Scale and Columbia Suicide Severity Rating Scale both identify hopelessness as the strongest independent predictor of suicidal ideation. Generic NLP models perform adequately on Standard American English expressions of hopelessness (HOP-01). VLAP&rsquo;s differentiation is in detecting culturally coded and vernacular expressions of futility (HOP-02 through HOP-09) that generic models systematically misclassify as frustration or hyperbole.</p>
       <div class="tax-signals">
-        <div class="tax-signal"><span class="tax-signal-code">HOP-01</span><span class="tax-signal-desc">Direct hopelessness &mdash; explicit future negation ("there's no point")</span></div>
-        <div class="tax-signal"><span class="tax-signal-code">HOP-03</span><span class="tax-signal-desc">AAVE hopelessness &mdash; indirect constructions ("can't keep doing this no more fr")</span></div>
-        <div class="tax-signal"><span class="tax-signal-code">HOP-05</span><span class="tax-signal-desc">Temporal collapse &mdash; compressed future horizon ("just gotta make it through tonight")</span></div>
-        <div class="tax-signal"><span class="tax-signal-code">HOP-07</span><span class="tax-signal-desc">Performative positivity &mdash; sudden calm following sustained distress</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">HOP-01</span><span class="tax-signal-risk tsr-high">High</span><span class="tax-signal-desc">Explicit future negation (“there's no point anymore”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">HOP-02</span><span class="tax-signal-risk tsr-mod">Moderate</span><span class="tax-signal-desc">Ambiguous future self-erasure (“I won't be here when that happens”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">HOP-03</span><span class="tax-signal-risk tsr-high">High</span><span class="tax-signal-desc">AAVE futility construction (“can't keep doing this no more fr”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">HOP-04</span><span class="tax-signal-risk tsr-var">Variable</span><span class="tax-signal-desc">Coded exhaustion (“tired of waking up and doing this again”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">HOP-05</span><span class="tax-signal-risk tsr-low">Low</span><span class="tax-signal-desc">Temporal foreclosure (“stopped making plans”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">HOP-06</span><span class="tax-signal-risk tsr-mod">Moderate</span><span class="tax-signal-desc">Third-person self-distancing (“that's not me anymore”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">HOP-07</span><span class="tax-signal-risk tsr-high">High</span><span class="tax-signal-desc">Burden narrative (“everyone would honestly be better off”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">HOP-08</span><span class="tax-signal-risk tsr-high">High</span><span class="tax-signal-desc">Queer futility narrative (“it doesn't get better for people like me”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">HOP-09</span><span class="tax-signal-risk tsr-mod">Moderate</span><span class="tax-signal-desc">Immigrant / first-gen foreclosure (“all that sacrifice and for what”)</span></div>
       </div>
     </div>
     <div class="tax-row-right">
       <div class="tax-example-label">Signal Example</div>
       <div class="tax-example">
         <div class="tax-ex-utterance">"I just need to get through this week, fr."</div>
-        <div class="tax-ex-interp">HOP-05 &mdash; Temporal collapse. "Fr" (for real) is authenticity marker &mdash; not casual.</div>
+        <div class="tax-ex-interp">HOP-04 &mdash; Coded exhaustion. “Fr” (for real) is an authenticity marker, not casual speech.</div>
       </div>
       <div class="tax-example">
-        <div class="tax-ex-utterance">"everything is fine now actually lol"</div>
-        <div class="tax-ex-interp">HOP-07 &mdash; Performative positivity following distress pattern in prior sessions.</div>
+        <div class="tax-ex-utterance">"It doesn't get better for people like me."</div>
+        <div class="tax-ex-interp">HOP-08 &mdash; Queer futility narrative. Carries the weight of observed community trauma, not just personal pessimism.</div>
       </div>
     </div>
   </div>
 
-  <!-- ISO -->
   <div class="tax-row reveal">
     <div class="tax-row-left">
-      <div class="tax-code">ISO-01 &ndash; ISO-09</div>
-      <div class="tax-count">9</div>
-      <div class="tax-name">Isolation & Withdrawal</div>
+      <div class="tax-code">SHA-01 &ndash; SHA-08</div>
+      <div class="tax-count">8</div>
+      <div class="tax-name">Coded Suicidal Ideation</div>
     </div>
     <div class="tax-row-mid">
-      <p class="tax-desc">Nine signals covering the spectrum of social disengagement &mdash; from broad relational withdrawal to community-specific expressions of disconnection. Includes family rejection language specific to LGBTQ+ youth, digital-native "unseen" expressions, and the behavioral reframing of withdrawal as self-elevation common in youth who have internalized isolation as a coping posture.</p>
+      <p class="tax-desc">The SHA category captures both explicit and coded expressions of suicidal ideation. Generic models perform well on explicit ideation (SHA-01) and poorly on all other signals. SHA-02 through SHA-08 represent the core of VLAP&rsquo;s clinical differentiation &mdash; these are the expressions young people actually use, developed specifically to evade platform content moderation and the perceived stigma of explicit disclosure.</p>
       <div class="tax-signals">
-        <div class="tax-signal"><span class="tax-signal-code">ISO-01</span><span class="tax-signal-desc">Broad relational withdrawal ("I don't fw people like that no more")</span></div>
-        <div class="tax-signal"><span class="tax-signal-code">ISO-04</span><span class="tax-signal-desc">Self-elevation framing of withdrawal ("moving different, people can't handle it")</span></div>
-        <div class="tax-signal"><span class="tax-signal-code">ISO-06</span><span class="tax-signal-desc">Family rejection language &mdash; LGBTQ+-specific ("my people don't see me")</span></div>
-        <div class="tax-signal"><span class="tax-signal-code">ISO-08</span><span class="tax-signal-desc">Digital withdrawal &mdash; ghosting, read receipts ignored, disappearance from peer groups</span></div>
-      </div>
-    </div>
-    <div class="tax-row-right">
-      <div class="tax-example-label">Signal Example</div>
-      <div class="tax-example">
-        <div class="tax-ex-utterance">"I'm moving different now. People can't handle it."</div>
-        <div class="tax-ex-interp">ISO-04 &mdash; Withdrawal reframed as growth. Rupture or rejection often precedes this pattern.</div>
-      </div>
-      <div class="tax-example">
-        <div class="tax-ex-utterance">"I don't really fw people like that no more."</div>
-        <div class="tax-ex-interp">ISO-01 &mdash; "No more" is a temporal marker. Something changed. The cause is clinically significant.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SHA -->
-  <div class="tax-row reveal">
-    <div class="tax-row-left">
-      <div class="tax-code">SHA-01 &ndash; SHA-07</div>
-      <div class="tax-count">7</div>
-      <div class="tax-name">Self-Harm Ideation</div>
-    </div>
-    <div class="tax-row-mid">
-      <p class="tax-desc">Seven signals covering coded, indirect, and euphemistic expressions of self-harm ideation. This dimension was specifically extended to include community-developed coded language &mdash; vocabulary that standard NLP models have never encountered and cannot classify. SHA signals carry the highest review priority in the clinical workflow.</p>
-      <div class="tax-signals">
-        <div class="tax-signal"><span class="tax-signal-code">SHA-01</span><span class="tax-signal-desc">Direct ideation &mdash; explicit language with clear self-harm reference</span></div>
-        <div class="tax-signal"><span class="tax-signal-code">SHA-03</span><span class="tax-signal-desc">Coded language &mdash; "unaliving," "ending it," and youth-specific euphemisms</span></div>
-        <div class="tax-signal"><span class="tax-signal-code">SHA-05</span><span class="tax-signal-desc">Indirect method reference &mdash; behavioral or contextual signals without explicit statement</span></div>
-        <div class="tax-signal"><span class="tax-signal-code">SHA-07</span><span class="tax-signal-desc">Behavioral withdrawal preceding ideation &mdash; peer group departure, disengagement patterns</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">SHA-01</span><span class="tax-signal-risk tsr-high">High</span><span class="tax-signal-desc">Explicit suicidal ideation (“I'm thinking about suicide”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">SHA-02</span><span class="tax-signal-risk tsr-high">High</span><span class="tax-signal-desc">Unaliving and derivatives (“been thinking about unaliving”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">SHA-03</span><span class="tax-signal-risk tsr-mod">Moderate</span><span class="tax-signal-desc">Sleep-death conflation (“I just want to go to sleep and not wake up”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">SHA-04</span><span class="tax-signal-risk tsr-mod">Moderate</span><span class="tax-signal-desc">Fantasy of absence (“what would happen if I disappeared”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">SHA-05</span><span class="tax-signal-risk tsr-high">High</span><span class="tax-signal-desc">Method inquiry with minimization wrapper (“just curious how many pills”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">SHA-06</span><span class="tax-signal-risk tsr-high">High</span><span class="tax-signal-desc">Goodbye behavior references (“made sure everything was in order”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">SHA-07</span><span class="tax-signal-risk tsr-high">High</span><span class="tax-signal-desc">Date markers with inverted framing (“I just need to get through [date]”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">SHA-08</span><span class="tax-signal-risk tsr-high">High</span><span class="tax-signal-desc">Community-specific death euphemisms (“catching a fade fr”)</span></div>
       </div>
     </div>
     <div class="tax-row-right">
       <div class="tax-example-label">Signal Example</div>
       <div class="tax-example">
         <div class="tax-ex-utterance">"been thinking about unaliving lately ngl."</div>
-        <div class="tax-ex-interp">SHA-03 &mdash; Coded ideation. "Ngl" (not gonna lie) is an authenticity pivot &mdash; not minimization.</div>
+        <div class="tax-ex-interp">SHA-02 &mdash; Coded ideation. “Ngl” is a sincerity marker, not minimization.</div>
       </div>
       <div class="tax-example">
-        <div class="tax-ex-utterance">"It's giving unalive energy out here."</div>
-        <div class="tax-ex-interp">SHA-03 &mdash; Euphemistic framing. Distancing language does not reduce clinical weight.</div>
+        <div class="tax-ex-utterance">"not that I'd do it but what does it feel like when..."</div>
+        <div class="tax-ex-interp">SHA-05 &mdash; Method inquiry with minimization wrapper. Always triggers human review regardless of stated intent.</div>
       </div>
     </div>
   </div>
 
-  <!-- CRS -->
   <div class="tax-row reveal">
     <div class="tax-row-left">
-      <div class="tax-code">CRS-01 &ndash; CRS-06</div>
-      <div class="tax-count">6</div>
-      <div class="tax-name">Crisis Escalation</div>
+      <div class="tax-code">CCM-01 &ndash; CCM-08</div>
+      <div class="tax-count">8</div>
+      <div class="tax-name">Minimization & Disclosure Suppression</div>
     </div>
     <div class="tax-row-mid">
-      <p class="tax-desc">Six signals that indicate acute temporal framing, farewell patterns, and sudden behavioral changes that have been documented as precursors to crisis escalation. CRS signals trigger the highest-priority clinical review pathway &mdash; surfaced to clinical supervisors for human review within 90 minutes of detection.</p>
+      <p class="tax-desc">CCM signals are the category most specific to Vasl&rsquo;s target population and most absent from generic NLP training data. They represent culturally conditioned patterns of downplaying distress before disclosing it &mdash; a documented phenomenon in Black, Latino, and LGBTQIA+ communities where mental health help-seeking carries stigma. Generic models classify CCM signals as low risk. VLAP treats them as pre-disclosure markers that warrant gentle engagement prompts and session logging.</p>
       <div class="tax-signals">
-        <div class="tax-signal"><span class="tax-signal-code">CRS-01</span><span class="tax-signal-desc">Time-bounding &mdash; "just gotta make it through tonight / this week"</span></div>
-        <div class="tax-signal"><span class="tax-signal-code">CRS-02</span><span class="tax-signal-desc">Time-context specificity &mdash; acute temporal framing combined with SHA signal</span></div>
-        <div class="tax-signal"><span class="tax-signal-code">CRS-04</span><span class="tax-signal-desc">Farewell patterns &mdash; expressions of gratitude, closure, or goodbye without context</span></div>
-        <div class="tax-signal"><span class="tax-signal-code">CRS-06</span><span class="tax-signal-desc">Sudden calm &mdash; rapid positive shift following sustained distress signal history</span></div>
-      </div>
-    </div>
-    <div class="tax-row-right">
-      <div class="tax-example-label">Signal Example</div>
-      <div class="tax-example">
-        <div class="tax-ex-utterance">"just gotta make it to the weekend, that's all."</div>
-        <div class="tax-ex-interp">CRS-01 &mdash; Time-bounding. "That's all" compounds the signal &mdash; normalization of an acute horizon.</div>
-      </div>
-      <div class="tax-example">
-        <div class="tax-ex-utterance">"Thanks for everything tbh. You're the only one who got it."</div>
-        <div class="tax-ex-interp">CRS-04 &mdash; Farewell pattern. Expressed gratitude without preceding context is a CRS-priority signal.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- CCM -->
-  <div class="tax-row reveal">
-    <div class="tax-row-left">
-      <div class="tax-code">CCM-01 &ndash; CCM-12</div>
-      <div class="tax-count">12</div>
-      <div class="tax-name">Cultural Context Modifiers</div>
-    </div>
-    <div class="tax-row-mid">
-      <p class="tax-desc">Twelve modifiers that adjust the contextual weight of other signals based on cultural register, minimization patterns, code-switching, and community-specific stressors. CCMs are what allow CulturalBERT to read the same words differently depending on who is speaking, in what context, and through which cultural lens &mdash; which is what makes accurate interpretation possible.</p>
-      <div class="tax-signals">
-        <div class="tax-signal"><span class="tax-signal-code">CCM-01</span><span class="tax-signal-desc">AAVE register &mdash; flags AAVE linguistic context for appropriate signal weighting</span></div>
-        <div class="tax-signal"><span class="tax-signal-code">CCM-04</span><span class="tax-signal-desc">Pre-disclosure minimization &mdash; "not that deep but," "it's whatever but"</span></div>
-        <div class="tax-signal"><span class="tax-signal-code">CCM-07</span><span class="tax-signal-desc">Code-switching &mdash; tonal register shift mid-utterance signals authentic disclosure</span></div>
-        <div class="tax-signal"><span class="tax-signal-code">CCM-10</span><span class="tax-signal-desc">Anti-LGBTQ+ political stressor &mdash; environmental threat language in identity context</span></div>
-        <div class="tax-signal"><span class="tax-signal-code">CCM-12</span><span class="tax-signal-desc">Spiritual coping &mdash; faith-adjacent framing as closure vs. active coping differentiator</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">CCM-01</span><span class="tax-signal-risk tsr-var">Variable</span><span class="tax-signal-desc">Classic minimization opener (“it's probably not a big deal but...”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">CCM-02</span><span class="tax-signal-risk tsr-var">Variable</span><span class="tax-signal-desc">AAVE minimization constructions (“lowkey been struggling lately”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">CCM-03</span><span class="tax-signal-risk tsr-low">Low</span><span class="tax-signal-desc">Permission-seeking before disclosure (“can I tell you something personal?”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">CCM-04</span><span class="tax-signal-risk tsr-mod">Moderate</span><span class="tax-signal-desc">Gallows humor as disclosure mechanism (“not to be unalive about it but lmao”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">CCM-05</span><span class="tax-signal-risk tsr-mod">Moderate</span><span class="tax-signal-desc">Asking for a friend construction (“my friend is going through something...”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">CCM-06</span><span class="tax-signal-risk tsr-mod">Moderate</span><span class="tax-signal-desc">Topic drop without resolution (“actually forget I said anything”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">CCM-07</span><span class="tax-signal-risk tsr-low">Low</span><span class="tax-signal-desc">Internalized stigma pattern (“other people have it so much worse”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">CCM-08</span><span class="tax-signal-risk tsr-low">Low</span><span class="tax-signal-desc">Performed resilience (“I'm strong, I've been through worse”)</span></div>
       </div>
     </div>
     <div class="tax-row-right">
       <div class="tax-example-label">Signal Example</div>
       <div class="tax-example">
         <div class="tax-ex-utterance">"it's not that deep but lowkey been struggling."</div>
-        <div class="tax-ex-interp">CCM-04 &mdash; Minimization increases downstream signal weight. The hedge is the signal.</div>
+        <div class="tax-ex-interp">CCM-01 + CCM-02 &mdash; Minimization opener predicts significant disclosure in what follows.</div>
       </div>
       <div class="tax-example">
         <div class="tax-ex-utterance">"God got me. That's all I'm saying."</div>
-        <div class="tax-ex-interp">CCM-12 &mdash; Spiritual closure. May be resilience or disclosure shutdown. Frequency across sessions differentiates.</div>
+        <div class="tax-ex-interp">PFE-01 territory if faith is being lost &mdash; here, CCM spiritual framing as conversational closure.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tax-row reveal">
+    <div class="tax-row-left">
+      <div class="tax-code">ISO-01 &ndash; ISO-07</div>
+      <div class="tax-count">7</div>
+      <div class="tax-name">Social Isolation & Withdrawal</div>
+    </div>
+    <div class="tax-row-mid">
+      <p class="tax-desc">Social isolation is a documented independent risk factor for suicidal ideation and is one of the two primary components of Joiner&rsquo;s Interpersonal Theory of Suicide (thwarted belongingness). ISO signals are most clinically significant in combination with HOP or SHA signals, and as longitudinal markers of increasing withdrawal across sessions.</p>
+      <div class="tax-signals">
+        <div class="tax-signal"><span class="tax-signal-code">ISO-01</span><span class="tax-signal-risk tsr-mod">Moderate</span><span class="tax-signal-desc">Direct withdrawal statement (“not really talking to anyone these days”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">ISO-02</span><span class="tax-signal-risk tsr-high">High</span><span class="tax-signal-desc">Relationship severance language (“blocked a bunch of people”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">ISO-03</span><span class="tax-signal-risk tsr-mod">Moderate</span><span class="tax-signal-desc">Perceived burdensomeness, social expression (“I don't want to be a burden”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">ISO-04</span><span class="tax-signal-risk tsr-mod">Moderate</span><span class="tax-signal-desc">Code-switching exhaustion (“always performing, never actually me”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">ISO-05</span><span class="tax-signal-risk tsr-mod">Moderate</span><span class="tax-signal-desc">Community disconnection (“even my own people don't get it”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">ISO-06</span><span class="tax-signal-risk tsr-high">High</span><span class="tax-signal-desc">Family estrangement, LGBTQIA+-specific (“got kicked out because of who I am”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">ISO-07</span><span class="tax-signal-risk tsr-low">Low</span><span class="tax-signal-desc">Digital withdrawal references (“turned all my notifications off”)</span></div>
+      </div>
+    </div>
+    <div class="tax-row-right">
+      <div class="tax-example-label">Signal Example</div>
+      <div class="tax-example">
+        <div class="tax-ex-utterance">"I'm moving different now. People can't handle it."</div>
+        <div class="tax-ex-interp">ISO withdrawal reframed as self-elevation &mdash; often follows rupture or rejection.</div>
+      </div>
+      <div class="tax-example">
+        <div class="tax-ex-utterance">"My family doesn't know and if they found out..."</div>
+        <div class="tax-ex-interp">ISO-06 &mdash; Family estrangement, LGBTQIA+-specific. VLAP's highest-priority isolation signal.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tax-row reveal">
+    <div class="tax-row-left">
+      <div class="tax-code">TRM-01 &ndash; TRM-08</div>
+      <div class="tax-count">8</div>
+      <div class="tax-name">Trauma & Acute Stressor Markers</div>
+    </div>
+    <div class="tax-row-mid">
+      <p class="tax-desc">TRM signals capture social determinants of mental health that are disproportionately present in Vasl&rsquo;s target population. Most TRM signals are not independently actionable clinical risk indicators &mdash; they are contextual elevators that increase the clinical significance of co-occurring HOP, SHA, or ISO signals. They are also the signals most normalized in community language and therefore most frequently missed by clinicians and tools not calibrated for this population.</p>
+      <div class="tax-signals">
+        <div class="tax-signal"><span class="tax-signal-code">TRM-01</span><span class="tax-signal-risk tsr-var">Variable</span><span class="tax-signal-desc">Community violence exposure (“another one of my friends got shot”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">TRM-02</span><span class="tax-signal-risk tsr-mod">Moderate</span><span class="tax-signal-desc">Housing instability (“we got evicted so...”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">TRM-03</span><span class="tax-signal-risk tsr-var">Variable</span><span class="tax-signal-desc">Immigration and documentation stress (“we don't know if we can stay”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">TRM-04</span><span class="tax-signal-risk tsr-low">Low</span><span class="tax-signal-desc">Food insecurity references (“hadn't eaten since yesterday”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">TRM-05</span><span class="tax-signal-risk tsr-var">Variable</span><span class="tax-signal-desc">Police and legal system contact (“my brother just got locked up”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">TRM-06</span><span class="tax-signal-risk tsr-mod">Moderate</span><span class="tax-signal-desc">School discipline and push-out (“they're trying to expel me”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">TRM-07</span><span class="tax-signal-risk tsr-mod">Moderate</span><span class="tax-signal-desc">Vicarious and cumulative loss (“I've been to too many funerals”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">TRM-08</span><span class="tax-signal-risk tsr-mod">Moderate</span><span class="tax-signal-desc">Caregiver incapacity / parentification (“I'm basically the parent right now”)</span></div>
+      </div>
+    </div>
+    <div class="tax-row-right">
+      <div class="tax-example-label">Signal Example</div>
+      <div class="tax-example">
+        <div class="tax-ex-utterance">"Another one of my friends got shot."</div>
+        <div class="tax-ex-interp">TRM-01 &mdash; Community violence exposure. Not independently actionable; elevates co-occurring HOP/SHA signals.</div>
+      </div>
+      <div class="tax-example">
+        <div class="tax-ex-utterance">"They're trying to expel me."</div>
+        <div class="tax-ex-interp">TRM-06 &mdash; School discipline and push-out. Documented trauma and mental health risk factor.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tax-row reveal">
+    <div class="tax-row-left">
+      <div class="tax-code">PFE-01 &ndash; PFE-07</div>
+      <div class="tax-count">7</div>
+      <div class="tax-name">Protective Factor Erosion</div>
+    </div>
+    <div class="tax-row-mid">
+      <p class="tax-desc">PFE signals are not distress signals in isolation &mdash; they indicate that a previously present protective factor has been removed, which elevates baseline risk. They are most clinically significant as longitudinal markers (V2 cross-session modeling) and in combination with HOP or SHA signals. The protective factors most relevant to Vasl&rsquo;s population &mdash; faith community, mentors, peer networks, cultural identity, and aspirational goals &mdash; are different from those in the clinical literature developed for White, middle-class youth populations.</p>
+      <div class="tax-signals">
+        <div class="tax-signal"><span class="tax-signal-code">PFE-01</span><span class="tax-signal-risk tsr-low">Low</span><span class="tax-signal-desc">Loss of faith or spiritual anchor (“don't really pray anymore”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">PFE-02</span><span class="tax-signal-risk tsr-mod">Moderate</span><span class="tax-signal-desc">Trusted adult loss (“the one adult who actually got me is gone”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">PFE-03</span><span class="tax-signal-risk tsr-mod">Moderate</span><span class="tax-signal-desc">Peer network dissolution (“everyone went their separate ways”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">PFE-04</span><span class="tax-signal-risk tsr-mod">Moderate</span><span class="tax-signal-desc">Achievement identity loss (“stopped performing, don't see the point”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">PFE-05</span><span class="tax-signal-risk tsr-low">Low</span><span class="tax-signal-desc">Future goal erasure (“those dreams don't seem realistic anymore”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">PFE-06</span><span class="tax-signal-risk tsr-low">Low</span><span class="tax-signal-desc">Cultural disconnection (“feel like I'm losing my culture”)</span></div>
+        <div class="tax-signal"><span class="tax-signal-code">PFE-07</span><span class="tax-signal-risk tsr-low">Low</span><span class="tax-signal-desc">Loss of routine and structure (“nothing feels normal or regular”)</span></div>
+      </div>
+    </div>
+    <div class="tax-row-right">
+      <div class="tax-example-label">Signal Example</div>
+      <div class="tax-example">
+        <div class="tax-ex-utterance">"The one adult who actually got me is gone."</div>
+        <div class="tax-ex-interp">PFE-02 &mdash; Trusted adult loss. Removes a disproportionate share of the member's social safety net.</div>
+      </div>
+      <div class="tax-example">
+        <div class="tax-ex-utterance">"Stopped thinking about that kind of future."</div>
+        <div class="tax-ex-interp">PFE-05 &mdash; Future goal erasure. A longitudinal hopelessness marker VLAP tracks across sessions.</div>
       </div>
     </div>
   </div>
@@ -1194,7 +1248,7 @@
     <div class="sp-panel">
       <div class="sp-header">
         <span class="sp-type">AAVE Hopelessness</span>
-        <div class="sp-codes"><span class="sp-code">HOP-03</span><span class="sp-code">CCM-09</span></div>
+        <div class="sp-codes"><span class="sp-code">HOP-03</span><span class="sp-code">CCM-02</span></div>
       </div>
       <div class="sp-body">
         <div class="sp-label">Member utterance &mdash; composite</div>
@@ -1214,7 +1268,7 @@
     <div class="sp-panel">
       <div class="sp-header">
         <span class="sp-type">Coded Self-Harm Language</span>
-        <div class="sp-codes"><span class="sp-code">SHA-03</span><span class="sp-code">CRS-02</span></div>
+        <div class="sp-codes"><span class="sp-code">SHA-02</span></div>
       </div>
       <div class="sp-body">
         <div class="sp-label">Member utterance &mdash; composite</div>
@@ -1253,8 +1307,8 @@
     <!-- Panel 04 -->
     <div class="sp-panel">
       <div class="sp-header">
-        <span class="sp-type">Performative Positivity</span>
-        <div class="sp-codes"><span class="sp-code">HOP-07</span><span class="sp-code">CRS-06</span></div>
+        <span class="sp-type">Burden Narrative</span>
+        <div class="sp-codes"><span class="sp-code">HOP-07</span></div>
       </div>
       <div class="sp-body">
         <div class="sp-label">Member utterance &mdash; composite</div>
@@ -1331,7 +1385,7 @@
       <div class="pipe-dot"></div>
       <div class="pipe-step-num">Step 05 &mdash; Inference</div>
       <div class="pipe-step-name">CulturalBERT classifies signals across all clinical categories.</div>
-      <p class="pipe-step-desc">The model runs inference across the full Cultural Signal Taxonomy &mdash; evaluating the input against all 42 signals across five behavioral dimensions simultaneously. CCM modifiers adjust signal weights based on cultural register, minimization patterns, and code-switching context. Output is a structured dimensional signal profile &mdash; not a score, not a diagnosis, not a risk tier.</p>
+      <p class="pipe-step-desc">The model runs inference across the full VLAP Distress Signal Taxonomy &mdash; evaluating the input against all 47 signals across six clinical categories simultaneously. CCM modifiers adjust signal weights based on cultural register, minimization patterns, and code-switching context. Output is a structured dimensional signal profile &mdash; not a score, not a diagnosis, not a risk tier.</p>
       <div class="pipe-step-tech">CulturalBERT V1 &middot; CCM weighting active</div>
       <span class="pipe-step-tag">Non-diagnostic output</span>
     </div>
@@ -1349,8 +1403,8 @@
       <div class="pipe-dot"></div>
       <div class="pipe-step-num">Step 07 &mdash; Human Review</div>
       <div class="pipe-step-name">A licensed clinician receives the context and determines the response.</div>
-      <p class="pipe-step-desc">The pipeline ends here &mdash; with a human being. No automated action follows from VLAP output. No alert fires. No protocol activates. The clinician reviews the dimensional signal context before the session and decides what to do with it. For signals that meet CRS-level thresholds, a clinical supervisor review is initiated within 90 minutes &mdash; by a person, not a trigger.</p>
-      <div class="pipe-step-tech">Licensed clinician review required &middot; CRS-level: clinical supervisor + 90-min human SLA &middot; No automated action</div>
+      <p class="pipe-step-desc">The pipeline ends here &mdash; with a human being. No automated action follows from VLAP output. No alert fires. No protocol activates. The clinician reviews the dimensional signal context before the session and decides what to do with it. For signals or signal combinations that meet High-risk escalation criteria, a clinical supervisor review is initiated within 90 minutes &mdash; by a person, not a trigger.</p>
+      <div class="pipe-step-tech">Licensed clinician review required &middot; High-risk escalation: clinical supervisor + 90-min human SLA &middot; No automated action</div>
       <span class="pipe-step-tag">Human determination</span>
     </div>
   </div>
@@ -1397,7 +1451,7 @@
     <div class="pr-right">
       <div class="pr-technical">
         <div class="pr-tech-label">Technical Implementation</div>
-        <div class="pr-tech-text">All VLAP output is surfaced to the clinical dashboard as read-only context. No output field connects to any automated action, notification dispatch, or external API call. CRS-level signals generate a review queue item &mdash; not an alert or an automated escalation. The queue requires a licensed clinician to open, review, and document a response.</div>
+        <div class="pr-tech-text">All VLAP output is surfaced to the clinical dashboard as read-only context. No output field connects to any automated action, notification dispatch, or external API call. High-risk escalation signals generate a review queue item &mdash; not an alert or an automated escalation. The queue requires a licensed clinician to open, review, and document a response.</div>
       </div>
     </div>
   </div>
@@ -1537,8 +1591,8 @@
         <div class="spec-toc-item">
           <span class="stoc-num">§03</span>
           <div>
-            <div class="stoc-title">Cultural Signal Taxonomy V1 &mdash; Full Definitions</div>
-            <div class="stoc-pages">Pages 13&ndash;20 &middot; 42 signal definitions &middot; Clinical criteria &middot; Confidence weighting</div>
+            <div class="stoc-title">VLAP Distress Signal Taxonomy v1.0 &mdash; Full Definitions</div>
+            <div class="stoc-pages">Pages 13&ndash;20 &middot; 47 signal definitions &middot; Escalation rules &middot; Confidence weighting</div>
           </div>
         </div>
         <div class="spec-toc-item">
