@@ -28,6 +28,8 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
+from seo_shared import IGNORE
+
 ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT / "site"
 ORIGIN = "https://gotovasl.com"
@@ -71,6 +73,8 @@ def head_of(html: str) -> str:
 pages = {}
 for path in sorted(SITE.rglob("*.html")):
     rel = path.relative_to(SITE).as_posix()
+    if rel in IGNORE:
+        continue
     pages[rel] = path.read_text(encoding="utf-8", errors="ignore")
 
 titles = defaultdict(list)
