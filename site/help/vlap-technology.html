@@ -266,7 +266,7 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
         <div class="callout-label">The One-Sentence Definition</div>
         <p class="callout-text">VLAP detects culturally specific distress signals in member language and surfaces interpretive context to the care team. It does not respond to members, make clinical decisions, or initiate any action independently.</p>
       </div>
-      <p class="section-body">VLAP is trained on 198,000+ culturally specific mental health language samples, including a vocabulary extension of 2,400+ AAVE and youth vernacular tokens not found in standard NLP training corpora. The model identifies patterns across six clinical categories and surfaces them in the coach and clinician interfaces before sessions begin.</p>
+      <p class="section-body">VLAP is trained on culturally specific mental health language samples, including a vocabulary extension of 2,400+ AAVE and youth vernacular tokens not found in standard NLP training corpora. The model identifies patterns across six clinical categories and surfaces them in the coach and clinician interfaces before sessions begin.</p>
     </div>
 
     <div class="content-section">
@@ -424,7 +424,7 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
           <div class="fs-num"><div class="fs-num-inner">02</div></div>
           <div class="fs-body">
             <div class="fs-title">VLAP processes language in-memory</div>
-            <p class="fs-desc">CulturalBERT-VLAP analyzes the language against the 47-signal taxonomy across six categories. Processing happens in-memory &mdash; verbatim content is not stored after signal profile generation. The output is a dimensional signal profile, not a transcript or quote.</p>
+            <p class="fs-desc">VLAP analyzes the language against the 47-signal taxonomy across six categories. Processing happens in-memory &mdash; verbatim content is not stored after signal profile generation. The output is a dimensional signal profile, not a transcript or quote.</p>
           </div>
         </div>
         <div class="flow-step">
@@ -490,15 +490,15 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
     <div class="content-section">
       <span class="section-anchor" id="technical-foundation"></span>
       <h2 class="section-heading">Technical foundation</h2>
-      <p class="section-body">VLAP is built on CulturalBERT &mdash; a BERT-architecture language model fine-tuned on a culturally specific mental health language corpus. The base BERT model was selected for its bidirectional context processing, essential for reading the layered meaning in code-switching, minimization patterns, and culturally framed expressions where individual words carry different weight depending on surrounding context.</p>
+      <p class="section-body">VLAP is built on DeBERTa-v3 &mdash; a BERT-architecture language model fine-tuned on a culturally specific mental health language corpus. The base BERT model was selected for its bidirectional context processing, essential for reading the layered meaning in code-switching, minimization patterns, and culturally framed expressions where individual words carry different weight depending on surrounding context.</p>
       <div class="spec-table">
         <div class="st-row">
           <div class="st-label">Architecture</div>
-          <div class="st-value"><strong>CulturalBERT-VLAP</strong> &mdash; BERT base fine-tuned on culturally specific mental health language corpus</div>
+          <div class="st-value"><strong>VLAP</strong> &mdash; BERT base fine-tuned on culturally specific mental health language corpus</div>
         </div>
         <div class="st-row">
           <div class="st-label">Training Data</div>
-          <div class="st-value"><strong>198,000+</strong> culturally specific mental health language samples, clinically annotated by licensed clinicians with community competency training</div>
+          <div class="st-value">Culturally specific mental health language samples, clinically annotated by licensed clinicians with community competency training</div>
         </div>
         <div class="st-row">
           <div class="st-label">Vocabulary Extension</div>
