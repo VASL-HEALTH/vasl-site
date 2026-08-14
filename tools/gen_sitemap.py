@@ -47,6 +47,10 @@ PRIORITY = {
     "infrastructure.html": ("0.6", "monthly"),
     "support.html": ("0.5", "monthly"),
     "accessibility.html": ("0.3", "yearly"),
+    "school-mental-health-rfp.html": ("0.7", "monthly"),
+    "dialect-bias-mental-health-screening.html": ("0.7", "monthly"),
+    "hedis-behavioral-health-cultural-fit.html": ("0.7", "monthly"),
+    "glossary.html": ("0.6", "monthly"),
 }
 DEFAULT_BLOG = ("0.7", "yearly")
 DEFAULT_HELP = ("0.5", "monthly")
