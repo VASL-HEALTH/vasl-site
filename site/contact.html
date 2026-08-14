@@ -25,6 +25,9 @@
 <meta name="twitter:title" content="Contact Vasl Health — Request a Demo">
 <meta name="twitter:description" content="Schedule a demo, ask about implementation timelines, or reach our clinical, education, research, or community partnerships teams directly.">
 <meta name="twitter:image" content="https://gotovasl.com/og-image.png">
+<script defer data-domain="gotovasl.com" src="https://plausible.io/js/script.outbound-links.tagged-events.js"></script>
+<script>window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>
+<script>(function(){var PAGE="contact";document.addEventListener("click",function(e){var a=e.target.closest("a[href]");if(!a)return;var href=a.getAttribute("href");if(!href)return;if(/(^|\/)contact\.html(\?|#|$)/.test(href)){window.plausible("Contact CTA",{props:{page:PAGE}});if(PAGE==="pricing"){window.plausible("Pricing CTA",{props:{page:PAGE}});}}},true);})();</script>
 <!-- /SEO:VASL -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -519,6 +522,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
     const body = encodeURIComponent(
       `Name: ${firstName} ${lastName}\nEmail: ${email}\nOrganization: ${org}\nRole: ${role}\nOrg Type: ${orgType}\nPopulation Size: ${popSize || 'Not specified'}\nTimeline: ${timeline || 'Not specified'}\nInterests: ${interests || 'Not specified'}\n\nAdditional Information:\n${additional || 'None provided'}`
     );
+    if (window.plausible) {
+      // Org type only — no name, email, or organization name in the event.
+      window.plausible('Demo Request', { props: { orgType: orgType || 'unspecified' } });
+    }
     window.location.href = `mailto:hello@vaslhealth.com?subject=${subject}&body=${body}`;
   }
   function toggleNav() {
