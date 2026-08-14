@@ -60,20 +60,40 @@ jobs:
           role-to-assume: arn:aws:iam::558215002439:role/vasl-marketing-site-deploy
           aws-region: ${{ env.AWS_REGION }}
 
-      # Two passes, because Cache-Control differs by asset class and it is the
-      # only thing making CloudFront behave like Netlify did.
+      # Three passes, because Cache-Control differs by asset class and it is
+      # the only thing making CloudFront behave like Netlify did.
       #
       # Pass 1 — fingerprinted/static assets. Safe to cache hard: a changed
       # image gets a changed filename, or is caught by the invalidation below.
+      # sitemap.xml and robots.txt are excluded here — they're neither
+      # fingerprinted nor invalidated by path below, so a year-long immutable
+      # cache would leave crawlers reading a stale sitemap for up to a year.
+      # They get their own short-cache pass instead (below).
       - name: Sync static assets (long cache)
         run: |
           aws s3 sync site/ "s3://${BUCKET}/" \
             --delete \
             --exclude '*.html' \
+            --exclude 'sitemap.xml' \
+            --exclude 'robots.txt' \
             --cache-control 'public,max-age=31536000,immutable' \
             --no-progress
 
-      # Pass 2 — HTML last, so a page is never live before the asset it needs.
+      # Pass 2 — sitemap.xml and robots.txt. `aws s3 cp`, not `sync`: sync
+      # skips re-uploading a file whose size/mtime look unchanged, which
+      # would silently leave a stale Cache-Control header in place even
+      # after this fix ships. cp always writes, so the short TTL is
+      # guaranteed on every deploy regardless of whether the content moved.
+      - name: Sync sitemap.xml and robots.txt (short cache)
+        run: |
+          aws s3 cp site/sitemap.xml "s3://${BUCKET}/sitemap.xml" \
+            --cache-control 'public,max-age=300' \
+            --no-progress
+          aws s3 cp site/robots.txt "s3://${BUCKET}/robots.txt" \
+            --cache-control 'public,max-age=300' \
+            --no-progress
+
+      # Pass 3 — HTML last, so a page is never live before the asset it needs.
       # `public,max-age=0,must-revalidate` is exactly what Netlify served on
       # gotovasl.com (verified against the live response 2026-08-08); CloudFront's
       # CachingOptimized policy honors the origin header, so behavior matches.
@@ -93,7 +113,7 @@ jobs:
           if [ "${{ inputs.invalidate_all }}" = "true" ]; then
             PATHS='/*'
           else
-            PATHS='/ /*.html /help/*'
+            PATHS='/ /*.html /help/* /sitemap.xml /robots.txt'
           fi
           echo "Invalidating: ${PATHS}"
           ID=$(aws cloudfront create-invalidation \
