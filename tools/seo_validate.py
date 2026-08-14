@@ -70,7 +70,7 @@ def head_of(html: str) -> str:
 
 pages = {}
 for path in sorted(SITE.rglob("*.html")):
-    rel = str(path.relative_to(SITE))
+    rel = path.relative_to(SITE).as_posix()
     pages[rel] = path.read_text(encoding="utf-8", errors="ignore")
 
 titles = defaultdict(list)
