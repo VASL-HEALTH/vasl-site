@@ -25,7 +25,7 @@ REWRITES = {
     # ---- Primary buyer paths -------------------------------------------------
     "index.html": (
         "Culturally Grounded Youth Behavioral Health | Vasl Health",
-        "Behavioral health for Black, Latino, and first-generation youth 14–24 — "
+        "Behavioral health for Black, Latino, LGBTQ+, and first-generation youth 14–24 — "
         "built on how they actually speak. Detection, not diagnosis.",
     ),
     "for-schools.html": (
@@ -116,7 +116,7 @@ REWRITES = {
     # ---- Company -------------------------------------------------------------
     "about.html": (
         "About Vasl Health: Built for the Youth Systems Miss",
-        "Behavioral health for Black, Latino, and first-generation youth — designed "
+        "Behavioral health for Black, Latino, LGBTQ+, and first-generation youth — designed "
         "inside their language and culture from the start, not retrofitted after.",
     ),
     "team.html": (
@@ -168,14 +168,13 @@ REWRITES = {
     ),
     "blog-mental-health-equity-crisis.html": (
         "The Mental Health Equity Crisis and Cultural AI",
-        "Why the access gap in youth behavioral health is also a language gap — and "
+        "Why the access gap for Black, Latino, and LGBTQ+ youth is also a language gap — and "
         "what culturally trained models can and cannot do about it.",
     ),
     "blog-other-diagnosis.html": (
         "The Other Diagnosis: Identity-Based Stress",
         "Identity-based stress is not a disorder, and treating it as one is part of "
-        "the problem. What it looks like in youth language, and why systems keep "
-        "reading it wrong.",
+        "the problem — what it looks like for Black, Latino, and LGBTQ+ youth.",
     ),
     # ---- SEO week 2: new pages ------------------------------------------------
     "school-mental-health-rfp.html": (
