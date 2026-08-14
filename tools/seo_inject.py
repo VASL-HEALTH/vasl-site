@@ -12,7 +12,7 @@ Adds, per page:
   - meta robots (noindex on legal/utility pages)
   - a meta description where the page is missing one
   - JSON-LD: Organization + WebSite sitewide, BlogPosting on posts,
-    BreadcrumbList on nested pages
+    BreadcrumbList on nested pages, DefinedTermSet on the glossary
 
 Run:  python3 tools/seo_inject.py            (writes)
       python3 tools/seo_inject.py --check    (exits 1 if anything would change)
@@ -23,12 +23,19 @@ import re
 import sys
 from pathlib import Path
 
+from glossary_terms import TERMS as GLOSSARY_TERMS
+
 SITE = Path(__file__).resolve().parent.parent / "site"
 ORIGIN = "https://gotovasl.com"
 OG_IMAGE = f"{ORIGIN}/og-image.png"
 ORG_NAME = "Vasl Health"
 MARK_OPEN = "<!-- SEO:VASL -->"
 MARK_CLOSE = "<!-- /SEO:VASL -->"
+
+# Plausible: cookieless, no consent banner, no personal data collected — see
+# Workstream 3 in SEO-WEEK2.md and the Analytics section of README.md.
+PLAUSIBLE_DOMAIN = "gotovasl.com"
+PLAUSIBLE_SCRIPT = "https://plausible.io/js/script.outbound-links.tagged-events.js"
 
 # Pages that should stay out of the index: legal boilerplate, utility pages,
 # and the prototype shell. They remain crawlable so link equity still flows.
@@ -222,6 +229,28 @@ def jsonld_blocks(rel: str, title: str, desc: str, canonical: str) -> list:
             }
         )
 
+    if rel == "glossary.html":
+        blocks.append(
+            {
+                "@context": "https://schema.org",
+                "@type": "DefinedTermSet",
+                "@id": f"{ORIGIN}/glossary#termset",
+                "name": "Vasl Health Glossary",
+                "description": desc,
+                "url": canonical,
+                "hasDefinedTerm": [
+                    {
+                        "@type": "DefinedTerm",
+                        "name": term,
+                        "description": definition,
+                        "url": f"{canonical}#{slug}",
+                        "inDefinedTermSet": f"{ORIGIN}/glossary#termset",
+                    }
+                    for term, slug, definition in GLOSSARY_TERMS
+                ],
+            }
+        )
+
     if rel.startswith("help/"):
         leaf = rel.split("/", 1)[1]
         blocks.append(
@@ -246,6 +275,39 @@ def jsonld_blocks(rel: str, title: str, desc: str, canonical: str) -> list:
         )
 
     return blocks
+
+
+def page_slug(rel: str) -> str:
+    """Short label for analytics props — the same string a person would type
+    after gotovasl.com/, with index.html collapsed to "home"."""
+    if rel == "index.html":
+        return "home"
+    return rel[: -len(".html")]
+
+
+def analytics_block(rel: str) -> str:
+    """Plausible base script plus a small delegated click listener that tags
+    every contact.html CTA with the page it was clicked from, and fires a
+    second, dedicated event for CTAs clicked on pricing.html. Delegated so it
+    covers every current and future link to contact.html without hand-editing
+    nav, footer, or CTA markup on every page."""
+    slug = page_slug(rel)
+    return (
+        f'<script defer data-domain="{PLAUSIBLE_DOMAIN}" src="{PLAUSIBLE_SCRIPT}"></script>\n'
+        "<script>window.plausible=window.plausible||function(){"
+        "(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>\n"
+        "<script>(function(){"
+        f'var PAGE="{slug}";'
+        'document.addEventListener("click",function(e){'
+        'var a=e.target.closest("a[href]");if(!a)return;'
+        'var href=a.getAttribute("href");if(!href)return;'
+        'if(/(^|\\/)contact\\.html(\\?|#|$)/.test(href)){'
+        'window.plausible("Contact CTA",{props:{page:PAGE}});'
+        'if(PAGE==="pricing"){window.plausible("Pricing CTA",{props:{page:PAGE}});}'
+        "}"
+        "},true);"
+        "})();</script>"
+    )
 
 
 def build_block(rel: str, html: str) -> str:
@@ -303,6 +365,8 @@ def build_block(rel: str, html: str) -> str:
             + json.dumps(b, ensure_ascii=False, separators=(",", ":"))
             + "</script>"
         )
+
+    lines.append(analytics_block(rel))
 
     lines.append(MARK_CLOSE)
     return "\n".join(lines)
