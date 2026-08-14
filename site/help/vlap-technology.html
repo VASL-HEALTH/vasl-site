@@ -244,49 +244,55 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
         <div class="callout-label">The One-Sentence Definition</div>
         <p class="callout-text">VLAP detects culturally specific distress signals in member language and surfaces interpretive context to the care team. It does not respond to members, make clinical decisions, or initiate any action independently.</p>
       </div>
-      <p class="section-body">VLAP is trained on 198,000+ culturally specific mental health language samples, including a vocabulary extension of 2,400+ AAVE and youth vernacular tokens not found in standard NLP training corpora. The model identifies patterns across five behavioral signal dimensions and surfaces them in the coach and clinician interfaces before sessions begin.</p>
+      <p class="section-body">VLAP is trained on 198,000+ culturally specific mental health language samples, including a vocabulary extension of 2,400+ AAVE and youth vernacular tokens not found in standard NLP training corpora. The model identifies patterns across six clinical categories and surfaces them in the coach and clinician interfaces before sessions begin.</p>
     </div>
 
     <div class="content-section">
       <span class="section-anchor" id="what-it-detects"></span>
       <h2 class="section-heading">What VLAP detects</h2>
-      <p class="section-body">VLAP analyzes language across five behavioral signal dimensions. Each captures a distinct category of distress expression &mdash; the way it manifests in the cultural contexts of the communities Vasl serves, not the way standard clinical instruments were designed to measure it.</p>
+      <p class="section-body">VLAP analyzes language across six clinical categories. Each captures a distinct category of distress expression &mdash; the way it manifests in the cultural contexts of the communities Vasl serves, not the way standard clinical instruments were designed to measure it.</p>
       <div class="dim-table">
         <div class="dim-table-header">
           <div class="dth">Code</div>
-          <div class="dth">Dimension</div>
+          <div class="dth">Category</div>
           <div class="dth">What It Captures</div>
           <div class="dth">Signals</div>
         </div>
         <div class="dim-row">
           <div class="drc">HOP</div>
-          <div class="drc">Hopelessness & Pessimism</div>
+          <div class="drc">Hopelessness & Futility</div>
           <div class="drc">Indirect hopelessness, temporal collapse, and "no point" framing expressed through AAVE, coded youth language, and minimization patterns</div>
-          <div class="drc">8</div>
-        </div>
-        <div class="dim-row">
-          <div class="drc">ISO</div>
-          <div class="drc">Social Isolation</div>
-          <div class="drc">Withdrawal signals, relational distancing, absence of connection framed as normal or preferred &mdash; often missed because it's expressed indirectly</div>
           <div class="drc">9</div>
         </div>
         <div class="dim-row">
           <div class="drc">SHA</div>
-          <div class="drc">Self-Harm Adjacent</div>
-          <div class="drc">Coded self-harm and suicidal ideation language &mdash; including community-developed terms built specifically to avoid content filters</div>
-          <div class="drc">7</div>
-        </div>
-        <div class="dim-row">
-          <div class="drc">CRS</div>
-          <div class="drc">Crisis Risk Signals</div>
-          <div class="drc">Acute distress patterns, perceived burdensomeness, and escalating hopelessness signals that indicate elevated clinical risk</div>
-          <div class="drc">6</div>
+          <div class="drc">Coded Suicidal Ideation</div>
+          <div class="drc">Explicit and coded self-harm and suicidal ideation language &mdash; including community-developed terms built specifically to avoid content filters</div>
+          <div class="drc">8</div>
         </div>
         <div class="dim-row">
           <div class="drc">CCM</div>
-          <div class="drc">Cultural Context Modifiers</div>
-          <div class="drc">Pre-disclosure minimization, code-switching, spiritual deflection, and family-loyalty framing that modifies the interpretation of other signals</div>
-          <div class="drc">12</div>
+          <div class="drc">Minimization & Disclosure Suppression</div>
+          <div class="drc">Pre-disclosure minimization, gallows humor, asking-for-a-friend framing, and topic drops that modify the interpretation of other signals</div>
+          <div class="drc">8</div>
+        </div>
+        <div class="dim-row">
+          <div class="drc">ISO</div>
+          <div class="drc">Social Isolation & Withdrawal</div>
+          <div class="drc">Withdrawal signals, relational distancing, absence of connection framed as normal or preferred &mdash; often missed because it's expressed indirectly</div>
+          <div class="drc">7</div>
+        </div>
+        <div class="dim-row">
+          <div class="drc">TRM</div>
+          <div class="drc">Trauma & Acute Stressor Markers</div>
+          <div class="drc">Community violence, housing instability, police contact, school push-out, and other social determinants that elevate co-occurring signals</div>
+          <div class="drc">8</div>
+        </div>
+        <div class="dim-row">
+          <div class="drc">PFE</div>
+          <div class="drc">Protective Factor Erosion</div>
+          <div class="drc">Loss of a trusted adult, faith community, peer network, or aspirational identity &mdash; longitudinal markers of elevated baseline risk</div>
+          <div class="drc">7</div>
         </div>
       </div>
       <div class="callout note">
@@ -303,7 +309,7 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
       <div class="signal-panel">
         <div class="sp-header">
           <span class="sp-label">Pattern &mdash; AAVE Indirect Hopelessness</span>
-          <span class="sp-code">HOP-03 &middot; CCM-09</span>
+          <span class="sp-code">HOP-03 &middot; CCM-02</span>
         </div>
         <div class="sp-body">
           <div class="sp-col">
@@ -314,7 +320,7 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
             <div class="sp-col-label">What VLAP surfaces to care team</div>
             <div class="sp-detection-item">
               <div class="sp-term">"lowkey"</div>
-              <div class="sp-interp">CCM-09: Pre-disclosure minimization. The hedge signals underreporting of severity &mdash; not low distress. Standard models reduce confidence here; VLAP increases it.</div>
+              <div class="sp-interp">CCM-02: AAVE minimization construction. The hedge signals underreporting of severity &mdash; not low distress. Standard models reduce confidence here; VLAP increases it.</div>
             </div>
             <div class="sp-detection-item">
               <div class="sp-term">"fr" (for real)</div>
@@ -357,7 +363,7 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
       <div class="signal-panel">
         <div class="sp-header">
           <span class="sp-label">Pattern &mdash; Coded Self-Harm Language</span>
-          <span class="sp-code">SHA-03 &middot; CRS-02</span>
+          <span class="sp-code">SHA-02</span>
         </div>
         <div class="sp-body">
           <div class="sp-col">
@@ -368,11 +374,11 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
             <div class="sp-col-label">What VLAP surfaces to care team</div>
             <div class="sp-detection-item">
               <div class="sp-term">"unaliving"</div>
-              <div class="sp-interp">SHA-03: Coded suicidal ideation term developed in youth communities to circumvent content filters. Not in standard NLP training data. In VLAP's extended vocabulary.</div>
+              <div class="sp-interp">SHA-02: Coded suicidal ideation term developed in youth communities to circumvent content filters. Not in standard NLP training data. In VLAP's extended vocabulary.</div>
             </div>
             <div class="sp-detection-item">
               <div class="sp-term">"ngl" (not gonna lie)</div>
-              <div class="sp-interp">CRS-02: Sincerity marker confirming this is not performative. SHA-03 + CRS-02 combined: elevated priority signal surfaced for immediate clinical supervisor review.</div>
+              <div class="sp-interp">Sincerity marker confirming this is not performative. SHA-02 is High risk independently &mdash; surfaced for immediate clinical supervisor review under VLAP's escalation rules.</div>
             </div>
           </div>
         </div>
@@ -396,7 +402,7 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
           <div class="fs-num"><div class="fs-num-inner">02</div></div>
           <div class="fs-body">
             <div class="fs-title">VLAP processes language in-memory</div>
-            <p class="fs-desc">CulturalBERT-VLAP analyzes the language against the 42-signal taxonomy across five dimensions. Processing happens in-memory &mdash; verbatim content is not stored after signal profile generation. The output is a dimensional signal profile, not a transcript or quote.</p>
+            <p class="fs-desc">CulturalBERT-VLAP analyzes the language against the 47-signal taxonomy across six categories. Processing happens in-memory &mdash; verbatim content is not stored after signal profile generation. The output is a dimensional signal profile, not a transcript or quote.</p>
           </div>
         </div>
         <div class="flow-step">
@@ -417,7 +423,7 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
           <div class="fs-num"><div class="fs-num-inner">05</div></div>
           <div class="fs-body">
             <div class="fs-title">Critical signals surface to clinical supervisor immediately</div>
-            <p class="fs-desc">CRS-category detections are flagged for immediate review by Vasl's licensed clinical supervisor team &mdash; with a 90-minute human response SLA. The supervisor determines the appropriate response. No automated action is taken. The member is never contacted by an automated system in response to a crisis signal.</p>
+            <p class="fs-desc">High-risk escalation detections are flagged for immediate review by Vasl's licensed clinical supervisor team &mdash; with a 90-minute human response SLA. The supervisor determines the appropriate response. No automated action is taken. The member is never contacted by an automated system in response to a crisis signal.</p>
           </div>
         </div>
       </div>
@@ -478,7 +484,7 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
         </div>
         <div class="st-row">
           <div class="st-label">Signal Taxonomy</div>
-          <div class="st-value"><strong>42 signals</strong> across 5 behavioral dimensions: HOP, ISO, SHA, CRS, CCM</div>
+          <div class="st-value"><strong>47 signals</strong> across 6 clinical categories: HOP, SHA, CCM, ISO, TRM, PFE</div>
         </div>
         <div class="st-row">
           <div class="st-label">Sensitivity</div>

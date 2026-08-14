@@ -401,6 +401,140 @@
   .dim-ex-item:last-child { border-bottom: none; }
   .dim-ex-note { font-size: 11px; font-style: normal; font-weight: 300; color: rgba(250,247,242,0.35); margin-top: 3px; }
 
+  /* Critical design constraint callout */
+  .tax-constraint {
+    background: rgba(250,247,242,0.06); border: 1px solid rgba(250,247,242,0.16);
+    padding: 28px 32px; margin-bottom: 70px;
+  }
+  .tax-constraint-label {
+    display: block; font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--clay-light); margin-bottom: 10px;
+  }
+  .tax-constraint p { font-size: 14px; font-weight: 300; line-height: 1.7; color: rgba(250,247,242,0.72); }
+  .tax-constraint p strong { color: var(--warm-white); font-weight: 500; }
+
+  /* Category blocks (47-signal taxonomy) */
+  .cat-blocks { display: flex; flex-direction: column; gap: 0; }
+
+  .cat-block { padding: 56px 0; border-bottom: 1px solid rgba(250,247,242,0.12); }
+  .cat-block:last-child { border-bottom: none; }
+
+  .cat-head {
+    display: grid; grid-template-columns: 140px 1fr; gap: 0 60px;
+    align-items: start; margin-bottom: 36px;
+  }
+  .cat-code-col {}
+  .cat-code {
+    font-family: var(--serif); font-size: 52px; font-weight: 300; font-style: italic;
+    color: var(--clay-light); line-height: 1; letter-spacing: -0.04em;
+  }
+  .cat-signal-count {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(250,247,242,0.30); margin-top: 8px;
+  }
+  .cat-main {}
+  .cat-name {
+    font-family: var(--sans); font-size: 19px; font-weight: 500;
+    color: var(--warm-white); margin-bottom: 10px; line-height: 1.25;
+  }
+  .cat-basis { font-size: 14px; font-weight: 300; color: rgba(250,247,242,0.58); line-height: 1.72; }
+
+  .sig-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+    background: rgba(250,247,242,0.10);
+  }
+  .sig-card {
+    background: var(--deep-green); padding: 26px 28px;
+  }
+  .sig-card-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+  .sig-code {
+    font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 0.08em;
+    color: var(--clay-light);
+  }
+  .sig-label { font-family: var(--sans); font-size: 13px; font-weight: 500; color: var(--warm-white); }
+  .sig-risk {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 2px; margin-left: auto;
+  }
+  .risk-high { background: rgba(196,90,60,0.25); color: #e8a389; }
+  .risk-mod { background: rgba(214,171,90,0.22); color: #e0bd82; }
+  .risk-low { background: rgba(250,247,242,0.10); color: rgba(250,247,242,0.55); }
+  .risk-var { background: rgba(120,150,170,0.22); color: #9dc0d4; }
+
+  .sig-examples { margin-bottom: 12px; }
+  .sig-ex {
+    font-family: var(--serif); font-size: 13px; font-style: italic;
+    color: rgba(250,247,242,0.68); line-height: 1.55; margin-bottom: 6px;
+  }
+  .sig-note { font-size: 12px; font-weight: 300; color: rgba(250,247,242,0.45); line-height: 1.65; }
+
+  /* Escalation rules + validation status */
+  .esc-section, .val-status-section { padding-top: 70px; }
+  .esc-header { max-width: 640px; margin-bottom: 40px; }
+  .esc-kicker {
+    display: block; font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay-light); margin-bottom: 14px;
+  }
+  .esc-title {
+    font-family: var(--serif); font-size: 28px; font-weight: 300; color: var(--warm-white);
+    margin-bottom: 14px; letter-spacing: -0.01em;
+  }
+  .esc-intro { font-size: 15px; font-weight: 300; color: rgba(250,247,242,0.58); line-height: 1.72; }
+
+  .esc-table { display: flex; flex-direction: column; }
+  .esc-row {
+    display: grid; grid-template-columns: 1.4fr 1fr 0.7fr 1.6fr; gap: 0 24px;
+    padding: 16px 0; border-bottom: 1px solid rgba(250,247,242,0.10); align-items: center;
+  }
+  .esc-row-head {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(250,247,242,0.35); padding-bottom: 12px;
+  }
+  .esc-combo { font-size: 13px; font-weight: 400; color: var(--warm-white); }
+  .esc-levels { font-size: 12px; font-weight: 300; color: rgba(250,247,242,0.5); }
+  .esc-result {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; font-weight: 600;
+  }
+  .esc-result-high { color: #e8a389; }
+  .esc-result-moderate { color: #e0bd82; }
+  .esc-action { font-size: 12px; font-weight: 300; color: rgba(250,247,242,0.58); line-height: 1.5; }
+
+  .val-status-table { display: flex; flex-direction: column; }
+  .val-status-row {
+    display: grid; grid-template-columns: 1fr 1.3fr 1.6fr; gap: 0 40px;
+    padding: 26px 0; border-bottom: 1px solid rgba(250,247,242,0.10); align-items: start;
+  }
+  .vsr-cat {
+    font-family: var(--serif); font-size: 24px; font-style: italic; font-weight: 300;
+    color: var(--clay-light);
+  }
+  .vsr-range {
+    display: block; font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em;
+    color: rgba(250,247,242,0.35); font-style: normal; margin-top: 4px;
+  }
+  .vsr-status { font-size: 13px; font-weight: 300; color: rgba(250,247,242,0.65); line-height: 1.65; }
+  .vsr-question { font-size: 13px; font-weight: 300; color: rgba(250,247,242,0.5); line-height: 1.65; }
+  .vsr-q-label {
+    display: block; font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--clay-light); margin-bottom: 6px;
+  }
+
+  .tax-refs { padding-top: 70px; }
+  .tax-refs-list { padding-left: 20px; }
+  .tax-refs-list li {
+    font-size: 12px; font-weight: 300; color: rgba(250,247,242,0.5); line-height: 1.7;
+    margin-bottom: 10px;
+  }
+  .tax-refs-list li em { font-style: italic; color: rgba(250,247,242,0.68); }
+
+  @media (max-width: 860px) {
+    .cat-head { grid-template-columns: 1fr; gap: 16px; }
+    .sig-grid { grid-template-columns: 1fr; }
+    .esc-row { grid-template-columns: 1fr; gap: 6px; padding: 20px 0; }
+    .esc-row-head { display: none; }
+    .val-status-row { grid-template-columns: 1fr; gap: 12px; }
+  }
+
   /* ═══════════════════════════════════════════
      CHAPTER 06 — VALIDATION
   ═══════════════════════════════════════════ */
@@ -814,7 +948,7 @@
           </div>
           <div class="fp-col vlap">
             <div class="fp-col-label">CulturalBERT reads</div>
-            <div class="fp-read">CCM-09 pre-disclosure minimization. "fr" authenticity escalator contradicting the minimization hedge. HOP-03 isolation framing in AAVE. Elevated signal &mdash; surfaces to care team.</div>
+            <div class="fp-read">CCM-02 AAVE minimization construction. "fr" authenticity escalator contradicting the minimization hedge. HOP-03 futility framing in AAVE. Elevated signal &mdash; surfaces to care team.</div>
           </div>
         </div>
       </div>
@@ -840,7 +974,7 @@
           </div>
           <div class="fp-col vlap">
             <div class="fp-col-label">CulturalBERT reads</div>
-            <div class="fp-read">SHA-03 coded suicidal ideation &mdash; "unaliving" is in the extended vocabulary. "ngl" sincerity marker confirms non-performative. CRS-02 elevated priority. Immediate clinical supervisor review triggered.</div>
+            <div class="fp-read">SHA-02 coded suicidal ideation &mdash; "unaliving" is in the extended vocabulary. "ngl" is a CCM sincerity marker confirming non-performative disclosure. Per escalation rules, this combination triggers immediate clinical supervisor review.</div>
           </div>
         </div>
       </div>
@@ -924,7 +1058,7 @@
       <div class="al-num">Training</div>
       <div class="al-body">
         <div class="al-title">Fine-Tuning on Culturally Specific Mental Health Corpus</div>
-        <p class="al-desc">The extended BERT-family model was fine-tuned on annotated language samples drawn from the communities VLAP serves &mdash; not web-scraped text, but specifically collected and clinically annotated mental health communication. Each sample was labeled by licensed clinicians with community competency training against the 42-signal taxonomy across five behavioral dimensions. The fine-tuning process was conducted in multiple phases with inter-annotator agreement validation.</p>
+        <p class="al-desc">The extended BERT-family model was fine-tuned on annotated language samples drawn from the communities VLAP serves &mdash; not web-scraped text, but specifically collected and clinically annotated mental health communication. Each sample was labeled by licensed clinicians with community competency training against the 47-signal taxonomy across six clinical categories. The fine-tuning process was conducted in multiple phases with inter-annotator agreement validation.</p>
         <div class="al-tech">Multi-phase fine-tuning &middot; IAA validation across annotation cohort</div>
       </div>
     </div>
@@ -932,8 +1066,8 @@
       <div class="al-num">Output</div>
       <div class="al-body">
         <div class="al-title">Dimensional Signal Profiling &mdash; Non-Diagnostic Output Layer</div>
-        <p class="al-desc">The model output layer generates dimensional signal profiles across the five-dimension taxonomy &mdash; not diagnostic outputs, not severity scores, and not clinical recommendations. The output is an interpretive context package: which signal patterns are present, their dimensional classification, and cultural interpretation notes that help clinicians understand what the patterns typically indicate in the communities that produce them. Every output includes a non-diagnostic disclaimer and is designed to support clinical judgment, not substitute for it.</p>
-        <div class="al-tech">Non-diagnostic &middot; Interpretive context &middot; 42-signal taxonomy &middot; Clinician-surfaced only</div>
+        <p class="al-desc">The model output layer generates dimensional signal profiles across the six-category taxonomy &mdash; not diagnostic outputs, not severity scores, and not clinical recommendations. The output is an interpretive context package: which signal patterns are present, their dimensional classification, and cultural interpretation notes that help clinicians understand what the patterns typically indicate in the communities that produce them. Every output includes a non-diagnostic disclaimer and is designed to support clinical judgment, not substitute for it.</p>
+        <div class="al-tech">Non-diagnostic &middot; Interpretive context &middot; 47-signal taxonomy &middot; Clinician-surfaced only</div>
       </div>
     </div>
     <div class="arch-layer">
@@ -973,8 +1107,8 @@
         <div class="tg-stat-label">Cultural community cohorts represented in annotation</div>
       </div>
       <div class="tg-stat">
-        <div class="tg-stat-num">42</div>
-        <div class="tg-stat-label">Distress signal patterns in the taxonomy</div>
+        <div class="tg-stat-num">47</div>
+        <div class="tg-stat-label">Distress signal patterns across 6 clinical categories</div>
       </div>
     </div>
     <div class="tg-col">
@@ -1002,142 +1136,852 @@
 
 <!-- ═══ TAXONOMY ═══ -->
 <section id="taxonomy">
-  <div class="chapter-label light reveal">Chapter 05 &mdash; The 5-Dimensional Signal Taxonomy</div>
+  <div class="chapter-label light reveal">Chapter 05 &mdash; The 47-Signal Distress Signal Taxonomy</div>
 
   <div class="tax-header">
     <h2 class="tax-headline reveal d1">
-      42 signals.<br>
-      <em>Five dimensions.</em>
+      47 signals.<br>
+      <em>Six categories.</em>
     </h2>
-    <p class="tax-intro reveal d2">The VLAP signal taxonomy was developed through clinical annotation of the training corpus &mdash; identifying recurring patterns of culturally framed distress expression that standard clinical instruments and general NLP models systematically miss. The taxonomy is not static. It is updated as language evolves, with community input informing additions and revisions through a structured clinical review process.</p>
+    <p class="tax-intro reveal d2">The VLAP Distress Signal Taxonomy (v1.0) is the clinical reference document behind CulturalBERT &mdash; it defines the 47 discrete linguistic, behavioral, and contextual signals VLAP is trained to detect, organized into six clinically grounded categories. It serves as the model specification, the annotation codebook for IRB study data labeling, and the signal-level evidence base for VLAP&rsquo;s NIMH SBIR Phase I application. The taxonomy is not static &mdash; it is updated as language evolves and as clinical review proceeds.</p>
   </div>
 
-  <div class="dimensions">
-    <div class="dim-panel reveal">
-      <div class="dim-code-col">
-        <div class="dim-code">HOP</div>
-        <div class="dim-signals">8 signals</div>
-      </div>
-      <div class="dim-main">
-        <div class="dim-name">Hopelessness & Pessimism</div>
-        <p class="dim-desc">Indirect hopelessness, temporal compression, and "no point" framing expressed through AAVE, coded youth language, and minimization patterns. Standard models read these as low-confidence signals. CulturalBERT reads them as the primary signal. The cultural norm of underreporting &mdash; particularly prevalent in BIPOC male youth populations &mdash; means direct expressions of hopelessness are less common than coded expressions. HOP signals are most clinically significant when combined with CCM modifiers.</p>
-      </div>
-      <div class="dim-examples">
-        <div class="dim-ex-label">Signal Examples</div>
-        <div class="dim-ex-item">
-          "Just gotta make it through this week"
-          <div class="dim-ex-note">HOP-05 &middot; Acutely compressed future horizon</div>
+  <div class="tax-constraint reveal">
+    <span class="tax-constraint-label">Critical Design Constraint &mdash; Applies to Every Signal in This Taxonomy</span>
+    <p>VLAP outputs are clinical decision support signals. No signal in this taxonomy, individually or in combination, triggers an automated clinical action. All VLAP outputs are reviewed by a licensed clinician, certified coach, or trained care coordinator before any clinical response. <strong>VLAP flags; humans act.</strong></p>
+  </div>
+
+  <div class="cat-blocks">
+    <div class="cat-block reveal">
+      <div class="cat-head">
+        <div class="cat-code-col">
+          <div class="cat-code">HOP</div>
+          <div class="cat-signal-count">9 signals</div>
         </div>
-        <div class="dim-ex-item">
-          "ain't nobody care anyway so"
-          <div class="dim-ex-note">HOP-03 &middot; AAVE relational hopelessness + ISO co-occurrence</div>
+        <div class="cat-main">
+          <div class="cat-name">Hopelessness & Futility</div>
+          <p class="cat-basis">The Beck Hopelessness Scale and Columbia Suicide Severity Rating Scale both identify hopelessness as the strongest independent predictor of suicidal ideation. Generic NLP models perform adequately on Standard American English expressions of hopelessness (HOP-01). VLAP&rsquo;s differentiation is in detecting culturally coded and vernacular expressions of futility (HOP-02 through HOP-09) that generic models systematically misclassify as frustration or hyperbole.</p>
         </div>
-        <div class="dim-ex-item">
-          "what's even the point fr"
-          <div class="dim-ex-note">HOP-07 &middot; Direct futility + authenticity marker</div>
+      </div>
+      <div class="sig-grid">
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">HOP-01</span>
+            <span class="sig-label">Absolute futurity negation</span>
+            <span class="sig-risk risk-high">High</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;There's no point anymore&rdquo;</div>
+          <div class="sig-ex">&ldquo;Nothing's ever going to change&rdquo;</div>
+          <div class="sig-ex">&ldquo;What's even the use&rdquo;</div>
+          </div>
+          <p class="sig-note">Standard SAE expression of hopelessness. Well-detected by generic NLP models. Included for completeness and as inter-rater reliability baseline in validation study.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">HOP-02</span>
+            <span class="sig-label">Future self-erasure</span>
+            <span class="sig-risk risk-mod">Moderate</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;I won't be here when that happens&rdquo;</div>
+          <div class="sig-ex">&ldquo;By the time that matters I'll be gone&rdquo;</div>
+          <div class="sig-ex">&ldquo;Doesn't apply to me anymore&rdquo;</div>
+          </div>
+          <p class="sig-note">Ambiguous temporal framing. Generic models frequently classify as planning or travel intent rather than ideation. Clinical significance depends on context &mdash; requires co-occurring signal for High risk classification.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">HOP-03</span>
+            <span class="sig-label">AAVE futility construction</span>
+            <span class="sig-risk risk-high">High</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;Can't keep doing this no more fr&rdquo;</div>
+          <div class="sig-ex">&ldquo;Ain't no way out of this&rdquo;</div>
+          <div class="sig-ex">&ldquo;I'm done fr fr&rdquo;</div>
+          <div class="sig-ex">&ldquo;This ain't it no more&rdquo;</div>
+          </div>
+          <p class="sig-note">CRITICAL &mdash; highest false negative rate in generic NLP models. The intensifier 'fr' (for real) and double negation construction 'no more' are systematic misclassification sources. Generic models return 'frustration' or 'venting'. VLAP training data includes 340+ AAVE futility constructions. This single signal accounts for the largest share of VLAP's sensitivity advantage over baseline.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">HOP-04</span>
+            <span class="sig-label">Coded exhaustion</span>
+            <span class="sig-risk risk-var">Variable</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;I'm just so tired&rdquo;</div>
+          <div class="sig-ex">&ldquo;Tired of everything honestly&rdquo;</div>
+          <div class="sig-ex">&ldquo;Tired of waking up and doing this again&rdquo;</div>
+          </div>
+          <p class="sig-note">In isolation: Low risk, common expression. In combination with ISO or SHA signals: Moderate-High. 'Tired of waking up' is a clinically significant formulation &mdash; the exhaustion is specifically about existing. Requires attention to the object of the exhaustion, not just the emotion.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">HOP-05</span>
+            <span class="sig-label">Temporal foreclosure</span>
+            <span class="sig-risk risk-low">Low</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;I used to care about that stuff&rdquo;</div>
+          <div class="sig-ex">&ldquo;I don't really think about the future anymore&rdquo;</div>
+          <div class="sig-ex">&ldquo;Stopped making plans&rdquo;</div>
+          </div>
+          <p class="sig-note">Shift from future-orientation to present-only or past-only temporal framing. Requires longitudinal signal comparison &mdash; most meaningful when contrasted against previous session content. Flags for V2 cross-session modeling. In single-session context: Low-Moderate.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">HOP-06</span>
+            <span class="sig-label">Third-person self-distancing</span>
+            <span class="sig-risk risk-mod">Moderate</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;I was the kind of person who used to...&rdquo;</div>
+          <div class="sig-ex">&ldquo;That's not me anymore&rdquo;</div>
+          <div class="sig-ex">&ldquo;The old me would have cared about this&rdquo;</div>
+          </div>
+          <p class="sig-note">Speaking about oneself in the past tense in a living context. Dissociative marker documented in pre-suicidal ideation literature. Distinct from healthy reflection &mdash; the distancing is from a valued self-identity. Particularly significant in combination with PFE signals.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">HOP-07</span>
+            <span class="sig-label">Burden narrative</span>
+            <span class="sig-risk risk-high">High</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;Everyone would honestly be better off&rdquo;</div>
+          <div class="sig-ex">&ldquo;I'm just a problem for everyone&rdquo;</div>
+          <div class="sig-ex">&ldquo;They don't actually need me around&rdquo;</div>
+          <div class="sig-ex">&ldquo;I make everything harder for people I love&rdquo;</div>
+          </div>
+          <p class="sig-note">Classic pre-suicidal cognition &mdash; perceived burdensomeness is one of the two primary components of Joiner's Interpersonal Theory of Suicide (alongside thwarted belongingness). High independent risk. Documented as having the highest correlation with suicide attempt in the clinical literature for this population.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">HOP-08</span>
+            <span class="sig-label">Queer futility narrative</span>
+            <span class="sig-risk risk-high">High</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;It doesn't get better for people like me&rdquo;</div>
+          <div class="sig-ex">&ldquo;I've seen what happens to people like us&rdquo;</div>
+          <div class="sig-ex">&ldquo;That kind of life isn't for someone like me&rdquo;</div>
+          </div>
+          <p class="sig-note">Specifically references the cultural narrative of LGBTQIA+ suffering &mdash; 'people like me' and 'people like us' are key referents. Generic models do not detect the referent. For LGBTQIA+ youth, this expression carries the weight of observed community trauma, not just personal pessimism. Requires LGBTQIA+ identity context flag from member profile.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">HOP-09</span>
+            <span class="sig-label">Immigrant & first-gen foreclosure</span>
+            <span class="sig-risk risk-mod">Moderate</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;All that sacrifice and for what&rdquo;</div>
+          <div class="sig-ex">&ldquo;My parents went through all that and I can't even&rdquo;</div>
+          <div class="sig-ex">&ldquo;I was supposed to be the one who made it&rdquo;</div>
+          </div>
+          <p class="sig-note">Specific to first-generation and immigrant youth &mdash; the weight of intergenerational sacrifice creates a distinct form of hopelessness in which the member perceives themselves as failing a familial obligation. Not detectable by generic models without cultural context. Requires first-gen or immigrant identity flag from member profile.</p>
         </div>
       </div>
     </div>
 
-    <div class="dim-panel reveal">
-      <div class="dim-code-col">
-        <div class="dim-code">ISO</div>
-        <div class="dim-signals">9 signals</div>
-      </div>
-      <div class="dim-main">
-        <div class="dim-name">Social Isolation</div>
-        <p class="dim-desc">Withdrawal signals, relational distancing, and absence of connection framed as normal or preferred. ISO signals are particularly significant for BIPOC and LGBTQ+ youth whose support networks are often culturally specific and difficult to replace &mdash; the stakes of isolation are higher. Critically, ISO signals frequently appear as positively framed statements ("I'm good, just been staying to myself") that read as fine to general models but register as relational withdrawal in cultural context.</p>
-      </div>
-      <div class="dim-examples">
-        <div class="dim-ex-label">Signal Examples</div>
-        <div class="dim-ex-item">
-          "I don't really fw people like that no more"
-          <div class="dim-ex-note">ISO-01 &middot; Broad relational withdrawal &middot; temporal marker</div>
+    <div class="cat-block reveal">
+      <div class="cat-head">
+        <div class="cat-code-col">
+          <div class="cat-code">SHA</div>
+          <div class="cat-signal-count">8 signals</div>
         </div>
-        <div class="dim-ex-item">
-          "been keeping to myself, it's fine tho"
-          <div class="dim-ex-note">ISO-04 &middot; Withdrawal with minimization &middot; CCM co-occurrence</div>
+        <div class="cat-main">
+          <div class="cat-name">Coded Suicidal Ideation</div>
+          <p class="cat-basis">The SHA category captures both explicit and coded expressions of suicidal ideation. Generic models perform well on explicit ideation (SHA-01) and poorly on all other signals. SHA-02 through SHA-08 represent the core of VLAP&rsquo;s clinical differentiation &mdash; these are the expressions young people actually use, developed specifically to evade platform content moderation and the perceived stigma of explicit disclosure.</p>
         </div>
-        <div class="dim-ex-item">
-          "my people don't really get it"
-          <div class="dim-ex-note">ISO-07 &middot; Perceived community disconnect</div>
+      </div>
+      <div class="sig-grid">
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">SHA-01</span>
+            <span class="sig-label">Explicit suicidal ideation</span>
+            <span class="sig-risk risk-high">High</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;I want to kill myself&rdquo;</div>
+          <div class="sig-ex">&ldquo;I'm thinking about suicide&rdquo;</div>
+          <div class="sig-ex">&ldquo;I've been having thoughts of ending my life&rdquo;</div>
+          </div>
+          <p class="sig-note">Well-detected by all NLP models. Included as validation baseline. VLAP does not differentiate meaningfully from generic models on this signal. The 47-signal taxonomy is justified by performance on SHA-02 through SHA-08 and the other five categories, not SHA-01.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">SHA-02</span>
+            <span class="sig-label">Unaliving and derivatives</span>
+            <span class="sig-risk risk-high">High</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;Been thinking about unaliving&rdquo;</div>
+          <div class="sig-ex">&ldquo;I want to unalive myself honestly&rdquo;</div>
+          <div class="sig-ex">&ldquo;Thought about unaliving last night&rdquo;</div>
+          </div>
+          <p class="sig-note">CRITICAL &mdash; youth-specific euphemism developed explicitly to evade content moderation on TikTok, Instagram, and other platforms. First documented in widespread use approximately 2020. Most generic NLP models trained before 2022 do not have 'unaliving' in clinical context in training data. VLAP's training data includes 180+ documented uses with clinical annotation. This is one of the clearest demonstrations of generic model failure and VLAP's advantage.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">SHA-03</span>
+            <span class="sig-label">Sleep-death conflation</span>
+            <span class="sig-risk risk-mod">Moderate</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;I just want to go to sleep and not wake up&rdquo;</div>
+          <div class="sig-ex">&ldquo;Wish I didn't have to open my eyes tomorrow&rdquo;</div>
+          <div class="sig-ex">&ldquo;I just want it to stop so I can rest&rdquo;</div>
+          </div>
+          <p class="sig-note">Common expression chronically underweighted in generic models. The sleep framing is literal &mdash; the desire is for non-existence, not rest. 'I just want it to stop' requires object identification &mdash; what 'it' refers to determines clinical significance. Requires co-occurring signal for High classification unless the expression is highly specific.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">SHA-04</span>
+            <span class="sig-label">Fantasy of absence</span>
+            <span class="sig-risk risk-mod">Moderate</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;Imagine if I just wasn't here anymore&rdquo;</div>
+          <div class="sig-ex">&ldquo;What would happen if I disappeared&rdquo;</div>
+          <div class="sig-ex">&ldquo;Sometimes I think about just being gone&rdquo;</div>
+          </div>
+          <p class="sig-note">Passive ideation &mdash; the member is not describing an action but imagining a state of non-existence. Generic models frequently classify as daydreaming or escapism. In clinical literature, passive ideation is a documented precursor to active ideation. Escalate to Moderate when combined with any HOP signal.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">SHA-05</span>
+            <span class="sig-label">Method inquiry with minimization wrapper</span>
+            <span class="sig-risk risk-high">High</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;I was just curious, like how many pills would it actually take&rdquo;</div>
+          <div class="sig-ex">&ldquo;Not that I'd do it but what does it feel like when...&rdquo;</div>
+          <div class="sig-ex">&ldquo;Just wondering what happens if someone...&rdquo;</div>
+          </div>
+          <p class="sig-note">CRITICAL &mdash; the minimization wrapper ('just wondering', 'not that I'd do it') is the disclosure suppression mechanism, not evidence of low risk. Generic models weight the minimization wrapper and reduce risk classification. VLAP is trained to detect the method inquiry independent of the wrapper. This signal should always trigger human review regardless of stated intent.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">SHA-06</span>
+            <span class="sig-label">Goodbye behavior references</span>
+            <span class="sig-risk risk-high">High</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;Told my best friend I loved her, like really told her&rdquo;</div>
+          <div class="sig-ex">&ldquo;I gave away some stuff I don't need anymore&rdquo;</div>
+          <div class="sig-ex">&ldquo;Finally finished that thing I'd been putting off&rdquo;</div>
+          <div class="sig-ex">&ldquo;Made sure everything was in order&rdquo;</div>
+          </div>
+          <p class="sig-note">Behavioral markers described in text &mdash; the member is describing actions consistent with pre-suicidal behavior. Often expressed with a sense of resolution or relief, which is a clinically significant affect shift. Requires careful contextual interpretation &mdash; these expressions can be innocent. Combination with HOP-01 through HOP-08 significantly elevates risk.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">SHA-07</span>
+            <span class="sig-label">Anniversary and date markers with inverted framing</span>
+            <span class="sig-risk risk-high">High</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;I just need to get through [date]&rdquo;</div>
+          <div class="sig-ex">&ldquo;After [event] it won't matter anymore&rdquo;</div>
+          <div class="sig-ex">&ldquo;I told myself if things aren't better by [date]...&rdquo;</div>
+          </div>
+          <p class="sig-note">References to specific dates or events with framing that implies a terminus &mdash; a point after which the member does not expect or want to continue. Distinct from goal-setting. The inversion is key: the date is a deadline, not a milestone.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">SHA-08</span>
+            <span class="sig-label">'Catching a fade' and community-specific death euphemisms</span>
+            <span class="sig-risk risk-high">High</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;I've been thinking about catching a fade fr&rdquo;</div>
+          <div class="sig-ex">&ldquo;Ready to check out for real&rdquo;</div>
+          <div class="sig-ex">&ldquo;Done with this whole run honestly&rdquo;</div>
+          </div>
+          <p class="sig-note">Community-specific coded language for death or suicide. 'Catching a fade' is documented in AAVE; 'checking out' and 'ending the run' are youth-vernacular constructions. These do not appear in generic NLP training data in clinical context. VLAP's training data includes 95+ community-specific death euphemisms with clinical annotation.</p>
         </div>
       </div>
     </div>
 
-    <div class="dim-panel reveal">
-      <div class="dim-code-col">
-        <div class="dim-code">SHA</div>
-        <div class="dim-signals">7 signals</div>
-      </div>
-      <div class="dim-main">
-        <div class="dim-name">Self-Harm Adjacent</div>
-        <p class="dim-desc">Coded self-harm and suicidal ideation language &mdash; including community-developed terms built specifically to circumvent content filters. The SHA dimension required the most extensive vocabulary extension: terms like "unaliving," "sewerslide," and others circulating within youth online communities to communicate suicidal ideation while avoiding automated detection. Standard models with standard vocabularies have zero coverage of these terms. SHA-category signals are the highest-stakes VLAP detections and receive the most conservative threshold settings &mdash; lower false negative rates, higher false positive tolerance.</p>
-      </div>
-      <div class="dim-examples">
-        <div class="dim-ex-label">Signal Examples</div>
-        <div class="dim-ex-item">
-          "been thinking about unaliving lately ngl"
-          <div class="dim-ex-note">SHA-03 &middot; Coded SI + CRS-02 sincerity marker</div>
+    <div class="cat-block reveal">
+      <div class="cat-head">
+        <div class="cat-code-col">
+          <div class="cat-code">CCM</div>
+          <div class="cat-signal-count">8 signals</div>
         </div>
-        <div class="dim-ex-item">
-          "tired of being here honestly"
-          <div class="dim-ex-note">SHA-01 &middot; Indirect ideation &middot; ambiguous but elevated</div>
+        <div class="cat-main">
+          <div class="cat-name">Minimization & Disclosure Suppression</div>
+          <p class="cat-basis">CCM signals are the category most specific to Vasl&rsquo;s target population and most absent from generic NLP training data. They represent culturally conditioned patterns of downplaying distress before disclosing it &mdash; a documented phenomenon in Black, Latino, and LGBTQIA+ communities where mental health help-seeking carries stigma. Generic models classify CCM signals as low risk. VLAP treats them as pre-disclosure markers that warrant gentle engagement prompts and session logging.</p>
         </div>
-        <div class="dim-ex-item">
-          "what if I just didn't show up anymore"
-          <div class="dim-ex-note">SHA-05 &middot; Disappearance ideation framing</div>
+      </div>
+      <div class="sig-grid">
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">CCM-01</span>
+            <span class="sig-label">Classic minimization opener</span>
+            <span class="sig-risk risk-var">Variable</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;It's probably not a big deal but...&rdquo;</div>
+          <div class="sig-ex">&ldquo;This is probably stupid to even say but...&rdquo;</div>
+          <div class="sig-ex">&ldquo;I don't want to be dramatic, but...&rdquo;</div>
+          </div>
+          <p class="sig-note">The minimization opener predicts significant disclosure in the sentence that follows. Generic models weight the minimizer and under-score the disclosure. VLAP is trained to detect the opener as a pre-disclosure flag and analyze the following content at elevated weight. The minimizer is a social safety mechanism &mdash; the member is testing for a non-judgmental response before fully disclosing.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">CCM-02</span>
+            <span class="sig-label">AAVE minimization constructions</span>
+            <span class="sig-risk risk-var">Variable</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;Lowkey been struggling lately&rdquo;</div>
+          <div class="sig-ex">&ldquo;Kinda going through it ngl&rdquo;</div>
+          <div class="sig-ex">&ldquo;It's whatever though, I'm good&rdquo;</div>
+          <div class="sig-ex">&ldquo;Ion even know how to explain it&rdquo;</div>
+          </div>
+          <p class="sig-note">AAVE-specific minimization &mdash; 'lowkey', 'kinda', and 'ion' (I don't) are qualifiers that reduce apparent severity without reducing actual severity. 'It's whatever though' is a disclosure-withdrawal marker &mdash; the member raised something and then minimized. VLAP detects the content of the disclosure, not the qualifier. High false negative rate in generic models.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">CCM-03</span>
+            <span class="sig-label">Permission-seeking before disclosure</span>
+            <span class="sig-risk risk-low">Low</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;Can I tell you something kind of personal?&rdquo;</div>
+          <div class="sig-ex">&ldquo;Is it weird if I say something?&rdquo;</div>
+          <div class="sig-ex">&ldquo;Don't judge me, okay, but...&rdquo;</div>
+          </div>
+          <p class="sig-note">Pre-disclosure social negotiation &mdash; the member is seeking explicit permission and a non-judgmental response before disclosing. Particularly significant in youth who have previously disclosed to an adult and experienced a negative response. VLAP flags this for an immediate warm, non-judgmental coach response.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">CCM-04</span>
+            <span class="sig-label">Gallows humor as disclosure mechanism</span>
+            <span class="sig-risk risk-mod">Moderate</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;lol I'm literally such a mess&rdquo;</div>
+          <div class="sig-ex">&ldquo;haha I hate myself sometimes tho&rdquo;</div>
+          <div class="sig-ex">&ldquo;not to be unalive about it but lmao&rdquo;</div>
+          </div>
+          <p class="sig-note">CRITICAL &mdash; humor framing is the most common disclosure suppression mechanism in youth aged 13-22. The joke is the test: if the listener laughs or deflects, the disclosure is abandoned. VLAP is trained to detect the clinical content independent of the humor wrapper. 'Not to be unalive about it' is a specific formulation that combines SHA-02 with CCM-04 &mdash; extremely high combined risk.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">CCM-05</span>
+            <span class="sig-label">Asking for a friend construction</span>
+            <span class="sig-risk risk-mod">Moderate</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;My friend is going through something, like what would you even do if...&rdquo;</div>
+          <div class="sig-ex">&ldquo;This is for someone I know, but like how do you handle...&rdquo;</div>
+          <div class="sig-ex">&ldquo;Not me but what does it mean when someone...&rdquo;</div>
+          </div>
+          <p class="sig-note">Distance-creating framing used to test response before self-disclosure &mdash; a documented pre-disclosure mechanism in adolescents. VLAP flags all 'asking for a friend' formulations for gentle direct engagement rather than a literal, accusatory response.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">CCM-06</span>
+            <span class="sig-label">Topic drop without resolution</span>
+            <span class="sig-risk risk-mod">Moderate</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;Anyway... never mind, it's fine&rdquo;</div>
+          <div class="sig-ex">&ldquo;Actually forget I said anything&rdquo;</div>
+          <div class="sig-ex">&ldquo;I shouldn't have brought it up&rdquo;</div>
+          </div>
+          <p class="sig-note">The member raised a distress topic and then withdrew from it. This is a failed disclosure &mdash; the member attempted to disclose and retreated, likely due to fear of the response. VLAP flags topic drops for coach follow-up: acknowledging the withdrawal and creating a safe reopening.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">CCM-07</span>
+            <span class="sig-label">Internalized stigma disclosure pattern</span>
+            <span class="sig-risk risk-low">Low</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;I know I'm probably just being sensitive&rdquo;</div>
+          <div class="sig-ex">&ldquo;Other people have it so much worse than me&rdquo;</div>
+          <div class="sig-ex">&ldquo;I shouldn't be this upset, it's not even that serious&rdquo;</div>
+          </div>
+          <p class="sig-note">Internalized stigma &mdash; the member has accepted the message that their distress is not legitimate or warranted. Particularly documented in Black, Latino, and LGBTQIA+ youth. The comparison to 'other people' with more severe situations is a disclosure suppression mechanism. VLAP flags for validation-focused coach response.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">CCM-08</span>
+            <span class="sig-label">Performed resilience</span>
+            <span class="sig-risk risk-low">Low</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;I'm good, I always figure it out&rdquo;</div>
+          <div class="sig-ex">&ldquo;I don't let things get to me like that&rdquo;</div>
+          <div class="sig-ex">&ldquo;I'm strong, I've been through worse&rdquo;</div>
+          </div>
+          <p class="sig-note">Strength-performance in communities where emotional vulnerability is stigmatized as weakness &mdash; documented in Black male youth in particular, and in communities with strong 'we don't ask for help' cultural norms. VLAP flags for gentle, direct engagement that validates strength while creating space for vulnerability.</p>
         </div>
       </div>
     </div>
 
-    <div class="dim-panel reveal">
-      <div class="dim-code-col">
-        <div class="dim-code">CRS</div>
-        <div class="dim-signals">6 signals</div>
-      </div>
-      <div class="dim-main">
-        <div class="dim-name">Crisis Risk Signals</div>
-        <p class="dim-desc">Acute distress patterns including perceived burdensomeness, escalating hopelessness with sincerity markers, and suicidal ideation confirmed by authenticity escalators. CRS signals operate as a multiplier on co-occurring signals &mdash; a SHA signal becomes a clinical priority when paired with a CRS sincerity marker. CRS-category detections trigger immediate surfacing to Vasl's licensed clinical supervisor team with a 90-minute human response SLA. No automated action is taken; human clinical judgment determines every response.</p>
-      </div>
-      <div class="dim-examples">
-        <div class="dim-ex-label">Signal Examples</div>
-        <div class="dim-ex-item">
-          "everyone would be better off without me fr"
-          <div class="dim-ex-note">CRS-01 &middot; Perceived burdensomeness + authenticity marker</div>
+    <div class="cat-block reveal">
+      <div class="cat-head">
+        <div class="cat-code-col">
+          <div class="cat-code">ISO</div>
+          <div class="cat-signal-count">7 signals</div>
         </div>
-        <div class="dim-ex-item">
-          "ngl I'm not doing good at all"
-          <div class="dim-ex-note">CRS-02 &middot; Sincerity marker &middot; escalates co-occurring signals</div>
+        <div class="cat-main">
+          <div class="cat-name">Social Isolation & Withdrawal</div>
+          <p class="cat-basis">Social isolation is a documented independent risk factor for suicidal ideation and is one of the two primary components of Joiner&rsquo;s Interpersonal Theory of Suicide (thwarted belongingness). ISO signals are most clinically significant in combination with HOP or SHA signals, and as longitudinal markers of increasing withdrawal across sessions.</p>
+        </div>
+      </div>
+      <div class="sig-grid">
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">ISO-01</span>
+            <span class="sig-label">Direct withdrawal statement</span>
+            <span class="sig-risk risk-mod">Moderate</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;I've basically been staying in my room&rdquo;</div>
+          <div class="sig-ex">&ldquo;Stopped going out or seeing people&rdquo;</div>
+          <div class="sig-ex">&ldquo;Not really talking to anyone these days&rdquo;</div>
+          </div>
+          <p class="sig-note">Explicit social withdrawal. Well-detected by generic models in standard formulation. VLAP adds detection of AAVE and youth-vernacular variants. Moderate risk in isolation; elevates significantly in combination with HOP or SHA signals.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">ISO-02</span>
+            <span class="sig-label">Relationship severance language</span>
+            <span class="sig-risk risk-high">High</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;Told people to stop checking on me&rdquo;</div>
+          <div class="sig-ex">&ldquo;Blocked a bunch of people&rdquo;</div>
+          <div class="sig-ex">&ldquo;Deleted my accounts&rdquo;</div>
+          <div class="sig-ex">&ldquo;Pushed everyone away honestly&rdquo;</div>
+          </div>
+          <p class="sig-note">Active severance of social support &mdash; distinct from passive withdrawal. The member is taking action to remove supportive contacts. High combined risk when co-occurring with any SHA signal.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">ISO-03</span>
+            <span class="sig-label">Perceived burdensomeness &mdash; social expression</span>
+            <span class="sig-risk risk-mod">Moderate</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;I don't want to bring everyone down with my stuff&rdquo;</div>
+          <div class="sig-ex">&ldquo;Everyone's dealing with their own things, I can't add to that&rdquo;</div>
+          <div class="sig-ex">&ldquo;I don't want to be a burden&rdquo;</div>
+          </div>
+          <p class="sig-note">Perceived burdensomeness expressed through social withdrawal rationale. Distinct from HOP-07 (self-directed) &mdash; ISO-03 is expressed as a reason for social withdrawal rather than a statement about the member's worth. Combination elevates to High.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">ISO-04</span>
+            <span class="sig-label">Code-switching exhaustion</span>
+            <span class="sig-risk risk-mod">Moderate</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;I'm just tired of having to explain myself everywhere I go&rdquo;</div>
+          <div class="sig-ex">&ldquo;Can't be myself anywhere, it's exhausting&rdquo;</div>
+          <div class="sig-ex">&ldquo;Always performing, never actually me&rdquo;</div>
+          </div>
+          <p class="sig-note">Documented psychological stressor specific to Black, Latino, and LGBTQIA+ youth &mdash; the exhaustion of constantly adapting one's language, presentation, and identity to majority contexts. In VLAP's context, code-switching exhaustion is an isolation marker.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">ISO-05</span>
+            <span class="sig-label">Community disconnection</span>
+            <span class="sig-risk risk-mod">Moderate</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;Even my own people don't get it&rdquo;</div>
+          <div class="sig-ex">&ldquo;Don't fit in anywhere, not even with people like me&rdquo;</div>
+          <div class="sig-ex">&ldquo;Feel like I'm between worlds and belong in neither&rdquo;</div>
+          </div>
+          <p class="sig-note">Feeling rejected or invisible within one's own cultural community &mdash; a specific form of isolation particularly painful for youth who experience intersectional marginalization. Generic models do not detect the cultural referent.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">ISO-06</span>
+            <span class="sig-label">Family estrangement &mdash; LGBTQIA+ specific</span>
+            <span class="sig-risk risk-high">High</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;My family doesn't know and if they found out...&rdquo;</div>
+          <div class="sig-ex">&ldquo;Got kicked out because of who I am&rdquo;</div>
+          <div class="sig-ex">&ldquo;I've been sleeping at a friend's place&rdquo;</div>
+          <div class="sig-ex">&ldquo;My parents act like I don't exist now&rdquo;</div>
+          </div>
+          <p class="sig-note">Family rejection is the single strongest risk factor for LGBTQIA+ youth suicidal ideation &mdash; rejected LGBTQIA+ youth are 8.4 times more likely to attempt suicide than accepted peers (Ryan et al., 2009). VLAP flags any expression of family rejection or housing instability related to LGBTQIA+ identity as High risk immediately.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">ISO-07</span>
+            <span class="sig-label">Digital withdrawal references</span>
+            <span class="sig-risk risk-low">Low</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;Haven't posted in like a month&rdquo;</div>
+          <div class="sig-ex">&ldquo;Turned all my notifications off&rdquo;</div>
+          <div class="sig-ex">&ldquo;Not really on anything anymore&rdquo;</div>
+          </div>
+          <p class="sig-note">Withdrawal from digital social spaces &mdash; for youth, digital social networks are primary social infrastructure. Low risk in isolation; Moderate in combination with ISO-01 or any HOP signal.</p>
         </div>
       </div>
     </div>
 
-    <div class="dim-panel reveal">
-      <div class="dim-code-col">
-        <div class="dim-code">CCM</div>
-        <div class="dim-signals">12 signals</div>
-      </div>
-      <div class="dim-main">
-        <div class="dim-name">Cultural Context Modifiers</div>
-        <p class="dim-desc">The CCM dimension is the most architecturally significant of the five &mdash; and the most clinically important. CCM signals don't indicate distress directly; they modify how other signals should be interpreted. Pre-disclosure minimization (CCM-04) paired with an ISO signal means the withdrawal is more significant than it appears. Spiritual deflection (CCM-12) may indicate either genuine resilience or disclosure avoidance. Code-switching (CCM-08) indicates the member is speaking to a perceived authority audience &mdash; context that changes what they're willing to disclose. Standard models have no equivalent to the CCM dimension; they read utterances at face value without cultural framing.</p>
-      </div>
-      <div class="dim-examples">
-        <div class="dim-ex-label">Signal Examples</div>
-        <div class="dim-ex-item">
-          "it's not that deep but..."
-          <div class="dim-ex-note">CCM-04 &middot; Pre-disclosure minimization &middot; increases confidence</div>
+    <div class="cat-block reveal">
+      <div class="cat-head">
+        <div class="cat-code-col">
+          <div class="cat-code">TRM</div>
+          <div class="cat-signal-count">8 signals</div>
         </div>
-        <div class="dim-ex-item">
-          "God got me. That's all I'm saying."
-          <div class="dim-ex-note">CCM-12 &middot; Spiritual closure &middot; may signal avoidance</div>
+        <div class="cat-main">
+          <div class="cat-name">Trauma & Acute Stressor Markers</div>
+          <p class="cat-basis">TRM signals capture social determinants of mental health that are disproportionately present in Vasl&rsquo;s target population. Most TRM signals are not independently actionable clinical risk indicators &mdash; they are contextual elevators that increase the clinical significance of co-occurring HOP, SHA, or ISO signals. They are also the signals most normalized in community language and therefore most frequently missed by clinicians and tools not calibrated for this population.</p>
         </div>
-        <div class="dim-ex-item">
-          "lowkey" &middot; "kinda" &middot; "I guess"
-          <div class="dim-ex-note">CCM-09 &middot; Minimization hedges &middot; signal: underreporting of severity</div>
+      </div>
+      <div class="sig-grid">
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">TRM-01</span>
+            <span class="sig-label">Community violence exposure</span>
+            <span class="sig-risk risk-var">Variable</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;Another one of my friends got shot&rdquo;</div>
+          <div class="sig-ex">&ldquo;They got my cousin last week&rdquo;</div>
+          <div class="sig-ex">&ldquo;This neighborhood just takes people&rdquo;</div>
+          <div class="sig-ex">&ldquo;Can't even go outside without...&rdquo;</div>
+          </div>
+          <p class="sig-note">Repeated exposure to community violence is a documented trauma and acute stressor for urban youth. For many members, violence is normalized in language. VLAP flags for trauma-informed engagement. Cumulative exposure tracked longitudinally.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">TRM-02</span>
+            <span class="sig-label">Housing instability</span>
+            <span class="sig-risk risk-mod">Moderate</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;Staying with different people right now&rdquo;</div>
+          <div class="sig-ex">&ldquo;We got evicted so...&rdquo;</div>
+          <div class="sig-ex">&ldquo;My mom moved us again&rdquo;</div>
+          <div class="sig-ex">&ldquo;Don't really have a stable place&rdquo;</div>
+          </div>
+          <p class="sig-note">Housing instability is a strong predictor of youth mental health crisis, often expressed matter-of-factly in communities where it is common. VLAP flags for social determinants of health documentation and connection to housing support resources.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">TRM-03</span>
+            <span class="sig-label">Immigration and documentation stress</span>
+            <span class="sig-risk risk-var">Variable</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;My parents are scared about what's happening with immigration&rdquo;</div>
+          <div class="sig-ex">&ldquo;We don't know if we can stay&rdquo;</div>
+          <div class="sig-ex">&ldquo;ICE came to someone's house in our neighborhood&rdquo;</div>
+          </div>
+          <p class="sig-note">Immigration anxiety is an acute and chronic stressor for immigrant youth and families. Not independently a clinical risk indicator but a significant context marker that elevates other signals.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">TRM-04</span>
+            <span class="sig-label">Food insecurity references</span>
+            <span class="sig-risk risk-low">Low</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;We don't really have food in the house&rdquo;</div>
+          <div class="sig-ex">&ldquo;Been eating at school cause there's nothing at home&rdquo;</div>
+          <div class="sig-ex">&ldquo;Hadn't eaten since yesterday&rdquo;</div>
+          </div>
+          <p class="sig-note">Food insecurity is a significant stressor frequently normalized in community language. VLAP flags for connection to food resources and documentation as a social determinant. Low independent clinical risk; contextual elevator.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">TRM-05</span>
+            <span class="sig-label">Police and legal system contact</span>
+            <span class="sig-risk risk-var">Variable</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;The police stopped me again&rdquo;</div>
+          <div class="sig-ex">&ldquo;My brother just got locked up&rdquo;</div>
+          <div class="sig-ex">&ldquo;Scared every time I leave the house&rdquo;</div>
+          <div class="sig-ex">&ldquo;Got a court date coming up&rdquo;</div>
+          </div>
+          <p class="sig-note">Police contact and legal system involvement are acute and chronic stressors for Black and Latino youth disproportionately. The fear of police contact is independently traumatic regardless of actual contact.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">TRM-06</span>
+            <span class="sig-label">School discipline and push-out</span>
+            <span class="sig-risk risk-mod">Moderate</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;Got suspended again&rdquo;</div>
+          <div class="sig-ex">&ldquo;They're trying to expel me&rdquo;</div>
+          <div class="sig-ex">&ldquo;I don't think I can go back to that school&rdquo;</div>
+          <div class="sig-ex">&ldquo;They just kicked me out&rdquo;</div>
+          </div>
+          <p class="sig-note">School push-out is a documented trauma, disproportionate for Black students and students with disabilities, and part of the school-to-prison pipeline stressor. VLAP flags for engagement and connection to educational support.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">TRM-07</span>
+            <span class="sig-label">Vicarious and cumulative loss</span>
+            <span class="sig-risk risk-mod">Moderate</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;We lost so many people this year&rdquo;</div>
+          <div class="sig-ex">&ldquo;I've been to too many funerals&rdquo;</div>
+          <div class="sig-ex">&ldquo;My community just keeps losing people&rdquo;</div>
+          </div>
+          <p class="sig-note">Cumulative community loss &mdash; the accumulation of grief across multiple losses within a community. Particularly significant for Black and Latino youth in communities with high rates of gun violence.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">TRM-08</span>
+            <span class="sig-label">Caregiver incapacity and parentification</span>
+            <span class="sig-risk risk-mod">Moderate</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;My mom is really going through it so I'm taking care of things&rdquo;</div>
+          <div class="sig-ex">&ldquo;I'm basically the parent right now&rdquo;</div>
+          <div class="sig-ex">&ldquo;Nobody's really home, I'm handling everything&rdquo;</div>
+          </div>
+          <p class="sig-note">Parentified youth &mdash; children assuming caregiver roles &mdash; experience heightened stress, accelerated loss of childhood, and reduced access to their own emotional needs. VLAP flags for acknowledgment of the burden and connection to youth support resources.</p>
         </div>
       </div>
     </div>
+
+    <div class="cat-block reveal">
+      <div class="cat-head">
+        <div class="cat-code-col">
+          <div class="cat-code">PFE</div>
+          <div class="cat-signal-count">7 signals</div>
+        </div>
+        <div class="cat-main">
+          <div class="cat-name">Protective Factor Erosion</div>
+          <p class="cat-basis">PFE signals are not distress signals in isolation &mdash; they indicate that a previously present protective factor has been removed, which elevates baseline risk. They are most clinically significant as longitudinal markers (V2 cross-session modeling) and in combination with HOP or SHA signals. The protective factors most relevant to Vasl&rsquo;s population &mdash; faith community, mentors, peer networks, cultural identity, and aspirational goals &mdash; are different from those in the clinical literature developed for White, middle-class youth populations.</p>
+        </div>
+      </div>
+      <div class="sig-grid">
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">PFE-01</span>
+            <span class="sig-label">Loss of faith or spiritual anchor</span>
+            <span class="sig-risk risk-low">Low</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;I stopped going to church&rdquo;</div>
+          <div class="sig-ex">&ldquo;Don't really pray anymore&rdquo;</div>
+          <div class="sig-ex">&ldquo;Lost my faith in all that honestly&rdquo;</div>
+          </div>
+          <p class="sig-note">In communities where religious or spiritual practice is a primary coping resource and social support system, loss of faith represents the loss of a primary protective factor AND a primary social network simultaneously. Generic models do not identify this as a clinical signal.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">PFE-02</span>
+            <span class="sig-label">Trusted adult loss</span>
+            <span class="sig-risk risk-mod">Moderate</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;My coach left the program&rdquo;</div>
+          <div class="sig-ex">&ldquo;My counselor got replaced&rdquo;</div>
+          <div class="sig-ex">&ldquo;The one adult who actually got me is gone&rdquo;</div>
+          <div class="sig-ex">&ldquo;Nobody checks on me like that anymore&rdquo;</div>
+          </div>
+          <p class="sig-note">Loss of a trusted adult is a documented protective factor erosion. For youth with limited trusted adult relationships, losing one trusted adult removes a disproportionate share of the member's social safety net. VLAP flags for immediate coach relationship reinforcement.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">PFE-03</span>
+            <span class="sig-label">Peer network dissolution</span>
+            <span class="sig-risk risk-mod">Moderate</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;My whole friend group kind of fell apart&rdquo;</div>
+          <div class="sig-ex">&ldquo;Everyone went their separate ways&rdquo;</div>
+          <div class="sig-ex">&ldquo;Don't really have my people anymore&rdquo;</div>
+          </div>
+          <p class="sig-note">Loss of peer social support. Distinct from ISO signals (which describe withdrawal) &mdash; PFE-03 describes an external dissolution of a previously present support network. Elevates significantly with HOP signals.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">PFE-04</span>
+            <span class="sig-label">Achievement identity loss</span>
+            <span class="sig-risk risk-mod">Moderate</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;I can't play anymore because of my injury&rdquo;</div>
+          <div class="sig-ex">&ldquo;My grades just dropped and I don't even care&rdquo;</div>
+          <div class="sig-ex">&ldquo;Stopped performing &mdash; don't see the point&rdquo;</div>
+          </div>
+          <p class="sig-note">Loss of the role or achievement identity that anchored the member's sense of self and social belonging. In combination with HOP signals, this pattern correlates with acute risk.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">PFE-05</span>
+            <span class="sig-label">Future goal erasure</span>
+            <span class="sig-risk risk-low">Low</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;I used to want to go to college but...&rdquo;</div>
+          <div class="sig-ex">&ldquo;Stopped thinking about that kind of future&rdquo;</div>
+          <div class="sig-ex">&ldquo;Those dreams don't seem realistic anymore&rdquo;</div>
+          </div>
+          <p class="sig-note">Aspirational identity erosion. Particularly significant for first-generation youth for whom educational aspirations carry the weight of family sacrifice. A longitudinal hopelessness marker.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">PFE-06</span>
+            <span class="sig-label">Cultural disconnection</span>
+            <span class="sig-risk risk-low">Low</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;I feel like I'm losing my culture&rdquo;</div>
+          <div class="sig-ex">&ldquo;Don't know where I belong &mdash; not here, not there&rdquo;</div>
+          <div class="sig-ex">&ldquo;Forgot how to be who I was supposed to be&rdquo;</div>
+          </div>
+          <p class="sig-note">Cultural identity is a documented protective factor for BIPOC youth. Strong cultural identity correlates with lower rates of depression and suicidal ideation in minority youth. Particularly relevant in first-generation, immigrant, and mixed-heritage youth.</p>
+        </div>
+        <div class="sig-card reveal">
+          <div class="sig-card-head">
+            <span class="sig-code">PFE-07</span>
+            <span class="sig-label">Loss of routine and structure</span>
+            <span class="sig-risk risk-low">Low</span>
+          </div>
+          <div class="sig-examples">
+          <div class="sig-ex">&ldquo;I don't really have a schedule anymore&rdquo;</div>
+          <div class="sig-ex">&ldquo;Stopped doing all the things I used to do&rdquo;</div>
+          <div class="sig-ex">&ldquo;Nothing feels normal or regular&rdquo;</div>
+          </div>
+          <p class="sig-note">Loss of daily structure and routine, particularly significant following major life transitions. Its loss correlates with increased rumination and social withdrawal. Low independent risk; Moderate in combination with TRM signals.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="esc-section reveal">
+    <div class="esc-header">
+      <span class="esc-kicker">Section 4</span>
+      <h3 class="esc-title">Signal Combination & Escalation Rules</h3>
+      <p class="esc-intro">VLAP does not evaluate signals in isolation. The following rules define when single Moderate or Low signals elevate to High-risk classifications requiring immediate human review.</p>
+    </div>
+    <div class="esc-table">
+      <div class="esc-row esc-row-head">
+        <div class="esc-combo">Signal Combination</div>
+        <div class="esc-levels">Individual Levels</div>
+        <div class="esc-result">Combined</div>
+        <div class="esc-action">Action</div>
+      </div>
+          <div class="esc-row">
+            <div class="esc-combo">Any SHA signal + any HOP signal</div>
+            <div class="esc-levels">Moderate + Moderate</div>
+            <div class="esc-result esc-result-high">HIGH</div>
+            <div class="esc-action">Immediate human review &mdash; clinician or on-call coach</div>
+          </div>
+          <div class="esc-row">
+            <div class="esc-combo">SHA-02 / SHA-05 / SHA-08 alone</div>
+            <div class="esc-levels">High</div>
+            <div class="esc-result esc-result-high">HIGH</div>
+            <div class="esc-action">Immediate human review regardless of other signals</div>
+          </div>
+          <div class="esc-row">
+            <div class="esc-combo">HOP-03 + HOP-07</div>
+            <div class="esc-levels">High + High</div>
+            <div class="esc-result esc-result-high">HIGH</div>
+            <div class="esc-action">Immediate escalation &mdash; AAVE futility + burden narrative is the highest-risk pattern</div>
+          </div>
+          <div class="esc-row">
+            <div class="esc-combo">ISO-06 + any SHA signal</div>
+            <div class="esc-levels">High + any</div>
+            <div class="esc-result esc-result-high">HIGH</div>
+            <div class="esc-action">Immediate review &mdash; family rejection + ideation is a critical combination</div>
+          </div>
+          <div class="esc-row">
+            <div class="esc-combo">CCM-04 with SHA-02 reference</div>
+            <div class="esc-levels">Moderate + High</div>
+            <div class="esc-result esc-result-high">HIGH</div>
+            <div class="esc-action">'Not to be unalive about it but' formulation &mdash; always escalate</div>
+          </div>
+          <div class="esc-row">
+            <div class="esc-combo">Any 3+ CCM signals in one session</div>
+            <div class="esc-levels">Low / Moderate</div>
+            <div class="esc-result esc-result-moderate">MODERATE</div>
+            <div class="esc-action">Coach notification &mdash; member is heavily suppressing; create disclosure opening</div>
+          </div>
+          <div class="esc-row">
+            <div class="esc-combo">PFE-02 + ISO-01 + HOP-04</div>
+            <div class="esc-levels">Low + Moderate + Variable</div>
+            <div class="esc-result esc-result-moderate">MODERATE</div>
+            <div class="esc-action">Coach check-in &mdash; protective factor loss + withdrawal + exhaustion is a slow-burn pattern</div>
+          </div>
+          <div class="esc-row">
+            <div class="esc-combo">3+ TRM signals in one session</div>
+            <div class="esc-levels">Variable</div>
+            <div class="esc-result esc-result-moderate">MODERATE</div>
+            <div class="esc-action">Document social determinants; consider resource connection; check for co-occurring HOP/SHA</div>
+          </div>
+    </div>
+  </div>
+
+  <div class="val-status-section reveal">
+    <div class="esc-header">
+      <span class="esc-kicker">Section 5</span>
+      <h3 class="esc-title">Validation Status & Research Agenda</h3>
+      <p class="esc-intro">Current validation status of each signal category and the associated NIMH SBIR Phase I research agenda. VLAP distinguishes between signals that are clinically annotated and signals that have completed powered statistical validation &mdash; we do not present the former as the latter.</p>
+    </div>
+    <div class="val-status-table">
+          <div class="val-status-row">
+            <div class="vsr-cat">HOP<span class="vsr-range">HOP-01 to HOP-09</span></div>
+            <div class="vsr-status">HOP-01 validated in pilot cohorts. HOP-02 through HOP-09 annotated; sensitivity/specificity pending powered study.</div>
+            <div class="vsr-question"><span class="vsr-q-label">SBIR Research Question</span>What is the sensitivity and specificity of HOP-03 through HOP-09 against Columbia-Suicide Severity Rating Scale (C-SSRS) scores in Black and Latino youth aged 13-25?</div>
+          </div>
+          <div class="val-status-row">
+            <div class="vsr-cat">SHA<span class="vsr-range">SHA-01 to SHA-08</span></div>
+            <div class="vsr-status">SHA-01 validated. SHA-02 ('unaliving') detected in early pilot review with full clinical confirmation on each instance. SHA-03 through SHA-08 annotated; underpowered.</div>
+            <div class="vsr-question"><span class="vsr-q-label">SBIR Research Question</span>What is the false negative rate of SHA-02 through SHA-08 in generic NLP models vs. VLAP, measured against clinician-confirmed ideation in the same sample?</div>
+          </div>
+          <div class="val-status-row">
+            <div class="vsr-cat">CCM<span class="vsr-range">CCM-01 to CCM-08</span></div>
+            <div class="vsr-status">All signals annotated in pilot data. CCM-04 (gallows humor) most frequently occurring. No powered validation study completed.</div>
+            <div class="vsr-question"><span class="vsr-q-label">SBIR Research Question</span>Do CCM signals predict subsequent explicit disclosure (within 3 sessions) at a statistically significant rate in Black, Latino, and LGBTQIA+ youth?</div>
+          </div>
+          <div class="val-status-row">
+            <div class="vsr-cat">ISO<span class="vsr-range">ISO-01 to ISO-07</span></div>
+            <div class="vsr-status">ISO-01 validated. ISO-06 (family rejection, LGBTQIA+) flagged in early pilot review. Others annotated only.</div>
+            <div class="vsr-question"><span class="vsr-q-label">SBIR Research Question</span>What is the combined predictive validity of ISO + HOP signal co-occurrence for PHQ-8 score deterioration over 30 days?</div>
+          </div>
+          <div class="val-status-row">
+            <div class="vsr-cat">TRM<span class="vsr-range">TRM-01 to TRM-08</span></div>
+            <div class="vsr-status">All signals annotated. No powered validation. Normalization in community language makes annotation complex &mdash; inter-rater reliability study required.</div>
+            <div class="vsr-question"><span class="vsr-q-label">SBIR Research Question</span>Does TRM signal frequency moderate the relationship between HOP/SHA signals and clinical outcomes in this population?</div>
+          </div>
+          <div class="val-status-row">
+            <div class="vsr-cat">PFE<span class="vsr-range">PFE-01 to PFE-07</span></div>
+            <div class="vsr-status">All signals annotated as longitudinal markers. Requires session data accumulation for validation. Primarily a V2 research agenda.</div>
+            <div class="vsr-question"><span class="vsr-q-label">SBIR Research Question</span>Do PFE signals predict PHQ-8 trajectory deterioration over 60 days when present in the absence of active HOP/SHA signals?</div>
+          </div>
+    </div>
+  </div>
+
+  <div class="tax-refs reveal">
+    <span class="esc-kicker">Section 7</span>
+    <h3 class="esc-title">Key References</h3>
+    <ol class="tax-refs-list">
+          <li>Joiner, T.E. (2005). <em>Why People Die by Suicide.</em> Harvard University Press. &mdash; Theoretical foundation for HOP-07 (perceived burdensomeness) and ISO-03 (thwarted belongingness).</li>
+          <li>Ryan, C. et al. (2009). Family rejection as a predictor of negative health outcomes in white and Latino LGB young adults. <em>Pediatrics.</em> &mdash; Empirical basis for ISO-06 (family rejection, LGBTQIA+) risk elevation.</li>
+          <li>Green, L.J. (2002). <em>African American English: A Linguistic Introduction.</em> Cambridge University Press. &mdash; Linguistic reference for AAVE construction documentation in HOP-03 and CCM-02.</li>
+          <li>Coppersmith, G. et al. (2015). CLPsych 2015 Shared Task: Mental Health Twitter Data. &mdash; NLP baseline for suicide signal detection; demonstrates generic model limitations on coded language.</li>
+          <li>Balsam, K.F. et al. (2011). Measuring multiple minority stress: The LGBT People of Color Microaggressions Scale. &mdash; Foundation for ISO-04, ISO-05, and CCM-07 cultural specificity.</li>
+          <li>Posner, K. et al. (2011). The Columbia-Suicide Severity Rating Scale. <em>American Journal of Psychiatry.</em> &mdash; Gold standard against which VLAP sensitivity/specificity will be validated in SBIR Phase I.</li>
+          <li>Beck, A.T. et al. (1974). The Measurement of Pessimism: The Hopelessness Scale. &mdash; Foundation for HOP category clinical basis.</li>
+          <li>Zimmerman, G. (2016). 'Unaliving': The internet word for suicide. &mdash; Linguistic documentation of SHA-02 emergence and spread.</li>
+    </ol>
   </div>
 </section>
 
@@ -1161,7 +2005,7 @@
       <div class="val-metric">
         <div class="val-metric-num">90<span style="font-size:24px">%</span></div>
         <div class="val-metric-label">High-distress signal sensitivity</div>
-        <p class="val-metric-body">VLAP's ability to detect high-distress signals when they are present in member language &mdash; measured against clinician-adjudicated ground truth in the IRB study cohort. Sensitivity is optimized conservatively for SHA and CRS dimensions: we accept more false positives to minimize missed crisis signals.</p>
+        <p class="val-metric-body">VLAP's ability to detect high-distress signals when they are present in member language &mdash; measured against clinician-adjudicated ground truth in the IRB study cohort. Sensitivity is optimized conservatively for the SHA and HOP categories, and for signal combinations that trigger High-risk escalation: we accept more false positives to minimize missed crisis signals.</p>
       </div>
       <div class="val-metric">
         <div class="val-metric-num">23<span style="font-size:24px">%</span></div>
@@ -1223,7 +2067,7 @@
       <div class="cf-dot"></div>
       <div class="cf-num">Step 02</div>
       <div class="cf-title">In-memory VLAP inference</div>
-      <p class="cf-body">CulturalBERT processes the language against the 42-signal taxonomy. In-memory only &mdash; verbatim text is not retained after processing. Output: a dimensional signal profile.</p>
+      <p class="cf-body">CulturalBERT processes the language against the 47-signal taxonomy. In-memory only &mdash; verbatim text is not retained after processing. Output: a dimensional signal profile.</p>
     </div>
     <div class="cf-item">
       <div class="cf-dot"></div>
@@ -1240,8 +2084,8 @@
     <div class="cf-item">
       <div class="cf-dot"></div>
       <div class="cf-num">Step 05</div>
-      <div class="cf-title">CRS signals surface to clinical supervisor &mdash; 90-minute SLA</div>
-      <p class="cf-body">Crisis Risk Signal detections are surfaced immediately to Vasl's licensed clinical supervisor team. A licensed clinician reviews the signal and determines the appropriate response. No automated action. Human judgment initiates every response.</p>
+      <div class="cf-title">High-risk escalations surface to clinical supervisor &mdash; 90-minute SLA</div>
+      <p class="cf-body">Signals or signal combinations that meet High-risk escalation criteria are surfaced immediately to Vasl's licensed clinical supervisor team. A licensed clinician reviews the signal and determines the appropriate response. No automated action. Human judgment initiates every response.</p>
     </div>
   </div>
 
