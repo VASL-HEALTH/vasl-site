@@ -175,6 +175,30 @@ REWRITES = {
         "the problem. What it looks like in youth language, and why systems keep "
         "reading it wrong.",
     ),
+    # ---- SEO week 2: new pages ------------------------------------------------
+    "school-mental-health-rfp.html": (
+        "School Mental Health RFP Evaluation Guide | Vasl",
+        "What districts ask for in behavioral health RFPs, drawn from real published "
+        "solicitations — evaluation criteria and what a strong vendor answer looks "
+        "like.",
+    ),
+    "dialect-bias-mental-health-screening.html": (
+        "Dialect Bias in Mental Health Screening | Vasl",
+        "Why the same screening score can mean different things across dialects, "
+        "what differential item functioning is, and how VLAP is built to read for "
+        "it.",
+    ),
+    "hedis-behavioral-health-cultural-fit.html": (
+        "HEDIS Behavioral Health Measures & Cultural Fit | Vasl",
+        "Which HEDIS behavioral health measures are most exposed to cultural and "
+        "linguistic mismatch, and where engagement, not diagnosis, is what closes "
+        "the gap.",
+    ),
+    "glossary.html": (
+        "Glossary: Youth Behavioral Health & AI Terms | Vasl",
+        "Plain-language definitions for the clinical, technical, and policy terms "
+        "used across Vasl, from differential item functioning to warm handoff.",
+    ),
     # ---- Utility -------------------------------------------------------------
     "prototype.html": (
         "Interactive Prototype | Vasl Health",
