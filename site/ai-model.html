@@ -886,7 +886,7 @@
       We fixed that.
     </h1>
     <p class="gap-body reveal d2">
-      Every major NLP model in clinical use was trained predominantly on majority-White internet text. That corpus doesn't contain AAVE. It doesn't contain queer vernacular. It doesn't contain the coded language underserved youth use to describe pain. The gap between what the model was trained on and who it's supposed to serve is not a fine-tuning problem. It's an architecture problem. CulturalBERT &mdash; our clinical language model, a fine-tuned DeBERTa-v3 architecture &mdash; is the answer.
+      Every major NLP model in clinical use was trained predominantly on majority-White internet text. That corpus doesn't contain AAVE. It doesn't contain queer vernacular. It doesn't contain the coded language underserved youth use to describe pain. The gap between what the model was trained on and who it's supposed to serve is not a fine-tuning problem. It's an architecture problem. CulturalBERT &mdash; our clinical language model, a fine-tuned BERT-family transformer &mdash; is the answer.
     </p>
     <div class="gap-actions reveal d3">
       <a href="#spec" class="btn-dark">Request Technical Spec</a>
@@ -901,7 +901,7 @@
     <div class="model-id">
       <div class="mid-label">Underlying Model Architecture</div>
       <div class="mid-name">CulturalBERT</div>
-      <div class="mid-desc">A fine-tuned DeBERTa-v3 architecture language model trained on culturally-specific mental health language corpora drawn from BIPOC, LGBTQ+, and underserved youth communities. The foundational layer of the Vasl Language Analysis Platform.</div>
+      <div class="mid-desc">A fine-tuned BERT-family transformer model trained on culturally-specific mental health language corpora drawn from BIPOC, LGBTQ+, and underserved youth communities. The foundational layer of the Vasl Language Analysis Platform.</div>
     </div>
 
     <div class="model-stats">
@@ -935,7 +935,7 @@
         <em>Trained from<br>inside it.</em>
       </h2>
       <p class="model-body reveal d2">
-        CulturalBERT begins with a fine-tuned DeBERTa-v3 architecture base and extends it with training samples drawn from culturally-specific mental health language &mdash; AAVE, queer vernacular, code-switching, trauma-adjacent idiom, and youth-specific coded language. This is not a demographic filter applied to a standard model. The cultural specificity is in the weights.
+        CulturalBERT begins with a fine-tuned BERT-family architecture base and extends it with training samples drawn from culturally-specific mental health language &mdash; AAVE, queer vernacular, code-switching, trauma-adjacent idiom, and youth-specific coded language. This is not a demographic filter applied to a standard model. The cultural specificity is in the weights.
       </p>
       <blockquote class="model-pull reveal d3">
         "A model trained on the wrong language will always be measuring the wrong thing. No fine-tuning fixes a training set."
@@ -945,7 +945,7 @@
         <div class="tb-header">Training Corpus &mdash; CulturalBERT V1</div>
         <div class="tb-row">
           <div class="tb-label">Base architecture</div>
-          <div class="tb-value">DeBERTa-v3 (Decoding-enhanced BERT with disentangled attention) &mdash; fine-tuned on domain-specific corpora with culturally extended vocabulary layer</div>
+          <div class="tb-value">BERT-family transformer &mdash; fine-tuned on domain-specific corpora with culturally extended vocabulary layer</div>
         </div>
         <div class="tb-row">
           <div class="tb-label">Training samples</div>
@@ -1323,7 +1323,7 @@
       <div class="pipe-step-num">Step 04 &mdash; Tokenization & Vocabulary Matching</div>
       <div class="pipe-step-name">The extended vocabulary layer activates &mdash; reading language that standard models cannot.</div>
       <p class="pipe-step-desc">The text is tokenized using VLAP's extended vocabulary &mdash; which includes the 2,400+ AAVE and youth vernacular tokens added to the base vocabulary. This is where standard NLP fails: it encounters tokens like "unaliving" or constructions like "can't keep doing this no more fr" and has no representation for them. VLAP has trained representations for all of them.</p>
-      <div class="pipe-step-tech">Extended DeBERTa-v3 tokenizer &middot; 2,400+ custom tokens &middot; Cultural register detection active</div>
+      <div class="pipe-step-tech">Extended BERT-family tokenizer &middot; 2,400+ custom tokens &middot; Cultural register detection active</div>
       <span class="pipe-step-tag">Cultural vocabulary</span>
     </div>
 
@@ -1524,7 +1524,7 @@
           <span class="stoc-num">§01</span>
           <div>
             <div class="stoc-title">Model Architecture & Base Training</div>
-            <div class="stoc-pages">Pages 1&ndash;6 &middot; DeBERTa-v3 architecture &middot; Fine-tuning methodology</div>
+            <div class="stoc-pages">Pages 1&ndash;6 &middot; BERT-family architecture &middot; Fine-tuning methodology</div>
           </div>
         </div>
         <div class="spec-toc-item">
