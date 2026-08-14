@@ -37,6 +37,9 @@ jobs:
       - name: Head layer is current
         run: python3 tools/seo_inject.py --check
 
+      - name: Internal links are current
+        run: python3 tools/internal_links.py --check
+
       - name: Sitemap is current
         run: python3 tools/gen_sitemap.py --check
 
