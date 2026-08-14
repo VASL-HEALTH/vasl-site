@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="CulturalBERT &mdash; the Vasl Language Analysis Platform, a fine-tuned DeBERTa-v3 architecture. Technical architecture, training methodology, clinical validation, and institutional partnership documentation for health system and research evaluators.">
+<meta name="description" content="CulturalBERT &mdash; the Vasl Language Analysis Platform, a fine-tuned BERT-family transformer model. Technical architecture, training methodology, clinical validation, and institutional partnership documentation for health system and research evaluators.">
 <title>Technology &mdash; CulturalBERT &mdash; Vasl Health</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -773,7 +773,7 @@
     <div class="hero-stats">
       <div class="hs-row">
         <div class="hs-num">2,400<span style="font-size:16px">+</span></div>
-        <div class="hs-label">AAVE and youth vernacular tokens added beyond standard DeBERTa-v3 vocabulary</div>
+        <div class="hs-label">AAVE and youth vernacular tokens added beyond standard BERT-family vocabulary</div>
       </div>
       <div class="hs-row">
         <div class="hs-num">47</div>
@@ -896,27 +896,27 @@
 
   <div class="arch-header">
     <h2 class="arch-headline reveal d1">
-      Built on DeBERTa-v3.<br>
+      Built on BERT-family.<br>
       Fine-tuned for<br>
       <em>cultural fluency.</em>
     </h2>
-    <p class="arch-intro reveal d2">CulturalBERT is a DeBERTa-v3 architecture language model fine-tuned on a purpose-built corpus of culturally specific mental health language. The base DeBERTa-v3 architecture was selected for its bidirectional context processing &mdash; essential for reading the layered meaning in code-switching, minimization patterns, and culturally framed expressions where individual words carry different weight depending on surrounding context. The model was then extended with a culturally specific vocabulary and fine-tuned against a clinically annotated training corpus.</p>
+    <p class="arch-intro reveal d2">CulturalBERT is a fine-tuned BERT-family transformer model, trained on a purpose-built corpus of culturally specific mental health language. The BERT-family architecture was selected for its bidirectional context processing &mdash; essential for reading the layered meaning in code-switching, minimization patterns, and culturally framed expressions where individual words carry different weight depending on surrounding context. The model was then extended with a culturally specific vocabulary and fine-tuned against a clinically annotated training corpus.</p>
   </div>
 
   <div class="arch-layers reveal">
     <div class="arch-layer">
       <div class="al-num">Foundation</div>
       <div class="al-body">
-        <div class="al-title">DeBERTa-v3 Base Architecture &mdash; Bidirectional Transformer</div>
+        <div class="al-title">BERT-Family Base Architecture &mdash; Bidirectional Transformer</div>
         <p class="al-desc">The bidirectional encoding layer processes the full context window simultaneously in both directions &mdash; unlike unidirectional models that read left-to-right. This is architecturally necessary for cultural signal detection: the meaning of "lowkey" depends entirely on what follows it, and the clinical significance of a minimization hedge ("it's not that deep but") only becomes clear in context of what comes after the conjunction.</p>
-        <div class="al-tech">DeBERTa-v3-base &middot; 12 layers &middot; 768 hidden dimensions &middot; 12 attention heads</div>
+        <div class="al-tech">BERT-family base &middot; fine-tuned &middot; behavioral health corpus</div>
       </div>
     </div>
     <div class="arch-layer">
       <div class="al-num">Extension</div>
       <div class="al-body">
         <div class="al-title">Vocabulary Extension &mdash; 2,400+ Cultural Tokens</div>
-        <p class="al-desc">Standard DeBERTa-v3 vocabulary was extended with 2,400+ AAVE terms, youth vernacular expressions, code-switching patterns, and community-developed coded language &mdash; including terms built specifically to circumvent content filters (e.g., "unaliving"). This extension was compiled through community engagement with BIPOC and LGBTQ+ youth populations and validated by licensed clinicians with relevant community competency. Without this extension, approximately 23% of the training corpus would be processed as unknown tokens by the base model.</p>
+        <p class="al-desc">Standard BERT-family vocabulary was extended with 2,400+ AAVE terms, youth vernacular expressions, code-switching patterns, and community-developed coded language &mdash; including terms built specifically to circumvent content filters (e.g., "unaliving"). This extension was compiled through community engagement with BIPOC and LGBTQ+ youth populations and validated by licensed clinicians with relevant community competency. Without this extension, approximately 23% of the training corpus would be processed as unknown tokens by the base model.</p>
         <div class="al-tech">Community-sourced &middot; Clinically validated &middot; Continuously updated</div>
       </div>
     </div>
@@ -924,7 +924,7 @@
       <div class="al-num">Training</div>
       <div class="al-body">
         <div class="al-title">Fine-Tuning on Culturally Specific Mental Health Corpus</div>
-        <p class="al-desc">The extended DeBERTa-v3 model was fine-tuned on annotated language samples drawn from the communities VLAP serves &mdash; not web-scraped text, but specifically collected and clinically annotated mental health communication. Each sample was labeled by licensed clinicians with community competency training against the 42-signal taxonomy across five behavioral dimensions. The fine-tuning process was conducted in multiple phases with inter-annotator agreement validation.</p>
+        <p class="al-desc">The extended BERT-family model was fine-tuned on annotated language samples drawn from the communities VLAP serves &mdash; not web-scraped text, but specifically collected and clinically annotated mental health communication. Each sample was labeled by licensed clinicians with community competency training against the 42-signal taxonomy across five behavioral dimensions. The fine-tuning process was conducted in multiple phases with inter-annotator agreement validation.</p>
         <div class="al-tech">Multi-phase fine-tuning &middot; IAA validation across annotation cohort</div>
       </div>
     </div>
@@ -966,7 +966,7 @@
       <div class="tg-col-label">Corpus Scale</div>
       <div class="tg-stat">
         <div class="tg-stat-num">2,400<span style="font-size:24px">+</span></div>
-        <div class="tg-stat-label">Extended vocabulary tokens beyond base DeBERTa-v3 vocabulary</div>
+        <div class="tg-stat-label">Extended vocabulary tokens beyond base BERT-family vocabulary</div>
       </div>
       <div class="tg-stat">
         <div class="tg-stat-num">5</div>
