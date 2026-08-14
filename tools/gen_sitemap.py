@@ -16,6 +16,8 @@ import sys
 from datetime import date, datetime
 from pathlib import Path
 
+from seo_shared import IGNORE
+
 ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT / "site"
 ORIGIN = "https://gotovasl.com"
@@ -84,6 +86,8 @@ def build() -> str:
     rows = []
     for path in sorted(SITE.rglob("*.html")):
         rel = path.relative_to(SITE).as_posix()
+        if rel in IGNORE:
+            continue
         html = path.read_text(encoding="utf-8", errors="ignore")
         if re.search(r'name=["\']robots["\'][^>]*content=["\'][^"\']*noindex', html, re.I):
             continue
