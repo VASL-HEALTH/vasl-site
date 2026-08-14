@@ -16,6 +16,8 @@ Run: python3 tools/seo_titles.py
 import re
 from pathlib import Path
 
+from seo_shared import IGNORE
+
 SITE = Path(__file__).resolve().parent.parent / "site"
 
 # rel -> (title, description). Either may be None to leave that tag alone.
@@ -220,6 +222,9 @@ def esc(s: str) -> str:
 def main() -> int:
     changed = 0
     for rel, (title, desc) in sorted(REWRITES.items()):
+        if rel in IGNORE:
+            print(f"  skip  {rel} (ignored)")
+            continue
         path = SITE / rel
         if not path.exists():
             print(f"  skip  {rel} (missing)")
