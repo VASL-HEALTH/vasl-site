@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Standard clinical NLP misreads AAVE and youth vernacular. CulturalBERT is trained on it directly — 2,400+ tokens, six signal categories, no diagnostic output.">
-<title>CulturalBERT: AI Trained on How Youth Actually Speak</title>
+<meta name="description" content="Standard clinical NLP misreads AAVE and youth vernacular. VLAP is trained on it directly — 2,400+ tokens, six signal categories, no diagnostic output.">
+<title>VLAP: AI Trained on How Youth Actually Speak</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -13,8 +13,8 @@
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Vasl Health">
-<meta property="og:title" content="CulturalBERT: AI Trained on How Youth Actually Speak">
-<meta property="og:description" content="Standard clinical NLP misreads AAVE and youth vernacular. CulturalBERT is trained on it directly — 2,400+ tokens, six signal categories, no diagnostic output.">
+<meta property="og:title" content="VLAP: AI Trained on How Youth Actually Speak">
+<meta property="og:description" content="Standard clinical NLP misreads AAVE and youth vernacular. VLAP is trained on it directly — 2,400+ tokens, six signal categories, no diagnostic output.">
 <meta property="og:url" content="https://gotovasl.com/ai-model">
 <meta property="og:image" content="https://gotovasl.com/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -22,8 +22,8 @@
 <meta property="og:image:alt" content="Vasl Health — Language Is Care">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="CulturalBERT: AI Trained on How Youth Actually Speak">
-<meta name="twitter:description" content="Standard clinical NLP misreads AAVE and youth vernacular. CulturalBERT is trained on it directly — 2,400+ tokens, six signal categories, no diagnostic output.">
+<meta name="twitter:title" content="VLAP: AI Trained on How Youth Actually Speak">
+<meta name="twitter:description" content="Standard clinical NLP misreads AAVE and youth vernacular. VLAP is trained on it directly — 2,400+ tokens, six signal categories, no diagnostic output.">
 <meta name="twitter:image" content="https://gotovasl.com/og-image.png">
 <script defer data-domain="gotovasl.com" src="https://plausible.io/js/script.outbound-links.tagged-events.js"></script>
 <script>window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>
@@ -917,7 +917,7 @@
       We fixed that.
     </h1>
     <p class="gap-body reveal d2">
-      Every major NLP model in clinical use was trained predominantly on majority-White internet text. That corpus doesn't contain AAVE. It doesn't contain queer vernacular. It doesn't contain the coded language underserved youth use to describe pain. The gap between what the model was trained on and who it's supposed to serve is not a fine-tuning problem. It's an architecture problem. CulturalBERT &mdash; our clinical language model, a fine-tuned BERT-family transformer &mdash; is the answer.
+      Every major NLP model in clinical use was trained predominantly on majority-White internet text. That corpus doesn't contain AAVE. It doesn't contain queer vernacular. It doesn't contain the coded language underserved youth use to describe pain. The gap between what the model was trained on and who it's supposed to serve is not a fine-tuning problem. It's an architecture problem. VLAP &mdash; our clinical language model, a fine-tuned BERT-family transformer &mdash; is the answer.
     </p>
     <div class="gap-actions reveal d3">
       <a href="#spec" class="btn-dark">Request Technical Spec</a>
@@ -931,7 +931,7 @@
   <div class="gap-right reveal d2">
     <div class="model-id">
       <div class="mid-label">Underlying Model Architecture</div>
-      <div class="mid-name">CulturalBERT</div>
+      <div class="mid-name">VLAP</div>
       <div class="mid-desc">A fine-tuned BERT-family transformer model trained on culturally-specific mental health language corpora drawn from Black, Latino, and youth in urban and rural communities. The foundational layer of the Vasl Language Analysis Platform.</div>
     </div>
 
@@ -966,14 +966,14 @@
         <em>Trained from<br>inside it.</em>
       </h2>
       <p class="model-body reveal d2">
-        CulturalBERT begins with a fine-tuned BERT-family architecture base and extends it with training samples drawn from culturally-specific mental health language &mdash; AAVE, queer vernacular, code-switching, trauma-adjacent idiom, and youth-specific coded language. This is not a demographic filter applied to a standard model. The cultural specificity is in the weights.
+        VLAP begins with a fine-tuned BERT-family architecture base and extends it with training samples drawn from culturally-specific mental health language &mdash; AAVE, queer vernacular, code-switching, trauma-adjacent idiom, and youth-specific coded language. This is not a demographic filter applied to a standard model. The cultural specificity is in the weights.
       </p>
       <blockquote class="model-pull reveal d3">
         "A model trained on the wrong language will always be measuring the wrong thing. No fine-tuning fixes a training set."
       </blockquote>
 
       <div class="training-block reveal d3">
-        <div class="tb-header">Training Corpus &mdash; CulturalBERT V1</div>
+        <div class="tb-header">Training Corpus &mdash; VLAP V1</div>
         <div class="tb-row">
           <div class="tb-label">Base architecture</div>
           <div class="tb-value">BERT-family transformer &mdash; fine-tuned on domain-specific corpora with culturally extended vocabulary layer</div>
@@ -1051,7 +1051,7 @@
       <em>Zero diagnostic<br>outputs.</em>
     </h2>
     <p class="tax-intro reveal d2">
-      The VLAP Distress Signal Taxonomy (v1.0) defines every signal CulturalBERT is trained to detect. Each signal has a clinical definition, a community-language annotation, and a risk-level weighting. None produce a diagnosis. All surface as interpretive context for a licensed clinician &mdash; who decides what to do with them. Full clinical notes, escalation rules, and validation status for every signal are documented in the <a href="technology.html" style="color:var(--clay);text-decoration:underline;">Technology deep-dive</a>.
+      The VLAP Distress Signal Taxonomy (v1.0) defines every signal VLAP is trained to detect. Each signal has a clinical definition, a community-language annotation, and a risk-level weighting. None produce a diagnosis. All surface as interpretive context for a licensed clinician &mdash; who decides what to do with them. Full clinical notes, escalation rules, and validation status for every signal are documented in the <a href="technology.html" style="color:var(--clay);text-decoration:underline;">Technology deep-dive</a>.
     </p>
   </div>
 
@@ -1362,7 +1362,7 @@
       insight &mdash; <em>in seven<br>accountable steps.</em>
     </h2>
     <p class="pipe-intro reveal d2">
-      Every piece of text processed by CulturalBERT moves through a documented, auditable pipeline. Each step has a clear technical purpose, a privacy control, and a human accountability point. No step produces a clinical decision. The pipeline produces context &mdash; and then a licensed clinician decides what to do with it.
+      Every piece of text processed by VLAP moves through a documented, auditable pipeline. Each step has a clear technical purpose, a privacy control, and a human accountability point. No step produces a clinical decision. The pipeline produces context &mdash; and then a licensed clinician decides what to do with it.
     </p>
   </div>
 
@@ -1406,9 +1406,9 @@
     <div class="pipe-step reveal">
       <div class="pipe-dot"></div>
       <div class="pipe-step-num">Step 05 &mdash; Inference</div>
-      <div class="pipe-step-name">CulturalBERT classifies signals across all clinical categories.</div>
+      <div class="pipe-step-name">VLAP classifies signals across all clinical categories.</div>
       <p class="pipe-step-desc">The model runs inference across the full VLAP Distress Signal Taxonomy &mdash; evaluating the input against all 47 signals across six clinical categories simultaneously. CCM modifiers adjust signal weights based on cultural register, minimization patterns, and code-switching context. Output is a structured dimensional signal profile &mdash; not a score, not a diagnosis, not a risk tier.</p>
-      <div class="pipe-step-tech">CulturalBERT V1 &middot; CCM weighting active</div>
+      <div class="pipe-step-tech">VLAP V1 &middot; CCM weighting active</div>
       <span class="pipe-step-tag">Non-diagnostic output</span>
     </div>
 
@@ -1446,7 +1446,7 @@
       <em>traded away.</em>
     </h2>
     <p class="principles-sub reveal d2">
-      These are not guidelines. They are the non-negotiable constraints that governed every architectural decision in CulturalBERT &mdash; from training data selection through deployment. If a design choice conflicted with any of these, the design changed. Not the principle.
+      These are not guidelines. They are the non-negotiable constraints that governed every architectural decision in VLAP &mdash; from training data selection through deployment. If a design choice conflicted with any of these, the design changed. Not the principle.
     </p>
   </div>
 
@@ -1522,13 +1522,13 @@
         <em>Not just<br>deployed.</em>
       </h2>
       <p class="val-body reveal d2">
-        CulturalBERT is not waiting for validation to come back from a lab. It is in active clinical deployment &mdash; with a parallel IRB study underway with a university research partner validating signal accuracy in production conditions. The model earns its claim in the real world, with real youth, under real clinical oversight. Results will be published upon study completion.
+        VLAP is not waiting for validation to come back from a lab. It is in active clinical deployment &mdash; with a parallel IRB study underway with a university research partner validating signal accuracy in production conditions. The model earns its claim in the real world, with real youth, under real clinical oversight. Results will be published upon study completion.
       </p>
 
       <div class="irb-block reveal d3">
         <div class="irb-label">Active Study &mdash; IRB Approved</div>
         <div class="irb-title">Clinical Signal Accuracy Validation &mdash; University Research Partner</div>
-        <div class="irb-desc">IRB-approved study validating CulturalBERT signal accuracy against licensed clinician assessment in production deployment conditions. Study evaluates signal sensitivity, specificity, and demographic subgroup parity across Black, Latino, and youth in urban and rural communities.</div>
+        <div class="irb-desc">IRB-approved study validating VLAP signal accuracy against licensed clinician assessment in production deployment conditions. Study evaluates signal sensitivity, specificity, and demographic subgroup parity across Black, Latino, and youth in urban and rural communities.</div>
         <div class="irb-status">Study in progress &mdash; results to be published upon completion</div>
       </div>
     </div>
@@ -1563,7 +1563,7 @@
           <div class="ci-name">Not a Medical Device</div>
           <div class="ci-right">
             <div class="ci-title">Clinical decision support software. All outputs require clinician review before any action.</div>
-            <div class="ci-desc">CulturalBERT is classified as clinical decision support software &mdash; not a medical device under current FDA guidance. All model outputs require licensed clinician review and determination before any clinical action is taken. The model does not diagnose, prescribe, or direct care.</div>
+            <div class="ci-desc">VLAP is classified as clinical decision support software &mdash; not a medical device under current FDA guidance. All model outputs require licensed clinician review and determination before any clinical action is taken. The model does not diagnose, prescribe, or direct care.</div>
           </div>
         </div>
       </div>
@@ -1660,7 +1660,7 @@
   <div class="vrl-head">Related Reading</div>
   <div class="vrl-grid">
     <a href="dialect-bias-mental-health-screening.html" class="vrl-item"><div class="vrl-item-title">the bias problem this model addresses</div><div class="vrl-item-desc">Differential item functioning, dialect bias, and why standard screening instruments don't hold up across groups.</div></a>
-    <a href="vlap.html" class="vrl-item"><div class="vrl-item-title">VLAP, the layer this model powers</div><div class="vrl-item-desc">How CulturalBERT's output becomes the signal taxonomy a human actually reviews.</div></a>
+    <a href="vlap.html" class="vrl-item"><div class="vrl-item-title">VLAP, the layer this model powers</div><div class="vrl-item-desc">How VLAP's output becomes the signal taxonomy a human actually reviews.</div></a>
     <a href="technology.html" class="vrl-item"><div class="vrl-item-title">the architecture this model runs inside</div><div class="vrl-item-desc">PHI boundaries and the security model around every prediction this model makes.</div></a>
   </div>
 </div>

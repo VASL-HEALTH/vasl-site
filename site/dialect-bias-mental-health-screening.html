@@ -192,9 +192,9 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
 
 <p>The practical failure mode is not a dramatic misdiagnosis. It's quieter than that: a genuine signal reads as ambiguous, gets scored lower than it should, or gets missed entirely — a false negative. In a screening or early-detection context, false negatives are the costlier error, because they mean the person who needed a response didn't get flagged for one.</p>
 
-<h2>What VLAP and CulturalBERT Do Differently</h2>
+<h2>What VLAP Does Differently</h2>
 
-<p>Vasl's language layer, <a href="vlap.html">VLAP</a>, and the model underneath it, <a href="ai-model.html">CulturalBERT</a>, were built specifically against this problem, not as a general-purpose model with a cultural sensitivity layer added afterward. CulturalBERT's vocabulary extension — over 2,400 AAVE and youth vernacular tokens, developed through structured engagement with youth from the communities represented and reviewed by licensed clinicians with documented community competency — exists because a one-time patch to a general model doesn't hold up; coded language and dialect usage shift continuously, and the extension is maintained as an ongoing process rather than a solved problem.</p>
+<p>Vasl's language layer, <a href="vlap.html">VLAP</a> &mdash; which runs on the <a href="ai-model.html">DeBERTa-v3</a> architecture &mdash; was built specifically against this problem, not as a general-purpose model with a cultural sensitivity layer added afterward. VLAP's vocabulary extension — over 2,400 AAVE and youth vernacular tokens, developed through structured engagement with youth from the communities represented and reviewed by licensed clinicians with documented community competency — exists because a one-time patch to a general model doesn't hold up; coded language and dialect usage shift continuously, and the extension is maintained as an ongoing process rather than a solved problem.</p>
 
 <p>VLAP organizes what it reads for into a taxonomy of 47 signals across six categories, developed to separate cultural expression from clinical risk rather than collapse them into a single score. That taxonomy, and the human review step behind every signal it surfaces, is described in full on the VLAP page.</p>
 
@@ -258,7 +258,7 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
   <div class="vrl-head">Related Reading</div>
   <div class="vrl-grid">
     <a href="vlap.html" class="vrl-item"><div class="vrl-item-title">VLAP's signal taxonomy</div><div class="vrl-item-desc">How the detection layer built for this problem is actually structured.</div></a>
-    <a href="ai-model.html" class="vrl-item"><div class="vrl-item-title">CulturalBERT's architecture</div><div class="vrl-item-desc">The bidirectional model and vocabulary extension this piece describes in plain terms.</div></a>
+    <a href="ai-model.html" class="vrl-item"><div class="vrl-item-title">VLAP's architecture</div><div class="vrl-item-desc">The bidirectional model and vocabulary extension this piece describes in plain terms.</div></a>
     <a href="research.html" class="vrl-item"><div class="vrl-item-title">the full research base</div><div class="vrl-item-desc">The peer-reviewed literature and active validation study behind Vasl's approach.</div></a>
     <a href="glossary.html" class="vrl-item"><div class="vrl-item-title">definitions for the terms used here</div><div class="vrl-item-desc">Differential item functioning, dialect bias, and related terms, defined plainly.</div></a>
   </div>

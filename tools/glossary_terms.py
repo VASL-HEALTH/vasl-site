@@ -127,7 +127,7 @@ TERMS = [
      "A machine learning model trained on large volumes of text to represent and generate "
      "language. General-purpose large language models are trained predominantly on internet text "
      "that underrepresents culturally specific and dialect-marked language — the starting problem "
-     "CulturalBERT was built to address."),
+     "VLAP was built to address."),
     ("Linguistic masking", "linguistic-masking",
      "Expressing distress in a form that minimizes social risk or the chance of an unwanted "
      "response — hedged, indirect, or coded language that carries real weight to someone who "
