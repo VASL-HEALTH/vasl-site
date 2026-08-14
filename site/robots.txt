@@ -1,0 +1,15 @@
+# gotovasl.com — Vasl Health
+# Marketing site. No PHI, no member data, no authenticated surfaces are served
+# from this origin. Everything here is public by design.
+
+User-agent: *
+Allow: /
+
+# Legal + interstitial pages: crawlable, but excluded from the sitemap and
+# marked noindex in-page. Listed here for clarity, not blocked — blocking them
+# would stop crawlers from ever seeing the noindex directive.
+
+# Staging / demo surfaces live on their own subdomains and carry their own
+# robots.txt. Nothing to exclude here.
+
+Sitemap: https://gotovasl.com/sitemap.xml
