@@ -26,6 +26,8 @@ LINKS = {
          "Retention, symptom change, and the budget case for your board and grants office."),
         ("pricing.html", "how pricing works for districts",
          "Cost structure by enrollment size, and how Title I and Medicaid billing typically offset it."),
+        ("school-mental-health-rfp.html", "evaluating this against an RFP",
+         "The same ten criteria a district procurement office checks, and where Vasl's answer to each one lives."),
     ],
     "health-systems.html": [
         ("platform.html", "the platform's five care layers",
@@ -38,6 +40,8 @@ LINKS = {
          "30-day retention and symptom-change figures from pilot cohorts, benchmarked against digital health norms."),
         ("pricing.html", "pricing for health plans and systems",
          "Population-based pricing and what a pilot deployment typically includes."),
+        ("hedis-behavioral-health-cultural-fit.html", "how this connects to HEDIS measures",
+         "Which behavioral health measures are most exposed to cultural and linguistic mismatch, and where engagement moves them."),
     ],
     "for-organizations.html": [
         ("platform.html", "the platform's care layers",
@@ -58,6 +62,8 @@ LINKS = {
          "How the vocabulary and validation work described here translates into member retention for payers."),
         ("ai-model.html", "CulturalBERT in full",
          "The architecture and vocabulary extension process behind the model this piece describes."),
+        ("dialect-bias-mental-health-screening.html", "the research this piece is built on",
+         "Differential item functioning and dialect bias, explained in full with the underlying citations."),
     ],
     "blog-future-culturally-responsive.html": [
         ("for-organizations.html", "what this looks like for community organizations",
@@ -76,6 +82,8 @@ LINKS = {
          "The tiered program built to close this gap inside a school's existing MTSS structure."),
         ("ai-model.html", "the model built to close the language gap",
          "CulturalBERT's approach to the vocabulary and context problem this piece describes."),
+        ("dialect-bias-mental-health-screening.html", "the measurement problem behind the equity gap",
+         "Why standard screening instruments score the same distress differently across groups — and what that requires of a model."),
     ],
     "blog-other-diagnosis.html": [
         ("for-schools.html", "how this shows up in a school setting",
@@ -130,6 +138,8 @@ LINKS = {
          "Cost and ROI implications of the retention and symptom data on this page."),
         ("vlap.html", "the signal layer behind the data",
          "How VLAP's detection informs the clinical escalation figures reported here."),
+        ("hedis-behavioral-health-cultural-fit.html", "how these figures map to HEDIS measures",
+         "PHQ-8 and retention data, reframed against the specific behavioral health measures a payer reports on."),
     ],
     "outcomes.html": [
         ("research.html", "the evidence base",
@@ -138,6 +148,8 @@ LINKS = {
          "PHQ-8 trajectories, retention checkpoints, and escalation methodology in detail."),
         ("pricing.html", "what this costs to deploy",
          "How these outcomes map to pricing by population size and setting."),
+        ("hedis-behavioral-health-cultural-fit.html", "what these numbers mean for a health plan's HEDIS scores",
+         "How the retention and engagement figures here connect to FUH, IET, FUM, and SSD."),
     ],
 
     # ---- technology.html <-> infrastructure.html <-> vlap.html ---------------
@@ -148,6 +160,8 @@ LINKS = {
          "What the language analysis layer actually does with the data described here."),
         ("ai-model.html", "the model running inside this architecture",
          "CulturalBERT's training approach and current validation status."),
+        ("dialect-bias-mental-health-screening.html", "why this architecture exists",
+         "The dialect and cultural bias problem this whole stack is built to address."),
     ],
     "infrastructure.html": [
         ("technology.html", "the full architecture and security model",
@@ -164,6 +178,8 @@ LINKS = {
          "Hosting, encryption, and retention specifics for a compliance reviewer."),
         ("ai-model.html", "CulturalBERT, the model behind VLAP",
          "The language model that powers VLAP's signal detection."),
+        ("dialect-bias-mental-health-screening.html", "the research problem VLAP is built to answer",
+         "Why the same screening score can mean different things across dialects, and what that requires of a detection layer."),
     ],
 
     # ---- broader coverage: homepage, about, platform --------------------------
@@ -191,6 +207,22 @@ LINKS = {
         ("teletherapy.html", "the licensed therapy layer",
          "Culturally matched teletherapy, and when a member is routed to it."),
     ],
+    "ai-model.html": [
+        ("dialect-bias-mental-health-screening.html", "the bias problem this model addresses",
+         "Differential item functioning, dialect bias, and why standard screening instruments don't hold up across groups."),
+        ("vlap.html", "VLAP, the layer this model powers",
+         "How CulturalBERT's output becomes the signal taxonomy a human actually reviews."),
+        ("technology.html", "the architecture this model runs inside",
+         "PHI boundaries and the security model around every prediction this model makes."),
+    ],
+    "pricing.html": [
+        ("school-mental-health-rfp.html", "evaluating this as part of an RFP",
+         "The ten criteria districts actually score vendors on, and where Vasl's answer to each lives."),
+        ("outcomes.html", "the outcomes this pricing is buying",
+         "Retention and symptom-change figures, with the methodology behind every number."),
+        ("contact.html", "talk to someone about a specific quote",
+         "Population size and setting change the number — a 15-minute call gets you an actual figure."),
+    ],
 
     # ---- new pages (workstream 2) ---------------------------------------------
     "school-mental-health-rfp.html": [
@@ -202,6 +234,8 @@ LINKS = {
          "Retention and symptom-change figures, reported with the rigor an RFP evaluator would expect."),
         ("contact.html", "talk to an implementation lead",
          "A 45-minute conversation, not a sales pitch — bring your RFP and we'll answer it directly."),
+        ("glossary.html", "definitions for the acronyms in this checklist",
+         "MTSS, FERPA, HIPAA, and the rest of the terms an RFP evaluator will see, defined plainly."),
     ],
     "dialect-bias-mental-health-screening.html": [
         ("vlap.html", "VLAP's signal taxonomy",
@@ -222,6 +256,8 @@ LINKS = {
          "PHQ-8 trajectories and escalation rates behind the summary numbers here."),
         ("pricing.html", "pricing for health plans and systems",
          "Population-based cost structure for a quality or behavioral health lead evaluating this."),
+        ("glossary.html", "definitions for FUH, IET, FUM, and SSD",
+         "Plain-language definitions for every measure acronym used on this page."),
     ],
     "glossary.html": [
         ("vlap.html", "VLAP",
@@ -230,6 +266,12 @@ LINKS = {
          "The model architecture behind several of the technical terms above."),
         ("research.html", "the research base",
          "Where the clinical and technical terms above come from in the literature."),
+        ("dialect-bias-mental-health-screening.html", "differential item functioning and dialect bias, in full",
+         "The full explainer behind two of the definitions above."),
+        ("hedis-behavioral-health-cultural-fit.html", "HEDIS, FUH, IET, and FUM, in full",
+         "How the measures defined above connect to cultural and linguistic mismatch."),
+        ("school-mental-health-rfp.html", "MTSS, FERPA, and HIPAA in an RFP context",
+         "How several of the terms above show up as actual evaluation criteria in a district RFP."),
     ],
 }
 
