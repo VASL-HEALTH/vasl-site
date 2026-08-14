@@ -24,6 +24,7 @@ import sys
 from pathlib import Path
 
 from glossary_terms import TERMS as GLOSSARY_TERMS
+from seo_shared import IGNORE
 
 SITE = Path(__file__).resolve().parent.parent / "site"
 ORIGIN = "https://gotovasl.com"
@@ -399,6 +400,8 @@ def main() -> int:
     check = "--check" in sys.argv
     pending = []
     for path in sorted(SITE.rglob("*.html")):
+        if path.relative_to(SITE).as_posix() in IGNORE:
+            continue
         rel, changed, result = process(path)
         if result is None:
             print(f"  skip  {rel}  (no <head> anchor)")

@@ -19,6 +19,7 @@ import sys
 from pathlib import Path
 
 from link_map import LINKS, HEADER_OVERRIDES
+from seo_shared import IGNORE
 
 SITE = Path(__file__).resolve().parent.parent / "site"
 MARK_OPEN = "<!-- LINKS:VASL -->"
@@ -47,6 +48,8 @@ def build_block(rel: str) -> str:
 
     items = []
     for target, anchor, desc in edges:
+        if target in IGNORE:
+            continue
         href = target if base == Path(".") else "../" * len(base.parts) + target
         items.append(
             f'<a href="{href}" class="vrl-item">'
@@ -99,6 +102,9 @@ def main() -> int:
     total_links = 0
 
     for rel in sorted(LINKS):
+        if rel in IGNORE:
+            print(f"  skip  {rel}  (ignored)")
+            continue
         path = SITE / rel
         if not path.exists():
             print(f"  skip  {rel}  (page does not exist yet)")
