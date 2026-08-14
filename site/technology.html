@@ -903,14 +903,14 @@
 <!-- ═══ HERO ═══ -->
 <section id="hero">
   <div class="hero-left">
-    <span class="hero-kicker reveal">CulturalBERT &middot; Vasl Language Analysis Platform</span>
+    <span class="hero-kicker reveal">VLAP &middot; Vasl Language Analysis Platform</span>
     <h1 class="hero-headline reveal d1">
       The clinical AI<br>
       the field was<br>
       <em>missing.</em>
     </h1>
     <p class="hero-body reveal d2">
-      Standard NLP models are trained on majority-White internet text. They were never designed to read how Black and Latino and first-generation youth communicate distress &mdash; and they consistently fail to. CulturalBERT was built specifically for those communities. Not adapted. Built.
+      Standard NLP models are trained on majority-White internet text. They were never designed to read how Black and Latino and first-generation youth communicate distress &mdash; and they consistently fail to. VLAP was built specifically for those communities. Not adapted. Built.
     </p>
     <div class="hero-actions reveal d3">
       <a href="contact.html" class="btn-dark">Request Technical Evaluation</a>
@@ -968,7 +968,7 @@
             <div class="fp-read">Low confidence signal. "lowkey" reduces severity weight. Grammatical irregularity reduces confidence further. Output: insufficient signal for flagging.</div>
           </div>
           <div class="fp-col vlap">
-            <div class="fp-col-label">CulturalBERT reads</div>
+            <div class="fp-col-label">VLAP reads</div>
             <div class="fp-read">CCM-02 AAVE minimization construction. "fr" authenticity escalator contradicting the minimization hedge. HOP-03 futility framing in AAVE. Elevated signal &mdash; surfaces to care team.</div>
           </div>
         </div>
@@ -981,7 +981,7 @@
             <div class="fp-read">Negation ("not that deep") reduces signal weight. Mild concern flagged, low priority.</div>
           </div>
           <div class="fp-col vlap">
-            <div class="fp-col-label">CulturalBERT reads</div>
+            <div class="fp-col-label">VLAP reads</div>
             <div class="fp-read">CCM-04 classic pre-disclosure frame. Negation before authentic disclosure is the signal, not evidence against it. ISO-04 temporal onset marker &mdash; distress tied to a specific starting point.</div>
           </div>
         </div>
@@ -994,7 +994,7 @@
             <div class="fp-read">"unaliving" not in vocabulary. Processed as unknown token or misclassified. Crisis signal missed entirely.</div>
           </div>
           <div class="fp-col vlap">
-            <div class="fp-col-label">CulturalBERT reads</div>
+            <div class="fp-col-label">VLAP reads</div>
             <div class="fp-read">SHA-02 coded suicidal ideation &mdash; "unaliving" is in the extended vocabulary. "ngl" is a CCM sincerity marker confirming non-performative disclosure. Per escalation rules, this combination triggers immediate clinical supervisor review.</div>
           </div>
         </div>
@@ -1047,7 +1047,7 @@
 
 <!-- ═══ ARCHITECTURE ═══ -->
 <section id="architecture">
-  <div class="chapter-label reveal">Chapter 03 &mdash; CulturalBERT Architecture</div>
+  <div class="chapter-label reveal">Chapter 03 &mdash; VLAP Architecture</div>
 
   <div class="arch-header">
     <h2 class="arch-headline reveal d1">
@@ -1055,7 +1055,7 @@
       Fine-tuned for<br>
       <em>cultural fluency.</em>
     </h2>
-    <p class="arch-intro reveal d2">CulturalBERT is a fine-tuned BERT-family transformer model, trained on a purpose-built corpus of culturally specific mental health language. The BERT-family architecture was selected for its bidirectional context processing &mdash; essential for reading the layered meaning in code-switching, minimization patterns, and culturally framed expressions where individual words carry different weight depending on surrounding context. The model was then extended with a culturally specific vocabulary and fine-tuned against a clinically annotated training corpus.</p>
+    <p class="arch-intro reveal d2">VLAP is a fine-tuned BERT-family transformer model, trained on a purpose-built corpus of culturally specific mental health language. The BERT-family architecture was selected for its bidirectional context processing &mdash; essential for reading the layered meaning in code-switching, minimization patterns, and culturally framed expressions where individual words carry different weight depending on surrounding context. The model was then extended with a culturally specific vocabulary and fine-tuned against a clinically annotated training corpus.</p>
   </div>
 
   <div class="arch-layers reveal">
@@ -1113,7 +1113,7 @@
       from inside the<br>
       <em>communities.</em>
     </h2>
-    <p class="training-sub reveal d2">The training data for CulturalBERT was not web-scraped, crowd-sourced generically, or assembled from existing open datasets. It was specifically collected from and with the communities the model serves &mdash; and annotated by licensed clinicians who have worked within those communities.</p>
+    <p class="training-sub reveal d2">The training data for VLAP was not web-scraped, crowd-sourced generically, or assembled from existing open datasets. It was specifically collected from and with the communities the model serves &mdash; and annotated by licensed clinicians who have worked within those communities.</p>
   </div>
 
   <div class="training-grid reveal">
@@ -1164,7 +1164,7 @@
       47 signals.<br>
       <em>Six categories.</em>
     </h2>
-    <p class="tax-intro reveal d2">The VLAP Distress Signal Taxonomy (v1.0) is the clinical reference document behind CulturalBERT &mdash; it defines the 47 discrete linguistic, behavioral, and contextual signals VLAP is trained to detect, organized into six clinically grounded categories. It serves as the model specification, the annotation codebook for IRB study data labeling, and the signal-level evidence base for VLAP&rsquo;s NIMH SBIR Phase I application. The taxonomy is not static &mdash; it is updated as language evolves and as clinical review proceeds.</p>
+    <p class="tax-intro reveal d2">The VLAP Distress Signal Taxonomy (v1.0) is the clinical reference document behind VLAP &mdash; it defines the 47 discrete linguistic, behavioral, and contextual signals VLAP is trained to detect, organized into six clinically grounded categories. It serves as the model specification, the annotation codebook for IRB study data labeling, and the signal-level evidence base for VLAP&rsquo;s NIMH SBIR Phase I application. The taxonomy is not static &mdash; it is updated as language evolves and as clinical review proceeds.</p>
   </div>
 
   <div class="tax-constraint reveal">
@@ -2088,7 +2088,7 @@
       <div class="cf-dot"></div>
       <div class="cf-num">Step 02</div>
       <div class="cf-title">In-memory VLAP inference</div>
-      <p class="cf-body">CulturalBERT processes the language against the 47-signal taxonomy. In-memory only &mdash; verbatim text is not retained after processing. Output: a dimensional signal profile.</p>
+      <p class="cf-body">VLAP processes the language against the 47-signal taxonomy. In-memory only &mdash; verbatim text is not retained after processing. Output: a dimensional signal profile.</p>
     </div>
     <div class="cf-item">
       <div class="cf-dot"></div>
@@ -2205,7 +2205,7 @@
       </div>
       <div class="part-body">
         <div class="part-relationship">Active IRB Study &mdash; VLAP Clinical Signal Validation</div>
-        <p class="part-desc">An IRB-approved clinical study is in progress with an academic research partner validating CulturalBERT's signal detection accuracy against clinician-adjudicated ground truth assessments. The study uses production deployment data from live Vasl cohorts. Results will be published in a peer-reviewed journal upon completion. The study represents the first formal independent validation of VLAP's culturally specific signal detection capabilities.</p>
+        <p class="part-desc">An IRB-approved clinical study is in progress with an academic research partner validating VLAP's signal detection accuracy against clinician-adjudicated ground truth assessments. The study uses production deployment data from live Vasl cohorts. Results will be published in a peer-reviewed journal upon completion. The study represents the first formal independent validation of VLAP's culturally specific signal detection capabilities.</p>
       </div>
       <div class="part-status"><span class="part-status-badge psb-active">IRB Active</span></div>
     </div>
@@ -2308,7 +2308,7 @@
   <div class="vrl-grid">
     <a href="infrastructure.html" class="vrl-item"><div class="vrl-item-title">the infrastructure and data handling model</div><div class="vrl-item-desc">Hosting, encryption, and retention specifics for a security or IT reviewer.</div></a>
     <a href="vlap.html" class="vrl-item"><div class="vrl-item-title">VLAP, the layer this architecture supports</div><div class="vrl-item-desc">What the language analysis layer actually does with the data described here.</div></a>
-    <a href="ai-model.html" class="vrl-item"><div class="vrl-item-title">the model running inside this architecture</div><div class="vrl-item-desc">CulturalBERT's training approach and current validation status.</div></a>
+    <a href="ai-model.html" class="vrl-item"><div class="vrl-item-title">the model running inside this architecture</div><div class="vrl-item-desc">VLAP's training approach and current validation status.</div></a>
     <a href="dialect-bias-mental-health-screening.html" class="vrl-item"><div class="vrl-item-title">why this architecture exists</div><div class="vrl-item-desc">The dialect and cultural bias problem this whole stack is built to address.</div></a>
   </div>
 </div>
