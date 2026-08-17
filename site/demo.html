@@ -212,7 +212,16 @@
 </div>
 
 <script>
-const API_URL = "https://vlap-service-production.up.railway.app/api/vlap/demo/analyze";
+// Railway is decommissioned (production is AWS ECS behind the phase1 ALB), so
+// the old vlap-service-production.up.railway.app host returned 404 for every
+// request. This is the intended destination.
+//
+// NOT YET REACHABLE: the ALB currently routes /api/* to vasl-backend and has no
+// rule or target group for vlap-service, whose ECS service has no load balancer
+// attached at all. Until that ingress exists this endpoint 404s and the page
+// shows "Couldn't reach VLAP: Not Found". Do not publish this page until the
+// route is live.
+const API_URL = "https://api.gotovasl.com/api/vlap/demo/analyze";
 
 const messageEl = document.getElementById("message");
 const charCountEl = document.getElementById("char-count");
