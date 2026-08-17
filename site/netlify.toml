@@ -1,14 +1,21 @@
 [build]
   publish = "."
 
+# NOTE: site/ moved to S3 + CloudFront on 2026-08-10 and CloudFront does not
+# read this file, so nothing here is applied to the live site. Kept only so the
+# directory is still buildable on Netlify; corrected rather than left pointing
+# at two hostnames that no longer resolve.
+#
+# prototype.gotovasl.com and demo.gotovasl.com are both NXDOMAIN and are not
+# coming back — both pages are served as paths on the main site instead.
 [[redirects]]
   from = "/prototype"
-  to = "https://prototype.gotovasl.com"
+  to = "/prototype.html"
   status = 301
 
 [[redirects]]
   from = "/demo"
-  to = "https://demo.gotovasl.com"
+  to = "/demo.html"
   status = 301
 
 [[headers]]

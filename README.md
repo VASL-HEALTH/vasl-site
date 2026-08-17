@@ -1,37 +1,47 @@
-# Vasl Health — Public Sites
+# Vasl Health — Public Site
 
-Three Netlify deployments from this single repo.
+One deployment: `site/` → **gotovasl.com** on S3 + CloudFront.
 
-| Site | Directory | Domain |
-|------|-----------|--------|
-| Main marketing site | `site/` | gotovasl.com |
-| Platform prototype | `prototype/` | prototype.gotovasl.com |
-| VLAP demo | `demo/` | demo.gotovasl.com |
+| Page | Source | URL |
+|------|--------|-----|
+| Marketing site | `site/` | gotovasl.com |
+| Platform prototype | `site/prototype.html` | gotovasl.com/prototype.html |
+| VLAP live demo | `site/demo.html` | gotovasl.com/demo.html |
+
+**There are no `demo.` or `prototype.` subdomains.** Both are NXDOMAIN and are
+not coming back; the pages are served as paths on the main site. Do not cite the
+subdomains in decks, docs or email — they are dead links.
+
+History, so this does not get "fixed" back the wrong way:
+
+- `demo/` was a static, hardcoded sales demo with no backend. Deleted
+  2026-07-28 (`e2f7b24`) at Rodney's request and replaced the same day by a
+  real one (`27db9ff`) that calls vlap-service directly.
+- `demo.gotovasl.com` has been NXDOMAIN since that deletion — it predates the
+  Netlify→AWS migration and is *deliberately* absent from the zone. See the
+  comments in `VASL-PLATFORM/infra/aws/dns/records_web.tf`.
+- `prototype/` is the older standalone Netlify copy, superseded by
+  `site/prototype.html`. It is kept for now but nothing serves from it.
 
 ## Deploying
 
-Each subdirectory deploys independently on Netlify.
-Push to `main` → Netlify auto-deploys all three sites.
-
-### Netlify Setup (one-time per site)
-1. New site → Import from GitHub → `VASL-HEALTH/vasl-site`
-2. Set **Base directory** to `site/`, `prototype/`, or `demo/`
-3. Set **Publish directory** same as base directory
-4. Leave build command empty (static HTML — no build needed)
-5. Assign custom domain
+Push to `main` touching `site/**` → `.github/workflows/deploy-site.yml` syncs
+to S3 and invalidates CloudFront. That is the whole pipeline.
 
 ## Updating a Page
 
-All pages are plain HTML — edit any `.html` file and push.
-Changes go live in ~30 seconds via Netlify's CDN.
+All pages are plain HTML — edit any `.html` file under `site/` and push to
+`main`. Changes go live once the deploy workflow finishes the S3 sync and the
+CloudFront invalidation.
 
 ## Structure
 
 ```
 vasl-site/
-  site/          ← gotovasl.com (30 HTML pages)
-  prototype/     ← prototype.gotovasl.com (single HTML file)
-  demo/          ← demo.gotovasl.com (single HTML file)
+  site/                   ← gotovasl.com (S3 + CloudFront)
+    prototype.html        ← gotovasl.com/prototype.html
+    demo.html             ← gotovasl.com/demo.html (VLAP live demo)
+  prototype/              ← superseded by site/prototype.html; nothing serves it
 ```
 
 ## Deployment (site/ → AWS)
@@ -45,7 +55,17 @@ The workflow authenticates with GitHub OIDC — there are no AWS keys in repo
 secrets. It needs one repo variable, `MARKETING_DISTRIBUTION_ID`, set to the
 `distribution_id` Terraform output.
 
-`prototype/` and `vlap-live-demo/` are still Netlify sites and are unaffected.
+`site/demo.html` (the VLAP live demo) posts to
+`https://api.gotovasl.com/api/vlap/demo/analyze`, which runs the **vlap-1.1.0
+regex engine** — deliberately not the DeBERTa weights. The EQ5 waiver covers
+training only and does not permit putting model weights in front of members, so
+this page must not be repointed at a trained checkpoint without that gate being
+cleared.
+
+> **The demo endpoint is not reachable yet.** The phase1 ALB routes `/api/*` to
+> `vasl-backend` and has no rule or target group for vlap-service, whose ECS
+> service has no load balancer attached. Until that ingress exists the page
+> renders but every analysis returns "Couldn't reach VLAP: Not Found".
 
 ## Analytics
 
