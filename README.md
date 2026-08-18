@@ -12,6 +12,15 @@ Every page's footer links to it as **VLAP Signal Demo**, alongside
 **Live Demo Portal** (`prototype.html`) — they are different artifacts and both
 are linked.
 
+> **`gotovasl.com/demo` (no extension) is broken and is not ours to fix here.**
+> It 301s to `https://demo.gotovasl.com/`, which is NXDOMAIN. `/prototype`,
+> `/about` and `/contact` all serve 200, so this is a stale per-path rule, not
+> general extensionless routing. The rule lives in the CloudFront/S3 config
+> under [`VASL-PLATFORM/infra/aws/static-sites`](https://github.com/VASL-HEALTH/VASL-PLATFORM/tree/main/infra/aws/static-sites),
+> not in this repo — `site/netlify.toml` is inert since the move to CloudFront.
+> **Use `gotovasl.com/demo.html`**, which is what the page's canonical and
+> og:url now point at.
+
 **There are no `demo.` or `prototype.` subdomains.** Both are NXDOMAIN and are
 not coming back; the pages are served as paths on the main site. Do not cite the
 subdomains in decks, docs or email — they are dead links.
