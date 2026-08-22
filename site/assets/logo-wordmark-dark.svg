@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" role="img" aria-label="Vasl Health">
+  <g>
+    <text x="0" y="54" font-family="Newsreader, Georgia, serif" font-weight="500" font-size="52" fill="#d4a574">vasl</text>
+    <text x="120" y="54" font-family="Newsreader, Georgia, serif" font-weight="500" font-style="italic" font-size="52" fill="#f3ece0" opacity="0.9">health</text>
+    <circle cx="290" cy="20" r="6" fill="#d4a574"></circle>
+  </g>
+</svg>
