@@ -28,185 +28,158 @@
 <script>window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>
 <!-- /SEO:VASL -->
 <style>
-:root{
-  --teal:#1D7A6A;--teal2:#155C50;--jade:#9FE1CB;--forest:#1B3030;
-  --gold:#B8892A;--saff:#C4622A;--red:#BE3246;--cream:#FDFCF9;
-  --low:#1D7A6A;--elevated:#B8892A;--high:#C4622A;--critical:#BE3246;
+@import url("https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+
+:root {
+  --vasl-green: #2d5f4f;
+  --vasl-clay:  #d4a574;
+  --green-50:  #eef3f0;
+  --green-100: #d6e2dc;
+  --green-600: #244c3f;
+  --green-700: #1a382f;
+  --ink-900: #1a1614;
+  --ink-500: #6b6259;
+  --ink-400: #8a8077;
+  --ink-100: #ece6db;
+  --paper:   #fafaf8;
+  --paper-2: #f4f0e8;
+  --paper-3: #ece6db;
+  --bg-elev:   #ffffff;
+  --fg1:       var(--ink-900);
+  --fg2:       #3d3631;
+  --fg3:       var(--ink-500);
+  --fg-muted:  var(--ink-400);
+  --fg-on-green: #f3ece0;
+  --border:        #e6dfd2;
+  --border-strong: #c7bda9;
+  --signal-critical: #b3361f;
+  --signal-high:     #c46a2a;
+  --signal-med:      #b88a2a;
+  --signal-low:      #4f806e;
+  --signal-critical-bg: #f7e3dd;
+  --signal-high-bg:     #f7e7d4;
+  --signal-med-bg:      #f5ecd3;
+  --signal-low-bg:      #dee8e2;
+  --font-serif: "Newsreader", "Source Serif Pro", Georgia, "Times New Roman", serif;
+  --font-sans:  "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-mono:  "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace;
 }
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:var(--forest);color:var(--cream);min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.5;}
-nav{background:rgba(0,0,0,0.35);border-bottom:1px solid rgba(255,255,255,0.08);padding:13px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;backdrop-filter:blur(8px);}
-.nav-logo{display:flex;align-items:center;gap:12px;}
-.nav-mark{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,var(--teal),var(--jade));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:var(--forest);}
-.nav-name{font-size:17px;font-weight:700;color:#fff;letter-spacing:-0.3px;}
-.nav-badge{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--jade);background:rgba(159,225,203,0.12);border:1px solid rgba(159,225,203,0.3);border-radius:99px;padding:3px 10px;}
-.nav-right{font-size:11px;color:rgba(255,255,255,0.4);}
-
-/* intro strip */
-.intro{max-width:1240px;margin:0 auto;padding:20px 28px 6px;}
-.intro h1{font-size:22px;font-weight:800;color:#fff;letter-spacing:-0.4px;margin-bottom:6px;}
-.intro p{font-size:13px;color:rgba(255,255,255,0.6);max-width:820px;}
-.intro .how{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;}
-.how-step{display:flex;align-items:center;gap:7px;font-size:12px;color:rgba(255,255,255,0.75);background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:99px;padding:6px 13px;}
-.how-num{width:18px;height:18px;border-radius:50%;background:var(--jade);color:var(--forest);font-weight:800;font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-
-.wrap{max-width:1240px;margin:0 auto;padding:16px 28px 40px;display:grid;grid-template-columns:1fr 1.05fr;gap:20px;align-items:start;}
-.card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:20px;}
-.step-tag{display:inline-flex;align-items:center;gap:7px;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--jade);margin-bottom:4px;}
-.step-tag .n{width:17px;height:17px;border-radius:50%;background:var(--jade);color:var(--forest);display:flex;align-items:center;justify-content:center;font-size:10px;}
-.card-h{font-size:16px;font-weight:700;color:#fff;margin-bottom:3px;}
-.card-sub{font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:14px;}
-
-textarea{width:100%;min-height:96px;background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:13px 15px;color:#fff;font-family:inherit;font-size:14px;line-height:1.6;resize:vertical;transition:border .15s;}
-textarea:focus{outline:none;border-color:var(--jade);}
-.try-lbl{font-size:11px;color:rgba(255,255,255,0.5);margin:12px 0 7px;}
-.samples{display:flex;flex-wrap:wrap;gap:7px;}
-.chip{font-size:11px;padding:6px 12px;border-radius:99px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.7);cursor:pointer;transition:all .15s;}
-.chip:hover{background:rgba(159,225,203,0.1);border-color:var(--jade);color:#fff;}
-.reg-line{display:flex;align-items:center;gap:8px;margin-top:13px;font-size:11px;color:rgba(255,255,255,0.5);}
-.reg-badge{font-size:10px;font-weight:700;color:var(--jade);background:rgba(159,225,203,0.12);padding:2px 9px;border-radius:99px;border:1px solid rgba(159,225,203,0.25);}
-
-/* SDOH */
-.sdoh-intro{font-size:12px;color:rgba(255,255,255,0.55);margin-bottom:14px;background:rgba(159,225,203,0.05);border-left:2px solid var(--jade);padding:9px 12px;border-radius:0 8px 8px 0;}
-.sdoh-slider{margin-bottom:15px;}
-.ss-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2px;}
-.ss-label{font-size:12px;font-weight:600;color:#fff;}
-.ss-val{font-size:11px;font-family:monospace;color:var(--jade);}
-.ss-desc{font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:6px;}
-input[type=range]{-webkit-appearance:none;width:100%;height:6px;border-radius:99px;background:rgba(255,255,255,0.12);outline:none;}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--jade);cursor:pointer;box-shadow:0 0 8px rgba(159,225,203,0.5);border:2px solid var(--forest);}
-input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--jade);cursor:pointer;border:2px solid var(--forest);}
-.ss-ends{display:flex;justify-content:space-between;font-size:9px;color:rgba(255,255,255,0.3);margin-top:3px;}
-
-/* OUTPUT */
-.out-intro{font-size:12px;color:rgba(255,255,255,0.55);margin-bottom:14px;}
-.hero{border-radius:14px;padding:18px 20px;margin-bottom:8px;border:1px solid transparent;transition:all .35s;}
-.hero.low{background:rgba(29,122,106,0.12);border-color:rgba(29,122,106,0.35);}
-.hero.elevated{background:rgba(184,137,42,0.12);border-color:rgba(184,137,42,0.35);}
-.hero.high{background:rgba(196,98,42,0.12);border-color:rgba(196,98,42,0.35);}
-.hero.critical{background:rgba(190,50,70,0.15);border-color:rgba(190,50,70,0.45);}
-.hero-top{display:flex;align-items:center;justify-content:space-between;}
-.hero-read{font-size:11px;color:rgba(255,255,255,0.55);margin-bottom:3px;}
-.hero-tier{font-size:24px;font-weight:800;letter-spacing:-0.3px;}
-.hero-tier.low{color:var(--jade);} .hero-tier.elevated{color:#D9B24A;} .hero-tier.high{color:#E8985A;} .hero-tier.critical{color:#E88;}
-.hero-plain{font-size:12px;color:rgba(255,255,255,0.6);margin-top:4px;max-width:280px;}
-.hero-score{text-align:right;}
-.hero-score-n{font-size:40px;font-weight:800;line-height:1;}
-.hero-score-n.low{color:var(--jade);} .hero-score-n.elevated{color:#D9B24A;} .hero-score-n.high{color:#E8985A;} .hero-score-n.critical{color:#E88;}
-.hero-score-l{font-size:9px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
-
-.effect{background:rgba(0,0,0,0.2);border-radius:10px;padding:12px 14px;margin-bottom:16px;font-size:12px;color:rgba(255,255,255,0.7);display:flex;align-items:center;gap:10px;transition:all .3s;}
-.effect .big{font-family:monospace;font-weight:700;}
-.effect .raw{color:rgba(255,255,255,0.55);}
-.effect .arrow{color:var(--jade);}
-.effect .cal{color:var(--jade);font-weight:800;}
-.effect .why{margin-left:auto;font-size:10px;color:rgba(255,255,255,0.45);text-align:right;max-width:150px;}
-
-.sec-label{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin:16px 0 4px;}
-.sec-help{font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:10px;}
-.sig{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:9px;padding:9px 12px;margin-bottom:7px;animation:fadein .3s;}
-@keyframes fadein{from{opacity:0;transform:translateY(4px);}to{opacity:1;}}
-.sig-top{display:flex;align-items:center;gap:8px;}
-.sig-code{font-family:monospace;font-size:10px;font-weight:700;color:var(--jade);background:rgba(159,225,203,0.12);padding:2px 6px;border-radius:4px;}
-.sig-label{font-size:12px;font-weight:600;color:#fff;}
-.sig-risk{margin-left:auto;font-size:9px;font-weight:800;text-transform:uppercase;padding:2px 7px;border-radius:4px;}
-.sig-risk.high{background:rgba(190,50,70,0.18);color:#E88;}
-.sig-risk.moderate{background:rgba(184,137,42,0.18);color:#D9B24A;}
-.sig-risk.low{background:rgba(107,102,96,0.25);color:rgba(255,255,255,0.6);}
-.sig-plain{font-size:11px;color:rgba(255,255,255,0.5);margin-top:3px;}
-.none-yet{font-size:12px;color:rgba(255,255,255,0.35);font-style:italic;padding:8px 0;}
-
-.route{font-size:11px;color:rgba(255,255,255,0.55);margin-top:6px;padding:11px 13px;background:rgba(29,122,106,0.08);border:1px solid rgba(29,122,106,0.2);border-radius:8px;line-height:1.55;}
-.route b{color:var(--jade);}
-
-.disclaimer{max-width:1240px;margin:0 auto;padding:0 28px;}
-.disclaimer-inner{background:rgba(184,137,42,0.08);border:1px solid rgba(184,137,42,0.2);border-radius:8px;padding:9px 14px;font-size:10px;color:rgba(217,178,74,0.85);line-height:1.5;}
-@media(max-width:980px){.wrap{grid-template-columns:1fr;}}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--paper); }
+body { font-family: var(--font-sans); font-size: 16px; line-height: 1.7; color: var(--fg1); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+h1, h2 { font-family: var(--font-serif); font-weight: 500; line-height: 1.15; letter-spacing: -0.01em; color: var(--fg1); margin: 0; }
+p { margin: 0; }
+a { color: var(--vasl-green); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--green-600); }
+::selection { background: var(--ink-100); color: var(--green-700); }
+input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; border-radius: 999px; background: var(--ink-100); outline: none; border: none; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 15px; height: 15px; border-radius: 999px; background: var(--vasl-green); border: 2px solid var(--bg-elev); box-shadow: 0 1px 2px rgba(26,22,20,0.18); cursor: pointer; }
+input[type=range]::-moz-range-thumb { width: 15px; height: 15px; border-radius: 999px; background: var(--vasl-green); border: 2px solid var(--bg-elev); cursor: pointer; }
+input[type=range]:focus-visible { outline: 2px solid rgba(212,165,116,0.4); outline-offset: 2px; }
+textarea:focus { outline: none; border-color: var(--vasl-clay); }
+.chip { font-family: var(--font-sans); font-size: 13px; padding: 7px 14px; border-radius: 6px; border: 1px solid var(--border-strong); background: var(--paper); color: var(--fg2); cursor: pointer; transition: background 120ms ease-out, border-color 120ms ease-out, color 120ms ease-out; }
+.chip:hover { background: var(--paper-2); border-color: var(--vasl-clay); color: var(--fg1); }
+@media (max-width: 1020px) { .vlap-grid { grid-template-columns: 1fr !important; } }
 </style>
 </head>
 <body>
-<nav>
-  <div class="nav-logo"><div class="nav-mark">V</div><div class="nav-name">VLAP</div><div class="nav-badge">Interactive Demo</div></div>
-  <div class="nav-right">Vasl Language Analysis Platform</div>
-</nav>
+<div style="min-height:100vh;background:var(--paper);color:var(--fg1);font-family:'IBM Plex Sans',sans-serif">
 
-<div class="intro">
-  <h1>See how VLAP reads distress in a young person's own words.</h1>
-  <p>VLAP detects behavioral-health distress in the language youth actually use — including dialect and coded expressions that standard screening tools miss. It then adjusts its read for the young person's real-world circumstances, and surfaces concerns to a licensed clinician. Try it below.</p>
-  <div class="how">
-    <div class="how-step"><span class="how-num">1</span> Type a message or pick an example</div>
-    <div class="how-step"><span class="how-num">2</span> Adjust the life-circumstances sliders</div>
-    <div class="how-step"><span class="how-num">3</span> Watch VLAP's read change on the right</div>
-  </div>
-</div>
-
-<div class="wrap">
-  <!-- LEFT -->
-  <div>
-    <div class="card">
-      <div class="step-tag"><span class="n">1</span> The message</div>
-      <div class="card-h">What did the young person say?</div>
-      <div class="card-sub">Type anything, or tap an example. VLAP reads it the moment you do.</div>
-      <textarea id="input" placeholder='e.g. "idk why i even try anymore, i be the strong one for everybody but lowkey i&#39;m done"'></textarea>
-      <div class="reg-line">How they're speaking: <span class="reg-badge" id="register">—</span> <span id="aave-note" style="color:rgba(255,255,255,0.4);"></span></div>
-      <div class="try-lbl">Try an example:</div>
-      <div class="samples" id="samples"></div>
+  <header style="position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:1px solid var(--border);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div style="width:26px;height:26px;border-radius:6px;background:var(--vasl-green);color:var(--fg-on-green);font-family:Newsreader,serif;font-size:18px;font-weight:500;display:flex;align-items:center;justify-content:center;line-height:1">v</div>
+      <div style="font-family:Newsreader,serif;font-size:19px;font-weight:500;letter-spacing:-0.01em;color:var(--fg1)">VLAP</div>
+      <div style="width:1px;height:16px;background:var(--border)"></div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg3)">Interactive demo</div>
     </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <span style="width:6px;height:6px;border-radius:999px;background:var(--vasl-clay)"></span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg3)">Vasl Language Analysis Platform</span>
+    </div>
+  </header>
 
-    <div class="card" style="margin-top:18px;">
-      <div class="step-tag"><span class="n">2</span> Their circumstances</div>
-      <div class="card-h">What's going on in their life?</div>
-      <div class="card-sub">The same words can mean different things depending on a young person's situation. Drag any slider and watch VLAP's read update.</div>
-      <div class="sdoh-intro">These are <b>social determinants of health</b> — real-world factors VLAP weighs alongside the words. In practice they come from the health record; here you can set them to see the effect. <span style="color:var(--jade);">This context-weighting is VLAP's patented core.</span></div>
-      <div id="sliders"></div>
+  <div style="max-width:1240px;margin:0 auto;padding:48px 32px 32px">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg3)">Clinician-facing risk detection</div>
+    <h1 style="font-size:40px;margin:14px 0 0;max-width:900px">See how VLAP reads distress in <em style="color:var(--vasl-green);font-style:italic">a young person's own words.</em></h1>
+    <p style="font-size:16px;line-height:1.7;color:var(--fg2);max-width:820px;margin:18px 0 0">VLAP detects behavioral-health distress in the language youth actually use — including dialect and coded expressions that standard screening tools miss. It then adjusts its read for the young person's real-world circumstances, and surfaces concerns to a licensed clinician. Try it below.</p>
+    <div style="display:flex;gap:32px;flex-wrap:wrap;margin-top:32px;padding-top:24px;border-top:1px solid var(--border)">
+      <div style="display:flex;align-items:baseline;gap:12px"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;color:var(--vasl-clay)">01</span><span style="font-size:15px;color:var(--fg2)">Type a message or pick an example</span></div>
+      <div style="display:flex;align-items:baseline;gap:12px"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;color:var(--vasl-clay)">02</span><span style="font-size:15px;color:var(--fg2)">Adjust the life-circumstances sliders</span></div>
+      <div style="display:flex;align-items:baseline;gap:12px"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;color:var(--vasl-clay)">03</span><span style="font-size:15px;color:var(--fg2)">Watch VLAP's read change on the right</span></div>
     </div>
   </div>
 
-  <!-- RIGHT -->
-  <div class="card">
-    <div class="step-tag"><span class="n">3</span> VLAP's read</div>
-    <div class="card-h">What VLAP sees — and what happens next</div>
-    <div class="out-intro">Updates live as you change the message or the circumstances.</div>
+  <div class="vlap-grid" style="max-width:1240px;margin:0 auto;padding:0 32px 32px;display:grid;grid-template-columns:1fr 1.05fr;gap:24px;align-items:start">
 
-    <div class="hero low" id="hero">
-      <div class="hero-top">
-        <div>
-          <div class="hero-read">Concern level</div>
-          <div class="hero-tier low" id="hero-tier">LOW</div>
-          <div class="hero-plain" id="hero-plain">Type a message to begin.</div>
+    <div style="display:flex;flex-direction:column;gap:24px">
+
+      <section style="background:var(--bg-elev);border:1px solid var(--border);border-radius:10px;padding:24px;box-shadow:0 1px 2px rgba(26,22,20,0.05)">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg3)">Step 01 · the message</div>
+        <h2 style="font-size:24px;margin:10px 0 0">What did the young person say?</h2>
+        <p style="font-size:14px;line-height:1.7;color:var(--fg3);margin:6px 0 18px">Type anything, or tap an example. VLAP reads it the moment you do.</p>
+        <textarea id="input" placeholder="e.g. &quot;idk why i even try anymore, i be the strong one for everybody but lowkey i'm done&quot;" style="width:100%;box-sizing:border-box;min-height:104px;background:var(--paper);border:1px solid var(--border-strong);border-radius:6px;padding:14px 16px;color:var(--fg1);font-family:'IBM Plex Sans',sans-serif;font-size:15px;line-height:1.7;resize:vertical"></textarea>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:16px;padding-top:16px;border-top:1px solid var(--paper-3)">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg3)">How they're speaking</span>
+          <span id="register" style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;color:var(--green-600);background:var(--green-50);border:1px solid var(--green-100);border-radius:999px;padding:3px 10px">—</span>
+          <span id="register-note" style="font-size:12px;color:var(--fg-muted)"></span>
         </div>
-        <div class="hero-score">
-          <div class="hero-score-n low" id="hero-score">0.00</div>
-          <div class="hero-score-l">risk score 0–1</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg3);margin:20px 0 10px">Try an example</div>
+        <div id="samples" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+      </section>
+
+      <section style="background:var(--bg-elev);border:1px solid var(--border);border-radius:10px;padding:24px;box-shadow:0 1px 2px rgba(26,22,20,0.05)">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg3)">Step 02 · their circumstances</div>
+        <h2 style="font-size:24px;margin:10px 0 0">What's going on in their life?</h2>
+        <p style="font-size:14px;line-height:1.7;color:var(--fg3);margin:6px 0 16px">The same words can mean different things depending on a young person's situation. Drag any slider and watch VLAP's read update.</p>
+        <p style="font-size:14px;line-height:1.7;color:var(--fg2);margin:0 0 22px;background:var(--paper-2);border-left:2px solid var(--vasl-clay);padding:12px 16px">These are <b style="font-weight:600">social determinants of health</b> — real-world factors VLAP weighs alongside the words. In practice they come from the health record; here you can set them to see the effect. <span style="color:var(--green-600)">This context-weighting is VLAP's patented core.</span></p>
+        <div id="sliders" style="display:flex;flex-direction:column;gap:20px"></div>
+      </section>
+
+    </div>
+
+    <section style="background:var(--bg-elev);border:1px solid var(--border);border-radius:10px;padding:24px;box-shadow:0 1px 2px rgba(26,22,20,0.05);position:sticky;top:88px">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg3)">Step 03 · VLAP's read</div>
+      <h2 style="font-size:24px;margin:10px 0 0">What VLAP sees — and what happens next</h2>
+      <p style="font-size:14px;line-height:1.7;color:var(--fg3);margin:6px 0 20px">Updates live as you change the message or the circumstances.</p>
+
+      <div id="hero-box" style="border:1px solid var(--border);border-left:3px solid var(--signal-low);border-radius:6px;padding:20px 22px;background:var(--signal-low-bg);display:flex;align-items:flex-start;justify-content:space-between;gap:24px;transition:background 320ms ease-in-out,border-color 320ms ease-in-out">
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg3)">Concern level</div>
+          <div id="tier-label" style="font-family:Newsreader,serif;font-size:34px;font-weight:500;line-height:1.1;margin-top:6px;color:var(--signal-low)">Low</div>
+          <div id="tier-plain" style="font-size:14px;line-height:1.6;color:var(--fg2);margin-top:6px;max-width:300px">Type a message to begin.</div>
+        </div>
+        <div style="text-align:right;flex:none">
+          <div id="score" style="font-family:'IBM Plex Mono',monospace;font-size:40px;font-weight:500;line-height:1;color:var(--signal-low)">0.00</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-muted);margin-top:6px">Risk score 0–1</div>
         </div>
       </div>
-    </div>
 
-    <div class="effect" id="effect">
-      <span>Words alone: <span class="big raw" id="raw-p">0.00</span></span>
-      <span class="arrow">→</span>
-      <span>with circumstances: <span class="big cal" id="cal-p">0.00</span></span>
-      <span class="why" id="why">Adjust the sliders to see context change the read.</span>
-    </div>
+      <div style="margin-top:10px;background:var(--paper-2);border:1px solid var(--border);border-radius:6px;padding:14px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+        <span style="font-size:13px;color:var(--fg3)">Words alone <span id="raw" style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:500;color:var(--fg2)">0.00</span></span>
+        <span style="color:var(--vasl-clay);font-size:14px">→</span>
+        <span style="font-size:13px;color:var(--fg3)">with circumstances <span id="cal" style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;color:var(--green-600)">0.00</span></span>
+        <span id="why" style="margin-left:auto;font-size:12px;line-height:1.5;color:var(--fg3);text-align:right;max-width:210px">Adjust the sliders to see context change the read.</span>
+      </div>
 
-    <div class="sec-label">What VLAP noticed in the words</div>
-    <div class="sec-help">The specific distress patterns VLAP detected — including coded and dialect expressions.</div>
-    <div id="signals"><div class="none-yet">Nothing yet — type a message on the left.</div></div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg3);margin:28px 0 4px">What VLAP noticed in the words</div>
+      <p style="font-size:13px;line-height:1.6;color:var(--fg-muted);margin:0 0 12px">The specific distress patterns VLAP detected — including coded and dialect expressions.</p>
 
-    <div class="sec-label">Who gets told</div>
-    <div class="route" id="route"><b>Surfaced to a licensed clinician only.</b> VLAP never shows this to the young person, their peers, a guardian, or non-clinical staff — and never acts on its own. A person always decides.</div>
+      <div id="signals"><div style="font-size:14px;color:var(--fg-muted);padding:10px 0">Nothing yet — type a message on the left.</div></div>
+
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg3);margin:28px 0 10px">Who gets told</div>
+      <p style="font-size:14px;line-height:1.7;color:var(--fg2);margin:0;background:var(--green-50);border:1px solid var(--green-100);border-radius:6px;padding:14px 16px"><b style="color:var(--green-600);font-weight:600">Surfaced to a licensed clinician only.</b> VLAP never shows this to the young person, their peers, a guardian, or non-clinical staff — and never acts on its own. A person always decides.</p>
+    </section>
   </div>
-</div>
 
-<div class="disclaimer">
-  <div class="disclaimer-inner"><b>Demonstration.</b> Illustrative example using representative messages. Shows how the VLAP pipeline and its patented SDOH-aware calibration (VH-2026-001, §7.4) work. Calibration weights shown are illustrative defaults, not yet fit to outcome data. Not a clinical deployment; no real patient data.</div>
+  <div style="max-width:1240px;margin:0 auto;padding:0 32px 64px">
+    <p style="font-size:12px;line-height:1.7;color:var(--fg3);margin:0;padding:14px 0 0;border-top:1px solid var(--border)"><b style="color:var(--fg2);font-weight:600">Demonstration.</b> Illustrative example using representative messages. Shows how the VLAP pipeline and its patented SDOH-aware calibration (VH-2026-001, §7.4) work. Calibration weights shown are illustrative defaults, not yet fit to outcome data. Not a clinical deployment; no real patient data.</p>
+  </div>
 </div>
 
 <script>
 const sig=x=>1/(1+Math.exp(-x));
 const logit=p=>{p=Math.min(Math.max(p,1e-6),1-1e-6);return Math.log(p/(1-p));};
 
-// SDOH features — plain-language labels + descriptions + patent weights
 const FEATS={
   adi:{b:0.22,g:0.18,def:0.5,label:"Neighborhood hardship",desc:"How under-resourced their area is (Area Deprivation Index)",lo:"Well-resourced",hi:"High hardship"},
   isolation:{b:0.19,g:0.15,def:0.4,label:"Social isolation",desc:"How cut off they are from support",lo:"Connected",hi:"Isolated"},
@@ -221,17 +194,21 @@ const A0=-0.15,A1=1.08;
 const S={}; for(const k in FEATS) S[k]=FEATS[k].def;
 
 function calibrate(p){
-  const lp=logit(p);let z=A0+A1*lp;const contrib={};
-  for(const k in FEATS){const f=FEATS[k];const c=f.b*S[k]+f.g*(lp*S[k]);z+=c;contrib[k]=c;}
-  return {pcal:sig(z),contrib};
+  const lp=logit(p);let z=A0+A1*lp;
+  for(const k in FEATS){const f=FEATS[k];z+=f.b*S[k]+f.g*(lp*S[k]);}
+  return sig(z);
 }
-function tierOf(p){return p>=0.80?'critical':p>=0.55?'high':p>=0.30?'elevated':'low';}
-const TL={critical:'CRITICAL',high:'HIGH',elevated:'ELEVATED',low:'LOW'};
-const PLAIN={
-  critical:"Immediate clinical attention warranted.",
-  high:"A clinician should follow up soon.",
-  elevated:"Worth a clinician's review.",
-  low:"No significant distress detected."
+
+const TIER = {
+  critical:{label:"Critical", color:"var(--signal-critical)", bg:"var(--signal-critical-bg)", plain:"Immediate clinical attention warranted."},
+  high:{label:"High", color:"var(--signal-high)", bg:"var(--signal-high-bg)", plain:"A clinician should follow up soon."},
+  elevated:{label:"Elevated", color:"var(--signal-med)", bg:"var(--signal-med-bg)", plain:"Worth a clinician's review."},
+  low:{label:"Low", color:"var(--signal-low)", bg:"var(--signal-low-bg)", plain:"No significant distress detected."}
+};
+const RISK = {
+  high:{color:"var(--signal-critical)", bg:"var(--signal-critical-bg)", label:"high"},
+  moderate:{color:"var(--signal-med)", bg:"var(--signal-med-bg)", label:"moderate"},
+  low:{color:"var(--signal-low)", bg:"var(--signal-low-bg)", label:"protective"}
 };
 
 const TAX=[
@@ -267,7 +244,7 @@ function analyze(){
   const t=document.getElementById('input').value.trim();
   const r=detectRegister(t);
   document.getElementById('register').textContent=r.reg;
-  document.getElementById('aave-note').textContent=r.note;
+  document.getElementById('register-note').textContent=r.note;
 
   const hits=[];
   for(const s of TAX){ if(s.re.test(t)) hits.push(s); }
@@ -276,47 +253,56 @@ function analyze(){
   hits.filter(h=>h.w<0).forEach(h=>raw=Math.max(0.02,raw+h.w));
   if(!t) raw=0; raw=Math.min(0.97,raw);
 
-  const {pcal,contrib}=calibrate(raw||0.001);
-  const tier=t?tierOf(pcal):'low';
+  const pcal=calibrate(raw||0.001);
+  const tierKey=t?(pcal>=0.80?'critical':pcal>=0.55?'high':pcal>=0.30?'elevated':'low'):'low';
+  const tier=TIER[tierKey];
 
-  const hero=document.getElementById('hero');
-  hero.className='hero '+tier;
-  const ht=document.getElementById('hero-tier'); ht.className='hero-tier '+tier; ht.textContent=TL[tier];
-  document.getElementById('hero-plain').textContent=t?PLAIN[tier]:'Type a message to begin.';
-  const hs=document.getElementById('hero-score'); hs.className='hero-score-n '+tier; hs.textContent=(t?pcal:0).toFixed(2);
+  const heroBox=document.getElementById('hero-box');
+  heroBox.style.borderLeftColor=tier.color;
+  heroBox.style.background=tier.bg;
+  const tl=document.getElementById('tier-label'); tl.style.color=tier.color; tl.textContent=tier.label;
+  document.getElementById('tier-plain').textContent=t?tier.plain:'Type a message to begin.';
+  const sc=document.getElementById('score'); sc.style.color=tier.color; sc.textContent=(t?pcal:0).toFixed(2);
 
-  document.getElementById('raw-p').textContent=(t?raw:0).toFixed(2);
-  document.getElementById('cal-p').textContent=(t?pcal:0).toFixed(2);
+  document.getElementById('raw').textContent=(t?raw:0).toFixed(2);
+  document.getElementById('cal').textContent=(t?pcal:0).toFixed(2);
   const d=pcal-raw;
   const why=document.getElementById('why');
   if(!t){ why.textContent="Adjust the sliders to see context change the read."; }
   else if(Math.abs(d)<0.015){ why.textContent="Their circumstances are about average — little adjustment."; }
-  else if(d>0){ why.innerHTML="Their circumstances <b style='color:#E8985A'>raised</b> the concern."; }
-  else { why.innerHTML="Positive circumstances <b style='color:var(--jade)'>lowered</b> the concern."; }
+  else if(d>0){ why.innerHTML="Their circumstances <b style='color:var(--signal-high)'>raised</b> the concern."; }
+  else { why.innerHTML="Positive circumstances <b style='color:var(--signal-low)'>lowered</b> the concern."; }
 
-  const sc=document.getElementById('signals');
+  const sigEl=document.getElementById('signals');
   if(hits.length){
-    sc.innerHTML=hits.sort((a,b)=>Math.abs(b.w)-Math.abs(a.w)).map(h=>`
-      <div class="sig"><div class="sig-top">
-        <span class="sig-code">${h.code}</span><span class="sig-label">${h.label}</span>
-        <span class="sig-risk ${h.risk}">${h.risk==='low'?'protective':h.risk}</span>
-      </div><div class="sig-plain">${h.plain}</div></div>`).join('');
+    sigEl.innerHTML=hits.sort((a,b)=>Math.abs(b.w)-Math.abs(a.w)).map(h=>{
+      const rk=RISK[h.risk];
+      return `<div style="background:var(--paper);border:1px solid var(--border);border-radius:6px;padding:12px 14px;margin-bottom:8px">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="width:6px;height:6px;border-radius:999px;flex:none;background:${rk.color}"></span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.04em;color:var(--fg3)">${h.code}</span>
+          <span style="font-size:14px;font-weight:500;color:var(--fg1)">${h.label}</span>
+          <span style="margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:${rk.color};background:${rk.bg};border-radius:3px;padding:3px 7px">${rk.label}</span>
+        </div>
+        <div style="font-size:13px;line-height:1.6;color:var(--fg3);margin-top:5px;padding-left:16px">${h.plain}</div>
+      </div>`;
+    }).join('');
   } else {
-    sc.innerHTML='<div class="none-yet">'+(t?'No distress patterns matched this message.':'Nothing yet — type a message on the left.')+'</div>';
+    sigEl.innerHTML='<div style="font-size:14px;color:var(--fg-muted);padding:10px 0">'+(t?'No distress patterns matched this message.':'Nothing yet — type a message on the left.')+'</div>';
   }
-
-  for(const k in FEATS){/* contrib not shown per-slider to keep clean */}
 }
 
-// sliders
 const sl=document.getElementById('sliders');
 sl.innerHTML=Object.keys(FEATS).map(k=>{
   const f=FEATS[k];
-  return `<div class="sdoh-slider">
-    <div class="ss-head"><span class="ss-label">${f.label}</span><span class="ss-val" id="val-${k}">${Math.round(f.def*100)}%</span></div>
-    <div class="ss-desc">${f.desc}</div>
+  return `<div>
+    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+      <span style="font-size:14px;font-weight:500;color:var(--fg1)">${f.label}</span>
+      <span id="val-${k}" style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;color:var(--green-600)">${Math.round(f.def*100)}%</span>
+    </div>
+    <div style="font-size:12px;line-height:1.6;color:var(--fg-muted);margin:2px 0 8px">${f.desc}</div>
     <input type="range" min="0" max="1" step="0.01" value="${f.def}" oninput="setS('${k}',this.value)">
-    <div class="ss-ends"><span>${f.lo}</span><span>${f.hi}</span></div>
+    <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fg-muted);margin-top:5px"><span>${f.lo}</span><span>${f.hi}</span></div>
   </div>`;
 }).join('');
 function setS(k,v){S[k]=parseFloat(v);document.getElementById('val-'+k).textContent=Math.round(v*100)+'%';analyze();}
@@ -328,7 +314,7 @@ const SAMPLES=[
  {label:"Switching languages",text:"no sé, últimamente todo se siente pesado. haven't left my room in days, avoiding everyone. estoy bien igual"},
  {label:"Positive / protective",text:"had a good week honestly, back on the track team and sleeping better. things are looking up"},
 ];
-document.getElementById('samples').innerHTML=SAMPLES.map((s,i)=>`<span class="chip" onclick="fill(${i})">${s.label}</span>`).join('');
+document.getElementById('samples').innerHTML=SAMPLES.map((s,i)=>`<button type="button" class="chip" onclick="fill(${i})">${s.label}</button>`).join('');
 function fill(i){document.getElementById('input').value=SAMPLES[i].text;analyze();}
 
 document.getElementById('input').addEventListener('input',analyze);
