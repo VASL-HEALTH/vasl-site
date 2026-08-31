@@ -3,322 +3,652 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="An interactive walkthrough of VLAP signal detection. The analysis runs entirely in your browser on illustrative sample text — no real member data appears anywhere in this demo.">
-<title>VLAP Live Demo | Vasl Health</title>
-<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/assets/mark-v-tile.svg">
+<meta name="description" content="How VLAP reads distress in the language youth actually write: the 47-signal, six-dimension taxonomy, the register-aware analysis behind it, and the clinical decision support boundary it operates inside.">
+<title>How VLAP Reads Language | Vasl Health</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <!-- SEO:VASL -->
-<link rel="canonical" href="https://gotovasl.com/demo.html">
-<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://gotovasl.com/demo">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Vasl Health">
-<meta property="og:title" content="VLAP Live Demo | Vasl Health">
-<meta property="og:description" content="An interactive walkthrough of VLAP signal detection. The analysis runs entirely in your browser on illustrative sample text — no real member data appears anywhere in this demo.">
-<meta property="og:url" content="https://gotovasl.com/demo.html">
+<meta property="og:title" content="How VLAP Reads Language | Vasl Health">
+<meta property="og:description" content="How VLAP reads distress in the language youth actually write: the 47-signal, six-dimension taxonomy, the register-aware analysis behind it, and the clinical decision support boundary it operates inside.">
+<meta property="og:url" content="https://gotovasl.com/demo">
 <meta property="og:image" content="https://gotovasl.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Vasl Health — Language Is Care">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="VLAP Live Demo | Vasl Health">
-<meta name="twitter:description" content="An interactive walkthrough of VLAP signal detection. The analysis runs entirely in your browser on illustrative sample text — no real member data appears anywhere in this demo.">
+<meta name="twitter:title" content="How VLAP Reads Language | Vasl Health">
+<meta name="twitter:description" content="How VLAP reads distress in the language youth actually write: the 47-signal, six-dimension taxonomy, the register-aware analysis behind it, and the clinical decision support boundary it operates inside.">
 <meta name="twitter:image" content="https://gotovasl.com/og-image.png">
 <script defer data-domain="gotovasl.com" src="https://plausible.io/js/script.outbound-links.tagged-events.js"></script>
 <script>window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>
+<script>(function(){var PAGE="demo";document.addEventListener("click",function(e){var a=e.target.closest("a[href]");if(!a)return;var href=a.getAttribute("href");if(!href)return;if(/(^|\/)contact\.html(\?|#|$)/.test(href)){window.plausible("Contact CTA",{props:{page:PAGE}});if(PAGE==="pricing"){window.plausible("Pricing CTA",{props:{page:PAGE}});}}},true);})();</script>
 <!-- /SEO:VASL -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
-
-:root {
-  --vasl-green: #2d5f4f;
-  --vasl-clay:  #d4a574;
-  --green-50:  #eef3f0;
-  --green-100: #d6e2dc;
-  --green-600: #244c3f;
-  --green-700: #1a382f;
-  --ink-900: #1a1614;
-  --ink-500: #6b6259;
-  --ink-400: #8a8077;
-  --ink-100: #ece6db;
-  --paper:   #fafaf8;
-  --paper-2: #f4f0e8;
-  --paper-3: #ece6db;
-  --bg-elev:   #ffffff;
-  --fg1:       var(--ink-900);
-  --fg2:       #3d3631;
-  --fg3:       var(--ink-500);
-  --fg-muted:  var(--ink-400);
-  --fg-on-green: #f3ece0;
-  --border:        #e6dfd2;
-  --border-strong: #c7bda9;
-  --signal-critical: #b3361f;
-  --signal-high:     #c46a2a;
-  --signal-med:      #b88a2a;
-  --signal-low:      #4f806e;
-  --signal-critical-bg: #f7e3dd;
-  --signal-high-bg:     #f7e7d4;
-  --signal-med-bg:      #f5ecd3;
-  --signal-low-bg:      #dee8e2;
-  --font-serif: "Newsreader", "Source Serif Pro", Georgia, "Times New Roman", serif;
-  --font-sans:  "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-  --font-mono:  "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --warm-white:#FAF7F2;--parchment:#F0EAE0;--ink:#1C1C1C;
+  --ink-70:rgba(28,28,28,0.70);--ink-50:rgba(28,28,28,0.50);--ink-12:rgba(28,28,28,0.12);
+  --clay:#C4896F;--clay-light:#E8C4AE;--clay-pale:#F5E6DC;
+  --deep-green:#2D4A3E;--dust:#8B7B6B;--chalk:#E2DAD0;--charcoal:#222222;
+  --serif:'Newsreader',Georgia,serif;--sans:'IBM Plex Sans',sans-serif;--mono:'IBM Plex Mono',monospace;
+  --gutter:7vw;
 }
-* { box-sizing: border-box; }
-html, body { margin: 0; background: var(--paper); }
-body { font-family: var(--font-sans); font-size: 16px; line-height: 1.7; color: var(--fg1); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
-h1, h2 { font-family: var(--font-serif); font-weight: 500; line-height: 1.15; letter-spacing: -0.01em; color: var(--fg1); margin: 0; }
-p { margin: 0; }
-a { color: var(--vasl-green); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
-a:hover { color: var(--green-600); }
-::selection { background: var(--ink-100); color: var(--green-700); }
-input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; border-radius: 999px; background: var(--ink-100); outline: none; border: none; }
-input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 15px; height: 15px; border-radius: 999px; background: var(--vasl-green); border: 2px solid var(--bg-elev); box-shadow: 0 1px 2px rgba(26,22,20,0.18); cursor: pointer; }
-input[type=range]::-moz-range-thumb { width: 15px; height: 15px; border-radius: 999px; background: var(--vasl-green); border: 2px solid var(--bg-elev); cursor: pointer; }
-input[type=range]:focus-visible { outline: 2px solid rgba(212,165,116,0.4); outline-offset: 2px; }
-textarea:focus { outline: none; border-color: var(--vasl-clay); }
-.chip { font-family: var(--font-sans); font-size: 13px; padding: 7px 14px; border-radius: 6px; border: 1px solid var(--border-strong); background: var(--paper); color: var(--fg2); cursor: pointer; transition: background 120ms ease-out, border-color 120ms ease-out, color 120ms ease-out; }
-.chip:hover { background: var(--paper-2); border-color: var(--vasl-clay); color: var(--fg1); }
-@media (max-width: 1020px) { .vlap-grid { grid-template-columns: 1fr !important; } }
+body{background:var(--warm-white);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;overflow-x:hidden;}
+.reveal{transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1),transform 0.9s cubic-bezier(0.16,1,0.3,1);}
+.js-ready .reveal{opacity:0;transform:translateY(20px);}
+.js-ready .reveal.visible{opacity:1;transform:translateY(0);}
+.d1{transition-delay:0.08s;}.d2{transition-delay:0.16s;}.d3{transition-delay:0.24s;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);display:flex;align-items:center;justify-content:space-between;background:rgba(250,247,242,0.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--ink-12);}
+.nav-logo{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:-0.02em;color:var(--ink);text-decoration:none;}
+.nav-logo span{color:var(--clay);font-style:italic;}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--dust);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--ink);}
+.nav-cta{font-family:var(--mono);font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--deep-green);border:1px solid var(--deep-green);padding:9px 20px;text-decoration:none;transition:background 0.22s,color 0.22s;}
+.nav-cta:hover{background:var(--deep-green);color:var(--warm-white);}
+section{padding:130px var(--gutter);position:relative;}
+.chapter-label{font-family:var(--mono);font-size:10px;font-weight:300;letter-spacing:0.16em;text-transform:uppercase;color:var(--clay);display:flex;align-items:center;gap:12px;margin-bottom:52px;}
+.chapter-label::after{content:'';display:block;width:36px;height:1px;background:var(--clay);opacity:0.45;}
+.chapter-label.light{color:var(--clay-light);}
+.chapter-label.light::after{background:var(--clay-light);}
+.btn-dark{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:var(--ink);color:var(--warm-white);padding:16px 32px;text-decoration:none;display:inline-block;transition:background 0.22s;}
+.btn-dark:hover{background:var(--deep-green);}
+.btn-ghost{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dust);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:color 0.2s;}
+.btn-ghost:hover{color:var(--ink);}
+.btn-ghost::after{content:'\2192';}
+.btn-light{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:var(--warm-white);color:var(--ink);padding:16px 32px;text-decoration:none;display:inline-block;transition:background 0.22s;}
+.btn-light:hover{background:var(--clay-light);}
+.btn-ghost-light{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.40);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:color 0.2s;}
+.btn-ghost-light:hover{color:var(--warm-white);}
+.btn-ghost-light::after{content:'\2192';}
+
+/* HERO */
+#hero{padding-top:170px;padding-bottom:110px;background:var(--warm-white);border-bottom:1px solid var(--chalk);display:grid;grid-template-columns:1.15fr 1fr;gap:0 80px;align-items:end;}
+.hero-kicker{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--dust);margin-bottom:36px;display:block;}
+.hero-headline{font-family:var(--serif);font-size:clamp(40px,4.8vw,68px);font-weight:300;line-height:1.06;letter-spacing:-0.03em;color:var(--ink);margin-bottom:34px;}
+.hero-headline em{font-style:italic;color:var(--clay);}
+.hero-body{font-size:19px;font-weight:300;line-height:1.72;color:var(--ink-70);max-width:520px;margin-bottom:30px;}
+.hero-actions{display:flex;align-items:center;gap:28px;flex-wrap:wrap;margin-top:44px;}
+.hero-right{border-left:1px solid var(--chalk);padding-left:64px;}
+.stat-item{padding:20px 0;border-bottom:1px solid var(--chalk);}
+.stat-item:last-child{border-bottom:none;}
+.stat-num{font-family:var(--serif);font-size:38px;font-weight:300;line-height:1;letter-spacing:-0.03em;color:var(--deep-green);margin-bottom:8px;}
+.stat-desc{font-size:14px;font-weight:300;color:var(--ink-70);line-height:1.6;}
+
+/* STATIC-PAGE NOTICE */
+.notice{border:1px solid var(--chalk);background:var(--clay-pale);padding:22px 26px;max-width:520px;}
+.notice-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--clay);margin-bottom:10px;}
+.notice-body{font-size:14px;font-weight:300;line-height:1.65;color:var(--ink-70);}
+
+/* DIFFERENTIATOR (dark) */
+#register{background:var(--charcoal);color:var(--warm-white);}
+.reg-head{max-width:860px;margin-bottom:64px;}
+.reg-headline{font-family:var(--serif);font-size:clamp(34px,4vw,54px);font-weight:300;line-height:1.1;letter-spacing:-0.025em;color:var(--warm-white);margin-bottom:30px;}
+.reg-headline em{font-style:italic;color:var(--clay-light);}
+.reg-body{font-size:18px;font-weight:300;line-height:1.75;color:rgba(250,247,242,0.62);margin-bottom:20px;}
+.reg-body:last-child{margin-bottom:0;}
+.reg-body strong{color:var(--warm-white);font-weight:500;}
+.reg-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(250,247,242,0.10);}
+.reg-card{background:var(--charcoal);padding:34px 32px;}
+.reg-card-label{font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--clay-light);margin-bottom:14px;}
+.reg-card-title{font-family:var(--serif);font-size:21px;font-weight:400;color:var(--warm-white);margin-bottom:12px;letter-spacing:-0.01em;}
+.reg-card-desc{font-size:14px;font-weight:300;color:rgba(250,247,242,0.60);line-height:1.65;}
+.reg-foot{margin-top:44px;padding-top:26px;border-top:1px solid rgba(250,247,242,0.12);font-size:13px;font-weight:300;line-height:1.7;color:rgba(250,247,242,0.45);max-width:860px;}
+
+/* TAXONOMY */
+#taxonomy{background:var(--warm-white);border-bottom:1px solid var(--chalk);}
+.tax-head{max-width:720px;margin-bottom:26px;}
+.tax-headline{font-family:var(--serif);font-size:clamp(34px,4vw,54px);font-weight:300;line-height:1.1;letter-spacing:-0.025em;color:var(--ink);margin-bottom:24px;}
+.tax-headline em{font-style:italic;color:var(--clay);}
+.tax-body{font-size:17px;font-weight:300;line-height:1.72;color:var(--ink-70);}
+.risk-key{margin:44px 0 64px;padding:26px 30px;background:var(--parchment);border:1px solid var(--chalk);max-width:780px;}
+.risk-key-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--dust);margin-bottom:18px;}
+.rk-row{display:grid;grid-template-columns:92px 1fr;gap:16px;padding:7px 0;align-items:baseline;}
+.rk-def{font-size:14px;font-weight:300;color:var(--ink-70);line-height:1.6;}
+.dim{padding:40px 0;border-top:1px solid var(--chalk);}
+.dim-head{display:flex;align-items:baseline;gap:16px;margin-bottom:12px;flex-wrap:wrap;}
+.dim-code{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;color:var(--clay);}
+.dim-name{font-family:var(--serif);font-size:26px;font-weight:400;letter-spacing:-0.015em;color:var(--ink);}
+.dim-count{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dust);margin-left:auto;}
+.dim-blurb{font-size:15px;font-weight:300;color:var(--ink-70);line-height:1.65;max-width:720px;margin-bottom:26px;}
+.sig-list{display:grid;grid-template-columns:1fr 1fr;gap:0 48px;}
+.sig-row{display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--ink-12);}
+.sig-code{font-family:var(--mono);font-size:11px;letter-spacing:0.05em;color:var(--dust);}
+.sig-label{font-size:14px;font-weight:300;color:var(--ink);line-height:1.5;}
+/* Signal risk level is typographic, never a tier colour: weight, case and rule only. */
+.sig-risk{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-50);white-space:nowrap;}
+.r-high{color:var(--ink);font-weight:500;}
+.r-moderate{color:var(--ink-70);font-weight:400;}
+.r-low{color:var(--ink-50);font-weight:300;}
+.r-variable{color:var(--ink-50);font-weight:300;font-style:italic;text-transform:none;letter-spacing:0.02em;font-size:11px;}
+
+/* COMBINATION RULES */
+#rules{background:var(--parchment);border-bottom:1px solid var(--chalk);}
+.rules-head{max-width:760px;margin-bottom:60px;}
+.rules-headline{font-family:var(--serif);font-size:clamp(34px,4vw,54px);font-weight:300;line-height:1.1;letter-spacing:-0.025em;color:var(--ink);margin-bottom:24px;}
+.rules-headline em{font-style:italic;color:var(--clay);}
+.rules-body{font-size:17px;font-weight:300;line-height:1.72;color:var(--ink-70);}
+.rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--chalk);}
+.rule{background:var(--parchment);padding:30px 32px;}
+.rule-top{display:flex;align-items:baseline;gap:14px;margin-bottom:14px;}
+.rule-id{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:0.06em;color:var(--clay);}
+.rule-level{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dust);margin-left:auto;}
+.rule-when{font-family:var(--serif);font-size:19px;font-weight:400;color:var(--ink);line-height:1.35;letter-spacing:-0.01em;margin-bottom:10px;}
+.rule-why{font-size:14px;font-weight:300;color:var(--ink-70);line-height:1.65;}
+.rules-foot{margin-top:44px;font-size:14px;font-weight:300;line-height:1.7;color:var(--ink-50);max-width:820px;}
+
+/* CDS BOUNDARY (green) */
+#cds{background:var(--deep-green);color:var(--warm-white);}
+.cds-head{max-width:820px;margin-bottom:56px;}
+.cds-headline{font-family:var(--serif);font-size:clamp(32px,3.8vw,50px);font-weight:300;line-height:1.12;letter-spacing:-0.025em;color:var(--warm-white);margin-bottom:26px;}
+.cds-headline em{font-style:italic;color:var(--clay-light);}
+.cds-body{font-size:18px;font-weight:300;line-height:1.75;color:rgba(250,247,242,0.62);margin-bottom:18px;}
+.cds-cols{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(250,247,242,0.14);margin-bottom:50px;}
+.cds-col{background:var(--deep-green);padding:32px 34px;}
+.cds-col-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--clay-light);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid rgba(250,247,242,0.14);}
+.cds-col p{font-size:15px;font-weight:300;color:rgba(250,247,242,0.72);line-height:1.6;padding:9px 0;}
+.cds-col.not p{color:rgba(250,247,242,0.50);}
+.tier-block{max-width:840px;}
+.tier-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,247,242,0.40);margin-bottom:6px;}
+.tier-sub{font-size:14px;font-weight:300;line-height:1.7;color:rgba(250,247,242,0.50);margin-bottom:22px;}
+.tier-row{display:grid;grid-template-columns:130px 1fr;gap:20px;padding:13px 0;border-bottom:1px solid rgba(250,247,242,0.12);align-items:baseline;}
+.tier-name{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;color:var(--warm-white);}
+.tier-what{font-size:14px;font-weight:300;color:rgba(250,247,242,0.62);line-height:1.6;}
+
+/* VALIDATION */
+#validation{background:var(--warm-white);border-bottom:1px solid var(--chalk);}
+.val-head{max-width:760px;margin-bottom:48px;}
+.val-headline{font-family:var(--serif);font-size:clamp(32px,3.8vw,50px);font-weight:300;line-height:1.12;letter-spacing:-0.025em;color:var(--ink);margin-bottom:24px;}
+.val-headline em{font-style:italic;color:var(--clay);}
+.val-lead{font-size:17px;font-weight:300;line-height:1.72;color:var(--ink-70);}
+.val-row{display:grid;grid-template-columns:80px 1fr;gap:24px;padding:18px 0;border-bottom:1px solid var(--chalk);align-items:baseline;max-width:960px;}
+.val-cat{font-family:var(--mono);font-size:12px;letter-spacing:0.1em;color:var(--clay);}
+.val-txt{font-size:15px;font-weight:300;color:var(--ink-70);line-height:1.65;}
+.val-foot{margin-top:40px;padding-top:24px;border-top:1px solid var(--chalk);max-width:960px;font-size:14px;font-weight:300;line-height:1.7;color:var(--ink-50);}
+
+/* CTA */
+#cta{background:var(--ink);color:var(--warm-white);text-align:center;}
+.cta-headline{font-family:var(--serif);font-size:clamp(32px,4.2vw,56px);font-weight:300;font-style:italic;line-height:1.12;letter-spacing:-0.02em;color:var(--warm-white);max-width:800px;margin:0 auto 26px;}
+.cta-headline em{color:var(--clay-light);font-style:italic;}
+.cta-body{font-size:17px;font-weight:300;line-height:1.75;color:rgba(250,247,242,0.58);max-width:600px;margin:0 auto 40px;}
+.cta-actions{display:flex;align-items:center;justify-content:center;gap:26px;flex-wrap:wrap;}
+
+@media(max-width:1100px){
+  #hero{grid-template-columns:1fr;gap:64px;}
+  .hero-right{border-left:none;padding-left:0;border-top:1px solid var(--chalk);padding-top:40px;}
+  .reg-grid{grid-template-columns:1fr;}
+  .rules-grid{grid-template-columns:1fr;}
+  .cds-cols{grid-template-columns:1fr;}
+  .sig-list{grid-template-columns:1fr;gap:0;}
+}
+@media(max-width:768px){
+  :root{--gutter:5vw;}
+  section{padding:90px var(--gutter);}
+  .nav-links{display:none;}
+  .sig-row{grid-template-columns:60px 1fr;gap:10px;}
+  .sig-risk{grid-column:2;padding-top:2px;}
+  .rk-row,.val-row,.tier-row{grid-template-columns:1fr;gap:4px;}
+}
+
+.ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
+.ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.2s;}
+.ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.ham-btn.open span:nth-child(2){opacity:0;}
+.ham-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+@media(max-width:780px){
+  .ham-btn{display:flex;}
+  .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--warm-white);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+  .nav-links.open{display:flex;}
+  .nav-links a{font-size:22px;letter-spacing:0.04em;}
+  .nav-cta{display:none;}
+}
+
+footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);padding:0;}
+.footer-sitemap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr 1fr;gap:0;padding:56px 7vw 40px;border-bottom:1px solid rgba(250,247,242,0.08);}
+.fs-brand{padding-right:40px;}
+.footer-logo{font-family:var(--serif);font-size:22px;color:var(--warm-white);letter-spacing:-0.02em;text-decoration:none;display:block;margin-bottom:12px;}
+.footer-logo span{color:var(--clay);font-style:italic;}
+.footer-mission{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.28);line-height:1.8;margin-bottom:20px;}
+.fs-cta{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:var(--clay);border:1px solid rgba(196,137,111,0.40);padding:9px 18px;text-decoration:none;transition:all 0.18s;}
+.fs-cta:hover{background:rgba(196,137,111,0.12);}
+.fs-col{padding-left:32px;border-left:1px solid rgba(250,247,242,0.06);}
+.fs-head{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,247,242,0.30);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(250,247,242,0.06);}
+.fs-col a{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,247,242,0.45);text-decoration:none;margin-bottom:10px;transition:color 0.15s;}
+.fs-col a:hover{color:var(--clay);}
+.footer-bottom{padding:20px 7vw;display:flex;align-items:center;justify-content:space-between;}
+.footer-copy{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,0.20);}
+.footer-legal{display:flex;gap:20px;}
+.footer-legal a{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,247,242,0.22);text-decoration:none;}
+.footer-legal a:hover{color:var(--clay);}
+@media(max-width:1100px){.footer-sitemap{grid-template-columns:1fr 1fr 1fr;gap:32px;}.fs-brand{grid-column:1/-1;padding-right:0;}.fs-col{border-left:none;padding-left:0;}}
+@media(max-width:680px){.footer-sitemap{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}}
+@media(max-width:400px){.footer-sitemap{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
-<div style="min-height:100vh;background:var(--paper);color:var(--fg1);font-family:'IBM Plex Sans',sans-serif">
 
-  <header style="position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:1px solid var(--border);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px">
-    <div style="display:flex;align-items:center;gap:14px">
-      <div style="width:26px;height:26px;border-radius:6px;background:var(--vasl-green);color:var(--fg-on-green);font-family:Newsreader,serif;font-size:18px;font-weight:500;display:flex;align-items:center;justify-content:center;line-height:1">v</div>
-      <div style="font-family:Newsreader,serif;font-size:19px;font-weight:500;letter-spacing:-0.01em;color:var(--fg1)">VLAP</div>
-      <div style="width:1px;height:16px;background:var(--border)"></div>
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg3)">Interactive demo</div>
-    </div>
-    <div style="display:flex;align-items:center;gap:10px">
-      <span style="width:6px;height:6px;border-radius:999px;background:var(--vasl-clay)"></span>
-      <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg3)">Vasl Language Analysis Platform</span>
-    </div>
-  </header>
+<nav>
+  <a href="index.html" class="nav-logo">Vasl <span>Health</span></a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="platform.html">Platform</a></li>
+    <li><a href="outcomes.html">Outcomes</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="contact.html" class="nav-cta">Request a Demo</a>
+</nav>
 
-  <div style="max-width:1240px;margin:0 auto;padding:48px 32px 32px">
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg3)">Clinician-facing risk detection</div>
-    <h1 style="font-size:40px;margin:14px 0 0;max-width:900px">See how VLAP reads distress in <em style="color:var(--vasl-green);font-style:italic">a young person's own words.</em></h1>
-    <p style="font-size:16px;line-height:1.7;color:var(--fg2);max-width:820px;margin:18px 0 0">VLAP detects behavioral-health distress in the language youth actually use — including dialect and coded expressions that standard screening tools miss. It then adjusts its read for the young person's real-world circumstances, and surfaces concerns to a licensed clinician. Try it below.</p>
-    <div style="display:flex;gap:32px;flex-wrap:wrap;margin-top:32px;padding-top:24px;border-top:1px solid var(--border)">
-      <div style="display:flex;align-items:baseline;gap:12px"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;color:var(--vasl-clay)">01</span><span style="font-size:15px;color:var(--fg2)">Type a message or pick an example</span></div>
-      <div style="display:flex;align-items:baseline;gap:12px"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;color:var(--vasl-clay)">02</span><span style="font-size:15px;color:var(--fg2)">Adjust the life-circumstances sliders</span></div>
-      <div style="display:flex;align-items:baseline;gap:12px"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;color:var(--vasl-clay)">03</span><span style="font-size:15px;color:var(--fg2)">Watch VLAP's read change on the right</span></div>
+<!-- HERO -->
+<section id="hero">
+  <div>
+    <span class="hero-kicker reveal">Vasl Language Analysis Platform</span>
+    <h1 class="hero-headline reveal d1">The distress a young person <em>has already told you about</em> &mdash; in the words they actually used.</h1>
+    <p class="hero-body reveal d2">VLAP is Vasl's natural-language engine for behavioral-health distress in youth communication. It is built for the language Black youth actually write &mdash; vernacular futility constructions, coded ideation, humour-masked disclosure &mdash; the constructions generic screening models read as venting and drop.</p>
+    <p class="hero-body reveal d2">Forty-seven signals across six clinical dimensions, a rules layer that reads them in combination, and a single output: a signal made visible to a licensed clinician, who decides what happens next.</p>
+    <div class="hero-actions reveal d3">
+      <a href="contact.html" class="btn-dark">Request a clinical walkthrough</a>
+      <a href="vlap.html" class="btn-ghost">Why VLAP exists</a>
     </div>
   </div>
-
-  <div class="vlap-grid" style="max-width:1240px;margin:0 auto;padding:0 32px 32px;display:grid;grid-template-columns:1fr 1.05fr;gap:24px;align-items:start">
-
-    <div style="display:flex;flex-direction:column;gap:24px">
-
-      <section style="background:var(--bg-elev);border:1px solid var(--border);border-radius:10px;padding:24px;box-shadow:0 1px 2px rgba(26,22,20,0.05)">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg3)">Step 01 · the message</div>
-        <h2 style="font-size:24px;margin:10px 0 0">What did the young person say?</h2>
-        <p style="font-size:14px;line-height:1.7;color:var(--fg3);margin:6px 0 18px">Type anything, or tap an example. VLAP reads it the moment you do.</p>
-        <textarea id="input" placeholder="e.g. &quot;idk why i even try anymore, i be the strong one for everybody but lowkey i'm done&quot;" style="width:100%;box-sizing:border-box;min-height:104px;background:var(--paper);border:1px solid var(--border-strong);border-radius:6px;padding:14px 16px;color:var(--fg1);font-family:'IBM Plex Sans',sans-serif;font-size:15px;line-height:1.7;resize:vertical"></textarea>
-        <div style="display:flex;align-items:center;gap:10px;margin-top:16px;padding-top:16px;border-top:1px solid var(--paper-3)">
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg3)">How they're speaking</span>
-          <span id="register" style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;color:var(--green-600);background:var(--green-50);border:1px solid var(--green-100);border-radius:999px;padding:3px 10px">—</span>
-          <span id="register-note" style="font-size:12px;color:var(--fg-muted)"></span>
-        </div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg3);margin:20px 0 10px">Try an example</div>
-        <div id="samples" style="display:flex;flex-wrap:wrap;gap:8px"></div>
-      </section>
-
-      <section style="background:var(--bg-elev);border:1px solid var(--border);border-radius:10px;padding:24px;box-shadow:0 1px 2px rgba(26,22,20,0.05)">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg3)">Step 02 · their circumstances</div>
-        <h2 style="font-size:24px;margin:10px 0 0">What's going on in their life?</h2>
-        <p style="font-size:14px;line-height:1.7;color:var(--fg3);margin:6px 0 16px">The same words can mean different things depending on a young person's situation. Drag any slider and watch VLAP's read update.</p>
-        <p style="font-size:14px;line-height:1.7;color:var(--fg2);margin:0 0 22px;background:var(--paper-2);border-left:2px solid var(--vasl-clay);padding:12px 16px">These are <b style="font-weight:600">social determinants of health</b> — real-world factors VLAP weighs alongside the words. In practice they come from the health record; here you can set them to see the effect. <span style="color:var(--green-600)">This context-weighting is VLAP's patented core.</span></p>
-        <div id="sliders" style="display:flex;flex-direction:column;gap:20px"></div>
-      </section>
-
+  <div class="hero-right">
+    <div class="stat-item reveal d1">
+      <div class="stat-num">47</div>
+      <div class="stat-desc">Discrete linguistic, behavioral and contextual signals in the v1.0 taxonomy.</div>
     </div>
-
-    <section style="background:var(--bg-elev);border:1px solid var(--border);border-radius:10px;padding:24px;box-shadow:0 1px 2px rgba(26,22,20,0.05);position:sticky;top:88px">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg3)">Step 03 · VLAP's read</div>
-      <h2 style="font-size:24px;margin:10px 0 0">What VLAP sees — and what happens next</h2>
-      <p style="font-size:14px;line-height:1.7;color:var(--fg3);margin:6px 0 20px">Updates live as you change the message or the circumstances.</p>
-
-      <div id="hero-box" style="border:1px solid var(--border);border-left:3px solid var(--signal-low);border-radius:6px;padding:20px 22px;background:var(--signal-low-bg);display:flex;align-items:flex-start;justify-content:space-between;gap:24px;transition:background 320ms ease-in-out,border-color 320ms ease-in-out">
-        <div>
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg3)">Concern level</div>
-          <div id="tier-label" style="font-family:Newsreader,serif;font-size:34px;font-weight:500;line-height:1.1;margin-top:6px;color:var(--signal-low)">Low</div>
-          <div id="tier-plain" style="font-size:14px;line-height:1.6;color:var(--fg2);margin-top:6px;max-width:300px">Type a message to begin.</div>
-        </div>
-        <div style="text-align:right;flex:none">
-          <div id="score" style="font-family:'IBM Plex Mono',monospace;font-size:40px;font-weight:500;line-height:1;color:var(--signal-low)">0.00</div>
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-muted);margin-top:6px">Risk score 0–1</div>
-        </div>
-      </div>
-
-      <div style="margin-top:10px;background:var(--paper-2);border:1px solid var(--border);border-radius:6px;padding:14px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-        <span style="font-size:13px;color:var(--fg3)">Words alone <span id="raw" style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:500;color:var(--fg2)">0.00</span></span>
-        <span style="color:var(--vasl-clay);font-size:14px">→</span>
-        <span style="font-size:13px;color:var(--fg3)">with circumstances <span id="cal" style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;color:var(--green-600)">0.00</span></span>
-        <span id="why" style="margin-left:auto;font-size:12px;line-height:1.5;color:var(--fg3);text-align:right;max-width:210px">Adjust the sliders to see context change the read.</span>
-      </div>
-
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg3);margin:28px 0 4px">What VLAP noticed in the words</div>
-      <p style="font-size:13px;line-height:1.6;color:var(--fg-muted);margin:0 0 12px">The specific distress patterns VLAP detected — including coded and dialect expressions.</p>
-
-      <div id="signals"><div style="font-size:14px;color:var(--fg-muted);padding:10px 0">Nothing yet — type a message on the left.</div></div>
-
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg3);margin:28px 0 10px">Who gets told</div>
-      <p style="font-size:14px;line-height:1.7;color:var(--fg2);margin:0;background:var(--green-50);border:1px solid var(--green-100);border-radius:6px;padding:14px 16px"><b style="color:var(--green-600);font-weight:600">Surfaced to a licensed clinician only.</b> VLAP never shows this to the young person, their peers, a guardian, or non-clinical staff — and never acts on its own. A person always decides.</p>
-    </section>
+    <div class="stat-item reveal d2">
+      <div class="stat-num">6</div>
+      <div class="stat-desc">Clinical dimensions: hopelessness, coded ideation, minimisation, isolation, trauma markers, and protective-factor erosion.</div>
+    </div>
+    <div class="stat-item reveal d3">
+      <div class="stat-num">8</div>
+      <div class="stat-desc">Combination rules evaluated after inference, so a co-occurrence no single signal would surface still reaches a clinician.</div>
+    </div>
   </div>
+</section>
 
-  <div style="max-width:1240px;margin:0 auto;padding:0 32px 64px">
-    <p style="font-size:12px;line-height:1.7;color:var(--fg3);margin:0;padding:14px 0 0;border-top:1px solid var(--border)"><b style="color:var(--fg2);font-weight:600">Demonstration.</b> Illustrative example using representative messages. Shows how the VLAP pipeline and its patented SDOH-aware calibration (VH-2026-001, §7.4) work. Calibration weights shown are illustrative defaults, not yet fit to outcome data. Not a clinical deployment; no real patient data.</p>
+<!-- THE DIFFERENTIATOR -->
+<section id="register">
+  <div class="chapter-label light">Where VLAP is different</div>
+  <div class="reg-head">
+    <h2 class="reg-headline">A screening tool that reads dialect as noise <em>will read distress as attitude.</em></h2>
+    <p class="reg-body">Most language models were trained on text that does not sound like the young people Vasl serves. Presented with a vernacular futility construction &mdash; the double negation, the intensifier doing the emotional work &mdash; a generic model returns frustration, or venting, and moves on. The young person disclosed. The instrument did not hear it.</p>
+    <p class="reg-body"><strong>VLAP detects the register first, then reads the message inside it.</strong> When the engine identifies African American English, Spanish-English code-switching, or a pre-disclosure minimisation move, it does not discount what follows. It raises the weight it gives the distress evidence, because in this population that framing is where the disclosure lives.</p>
+  </div>
+  <div class="reg-grid">
+    <div class="reg-card reveal">
+      <div class="reg-card-label">Register detection</div>
+      <div class="reg-card-title">Dialect is read, not corrected</div>
+      <div class="reg-card-desc">The engine scores dialect markers and grammatical constructions across the whole message before scoring risk. Register is an input to the analysis, not something normalised away before it starts.</div>
+    </div>
+    <div class="reg-card reveal d1">
+      <div class="reg-card-label">Weighting</div>
+      <div class="reg-card-title">Vernacular raises the read, it does not lower it</div>
+      <div class="reg-card-desc">Detected AAVE register and pre-disclosure minimisation both increase the weight carried by co-occurring distress signals. The bias being corrected runs in one direction, so the correction does too.</div>
+    </div>
+    <div class="reg-card reveal d2">
+      <div class="reg-card-label">Privacy</div>
+      <div class="reg-card-title">The words themselves stay out of the chart</div>
+      <div class="reg-card-desc">A clinician sees that the register was detected and that the analysis was tuned for it. The specific dialect tokens a young person used are never rendered on a clinical screen as evidence against them.</div>
+    </div>
+  </div>
+  <p class="reg-foot">HOP-03, the AAVE futility construction, is the signal the taxonomy names as carrying the largest single share of VLAP's sensitivity advantage over baseline, and the one with the highest false-negative rate in generic models. Register weighting is an engineering calibration and is not itself a clinically validated figure; see validation status below.</p>
+</section>
+
+<!-- TAXONOMY -->
+<section id="taxonomy">
+  <div class="chapter-label">The taxonomy</div>
+  <div class="tax-head">
+    <h2 class="tax-headline">Forty-seven signals, <em>six dimensions,</em> one codebook.</h2>
+    <p class="tax-body">Each signal has a code, a clinical label, and a risk level describing what it means on its own. The list below is the live v1.0 taxonomy, generated from the engine's own signal definitions. It is the same reference a clinician reads, and the same codebook used for annotation.</p>
+  </div>
+  <div class="risk-key">
+    <div class="risk-key-head">Risk level &mdash; the significance of one signal in isolation</div>
+      <div class="rk-row"><span class="rk-name r-high">High</span><span class="rk-def">Warrants human review on its own.</span></div>
+      <div class="rk-row"><span class="rk-name r-moderate">Moderate</span><span class="rk-def">Logged and monitored; reviewed in combination.</span></div>
+      <div class="rk-row"><span class="rk-name r-low">Low</span><span class="rk-def">Contextual or longitudinal marker.</span></div>
+      <div class="rk-row"><span class="rk-name r-variable">Variable</span><span class="rk-def">Context-dependent &mdash; read against co-occurring signals.</span></div>
+  </div>
+    <div class="dim reveal">
+      <div class="dim-head">
+        <span class="dim-code">HOP</span>
+        <h3 class="dim-name">Hopelessness &amp; Futility</h3>
+        <span class="dim-count">9 signals</span>
+      </div>
+      <p class="dim-blurb">Futility, foreclosed futures, and burden narratives &mdash; including the vernacular constructions generic models read as venting.</p>
+      <div class="sig-list">
+        <div class="sig-row"><span class="sig-code">HOP-01</span><span class="sig-label">Absolute futurity negation</span><span class="sig-risk r-high">High</span></div>
+        <div class="sig-row"><span class="sig-code">HOP-02</span><span class="sig-label">Future self-erasure</span><span class="sig-risk r-moderate">Moderate</span></div>
+        <div class="sig-row"><span class="sig-code">HOP-03</span><span class="sig-label">AAVE futility construction</span><span class="sig-risk r-high">High</span></div>
+        <div class="sig-row"><span class="sig-code">HOP-04</span><span class="sig-label">Coded exhaustion</span><span class="sig-risk r-variable">Variable</span></div>
+        <div class="sig-row"><span class="sig-code">HOP-05</span><span class="sig-label">Temporal foreclosure</span><span class="sig-risk r-low">Low</span></div>
+        <div class="sig-row"><span class="sig-code">HOP-06</span><span class="sig-label">Third-person self-distancing</span><span class="sig-risk r-moderate">Moderate</span></div>
+        <div class="sig-row"><span class="sig-code">HOP-07</span><span class="sig-label">Burden narrative</span><span class="sig-risk r-high">High</span></div>
+        <div class="sig-row"><span class="sig-code">HOP-08</span><span class="sig-label">Queer futility narrative</span><span class="sig-risk r-high">High</span></div>
+        <div class="sig-row"><span class="sig-code">HOP-09</span><span class="sig-label">Immigrant &amp; first-gen foreclosure</span><span class="sig-risk r-moderate">Moderate</span></div>
+      </div>
+    </div>
+    <div class="dim reveal">
+      <div class="dim-head">
+        <span class="dim-code">SHA</span>
+        <h3 class="dim-name">Coded Suicidal Ideation</h3>
+        <span class="dim-count">8 signals</span>
+      </div>
+      <p class="dim-blurb">Ideation as it is actually written by youth: euphemism built to evade platform moderation, inverted framing, community-specific reference.</p>
+      <div class="sig-list">
+        <div class="sig-row"><span class="sig-code">SHA-01</span><span class="sig-label">Explicit suicidal ideation</span><span class="sig-risk r-high">High</span></div>
+        <div class="sig-row"><span class="sig-code">SHA-02</span><span class="sig-label">Unaliving and derivatives</span><span class="sig-risk r-high">High</span></div>
+        <div class="sig-row"><span class="sig-code">SHA-03</span><span class="sig-label">Sleep-death conflation</span><span class="sig-risk r-moderate">Moderate</span></div>
+        <div class="sig-row"><span class="sig-code">SHA-04</span><span class="sig-label">Fantasy of absence</span><span class="sig-risk r-moderate">Moderate</span></div>
+        <div class="sig-row"><span class="sig-code">SHA-05</span><span class="sig-label">Method inquiry with minimization wrapper</span><span class="sig-risk r-high">High</span></div>
+        <div class="sig-row"><span class="sig-code">SHA-06</span><span class="sig-label">Goodbye behavior references</span><span class="sig-risk r-high">High</span></div>
+        <div class="sig-row"><span class="sig-code">SHA-07</span><span class="sig-label">Anniversary and date markers with inverted framing</span><span class="sig-risk r-high">High</span></div>
+        <div class="sig-row"><span class="sig-code">SHA-08</span><span class="sig-label">'Catching a fade' and community-specific death euphemisms</span><span class="sig-risk r-high">High</span></div>
+      </div>
+    </div>
+    <div class="dim reveal">
+      <div class="dim-head">
+        <span class="dim-code">CCM</span>
+        <h3 class="dim-name">Minimization &amp; Disclosure Suppression</h3>
+        <span class="dim-count">8 signals</span>
+      </div>
+      <p class="dim-blurb">The hedge, the joke, the walk-back. Patterns that precede disclosure rather than contradict it.</p>
+      <div class="sig-list">
+        <div class="sig-row"><span class="sig-code">CCM-01</span><span class="sig-label">Classic minimization opener</span><span class="sig-risk r-variable">Variable</span></div>
+        <div class="sig-row"><span class="sig-code">CCM-02</span><span class="sig-label">AAVE minimization constructions</span><span class="sig-risk r-variable">Variable</span></div>
+        <div class="sig-row"><span class="sig-code">CCM-03</span><span class="sig-label">Permission-seeking before disclosure</span><span class="sig-risk r-low">Low</span></div>
+        <div class="sig-row"><span class="sig-code">CCM-04</span><span class="sig-label">Gallows humor as disclosure mechanism</span><span class="sig-risk r-moderate">Moderate</span></div>
+        <div class="sig-row"><span class="sig-code">CCM-05</span><span class="sig-label">Asking for a friend construction</span><span class="sig-risk r-moderate">Moderate</span></div>
+        <div class="sig-row"><span class="sig-code">CCM-06</span><span class="sig-label">Topic drop without resolution</span><span class="sig-risk r-moderate">Moderate</span></div>
+        <div class="sig-row"><span class="sig-code">CCM-07</span><span class="sig-label">Internalized stigma disclosure pattern</span><span class="sig-risk r-low">Low</span></div>
+        <div class="sig-row"><span class="sig-code">CCM-08</span><span class="sig-label">Performed resilience</span><span class="sig-risk r-low">Low</span></div>
+      </div>
+    </div>
+    <div class="dim reveal">
+      <div class="dim-head">
+        <span class="dim-code">ISO</span>
+        <h3 class="dim-name">Social Isolation &amp; Withdrawal</h3>
+        <span class="dim-count">7 signals</span>
+      </div>
+      <p class="dim-blurb">Severance, withdrawal, and the specific isolation of being unwelcome at home.</p>
+      <div class="sig-list">
+        <div class="sig-row"><span class="sig-code">ISO-01</span><span class="sig-label">Direct withdrawal statement</span><span class="sig-risk r-moderate">Moderate</span></div>
+        <div class="sig-row"><span class="sig-code">ISO-02</span><span class="sig-label">Relationship severance language</span><span class="sig-risk r-high">High</span></div>
+        <div class="sig-row"><span class="sig-code">ISO-03</span><span class="sig-label">Perceived burdensomeness &mdash; social expression</span><span class="sig-risk r-moderate">Moderate</span></div>
+        <div class="sig-row"><span class="sig-code">ISO-04</span><span class="sig-label">Code-switching exhaustion</span><span class="sig-risk r-moderate">Moderate</span></div>
+        <div class="sig-row"><span class="sig-code">ISO-05</span><span class="sig-label">Community disconnection</span><span class="sig-risk r-moderate">Moderate</span></div>
+        <div class="sig-row"><span class="sig-code">ISO-06</span><span class="sig-label">Family estrangement &mdash; LGBTQIA+ specific</span><span class="sig-risk r-high">High</span></div>
+        <div class="sig-row"><span class="sig-code">ISO-07</span><span class="sig-label">Digital withdrawal references</span><span class="sig-risk r-low">Low</span></div>
+      </div>
+    </div>
+    <div class="dim reveal">
+      <div class="dim-head">
+        <span class="dim-code">TRM</span>
+        <h3 class="dim-name">Trauma &amp; Acute Stressor Markers</h3>
+        <span class="dim-count">8 signals</span>
+      </div>
+      <p class="dim-blurb">Social determinants as they surface in language &mdash; housing, food, policing, immigration status, cumulative loss.</p>
+      <div class="sig-list">
+        <div class="sig-row"><span class="sig-code">TRM-01</span><span class="sig-label">Community violence exposure</span><span class="sig-risk r-variable">Variable</span></div>
+        <div class="sig-row"><span class="sig-code">TRM-02</span><span class="sig-label">Housing instability</span><span class="sig-risk r-moderate">Moderate</span></div>
+        <div class="sig-row"><span class="sig-code">TRM-03</span><span class="sig-label">Immigration and documentation stress</span><span class="sig-risk r-variable">Variable</span></div>
+        <div class="sig-row"><span class="sig-code">TRM-04</span><span class="sig-label">Food insecurity references</span><span class="sig-risk r-low">Low</span></div>
+        <div class="sig-row"><span class="sig-code">TRM-05</span><span class="sig-label">Police and legal system contact</span><span class="sig-risk r-variable">Variable</span></div>
+        <div class="sig-row"><span class="sig-code">TRM-06</span><span class="sig-label">School discipline and push-out</span><span class="sig-risk r-moderate">Moderate</span></div>
+        <div class="sig-row"><span class="sig-code">TRM-07</span><span class="sig-label">Vicarious and cumulative loss</span><span class="sig-risk r-moderate">Moderate</span></div>
+        <div class="sig-row"><span class="sig-code">TRM-08</span><span class="sig-label">Caregiver incapacity and parentification</span><span class="sig-risk r-moderate">Moderate</span></div>
+      </div>
+    </div>
+    <div class="dim reveal">
+      <div class="dim-head">
+        <span class="dim-code">PFE</span>
+        <h3 class="dim-name">Protective Factor Erosion</h3>
+        <span class="dim-count">7 signals</span>
+      </div>
+      <p class="dim-blurb">What a young person is losing. Erosion signals, not credits: every one of the seven adds to concern rather than subtracting from it.</p>
+      <div class="sig-list">
+        <div class="sig-row"><span class="sig-code">PFE-01</span><span class="sig-label">Loss of faith or spiritual anchor</span><span class="sig-risk r-low">Low</span></div>
+        <div class="sig-row"><span class="sig-code">PFE-02</span><span class="sig-label">Trusted adult loss</span><span class="sig-risk r-moderate">Moderate</span></div>
+        <div class="sig-row"><span class="sig-code">PFE-03</span><span class="sig-label">Peer network dissolution</span><span class="sig-risk r-moderate">Moderate</span></div>
+        <div class="sig-row"><span class="sig-code">PFE-04</span><span class="sig-label">Achievement identity loss</span><span class="sig-risk r-moderate">Moderate</span></div>
+        <div class="sig-row"><span class="sig-code">PFE-05</span><span class="sig-label">Future goal erasure</span><span class="sig-risk r-low">Low</span></div>
+        <div class="sig-row"><span class="sig-code">PFE-06</span><span class="sig-label">Cultural disconnection</span><span class="sig-risk r-low">Low</span></div>
+        <div class="sig-row"><span class="sig-code">PFE-07</span><span class="sig-label">Loss of routine and structure</span><span class="sig-risk r-low">Low</span></div>
+      </div>
+    </div>
+</section>
+
+<!-- COMBINATION RULES -->
+<section id="rules">
+  <div class="chapter-label">The reasoning</div>
+  <div class="rules-head">
+    <h2 class="rules-headline">A score tells a clinician how worried to be. <em>These tell them why.</em></h2>
+    <p class="rules-body">Signals are not read in isolation. After inference, a separate rules layer evaluates the detected set against eight combination rules drawn from the taxonomy. A rule that fires is recorded with its reason, so what reaches the clinician is not a number but a pattern with a name. The combined level a rule elevates to has exactly two values, and it is always shown labelled, because the same words appear on other scales that mean other things.</p>
+  </div>
+  <div class="rules-grid">
+      <div class="rule reveal">
+        <div class="rule-top"><span class="rule-id">R1</span><span class="rule-level">combined level: HIGH</span></div>
+        <div class="rule-when">Any SHA signal together with any HOP signal</div>
+        <div class="rule-why">Ideation alongside futility. Either alone is a signal; together the taxonomy treats it as immediate human review.</div>
+      </div>
+      <div class="rule reveal">
+        <div class="rule-top"><span class="rule-id">R2</span><span class="rule-level">combined level: HIGH</span></div>
+        <div class="rule-when">SHA-02, SHA-05 or SHA-08 on their own</div>
+        <div class="rule-why">The three the taxonomy will not wait on: platform-evasion euphemism, method inquiry inside a minimising wrapper, and community-specific death reference.</div>
+      </div>
+      <div class="rule reveal">
+        <div class="rule-top"><span class="rule-id">R3</span><span class="rule-level">combined level: HIGH</span></div>
+        <div class="rule-when">HOP-03 together with HOP-07</div>
+        <div class="rule-why">AAVE futility construction plus burden narrative. The taxonomy names this its highest-risk pattern.</div>
+      </div>
+      <div class="rule reveal">
+        <div class="rule-top"><span class="rule-id">R4</span><span class="rule-level">combined level: HIGH</span></div>
+        <div class="rule-when">ISO-06 together with any SHA signal</div>
+        <div class="rule-why">Family rejection alongside ideation &mdash; the combination that carries the most weight for LGBTQIA+ youth.</div>
+      </div>
+      <div class="rule reveal">
+        <div class="rule-top"><span class="rule-id">R5</span><span class="rule-level">combined level: HIGH</span></div>
+        <div class="rule-when">CCM-04 together with SHA-02</div>
+        <div class="rule-why">Ideation delivered as a joke. The humour is the disclosure mechanism, not a discount on the content.</div>
+      </div>
+      <div class="rule reveal">
+        <div class="rule-top"><span class="rule-id">R6</span><span class="rule-level">combined level: MODERATE</span></div>
+        <div class="rule-when">Three or more CCM signals in one session</div>
+        <div class="rule-why">Not one hedge but a pattern of them. Reads as heavy suppression, and the response is to create an opening rather than to press.</div>
+      </div>
+      <div class="rule reveal">
+        <div class="rule-top"><span class="rule-id">R7</span><span class="rule-level">combined level: MODERATE</span></div>
+        <div class="rule-when">PFE-02, ISO-01 and HOP-04 together</div>
+        <div class="rule-why">Trusted-adult loss, withdrawal and coded exhaustion. A slow-burn pattern no single signal would surface.</div>
+      </div>
+      <div class="rule reveal">
+        <div class="rule-top"><span class="rule-id">R8</span><span class="rule-level">combined level: MODERATE</span></div>
+        <div class="rule-when">Three or more TRM signals in one session</div>
+        <div class="rule-why">Social determinants stacking. Documents the circumstances and points at resource connection.</div>
+      </div>
+  </div>
+  <p class="rules-foot">These are post-inference business logic, not a model training target. A fired rule is what the rules layer concluded from the model's output &mdash; not, itself, something the model detected. Keeping the two separable is what lets a clinician see the difference.</p>
+</section>
+
+<!-- CDS BOUNDARY -->
+<section id="cds">
+  <div class="chapter-label light">The boundary</div>
+  <div class="cds-head">
+    <h2 class="cds-headline">Vasl surfaces the signal. <em>A licensed clinician decides.</em></h2>
+    <p class="cds-body">VLAP is clinical decision support. It does not diagnose, and it is never member-facing. It does not contact a young person, a guardian, a clinician or a crisis service on anyone's behalf, and it does not decide that somebody must be reached right now. That judgement belongs to the treating provider.</p>
+  </div>
+  <div class="cds-cols">
+    <div class="cds-col">
+      <div class="cds-col-head">What Vasl does</div>
+      <p>Writes a row in the clinician's queue when a message crosses a surfacing threshold.</p>
+      <p>Makes a high signal prominent in that queue, with the signals and rules behind it.</p>
+      <p>Scopes which clinician can see which members' signals.</p>
+      <p>Records who read what, and when.</p>
+    </div>
+    <div class="cds-col not">
+      <div class="cds-col-head">What Vasl does not do</div>
+      <p>Email, page, text or otherwise notify a human that a signal was found.</p>
+      <p>Decide that a signal warrants immediate contact.</p>
+      <p>Choose a recipient and send to them.</p>
+      <p>Diagnose, close, resolve or act on a case.</p>
+    </div>
+  </div>
+  <div class="tier-block">
+    <div class="tier-head">Surfacing tier</div>
+    <p class="tier-sub">An operational routing bucket, not a clinical grade and not part of the taxonomy. It decides one thing: whether a queue row is written, and how quickly it asks to be looked at.</p>
+      <div class="tier-row"><span class="tier-name">LOW</span><span class="tier-what">No row written.</span></div>
+      <div class="tier-row"><span class="tier-name">MODERATE</span><span class="tier-what">No row written, unless the message is flagged for review.</span></div>
+      <div class="tier-row"><span class="tier-name">HIGH</span><span class="tier-what">Writes a row in the clinician queue.</span></div>
+      <div class="tier-row"><span class="tier-name">CRISIS</span><span class="tier-what">Writes a row in the clinician queue, carrying the shortest review window.</span></div>
+    <p class="tier-sub" style="margin-top:26px;margin-bottom:0;">Because Vasl does not dispatch, a surfaced signal is seen when a clinician looks. The safety property lives in a monitored queue and in whatever alerting the client organisation runs on its own side. Vasl does not claim to reach anyone.</p>
+  </div>
+</section>
+
+<!-- VALIDATION -->
+<section id="validation">
+  <div class="chapter-label">Validation status</div>
+  <div class="val-head">
+    <h2 class="val-headline">What has been validated, <em>and what has not.</em></h2>
+    <p class="val-lead">The taxonomy's own status line is "pending independent clinical review and validation." Four signals carry pilot evidence today. Stating which four, and what the rest are, is more useful than a blanket disclaimer.</p>
+  </div>
+      <div class="val-row"><span class="val-cat">HOP</span><span class="val-txt">HOP-01 validated in pilot cohorts (n=47). HOP-02 through HOP-09 annotated; sensitivity and specificity pending a powered study.</span></div>
+      <div class="val-row"><span class="val-cat">SHA</span><span class="val-txt">SHA-01 validated. SHA-02 detected in 23 pilot instances with 100% clinical confirmation. SHA-03 through SHA-08 annotated; underpowered.</span></div>
+      <div class="val-row"><span class="val-cat">CCM</span><span class="val-txt">All signals annotated in pilot data. CCM-04 the most frequently occurring. No powered validation study completed.</span></div>
+      <div class="val-row"><span class="val-cat">ISO</span><span class="val-txt">ISO-01 validated. ISO-06 flagged in 8 pilot instances. Others annotated only.</span></div>
+      <div class="val-row"><span class="val-cat">TRM</span><span class="val-txt">All signals annotated. No powered validation. Normalisation in community language makes annotation complex; an inter-rater reliability study is required.</span></div>
+      <div class="val-row"><span class="val-cat">PFE</span><span class="val-txt">All signals annotated as longitudinal markers. Validation requires accumulated session data.</span></div>
+  <p class="val-foot">Validation in progress toward NIMH SBIR Phase I. HOP-01, SHA-01, ISO-01 and SHA-02 carry pilot evidence; taxonomy-wide sensitivity and specificity are the Phase I aim. Independent clinical review, sociolinguistic review, community advisory review, inter-rater reliability and a powered sensitivity and specificity study are the named steps before this is a validated instrument.</p>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <h2 class="cta-headline">Language is culture, <em>not pathology.</em> Interpretation is care.</h2>
+  <p class="cta-body">This page describes the engine. Seeing it read real clinical language is a conversation with a clinician on our team, under the access controls the product actually ships with.</p>
+  <div class="cta-actions">
+    <a href="contact.html" class="btn-light">Request a clinical walkthrough</a>
+    <a href="research.html" class="btn-ghost-light">The validation agenda</a>
+  </div>
+</section>
+
+<!-- LINKS:VASL -->
+<style>
+.vrl-wrap{padding:70px var(--gutter);border-top:1px solid var(--chalk);background:var(--warm-white,var(--parchment));}
+.vrl-head{font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--clay);margin-bottom:36px;display:flex;align-items:center;gap:12px;}
+.vrl-head::after{content:'';display:block;width:36px;height:1px;background:var(--clay);opacity:0.45;}
+.vrl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;}
+.vrl-item{display:block;text-decoration:none;}
+.vrl-item-title{font-family:var(--serif);font-size:18px;font-weight:400;color:var(--ink);margin-bottom:8px;line-height:1.3;letter-spacing:-0.01em;transition:color 0.2s;}
+.vrl-item:hover .vrl-item-title{color:var(--clay);}
+.vrl-item-desc{font-size:13px;font-weight:300;color:var(--ink-70);line-height:1.6;}
+</style>
+<div class="vrl-wrap">
+  <div class="vrl-head">Related Reading</div>
+  <div class="vrl-grid">
+    <a href="vlap.html" class="vrl-item"><div class="vrl-item-title">why an instrument built for someone else keeps missing</div><div class="vrl-item-desc">The case for a language platform built on how youth actually speak.</div></a>
+    <a href="dialect-bias-mental-health-screening.html" class="vrl-item"><div class="vrl-item-title">dialect bias in mental health screening</div><div class="vrl-item-desc">Where standard instruments lose signal, and what it costs the young people they lose it on.</div></a>
+    <a href="technology.html" class="vrl-item"><div class="vrl-item-title">the architecture and security model</div><div class="vrl-item-desc">PHI boundaries, auditability, and the human-in-the-loop escalation design.</div></a>
+    <a href="research.html" class="vrl-item"><div class="vrl-item-title">how this holds up under independent review</div><div class="vrl-item-desc">The validation process the taxonomy is being taken through.</div></a>
   </div>
 </div>
+<!-- /LINKS:VASL -->
+
+<footer>
+  <div class="footer-sitemap">
+    <div class="fs-brand">
+      <a href="index.html" class="footer-logo">Vasl <span>Health</span></a>
+      <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
+      <a href="contact.html" class="fs-cta">Request a Demo &rarr;</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Platform</div>
+      <a href="platform.html">Platform Overview</a>
+      <a href="vlap.html">VLAP</a>
+      <a href="ai-model.html">AI Model</a>
+      <a href="technology.html">Technology</a>
+      <a href="infrastructure.html">Infrastructure, Not Burden</a>
+      <a href="health-systems.html">VLAP for Health Systems</a>
+      <a href="peer-groups.html">Peer Groups</a>
+      <a href="teletherapy.html">Teletherapy</a>
+      <a href="prototype.html">Live Demo Portal</a>
+      <a href="demo.html">VLAP Signal Taxonomy</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Who We Serve</div>
+      <a href="for-schools.html">For Schools</a>
+      <a href="for-organizations.html">For Organizations</a>
+      <a href="outcomes.html">Outcomes</a>
+      <a href="clinical-outcomes.html">Clinical Outcomes</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Company</div>
+      <a href="about.html">About Vasl</a>
+      <a href="team.html">Team</a>
+      <a href="careers.html">Careers</a>
+      <a href="research.html">Research</a>
+      <a href="blog.html">Blog &amp; Insights</a>
+      <a href="contact.html">Contact</a>
+      <a href="glossary.html">Glossary</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Support &amp; Legal</div>
+      <a href="support.html">Help Center</a>
+      <a href="for-families.html">For Families</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="baa.html">Business Associate Agreement</a>
+      <a href="accessibility.html">Accessibility</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Resources</div>
+      <a href="glossary.html">Glossary</a>
+      <a href="school-mental-health-rfp.html">School Mental Health RFP Guide</a>
+      <a href="dialect-bias-mental-health-screening.html">Dialect Bias in Screening</a>
+      <a href="hedis-behavioral-health-cultural-fit.html">HEDIS &amp; Cultural Fit</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 Vasl Health, Inc. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="baa.html">BAA</a>
+    </div>
+  </div>
+</footer>
 
 <script>
-const sig=x=>1/(1+Math.exp(-x));
-const logit=p=>{p=Math.min(Math.max(p,1e-6),1-1e-6);return Math.log(p/(1-p));};
-
-const FEATS={
-  adi:{b:0.22,g:0.18,def:0.5,label:"Neighborhood hardship",desc:"How under-resourced their area is (Area Deprivation Index)",lo:"Well-resourced",hi:"High hardship"},
-  isolation:{b:0.19,g:0.15,def:0.4,label:"Social isolation",desc:"How cut off they are from support",lo:"Connected",hi:"Isolated"},
-  housing:{b:0.17,g:0.13,def:0.3,label:"Housing instability",desc:"How secure their living situation is",lo:"Stable",hi:"Unstable"},
-  insurance:{b:0.14,g:0.10,def:0.3,label:"Insurance gaps",desc:"Coverage instability affecting access to care",lo:"Covered",hi:"Uninsured"},
-  food:{b:0.11,g:0.08,def:0.3,label:"Food insecurity",desc:"Reliable access to enough food",lo:"Secure",hi:"Insecure"},
-  lep:{b:0.09,g:0.12,def:0.0,label:"Language barrier",desc:"Limited English proficiency in their care setting",lo:"None",hi:"Significant"},
-  pc_engagement:{b:-0.12,g:-0.09,def:0.5,label:"Connected to care",desc:"How engaged they are with a regular provider (protective)",lo:"Disconnected",hi:"Well-connected"},
-  prior_bh:{b:0.10,g:0.07,def:0.3,label:"Prior mental-health history",desc:"Past behavioral-health service use",lo:"None",hi:"Extensive"},
-};
-const A0=-0.15,A1=1.08;
-const S={}; for(const k in FEATS) S[k]=FEATS[k].def;
-
-function calibrate(p){
-  const lp=logit(p);let z=A0+A1*lp;
-  for(const k in FEATS){const f=FEATS[k];z+=f.b*S[k]+f.g*(lp*S[k]);}
-  return sig(z);
-}
-
-const TIER = {
-  critical:{label:"Critical", color:"var(--signal-critical)", bg:"var(--signal-critical-bg)", plain:"Immediate clinical attention warranted."},
-  high:{label:"High", color:"var(--signal-high)", bg:"var(--signal-high-bg)", plain:"A clinician should follow up soon."},
-  elevated:{label:"Elevated", color:"var(--signal-med)", bg:"var(--signal-med-bg)", plain:"Worth a clinician's review."},
-  low:{label:"Low", color:"var(--signal-low)", bg:"var(--signal-low-bg)", plain:"No significant distress detected."}
-};
-const RISK = {
-  high:{color:"var(--signal-critical)", bg:"var(--signal-critical-bg)", label:"high"},
-  moderate:{color:"var(--signal-med)", bg:"var(--signal-med-bg)", label:"moderate"},
-  low:{color:"var(--signal-low)", bg:"var(--signal-low-bg)", label:"protective"}
-};
-
-const TAX=[
- {code:"HOP-03",label:"Indirect hopelessness",risk:"moderate",w:0.42,re:/\b(why (do i|even) bother|why even try|idk why i (even )?try|done with everything|what.?s (even )?the point)\b/i,plain:"Questioning whether it's worth trying"},
- {code:"HOP-06",label:"Burden narrative",risk:"high",w:0.55,re:/\b(i.?m a burden|better off without me|everyone would be better( off)? without|make things (harder|worse))\b/i,plain:"Feeling like a burden to others"},
- {code:"HOP-09",label:"Giving up",risk:"high",w:0.55,re:/\b(i give up|i.?m done( fighting| trying)?|can.?t fight anymore|no way out|ain.?t no way out)\b/i,plain:"Language of giving up the fight"},
- {code:"HOP-07",label:"Emotional numbness",risk:"moderate",w:0.40,re:/\b(feel nothing|completely numb|empty inside|nothing feels real|everything (feels|is) (heavy|pesado))\b/i,plain:"Numbness or heaviness"},
- {code:"ISO-01",label:"Withdrawal",risk:"moderate",w:0.42,re:/\b(staying in (my )?room|haven.?t left (the house|home|my room)|avoiding everyone|not answering)\b/i,plain:"Pulling away from people"},
- {code:"ISO-02",label:"Feeling unseen",risk:"moderate",w:0.42,re:/\b(nobody (gets|understands|cares about) me|no one (actually )?cares|i.?m invisible|don.?t belong)\b/i,plain:"Feeling that no one understands"},
- {code:"CCM-01",label:"Minimizing",risk:"moderate",w:0.38,re:/\b(it.?s whatever|don.?t worry about me|not a big deal|estoy bien igual|i.?ll be (okay|fine))\b/i,plain:"Downplaying their own distress"},
- {code:"CCM-04",label:"Pre-disclosure hedge",risk:"moderate",w:0.40,re:/\b(probably nothing but|not to be dramatic but|sounds? (stupid|dumb) but|probably overreacting)\b/i,plain:"Hedging before opening up"},
- {code:"CCM-05",label:"Coded distress",risk:"moderate",w:0.40,re:/\b(on god|no cap|lowkey|deadass|ngl|fr fr|ion)\b.{0,60}\b(not okay|struggling|going through|can.?t|done|dark|lot right now)\b/i,plain:"Distress expressed in dialect/slang"},
- {code:"CCM-06",label:"Performing strength",risk:"moderate",w:0.42,re:/\b(i.?m (always )?the strong one|have to be strong|can.?t fall apart|strong one for (everybody|everyone|my))\b/i,plain:"Masking behind 'being the strong one'"},
- {code:"SHA-01",label:"Self-harm thoughts",risk:"high",w:0.70,re:/\b(hurt(ing)? myself|self.?harm|urges? to hurt|thoughts? about (hurting|harming) myself)\b/i,plain:"Thoughts of self-harm"},
- {code:"SHA-06",label:"Suicidal thoughts (explicit)",risk:"high",w:0.90,re:/\b(suicid|kill(ing)? myself|want to die|end my life|take my (own )?life|don.?t want to (live|be here)|want to be dead)\b/i,plain:"Explicit suicidal language"},
- {code:"SHA-07",label:"Suicidal thoughts (coded)",risk:"high",w:0.72,re:/\b(better off (dead|gone|if i (wasn.?t|was never) here)|world (would be )?better without me|wish i (could )?(just )?disappear|in case (something|anything) happens)\b/i,plain:"Indirect/coded references to not being here"},
- {code:"SHA-04",label:"Saying goodbye",risk:"high",w:0.85,re:/\b(this is (my )?goodbye|say(ing)? (my )?goodbyes?|in case i (don.?t|never) (talk|see)|wanted to say goodbye|you all meant a lot)\b/i,plain:"Goodbye-type messages"},
- {code:"SHA-05",label:"Sudden calm",risk:"high",w:0.70,re:/\b((actually|finally|surprisingly) (feeling )?(really )?calm|at peace (finally|now)|feel(ing)? (so much )?lighter|calm now actually|made my (decision|peace))\b/i,plain:"Unexpected calm after distress — a known warning sign"},
- {code:"PFE-04",label:"Protective factor",risk:"low",w:-0.30,re:/\b(re.?engag|back (to|on) (track|the team)|improved sleep|attending (sessions|school)|things (are )?looking up|feeling (grateful|better)|passed my)\b/i,plain:"A positive, protective sign"},
-];
-
-function detectRegister(t){
-  const aave=/\b(fr|fr fr|lowkey|deadass|on god|no cap|ngl|ion|finna|tryna|be (the|going|feeling)|ain.?t)\b/i.test(t);
-  const es=/\b(no sé|estoy|todo|siente|pesado|igual|nada|vida)\b/i.test(t);
-  if(es&&/\b(the|my|i|and|been|room|haven)\b/i.test(t)) return {reg:"English + Spanish (switching)",note:"— switching between languages, flagged"};
-  if(es) return {reg:"Spanish",note:""};
-  if(aave) return {reg:"African American English",note:"— dialect-aware reading applied"};
-  if(t) return {reg:"General English",note:""};
-  return {reg:"—",note:""};
-}
-
-function analyze(){
-  const t=document.getElementById('input').value.trim();
-  const r=detectRegister(t);
-  document.getElementById('register').textContent=r.reg;
-  document.getElementById('register-note').textContent=r.note;
-
-  const hits=[];
-  for(const s of TAX){ if(s.re.test(t)) hits.push(s); }
-  let raw=0.05,comp=1;
-  hits.filter(h=>h.w>0).forEach(h=>comp*=(1-h.w)); raw=1-comp;
-  hits.filter(h=>h.w<0).forEach(h=>raw=Math.max(0.02,raw+h.w));
-  if(!t) raw=0; raw=Math.min(0.97,raw);
-
-  const pcal=calibrate(raw||0.001);
-  const tierKey=t?(pcal>=0.80?'critical':pcal>=0.55?'high':pcal>=0.30?'elevated':'low'):'low';
-  const tier=TIER[tierKey];
-
-  const heroBox=document.getElementById('hero-box');
-  heroBox.style.borderLeftColor=tier.color;
-  heroBox.style.background=tier.bg;
-  const tl=document.getElementById('tier-label'); tl.style.color=tier.color; tl.textContent=tier.label;
-  document.getElementById('tier-plain').textContent=t?tier.plain:'Type a message to begin.';
-  const sc=document.getElementById('score'); sc.style.color=tier.color; sc.textContent=(t?pcal:0).toFixed(2);
-
-  document.getElementById('raw').textContent=(t?raw:0).toFixed(2);
-  document.getElementById('cal').textContent=(t?pcal:0).toFixed(2);
-  const d=pcal-raw;
-  const why=document.getElementById('why');
-  if(!t){ why.textContent="Adjust the sliders to see context change the read."; }
-  else if(Math.abs(d)<0.015){ why.textContent="Their circumstances are about average — little adjustment."; }
-  else if(d>0){ why.innerHTML="Their circumstances <b style='color:var(--signal-high)'>raised</b> the concern."; }
-  else { why.innerHTML="Positive circumstances <b style='color:var(--signal-low)'>lowered</b> the concern."; }
-
-  const sigEl=document.getElementById('signals');
-  if(hits.length){
-    sigEl.innerHTML=hits.sort((a,b)=>Math.abs(b.w)-Math.abs(a.w)).map(h=>{
-      const rk=RISK[h.risk];
-      return `<div style="background:var(--paper);border:1px solid var(--border);border-radius:6px;padding:12px 14px;margin-bottom:8px">
-        <div style="display:flex;align-items:center;gap:10px">
-          <span style="width:6px;height:6px;border-radius:999px;flex:none;background:${rk.color}"></span>
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.04em;color:var(--fg3)">${h.code}</span>
-          <span style="font-size:14px;font-weight:500;color:var(--fg1)">${h.label}</span>
-          <span style="margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:${rk.color};background:${rk.bg};border-radius:3px;padding:3px 7px">${rk.label}</span>
-        </div>
-        <div style="font-size:13px;line-height:1.6;color:var(--fg3);margin-top:5px;padding-left:16px">${h.plain}</div>
-      </div>`;
-    }).join('');
-  } else {
-    sigEl.innerHTML='<div style="font-size:14px;color:var(--fg-muted);padding:10px 0">'+(t?'No distress patterns matched this message.':'Nothing yet — type a message on the left.')+'</div>';
+  document.documentElement.classList.add('js-ready');
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.06, rootMargin: '0px 0px -24px 0px' });
+  reveals.forEach(el => io.observe(el));
+  window.addEventListener('load', () => {
+    reveals.forEach((el, i) => {
+      if (el.getBoundingClientRect().top < window.innerHeight) {
+        setTimeout(() => el.classList.add('visible'), i * 55);
+      }
+    });
+  });
+  function toggleNav() {
+    document.querySelector('.nav-links').classList.toggle('open');
+    document.getElementById('ham-btn').classList.toggle('open');
   }
-}
-
-const sl=document.getElementById('sliders');
-sl.innerHTML=Object.keys(FEATS).map(k=>{
-  const f=FEATS[k];
-  return `<div>
-    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
-      <span style="font-size:14px;font-weight:500;color:var(--fg1)">${f.label}</span>
-      <span id="val-${k}" style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;color:var(--green-600)">${Math.round(f.def*100)}%</span>
-    </div>
-    <div style="font-size:12px;line-height:1.6;color:var(--fg-muted);margin:2px 0 8px">${f.desc}</div>
-    <input type="range" min="0" max="1" step="0.01" value="${f.def}" oninput="setS('${k}',this.value)">
-    <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fg-muted);margin-top:5px"><span>${f.lo}</span><span>${f.hi}</span></div>
-  </div>`;
-}).join('');
-function setS(k,v){S[k]=parseFloat(v);document.getElementById('val-'+k).textContent=Math.round(v*100)+'%';analyze();}
-
-const SAMPLES=[
- {label:"Everyday check-in",text:"had a decent week, nothing major. just checking in"},
- {label:"Coded distress (dialect)",text:"idk why i even try anymore fr. i be the strong one for everybody but lowkey i'm done fighting. probably nothing but"},
- {label:"Warning signs",text:"wanted to say goodbye to everyone in case something happens. you all meant a lot to me. feeling calm now actually"},
- {label:"Switching languages",text:"no sé, últimamente todo se siente pesado. haven't left my room in days, avoiding everyone. estoy bien igual"},
- {label:"Positive / protective",text:"had a good week honestly, back on the track team and sleeping better. things are looking up"},
-];
-document.getElementById('samples').innerHTML=SAMPLES.map((s,i)=>`<button type="button" class="chip" onclick="fill(${i})">${s.label}</button>`).join('');
-function fill(i){document.getElementById('input').value=SAMPLES[i].text;analyze();}
-
-document.getElementById('input').addEventListener('input',analyze);
-analyze();
 </script>
 </body>
 </html>
