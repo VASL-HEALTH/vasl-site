@@ -300,6 +300,106 @@
   }
 
   /* ═══════════════════════════════════════════
+     INTERSTITIAL — WHY THIS HAD TO BE BUILT
+  ═══════════════════════════════════════════ */
+  #infra-case {
+    background: var(--deep-green);
+    color: var(--warm-white);
+    padding-top: 130px;
+    padding-bottom: 130px;
+  }
+
+  .infra-kicker {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--clay-light);
+  }
+
+  .infra-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 0 100px;
+    align-items: start;
+    margin-top: 28px;
+  }
+
+  .infra-headline {
+    font-family: var(--serif);
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 300;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--warm-white);
+    margin-bottom: 28px;
+  }
+  .infra-headline em { font-style: italic; color: var(--clay-light); }
+
+  .infra-body {
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(250,247,242,0.72);
+    max-width: 560px;
+  }
+  .infra-body + .infra-body { margin-top: 20px; }
+  .infra-body strong { color: var(--warm-white); font-weight: 500; }
+
+  .infra-pull {
+    margin-top: 32px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 21px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--warm-white);
+    border-left: 2px solid var(--clay-light);
+    padding-left: 20px;
+  }
+
+  .infra-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  .infra-stat {
+    border-top: 1px solid rgba(250,247,242,0.18);
+    padding-top: 18px;
+  }
+
+  .infra-stat-num {
+    font-family: var(--serif);
+    font-size: 48px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--clay-light);
+  }
+  .infra-stat-num.down { color: rgba(250,247,242,0.6); }
+
+  .infra-stat-label {
+    margin-top: 8px;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: rgba(250,247,242,0.6);
+    max-width: 260px;
+  }
+
+  .infra-source {
+    margin-top: 8px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    color: rgba(250,247,242,0.4);
+  }
+
+  @media (max-width: 900px) {
+    .infra-grid { grid-template-columns: 1fr; gap: 60px 0; }
+  }
+
+  /* ═══════════════════════════════════════════
      CHAPTER 02 — WHAT VLAP IS
   ═══════════════════════════════════════════ */
   #what {
@@ -1250,6 +1350,47 @@
         <div class="instrument-claim">"Have you wished you were dead?"</div>
         <div class="instrument-gap">"I'm dead tired." "I'm deadass done." "This whole thing is dead to me." Three different youth. Three different meanings. One instrument that can't tell the difference.</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     INTERSTITIAL &mdash; WHY THIS HAD TO BE BUILT
+════════════════════════════════════ -->
+<section id="infra-case">
+  <div class="infra-kicker reveal">This isn't a novelty. It's the missing infrastructure.</div>
+
+  <div class="infra-grid">
+    <div>
+      <h2 class="infra-headline reveal d1">
+        The gap isn't<br>
+        awareness. <em>It's data<br>
+        that never existed.</em>
+      </h2>
+
+      <p class="infra-body reveal d2">
+        Black youth suicide rose <strong>29.4%</strong> between 2018 and 2023, while white youth suicide fell <strong>14.8%</strong> over the same period.<sup style="font-size:10px;">1</sup> The detection systems deployed on these young people were trained and validated on everyone else.
+      </p>
+
+      <p class="infra-body reveal d2">
+        The data to fix that cannot be bought, licensed, or downloaded. It doesn't exist in any public repository &mdash; we verified that systematically. It has to be built with the community, from inside the language. That's what Vasl did: the first community-annotated corpus pairing African American Language with behavioral-health distress labels, and the first clinical-language platform built on it.
+      </p>
+
+      <p class="infra-pull reveal d3">
+        VLAP surfaces distress signals for a clinician's independent review &mdash; in the language youth actually use.
+      </p>
+    </div>
+
+    <div class="infra-stats reveal d2">
+      <div class="infra-stat">
+        <div class="infra-stat-num">+29.4<span style="font-size:24px">%</span></div>
+        <div class="infra-stat-label">Rise in Black youth (ages 10&ndash;24) suicide rate, 2018&ndash;2023</div>
+      </div>
+      <div class="infra-stat">
+        <div class="infra-stat-num down">&minus;14.8<span style="font-size:24px">%</span></div>
+        <div class="infra-stat-label">Change in white youth (ages 10&ndash;24) suicide rate over the same period</div>
+      </div>
+      <div class="infra-source">1&nbsp;&mdash;&nbsp;CDC, MMWR 74(35);550&ndash;553, "Differences in Suicide Rates by Race, Ethnicity and Age Group, 2018&ndash;2023" (Sept. 2025)</div>
     </div>
   </div>
 </section>
