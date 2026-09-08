@@ -507,13 +507,19 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
 </footer>
 
 <script>
-  // Partner Package instant download endpoint. Empty until the AWS side
-  // (tools/partner-package-download/infra.tf in this repo) has been
-  // deployed by someone with AWS access -- see that file's header
-  // comment for the one-time `terraform apply` + PDF upload steps.
-  // Paste the resulting Lambda Function URL here once it's live; until
-  // then this feature quietly no-ops and the existing mailto lead
-  // notification (below) keeps working exactly as it does today.
+  // Partner Package instant download endpoint -- the Lambda Function URL
+  // that mints a short-lived presigned link to the PDF.
+  //
+  // The AWS side is NOT in this repo. It lives in VASL-PLATFORM at
+  // infra/aws/partner-package-download/ (own Terraform state key in
+  // vasl-terraform-state), alongside the rest of this site's infra --
+  // infra/aws/static-sites/ owns the bucket, distribution and deploy
+  // role. Run `terraform apply` there, upload the PDF, and paste the
+  // function_url output below.
+  //
+  // Empty is a safe state: this feature quietly no-ops and the existing
+  // mailto lead notification (below) keeps working exactly as it does
+  // today. Nothing on this page breaks while it is unset.
   const PARTNER_PACKAGE_ENDPOINT = '';
 
   document.documentElement.classList.add('js-ready');
