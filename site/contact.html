@@ -205,6 +205,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
   @media(max-width:1100px){.footer-sitemap{grid-template-columns:1fr 1fr 1fr;gap:32px;}.fs-brand{grid-column:1/-1;padding-right:0;}.fs-col{border-left:none;padding-left:0;}}
   @media(max-width:680px){.footer-sitemap{grid-template-columns:1fr 1fr;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}}
   @media(max-width:400px){.footer-sitemap{grid-template-columns:1fr;}}
+
+  .pp-status { margin-top: 14px; padding: 14px 16px; border-radius: 8px; font-size: 0.92rem; line-height: 1.5; }
+  .pp-status.pp-pending { background: var(--parchment, #f4efe6); color: var(--ink, #1a1614); }
+  .pp-status.pp-ready { background: var(--deep-green, #2d5f4f); color: #fff; }
+  .pp-status.pp-ready a { color: #fff; font-weight: 600; text-decoration: underline; }
+  .pp-status.pp-fallback { background: var(--parchment, #f4efe6); color: var(--ink, #1a1614); }
 </style>
 </head>
 <body>
@@ -391,6 +397,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
 
     <button type="submit" class="form-submit">Schedule Demo &rarr;</button>
     <div class="form-privacy">By submitting, you agree to our <a href="privacy.html">Privacy Policy</a>. We use this information to prepare your demo and follow up with relevant resources only.</div>
+    <div id="partner-package-status" class="pp-status" hidden></div>
   </form>
 </div>
 
@@ -500,6 +507,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
 </footer>
 
 <script>
+  // Partner Package instant download endpoint. Empty until the AWS side
+  // (tools/partner-package-download/infra.tf in this repo) has been
+  // deployed by someone with AWS access -- see that file's header
+  // comment for the one-time `terraform apply` + PDF upload steps.
+  // Paste the resulting Lambda Function URL here once it's live; until
+  // then this feature quietly no-ops and the existing mailto lead
+  // notification (below) keeps working exactly as it does today.
+  const PARTNER_PACKAGE_ENDPOINT = '';
+
   document.documentElement.classList.add('js-ready');
   const reveals = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
@@ -548,7 +564,53 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
       // Org type only — no name, email, or organization name in the event.
       window.plausible('Demo Request', { props: { orgType: orgType || 'unspecified' } });
     }
+    // Lead notification to the team — unchanged, fires for every submission.
     window.location.href = `mailto:hello@vaslhealth.com?subject=${subject}&body=${body}`;
+
+    // Instant self-serve download, in parallel with the mailto above —
+    // only for Partner Package requests, only once the endpoint is live.
+    if (wantsPartnerPackage) {
+      requestPartnerPackageDownload({ name: `${firstName} ${lastName}`.trim(), email, org });
+    }
+  }
+
+  function requestPartnerPackageDownload({ name, email, org }) {
+    const statusEl = document.getElementById('partner-package-status');
+    if (!statusEl) return;
+
+    if (!PARTNER_PACKAGE_ENDPOINT) {
+      // AWS side not deployed yet — the mailto lead notification above
+      // still went out, so nothing is lost, just not instant.
+      statusEl.hidden = false;
+      statusEl.className = 'pp-status pp-fallback';
+      statusEl.textContent = "Got it — we'll email the Partner Package to you directly.";
+      return;
+    }
+
+    statusEl.hidden = false;
+    statusEl.className = 'pp-status pp-pending';
+    statusEl.textContent = 'Preparing your download…';
+
+    fetch(PARTNER_PACKAGE_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, org }),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error('Request failed');
+        return res.json();
+      })
+      .then((data) => {
+        statusEl.className = 'pp-status pp-ready';
+        statusEl.innerHTML = `Your download is ready. <a href="${data.url}" target="_blank" rel="noopener">Open the Partner Package (PDF)</a>. This link expires in 24 hours.`;
+        // Also open it automatically so the requester doesn't have to
+        // hunt for the link.
+        window.open(data.url, '_blank', 'noopener');
+      })
+      .catch(() => {
+        statusEl.className = 'pp-status pp-fallback';
+        statusEl.textContent = "We couldn't generate an instant link, but we'll email the Partner Package to you directly.";
+      });
   }
   function toggleNav() {
     document.querySelector('.nav-links').classList.toggle('open');
