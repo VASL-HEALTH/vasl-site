@@ -1,4 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" role="img" aria-label="Vasl Health mark, tile">
-  <rect width="80" height="80" rx="14" fill="#2d5f4f"></rect>
-  <g transform="translate(11.6 11.6) scale(0.71)"><path d="M11 14 L21 14 L43 60 L38 62 Z" fill="#fafaf8"></path><path d="M43 60 L38 62 L60 14 L66 14 Z" fill="#d4a574"></path></g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" role="img" aria-labelledby="t"><title id="t">Vasl Health mark</title><rect width="80" height="80" rx="14" fill="#2d5f4f"/><g transform="translate(17.083 20) scale(0.833)"><path d="M0 0 L10 0 L32 46 L27 48 Z" fill="#fafaf8"/><path d="M32 46 L27 48 L49 0 L55 0 Z" fill="#d4a574"/></g></svg>

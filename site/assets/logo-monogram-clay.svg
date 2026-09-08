@@ -1,4 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" role="img" aria-label="Vasl Health mark">
-  <rect width="80" height="80" rx="14" fill="#d4a574"></rect>
-  <text x="40" y="55" text-anchor="middle" font-family="Newsreader, Georgia, serif" font-weight="500" font-size="48" fill="#2d5f4f">v</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" role="img" aria-labelledby="t"><title id="t">Vasl Health mark, for clay surfaces</title><g transform="translate(8.49 12.5) scale(1.146)"><path d="M0 0 L10 0 L32 46 L27 48 Z" fill="#2d5f4f"/><path d="M32 46 L27 48 L49 0 L55 0 Z" fill="#1a1614"/></g></svg>
