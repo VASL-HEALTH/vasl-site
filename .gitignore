@@ -4,3 +4,7 @@ node_modules/
 .netlify/
 __pycache__/
 *.pyc
+
+# Local agent tooling. Contains terminal-internal-token -- a live secret --
+# so this must never be committed.
+.gstack/

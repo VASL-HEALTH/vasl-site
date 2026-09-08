@@ -365,7 +365,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
         <label class="form-checkbox"><input type="checkbox" name="interest" value="crisis"><span class="form-checkbox-label">Crisis detection and clinical escalation protocol</span></label>
         <label class="form-checkbox"><input type="checkbox" name="interest" value="outcomes"><span class="form-checkbox-label">Clinical outcomes data and IRB validation</span></label>
         <label class="form-checkbox"><input type="checkbox" name="interest" value="compliance"><span class="form-checkbox-label">HIPAA / FERPA compliance and security documentation</span></label>
-        <label class="form-checkbox"><input type="checkbox" id="interest-partner-package" name="interest" value="partner-package"><span class="form-checkbox-label">The Partner Package &mdash; full technology, deployment, and evidence documentation (confidential)</span></label>
+        <label class="form-checkbox"><input type="checkbox" id="interest-partner-package" name="interest" value="partner-package"><span class="form-checkbox-label">The Partner Package &mdash; full technology, deployment, and evidence documentation</span></label>
       </div>
     </div>
 
@@ -526,7 +526,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
       const additionalField = document.getElementById('additional');
       if (cb) cb.checked = true;
       if (additionalField && !additionalField.value) {
-        additionalField.value = "Requesting the Vasl Partner Package (confidential PDF) \u2014 technology, deployment patterns, and evidence/validation status.";
+        additionalField.value = "Requesting the Vasl Partner Package (PDF) \u2014 technology, deployment patterns, and evidence/validation status.";
       }
     }
   })();
