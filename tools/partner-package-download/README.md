@@ -30,34 +30,31 @@ volume).
   site (the checkbox, status box, and `requestPartnerPackageDownload()`
   JS). It no-ops safely until `PARTNER_PACKAGE_ENDPOINT` is filled in.
 
-## Deployment — one manual step required
+## Deployment — one command, run by someone with AWS access
 
 I (Claude) have push access to this repo but **no AWS credentials or
-console access** — I can't run `terraform apply` myself. The site's own
-GitHub Actions deploy role is intentionally scoped to S3-sync +
+console access** — I can't run this myself. The site's own GitHub
+Actions deploy role is intentionally scoped to S3-sync +
 CloudFront-invalidate for the existing marketing bucket only (see
 `.github/workflows/deploy-site.yml`'s header comment); it isn't and
 shouldn't be widened to create Lambda/IAM/S3 resources.
 
-So this feature ships as complete, ready-to-run code, but someone with
-AWS access to the Vasl Health account needs to do this once:
+So this feature ships as complete, ready-to-run code. Whoever has AWS
+access to the Vasl Health account runs one script:
 
 ```bash
 cd tools/partner-package-download
-terraform init
-terraform apply
-
-# Upload the PDF to the new private bucket (one time):
-aws s3 cp /path/to/Vasl-Partner-Package-COMPLETE4.pdf \
-  s3://$(terraform output -raw bucket_name)/partner-package.pdf
-
-terraform output function_url
+./deploy.sh /path/to/Vasl-Partner-Package-COMPLETE4.pdf
 ```
 
-Then paste that Function URL into the `PARTNER_PACKAGE_ENDPOINT`
-constant at the top of the `<script>` block in `site/contact.html` and
-push to `main` — the existing deploy pipeline handles that HTML change
-automatically, same as any other content edit.
+That script does everything: `terraform init` + `apply` (creates the
+private bucket, IAM role, Lambda, Function URL), uploads the PDF,
+patches `PARTNER_PACKAGE_ENDPOINT` in `site/contact.html` with the live
+URL, and prints the `git commit` / `git push` commands to ship it. It
+stops short of pushing on its own so you can review the diff first.
 
-Until that one apply happens, the site behaves exactly as it does
-today (mailto-only) — nothing is broken by merging this.
+Requires `terraform` and `awscli` installed and AWS credentials
+configured (`aws configure` or an assumed role) before running.
+
+Until that script runs, the site behaves exactly as it does today
+(mailto-only) — nothing is broken by merging this.
