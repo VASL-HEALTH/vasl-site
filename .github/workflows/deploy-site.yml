@@ -110,15 +110,25 @@ jobs:
       - name: Invalidate CloudFront
         id: invalidate
         run: |
+          # Paths MUST be an array expanded as "${PATHS[@]}", never an
+          # unquoted string. This was `PATHS='/*'` expanded as ${PATHS}, so
+          # the shell globbed it against the RUNNER'S filesystem and sent
+          # CloudFront "/usr /etc /proc /home ..." instead of "/*" -- meaning
+          # invalidate_all silently invalidated nothing. Assets are synced
+          # immutable for a year, so a changed logo or favicon kept serving
+          # the old bytes from cache with a completely green deploy.
+          #
+          # The default list survived only by luck: /*.html and /help/* match
+          # nothing at the runner's root, so bash left them literal.
           if [ "${{ inputs.invalidate_all }}" = "true" ]; then
-            PATHS='/*'
+            PATHS=('/*')
           else
-            PATHS='/ /*.html /help/* /sitemap.xml /robots.txt'
+            PATHS=('/' '/*.html' '/help/*' '/sitemap.xml' '/robots.txt')
           fi
-          echo "Invalidating: ${PATHS}"
+          echo "Invalidating: ${PATHS[*]}"
           ID=$(aws cloudfront create-invalidation \
                  --distribution-id "${DISTRIBUTION_ID}" \
-                 --paths ${PATHS} \
+                 --paths "${PATHS[@]}" \
                  --query 'Invalidation.Id' --output text)
           echo "id=${ID}" >> "$GITHUB_OUTPUT"
 
