@@ -361,6 +361,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
         <label class="form-checkbox"><input type="checkbox" name="interest" value="crisis"><span class="form-checkbox-label">Crisis detection and clinical escalation protocol</span></label>
         <label class="form-checkbox"><input type="checkbox" name="interest" value="outcomes"><span class="form-checkbox-label">Clinical outcomes data and IRB validation</span></label>
         <label class="form-checkbox"><input type="checkbox" name="interest" value="compliance"><span class="form-checkbox-label">HIPAA / FERPA compliance and security documentation</span></label>
+        <label class="form-checkbox"><input type="checkbox" id="interest-partner-package" name="interest" value="partner-package"><span class="form-checkbox-label">The Partner Package &mdash; full technology, deployment, and evidence documentation (confidential)</span></label>
       </div>
     </div>
 
@@ -513,6 +514,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
     });
   });
 
+  (function prefillFromQuery() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('ref') === 'partner-package') {
+      const cb = document.getElementById('interest-partner-package');
+      const additionalField = document.getElementById('additional');
+      if (cb) cb.checked = true;
+      if (additionalField && !additionalField.value) {
+        additionalField.value = "Requesting the Vasl Partner Package (confidential PDF) \u2014 technology, deployment patterns, and evidence/validation status.";
+      }
+    }
+  })();
+
   function handleSubmit(e) {
     e.preventDefault();
     const firstName = document.getElementById('first-name').value;
@@ -526,7 +539,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
     const additional = document.getElementById('additional').value;
     const interests = [...document.querySelectorAll('input[name="interest"]:checked')].map(i => i.value).join(', ');
 
-    const subject = encodeURIComponent(`Demo Request — ${org}`);
+    const wantsPartnerPackage = document.getElementById('interest-partner-package').checked;
+    const subject = encodeURIComponent(wantsPartnerPackage ? `Partner Package Request — ${org}` : `Demo Request — ${org}`);
     const body = encodeURIComponent(
       `Name: ${firstName} ${lastName}\nEmail: ${email}\nOrganization: ${org}\nRole: ${role}\nOrg Type: ${orgType}\nPopulation Size: ${popSize || 'Not specified'}\nTimeline: ${timeline || 'Not specified'}\nInterests: ${interests || 'Not specified'}\n\nAdditional Information:\n${additional || 'None provided'}`
     );
