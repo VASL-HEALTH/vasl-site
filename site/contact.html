@@ -207,10 +207,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
   @media(max-width:400px){.footer-sitemap{grid-template-columns:1fr;}}
 
   .pp-status { margin-top: 14px; padding: 14px 16px; border-radius: 8px; font-size: 0.92rem; line-height: 1.5; }
-  .pp-status.pp-pending { background: var(--parchment, #f4efe6); color: var(--ink, #1a1614); }
   .pp-status.pp-ready { background: var(--deep-green, #2d5f4f); color: #fff; }
   .pp-status.pp-ready a { color: #fff; font-weight: 600; text-decoration: underline; }
-  .pp-status.pp-fallback { background: var(--parchment, #f4efe6); color: var(--ink, #1a1614); }
 </style>
 </head>
 <body>
@@ -507,21 +505,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
 </footer>
 
 <script>
-  // Partner Package instant download endpoint -- the Lambda Function URL
-  // that mints a short-lived presigned link to the PDF.
-  //
-  // The AWS side is NOT in this repo. It lives in VASL-PLATFORM at
-  // infra/aws/partner-package-download/ (own Terraform state key in
-  // vasl-terraform-state), alongside the rest of this site's infra --
-  // infra/aws/static-sites/ owns the bucket, distribution and deploy
-  // role. Run `terraform apply` there, upload the PDF, and paste the
-  // function_url output below.
-  //
-  // Empty is a safe state: this feature quietly no-ops and the existing
-  // mailto lead notification (below) keeps working exactly as it does
-  // today. Nothing on this page breaks while it is unset.
-  const PARTNER_PACKAGE_ENDPOINT = '';
-
   document.documentElement.classList.add('js-ready');
   const reveals = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
@@ -573,50 +556,31 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
     // Lead notification to the team — unchanged, fires for every submission.
     window.location.href = `mailto:hello@vaslhealth.com?subject=${subject}&body=${body}`;
 
-    // Instant self-serve download, in parallel with the mailto above —
-    // only for Partner Package requests, only once the endpoint is live.
+    // Reveal the download alongside the mailto above, for Partner Package
+    // requests only.
     if (wantsPartnerPackage) {
-      requestPartnerPackageDownload({ name: `${firstName} ${lastName}`.trim(), email, org });
+      showPartnerPackageDownload();
     }
   }
 
-  function requestPartnerPackageDownload({ name, email, org }) {
+  // The Partner Package is a static file in this site's own bucket, served
+  // by the same CloudFront distribution as every other page. There is no
+  // request to make and nothing to fail -- the link is just revealed.
+  //
+  // It was briefly built as a Lambda minting 24-hour presigned URLs from a
+  // private bucket. That protected nothing: the form accepts any name, any
+  // org and any @-shaped email, so anyone could mint a fresh link at will,
+  // and a downloaded PDF is permanent regardless of when its link expires.
+  // The mailto above is the actual lead capture and is unchanged. If this
+  // package ever genuinely needs gating, it needs verified-recipient auth --
+  // not a presigned URL behind an ungated form.
+  function showPartnerPackageDownload() {
     const statusEl = document.getElementById('partner-package-status');
     if (!statusEl) return;
 
-    if (!PARTNER_PACKAGE_ENDPOINT) {
-      // AWS side not deployed yet — the mailto lead notification above
-      // still went out, so nothing is lost, just not instant.
-      statusEl.hidden = false;
-      statusEl.className = 'pp-status pp-fallback';
-      statusEl.textContent = "Got it — we'll email the Partner Package to you directly.";
-      return;
-    }
-
     statusEl.hidden = false;
-    statusEl.className = 'pp-status pp-pending';
-    statusEl.textContent = 'Preparing your download…';
-
-    fetch(PARTNER_PACKAGE_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, org }),
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error('Request failed');
-        return res.json();
-      })
-      .then((data) => {
-        statusEl.className = 'pp-status pp-ready';
-        statusEl.innerHTML = `Your download is ready. <a href="${data.url}" target="_blank" rel="noopener">Open the Partner Package (PDF)</a>. This link expires in 24 hours.`;
-        // Also open it automatically so the requester doesn't have to
-        // hunt for the link.
-        window.open(data.url, '_blank', 'noopener');
-      })
-      .catch(() => {
-        statusEl.className = 'pp-status pp-fallback';
-        statusEl.textContent = "We couldn't generate an instant link, but we'll email the Partner Package to you directly.";
-      });
+    statusEl.className = 'pp-status pp-ready';
+    statusEl.innerHTML = 'Your copy is ready. <a href="/partner-package.pdf" target="_blank" rel="noopener">Open the Partner Package (PDF)</a>.';
   }
   function toggleNav() {
     document.querySelector('.nav-links').classList.toggle('open');
