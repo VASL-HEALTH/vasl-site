@@ -38,14 +38,13 @@ MARK_CLOSE = "<!-- /SEO:VASL -->"
 PLAUSIBLE_DOMAIN = "gotovasl.com"
 PLAUSIBLE_SCRIPT = "https://plausible.io/js/script.outbound-links.tagged-events.js"
 
-# Pages that should stay out of the index: legal boilerplate, utility pages,
-# and the prototype shell. They remain crawlable so link equity still flows.
+# Pages that should stay out of the index: legal boilerplate and utility
+# pages. They remain crawlable so link equity still flows.
 NOINDEX = {
     "404.html",
     "terms.html",
     "privacy.html",
     "baa.html",
-    "prototype.html",
 }
 
 # Descriptions for the pages that shipped without one. Written for the SERP:
@@ -67,7 +66,6 @@ MISSING_DESC = {
         "VLAP is Vasl's language analysis layer: 47 culturally specific distress signals across "
         "coded language, AAVE, and youth vernacular — surfaced to humans, never used to diagnose."
     ),
-    "prototype.html": "Interactive prototype of the Vasl Health platform.",
     "404.html": "That page could not be found. Return to gotovasl.com.",
 }
 

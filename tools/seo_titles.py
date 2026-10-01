@@ -201,11 +201,6 @@ REWRITES = {
         "used across Vasl, from differential item functioning to warm handoff.",
     ),
     # ---- Utility -------------------------------------------------------------
-    "prototype.html": (
-        "Interactive Prototype | Vasl Health",
-        "A walkthrough of the Vasl member and facilitator experience. Illustrative "
-        "only — no real member data appears anywhere in this prototype.",
-    ),
     "404.html": (
         "Page Not Found | Vasl Health",
         "That page could not be found. Head back to gotovasl.com, or use the "
