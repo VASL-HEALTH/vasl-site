@@ -6,13 +6,8 @@
 # directory is still buildable on Netlify; corrected rather than left pointing
 # at two hostnames that no longer resolve.
 #
-# prototype.gotovasl.com and demo.gotovasl.com are both NXDOMAIN and are not
-# coming back — both pages are served as paths on the main site instead.
-[[redirects]]
-  from = "/prototype"
-  to = "/prototype.html"
-  status = 301
-
+# demo.gotovasl.com is NXDOMAIN and is not coming back — the page is served
+# as a path on the main site instead.
 [[redirects]]
   from = "/demo"
   to = "/demo.html"
