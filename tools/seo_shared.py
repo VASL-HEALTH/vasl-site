@@ -18,4 +18,11 @@ never treat it as a page that can carry or receive a related-reading link.
 
 IGNORE = {
     "google21b71dccc4b8882d.html",
+    # demo.html is a redirect to vlap-standalone.gotovasl.com, not a page. It
+    # carries noindex and a canonical pointing at another origin; seo_inject
+    # would overwrite both with index,follow and a self-canonical on
+    # gotovasl.com/demo, which is the opposite of what a redirect needs, and
+    # canonical_for() cannot express a cross-origin target. It has no title,
+    # description or h1 story for the other generators to validate either.
+    "demo.html",
 }
