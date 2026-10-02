@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- /prototype.html was taken down in #20 because its content was not true: it
+     carried metrics retired on 25 Sept, four invented customer organizations
+     marked "BAA Status: Executed", an invoiced PMPM figure and an $847K ROI
+     estimate. None of that comes back here. This file is a pointer and nothing
+     else, so the URL resolves to the real surface instead of 404-ing.
+
+     NOT MANAGED BY seo_inject.py -- listed in tools/seo_shared.py's IGNORE set,
+     because the injector writes index,follow and a self-canonical on
+     gotovasl.com/prototype, which is the opposite of what a redirect needs, and
+     canonical_for() cannot express a cross-origin target.
+
+     Meta refresh rather than a 301: gotovasl.com is served from the S3 REST
+     endpoint, not the website endpoint, so object-level redirect metadata is
+     ignored. A true 301 would live in the CloudFront viewer-request function,
+     which is Terraform-managed in another repo. -->
+<title>VLAP — Vasl Language Analysis Platform | Vasl Health</title>
+<meta name="description" content="The VLAP surface, showing how it reads distress in the language youth actually write.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<link rel="canonical" href="https://vlap-standalone.gotovasl.com/">
+<meta name="robots" content="noindex,follow">
+<meta http-equiv="refresh" content="0; url=https://vlap-standalone.gotovasl.com/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vasl Health">
+<meta property="og:title" content="VLAP — Vasl Language Analysis Platform">
+<meta property="og:description" content="The VLAP surface, showing how it reads distress in the language youth actually write.">
+<meta property="og:url" content="https://vlap-standalone.gotovasl.com/">
+
+<style>
+  :root { color-scheme: light; }
+  body {
+    margin: 0; min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    background: #faf8f4; color: #1a382f;
+    font: 400 16px/1.6 ui-serif, Georgia, "Times New Roman", serif;
+    text-align: center; padding: 24px;
+  }
+  .wrap { max-width: 34rem; }
+  h1 { font-size: 1.5rem; font-weight: 500; margin: 0 0 .5rem; }
+  p { margin: 0 0 1.25rem; color: #4a5a53; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: .95rem; }
+  a.go {
+    display: inline-block; min-height: 44px; line-height: 44px;
+    padding: 0 20px; border-radius: 6px;
+    background: #2d5f4f; color: #fff; text-decoration: none;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-weight: 600; font-size: .95rem;
+  }
+  a.go:hover { background: #244c3f; }
+</style>
+</head>
+<body>
+  <!-- Visible to anyone the refresh does not carry: no-JS, a blocked refresh, a
+       crawler, or a reader on assistive tech who needs a real link. -->
+  <main class="wrap">
+    <h1>This page has moved</h1>
+    <p>The VLAP surface is now live.</p>
+    <p><a class="go" href="https://vlap-standalone.gotovasl.com/">Open VLAP</a></p>
+  </main>
+  <script>
+    // replace(), not assign(): Back should return the reader to where they came
+    // from, not to this page, which would bounce them straight out again.
+    location.replace('https://vlap-standalone.gotovasl.com/');
+  </script>
+</body>
+</html>
