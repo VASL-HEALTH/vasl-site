@@ -25,4 +25,9 @@ IGNORE = {
     # canonical_for() cannot express a cross-origin target. It has no title,
     # description or h1 story for the other generators to validate either.
     "demo.html",
+    # prototype.html is the same shape: a redirect to
+    # vlap-standalone.gotovasl.com, not a page. Same reasons as demo.html --
+    # the injector would replace its noindex and cross-origin canonical with
+    # index,follow and a self-canonical.
+    "prototype.html",
 }
