@@ -180,11 +180,18 @@ for rel, html in pages.items():
     for href in re.findall(r'href=["\']([^"\'#?]+)["\']', html):
         if href.startswith(("http", "mailto:", "tel:", "//", "javascript:")):
             continue
-        target = href.lstrip("/")
-        cand = (SITE / target) if href.startswith("/") else (SITE / base / target)
-        if cand.suffix == "":
+        # Internal links are canonical pretty URLs ("/about", "/", "/help/billing"),
+        # not file paths. Resolve the way the CloudFront viewer-request function
+        # does: a trailing slash (or a bare "/") means index.html in that
+        # directory, and an extensionless leaf gets .html appended. Without the
+        # directory case, every "/" link on the site reported as unresolved.
+        target = href.lstrip("/") if href.startswith("/") else (base / href).as_posix()
+        cand = SITE / target if target not in ("", ".") else SITE
+        if cand.is_dir():
+            cand = cand / "index.html"
+        elif cand.suffix == "":
             cand = cand.with_suffix(".html")
-        if not cand.exists() and not (cand.is_dir()):
+        if not cand.exists():
             warn(f"{rel}: internal link to {href!r} does not resolve")
 
 print(f"Checked {len(pages)} pages ({len(indexable)} indexable).\n")

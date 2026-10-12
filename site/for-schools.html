@@ -998,14 +998,14 @@
 
 <!-- ─── NAV ─── -->
 <nav>
-  <a href="index.html" class="nav-logo"><img src="/assets/logo-lockup.svg" alt="Vasl Health" width="160" height="40"></a>
+  <a href="/" class="nav-logo"><img src="/assets/logo-lockup.svg" alt="Vasl Health" width="160" height="40"></a>
     <ul class="nav-links">
-    <li><a href="about.html">About</a></li>
-    <li><a href="platform.html">Platform</a></li>
-    <li><a href="outcomes.html">Outcomes</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="team.html">Team</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/platform">Platform</a></li>
+    <li><a href="/#outcomes">Outcomes</a></li>
+    <li><a href="/blog">Blog</a></li>
+    <li><a href="/team">Team</a></li>
+    <li><a href="/contact">Contact</a></li>
   </ul>
   <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -1496,7 +1496,7 @@
         <div class="comp-label">Consent Architecture</div>
         <div class="comp-title">Minor consent frameworks developed with legal counsel and community input.</div>
         <p class="comp-body">Student consent is obtained at enrollment and revisited at each stage of data use. For minor students, consent frameworks are developed with legal counsel and adapted for the specific district's state law requirements &mdash; including states where minors can consent to their own mental health treatment. Parental consent is required where legally mandated. The framework is never buried in terms of service &mdash; it is presented clearly, in accessible language, at the point of enrollment.</p>
-        <p class="comp-body" style="margin-top:10px;"><a href="for-families.html" style="color:var(--clay);text-decoration:underline;">See our plain-language guide for families</a> &mdash; exactly what Vasl reads, what it looks for, and what it never does.</p>
+        <p class="comp-body" style="margin-top:10px;"><a href="/for-families" style="color:var(--clay);text-decoration:underline;">See our plain-language guide for families</a> &mdash; exactly what Vasl reads, what it looks for, and what it never does.</p>
       </div>
     </div>
   </div>
@@ -1588,35 +1588,35 @@
       <em>actually see.</em>
     </h2>
     <p class="outcomes-intro reveal d2">
-      From active pilot deployments in school-based programs, university partnerships, and community health centers serving the same populations schools serve. Measurement methodology is fully documented and available upon request.
+      Measured against the field&rsquo;s published standard &mdash; the Suicide Risk Lexicon released by MIT&rsquo;s McGovern Institute, the Child Mind Institute and Crisis Text Line. Measurement methodology is fully documented and available upon request.
     </p>
   </div>
 
   <div class="outcome-row reveal">
-    <div class="or-big">42<span class="or-unit">%</span></div>
+    <div class="or-big">23<span class="or-unit"> of 47</span></div>
     <div>
-      <div class="or-title">Average PHQ-8 improvement at 90 days &mdash; across all pilot cohorts.</div>
-      <p class="or-body">Measured as the mean reduction in PHQ-8 depression symptom scores from pre-enrollment baseline to 90-day follow-up. Cohort: BIPOC, LGBTQ+, and first-generation youth ages 14&ndash;24. All active members at 90 days are included in the measurement &mdash; not a selected subset. The 42% figure is above the documented improvement rate for standard outpatient therapy at 12 weeks (28&ndash;34%).</p>
+      <div class="or-title">VLAP signals with no counterpart in the field&rsquo;s published lexicon.</div>
+      <p class="or-body">In 2026 MIT&rsquo;s McGovern Institute, the Child Mind Institute and Crisis Text Line released the Suicide Risk Lexicon &mdash; 50 constructs, 6,910 terms, built from roughly 16,000 real crisis conversations. We compared it against our 47 signals term by term. Twenty-three have no counterpart anywhere in those 6,910 terms, across five of our six dimensions. Among them the signals for <em>unaliving</em> and <em>catching a fade</em>. The claim is narrow and checkable by anyone who downloads their file: the specific vernacular is absent.</p>
     </div>
     <div>
       <div class="or-bench-label">Benchmark Context</div>
-      <div class="or-bench-item"><span class="orbi-label">Vasl 90-day</span>42% mean PHQ-8 improvement &mdash; all active members</div>
-      <div class="or-bench-item"><span class="orbi-label">Standard therapy</span>28&ndash;34% improvement at 12 weeks &mdash; outpatient benchmark</div>
-      <div class="or-bench-item"><span class="orbi-label">No treatment</span>Documented symptom progression over equivalent time period</div>
+      <div class="or-bench-item"><span class="orbi-label">Suicide Risk Lexicon</span>50 constructs &middot; 6,910 terms &mdash; openly released, clinician-validated</div>
+      <div class="or-bench-item"><span class="orbi-label">Overlap</span>24 of 47 VLAP signals share at least one string with it</div>
+      <div class="or-bench-item"><span class="orbi-label">What we do not claim</span>Whether a construct and a signal measure the same thing is a clinical mapping question we have not done</div>
     </div>
   </div>
 
   <div class="outcome-row reveal">
-    <div class="or-big">79.5<span class="or-unit">%</span></div>
+    <div class="or-big">0.8255</div>
     <div>
-      <div class="or-title">Still actively engaged at 30 days &mdash; nearly three times the industry average.</div>
-      <p class="or-body">Retention is the most predictive metric in school-based mental health programs. A student who disengages at week two receives no clinical benefit from the program. Vasl's 79.5% 30-day retention reflects specific design decisions: proactive coach outreach, text-first access, peer community from day one, and cultural matching. Active defined as minimum one meaningful platform interaction in the 7 days prior to the 30-day mark.</p>
+      <div class="or-title">Suicide-attempt severity, scored against the field&rsquo;s own instrument.</div>
+      <p class="or-body">Of the six routing decisions the platform makes, one has no margin: escalate to a clinician now. So we validated there first, and it is the only dimension where an external, clinician-validated, openly published comparator exists. VLAP&rsquo;s severity head reads 0.8255 ROC-AUC where the Suicide Risk Lexicon reads 0.6489 and a 71-term clinical keyword rule we wrote ourselves reads 0.5578 &mdash; same corpus, same split, same treatment. Chunk level, n_pos 307, held-out test split.</p>
     </div>
     <div>
       <div class="or-bench-label">Benchmark Context</div>
-      <div class="or-bench-item"><span class="orbi-label">Vasl 30-day</span>79.5% active at 30 days</div>
-      <div class="or-bench-item"><span class="orbi-label">Digital MH apps</span>40&ndash;50% &mdash; 30-day retention industry average</div>
-      <div class="or-bench-item"><span class="orbi-label">Traditional therapy</span>72% dropout before session three</div>
+      <div class="or-bench-item"><span class="orbi-label">VLAP severity head</span>0.8255 ROC-AUC</div>
+      <div class="or-bench-item"><span class="orbi-label">MIT / Child Mind / CTL</span>0.6489 &mdash; Suicide Risk Lexicon</div>
+      <div class="or-bench-item"><span class="orbi-label">Keyword rule</span>0.5578 &mdash; 71 clinical terms, written by us</div>
     </div>
   </div>
 
@@ -1667,8 +1667,8 @@
         Every Vasl district partnership begins with a scoped pilot &mdash; typically one school, 100&ndash;300 students, one semester. By the end of the pilot, your district has measured outcomes, a Medicaid billing track record, counselor buy-in data, and a deployment model ready to scale. We do not ask you to commit to district-wide deployment before you've seen it work.
       </p>
       <div class="pilot-actions reveal d3">
-        <a href="contact.html?subject=School Pilot Request" class="btn-light">Request a Pilot</a>
-        <a href="outcomes.html" class="btn-ghost-light">Full outcomes data</a>
+        <a href="/contact?subject=School Pilot Request" class="btn-light">Request a Pilot</a>
+        <a href="/#outcomes" class="btn-ghost-light">Full outcomes data</a>
       </div>
     </div>
 
@@ -1721,67 +1721,66 @@
 <div class="vrl-wrap">
   <div class="vrl-head">Related Reading</div>
   <div class="vrl-grid">
-    <a href="platform.html" class="vrl-item"><div class="vrl-item-title">the full five-layer platform</div><div class="vrl-item-desc">Peer community, coaching, and licensed therapy in one continuum — see how the layers connect.</div></a>
-    <a href="vlap.html" class="vrl-item"><div class="vrl-item-title">how VLAP reads distress signals</div><div class="vrl-item-desc">The language layer behind every alert a counselor sees — what it flags and what it deliberately leaves alone.</div></a>
-    <a href="ai-model.html" class="vrl-item"><div class="vrl-item-title">the model trained on youth vernacular</div><div class="vrl-item-desc">VLAP, and why standard clinical NLP misses the way your students actually talk about distress.</div></a>
-    <a href="outcomes.html" class="vrl-item"><div class="vrl-item-title">pilot cohort outcomes and ROI</div><div class="vrl-item-desc">Retention, symptom change, and the budget case for your board and grants office.</div></a>
-    <a href="pricing.html" class="vrl-item"><div class="vrl-item-title">how pricing works for districts</div><div class="vrl-item-desc">Cost structure by enrollment size, and how Title I and Medicaid billing typically offset it.</div></a>
-    <a href="school-mental-health-rfp.html" class="vrl-item"><div class="vrl-item-title">evaluating this against an RFP</div><div class="vrl-item-desc">The same ten criteria a district procurement office checks, and where Vasl's answer to each one lives.</div></a>
+    <a href="/platform" class="vrl-item"><div class="vrl-item-title">the full five-layer platform</div><div class="vrl-item-desc">Peer community, coaching, and licensed therapy in one continuum — see how the layers connect.</div></a>
+    <a href="/vlap" class="vrl-item"><div class="vrl-item-title">how VLAP reads distress signals</div><div class="vrl-item-desc">The language layer behind every alert a counselor sees — what it flags and what it deliberately leaves alone.</div></a>
+    <a href="/ai-model" class="vrl-item"><div class="vrl-item-title">the model trained on youth vernacular</div><div class="vrl-item-desc">VLAP, and why standard clinical NLP misses the way your students actually talk about distress.</div></a>
+    <a href="/pricing" class="vrl-item"><div class="vrl-item-title">how pricing works for districts</div><div class="vrl-item-desc">Cost structure by enrollment size, and how Title I and Medicaid billing typically offset it.</div></a>
+    <a href="/school-mental-health-rfp" class="vrl-item"><div class="vrl-item-title">evaluating this against an RFP</div><div class="vrl-item-desc">The same ten criteria a district procurement office checks, and where Vasl's answer to each one lives.</div></a>
   </div>
 </div>
 <!-- /LINKS:VASL -->
 <footer>
   <div class="footer-sitemap">
     <div class="fs-brand">
-      <a href="index.html" class="footer-logo"><img src="/assets/logo-lockup-dark.svg" alt="Vasl Health" width="160" height="40"></a>
+      <a href="/" class="footer-logo"><img src="/assets/logo-lockup-dark.svg" alt="Vasl Health" width="160" height="40"></a>
       <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
-      <a href="contact.html" class="fs-cta">Request a Demo &rarr;</a>
+      <a href="/contact" class="fs-cta">Request a Demo &rarr;</a>
     </div>
     <div class="fs-col">
       <div class="fs-head">Platform</div>
-      <a href="platform.html">Platform Overview</a>
-      <a href="vlap.html">VLAP</a>
-      <a href="ai-model.html">AI Model</a>
-      <a href="technology.html">Technology</a>
-      <a href="infrastructure.html">Infrastructure, Not Burden</a>
-      <a href="health-systems.html">VLAP for Health Systems</a>
-      <a href="peer-groups.html">Peer Groups</a>
-      <a href="teletherapy.html">Teletherapy</a>
+      <a href="/platform">Platform Overview</a>
+      <a href="/vlap">VLAP</a>
+      <a href="/ai-model">AI Model</a>
+      <a href="/technology">Technology</a>
+      <a href="/infrastructure">Infrastructure, Not Burden</a>
+      <a href="/health-systems">VLAP for Health Systems</a>
+      <a href="/peer-groups">Peer Groups</a>
+      <a href="/teletherapy">Teletherapy</a>
       <a href="demo.html">VLAP Signal Taxonomy</a>
     </div>
     <div class="fs-col">
       <div class="fs-head">Who We Serve</div>
-      <a href="for-schools.html">For Schools</a>
-      <a href="for-organizations.html">For Organizations</a>
-      <a href="outcomes.html">Outcomes</a>
-      <a href="clinical-outcomes.html">Clinical Outcomes</a>
-      <a href="pricing.html">Pricing</a>
+      <a href="/for-schools">For Schools</a>
+      <a href="/for-organizations">For Organizations</a>
+      <a href="/#outcomes">Outcomes</a>
+      <a href="/clinical-outcomes">Clinical Outcomes</a>
+      <a href="/pricing">Pricing</a>
     </div>
     <div class="fs-col">
       <div class="fs-head">Company</div>
-      <a href="about.html">About Vasl</a>
-      <a href="team.html">Team</a>
-      <a href="careers.html">Careers</a>
-      <a href="research.html">Research</a>
-      <a href="blog.html">Blog &amp; Insights</a>
-      <a href="contact.html">Contact</a>
-      <a href="glossary.html">Glossary</a>
+      <a href="/about">About Vasl</a>
+      <a href="/team">Team</a>
+      <a href="/careers">Careers</a>
+      <a href="/research">Research</a>
+      <a href="/blog">Blog &amp; Insights</a>
+      <a href="/contact">Contact</a>
+      <a href="/glossary">Glossary</a>
     </div>
     <div class="fs-col">
       <div class="fs-head">Support &amp; Legal</div>
-      <a href="support.html">Help Center</a>
-      <a href="for-families.html">For Families</a>
+      <a href="/support">Help Center</a>
+      <a href="/for-families">For Families</a>
       <a href="privacy.html">Privacy Policy</a>
       <a href="terms.html">Terms of Service</a>
       <a href="baa.html">Business Associate Agreement</a>
-      <a href="accessibility.html">Accessibility</a>
+      <a href="/accessibility">Accessibility</a>
     </div>
     <div class="fs-col">
       <div class="fs-head">Resources</div>
-      <a href="glossary.html">Glossary</a>
-      <a href="school-mental-health-rfp.html">School Mental Health RFP Guide</a>
-      <a href="dialect-bias-mental-health-screening.html">Dialect Bias in Screening</a>
-      <a href="hedis-behavioral-health-cultural-fit.html">HEDIS &amp; Cultural Fit</a>
+      <a href="/glossary">Glossary</a>
+      <a href="/school-mental-health-rfp">School Mental Health RFP Guide</a>
+      <a href="/dialect-bias-mental-health-screening">Dialect Bias in Screening</a>
+      <a href="/hedis-behavioral-health-cultural-fit">HEDIS &amp; Cultural Fit</a>
     </div>
   </div>
   <div class="footer-bottom">
