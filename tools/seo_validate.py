@@ -186,11 +186,18 @@ for rel, html in pages.items():
         # directory, and an extensionless leaf gets .html appended. Without the
         # directory case, every "/" link on the site reported as unresolved.
         target = href.lstrip("/") if href.startswith("/") else (base / href).as_posix()
-        cand = SITE / target if target not in ("", ".") else SITE
-        if cand.is_dir():
-            cand = cand / "index.html"
-        elif cand.suffix == "":
-            cand = cand.with_suffix(".html")
+        if target in ("", "."):
+            cand = SITE / "index.html"
+        else:
+            cand = SITE / target
+            if cand.suffix == "":
+                # Mirror the viewer-request function: an extensionless path gets
+                # .html appended, and only the bare root maps to index.html. The
+                # file wins over a same-named directory -- once site/blog/ existed
+                # alongside blog.html, resolving the directory first reported every
+                # "/blog" link on the site as broken while the origin served it fine.
+                as_file = cand.with_suffix(".html")
+                cand = as_file if as_file.exists() else cand / "index.html"
         if not cand.exists():
             warn(f"{rel}: internal link to {href!r} does not resolve")
 

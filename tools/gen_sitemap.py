@@ -91,7 +91,10 @@ def build() -> str:
         html = path.read_text(encoding="utf-8", errors="ignore")
         if re.search(r'name=["\']robots["\'][^>]*content=["\'][^"\']*noindex', html, re.I):
             continue
-        if rel.startswith("blog-"):
+        # Posts live both flat ("blog-slug.html", the original nine) and nested
+        # ("blog/slug.html"). Both are blog posts and get the blog priority;
+        # matching only "blog-" silently dropped a nested post to DEFAULT.
+        if rel.startswith("blog-") or rel.startswith("blog/"):
             prio, freq = DEFAULT_BLOG
         elif rel.startswith("help/"):
             prio, freq = DEFAULT_HELP
