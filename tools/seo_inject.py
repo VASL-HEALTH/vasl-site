@@ -71,6 +71,13 @@ MISSING_DESC = {
 
 # Post -> ISO publish date, pulled from the bylines on each post.
 POST_DATES = {
+    # Keep this in sync when a post ships. A missing entry is not a no-op: it
+    # silently downgrades og:type to "website" and drops article:published_time,
+    # article:author, the BlogPosting block and the BreadcrumbList, because every
+    # one of those is gated on membership here. The two newest posts were absent,
+    # so running this generator stripped all of it back off them.
+    "blog-human-is-the-system.html": "2026-10-02",
+    "blog-missing-infrastructure.html": "2026-09-08",
     "blog-healing-great-divide.html": "2026-05-01",
     "blog-mental-health-equity-crisis.html": "2026-04-20",
     "blog-bridging-chasm.html": "2026-04-01",
@@ -120,11 +127,18 @@ def get_title(html: str) -> str:
 
 
 def get_desc(html: str, rel: str) -> str:
+    # Backreference the quote character on BOTH attributes. A naive
+    # ["'] alternation closes on the first quote OR apostrophe it meets, so a
+    # description containing "MIT's" matched only as far as "MIT" and the page
+    # shipped a truncated og:description and twitter:description. Same bug, and
+    # the same fix, as the description check in seo_validate.py.
     m = re.search(
-        r'name=["\']description["\'][^>]*content=["\'](.*?)["\']', head_of(html), re.S | re.I
+        r'name=(["\'])description\1[^>]*content=(["\'])(.*?)\2',
+        head_of(html),
+        re.S | re.I,
     )
     if m:
-        return m.group(1).strip()
+        return m.group(3).strip()
     return MISSING_DESC.get(rel, "")
 
 
@@ -143,7 +157,7 @@ def jsonld_blocks(rel: str, title: str, desc: str, canonical: str) -> list:
                 "@id": f"{ORIGIN}/#organization",
                 "name": ORG_NAME,
                 "url": f"{ORIGIN}/",
-                "logo": f"{ORIGIN}/apple-touch-icon.png",
+                "logo": f"{ORIGIN}/assets/mark-v-tile.svg",
                 "description": (
                     "Vasl Health builds culturally grounded, clinically governed early "
                     "detection and behavioral health support for Black, Latino, and "
