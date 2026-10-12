@@ -26,7 +26,7 @@
 <meta name="twitter:image" content="https://gotovasl.com/og-image.png">
 <script defer data-domain="gotovasl.com" src="https://plausible.io/js/script.outbound-links.tagged-events.js"></script>
 <script>window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>
-<script>(function(){var PAGE="blog";document.addEventListener("click",function(e){var a=e.target.closest("a[href]");if(!a)return;var href=a.getAttribute("href");if(!href)return;if(/(^|\/)contact\.html(\?|#|$)/.test(href)){window.plausible("Contact CTA",{props:{page:PAGE}});if(PAGE==="pricing"){window.plausible("Pricing CTA",{props:{page:PAGE}});}}},true);})();</script>
+<script>(function(){var PAGE="blog";document.addEventListener("click",function(e){var a=e.target.closest("a[href]");if(!a)return;var href=a.getAttribute("href");if(!href)return;if(/(^|\/)contact(\.html)?(\?|#|$)/.test(href)){window.plausible("Contact CTA",{props:{page:PAGE}});if(PAGE==="pricing"){window.plausible("Pricing CTA",{props:{page:PAGE}});}}},true);})();</script>
 <!-- /SEO:VASL -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -172,6 +172,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
 .nl-headline em{font-style:italic;color:var(--clay);}
 .nl-desc{font-size:16px;font-weight:300;line-height:1.72;color:var(--ink-70);}
 .nl-right{}
+.nl-status{margin-top:12px;font-size:13px;line-height:1.6;color:var(--ink-70);}
+.nl-status.is-error{color:#9a3412;}
+.nl-status.is-error a{color:inherit;text-decoration:underline;}
+.form-status-detail{opacity:0.65;font-size:11px;}
+.nl-done{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--deep-green);padding:16px 0;}
 .nl-form{display:flex;flex-direction:column;gap:12px;}
 .nl-input{width:100%;padding:14px 18px;border:1px solid var(--chalk);background:var(--warm-white);font-family:var(--sans);font-size:15px;font-weight:300;color:var(--ink);outline:none;transition:border-color 0.2s;border-radius:0;}
 .nl-input::placeholder{color:var(--dust);}
@@ -543,9 +548,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
   </div>
   <div class="nl-right reveal d1">
     <form class="nl-form" onsubmit="handleNewsletter(event)">
-      <input type="email" class="nl-input" id="nl-email" placeholder="your@email.com" required>
+      <!-- The form this submission belongs to. The handler routes on it and
+           rejects a submission that does not name one. -->
+      <input type="hidden" name="form" value="newsletter">
+      <!-- `name` matters: without it this field is not part of the form's data
+           at all. It had none, so the address was unreadable by anything. -->
+      <input type="email" class="nl-input" id="nl-email" name="email" maxlength="320" placeholder="your@email.com" required>
       <button type="submit" class="nl-submit">Subscribe &rarr;</button>
       <div class="nl-note">Monthly &middot; No spam &middot; Unsubscribe anytime</div>
+      <div class="nl-status" id="nl-status" role="status" aria-live="polite" hidden></div>
     </form>
   </div>
 </div>
@@ -646,10 +657,77 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
     document.getElementById('article-count').textContent = visible + ' article' + (visible !== 1 ? 's' : '');
   }
 
-  function handleNewsletter(e) {
+  // --- Form submission -----------------------------------------------------
+  // POSTs to Vasl's own API (API Gateway -> Lambda -> DynamoDB + SES). No
+  // third-party form vendor. The success state is shown ONLY on a 200 whose
+  // body is {"ok":true}; anything else raises, and the catch shows a visible
+  // error with a mailto fallback. A submission that did not land is never
+  // presented as one that did.
+  const VASL_FORMS_ENDPOINT = 'https://2hwpnt5k46.execute-api.us-east-1.amazonaws.com/';
+
+  async function vaslPost(payload) {
+    const res = await fetch(VASL_FORMS_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    let data = null;
+    try { data = await res.json(); } catch (parseErr) { /* empty or non-JSON body */ }
+    if (!res.ok || !data || data.ok !== true) {
+      // A 5xx from API Gateway carries no CORS header, so the browser reports
+      // a network failure and hides the status. Keep whatever we did get.
+      throw new Error((data && data.error) || ('HTTP ' + res.status));
+    }
+    return data;
+  }
+
+  // Built with DOM nodes rather than innerHTML: err.message comes off the
+  // response and is not ours to trust.
+  function vaslRenderError(el, message, mailbox, subject, err) {
+    el.textContent = '';
+    el.appendChild(document.createTextNode(message + ' Email '));
+    const a = document.createElement('a');
+    a.href = 'mailto:' + mailbox + '?subject=' + encodeURIComponent(subject);
+    a.textContent = mailbox;
+    el.appendChild(a);
+    el.appendChild(document.createTextNode(' and we will pick it up by hand.'));
+    if (err && err.message) {
+      const detail = document.createElement('span');
+      detail.className = 'form-status-detail';
+      detail.textContent = ' (' + err.message + ')';
+      el.appendChild(detail);
+    }
+  }
+
+  async function handleNewsletter(e) {
     e.preventDefault();
     const form = e.target;
-    form.innerHTML = '<p style="font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--deep-green);padding:16px 0;">Subscribed — we’ll be in touch. Wire this form to your email provider before go-live.</p>';
+    const btn = form.querySelector('.nl-submit');
+    const statusEl = document.getElementById('nl-status');
+    const email = (document.getElementById('nl-email').value || '').trim();
+
+    statusEl.hidden = false;
+    statusEl.className = 'nl-status';
+    statusEl.textContent = 'Subscribing…';
+    btn.disabled = true;
+
+    try {
+      await vaslPost({ form: 'newsletter', email: email, page: 'blog' });
+      // Success state ONLY after a 200 with {"ok":true}. This used to print
+      // "Subscribed" unconditionally over an address it never read.
+      form.innerHTML = '';
+      const done = document.createElement('p');
+      done.className = 'nl-done';
+      done.textContent = 'You’re subscribed. Check your inbox.';
+      form.appendChild(done);
+      if (window.plausible) window.plausible('Newsletter Signup');
+    } catch (err) {
+      btn.disabled = false;
+      statusEl.className = 'nl-status is-error';
+      vaslRenderError(statusEl,
+        'We could not add you just now.',
+        'hello@vaslhealth.com', 'Newsletter signup', err);
+    }
   }
   function toggleNav() {
     document.querySelector('.nav-links').classList.toggle('open');

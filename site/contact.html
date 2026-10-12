@@ -26,7 +26,7 @@
 <meta name="twitter:image" content="https://gotovasl.com/og-image.png">
 <script defer data-domain="gotovasl.com" src="https://plausible.io/js/script.outbound-links.tagged-events.js"></script>
 <script>window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>
-<script>(function(){var PAGE="contact";document.addEventListener("click",function(e){var a=e.target.closest("a[href]");if(!a)return;var href=a.getAttribute("href");if(!href)return;if(/(^|\/)contact\.html(\?|#|$)/.test(href)){window.plausible("Contact CTA",{props:{page:PAGE}});if(PAGE==="pricing"){window.plausible("Pricing CTA",{props:{page:PAGE}});}}},true);})();</script>
+<script>(function(){var PAGE="contact";document.addEventListener("click",function(e){var a=e.target.closest("a[href]");if(!a)return;var href=a.getAttribute("href");if(!href)return;if(/(^|\/)contact(\.html)?(\?|#|$)/.test(href)){window.plausible("Contact CTA",{props:{page:PAGE}});if(PAGE==="pricing"){window.plausible("Pricing CTA",{props:{page:PAGE}});}}},true);})();</script>
 <!-- /SEO:VASL -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -121,6 +121,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
 .form-checkbox input{margin-top:3px;accent-color:var(--deep-green);flex-shrink:0;}
 .form-checkbox-label{font-size:14px;font-weight:300;color:var(--ink-70);line-height:1.55;}
 .form-divider{height:1px;background:var(--chalk);}
+.form-status{margin-top:14px;font-size:14px;line-height:1.6;color:var(--ink-70);}
+.form-status.is-ok{color:var(--deep-green);font-weight:500;}
+.form-status.is-error{color:#9a3412;}
+.form-status.is-error a{color:inherit;text-decoration:underline;}
+.form-status-detail{opacity:0.65;font-size:12px;}
 .form-submit{
   font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;
   background:var(--ink);color:var(--warm-white);padding:16px 32px;
@@ -300,6 +305,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
   </div>
 
   <form class="demo-form reveal d1" onsubmit="handleSubmit(event)">
+    <!-- The form this submission belongs to. The handler routes on it and
+         rejects a submission that does not name one. -->
+    <input type="hidden" name="form" value="contact">
     <div class="form-row">
       <div class="form-group">
         <label class="form-label" for="first-name">First Name <span>*</span></label>
@@ -313,7 +321,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
 
     <div class="form-group">
       <label class="form-label" for="email">Work Email <span>*</span></label>
-      <input type="email" id="email" name="email" class="form-input" placeholder="you@organization.edu" required>
+      <input type="email" id="email" name="email" class="form-input" maxlength="320" placeholder="you@organization.edu" required>
     </div>
 
     <div class="form-row">
@@ -383,7 +391,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
 
     <div class="form-group">
       <label class="form-label" for="additional">Anything else we should know?</label>
-      <textarea id="additional" name="additional" class="form-textarea" placeholder="Your current mental health infrastructure, specific population challenges, grant funding context, or any questions you want addressed in the demo."></textarea>
+      <textarea id="additional" name="additional" class="form-textarea" maxlength="5000" placeholder="Your current mental health infrastructure, specific population challenges, grant funding context, or any questions you want addressed in the demo."></textarea>
     </div>
 
     <div class="form-divider"></div>
@@ -394,6 +402,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
     </label>
 
     <button type="submit" class="form-submit">Schedule Demo &rarr;</button>
+    <div id="form-status" class="form-status" role="status" aria-live="polite" hidden></div>
     <div class="form-privacy">By submitting, you agree to our <a href="privacy.html">Privacy Policy</a>. We use this information to prepare your demo and follow up with relevant resources only.</div>
     <div id="partner-package-status" class="pp-status" hidden></div>
   </form>
@@ -530,53 +539,119 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
     }
   })();
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    const firstName = document.getElementById('first-name').value;
-    const lastName = document.getElementById('last-name').value;
-    const email = document.getElementById('email').value;
-    const org = document.getElementById('org-name').value;
-    const role = document.getElementById('role').value;
-    const orgType = document.getElementById('org-type').value;
-    const popSize = document.getElementById('pop-size').value;
-    const timeline = document.getElementById('timeline').value;
-    const additional = document.getElementById('additional').value;
-    const interests = [...document.querySelectorAll('input[name="interest"]:checked')].map(i => i.value).join(', ');
+  // --- Form submission -----------------------------------------------------
+  // POSTs to Vasl's own API (API Gateway -> Lambda -> DynamoDB + SES). No
+  // third-party form vendor. The success state is shown ONLY on a 200 whose
+  // body is {"ok":true}; anything else raises, and the catch shows a visible
+  // error with a mailto fallback. A submission that did not land is never
+  // presented as one that did.
+  const VASL_FORMS_ENDPOINT = 'https://2hwpnt5k46.execute-api.us-east-1.amazonaws.com/';
 
-    const wantsPartnerPackage = document.getElementById('interest-partner-package').checked;
-    const subject = encodeURIComponent(wantsPartnerPackage ? `Partner Package Request — ${org}` : `Demo Request — ${org}`);
-    const body = encodeURIComponent(
-      `Name: ${firstName} ${lastName}\nEmail: ${email}\nOrganization: ${org}\nRole: ${role}\nOrg Type: ${orgType}\nPopulation Size: ${popSize || 'Not specified'}\nTimeline: ${timeline || 'Not specified'}\nInterests: ${interests || 'Not specified'}\n\nAdditional Information:\n${additional || 'None provided'}`
-    );
-    if (window.plausible) {
-      // Org type only — no name, email, or organization name in the event.
-      window.plausible('Demo Request', { props: { orgType: orgType || 'unspecified' } });
+  async function vaslPost(payload) {
+    const res = await fetch(VASL_FORMS_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    let data = null;
+    try { data = await res.json(); } catch (parseErr) { /* empty or non-JSON body */ }
+    if (!res.ok || !data || data.ok !== true) {
+      // A 5xx from API Gateway carries no CORS header, so the browser reports
+      // a network failure and hides the status. Keep whatever we did get.
+      throw new Error((data && data.error) || ('HTTP ' + res.status));
     }
-    // Lead notification to the team — unchanged, fires for every submission.
-    window.location.href = `mailto:hello@vaslhealth.com?subject=${subject}&body=${body}`;
+    return data;
+  }
 
-    // Reveal the download alongside the mailto above, for Partner Package
-    // requests only.
-    if (wantsPartnerPackage) {
-      showPartnerPackageDownload();
+  // Built with DOM nodes rather than innerHTML: err.message comes off the
+  // response and is not ours to trust.
+  function vaslRenderError(el, message, mailbox, subject, err) {
+    el.textContent = '';
+    el.appendChild(document.createTextNode(message + ' Email '));
+    const a = document.createElement('a');
+    a.href = 'mailto:' + mailbox + '?subject=' + encodeURIComponent(subject);
+    a.textContent = mailbox;
+    el.appendChild(a);
+    el.appendChild(document.createTextNode(' and we will pick it up by hand.'));
+    if (err && err.message) {
+      const detail = document.createElement('span');
+      detail.className = 'form-status-detail';
+      detail.textContent = ' (' + err.message + ')';
+      el.appendChild(detail);
     }
   }
 
-  // The Partner Package is a static file in this site's own bucket, served
-  // by the same CloudFront distribution as every other page. There is no
-  // request to make and nothing to fail -- the link is just revealed.
-  //
-  // It was briefly built as a Lambda minting 24-hour presigned URLs from a
-  // private bucket. That protected nothing: the form accepts any name, any
-  // org and any @-shaped email, so anyone could mint a fresh link at will,
-  // and a downloaded PDF is permanent regardless of when its link expires.
-  // The mailto above is the actual lead capture and is unchanged. If this
-  // package ever genuinely needs gating, it needs verified-recipient auth --
-  // not a presigned URL behind an ungated form.
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('.form-submit');
+    const statusEl = document.getElementById('form-status');
+
+    const val = (id) => (document.getElementById(id).value || '').trim();
+    const wantsPartnerPackage = document.getElementById('interest-partner-package').checked;
+
+    // Field names are the contract the handler reads. Checkbox VALUES are what
+    // it routes on -- `partner-package` is what makes the Partner Package
+    // template, the only one carrying the PDF link, reachable at all.
+    const payload = {
+      form: 'contact',
+      first_name: val('first-name'),
+      last_name: val('last-name'),
+      email: val('email'),
+      org_name: val('org-name'),
+      role: val('role'),
+      org_type: val('org-type'),
+      pop_size: val('pop-size'),
+      timeline: val('timeline'),
+      additional: val('additional'),
+      interest: [...document.querySelectorAll('input[name="interest"]:checked')].map((i) => i.value),
+      page: 'contact',
+    };
+    if (document.querySelector('input[name="updates"]').checked) payload.updates = 'on';
+
+    // The CTA that sent the visitor here carries its intent in ?subject=, and
+    // the handler routes the pilot/sales and technical-spec templates on it.
+    const intent = new URLSearchParams(window.location.search).get('subject');
+    if (intent) payload.subject_intent = intent;
+
+    statusEl.hidden = false;
+    statusEl.className = 'form-status';
+    statusEl.textContent = 'Sending…';
+    btn.disabled = true;
+
+    try {
+      await vaslPost(payload);
+
+      // Everything below happens ONLY after a 200 with {"ok":true}. The
+      // analytics event used to fire on the click and the Partner Package
+      // download used to be revealed unconditionally, so both reported a
+      // success the submission had not earned.
+      if (window.plausible) {
+        // Org type only -- no name, email, or organization name in the event.
+        window.plausible('Demo Request', { props: { orgType: payload.org_type || 'unspecified' } });
+      }
+      statusEl.className = 'form-status is-ok';
+      statusEl.textContent = wantsPartnerPackage
+        ? 'Request received. Your acknowledgment email is on its way.'
+        : 'Request received. Check your inbox for your acknowledgment email — an implementation lead will follow up within one business day.';
+      form.querySelectorAll('input, select, textarea, button').forEach((el) => { el.disabled = true; });
+      if (wantsPartnerPackage) showPartnerPackageDownload();
+    } catch (err) {
+      btn.disabled = false;
+      statusEl.className = 'form-status is-error';
+      vaslRenderError(statusEl,
+        'We could not send that just now. Nothing was lost on your side.',
+        'hello@vaslhealth.com', 'Demo request', err);
+    }
+  }
+
+  // The Partner Package is a static file in this site's own bucket, served by
+  // the same CloudFront distribution as every other page. There is no second
+  // request to make -- the link is just revealed, and now only after the
+  // submission itself has been accepted.
   function showPartnerPackageDownload() {
     const statusEl = document.getElementById('partner-package-status');
     if (!statusEl) return;
-
     statusEl.hidden = false;
     statusEl.className = 'pp-status pp-ready';
     statusEl.innerHTML = 'Your copy is ready. <a href="/partner-package.pdf" target="_blank" rel="noopener">Open the Partner Package (PDF)</a>.';

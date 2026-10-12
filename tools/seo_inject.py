@@ -315,7 +315,12 @@ def analytics_block(rel: str) -> str:
         'document.addEventListener("click",function(e){'
         'var a=e.target.closest("a[href]");if(!a)return;'
         'var href=a.getAttribute("href");if(!href)return;'
-        'if(/(^|\\/)contact\\.html(\\?|#|$)/.test(href)){'
+        # `.html` is OPTIONAL. 10b3eb7 rewrote every internal link to its
+        # canonical pretty URL, so every CTA on the site is now `/contact`,
+        # which contains no literal "contact.html" -- the old pattern matched
+        # nothing and BOTH custom events stopped firing sitewide the moment
+        # that commit landed. The path boundary keeps it off /contact-us.
+        'if(/(^|\/)contact(\.html)?(\?|#|$)/.test(href)){'
         'window.plausible("Contact CTA",{props:{page:PAGE}});'
         'if(PAGE==="pricing"){window.plausible("Pricing CTA",{props:{page:PAGE}});}'
         "}"
