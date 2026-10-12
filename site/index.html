@@ -982,14 +982,14 @@
 
 <!-- ─── NAV ─── -->
 <nav>
-  <a href="index.html" class="nav-logo"><img src="/assets/logo-lockup.svg" alt="Vasl Health" width="160" height="40"></a>
+  <a href="/" class="nav-logo"><img src="/assets/logo-lockup.svg" alt="Vasl Health" width="160" height="40"></a>
     <ul class="nav-links">
-    <li><a href="about.html">About</a></li>
-    <li><a href="platform.html">Platform</a></li>
-    <li><a href="outcomes.html">Outcomes</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="team.html">Team</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/platform">Platform</a></li>
+    <li><a href="#outcomes">Outcomes</a></li>
+    <li><a href="/blog">Blog</a></li>
+    <li><a href="/team">Team</a></li>
+    <li><a href="/contact">Contact</a></li>
   </ul>
   <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -1014,7 +1014,7 @@
     </p>
     <div class="hero-actions reveal d3">
       <a href="#ask" class="btn-dark">Request a Demo</a>
-      <a href="about.html" class="btn-outline">Our mission</a>
+      <a href="/about" class="btn-outline">Our mission</a>
     </div>
   </div>
 
@@ -1060,8 +1060,8 @@
         <div class="hs-label">Cost to members &mdash;<br>payer or org funded</div>
       </div>
       <div class="hs-item">
-        <div class="hs-num">79.5<span style="font-size:20px">%</span></div>
-        <div class="hs-label">Still active<br>at 30 days</div>
+        <div class="hs-num">0.8255</div>
+        <div class="hs-label">VLAP vs 0.6489 &mdash; MIT / Child Mind /<br>Crisis Text Line lexicon</div>
       </div>
     </div>
   </div>
@@ -1130,9 +1130,9 @@
       <div class="ct-cell"><span class="ct-vasl"><strong>VLAP</strong> &mdash; our clinical language model, 2,400+ community-specific tokens. Reads language as it's actually spoken.</span></div>
     </div>
     <div class="ct-row">
-      <div class="ct-cell"><span class="ct-metric">Retention</span></div>
-      <div class="ct-cell"><span class="ct-old">72% drop out before their third session</span></div>
-      <div class="ct-cell"><span class="ct-vasl"><strong>79.5% still active</strong> at 30 days across pilot cohorts</span></div>
+      <div class="ct-cell"><span class="ct-metric">Risk detection</span></div>
+      <div class="ct-cell"><span class="ct-old">Keyword rules and published clinical lexicons</span></div>
+      <div class="ct-cell"><span class="ct-vasl"><strong>0.8255 vs 0.6489</strong> against the MIT / Child Mind / Crisis Text Line lexicon</span></div>
     </div>
   </div>
   <p class="reveal" style="margin-top:16px;font-size:12px;font-weight:300;color:var(--ink-50);max-width:680px;">*&ldquo;First meaningful support&rdquo; is measured conservatively &mdash; from enrollment to a member&rsquo;s first substantive peer interaction or coach exchange, not from account activation. Community access and coach assignment happen on day one; we report the 3-week median because we count real support, not sign-ups.</p>
@@ -1189,7 +1189,7 @@
       <div class="pl-who">Youth Members</div>
       <div class="pl-name">Member App</div>
       <p class="pl-desc">Text-first. No app required. Peer groups, daily check-ins, coach messaging, session booking. In the member's language, on their terms, from day one.</p>
-      <a href="platform.html#member" class="pl-link">Member layer</a>
+      <a href="/platform#member" class="pl-link">Member layer</a>
     </div>
 
     <div class="pl-layer reveal d1">
@@ -1197,7 +1197,7 @@
       <div class="pl-who">Certified Coaches</div>
       <div class="pl-name">Coach Layer</div>
       <p class="pl-desc">Proactive. Culturally matched. Available 7 days a week, 365 days a year. The relationship that's there before it's needed &mdash; and ready when it is.</p>
-      <a href="platform.html#coach" class="pl-link">Coach layer</a>
+      <a href="/platform#coach" class="pl-link">Coach layer</a>
     </div>
 
     <div class="pl-layer reveal d2">
@@ -1205,7 +1205,7 @@
       <div class="pl-who">Licensed Clinicians</div>
       <div class="pl-name">Coach Portal</div>
       <p class="pl-desc">VLAP signal context before every session. Session notes, outcome tracking, caseload management. Clinicians enter the room already understanding who's in it.</p>
-      <a href="platform.html#clinician" class="pl-link">Clinician layer</a>
+      <a href="/platform#clinician" class="pl-link">Clinician layer</a>
     </div>
 
     <div class="pl-layer reveal d3">
@@ -1213,7 +1213,7 @@
       <div class="pl-who">Orgs & Payers</div>
       <div class="pl-name">Client Org Portal</div>
       <p class="pl-desc">Aggregate, de-identified population data. No individual records. Real-time insight into where need is rising &mdash; before it becomes a crisis to manage.</p>
-      <a href="platform.html#org" class="pl-link">Org layer</a>
+      <a href="/platform#org" class="pl-link">Org layer</a>
     </div>
   </div>
 </section>
@@ -1259,7 +1259,7 @@
       </div>
       <p class="reveal d3" style="margin-top:14px;font-size:12px;font-weight:300;color:rgba(250,247,242,0.40);max-width:520px;">Specificity and predictive-value results will be published with our university validation study &mdash; because half a statistic isn&rsquo;t transparency.</p>
 
-      <a href="ai-model.html" class="intel-cta reveal d4">Full technical overview &mdash; VLAP</a>
+      <a href="/ai-model" class="intel-cta reveal d4">Full technical overview &mdash; VLAP</a>
     </div>
 
     <div class="intel-right reveal d2">
@@ -1371,45 +1371,47 @@
 
 
 <!-- ═══════════════════════════════════
-     CHAPTER 06 &mdash; OUTCOMES
+     CHAPTER 06 &mdash; MEASURED AGAINST THE FIELD'S STANDARD
 ════════════════════════════════════ -->
 <section id="outcomes">
-  <div class="chapter-label reveal">Chapter 06 &mdash; Outcomes</div>
+  <div class="chapter-label reveal">Chapter 06 &mdash; Measured against the field&rsquo;s standard</div>
 
   <div class="outcomes-header">
     <h2 class="outcomes-headline reveal d1">
-      What the<br>
-      data <em>says.</em>
+      The field published its map.<br>
+      Our young people <em>aren&rsquo;t on it.</em>
     </h2>
     <p class="outcomes-intro reveal d2">
-      Across pilot cohorts &mdash; community health centers, school-based programs, and university partnerships. Not projections. Not benchmarks from comparable platforms. Vasl's own deployment data, measured against pre-enrollment baselines and national averages.
+      In 2026, MIT&rsquo;s McGovern Institute, the Child Mind Institute and Crisis Text Line published the Suicide Risk Lexicon, the field&rsquo;s reference standard for risk language. We measured VLAP against it.
     </p>
   </div>
 
   <div class="outcomes-grid">
     <div class="outcome-item reveal">
-      <div class="oi-num">42<span style="font-size:40px">%</span></div>
-      <div class="oi-label">Clinical Outcome</div>
-      <p class="oi-desc">Average PHQ-8 improvement across pilot cohorts &mdash; measured at 90 days from enrollment against pre-enrollment baseline. Population: BIPOC, LGBTQ+, and first-generation youth ages 14&ndash;24.</p>
-      <span class="oi-note">vs. 28&ndash;34% at 12 weeks &mdash; outpatient therapy</span>
+      <div class="oi-num">0.8255</div>
+      <div class="oi-label">VLAP</div>
+      <p class="oi-desc">The VLAP severity head, scored as ROC-AUC on suicide-attempt severity.</p>
+      <span class="oi-note">Higher is better</span>
     </div>
 
     <div class="outcome-item reveal d1">
-      <div class="oi-num">79.5<span style="font-size:40px">%</span></div>
-      <div class="oi-label">Retention</div>
-      <p class="oi-desc">Still active on the platform at 30 days from enrollment. Industry average for digital behavioral health platforms: 40&ndash;50%. Traditional therapy dropout rate before session three: 72%.</p>
-      <span class="oi-note">vs. 40&ndash;50% industry average</span>
+      <div class="oi-num">0.6489</div>
+      <div class="oi-label">MIT / Child Mind / Crisis Text Line lexicon</div>
+      <p class="oi-desc">The Suicide Risk Lexicon &mdash; 50 constructs, 6,910 terms &mdash; scored on the same corpus, the same split, the same way.</p>
+      <span class="oi-note">Same corpus, same split</span>
     </div>
 
     <div class="outcome-item reveal d2">
-      <div class="oi-num">4<span style="font-size:32px">/5</span></div>
-      <div class="oi-label">Escalation Prevention</div>
-      <p class="oi-desc">Members who get what they need before ever needing licensed therapy &mdash; 48% through peer community, 32% with a coach, 20% reaching licensed clinical care via warm handoff. Descriptive pilot distribution across active cohorts.</p>
-      <span class="oi-note">80% resolved before licensed therapy</span>
+      <div class="oi-num">23<span style="font-size:32px"> of </span>47</div>
+      <div class="oi-label">Distinct vocabulary</div>
+      <p class="oi-desc">VLAP signals with no counterpart in its 6,910 terms.</p>
+      <span class="oi-note">No shared terms</span>
     </div>
   </div>
 
-  <p class="reveal d3" style="margin-top:32px;font-size:13px;font-weight:300;color:var(--ink-50);max-width:640px;">Every number on this page comes from active pilot deployments, measured the same way every time. Definitions and methodology live on our <a href="outcomes.html" style="color:var(--clay);text-decoration:underline;">Outcomes page</a> &mdash; we&rsquo;d rather earn your trust than round up.</p>
+  <p class="reveal d3" style="margin-top:32px;font-size:13px;font-weight:300;color:var(--ink-50);max-width:640px;">Suicide-attempt severity, chunk level, n_pos 307, held-out test split.</p>
+
+  <p class="reveal d3" style="margin-top:28px;font-size:18px;font-weight:300;line-height:1.72;color:var(--ink-70);max-width:720px;">The language our young people use isn&rsquo;t on the field&rsquo;s map. VLAP was built to read it &mdash; and surfaces what it finds for a clinician&rsquo;s review.</p>
 </section>
 
 
@@ -1502,7 +1504,7 @@
         <div class="tf-item">Outcomes dashboard &mdash; basic</div>
         <div class="tf-item">Email support</div>
       </div>
-      <a href="contact.html?subject=Starter Pilot" class="tier-cta dark">Start a Pilot</a>
+      <a href="/contact?subject=Starter Pilot" class="tier-cta dark">Start a Pilot</a>
     </div>
 
     <!-- Pro &mdash; featured -->
@@ -1523,7 +1525,7 @@
         <div class="tf-item">Priority support + Customer Success Manager</div>
         <div class="tf-item">Medicaid billing documentation included</div>
       </div>
-      <a href="contact.html?subject=Pro Plan" class="tier-cta light">Get Started</a>
+      <a href="/contact?subject=Pro Plan" class="tier-cta light">Get Started</a>
     </div>
 
     <!-- Enterprise -->
@@ -1543,7 +1545,7 @@
         <div class="tf-item">Dedicated implementation and success team</div>
         <div class="tf-item">BAA + full compliance documentation package</div>
       </div>
-      <a href="contact.html?subject=Enterprise" class="tier-cta outline">Contact Sales</a>
+      <a href="/contact?subject=Enterprise" class="tier-cta outline">Contact Sales</a>
     </div>
   </div>
 
@@ -1573,8 +1575,8 @@
         We don't do generic demos. Every walkthrough is configured around your population, your partners, and the care gap you're trying to close. Tell us who you serve and we'll show you exactly what Vasl looks like for them.
       </p>
       <div class="ask-actions reveal d3">
-        <a href="contact.html" class="btn-light">Request a Demo</a>
-        <a href="about.html" class="btn-ghost-light">Our mission</a>
+        <a href="/contact" class="btn-light">Request a Demo</a>
+        <a href="/about" class="btn-ghost-light">Our mission</a>
       </div>
     </div>
 
@@ -1627,64 +1629,64 @@
 <div class="vrl-wrap">
   <div class="vrl-head">Related Reading</div>
   <div class="vrl-grid">
-    <a href="for-schools.html" class="vrl-item"><div class="vrl-item-title">Vasl for K-12 districts</div><div class="vrl-item-desc">A tiered program mapped to MTSS, staffed by people students recognize.</div></a>
-    <a href="health-systems.html" class="vrl-item"><div class="vrl-item-title">Vasl for health plans and systems</div><div class="vrl-item-desc">Engagement built on cultural fit for the members standard outreach loses.</div></a>
-    <a href="for-organizations.html" class="vrl-item"><div class="vrl-item-title">Vasl for community organizations</div><div class="vrl-item-desc">Extend behavioral health reach without hiring a clinical team of your own.</div></a>
+    <a href="/for-schools" class="vrl-item"><div class="vrl-item-title">Vasl for K-12 districts</div><div class="vrl-item-desc">A tiered program mapped to MTSS, staffed by people students recognize.</div></a>
+    <a href="/health-systems" class="vrl-item"><div class="vrl-item-title">Vasl for health plans and systems</div><div class="vrl-item-desc">Engagement built on cultural fit for the members standard outreach loses.</div></a>
+    <a href="/for-organizations" class="vrl-item"><div class="vrl-item-title">Vasl for community organizations</div><div class="vrl-item-desc">Extend behavioral health reach without hiring a clinical team of your own.</div></a>
   </div>
 </div>
 <!-- /LINKS:VASL -->
 <footer>
   <div class="footer-sitemap">
     <div class="fs-brand">
-      <a href="index.html" class="footer-logo"><img src="/assets/logo-lockup-dark.svg" alt="Vasl Health" width="160" height="40"></a>
+      <a href="/" class="footer-logo"><img src="/assets/logo-lockup-dark.svg" alt="Vasl Health" width="160" height="40"></a>
       <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
-      <a href="contact.html" class="fs-cta">Request a Demo &rarr;</a>
+      <a href="/contact" class="fs-cta">Request a Demo &rarr;</a>
     </div>
     <div class="fs-col">
       <div class="fs-head">Platform</div>
-      <a href="platform.html">Platform Overview</a>
-      <a href="vlap.html">VLAP</a>
-      <a href="ai-model.html">AI Model</a>
-      <a href="technology.html">Technology</a>
-      <a href="infrastructure.html">Infrastructure, Not Burden</a>
-      <a href="health-systems.html">VLAP for Health Systems</a>
-      <a href="peer-groups.html">Peer Groups</a>
-      <a href="teletherapy.html">Teletherapy</a>
+      <a href="/platform">Platform Overview</a>
+      <a href="/vlap">VLAP</a>
+      <a href="/ai-model">AI Model</a>
+      <a href="/technology">Technology</a>
+      <a href="/infrastructure">Infrastructure, Not Burden</a>
+      <a href="/health-systems">VLAP for Health Systems</a>
+      <a href="/peer-groups">Peer Groups</a>
+      <a href="/teletherapy">Teletherapy</a>
       <a href="demo.html">VLAP Signal Taxonomy</a>
     </div>
     <div class="fs-col">
       <div class="fs-head">Who We Serve</div>
-      <a href="for-schools.html">For Schools</a>
-      <a href="for-organizations.html">For Organizations</a>
-      <a href="outcomes.html">Outcomes</a>
-      <a href="clinical-outcomes.html">Clinical Outcomes</a>
-      <a href="pricing.html">Pricing</a>
+      <a href="/for-schools">For Schools</a>
+      <a href="/for-organizations">For Organizations</a>
+      <a href="#outcomes">Outcomes</a>
+      <a href="/clinical-outcomes">Clinical Outcomes</a>
+      <a href="/pricing">Pricing</a>
     </div>
     <div class="fs-col">
       <div class="fs-head">Company</div>
-      <a href="about.html">About Vasl</a>
-      <a href="team.html">Team</a>
-      <a href="careers.html">Careers</a>
-      <a href="research.html">Research</a>
-      <a href="blog.html">Blog &amp; Insights</a>
-      <a href="contact.html">Contact</a>
-      <a href="glossary.html">Glossary</a>
+      <a href="/about">About Vasl</a>
+      <a href="/team">Team</a>
+      <a href="/careers">Careers</a>
+      <a href="/research">Research</a>
+      <a href="/blog">Blog &amp; Insights</a>
+      <a href="/contact">Contact</a>
+      <a href="/glossary">Glossary</a>
     </div>
     <div class="fs-col">
       <div class="fs-head">Support &amp; Legal</div>
-      <a href="support.html">Help Center</a>
-      <a href="for-families.html">For Families</a>
+      <a href="/support">Help Center</a>
+      <a href="/for-families">For Families</a>
       <a href="privacy.html">Privacy Policy</a>
       <a href="terms.html">Terms of Service</a>
       <a href="baa.html">Business Associate Agreement</a>
-      <a href="accessibility.html">Accessibility</a>
+      <a href="/accessibility">Accessibility</a>
     </div>
     <div class="fs-col">
       <div class="fs-head">Resources</div>
-      <a href="glossary.html">Glossary</a>
-      <a href="school-mental-health-rfp.html">School Mental Health RFP Guide</a>
-      <a href="dialect-bias-mental-health-screening.html">Dialect Bias in Screening</a>
-      <a href="hedis-behavioral-health-cultural-fit.html">HEDIS &amp; Cultural Fit</a>
+      <a href="/glossary">Glossary</a>
+      <a href="/school-mental-health-rfp">School Mental Health RFP Guide</a>
+      <a href="/dialect-bias-mental-health-screening">Dialect Bias in Screening</a>
+      <a href="/hedis-behavioral-health-cultural-fit">HEDIS &amp; Cultural Fit</a>
     </div>
   </div>
   <div class="footer-bottom">

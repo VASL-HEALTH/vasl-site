@@ -241,19 +241,19 @@ section{padding:130px var(--gutter);position:relative;}
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo"><img src="/assets/logo-lockup.svg" alt="Vasl Health" width="160" height="40"></a>
+  <a href="/" class="nav-logo"><img src="/assets/logo-lockup.svg" alt="Vasl Health" width="160" height="40"></a>
     <ul class="nav-links">
-    <li><a href="about.html">About</a></li>
-    <li><a href="platform.html">Platform</a></li>
-    <li><a href="outcomes.html">Outcomes</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="team.html">Team</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/platform">Platform</a></li>
+    <li><a href="/#outcomes">Outcomes</a></li>
+    <li><a href="/blog">Blog</a></li>
+    <li><a href="/team">Team</a></li>
+    <li><a href="/contact">Contact</a></li>
   </ul>
   <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
-  <a href="contact.html" class="nav-cta">Request a Demo</a>
+  <a href="/contact" class="nav-cta">Request a Demo</a>
 </nav>
 
 <!-- HERO -->
@@ -268,8 +268,8 @@ section{padding:130px var(--gutter);position:relative;}
     </h1>
     <p class="hero-body reveal d2">Universities, health plans, community health centers, and non-profits all face the same structural problem: the behavioral health infrastructure they have was designed for a different population than the one they're serving. Vasl is the infrastructure that was missing.</p>
     <div class="hero-actions reveal d3">
-      <a href="contact.html" class="btn-dark">Request a Demo</a>
-      <a href="pricing.html" class="btn-ghost">View pricing</a>
+      <a href="/contact" class="btn-dark">Request a Demo</a>
+      <a href="/pricing" class="btn-ghost">View pricing</a>
     </div>
   </div>
   <div class="hero-right reveal d2">
@@ -325,12 +325,12 @@ section{padding:130px var(--gutter);position:relative;}
         <div class="cs-label">Faster time to first meaningful support in Vasl versus the national average wait for behavioral health care for underserved populations</div>
       </div>
       <div class="cs-item">
-        <div class="cs-num">79.5<span style="font-size:20px">%</span></div>
-        <div class="cs-label">30-day member retention &mdash; compared to 40-50% industry average for digital behavioral health platforms</div>
+        <div class="cs-num">0.8255</div>
+                <div class="cs-label">VLAP vs 0.6489 against the MIT / Child Mind / Crisis Text Line lexicon &mdash; suicide-attempt severity, held-out test split</div>
       </div>
       <div class="cs-item">
-        <div class="cs-num">42<span style="font-size:20px">%</span></div>
-        <div class="cs-label">Average PHQ-8 improvement in deployed pilot cohorts &mdash; measured at 90 days against onboarding baseline</div>
+        <div class="cs-num">23 of 47</div>
+                <div class="cs-label">VLAP signals with no counterpart in the lexicon&rsquo;s 6,910 terms</div>
       </div>
       <div class="cs-item">
         <div class="cs-num">23<span style="font-size:20px">%</span></div>
@@ -470,14 +470,14 @@ section{padding:130px var(--gutter);position:relative;}
   </div>
   <div class="out-grid">
     <div class="out-stat reveal">
-      <div class="os-label">30-Day Retention</div>
-      <div class="os-num">79.5<span style="font-size:26px">%</span></div>
-      <div class="os-sub">Versus 40&ndash;50% industry average for digital behavioral health platforms</div>
+      <div class="os-label">Measured Against the Field</div>
+          <div class="os-num">0.8255</div>
+          <div class="os-sub">Versus 0.6489 for the MIT / Child Mind / Crisis Text Line lexicon &mdash; same corpus, same split</div>
     </div>
     <div class="out-stat reveal d1">
-      <div class="os-label">PHQ-8 Improvement</div>
-      <div class="os-num">42<span style="font-size:26px">%</span></div>
-      <div class="os-sub">Average symptom reduction at 90 days measured against onboarding baseline</div>
+      <div class="os-label">Distinct Vocabulary</div>
+          <div class="os-num">23 of 47</div>
+          <div class="os-sub">VLAP signals with no counterpart in the lexicon&rsquo;s 6,910 terms</div>
     </div>
     <div class="out-stat reveal d2">
       <div class="os-label">Time to First Support</div>
@@ -536,9 +536,9 @@ section{padding:130px var(--gutter);position:relative;}
       </h2>
       <p class="cta-body reveal d2">Every Vasl deployment starts with a scoping conversation &mdash; your organization type, your member population, your existing clinical infrastructure, and what you need the platform to do. Request a demo and we'll come prepared to discuss your specific context, not a generic pitch.</p>
       <div class="cta-actions reveal d3">
-        <a href="contact.html" class="btn-light">Request a Demo</a>
-        <a href="pricing.html" class="btn-ghost-light">View pricing</a>
-        <a href="contact.html?ref=partner-package" class="btn-ghost-light">Request the Partner Package</a>
+        <a href="/contact" class="btn-light">Request a Demo</a>
+        <a href="/pricing" class="btn-ghost-light">View pricing</a>
+        <a href="/contact?ref=partner-package" class="btn-ghost-light">Request the Partner Package</a>
       </div>
     </div>
     <div class="cta-right reveal d2">
@@ -576,66 +576,65 @@ section{padding:130px var(--gutter);position:relative;}
 <div class="vrl-wrap">
   <div class="vrl-head">Related Reading</div>
   <div class="vrl-grid">
-    <a href="platform.html" class="vrl-item"><div class="vrl-item-title">the platform's care layers</div><div class="vrl-item-desc">Peer support, coaching, and licensed therapy — sized for an organization without its own clinical team.</div></a>
-    <a href="vlap.html" class="vrl-item"><div class="vrl-item-title">how VLAP surfaces distress signals</div><div class="vrl-item-desc">The language layer that flags risk to a human who already knows the young person.</div></a>
-    <a href="ai-model.html" class="vrl-item"><div class="vrl-item-title">the model behind VLAP</div><div class="vrl-item-desc">DeBERTa-v3 and the vocabulary work that lets it read AAVE and youth vernacular directly.</div></a>
-    <a href="outcomes.html" class="vrl-item"><div class="vrl-item-title">outcomes across pilot cohorts</div><div class="vrl-item-desc">Retention and engagement figures, with the methodology behind each number.</div></a>
-    <a href="pricing.html" class="vrl-item"><div class="vrl-item-title">pricing for community organizations</div><div class="vrl-item-desc">How cost scales with population size, and what a pilot includes.</div></a>
+    <a href="/platform" class="vrl-item"><div class="vrl-item-title">the platform's care layers</div><div class="vrl-item-desc">Peer support, coaching, and licensed therapy — sized for an organization without its own clinical team.</div></a>
+    <a href="/vlap" class="vrl-item"><div class="vrl-item-title">how VLAP surfaces distress signals</div><div class="vrl-item-desc">The language layer that flags risk to a human who already knows the young person.</div></a>
+    <a href="/ai-model" class="vrl-item"><div class="vrl-item-title">the model behind VLAP</div><div class="vrl-item-desc">DeBERTa-v3 and the vocabulary work that lets it read AAVE and youth vernacular directly.</div></a>
+    <a href="/pricing" class="vrl-item"><div class="vrl-item-title">pricing for community organizations</div><div class="vrl-item-desc">How cost scales with population size, and what a pilot includes.</div></a>
   </div>
 </div>
 <!-- /LINKS:VASL -->
 <footer>
   <div class="footer-sitemap">
     <div class="fs-brand">
-      <a href="index.html" class="footer-logo"><img src="/assets/logo-lockup-dark.svg" alt="Vasl Health" width="160" height="40"></a>
+      <a href="/" class="footer-logo"><img src="/assets/logo-lockup-dark.svg" alt="Vasl Health" width="160" height="40"></a>
       <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
-      <a href="contact.html" class="fs-cta">Request a Demo &rarr;</a>
+      <a href="/contact" class="fs-cta">Request a Demo &rarr;</a>
     </div>
     <div class="fs-col">
       <div class="fs-head">Platform</div>
-      <a href="platform.html">Platform Overview</a>
-      <a href="vlap.html">VLAP</a>
-      <a href="ai-model.html">AI Model</a>
-      <a href="technology.html">Technology</a>
-      <a href="infrastructure.html">Infrastructure, Not Burden</a>
-      <a href="health-systems.html">VLAP for Health Systems</a>
-      <a href="peer-groups.html">Peer Groups</a>
-      <a href="teletherapy.html">Teletherapy</a>
+      <a href="/platform">Platform Overview</a>
+      <a href="/vlap">VLAP</a>
+      <a href="/ai-model">AI Model</a>
+      <a href="/technology">Technology</a>
+      <a href="/infrastructure">Infrastructure, Not Burden</a>
+      <a href="/health-systems">VLAP for Health Systems</a>
+      <a href="/peer-groups">Peer Groups</a>
+      <a href="/teletherapy">Teletherapy</a>
       <a href="demo.html">VLAP Signal Taxonomy</a>
     </div>
     <div class="fs-col">
       <div class="fs-head">Who We Serve</div>
-      <a href="for-schools.html">For Schools</a>
-      <a href="for-organizations.html">For Organizations</a>
-      <a href="outcomes.html">Outcomes</a>
-      <a href="clinical-outcomes.html">Clinical Outcomes</a>
-      <a href="pricing.html">Pricing</a>
+      <a href="/for-schools">For Schools</a>
+      <a href="/for-organizations">For Organizations</a>
+      <a href="/#outcomes">Outcomes</a>
+      <a href="/clinical-outcomes">Clinical Outcomes</a>
+      <a href="/pricing">Pricing</a>
     </div>
     <div class="fs-col">
       <div class="fs-head">Company</div>
-      <a href="about.html">About Vasl</a>
-      <a href="team.html">Team</a>
-      <a href="careers.html">Careers</a>
-      <a href="research.html">Research</a>
-      <a href="blog.html">Blog &amp; Insights</a>
-      <a href="contact.html">Contact</a>
-      <a href="glossary.html">Glossary</a>
+      <a href="/about">About Vasl</a>
+      <a href="/team">Team</a>
+      <a href="/careers">Careers</a>
+      <a href="/research">Research</a>
+      <a href="/blog">Blog &amp; Insights</a>
+      <a href="/contact">Contact</a>
+      <a href="/glossary">Glossary</a>
     </div>
     <div class="fs-col">
       <div class="fs-head">Support &amp; Legal</div>
-      <a href="support.html">Help Center</a>
-      <a href="for-families.html">For Families</a>
+      <a href="/support">Help Center</a>
+      <a href="/for-families">For Families</a>
       <a href="privacy.html">Privacy Policy</a>
       <a href="terms.html">Terms of Service</a>
       <a href="baa.html">Business Associate Agreement</a>
-      <a href="accessibility.html">Accessibility</a>
+      <a href="/accessibility">Accessibility</a>
     </div>
     <div class="fs-col">
       <div class="fs-head">Resources</div>
-      <a href="glossary.html">Glossary</a>
-      <a href="school-mental-health-rfp.html">School Mental Health RFP Guide</a>
-      <a href="dialect-bias-mental-health-screening.html">Dialect Bias in Screening</a>
-      <a href="hedis-behavioral-health-cultural-fit.html">HEDIS &amp; Cultural Fit</a>
+      <a href="/glossary">Glossary</a>
+      <a href="/school-mental-health-rfp">School Mental Health RFP Guide</a>
+      <a href="/dialect-bias-mental-health-screening">Dialect Bias in Screening</a>
+      <a href="/hedis-behavioral-health-cultural-fit">HEDIS &amp; Cultural Fit</a>
     </div>
   </div>
   <div class="footer-bottom">

@@ -41,16 +41,37 @@ def esc(s: str) -> str:
     return s.replace("&", "&amp;").replace("<", "&lt;").replace('"', "&quot;")
 
 
+# Retired page folded into the homepage. It carries noindex, so a related-reading
+# link must point at the surviving section rather than at /outcomes.
+REMAP = {"outcomes.html": "/#outcomes"}
+
+
+def canonical_href(target: str) -> str:
+    """The page's own canonical URL, not a relative path to the file.
+
+    Every page canonicalises to /x while the file is x.html. Emitting the
+    relative x.html sent all internal link signal to the non-canonical twin
+    and left the canonical URL with no inbound links at all, which is what
+    kept these pages in "Discovered - currently not indexed". Absolute
+    canonical hrefs also make the block position-independent, so a page in
+    site/help/ no longer needs ../ prefixing.
+    """
+    if target in REMAP:
+        return REMAP[target]
+    if target == "index.html":
+        return "/"
+    return "/" + target[: -len(".html")]
+
+
 def build_block(rel: str) -> str:
     edges = LINKS[rel]
     header = HEADER_OVERRIDES.get(rel, "Related Reading")
-    base = Path(rel).parent
 
     items = []
     for target, anchor, desc in edges:
         if target in IGNORE:
             continue
-        href = target if base == Path(".") else "../" * len(base.parts) + target
+        href = canonical_href(target)
         items.append(
             f'<a href="{href}" class="vrl-item">'
             f'<div class="vrl-item-title">{esc(anchor)}</div>'

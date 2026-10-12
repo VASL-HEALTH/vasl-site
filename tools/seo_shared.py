@@ -30,4 +30,13 @@ IGNORE = {
     # the injector would replace its noindex and cross-origin canonical with
     # index,follow and a self-canonical.
     "prototype.html",
+    # outcomes.html was folded into the homepage (#outcomes) and reduced to a
+    # noindex stub with a cross-origin-style canonical at /#outcomes. It is the
+    # same shape as the two above: seo_inject would overwrite that noindex and
+    # canonical with index,follow and a self-canonical on /outcomes, silently
+    # un-retiring the page, and seo_validate would demand a description, an h1
+    # and og tags the stub deliberately no longer has. gen_sitemap already
+    # excluded it via the noindex check; listing it here makes that explicit
+    # rather than incidental.
+    "outcomes.html",
 }
