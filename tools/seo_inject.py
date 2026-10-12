@@ -76,6 +76,7 @@ POST_DATES = {
     # article:author, the BlogPosting block and the BreadcrumbList, because every
     # one of those is gated on membership here. The two newest posts were absent,
     # so running this generator stripped all of it back off them.
+    "blog/what-a-suicide-risk-word-list-cant-hear.html": "2026-10-12",
     "blog-human-is-the-system.html": "2026-10-02",
     "blog-missing-infrastructure.html": "2026-09-08",
     "blog-healing-great-divide.html": "2026-05-01",
