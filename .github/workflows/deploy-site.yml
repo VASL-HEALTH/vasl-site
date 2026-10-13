@@ -14,11 +14,10 @@
 name: Deploy marketing site
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'site/**'
-      - '.github/workflows/deploy-site.yml'
+  # PUSH TRIGGER REMOVED 2026-10-13, Rodney's instruction. The site is deployed
+  # by hand from committed main: `aws s3 sync` in three cache-control passes,
+  # then a CloudFront invalidation of E11DM7B5W2KRCQ. Never through Actions.
+  # workflow_dispatch is kept so a manual run is still possible.
   workflow_dispatch:
     inputs:
       invalidate_all:

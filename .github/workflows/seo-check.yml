@@ -11,16 +11,12 @@
 name: SEO check
 
 on:
-  pull_request:
-    paths:
-      - 'site/**'
-      - 'tools/**'
-      - '.github/workflows/seo-check.yml'
-  push:
-    branches: [main]
-    paths:
-      - 'site/**'
-      - 'tools/**'
+  # PULL_REQUEST AND PUSH TRIGGERS REMOVED 2026-10-13, Rodney's instruction.
+  # `python tools/seo_validate.py` runs locally before a push, alongside
+  # tools/check_copy.py and tools/check_forms.py. This file had no
+  # workflow_dispatch, so one is added here: without it, removing the two
+  # triggers would leave the workflow with no way to run at all.
+  workflow_dispatch:
 
 jobs:
   seo:
