@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://gotovasl.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Vasl Health — Language Is Care">
+<meta property="og:image:alt" content="Vasl Health, Language Is Care">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-04-01">
 <meta property="article:author" content="Rodney Bell">
@@ -192,7 +192,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
   </div>
   <div class="ah-category">Research</div>
   <h1 class="ah-title">Bridging the Chasm:<br>Health Equity in <em>Mental Health AI</em></h1>
-  <p class="ah-deck">Standard NLP models miss nearly a quarter of culturally specific distress language. Here is the research behind why &mdash; and what building a model that actually reads it requires.</p>
+  <p class="ah-deck">Standard NLP models miss nearly a quarter of culturally specific distress language. Here is the research behind why and what building a model that actually reads it requires.</p>
   <div class="ah-meta">
     <div class="ah-author">
       <div class="ah-avatar">R</div>
@@ -213,52 +213,51 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
 <div class="article-body-wrap">
   <div class="article-content ac">
     
-<p>The behavioral health AI market has a validation problem. Most platforms that use artificial intelligence to support mental health care have deployed models trained on data that does not represent the populations most in need of that care. This is not a secret. The research literature on algorithmic bias in health AI has been growing for years. What the market has been slower to produce is a rigorous account of what actually solving the problem requires &mdash; not in principle, but in practice.</p>
+<p>The behavioral health AI market has a validation problem. Most platforms that use artificial intelligence to support mental health care have deployed models trained on data that does not represent the populations most in need of that care. This is not a secret. The research literature on algorithmic bias in health AI has been growing for years. What the market has been slower to produce is a rigorous account of what actually solving the problem requires, not in principle, but in practice. This piece is an attempt at that account.</p>
 
-<p>This piece is an attempt at that account.</p>
 
-<h2>What Standard NLP Models Actually Miss</h2>
+<h2>The gap in standard NLP models</h2>
 
-<p>Large language models and NLP classifiers learn their representations of language from training data. The dominant internet text corpora used to train these models &mdash; Common Crawl, Wikipedia, Reddit, and similar sources &mdash; are skewed heavily toward English-language, majority-White, educated users. This is not a controversial finding. It is documented in the NLP literature and acknowledged, at various levels of specificity, by most major AI labs.</p>
+<p>Large language models and NLP classifiers learn their representations of language from training data. The dominant internet text corpora used to train these models, Common Crawl, Wikipedia, Reddit, and similar sources, are skewed heavily toward English-language, majority-White, educated users. This finding is documented in the NLP literature and acknowledged, at various levels of specificity, by most major AI labs.</p>
 
-<p>The consequence for mental health AI is specific and serious. A model trained on these corpora learns how one demographic segment communicates emotional distress. It learns the words, the structures, the hedging patterns, the directness levels that characterize distress expression in that segment. When it is deployed to identify distress in populations who communicate differently &mdash; Black and Latino youth, LGBTQ+ youth, first-generation youth, communities where AAVE is the primary spoken dialect &mdash; it is reading a language it was not taught.</p>
+<p>The consequence for mental health AI is specific and serious. A model trained on these corpora learns how one demographic segment communicates emotional distress. It learns the words, the structures, the hedging patterns, the directness levels that characterize distress expression in that segment. When it is deployed to identify distress in populations who communicate differently, Black and Latino youth, LGBTQ+ youth, first-generation youth, communities where AAVE is the primary spoken dialect. It is reading a language it was not taught.</p>
 
 <div class="stat-callout">
   <div class="sc-num">23%</div>
   <div class="sc-label">Vocabulary gap in standard NLP models</div>
-  <div class="sc-sub">Approximately 23% of the culturally specific language in Vasl&rsquo;s training corpus would be processed as unknown tokens by a standard BERT model without vocabulary extension &mdash; not misread, but invisible to the model entirely.</div>
+  <div class="sc-sub">Approximately 23% of the culturally specific language in Vasl&rsquo;s training corpus would be processed as unknown tokens by a standard BERT model without vocabulary extension, not misread, but invisible to the model entirely.</div>
 </div>
 
 <p>The 23% figure comes from Vasl&rsquo;s own corpus analysis: approximately one in four words or phrases in our culturally specific mental health training data would be processed as unknown tokens by a standard BERT model. This is not a rounding error. It means that a standard model has no semantic representation of roughly one quarter of the language Black, Latino, and LGBTQ+ youth use to communicate their emotional state.</p>
 
 <h2>The Vocabulary Extension Problem</h2>
 
-<p>The most visible component of the vocabulary gap is coded language &mdash; terms that communities develop, often deliberately, to communicate in ways that automated systems cannot read. &ldquo;Unaliving&rdquo; &mdash; a term used primarily by LGBTQ+ youth to communicate suicidal ideation without triggering content moderation &mdash; is the most widely cited example. But it is far from the only one.</p>
+<p>The most visible component of the vocabulary gap is coded language, terms that communities develop, often deliberately, to communicate in ways that automated systems cannot read. &ldquo;Unaliving&rdquo;, a term used primarily by LGBTQ+ youth to communicate suicidal ideation without triggering content moderation, is the most widely cited example. But it is far from the only one.</p>
 
 <p>Community-developed coded language evolves continuously in response to platform moderation, cultural drift, and community need. Any model that addresses this problem through a one-time vocabulary extension will be partially out of date before the extension is complete. Solving the vocabulary problem requires ongoing community engagement, not a static fix.</p>
 
 <p>Vasl&rsquo;s approach to vocabulary extension for VLAP involved structured engagement with youth from the target communities. Vocabulary candidates were reviewed and validated by licensed clinicians with documented community competency before inclusion. The current extension covers 2,400+ AAVE and youth vernacular tokens. It is updated through an ongoing community engagement process rather than treated as a solved problem.</p>
 
-<h2>Why Bidirectional Context Matters</h2>
+<h2>Bidirectional context</h2>
 
-<p>The vocabulary gap is the most visible part of the problem, but it is not the most structurally significant. The deeper challenge is cultural context &mdash; the way in which the meaning of words shifts based on surrounding language, and the way in which cultural patterns of communication change what a word means in a clinical context.</p>
+<p>The vocabulary gap is the most visible part of the problem, but it is not the most structurally significant. The deeper challenge is cultural context, the way in which the meaning of words shifts based on surrounding language, and the way in which cultural patterns of communication change what a word means in a clinical context.</p>
 
-<p>The word &ldquo;lowkey&rdquo; is a useful example. In standard internet text, &ldquo;lowkey&rdquo; functions as a minimizer &mdash; &ldquo;I lowkey want pizza&rdquo; means something like &ldquo;I somewhat want pizza.&rdquo; Standard NLP models learn this usage and apply it in mental health contexts: &ldquo;lowkey been struggling&rdquo; reads as &ldquo;somewhat struggling,&rdquo; reducing the distress signal weight.</p>
+<p>The word &ldquo;lowkey&rdquo; is a useful example. In standard internet text, &ldquo;lowkey&rdquo; functions as a minimizer, &ldquo;I lowkey want pizza&rdquo; means something like &ldquo;I somewhat want pizza.&rdquo; Standard NLP models learn this usage and apply it in mental health contexts: &ldquo;lowkey been struggling&rdquo; reads as &ldquo;somewhat struggling,&rdquo; reducing the distress signal weight.</p>
 
-<p>In AAVE-dominant speech in mental health contexts, &ldquo;lowkey&rdquo; functions as a pre-disclosure modifier &mdash; a signal that what follows is genuine and serious, delivered in a register that minimizes social risk. The same word, in the same surface position in a sentence, means the opposite of what a standard model would interpret it to mean.</p>
+<p>In AAVE-dominant speech in mental health contexts, &ldquo;lowkey&rdquo; functions as a pre-disclosure modifier, a signal that what follows is genuine and serious, delivered in a register that minimizes social risk. The same word, in the same surface position in a sentence, means the opposite of what a standard model would interpret it to mean.</p>
 
 <div class="pull-quote">
-  <div class="pq-text">&ldquo;The problem is not just missing vocabulary. It is missing the cultural framework that determines what words mean in context. A model trained on different cultural contexts cannot borrow that framework &mdash; it has to be built from different data.&rdquo;</div>
-  <div class="pq-attr">Rodney Bell &mdash; Founder & CEO, Vasl Health</div>
+  <div class="pq-text">&ldquo;The problem is not just missing vocabulary. It is missing the cultural framework that determines what words mean in context. A model trained on different cultural contexts cannot borrow that framework. It has to be built from different data.&rdquo;</div>
+  <div class="pq-attr">Rodney Bell, Founder & CEO, Vasl Health</div>
 </div>
 
 <p>This is why VLAP is built on the BERT bidirectional transformer architecture. Bidirectional encoding processes the full context window simultaneously in both directions, which is architecturally necessary for reading the layered meaning in pre-disclosure patterns, code-switching, and culturally framed minimization. Unidirectional models cannot do this reliably.</p>
 
-<h2>What Independent Validation Requires</h2>
+<h2>Requirements for independent validation</h2>
 
 <p>Vasl is conducting an active IRB-approved study with a university research partner validating VLAP&rsquo;s signal detection accuracy against clinician-adjudicated ground truth. The study uses production deployment data from live Vasl cohorts. Preliminary findings indicate approximately 90% sensitivity on high-distress signal detection. Results will be published in a peer-reviewed journal upon study completion.</p>
 
-<p>We are not reporting that figure as a settled number. It is preliminary, the study is ongoing, and the publication process involves additional review. We report it because it represents the current state of what we know &mdash; and because being specific and honest about the state of validation is what responsible AI deployment in clinical contexts requires.</p>
+<p>That figure is preliminary. The study is ongoing, and the publication process involves additional review. We report it because it represents the current state of what we know and because being specific and honest about the state of validation is what responsible AI deployment in clinical contexts requires.</p>
 
 <p>The broader point is methodological: any mental health AI platform that makes accuracy claims without independent IRB-approved validation against clinician-adjudicated ground truth is making claims that cannot be evaluated. The field needs a higher standard for what counts as validated performance, particularly for AI systems deployed with underserved populations who have the least recourse if the system fails.</p>
 
@@ -266,7 +265,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
 
 <p>There is substantial research literature on algorithmic bias in health AI. There is significantly less published research on specific, validated approaches to building culturally competent clinical AI for mental health applications. The IRB study Vasl is conducting with a university research partner is, to our knowledge, one of the first independent validations of a culturally specific mental health NLP model against a clinically annotated ground truth in deployed populations.</p>
 
-<p>That gap &mdash; between the problem being well-documented and the solutions being rigorously validated &mdash; is the chasm the field needs to bridge. Building that bridge requires the time and resources to do community-partnered research correctly. It requires accepting slower development timelines in exchange for better validation. And it requires transparency about what is known, what is preliminary, and what remains to be established.</p>
+<p>That gap, between the problem being well-documented and the solutions being rigorously validated, is the chasm the field needs to bridge. Building that bridge requires the time and resources to do community-partnered research correctly. It requires accepting slower development timelines in exchange for better validation. And it requires transparency about what is known, what is preliminary, and what remains to be established.</p>
 
   </div>
   <aside class="article-sidebar">
@@ -289,7 +288,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
 <div class="article-cta">
   <div>
     <div class="cta-headline">See Vasl Health<br>in <em>action.</em></div>
-    <p class="cta-body">A 45-minute call with an implementation lead &mdash; not a sales pitch. We come prepared with context specific to your organization and population.</p>
+    <p class="cta-body">Book a 45-minute call with an implementation lead. We come prepared with context specific to your organization and population.</p>
   </div>
   <a href="/contact" class="cta-btn">Request a Demo &rarr;</a>
 </div>

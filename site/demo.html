@@ -12,14 +12,14 @@
      endpoint, not the S3 website endpoint, so object-level redirect metadata
      (x-amz-website-redirect-location) is ignored. A true 301 belongs in the
      CloudFront viewer-request function `vasl-marketing-viewer-request`, which
-     is Terraform-managed in VASL-PLATFORM/infra/aws/static-sites — a separate
+     is Terraform-managed in VASL-PLATFORM/infra/aws/static-sites, a separate
      repo and a terraform apply against the live distribution. This page ships
      through the normal site/ deploy and needs neither.
 
      noindex,follow is deliberate: the old URL should drop out of the index
      rather than compete with the destination, but the outbound link should
      still be crawled. -->
-<title>VLAP — Vasl Language Analysis Platform | Vasl Health</title>
+<title>VLAP, Vasl Language Analysis Platform | Vasl Health</title>
 <meta name="description" content="The VLAP surface, showing how it reads distress in the language youth actually write.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -31,7 +31,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Vasl Health">
-<meta property="og:title" content="VLAP — Vasl Language Analysis Platform">
+<meta property="og:title" content="VLAP, Vasl Language Analysis Platform">
 <meta property="og:description" content="The VLAP surface, showing how it reads distress in the language youth actually write.">
 <meta property="og:url" content="https://vlap-standalone.gotovasl.com/">
 

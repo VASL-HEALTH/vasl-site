@@ -25,12 +25,12 @@ REWRITES = {
     # ---- Primary buyer paths -------------------------------------------------
     "index.html": (
         "Culturally Grounded Youth Behavioral Health | Vasl Health",
-        "Behavioral health for Black, Latino, LGBTQ+, and first-generation youth 14–24 — "
+        "Behavioral health for Black, Latino, LGBTQ+, and first-generation youth 14 to 24, "
         "built on how they actually speak. Detection, not diagnosis.",
     ),
     "for-schools.html": (
         "School-Based Mental Health Platform for Districts | Vasl",
-        "A tiered youth behavioral health program for K-12 districts — peer support "
+        "A tiered youth behavioral health program for K-12 districts, peer support "
         "through licensed therapy, mapped to MTSS and staffed by people students "
         "recognize.",
     ),
@@ -58,53 +58,53 @@ REWRITES = {
     "platform.html": (
         "Youth Behavioral Health Platform: The Full Continuum | Vasl",
         "Five layers in one system: peer community, check-ins, culturally matched "
-        "coaching, licensed therapy, and crisis support — human in the loop at every "
+        "coaching, licensed therapy, and crisis support, human in the loop at every "
         "escalation.",
     ),
     "vlap.html": (
         "VLAP: Reading Youth Language for Distress Signals | Vasl",
-        "Vasl's language layer — 47 culturally specific distress signals across coded "
+        "Vasl's language layer, 47 culturally specific distress signals across coded "
         "language, AAVE, and youth vernacular, surfaced to humans, never used to "
         "diagnose.",
     ),
     "ai-model.html": (
         "VLAP: AI Trained on How Youth Actually Speak",
         "Standard clinical NLP misreads AAVE and youth vernacular. VLAP is "
-        "trained on it directly — 2,400+ tokens, six signal categories, no "
+        "trained on it directly, 2,400+ tokens, six signal categories, no "
         "diagnostic output.",
     ),
     "peer-groups.html": (
         "Moderated Peer Support Groups for Youth | Vasl Health",
-        "Facilitated peer groups where youth show up as themselves — the relationship "
+        "Facilitated peer groups where youth show up as themselves, the relationship "
         "that exists before a crisis does, run by people from their own communities.",
     ),
     "teletherapy.html": (
         "Culturally Matched Teletherapy for Youth | Vasl Health",
-        "Licensed therapy for youth 14–24, matched on culture and language rather than "
-        "availability alone — the layer reached only when it is actually needed.",
+        "Licensed therapy for youth 14 to 24, matched on culture and language rather than "
+        "availability alone, the layer reached only when it is actually needed.",
     ),
     "technology.html": (
         "Architecture, Privacy & Security | Vasl Health",
         "PHI boundaries, auditability, human-in-the-loop escalation, and "
-        "population-level insight without individual records — written for security "
+        "population-level insight without individual records, written for security "
         "and compliance reviewers.",
     ),
     "infrastructure.html": (
         "Infrastructure & Data Handling | Vasl Health",
-        "The hosting, encryption, access control, and retention model behind Vasl — "
+        "The hosting, encryption, access control, and retention model behind Vasl, "
         "what a district IT reviewer or plan security team needs before a pilot.",
     ),
     # ---- Evidence ------------------------------------------------------------
     "outcomes.html": (
         "Youth Behavioral Health Outcomes & ROI | Vasl Health",
         "Pilot-cohort results and stakeholder ROI for districts, plans, and "
-        "community organizations — with the methodology behind every number stated "
+        "community organizations, with the methodology behind every number stated "
         "openly.",
     ),
     "clinical-outcomes.html": (
         "Clinical Outcomes: Symptom Change & Retention | Vasl",
         "PHQ-8 change at 90 days, 30-day retention, time to first meaningful "
-        "support, and escalation rates from Vasl pilot cohorts — with methodology "
+        "support, and escalation rates from Vasl pilot cohorts, with methodology "
         "and limitations.",
     ),
     "research.html": (
@@ -116,28 +116,28 @@ REWRITES = {
     # ---- Company -------------------------------------------------------------
     "about.html": (
         "About Vasl Health: Built for the Youth Systems Miss",
-        "Behavioral health for Black, Latino, LGBTQ+, and first-generation youth — designed "
+        "Behavioral health for Black, Latino, LGBTQ+, and first-generation youth, designed "
         "inside their language and culture from the start, not retrofitted after.",
     ),
     "team.html": (
         "Our Team & Clinical Advisors | Vasl Health",
-        "The clinicians, engineers, and community practitioners building Vasl — and "
+        "The clinicians, engineers, and community practitioners building Vasl and "
         "the advisory structure that governs what the platform is allowed to claim.",
     ),
     "careers.html": (
         "Careers at Vasl Health",
-        "Open roles across clinical, engineering, and community partnerships — and "
+        "Open roles across clinical, engineering, and community partnerships and "
         "what we expect from people building for youth who are usually built around.",
     ),
     "contact.html": (
-        "Contact Vasl Health — Request a Demo",
+        "Contact Vasl Health, Request a Demo",
         "Schedule a demo, ask about implementation timelines, or reach our clinical, "
         "education, research, or community partnerships teams directly.",
     ),
     "support.html": (
         "Help Center & Implementation Support | Vasl Health",
         "Answers on getting started, assessments, billing, clinical escalation, "
-        "compliance, and VLAP — for partners already running Vasl.",
+        "compliance, and VLAP, for partners already running Vasl.",
     ),
     "blog.html": (
         "Insights & Research on Behavioral Health Equity | Vasl",
@@ -163,24 +163,24 @@ REWRITES = {
     "blog-medicaid-populations.html": (
         "Why Medicaid Populations Are Central to BH Innovation",
         "Medicaid serves the populations where behavioral health need is highest and "
-        "standard care fails hardest — plus the policy architecture that makes scale "
+        "standard care fails hardest, plus the policy architecture that makes scale "
         "possible.",
     ),
     "blog-mental-health-equity-crisis.html": (
         "The Mental Health Equity Crisis and Cultural AI",
-        "Why the access gap for Black, Latino, and LGBTQ+ youth is also a language gap — and "
+        "Why the access gap for Black, Latino, and LGBTQ+ youth is also a language gap and "
         "what culturally trained models can and cannot do about it.",
     ),
     "blog-other-diagnosis.html": (
         "The Other Diagnosis: Identity-Based Stress",
         "Identity-based stress is not a disorder, and treating it as one is part of "
-        "the problem — what it looks like for Black, Latino, and LGBTQ+ youth.",
+        "the problem, what it looks like for Black, Latino, and LGBTQ+ youth.",
     ),
     # ---- SEO week 2: new pages ------------------------------------------------
     "school-mental-health-rfp.html": (
         "School Mental Health RFP Evaluation Guide | Vasl",
         "What districts ask for in behavioral health RFPs, drawn from real published "
-        "solicitations — evaluation criteria and what a strong vendor answer looks "
+        "solicitations, evaluation criteria and what a strong vendor answer looks "
         "like.",
     ),
     "dialect-bias-mental-health-screening.html": (
