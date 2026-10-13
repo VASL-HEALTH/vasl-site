@@ -102,7 +102,7 @@ def build() -> str:
             prio, freq = PRIORITY.get(rel, DEFAULT)
         rows.append((canonical_for(rel), git_lastmod(path), freq, prio))
 
-    # Highest priority first — purely for human readability of the file.
+    # Highest priority first, purely for human readability of the file.
     rows.sort(key=lambda r: (-float(r[3]), r[0]))
 
     body = "\n".join(
@@ -134,7 +134,7 @@ def main() -> int:
         print(f"sitemap.xml is current ({n} URLs).")
         return 0
     OUT.write_text(new, encoding="utf-8")
-    print(f"Wrote {OUT.relative_to(ROOT)} — {n} URLs.")
+    print(f"Wrote {OUT.relative_to(ROOT)}, {n} URLs.")
     return 0
 
 

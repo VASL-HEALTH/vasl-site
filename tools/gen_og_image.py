@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Render site/og-image.png — the default share card for every page.
+Render site/og-image.png, the default share card for every page.
 
 Until this existed, every link Rodney pasted into Slack, LinkedIn, or a funder
 email rendered as a bare grey box. This is the fallback card; per-page cards can
@@ -37,7 +37,7 @@ def main():
     img = Image.new("RGB", (W, H), WARM_WHITE)
     d = ImageDraw.Draw(img)
 
-    # Left rule in clay — the site's own accent, so the card reads as Vasl at a glance.
+    # Left rule in clay, the site's own accent, so the card reads as Vasl at a glance.
     d.rectangle([0, 0, 10, H], fill=CLAY)
 
     pad = 84
@@ -45,7 +45,7 @@ def main():
     # Eyebrow
     d.text((pad, 92), "VASL HEALTH", font=f(MONO, 22), fill=DUST)
 
-    # Wordmark-scale statement. Two lines, the second in clay italic — this is the
+    # Wordmark-scale statement. Two lines, the second in clay italic. This is the
     # site's actual typographic move (roman + italic emphasis), not a generic headline.
     d.text((pad, 176), "Language", font=f(SERIF, 104), fill=INK)
     d.text((pad, 292), "is care.", font=f(SERIF_I, 104), fill=CLAY)
@@ -53,10 +53,10 @@ def main():
     # Hairline
     d.rectangle([pad, 440, W - pad, 441], fill=INK_12)
 
-    # Positioning line — what a district or plan buyer needs to see in the preview.
+    # Positioning line, what a district or plan buyer needs to see in the preview.
     d.text(
         (pad, 474),
-        "Culturally grounded behavioral health for youth 14–24.",
+        "Culturally grounded behavioral health for youth 14 to 24.",
         font=f(SERIF, 34),
         fill=INK,
     )

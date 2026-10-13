@@ -11,7 +11,7 @@ This is not a lint. Each check below maps to a specific, known failure mode:
   3. Title length 15-65 chars, description 70-165. Outside that range the SERP
      truncates or Google rewrites the snippet itself.
   4. Exactly one <h1>. Zero means no topical anchor; more than one splits it.
-  5. No two indexable pages share a title or a description — that is the
+  5. No two indexable pages share a title or a description. That is the
      signature of cannibalization.
   6. All JSON-LD parses. A malformed block is silently discarded, which is worse
      than having none because it looks done.
@@ -57,7 +57,7 @@ def canonical_for(rel: str) -> str:
 
 def unescape(s: str) -> str:
     return (
-        s.replace("&mdash;", "—")
+        s.replace(", ", ", ")
         .replace("&amp;", "&")
         .replace("&nbsp;", " ")
         .replace("&quot;", '"')
@@ -105,11 +105,11 @@ for rel, html in pages.items():
     else:
         t = unescape(ts[0].strip())
         if not (TITLE_MIN <= len(t) <= TITLE_MAX):
-            warn(f"{rel}: title is {len(t)} chars (want {TITLE_MIN}-{TITLE_MAX}) — {t!r}")
+            warn(f"{rel}: title is {len(t)} chars (want {TITLE_MIN}-{TITLE_MAX}), {t!r}")
         if not noindex:
             titles[t].append(rel)
 
-    # Backreference the quote char — an apostrophe inside the copy ("Vasl's")
+    # Backreference the quote char, an apostrophe inside the copy ("Vasl's")
     # silently truncates a naive ["\'] alternation and fakes a length failure.
     ds = re.findall(
         r'<meta[^>]+name=(["\'])description\1[^>]*content=(["\'])(.*?)\2',
@@ -144,7 +144,7 @@ for rel, html in pages.items():
         try:
             json.loads(block)
         except json.JSONDecodeError as e:
-            err(f"{rel}: JSON-LD block {i} does not parse — {e}")
+            err(f"{rel}: JSON-LD block {i} does not parse, {e}")
 
 # 5. cannibalization
 for t, rels in titles.items():
@@ -172,7 +172,7 @@ elif "Sitemap: " not in (SITE / "robots.txt").read_text(encoding="utf-8"):
     err("robots.txt does not reference the sitemap")
 
 if not (SITE / "og-image.png").exists():
-    err("site/og-image.png is missing — every share preview will render blank")
+    err("site/og-image.png is missing, every share preview will render blank")
 
 # 8. internal links resolve
 for rel, html in pages.items():
