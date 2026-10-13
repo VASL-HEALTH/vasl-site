@@ -6,7 +6,7 @@ add to the sitemap, inject into, or validate against normal HTML-page
 invariants. Import this in every generator rather than hard-coding the set
 separately, so there is exactly one place to add the next exception.
 
-Currently just the Google Search Console verification file: it's plain text
+The Search Console verification file plus the retired and redirect pages: it's plain text
 ("google-site-verification: <token>") wearing an .html extension, not a real
 page, and Google rejects the verification if a single byte of it changes —
 so seo_inject.py must never inject a head layer into it, seo_titles.py must

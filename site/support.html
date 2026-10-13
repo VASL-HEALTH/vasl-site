@@ -26,7 +26,7 @@
 <meta name="twitter:image" content="https://gotovasl.com/og-image.png">
 <script defer data-domain="gotovasl.com" src="https://plausible.io/js/script.outbound-links.tagged-events.js"></script>
 <script>window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>
-<script>(function(){var PAGE="support";document.addEventListener("click",function(e){var a=e.target.closest("a[href]");if(!a)return;var href=a.getAttribute("href");if(!href)return;if(/(^|\/)contact\.html(\?|#|$)/.test(href)){window.plausible("Contact CTA",{props:{page:PAGE}});if(PAGE==="pricing"){window.plausible("Pricing CTA",{props:{page:PAGE}});}}},true);})();</script>
+<script>(function(){var PAGE="support";document.addEventListener("click",function(e){var a=e.target.closest("a[href]");if(!a)return;var href=a.getAttribute("href");if(!href)return;if(/(^|\/)contact(\.html)?(\?|#|$)/.test(href)){window.plausible("Contact CTA",{props:{page:PAGE}});if(PAGE==="pricing"){window.plausible("Pricing CTA",{props:{page:PAGE}});}}},true);})();</script>
 <!-- /SEO:VASL -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -462,6 +462,11 @@
 
   .form-textarea { resize: vertical; min-height: 120px; }
 
+.form-status{margin-top:14px;font-size:14px;line-height:1.6;color:var(--ink-70);}
+.form-status.is-ok{color:var(--deep-green);font-weight:500;}
+.form-status.is-error{color:#9a3412;}
+.form-status.is-error a{color:inherit;text-decoration:underline;}
+.form-status-detail{opacity:0.65;font-size:12px;}
   .form-submit {
     font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
     background: var(--warm-white); color: var(--ink); padding: 14px 32px;
@@ -880,6 +885,9 @@
     <div class="contact-right reveal d2">
       <div class="form-label-group">Send a Message</div>
       <form class="contact-form" onsubmit="handleSubmit(event)">
+        <!-- The form this submission belongs to. The handler routes on it and
+             rejects a submission that does not name one. -->
+        <input type="hidden" name="form" value="support">
         <div class="form-row">
           <div class="form-group">
             <label class="form-field-label" for="name">Name</label>
@@ -887,7 +895,7 @@
           </div>
           <div class="form-group">
             <label class="form-field-label" for="email">Email</label>
-            <input type="email" id="email" name="email" class="form-input" placeholder="your@email.com" required>
+            <input type="email" id="email" name="email" class="form-input" maxlength="320" placeholder="your@email.com" required>
           </div>
         </div>
 
@@ -898,7 +906,7 @@
 
         <div class="form-group">
           <label class="form-field-label" for="category">Category</label>
-          <select id="category" name="category" class="form-select">
+          <select id="category" name="category" class="form-select" required>
             <option value="" disabled selected>Select a category</option>
             <option value="technical">Technical Support</option>
             <option value="billing">Billing & Pricing</option>
@@ -911,10 +919,11 @@
 
         <div class="form-group">
           <label class="form-field-label" for="message">How can we help?</label>
-          <textarea id="message" name="message" class="form-textarea" placeholder="Describe your question or issue in as much detail as you can. If it's a technical issue, include your browser, device, and what you were trying to do when it occurred." required></textarea>
+          <textarea id="message" name="message" class="form-textarea" maxlength="5000" placeholder="Describe your question or issue in as much detail as you can. If it's a technical issue, include your browser, device, and what you were trying to do when it occurred." required></textarea>
         </div>
 
         <button type="submit" class="form-submit">Send Message</button>
+        <div id="form-status" class="form-status" role="status" aria-live="polite" hidden></div>
         <div class="form-note">We respond within 2 hours on business days. Clinical urgent matters: email clinical@vaslhealth.com directly.</div>
       </form>
     </div>
@@ -1026,17 +1035,90 @@
     });
   });
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const org = document.getElementById('org').value;
-    const cat = document.getElementById('category').value;
-    const msg = document.getElementById('message').value;
-    const subject = encodeURIComponent(`Support Request${cat ? ' — ' + cat : ''}`);
-    const body = encodeURIComponent(`Name: ${name}\nOrganization: ${org || 'Not provided'}\nCategory: ${cat || 'General'}\n\nMessage:\n${msg}`);
-    window.location.href = `mailto:support@vaslhealth.com?subject=${subject}&body=${body}`;
+  // --- Form submission -----------------------------------------------------
+  // POSTs to Vasl's own API (API Gateway -> Lambda -> DynamoDB + SES). No
+  // third-party form vendor. The success state is shown ONLY on a 200 whose
+  // body is {"ok":true}; anything else raises, and the catch shows a visible
+  // error with a mailto fallback. A submission that did not land is never
+  // presented as one that did.
+  const VASL_FORMS_ENDPOINT = 'https://2hwpnt5k46.execute-api.us-east-1.amazonaws.com/';
+
+  async function vaslPost(payload) {
+    const res = await fetch(VASL_FORMS_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    let data = null;
+    try { data = await res.json(); } catch (parseErr) { /* empty or non-JSON body */ }
+    if (!res.ok || !data || data.ok !== true) {
+      // A 5xx from API Gateway carries no CORS header, so the browser reports
+      // a network failure and hides the status. Keep whatever we did get.
+      throw new Error((data && data.error) || ('HTTP ' + res.status));
+    }
+    return data;
   }
+
+  // Built with DOM nodes rather than innerHTML: err.message comes off the
+  // response and is not ours to trust.
+  function vaslRenderError(el, message, mailbox, subject, err) {
+    el.textContent = '';
+    el.appendChild(document.createTextNode(message + ' Email '));
+    const a = document.createElement('a');
+    a.href = 'mailto:' + mailbox + '?subject=' + encodeURIComponent(subject);
+    a.textContent = mailbox;
+    el.appendChild(a);
+    el.appendChild(document.createTextNode(' and we will pick it up by hand.'));
+    if (err && err.message) {
+      const detail = document.createElement('span');
+      detail.className = 'form-status-detail';
+      detail.textContent = ' (' + err.message + ')';
+      el.appendChild(detail);
+    }
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('.form-submit');
+    const statusEl = document.getElementById('form-status');
+    const val = (id) => (document.getElementById(id).value || '').trim();
+
+    // `category` carries the <option> VALUE, not its label -- the handler
+    // routes on the value, and `clinical` is what reaches the same-day
+    // clinical acknowledgment rather than the generic one.
+    const payload = {
+      form: 'support',
+      name: val('name'),
+      email: val('email'),
+      organization: val('org'),
+      category: val('category'),
+      message: val('message'),
+      page: 'support',
+    };
+
+    statusEl.hidden = false;
+    statusEl.className = 'form-status';
+    statusEl.textContent = 'Sending…';
+    btn.disabled = true;
+
+    try {
+      await vaslPost(payload);
+      statusEl.className = 'form-status is-ok';
+      statusEl.textContent = payload.category === 'clinical'
+        ? 'Received. Check your inbox — a member of our clinical team will contact you today.'
+        : 'Received. Check your inbox for your acknowledgment — we respond within 2 hours on business days.';
+      form.querySelectorAll('input, select, textarea, button').forEach((el) => { el.disabled = true; });
+      if (window.plausible) window.plausible('Support Request', { props: { category: payload.category || 'unspecified' } });
+    } catch (err) {
+      btn.disabled = false;
+      statusEl.className = 'form-status is-error';
+      vaslRenderError(statusEl,
+        'We could not send that just now. Nothing was lost on your side.',
+        'support@vaslhealth.com', 'Support request', err);
+    }
+  }
+
   function toggleNav() {
     document.querySelector('.nav-links').classList.toggle('open');
     document.getElementById('ham-btn').classList.toggle('open');
