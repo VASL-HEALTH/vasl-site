@@ -1046,7 +1046,15 @@
   async function vaslPost(payload) {
     const res = await fetch(VASL_FORMS_ENDPOINT, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      // charset=utf-8 is REQUIRED, not decoration. Without it API Gateway
+      // does not decode the body as UTF-8, and every non-ASCII character a
+      // visitor types -- an accented name, a curly apostrophe pasted from
+      // Word, an em dash -- reaches the handler already replaced with U+FFFD
+      // and is stored and emailed that way. Measured against the live API
+      // 2026-10-13: identical bodies, one header apart, gave "em dash �"
+      // without it and "em dash —" with it. The header NAME is unchanged,
+      // so the CORS allow-list still covers it.
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
       body: JSON.stringify(payload),
     });
     let data = null;

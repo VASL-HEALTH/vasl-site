@@ -92,6 +92,11 @@ for fname, (form_value, expected_fields) in FORMS.items():
     if not catch or "vaslRenderError" not in catch.group(1):
         err(f"{fname}: the catch block does not render a visible error")
 
+    # 8a. the body must declare UTF-8. Without the charset parameter API
+    #     Gateway mis-decodes every non-ASCII character the visitor typed.
+    if "'Content-Type': 'application/json; charset=utf-8'" not in src:
+        err(f"{fname}: Content-Type does not declare charset=utf-8")
+
     # 8. vaslPost must treat a non-200 or ok!=true as a failure
     if "if (!res.ok || !data || data.ok !== true)" not in src:
         err(f"{fname}: vaslPost does not reject a non-200 / ok!=true response")
