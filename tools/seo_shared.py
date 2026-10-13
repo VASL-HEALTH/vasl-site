@@ -8,7 +8,7 @@ separately, so there is exactly one place to add the next exception.
 
 The Search Console verification file plus the retired and redirect pages: it's plain text
 ("google-site-verification: <token>") wearing an .html extension, not a real
-page, and Google rejects the verification if a single byte of it changes —
+page, and Google rejects the verification if a single byte of it changes 
 so seo_inject.py must never inject a head layer into it, seo_titles.py must
 never rewrite a <title> it doesn't have, gen_sitemap.py must never list it as
 an indexable URL, seo_validate.py must never check it for a canonical/h1/

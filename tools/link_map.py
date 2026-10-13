@@ -1,5 +1,5 @@
 """
-Data file for tools/internal_links.py — one entry per page that gets a
+Data file for tools/internal_links.py, one entry per page that gets a
 "related reading" block. Kept separate from the generator so the editorial
 decisions (which pages connect, and why a human would click through) are easy
 to review and change without touching rendering code.
@@ -10,16 +10,16 @@ Order is preserved in the rendered block.
 
 Edges required by SEO-WEEK2.md workstream 1, plus enough additional coverage
 to land in the 60-80 new-link target without turning any page into a link
-dump — every entry earns its place with a reason someone would click it.
+dump, every entry earns its place with a reason someone would click it.
 """
 
 LINKS = {
     # ---- Buyer pages: platform, vlap, ai-model, outcomes, pricing ------------
     "for-schools.html": [
         ("platform.html", "the full five-layer platform",
-         "Peer community, coaching, and licensed therapy in one continuum — see how the layers connect."),
+         "Peer community, coaching, and licensed therapy in one continuum, see how the layers connect."),
         ("vlap.html", "how VLAP reads distress signals",
-         "The language layer behind every alert a counselor sees — what it flags and what it deliberately leaves alone."),
+         "The language layer behind every alert a counselor sees, what it flags and what it deliberately leaves alone."),
         ("ai-model.html", "the model trained on youth vernacular",
          "VLAP, and why standard clinical NLP misses the way your students actually talk about distress."),
         ("outcomes.html", "pilot cohort outcomes and ROI",
@@ -31,7 +31,7 @@ LINKS = {
     ],
     "health-systems.html": [
         ("platform.html", "the platform's five care layers",
-         "From peer community to licensed therapy — where each layer sits in a member's care continuum."),
+         "From peer community to licensed therapy where each layer sits in a member's care continuum."),
         ("vlap.html", "VLAP's signal detection layer",
          "How language analysis surfaces risk to a human reviewer without ever assigning a diagnosis."),
         ("ai-model.html", "VLAP's training approach",
@@ -45,7 +45,7 @@ LINKS = {
     ],
     "for-organizations.html": [
         ("platform.html", "the platform's care layers",
-         "Peer support, coaching, and licensed therapy — sized for an organization without its own clinical team."),
+         "Peer support, coaching, and licensed therapy, sized for an organization without its own clinical team."),
         ("vlap.html", "how VLAP surfaces distress signals",
          "The language layer that flags risk to a human who already knows the young person."),
         ("ai-model.html", "the model behind VLAP",
@@ -83,7 +83,7 @@ LINKS = {
         ("ai-model.html", "the model built to close the language gap",
          "VLAP's approach to the vocabulary and context problem this piece describes."),
         ("dialect-bias-mental-health-screening.html", "the measurement problem behind the equity gap",
-         "Why standard screening instruments score the same distress differently across groups — and what that requires of a model."),
+         "Why standard screening instruments score the same distress differently across groups and what that requires of a model."),
     ],
     "blog-other-diagnosis.html": [
         ("for-schools.html", "how this shows up in a school setting",
@@ -221,7 +221,7 @@ LINKS = {
         ("outcomes.html", "the outcomes this pricing is buying",
          "Retention and symptom-change figures, with the methodology behind every number."),
         ("contact.html", "talk to someone about a specific quote",
-         "Population size and setting change the number — a 15-minute call gets you an actual figure."),
+         "Population size and setting change the number, a 15-minute call gets you an actual figure."),
     ],
 
     # ---- new pages (workstream 2) ---------------------------------------------
@@ -233,7 +233,7 @@ LINKS = {
         ("outcomes.html", "outcomes data with methodology",
          "Retention and symptom-change figures, reported with the rigor an RFP evaluator would expect."),
         ("contact.html", "talk to an implementation lead",
-         "A 45-minute conversation, not a sales pitch — bring your RFP and we'll answer it directly."),
+         "A 45-minute conversation, not a sales pitch, bring your RFP and we'll answer it directly."),
         ("glossary.html", "definitions for the acronyms in this checklist",
          "MTSS, FERPA, HIPAA, and the rest of the terms an RFP evaluator will see, defined plainly."),
     ],

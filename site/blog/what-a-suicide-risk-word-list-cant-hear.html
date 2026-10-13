@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="We tested the new MIT, Child Mind Institute and Crisis Text Line suicide risk lexicon against VLAP on a psychiatrist-labelled corpus. The lexicon scored 0.6489. VLAP scored 0.8255. Here is where the gap comes from, and why it matters most for the young people whose risk is rising fastest.">
-<title>What a suicide-risk word list can’t hear &mdash; Vasl Health</title>
+<title>What a suicide-risk word list can’t hear, Vasl Health</title>
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/mark-v-tile.svg">
 <!-- SEO:VASL -->
@@ -12,18 +12,18 @@
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Vasl Health">
-<meta property="og:title" content="What a suicide-risk word list can’t hear — Vasl Health">
+<meta property="og:title" content="What a suicide-risk word list can’t hear, Vasl Health">
 <meta property="og:description" content="We tested the new MIT, Child Mind Institute and Crisis Text Line suicide risk lexicon against VLAP on a psychiatrist-labelled corpus. The lexicon scored 0.6489. VLAP scored 0.8255. Here is where the gap comes from, and why it matters most for the young people whose risk is rising fastest.">
 <meta property="og:url" content="https://gotovasl.com/blog/what-a-suicide-risk-word-list-cant-hear">
 <meta property="og:image" content="https://gotovasl.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Vasl Health — Language Is Care">
+<meta property="og:image:alt" content="Vasl Health, Language Is Care">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-10-12">
 <meta property="article:author" content="Rodney Bell">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="What a suicide-risk word list can’t hear — Vasl Health">
+<meta name="twitter:title" content="What a suicide-risk word list can’t hear, Vasl Health">
 <meta name="twitter:description" content="We tested the new MIT, Child Mind Institute and Crisis Text Line suicide risk lexicon against VLAP on a psychiatrist-labelled corpus. The lexicon scored 0.6489. VLAP scored 0.8255. Here is where the gap comes from, and why it matters most for the young people whose risk is rising fastest.">
 <meta name="twitter:image" content="https://gotovasl.com/og-image.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"What a suicide-risk word list can’t hear","description":"We tested the new MIT, Child Mind Institute and Crisis Text Line suicide risk lexicon against VLAP on a psychiatrist-labelled corpus. The lexicon scored 0.6489. VLAP scored 0.8255. Here is where the gap comes from, and why it matters most for the young people whose risk is rising fastest.","datePublished":"2026-10-12","dateModified":"2026-10-12","author":{"@type":"Person","name":"Rodney Bell"},"publisher":{"@id":"https://gotovasl.com/#organization"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://gotovasl.com/blog/what-a-suicide-risk-word-list-cant-hear"},"image":"https://gotovasl.com/og-image.png","isPartOf":{"@type":"Blog","@id":"https://gotovasl.com/blog"}}</script>
@@ -230,11 +230,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
 <h2>Summary</h2>
 <p>In September 2026, researchers at MIT and the Child Mind Institute published a suicide risk lexicon built with Crisis Text Line data. It is the most careful public attempt yet to make suicide-risk detection in text transparent, and it will become the reference point for anyone working in this space.</p>
 <p>We tested it. On a held-out corpus labelled for suicide-attempt severity by four practicing psychiatrists, the lexicon scored 0.6489. A 71-term keyword rule scored 0.5578. VLAP, the clinical language model Vasl built, scored 0.8255.</p>
-<p>The gap is not about effort or rigor. It is about what a word list can and cannot do. Of the 47 distress signals VLAP reads for, 23 have no counterpart anywhere in the lexicon. Those signals are the kind of language VLAP was built for: the ways Black, Brown, LGBTQ+, first-generation and rural young people describe being in trouble, often coded, hedged, understated, or in a dialect the lexicon was not built from. A word list cannot find words that are not on it. When it misses, it does not return a low score. It returns nothing, and that nothing goes into the record as no risk found.</p>
+<p>A word list can only find the words it contains. Of the 47 distress signals VLAP reads for, 23 have no counterpart anywhere in the lexicon. Those signals are the kind of language VLAP was built for: the ways Black, Brown, LGBTQ+, first-generation and rural young people describe being in trouble, often coded, hedged, understated, or in a dialect the lexicon was not built from. A word list cannot find words that are not on it. When it misses, it does not return a low score. It returns nothing, and that nothing goes into the record as no risk found.</p>
 <p>This post explains what the MIT team built, how we tested it, what the results show, and what they mean for the health systems, health plans and schools that will be choosing tools like these over the next few years.</p>
-<h2>What MIT and the Child Mind Institute built</h2>
+<h2>The MIT lexicon</h2>
 <p>The paper, &ldquo;Using Large Language Models to Create Lexicons for Interpretable Text Models With High Content Validity: The Suicide Risk Lexicon,&rdquo; appeared in the <em>Journal of Psychopathology and Clinical Science</em> in 2026. The work was led by Daniel Low, now at the Child Mind Institute, and Satra Ghosh of MIT&rsquo;s McGovern Institute.</p>
-<p>Their approach has three parts:</p>
+<p>Their method has three steps.</p>
 <ol>
   <li><strong>Build the vocabulary.</strong> A large language model drafted word and phrase lists for 49 suicide risk factors, such as lethal means, substance use, hopelessness, self-injury, anxiety and emotional pain. The researchers curated those lists by hand, and clinicians confirmed each term&rsquo;s relevance.</li>
   <li><strong>Train a small, transparent model.</strong> Using about 16,000 de-identified Crisis Text Line conversations, sorted into non-suicidal, suicidal ideation without imminent risk, and imminent risk, they trained a lightweight model that weights each risk factor.</li>
@@ -243,20 +243,20 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
 <p>Their findings are clinically sensible. Words about lethal means, such as &ldquo;cut&rdquo; or &ldquo;pills,&rdquo; carried heavy weight. Active suicidal ideation and self-injury were strong predictors. Anxiety, PTSD and emotional pain were intermediate. Depressed mood and fatigue carried less weight than lethal means and substance use.</p>
 <p>This is good science, and we want to be clear about that. Interpretability matters in clinical settings, and most AI tools in mental health offer none. A model that runs on a laptop and explains itself lowers the barrier for organizations that cannot afford a black box. The authors are also candid about the limits: they note that lexicons do not account for context, can miss terms that are not explicitly included, may need continual refinement as language and populations change, and must be thoroughly validated before clinical use.</p>
 <p>That last set of limits is where our work starts.</p>
-<h2>Why we tested it</h2>
+<h2>Background</h2>
 <p>Vasl builds clinical language infrastructure for behavioral health. Our model, VLAP (the Vasl Language Analysis Platform), reads the text that already exists around a young person in care: intake notes, discharge summaries, screener free text, check-ins and peer messages. It surfaces distress signals for a clinician to review, with the exact passage behind every signal.</p>
-<p>We built VLAP because the tools meant to catch risk early were mostly validated on formal written English, and the young people whose risk is rising fastest rarely describe distress that way. Between 2018 and 2023, the suicide rate among Black youth rose 29.4% while the rate among white youth fell 14.8% (Stone et al., <em>MMWR</em>, 2025). A screen that reads silence where distress exists does not just miss a patient. It records the miss as a negative, and that negative follows the patient through the chart.</p>
+<p>We built VLAP because the tools meant to catch risk early were mostly validated on formal written English, and the young people whose risk is rising fastest rarely describe distress that way. Between 2018 and 2023, the suicide rate among Black youth rose 29.4% while the rate among white youth fell 14.8% (Stone et al., <em>MMWR</em>, 2025). A screen that reads silence where distress exists misses a patient and records the miss as a negative, and that negative follows the patient through the chart.</p>
 <p>When a new reference lexicon arrives, the honest thing to do is test against it. If it closed the gap, we would want to know. If it did not, health systems deserve to know that before they build programs around it.</p>
-<h2>How we tested it</h2>
+<h2>Our test</h2>
 <p><strong>The corpus.</strong> We used a held-out corpus in which every text was labelled for suicide-attempt severity by four practicing psychiatrists. No text in it was used to train VLAP or to tune any of the three approaches.</p>
-<p><strong>The three approaches.</strong></p>
+<p><strong>The approaches.</strong> We compared three.</p>
 <ul>
   <li><em>A 71-term keyword rule</em>, representing the simplest screen many systems still run: flag the text if it contains any of a fixed list of risk words.</li>
   <li><em>The MIT / Child Mind Institute / Crisis Text Line suicide risk lexicon</em>, as published.</li>
   <li><em>VLAP</em>, Vasl&rsquo;s fine-tuned clinical language model, which scores 47 signals across six categories defined in our taxonomy, VASL-VLAP-TAX-001 v1.0. The taxonomy was clinically reviewed and approved by Panagis Galiatsatos, MD, MHS, of the Johns Hopkins School of Medicine.</li>
 </ul>
-<p><strong>The coverage check.</strong> Separately, we mapped each of VLAP&rsquo;s 47 signals against every term in the lexicon. A signal counts as covered if any lexicon term matches its meaning, not only its exact wording.</p>
-<h2>What we found</h2>
+<p><strong>The coverage check.</strong> Separately, we mapped each of VLAP&rsquo;s 47 signals against every term in the lexicon. A signal counts as covered if any lexicon term matches its meaning, even when the wording differs.</p>
+<h2>Results</h2>
 <div class="ac-table-wrap">
 <table>
 <thead><tr>
@@ -270,11 +270,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
 </tbody>
 </table>
 </div>
-<p>Three things stand out.</p>
 <p><strong>The lexicon is a real improvement over keywords.</strong> A clinician-reviewed vocabulary with weights beats a flat list, by about nine points. That is what you would expect, and it confirms the MIT team&rsquo;s core argument.</p>
 <p><strong>VLAP&rsquo;s lead over the lexicon is twice the lexicon&rsquo;s lead over keywords.</strong> The step from keyword list to lexicon is roughly nine points. The step from lexicon to VLAP is roughly seventeen.</p>
 <p><strong>Nearly half of VLAP&rsquo;s signals have no counterpart in the lexicon.</strong> Of the 47, 23 have no matching term anywhere in it.</p>
-<h2>Where the gap comes from</h2>
+<h2>The source of the gap</h2>
 <p>VLAP&rsquo;s taxonomy groups its 47 signals into six categories:</p>
 <div class="ac-table-wrap">
 <table>
@@ -303,11 +302,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
   <li>&ldquo;I&rsquo;m fine, it&rsquo;s whatever,&rdquo; the minimization that often comes right before a disclosure, in communities where asking for help carries a cost.</li>
 </ul>
 <p>None of these is exotic. A lexicon built from crisis-line conversations will catch some of them, because some of these young people text crisis lines. But a word list is only as wide as the language it was built from, and it has no way to read a sentence whose meaning depends on how the words are combined, on the dialect, or on what came before.</p>
-<p>That is the structural point. It is not that the lexicon was built carelessly. It is that a lexicon, by design, counts words. Distress in these communities is often carried by construction, register and context, not vocabulary.</p>
-<h2>Why it matters most where risk is rising</h2>
+<p>That is the structural point. A lexicon, by design, counts words. Distress in these communities is often carried by construction, register and context, not vocabulary.</p>
+<h2>Populations where risk is rising</h2>
 <p>If a screening program depends on a word list, it will be most accurate for patients who write like the people the list was built from, and least accurate for the patients who do not. In the United States today, the second group overlaps heavily with the young people whose suicide risk is rising fastest.</p>
 <p>The cost of a miss is concrete. Among Medicaid-enrolled children seen in the emergency department for a mental health crisis, only 31.2% saw a clinician within seven days of discharge, and 26.5% were back in the emergency department or hospital within six months (Hoffmann et al., <em>Pediatrics</em>, 2023). Every one of those returns is a young person whose distress was in a chart, a screener or a message, and was not read in a way that changed what happened next.</p>
-<h2>What VLAP does differently</h2>
+<h2>VLAP's approach</h2>
 <p>VLAP is a fine-tuned language model, not a word list, so it reads words in combination and in context. It was trained on the first community-annotated corpus pairing African American Language with behavioral-health distress labels, rated by members of the community it describes. No public dataset like it exists. We started with African American Language; LGBTQ+ youth language is built, and Spanish and Rural American English are next.</p>
 <p>It also keeps what is good about the lexicon approach:</p>
 <ul>
@@ -316,14 +315,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
   <li><strong>It runs inside our own infrastructure.</strong> No clinical text is sent to an outside model vendor.</li>
   <li><strong>It improves with data, and we measure how fast.</strong> Scaling the training data from 75 to 300 authors moved development-set ROC-AUC from 0.9043 to 0.9397.</li>
 </ul>
-<h2>What we have not shown yet</h2>
+<h2>Limits</h2>
 <p>We want to be as candid about limits as the MIT team was.</p>
 <ul>
   <li>This is one held-out corpus. A single benchmark is a signal, not a settled result.</li>
   <li>The corpus is first-person text. Clinician-written notes are a different register, and performance there has to be measured separately.</li>
   <li>The next step is validation on de-identified clinical text inside partner health systems. We will publish those results, including any that go the other way.</li>
 </ul>
-<h2>What comes next</h2>
+<h2>Next steps</h2>
 <p>We think the field is better off with more public benchmarks, not fewer. Vasl is committing to two things.</p>
 <p>First, a regular publication cadence: peer-reviewed submissions with clinical and academic partners, with technical reports and preprints in between. The first will describe the community-annotated African American Language distress corpus itself.</p>
 <p>Second, an open research model. Led by Hants Williams, PhD, RN, our Head of Data Science, we will release a public, open-source version of VLAP for other research teams to build on and test against, including against lexicons like this one.</p>
@@ -358,7 +357,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
 <div class="article-cta">
   <div>
     <div class="cta-headline">See Vasl Health<br>in <em>action.</em></div>
-    <p class="cta-body">A 45-minute call with an implementation lead &mdash; not a sales pitch. We come prepared with context specific to your organization and population.</p>
+    <p class="cta-body">Book a 45-minute call with an implementation lead. We come prepared with context specific to your organization and population.</p>
   </div>
   <a href="/contact" class="cta-btn">Request a Demo &rarr;</a>
 </div>

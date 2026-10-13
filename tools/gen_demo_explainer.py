@@ -1,4 +1,4 @@
-# Generates site/demo.html — the static VLAP explainer.
+# Generates site/demo.html, the static VLAP explainer.
 #
 # The page describes the engine and never runs it. There is no textarea, no
 # input, no scoring and no model on visitor text; see the commit that replaced
@@ -52,12 +52,12 @@ for code, body in entries:
     risk = re.search(r'"risk_level": "(.*?)"', body).group(1)
     # design-handoff/SKILL.md: named entities in text, so escape both the
     # ampersands and the literal em dashes ISO-03/ISO-06 carry in the engine source.
-    label = label.replace("&", "&amp;").replace("\u2014", "&mdash;").replace("\ufffd", "&mdash;")
+    label = label.replace("&", "&amp;").replace("\u2014", ", ").replace("\ufffd", ", ")
     dims.setdefault(dim, {"code": code[:3], "rows": []})["rows"].append((code, label, risk))
 
 ORDER = [
     ("Hopelessness & Futility",
-     "Futility, foreclosed futures, and burden narratives &mdash; including the vernacular constructions generic models read as venting."),
+     "Futility, foreclosed futures, and burden narratives, including the vernacular constructions generic models read as venting."),
     ("Coded Suicidal Ideation",
      "Ideation as it is actually written by youth: euphemism built to evade platform moderation, inverted framing, community-specific reference."),
     ("Minimization & Disclosure Suppression",
@@ -65,7 +65,7 @@ ORDER = [
     ("Social Isolation & Withdrawal",
      "Severance, withdrawal, and the specific isolation of being unwelcome at home."),
     ("Trauma & Acute Stressor Markers",
-     "Social determinants as they surface in language &mdash; housing, food, policing, immigration status, cumulative loss."),
+     "Social determinants as they surface in language, housing, food, policing, immigration status, cumulative loss."),
     ("Protective Factor Erosion",
      "What a young person is losing. Erosion signals, not credits: every one of the seven adds to concern rather than subtracting from it."),
 ]
@@ -75,7 +75,7 @@ RISK_NOTE = {
     "High": "Warrants human review on its own.",
     "Moderate": "Logged and monitored; reviewed in combination.",
     "Low": "Contextual or longitudinal marker.",
-    "Variable": "Context-dependent &mdash; read against co-occurring signals.",
+    "Variable": "Context-dependent, read against co-occurring signals.",
 }
 
 # Section 4 rules, verbatim from vlap_engine.py COMBINATION_RULES.
@@ -87,7 +87,7 @@ RULES = [
     ("R3", "HIGH", "HOP-03 together with HOP-07",
      "AAVE futility construction plus burden narrative. The taxonomy names this its highest-risk pattern."),
     ("R4", "HIGH", "ISO-06 together with any SHA signal",
-     "Family rejection alongside ideation &mdash; the combination that carries the most weight for LGBTQIA+ youth."),
+     "Family rejection alongside ideation, the combination that carries the most weight for LGBTQIA+ youth."),
     ("R5", "HIGH", "CCM-04 together with SHA-02",
      "Ideation delivered as a joke. The humour is the disclosure mechanism, not a discount on the content."),
     ("R6", "MODERATE", "Three or more CCM signals in one session",
@@ -190,7 +190,7 @@ HTML = f"""<!DOCTYPE html>
 <meta property="og:image" content="https://gotovasl.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Vasl Health &mdash; Language Is Care">
+<meta property="og:image:alt" content="Vasl Health, Language Is Care">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="How VLAP Reads Language | Vasl Health">
@@ -428,8 +428,8 @@ footer{{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);p
 <section id="hero">
   <div>
     <span class="hero-kicker reveal">Vasl Language Analysis Platform</span>
-    <h1 class="hero-headline reveal d1">The distress a young person <em>has already told you about</em> &mdash; in the words they actually used.</h1>
-    <p class="hero-body reveal d2">VLAP is Vasl's natural-language engine for behavioral-health distress in youth communication. It is built for the language Black youth actually write &mdash; vernacular futility constructions, coded ideation, humour-masked disclosure &mdash; the constructions generic screening models read as venting and drop.</p>
+    <h1 class="hero-headline reveal d1">The distress a young person <em>has already told you about</em>, in the words they actually used.</h1>
+    <p class="hero-body reveal d2">VLAP is Vasl's natural-language engine for behavioral-health distress in youth communication. It is built for the language Black youth actually write, vernacular futility constructions, coded ideation, humour-masked disclosure, the constructions generic screening models read as venting and drop.</p>
     <p class="hero-body reveal d2">Forty-seven signals across six clinical dimensions, a rules layer that reads them in combination, and a single output: a signal made visible to a licensed clinician, who decides what happens next.</p>
     <div class="hero-actions reveal d3">
       <a href="contact.html" class="btn-dark">Request a clinical walkthrough</a>
@@ -457,7 +457,7 @@ footer{{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);p
   <div class="chapter-label light">Where VLAP is different</div>
   <div class="reg-head">
     <h2 class="reg-headline">A screening tool that reads dialect as noise <em>will read distress as attitude.</em></h2>
-    <p class="reg-body">Most language models were trained on text that does not sound like the young people Vasl serves. Presented with a vernacular futility construction &mdash; the double negation, the intensifier doing the emotional work &mdash; a generic model returns frustration, or venting, and moves on. The young person disclosed. The instrument did not hear it.</p>
+    <p class="reg-body">Most language models were trained on text that does not sound like the young people Vasl serves. Presented with a vernacular futility construction, the double negation, the intensifier doing the emotional work, a generic model returns frustration, or venting, and moves on. The young person disclosed. The instrument did not hear it.</p>
     <p class="reg-body"><strong>VLAP detects the register first, then reads the message inside it.</strong> When the engine identifies African American Language (AAL), Spanish-English code-switching, or a pre-disclosure minimisation move, it does not discount what follows. It raises the weight it gives the distress evidence, because in this population that framing is where the disclosure lives.</p>
   </div>
   <div class="reg-grid">
@@ -488,7 +488,7 @@ footer{{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);p
     <p class="tax-body">Each signal has a code, a clinical label, and a risk level describing what it means on its own. The list below is the live v1.0 taxonomy, generated from the engine's own signal definitions. It is the same reference a clinician reads, and the same codebook used for annotation.</p>
   </div>
   <div class="risk-key">
-    <div class="risk-key-head">Risk level &mdash; the significance of one signal in isolation</div>
+    <div class="risk-key-head">Risk level, the significance of one signal in isolation</div>
 {RISK_KEY_HTML}
   </div>
 {DIMS_HTML}
@@ -504,7 +504,7 @@ footer{{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);p
   <div class="rules-grid">
 {RULES_HTML}
   </div>
-  <p class="rules-foot">These are post-inference business logic, not a model training target. A fired rule is what the rules layer concluded from the model's output &mdash; not, itself, something the model detected. Keeping the two separable is what lets a clinician see the difference.</p>
+  <p class="rules-foot">These are post-inference business logic, not a model training target. A fired rule is what the rules layer concluded from the model's output, not, itself, something the model detected. Keeping the two separable is what lets a clinician see the difference.</p>
 </section>
 
 <!-- CDS BOUNDARY -->

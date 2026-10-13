@@ -33,7 +33,7 @@ ORG_NAME = "Vasl Health"
 MARK_OPEN = "<!-- SEO:VASL -->"
 MARK_CLOSE = "<!-- /SEO:VASL -->"
 
-# Plausible: cookieless, no consent banner, no personal data collected — see
+# Plausible: cookieless, no consent banner, no personal data collected, see
 # Workstream 3 in SEO-WEEK2.md and the Analytics section of README.md.
 PLAUSIBLE_DOMAIN = "gotovasl.com"
 PLAUSIBLE_SCRIPT = "https://plausible.io/js/script.outbound-links.tagged-events.js"
@@ -51,7 +51,7 @@ NOINDEX = {
 # ~150 chars, buyer-facing, no diagnostic claims.
 MISSING_DESC = {
     "ai-model.html": (
-        "VLAP is the language model behind Vasl — trained on how Black, Latino, "
+        "VLAP is the language model behind Vasl, trained on how Black, Latino, "
         "and first-generation youth actually describe distress. Detection, not diagnosis."
     ),
     "platform.html": (
@@ -59,12 +59,12 @@ MISSING_DESC = {
         "culturally matched coaching, licensed therapy, and crisis support in one system."
     ),
     "peer-groups.html": (
-        "Moderated peer community groups where youth show up as themselves — the relationship "
+        "Moderated peer community groups where youth show up as themselves, the relationship "
         "that exists before a crisis does, staffed by facilitators from their own communities."
     ),
     "vlap.html": (
         "VLAP is Vasl's language analysis layer: 47 culturally specific distress signals across "
-        "coded language, AAVE, and youth vernacular — surfaced to humans, never used to diagnose."
+        "coded language, AAVE, and youth vernacular, surfaced to humans, never used to diagnose."
     ),
     "404.html": "That page could not be found. Return to gotovasl.com.",
 }
@@ -101,7 +101,7 @@ HELP_LABELS = {
 
 def canonical_for(rel: str) -> str:
     """Pretty URL. The origin serves /about and /about.html identically, so we
-    pick one and declare it — otherwise every page competes with its own twin."""
+    pick one and declare it, otherwise every page competes with its own twin."""
     if rel == "index.html":
         return f"{ORIGIN}/"
     return f"{ORIGIN}/{rel[:-len('.html')]}"
@@ -124,7 +124,7 @@ def strip_existing(html: str) -> str:
 def get_title(html: str) -> str:
     m = re.search(r"<title>(.*?)</title>", html, re.S)
     t = m.group(1).strip() if m else ORG_NAME
-    return t.replace("&mdash;", "—").replace("&amp;", "&")
+    return t.replace(", ", ", ").replace("&amp;", "&")
 
 
 def get_desc(html: str, rel: str) -> str:
@@ -162,7 +162,7 @@ def jsonld_blocks(rel: str, title: str, desc: str, canonical: str) -> list:
                 "description": (
                     "Vasl Health builds culturally grounded, clinically governed early "
                     "detection and behavioral health support for Black, Latino, and "
-                    "first-generation youth ages 14–24."
+                    "first-generation youth ages 14 to 24."
                 ),
                 "email": "hello@vaslhealth.com",
                 "foundingLocation": {
@@ -215,7 +215,7 @@ def jsonld_blocks(rel: str, title: str, desc: str, canonical: str) -> list:
             {
                 "@context": "https://schema.org",
                 "@type": "BlogPosting",
-                "headline": title.split(" — ")[0],
+                "headline": title.split(", ")[0],
                 "description": desc,
                 "datePublished": POST_DATES[rel],
                 "dateModified": POST_DATES[rel],
@@ -238,7 +238,7 @@ def jsonld_blocks(rel: str, title: str, desc: str, canonical: str) -> list:
                         "name": "Insights & Research",
                         "item": f"{ORIGIN}/blog",
                     },
-                    {"@type": "ListItem", "position": 3, "name": title.split(" — ")[0]},
+                    {"@type": "ListItem", "position": 3, "name": title.split(", ")[0]},
                 ],
             }
         )
@@ -292,7 +292,7 @@ def jsonld_blocks(rel: str, title: str, desc: str, canonical: str) -> list:
 
 
 def page_slug(rel: str) -> str:
-    """Short label for analytics props — the same string a person would type
+    """Short label for analytics props, the same string a person would type
     after gotovasl.com/, with index.html collapsed to "home"."""
     if rel == "index.html":
         return "home"
@@ -363,7 +363,7 @@ def build_block(rel: str, html: str) -> str:
     lines.append(f'<meta property="og:image" content="{OG_IMAGE}">')
     lines.append('<meta property="og:image:width" content="1200">')
     lines.append('<meta property="og:image:height" content="630">')
-    lines.append(f'<meta property="og:image:alt" content="Vasl Health — Language Is Care">')
+    lines.append(f'<meta property="og:image:alt" content="Vasl Health, Language Is Care">')
     lines.append('<meta property="og:locale" content="en_US">')
 
     if rel in POST_DATES:
@@ -406,7 +406,7 @@ def process(path: Path) -> tuple:
         new = html.replace("</head>", block + "\n</head>", 1)
     else:
         # No place to put the block. Return None for content so main() can tell
-        # this apart from "unchanged" — returning the reason as a string here
+        # this apart from "unchanged", returning the reason as a string here
         # made main() print the entire file as the skip reason.
         return rel, False, None
 
