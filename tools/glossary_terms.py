@@ -102,8 +102,8 @@ TERMS = [
     ("Help-seeking mismatch", "help-seeking-mismatch",
      "The gap between how a person actually asks for help, often indirectly, in coded or "
      "culturally specific language and how a system is built to recognize a request for help. "
-     "When the mismatch is large, real requests go unanswered not because no one was listening, "
-     "but because the system was listening for the wrong signal."),
+     "When the mismatch is large, real requests go unanswered because the system was "
+     "listening for the wrong signal."),
     ("HEDIS", "hedis",
      "The Healthcare Effectiveness Data and Information Set, a standardized set of performance "
      "measures used by health plans to report on care quality, including several specific to "

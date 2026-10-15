@@ -75,7 +75,7 @@ LINKS = {
         ("health-systems.html", "the health plan case for this approach",
          "How Medicaid-serving plans use Vasl to reach members standard outreach doesn't retain."),
         ("vlap.html", "the language layer behind engagement",
-         "Why cultural and linguistic fit, not just access, is what actually drives retention."),
+         "Why cultural and linguistic fit, more than access, is what actually drives retention."),
     ],
     "blog-mental-health-equity-crisis.html": [
         ("for-schools.html", "what districts can do about it",
