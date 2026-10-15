@@ -953,7 +953,7 @@
         never learned<br>
         <em>their language.</em>
       </h2>
-      <p class="problem-body">General-purpose NLP models, including large language models, are trained on internet text that skews heavily toward majority-White, educated, English-speaking populations. The result is a systematic blind spot: the specific ways Black and Latino, LGBTQ+, and first-generation youth signal emotional distress are consistently misread, deprioritized, or missed entirely.</p>
+      <p class="problem-body">General-purpose NLP models, including large language models, are trained on internet text that skews heavily toward majority-White, educated, English-speaking populations. Standard models therefore miss the specific ways Black and Latino, LGBTQ+, and first-generation youth signal emotional distress.</p>
       <p class="problem-body">This isn't a model failure in the traditional sense. These models perform well on the populations they were trained for. The failure is in deploying them, uncorrected, for populations they were never trained on and expecting accurate clinical signal detection to follow.</p>
       <p class="problem-body">The gap isn't theoretical. In clinical practice, it means a youth saying "lowkey been struggling fr" is read as casual. A pre-disclosure minimization pattern ("it's not that deep but...") reduces the model's confidence instead of increasing it. Community-developed coded language, terms built specifically to avoid content filters, registers as noise. Standard models consistently miss these signals in the communities that most need them caught.</p>
     </div>
@@ -1078,7 +1078,7 @@
       <div class="al-num">Training</div>
       <div class="al-body">
         <div class="al-title">Fine-Tuning on Culturally Specific Mental Health Corpus</div>
-        <p class="al-desc">The extended BERT-family model was fine-tuned on annotated language samples drawn from the communities VLAP serves, not web-scraped text, but specifically collected and clinically annotated mental health communication. Each sample was labeled by licensed clinicians with community competency training against the 47-signal taxonomy across six clinical categories. The fine-tuning process was conducted in multiple phases with inter-annotator agreement validation.</p>
+        <p class="al-desc">The extended BERT-family model was fine-tuned on annotated language samples drawn from the communities VLAP serves, specifically collected and clinically annotated mental health communication rather than web-scraped text. Each sample was labeled by licensed clinicians with community competency training against the 47-signal taxonomy across six clinical categories. The fine-tuning process was conducted in multiple phases with inter-annotator agreement validation.</p>
         <div class="al-tech">Multi-phase fine-tuning &middot; IAA validation across annotation cohort</div>
       </div>
     </div>
@@ -1086,7 +1086,7 @@
       <div class="al-num">Output</div>
       <div class="al-body">
         <div class="al-title">Dimensional Signal Profiling, Non-Diagnostic Output Layer</div>
-        <p class="al-desc">The model output layer generates dimensional signal profiles across the six-category taxonomy, not diagnostic outputs, not severity scores, and not clinical recommendations. The output is an interpretive context package: which signal patterns are present, their dimensional classification, and cultural interpretation notes that help clinicians understand what the patterns typically indicate in the communities that produce them. Every output includes a non-diagnostic disclaimer and is designed to support clinical judgment, not substitute for it.</p>
+        <p class="al-desc">The model output layer generates dimensional signal profiles across the six-category taxonomy, not diagnostic outputs, not severity scores, and not clinical recommendations. The output is an interpretive context package containing which signal patterns are present, their dimensional classification, and cultural interpretation notes that help clinicians understand what the patterns typically indicate in the communities that produce them. Every output includes a non-diagnostic disclaimer and is designed to support clinical judgment, not substitute for it.</p>
         <div class="al-tech">Non-diagnostic &middot; Interpretive context &middot; 47-signal taxonomy &middot; Clinician-surfaced only</div>
       </div>
     </div>
@@ -1408,7 +1408,7 @@
           <div class="sig-ex">&ldquo;After [event] it won't matter anymore&rdquo;</div>
           <div class="sig-ex">&ldquo;I told myself if things aren't better by [date]...&rdquo;</div>
           </div>
-          <p class="sig-note">References to specific dates or events with framing that implies a terminus, a point after which the member does not expect or want to continue. Distinct from goal-setting. The inversion is key: the date is a deadline, not a milestone.</p>
+          <p class="sig-note">References to specific dates or events with framing that implies a terminus, a point after which the member does not expect or want to continue. Distinct from goal-setting. The date functions as a deadline rather than a milestone.</p>
         </div>
         <div class="sig-card reveal">
           <div class="sig-card-head">
@@ -1489,7 +1489,7 @@
           <div class="sig-ex">&ldquo;haha I hate myself sometimes tho&rdquo;</div>
           <div class="sig-ex">&ldquo;not to be unalive about it but lmao&rdquo;</div>
           </div>
-          <p class="sig-note">CRITICAL, humor framing is the most common disclosure suppression mechanism in youth aged 13-22. The joke is the test: if the listener laughs or deflects, the disclosure is abandoned. VLAP is trained to detect the clinical content independent of the humor wrapper. 'Not to be unalive about it' is a specific formulation that combines SHA-02 with CCM-04, extremely high combined risk.</p>
+          <p class="sig-note">CRITICAL, humor framing is the most common disclosure suppression mechanism in youth aged 13-22. The joke tests the listener. If they laugh or deflect, the disclosure is abandoned. VLAP is trained to detect the clinical content independent of the humor wrapper. 'Not to be unalive about it' is a specific formulation that combines SHA-02 with CCM-04, extremely high combined risk.</p>
         </div>
         <div class="sig-card reveal">
           <div class="sig-card-head">
