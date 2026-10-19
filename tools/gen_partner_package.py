@@ -69,13 +69,41 @@ DASH_FORMS = tuple(
     + ["&#%s%s;" % (x, h) for x in ("x", "X") for h in ("2014", "2013")]
 )
 
+# VASL-PLATFORM CLAUDE.md section 13 rule 1: the BUILD sets the identity, in
+# both metadata blocks, and the file is never patched afterwards. Title, author,
+# creator and producer all read exactly this, which is what tools/vasl-publish
+# checks before a file may reach the S3 data room master or a Drive room.
+IDENTITY = "Vasl Health PBC"
+
 META = {
-    "title": "Vasl Health, Partner Package",
-    "author": "Vasl Health PBC",
+    "title": IDENTITY,
+    "author": IDENTITY,
     "subject": "VLAP non-device clinical decision support for behavioral health",
-    "creator": "tools/gen_partner_package.py",
+    "creator": IDENTITY,
+    # pymupdf stamps its own name as the producer unless this is set, which is
+    # the field that made the published copy need a post-build patch.
+    "producer": IDENTITY,
     "keywords": "",
 }
+
+# The second block. set_metadata writes only the Info dict; a reader that
+# prefers the XMP packet, and vasl-publish, both read this one instead, so a
+# build that sets one and not the other is half clean. No dash in any form here:
+# assert_no_dashes checks this string as well as the copy and META.
+XMP = """<?xpacket begin='' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<x:xmpmeta xmlns:x='adobe:ns:meta/'>
+ <rdf:RDF xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+  <rdf:Description rdf:about=''
+    xmlns:dc='http://purl.org/dc/elements/1.1/'
+    xmlns:xmp='http://ns.adobe.com/xap/1.0/'
+    xmlns:pdf='http://ns.adobe.com/pdf/1.3/'>
+   <dc:creator><rdf:Seq><rdf:li>%s</rdf:li></rdf:Seq></dc:creator>
+   <xmp:CreatorTool>%s</xmp:CreatorTool>
+   <pdf:Producer>%s</pdf:Producer>
+  </rdf:Description>
+ </rdf:RDF>
+</x:xmpmeta>
+<?xpacket end='w'?>""" % (IDENTITY, IDENTITY, IDENTITY)
 
 CARD_RADIUS = 3.0
 
@@ -108,6 +136,9 @@ def assert_no_dashes():
         for form in DASH_FORMS:
             if form in v:
                 bad.append(("metadata:" + k, form, v))
+    for form in DASH_FORMS:
+        if form in XMP:
+            bad.append(("metadata:xmp", form, XMP))
     if bad:
         for where, form, t in bad:
             print("  DASH %-14s %-10r %r" % (where, form, t), file=sys.stderr)
@@ -248,6 +279,10 @@ def render(out_path):
                     put(page, (x, y + i * lead), line, face, size, color, fonts)
 
     doc.set_metadata(META)
+    # Both blocks, at build time. Order matters: set_metadata rewrites the Info
+    # dict, so the XMP packet goes in after it, and subset_fonts below preserves
+    # it. Never patch either one into a file that has already been saved.
+    doc.set_xml_metadata(XMP)
     # The six faces embed in full otherwise, which roughly trebles the file for
     # a document that uses a few hundred glyphs. This is a public download.
     try:
