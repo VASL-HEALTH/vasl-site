@@ -148,6 +148,13 @@ STYLE = """<style>
 .vh-sol[data-open="true"] .vh-sol-btn{color:var(--ink,#1C1C1C);}
 .vh-sol[data-open="true"] .vh-chev{transform:rotate(180deg);}
 .vh-chev{transition:transform 0.18s;}
+/* The panel hangs off <nav>, so the nav's own bottom padding sits between the
+   button and the panel and belongs to neither. Without something covering that
+   band the pointer leaves both elements on the way down, the menu closes, and
+   it reopens on arrival: it never holds still long enough to click. This spans
+   the band; JS gives it the button's width and the exact remaining height. */
+.vh-sol-bridge{position:absolute;z-index:119;display:none;}
+.vh-sol[data-open="true"] .vh-sol-bridge{display:block;}
 .nav-links > li > a.is-active,.vh-sol.is-active .vh-sol-btn{color:var(--ink,#1C1C1C);
   padding-bottom:4px;border-bottom:1px solid var(--clay,#C4896F);}
 .vh-sol-menu{position:absolute;top:100%;margin-top:1px;left:0;width:440px;z-index:120;
@@ -223,6 +230,8 @@ SCRIPT = """<script>
   var sol = document.querySelector('.vh-sol');
   var btn = sol && sol.querySelector('.vh-sol-btn');
   var menu = sol && sol.querySelector('.vh-sol-menu');
+  var bridge = sol && sol.querySelector('.vh-sol-bridge');
+  var closeTimer = null;
 
   // The panel hangs off <nav>, so its left edge is set from the button rather
   // than inherited from a positioned list item. Measuring beats a hard-coded
@@ -233,6 +242,13 @@ SCRIPT = """<script>
     var pad = parseFloat(getComputedStyle(nav).paddingRight) || 0;
     var max = nav.clientWidth - pad - menu.offsetWidth;
     menu.style.left = Math.max(0, Math.min(btn.offsetLeft, max)) + 'px';
+    if (bridge) {
+      var below = btn.offsetTop + btn.offsetHeight;
+      bridge.style.left = btn.offsetLeft + 'px';
+      bridge.style.width = btn.offsetWidth + 'px';
+      bridge.style.top = below + 'px';
+      bridge.style.height = Math.max(0, nav.clientHeight - below) + 'px';
+    }
   }
 
   function setSolutions(open) {
@@ -243,14 +259,34 @@ SCRIPT = """<script>
     if (open) placeMenu();
   }
 
+  function cancelClose() {
+    if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+  }
+
+  // Closing on a short grace period rather than on the first mouseleave, so a
+  // pointer travelling between the button and the panel cannot strand it.
+  function scheduleClose() {
+    cancelClose();
+    closeTimer = setTimeout(function () { setSolutions(false); }, 240);
+  }
+
   if (sol) {
     setSolutions(false);
     // Hover and click both open it, so a pointer user never has to click and
     // a keyboard user never has to hover.
-    sol.addEventListener('mouseenter', function () { setSolutions(true); });
-    sol.addEventListener('mouseleave', function () { setSolutions(false); });
+    [btn, bridge, menu].forEach(function (el) {
+      if (!el) return;
+      el.addEventListener('mouseenter', function () { cancelClose(); setSolutions(true); });
+      el.addEventListener('mouseleave', scheduleClose);
+    });
     btn.addEventListener('click', function () {
-      setSolutions(btn.getAttribute('aria-expanded') !== 'true');
+      cancelClose();
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      // With a mouse, hover has already opened it by the time the click lands,
+      // so a toggle here would close the menu the user just pointed at. Only
+      // the pointer-is-elsewhere case (touch, keyboard) toggles shut.
+      if (open && btn.matches(':hover')) return;
+      setSolutions(!open);
     });
     sol.addEventListener('focusout', function (e) {
       if (!sol.contains(e.relatedTarget)) setSolutions(false);
@@ -289,6 +325,7 @@ SCRIPT = """<script>
 
   document.addEventListener('keydown', function (e) {
     if (e.key !== 'Escape') return;
+    cancelClose();
     setSolutions(false);
     if (sheet && !sheet.hidden) setSheet(false);
   });
@@ -296,7 +333,7 @@ SCRIPT = """<script>
   // A click anywhere else closes the menu, which a pointer that never enters
   // the panel would otherwise leave open on a touch device.
   document.addEventListener('click', function (e) {
-    if (sol && !sol.contains(e.target)) setSolutions(false);
+    if (sol && !sol.contains(e.target)) { cancelClose(); setSolutions(false); }
   });
 })();
 </script>"""
@@ -332,6 +369,7 @@ def header_html(rel: str) -> str:
 {chr(10).join(items)}
     <li class="{sol_li_cls}">
       <button type="button" class="vh-sol-btn" id="vh-sol-btn" aria-expanded="false" aria-controls="vh-sol-menu">Solutions{CHEVRON}</button>
+      <span class="vh-sol-bridge" aria-hidden="true"></span>
       <div class="vh-sol-menu" id="vh-sol-menu" hidden>
 {sol_block}
       </div>
