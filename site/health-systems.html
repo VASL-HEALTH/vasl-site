@@ -107,6 +107,17 @@ section{padding:130px var(--gutter);position:relative;}
 .calib-headline em{font-style:italic;color:var(--clay);}
 .calib-body{font-size:18px;font-weight:300;line-height:1.72;color:var(--ink-70);max-width:760px;}
 
+/* BRIDGE (parchment) */
+#bridge{background:var(--parchment);padding-top:120px;padding-bottom:120px;border-bottom:1px solid var(--chalk);display:grid;grid-template-columns:1fr 1fr;gap:0 72px;align-items:center;}
+.bridge-text{display:flex;flex-direction:column;}
+.bridge-headline{font-family:var(--serif);font-size:clamp(34px,4.2vw,52px);font-weight:300;line-height:1.08;letter-spacing:-0.025em;color:var(--ink);margin-bottom:24px;}
+.bridge-headline em{font-style:italic;color:var(--clay);}
+.bridge-body{font-size:17px;font-weight:300;line-height:1.72;color:var(--ink-70);margin-bottom:36px;}
+.bridge-card{background:var(--warm-white);border:1px solid var(--chalk);padding:32px;}
+.bridge-figure{font-family:var(--serif);font-size:clamp(56px,6.6vw,88px);font-weight:300;line-height:1;letter-spacing:-0.03em;color:var(--deep-green);margin-bottom:12px;}
+.bridge-stat{font-family:var(--serif);font-size:clamp(18px,1.8vw,22px);font-weight:300;line-height:1.35;color:var(--ink);margin-bottom:12px;}
+.bridge-source{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dust);}
+
 /* STATUS (parchment) */
 #status{background:var(--parchment);padding-top:110px;padding-bottom:110px;text-align:center;}
 .status-statement{font-family:var(--serif);font-size:clamp(24px,3vw,36px);font-weight:300;font-style:italic;line-height:1.35;color:var(--ink);max-width:760px;margin:0 auto 32px;}
@@ -125,6 +136,14 @@ section{padding:130px var(--gutter);position:relative;}
   #hero{grid-template-columns:1fr;gap:70px;}
   .hero-right{border-left:none;padding-left:0;border-top:1px solid var(--chalk);padding-top:50px;}
   .gov-grid{grid-template-columns:1fr;gap:60px;}
+  #bridge{grid-template-columns:1fr;gap:0;}
+  .bridge-text{display:contents;}
+  .bridge-head{order:1;}
+  .bridge-card{order:2;padding:20px;margin-bottom:24px;}
+  .bridge-copy{order:3;}
+  .bridge-headline{margin-bottom:24px;}
+  .bridge-body{margin-bottom:24px;}
+  .bridge-actions .btn-dark{display:block;text-align:center;}
 }
 @media(max-width:768px){
   :root{--gutter:5vw;}
@@ -245,6 +264,24 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
   <p class="calib-body reveal d2">VLAP, our clinical language model, is trained on youth-generated language, AAVE, coded phrasing, limited-English-proficiency patterns, with an SDOH-aware calibration layer (Provisional Patent VH-2026-001-PROV) that adjusts for the contexts standard NLP gets wrong.</p>
 </section>
 
+<section id="bridge">
+  <div class="bridge-text">
+    <div class="bridge-head reveal">
+      <div class="chapter-label">Vasl Bridge</div>
+      <h2 class="bridge-headline">From discharge to <em>first visit.</em></h2>
+    </div>
+    <div class="bridge-copy reveal d1">
+      <p class="bridge-body">A text from Vasl every day, from the day a young person leaves the emergency department to their first appointment. When a reply hides distress, the partner&rsquo;s clinician sees it.</p>
+      <div class="bridge-actions"><a href="/bridge" class="btn-dark">See Vasl Bridge</a></div>
+    </div>
+  </div>
+  <div class="bridge-card reveal d2">
+    <div class="bridge-figure">31.2%</div>
+    <div class="bridge-stat">Only 31.2% of Medicaid youth see a clinician within 7 days of a mental health emergency visit.</div>
+    <div class="bridge-source">Hoffmann et al., Pediatrics 2023</div>
+  </div>
+</section>
+
 <section id="status">
   <div class="chapter-label reveal" style="justify-content:center;">Where We Are</div>
   <p class="status-statement reveal d1">Currently in structured pilot pathways with academic medical centers and health-system innovation programs. Independent validation via an IRB-approved university study is underway.</p>
@@ -302,6 +339,7 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
     <div class="fs-col">
       <div class="fs-head">Platform</div>
       <a href="/platform">Platform Overview</a>
+      <a href="/platform/vasl-platform">The Vasl Platform</a>
       <a href="/vlap">VLAP</a>
       <a href="/ai-model">AI Model</a>
       <a href="/technology">Technology</a>
