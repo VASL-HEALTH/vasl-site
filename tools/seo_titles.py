@@ -49,17 +49,12 @@ REWRITES = {
         "What Vasl looks at, what it never stores, and what a parent or guardian "
         "should expect. Plain language, no clinical jargon, no surveillance.",
     ),
-    "pricing.html": (
-        "Pricing for Schools, Health Plans & Nonprofits | Vasl",
-        "How Vasl is priced by population size and setting, what a pilot includes, "
-        "and which funding sources districts and plans typically use to pay for it.",
-    ),
     # ---- Product -------------------------------------------------------------
     "platform.html": (
-        "Youth Behavioral Health Platform: The Full Continuum | Vasl",
-        "Five layers in one system: peer community, check-ins, culturally matched "
-        "coaching, licensed therapy, and crisis support, human in the loop at every "
-        "escalation.",
+        "The Vasl Platform: What Happens After VLAP Reads",
+        "What happens after VLAP reads a reply: a check-in text every day, a mood "
+        "map, a peer community, a coach the same day, and a warm handoff to a "
+        "licensed clinician.",
     ),
     "vlap.html": (
         "VLAP: Reading Youth Language for Distress Signals | Vasl",

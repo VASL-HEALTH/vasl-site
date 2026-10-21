@@ -676,7 +676,7 @@
 
 
   /* ═══════════════════════════════════════════
-     CHAPTER 08: PARTNERS
+     PARTNERS BAND
   ═══════════════════════════════════════════ */
   #partners {
     background: var(--parchment);
@@ -709,125 +709,7 @@
 
 
   /* ═══════════════════════════════════════════
-     CHAPTER 09: PRICING
-  ═══════════════════════════════════════════ */
-  #pricing {
-    background: var(--warm-white);
-    padding-top: 150px; padding-bottom: 150px;
-    border-bottom: 1px solid var(--chalk);
-  }
-
-  .pricing-header {
-    display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px;
-    align-items: end; margin-bottom: 80px;
-    padding-bottom: 60px; border-bottom: 1px solid var(--chalk);
-  }
-
-  .pricing-headline {
-    font-family: var(--serif); font-size: clamp(34px, 3.8vw, 52px);
-    font-weight: 300; line-height: 1.1; letter-spacing: -0.025em; color: var(--ink);
-  }
-  .pricing-headline em { font-style: italic; color: var(--clay); }
-
-  .pricing-intro {
-    font-size: 17px; font-weight: 300; line-height: 1.72; color: var(--ink-70);
-  }
-
-  /* Pricing tiers, three editorial columns */
-  .pricing-tiers {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
-    border: 1px solid var(--chalk);
-  }
-
-  .tier {
-    padding: 52px 44px; border-right: 1px solid var(--chalk);
-    display: flex; flex-direction: column;
-  }
-  .tier:last-child { border-right: none; }
-  .tier.featured { background: var(--ink); }
-
-  .tier-label {
-    font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
-    text-transform: uppercase; color: var(--clay); margin-bottom: 16px;
-  }
-  .tier.featured .tier-label { color: var(--clay-light); }
-
-  .tier-name {
-    font-family: var(--serif); font-size: 28px; font-weight: 400;
-    color: var(--ink); margin-bottom: 8px; line-height: 1.15; letter-spacing: -0.01em;
-  }
-  .tier.featured .tier-name { color: var(--warm-white); }
-
-  .tier-tagline {
-    font-size: 14px; font-weight: 300; line-height: 1.6;
-    color: var(--dust); margin-bottom: 32px;
-  }
-  .tier.featured .tier-tagline { color: rgba(250,247,242,0.48); }
-
-  .tier-price {
-    font-family: var(--serif); font-size: 52px; font-weight: 300;
-    color: var(--ink); line-height: 1; letter-spacing: -0.04em; margin-bottom: 4px;
-  }
-  .tier.featured .tier-price { color: var(--warm-white); }
-
-  .tier-period {
-    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--dust); margin-bottom: 10px;
-  }
-  .tier.featured .tier-period { color: rgba(250,247,242,0.38); }
-  .tier-pmpm {
-    font-family: var(--mono); font-size: 9px; letter-spacing: 0.06em;
-    text-transform: uppercase; color: var(--clay); line-height: 1.9;
-    margin-bottom: 20px; padding: 10px 14px;
-    border: 1px solid var(--chalk); background: var(--parchment);
-  }
-  .tier.featured .tier-pmpm { border-color: rgba(250,247,242,0.15); background: rgba(250,247,242,0.07); color: var(--clay-light); }
-
-  .tier-divider {
-    height: 1px; background: var(--chalk); margin-bottom: 28px;
-  }
-  .tier.featured .tier-divider { background: rgba(250,247,242,0.12); }
-
-  .tier-features { display: flex; flex-direction: column; gap: 0; flex: 1; }
-
-  .tf-item {
-    padding: 12px 0; border-bottom: 1px solid var(--chalk);
-    display: flex; align-items: baseline; gap: 12px;
-    font-size: 14px; font-weight: 300; line-height: 1.55; color: var(--ink-70);
-  }
-  .tier.featured .tf-item { border-color: rgba(250,247,242,0.10); color: rgba(250,247,242,0.58); }
-  .tf-item:last-child { border-bottom: none; }
-
-  .tf-item::before { content: ''; font-family: var(--mono); font-size: 10px; color: var(--clay); flex-shrink: 0; }
-  .tier.featured .tf-item::before { color: var(--clay-light); }
-
-  .tier-cta {
-    margin-top: 36px;
-    font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
-    text-transform: uppercase; padding: 14px 28px; text-decoration: none;
-    display: inline-block; text-align: center; transition: background 0.22s, color 0.22s;
-  }
-
-  .tier-cta.dark { background: var(--ink); color: var(--warm-white); }
-  .tier-cta.dark:hover { background: var(--deep-green); }
-  .tier-cta.light { background: var(--warm-white); color: var(--ink); }
-  .tier-cta.light:hover { background: var(--clay-light); }
-  .tier-cta.outline { border: 1px solid var(--chalk); color: var(--dust); background: transparent; }
-  .tier-cta.outline:hover { border-color: var(--ink); color: var(--ink); }
-
-  .pricing-note {
-    margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--chalk);
-    font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--dust);
-    display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
-  }
-
-  .pricing-note-item { display: flex; align-items: center; gap: 6px; }
-  .pricing-note-item::before { content: '·'; color: var(--clay); font-size: 14px; }
-
-
-  /* ═══════════════════════════════════════════
-     CHAPTER 10: THE ASK
+     CHAPTER 08: THE ASK
   ═══════════════════════════════════════════ */
   #ask {
     background: var(--charcoal);
@@ -923,11 +805,6 @@
     .voice-card:nth-child(n) { padding-left: 0; }
     .partners-inner { grid-template-columns: 1fr; gap: 28px; }
     .partners-list { border-left: none; border-top: 1px solid var(--chalk); padding-top: 28px; }
-    .pricing-header { grid-template-columns: 1fr; gap: 28px; }
-    .pricing-tiers { grid-template-columns: 1fr; }
-    .tier { border-right: none; border-bottom: 1px solid var(--chalk); }
-    .tier.featured { border-color: rgba(250,247,242,0.12); }
-    .tier:last-child { border-bottom: none; }
     .ask-inner { grid-template-columns: 1fr; gap: 60px; }
   }
 
@@ -986,19 +863,47 @@
 <!-- ─── NAV ─── -->
 <nav>
   <a href="/" class="nav-logo"><img src="/assets/logo-lockup.svg" alt="Vasl Health" width="160" height="40"></a>
-    <ul class="nav-links">
-    <li><a href="/about">About</a></li>
+  <ul class="nav-links">
     <li><a href="/platform">Platform</a></li>
-    <li><a href="#outcomes">Outcomes</a></li>
-    <li><a href="/blog">Blog</a></li>
-    <li><a href="/team">Team</a></li>
-    <li><a href="/contact">Contact</a></li>
+    <li><a href="/vlap">VLAP</a></li>
+    <li class="vh-sol">
+      <button type="button" class="vh-sol-btn" id="vh-sol-btn" aria-expanded="false" aria-controls="vh-sol-menu">Solutions<svg class="vh-chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.2"></path></svg></button>
+      <div class="vh-sol-menu" id="vh-sol-menu" hidden>
+        <a href="/health-systems"><span class="vh-sm-name">Health Plans &amp; Systems</span><span class="vh-sm-line">VLAP and the platform inside the care you already deliver.</span></a>
+        <a href="/bridge"><span class="vh-sm-name">Vasl Bridge</span><span class="vh-sm-line">A text every day from ED discharge to the first visit.</span></a>
+        <a href="/for-schools"><span class="vh-sm-name">Schools</span><span class="vh-sm-line">Daily check-ins, peer support and coaching for K-12 districts.</span></a>
+        <a href="/for-organizations"><span class="vh-sm-name">Community Organizations</span><span class="vh-sm-line">The platform for youth-serving organizations.</span></a>
+      </div>
+    </li>
+    <li><a href="/about">About</a></li>
   </ul>
-  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+  <button class="ham-btn" id="ham-btn" aria-label="Menu" aria-expanded="false" aria-controls="vh-sheet">
     <span></span><span></span><span></span>
   </button>
-  <a href="#ask" class="nav-cta">Request a Demo</a>
+  <a href="/contact" class="nav-cta">Request a Demo</a>
 </nav>
+
+<div class="vh-sheet" id="vh-sheet" hidden>
+  <div class="vh-sheet-top">
+    <a href="/" class="nav-logo"><img src="/assets/logo-lockup.svg" alt="Vasl Health" width="144" height="36"></a>
+    <button type="button" class="vh-close" id="vh-close" aria-label="Close menu"><span></span><span></span></button>
+  </div>
+  <div class="vh-sheet-body">
+    <a href="/platform">Platform</a>
+    <a href="/vlap">VLAP</a>
+    <button type="button" class="vh-sheet-sol" aria-expanded="false" aria-controls="vh-sheet-sub">Solutions<svg class="vh-chev" width="14" height="14" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1"></path></svg></button>
+    <div class="vh-sheet-sub" id="vh-sheet-sub" hidden>
+        <a href="/health-systems"><span class="vh-sm-name">Health Plans &amp; Systems</span><span class="vh-sm-line">VLAP and the platform inside the care you already deliver.</span></a>
+        <a href="/bridge"><span class="vh-sm-name">Vasl Bridge</span><span class="vh-sm-line">A text every day from ED discharge to the first visit.</span></a>
+        <a href="/for-schools"><span class="vh-sm-name">Schools</span><span class="vh-sm-line">Daily check-ins, peer support and coaching for K-12 districts.</span></a>
+        <a href="/for-organizations"><span class="vh-sm-name">Community Organizations</span><span class="vh-sm-line">The platform for youth-serving organizations.</span></a>
+    </div>
+    <a href="/about">About</a>
+  </div>
+  <div class="vh-sheet-foot">
+    <a href="/contact" class="vh-sheet-cta">Request a Demo</a>
+  </div>
+</div>
 
 
 <!-- ═══════════════════════════════════
@@ -1341,7 +1246,7 @@
         <div class="mb-label">School-Based Medicaid Billing</div>
         <div class="mb-num">~50<span style="font-size:26px">%</span></div>
         <div class="mb-desc">of Vasl contract cost recoverable through school-based Medicaid billing for Title I districts. Vasl provides the documentation and billing codes your finance team needs.</div>
-        <div class="mb-note">Average net district cost after billing: approximately $38 per student per year</div>
+        <div class="mb-note">Approximately 50% of contract cost is recoverable through school-based Medicaid billing for qualifying services</div>
       </div>
     </div>
 
@@ -1458,7 +1363,7 @@
 
 
 <!-- ═══════════════════════════════════
-     CHAPTER 08: PARTNERS
+     PARTNERS BAND
 ════════════════════════════════════ -->
 <section id="partners">
   <div class="partners-inner">
@@ -1474,102 +1379,13 @@
 
 
 <!-- ═══════════════════════════════════
-     CHAPTER 09: PRICING
-════════════════════════════════════ -->
-<section id="pricing">
-  <div class="chapter-label reveal">Chapter 09, Pricing</div>
-
-  <div class="pricing-header">
-    <h2 class="pricing-headline reveal d1">
-      Organizations pay.<br>
-      Members access<br>
-      Vasl <em>for free.</em>
-    </h2>
-    <p class="pricing-intro reveal d2">
- Every pricing tier includes full member access at zero cost to the individual. The platform is funded through organizational partnerships, health systems, payers, school districts, and community organizations, so the communities who need it most never encounter a billing question. Three tiers. No hidden fees. No per-session charges.
- </p>
-  </div>
-
-  <div class="pricing-tiers reveal">
-    <!-- Starter -->
-    <div class="tier">
-      <div class="tier-label">Starter</div>
-      <div class="tier-name">Community Launch</div>
-      <div class="tier-tagline">For small youth orgs, community centers, and organizations ready to pilot Vasl with a focused cohort.</div>
-      <div class="tier-price">$480</div>
-      <div class="tier-period">Platform fee &middot; per month &middot; billed annually</div>
-      <div class="tier-pmpm">+ $3 to 5 per member / month &middot; schools &amp; non-profits<br>+ $6 to 8 per member / month &middot; health systems</div>
-      <div class="tier-divider"></div>
-      <div class="tier-features">
-        <div class="tf-item">Up to 100 members</div>
-        <div class="tf-item">3 moderated peer groups</div>
-        <div class="tf-item">Crisis escalation, 90-min clinical supervisor SLA</div>
-        <div class="tf-item">Certified coaching access, unlimited</div>
-        <div class="tf-item">Outcomes dashboard, basic</div>
-        <div class="tf-item">Email support</div>
-      </div>
-      <a href="/contact?subject=Starter Pilot" class="tier-cta dark">Start a Pilot</a>
-    </div>
-
-    <!-- Pro, featured -->
-    <div class="tier featured">
-      <div class="tier-label">Pro</div>
-      <div class="tier-name">Full Program</div>
-      <div class="tier-tagline">For organizations running a full behavioral health program, with the complete Vasl platform for their population.</div>
-      <div class="tier-price">$1,200</div>
-      <div class="tier-period">Platform fee &middot; per month &middot; billed annually</div>
-      <div class="tier-pmpm">+ $3 to 5 per member / month &middot; schools &amp; non-profits<br>+ $6 to 8 per member / month &middot; health systems</div>
-      <div class="tier-divider"></div>
-      <div class="tier-features">
-        <div class="tf-item">Up to 500 members</div>
-        <div class="tf-item">Unlimited peer groups</div>
-        <div class="tf-item">Medicaid billing documentation export</div>
-        <div class="tf-item">VLAP signal context, full clinician dashboard</div>
-        <div class="tf-item">Full analytics and population outcomes</div>
-        <div class="tf-item">Priority support + Customer Success Manager</div>
-        <div class="tf-item">Medicaid billing documentation included</div>
-      </div>
-      <a href="/contact?subject=Pro Plan" class="tier-cta light">Get Started</a>
-    </div>
-
-    <!-- Enterprise -->
-    <div class="tier">
-      <div class="tier-label">Enterprise</div>
-      <div class="tier-name">Health System Scale</div>
-      <div class="tier-tagline">For health systems, state agencies, and large multi-site organizations deploying Vasl across populations.</div>
-      <div class="tier-price" style="font-size: 36px; padding-top: 8px; margin-bottom: 12px;">Custom</div>
-      <div class="tier-period">Platform fee scoped to deployment</div>
-      <div class="tier-pmpm">+ $6 to 8 per member / month &middot; health systems &amp; enterprise</div>
-      <div class="tier-divider"></div>
-      <div class="tier-features">
-        <div class="tf-item">Unlimited members</div>
-        <div class="tf-item">Multi-site management and administration</div>
-        <div class="tf-item">Custom VLAP fine-tuning for population</div>
-        <div class="tf-item">SSO + SCIM provisioning</div>
-        <div class="tf-item">Dedicated implementation and success team</div>
-        <div class="tf-item">BAA + full compliance documentation package</div>
-      </div>
-      <a href="/contact?subject=Enterprise" class="tier-cta outline">Contact Sales</a>
-    </div>
-  </div>
-
-  <div class="pricing-note reveal">
-    <span class="pricing-note-item">No commitment required for pilot</span>
-    <span class="pricing-note-item">HIPAA-compliant inquiry</span>
-    <span class="pricing-note-item">Response within 1 business day</span>
-    <span class="pricing-note-item">Nonprofit pricing available</span>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════
-     CHAPTER 10: THE ASK
+     CHAPTER 08: THE ASK
 ════════════════════════════════════ -->
 <section id="ask">
   <div class="ask-bg" aria-hidden="true">Vasl</div>
   <div class="ask-inner">
     <div class="ask-left">
-      <div class="chapter-label muted reveal">Chapter 10, The Work Starts Here</div>
+      <div class="chapter-label muted reveal">Chapter 08, The Work Starts Here</div>
       <h2 class="ask-headline reveal d1">Bring Vasl to your community</h2>
       <p class="ask-body reveal d2">
         We don't do generic demos. Every walkthrough is configured around your population, your partners, and the care gap you're trying to close. Tell us who you serve and we'll show you exactly what Vasl looks like for them.
@@ -1625,12 +1441,16 @@
 .vrl-item-title{font-family:var(--serif);font-size:18px;font-weight:400;color:var(--ink);margin-bottom:8px;line-height:1.3;letter-spacing:-0.01em;transition:color 0.2s;}
 .vrl-item:hover .vrl-item-title{color:var(--clay);}
 .vrl-item-desc{font-size:13px;font-weight:300;color:var(--ink-70);line-height:1.6;}
+.vrl-pair{display:flex;flex-direction:column;gap:14px;}
+.vrl-sub{align-self:flex-start;font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--deep-green,#2D4A3E);text-decoration:none;padding-top:10px;border-top:1px solid var(--chalk);}
+.vrl-sub:hover{color:var(--ink);}
+@media(max-width:680px){.vrl-pair{gap:6px;}.vrl-sub{border-top:none;padding-top:0;min-height:44px;display:flex;align-items:center;}}
 </style>
 <div class="vrl-wrap">
   <div class="vrl-head">Related Reading</div>
   <div class="vrl-grid">
     <a href="/for-schools" class="vrl-item"><div class="vrl-item-title">Vasl for K-12 districts</div><div class="vrl-item-desc">A tiered program mapped to MTSS, staffed by people students recognize.</div></a>
-    <a href="/health-systems" class="vrl-item"><div class="vrl-item-title">Vasl for health plans and systems</div><div class="vrl-item-desc">Engagement built on cultural fit for the members standard outreach loses.</div></a>
+    <div class="vrl-pair"><a href="/health-systems" class="vrl-item"><div class="vrl-item-title">Vasl for health plans and systems</div><div class="vrl-item-desc">Engagement built on cultural fit for the members standard outreach loses.</div></a><a href="/bridge" class="vrl-sub">See Vasl Bridge →</a></div>
     <a href="/for-organizations" class="vrl-item"><div class="vrl-item-title">Vasl for community organizations</div><div class="vrl-item-desc">Extend behavioral health reach without hiring a clinical team of your own.</div></a>
   </div>
 </div>
@@ -1644,43 +1464,27 @@
     </div>
     <div class="fs-col">
       <div class="fs-head">Platform</div>
-      <a href="/platform">Platform Overview</a>
-      <a href="/platform/vasl-platform">The Vasl Platform</a>
+      <a href="/platform">Platform</a>
       <a href="/vlap">VLAP</a>
-      <a href="/ai-model">AI Model</a>
       <a href="/technology">Technology</a>
-      <a href="/infrastructure">Infrastructure, Not Burden</a>
-      <a href="/health-systems">VLAP for Health Systems</a>
-      <a href="/peer-groups">Peer Groups</a>
-      <a href="/teletherapy">Teletherapy</a>
-      <a href="demo.html">VLAP Signal Taxonomy</a>
+      <a href="/demo.html">Signal Taxonomy</a>
     </div>
     <div class="fs-col">
-      <div class="fs-head">Who We Serve</div>
-      <a href="/for-schools">For Schools</a>
-      <a href="/for-organizations">For Organizations</a>
-      <a href="#outcomes">Outcomes</a>
-      <a href="/clinical-outcomes">Clinical Outcomes</a>
-      <a href="/pricing">Pricing</a>
+      <div class="fs-head">Solutions</div>
+      <a href="/health-systems">Health Plans &amp; Systems</a>
+      <a href="/bridge">Vasl Bridge</a>
+      <a href="/for-schools">Schools</a>
+      <a href="/for-organizations">Community Organizations</a>
+      <a href="/contact?subject=Pricing">Talk to us about pricing</a>
     </div>
     <div class="fs-col">
       <div class="fs-head">Company</div>
-      <a href="/about">About Vasl</a>
+      <a href="/about">About</a>
       <a href="/team">Team</a>
       <a href="/careers">Careers</a>
       <a href="/research">Research</a>
-      <a href="/blog">Blog &amp; Insights</a>
+      <a href="/blog">Blog</a>
       <a href="/contact">Contact</a>
-      <a href="/glossary">Glossary</a>
-    </div>
-    <div class="fs-col">
-      <div class="fs-head">Support &amp; Legal</div>
-      <a href="/support">Help Center</a>
-      <a href="/for-families">For Families</a>
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="terms.html">Terms of Service</a>
-      <a href="baa.html">Business Associate Agreement</a>
-      <a href="/accessibility">Accessibility</a>
     </div>
     <div class="fs-col">
       <div class="fs-head">Resources</div>
@@ -1688,15 +1492,19 @@
       <a href="/school-mental-health-rfp">School Mental Health RFP Guide</a>
       <a href="/dialect-bias-mental-health-screening">Dialect Bias in Screening</a>
       <a href="/hedis-behavioral-health-cultural-fit">HEDIS &amp; Cultural Fit</a>
+      <a href="/for-families">For Families</a>
+      <a href="/support">Help Center</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Legal</div>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/baa.html">BAA</a>
+      <a href="/accessibility">Accessibility</a>
     </div>
   </div>
   <div class="footer-bottom">
-    <div class="footer-copy">&copy; 2026 Vasl Health, Inc. All rights reserved.</div>
-    <div class="footer-legal">
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
-      <a href="baa.html">BAA</a>
-    </div>
+    <div class="footer-copy">&copy; 2026 Vasl Health PBC. All rights reserved.</div>
   </div>
 </footer>
 
@@ -1715,10 +1523,176 @@
       }
     });
   });
-  function toggleNav() {
-    document.querySelector('.nav-links').classList.toggle('open');
-    document.getElementById('ham-btn').classList.toggle('open');
-  }
 </script>
+<!-- CHROME:VASL -->
+<style>
+/* Header, Solutions menu, phone sheet and footer. Values come from the
+   navigation artboards; every colour falls back to a literal so the block
+   also works on a page that does not define the full token set. */
+/* The logo image is inline by default, so its line box added 13px of leading
+   and made the bar 94px instead of the 81px the artboards draw. */
+.nav-logo img{display:block;}
+.nav-links{align-items:center;}
+.nav-links > li{display:flex;align-items:center;}
+.nav-links a,.vh-sol-btn{height:40px;display:inline-flex;align-items:center;}
+.vh-sol-btn{gap:6px;background:none;border:0;padding:0;cursor:pointer;line-height:1.2;
+  font-family:var(--mono,'IBM Plex Mono',monospace);font-size:10px;letter-spacing:0.09em;
+  text-transform:uppercase;color:var(--dust,#8B7B6B);transition:color 0.2s;}
+.vh-sol-btn:hover{color:var(--ink,#1C1C1C);}
+.vh-sol[data-open="true"] .vh-sol-btn{color:var(--ink,#1C1C1C);}
+.vh-sol[data-open="true"] .vh-chev{transform:rotate(180deg);}
+.vh-chev{transition:transform 0.18s;}
+.nav-links a.is-active,.vh-sol.is-active .vh-sol-btn{color:var(--ink,#1C1C1C);
+  padding-bottom:4px;border-bottom:1px solid var(--clay,#C4896F);}
+.vh-sol-menu{position:absolute;top:100%;margin-top:1px;left:0;width:440px;z-index:120;
+  background:var(--warm-white,#FAF7F2);border:1px solid var(--chalk,#E2DAD0);
+  border-top:2px solid var(--deep-green,#2D4A3E);box-shadow:0 18px 40px rgba(28,28,28,0.10);
+  display:flex;flex-direction:column;}
+.vh-sol-menu[hidden]{display:none;}
+.vh-sol-menu a{display:flex;flex-direction:column;align-items:flex-start;gap:4px;
+  padding:18px 24px;height:auto;
+  border-bottom:1px solid var(--chalk,#E2DAD0);text-decoration:none;text-transform:none;
+  letter-spacing:normal;transition:background 0.15s;}
+.vh-sol-menu a:last-child{border-bottom:none;}
+.vh-sol-menu a:hover{background:var(--parchment,#F0EAE0);}
+.vh-sol-menu a.is-active{border-left:2px solid var(--ink,#1C1C1C);padding-left:22px;}
+.vh-sm-name{font-family:var(--serif,'Newsreader',Georgia,serif);font-size:20px;font-weight:400;
+  letter-spacing:-0.01em;line-height:1.25;color:var(--ink,#1C1C1C);text-transform:none;}
+.vh-sm-line{font-family:var(--sans,'IBM Plex Sans',sans-serif);font-size:14px;font-weight:300;
+  line-height:1.55;color:var(--ink-70,rgba(28,28,28,0.70));text-transform:none;}
+
+/* Phone sheet */
+.vh-sheet{position:fixed;inset:0;z-index:300;background:var(--warm-white,#FAF7F2);
+  display:flex;flex-direction:column;}
+.vh-sheet[hidden]{display:none;}
+.vh-sheet-top{height:72px;flex-shrink:0;padding:16px 20px;display:flex;align-items:center;
+  justify-content:space-between;border-bottom:1px solid var(--ink-12,rgba(28,28,28,0.12));}
+.vh-close{width:44px;height:44px;position:relative;background:none;border:0;cursor:pointer;padding:0;}
+.vh-close span{position:absolute;left:11px;top:21px;width:22px;height:1.5px;
+  background:var(--ink,#1C1C1C);display:block;}
+.vh-close span:first-child{transform:rotate(45deg);}
+.vh-close span:last-child{transform:rotate(-45deg);}
+.vh-sheet-body{flex:1;min-height:0;overflow-y:auto;padding:8px 20px;display:flex;flex-direction:column;}
+.vh-sheet-body > a,.vh-sheet-sol{height:64px;flex-shrink:0;display:flex;align-items:center;
+  border-bottom:1px solid var(--chalk,#E2DAD0);background:none;border-left:0;border-right:0;border-top:0;
+  font-family:var(--mono,'IBM Plex Mono',monospace);font-size:14px;letter-spacing:0.09em;
+  text-transform:uppercase;color:var(--ink,#1C1C1C);text-decoration:none;cursor:pointer;
+  width:100%;justify-content:flex-start;padding:0;}
+.vh-sheet-sol{justify-content:space-between;}
+.vh-sheet-sol[aria-expanded="true"]{border-bottom:none;}
+.vh-sheet-sol[aria-expanded="true"] .vh-chev{transform:rotate(180deg);}
+.vh-sheet-sub{background:var(--parchment,#F0EAE0);border-top:2px solid var(--deep-green,#2D4A3E);
+  display:flex;flex-direction:column;flex-shrink:0;}
+.vh-sheet-sub[hidden]{display:none;}
+.vh-sheet-sub a{display:flex;flex-direction:column;align-items:flex-start;gap:2px;
+  padding:13px 16px;height:auto;
+  border-bottom:1px solid var(--chalk,#E2DAD0);text-decoration:none;}
+.vh-sheet-sub .vh-sm-name{font-size:19px;}
+.vh-sheet-sub .vh-sm-line{font-size:13.5px;line-height:1.5;}
+.vh-sheet-foot{padding:16px 20px 28px;border-top:1px solid var(--chalk,#E2DAD0);flex-shrink:0;
+  background:var(--warm-white,#FAF7F2);}
+.vh-sheet-cta{display:block;text-align:center;font-family:var(--mono,'IBM Plex Mono',monospace);
+  font-size:11px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;
+  background:var(--ink,#1C1C1C);color:var(--warm-white,#FAF7F2);padding:18px 32px;}
+body.vh-locked{overflow:hidden;}
+
+/* The help pages never carried a hamburger, so the button styling ships here
+   rather than relying on each page's own copy. */
+.ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;
+  cursor:pointer;padding:6px;margin-left:8px;}
+.ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink,#1C1C1C);}
+@media(min-width:781px){.vh-sheet{display:none;}}
+@media(max-width:780px){
+  .ham-btn{display:flex;}
+  .nav-links{display:none;}
+  .nav-cta{display:none;}
+  .vh-sol-menu{display:none;}
+  nav{padding-top:16px;padding-bottom:16px;}
+  nav > .nav-logo img{width:144px;height:36px;}
+}
+</style>
+<script>
+(function () {
+  var sol = document.querySelector('.vh-sol');
+  var btn = sol && sol.querySelector('.vh-sol-btn');
+  var menu = sol && sol.querySelector('.vh-sol-menu');
+
+  // The panel hangs off <nav>, so its left edge is set from the button rather
+  // than inherited from a positioned list item. Measuring beats a hard-coded
+  // offset here: nav height varies by a few pixels from page to page.
+  function placeMenu() {
+    if (!menu || !btn) return;
+    var nav = btn.closest('nav');
+    var pad = parseFloat(getComputedStyle(nav).paddingRight) || 0;
+    var max = nav.clientWidth - pad - menu.offsetWidth;
+    menu.style.left = Math.max(0, Math.min(btn.offsetLeft, max)) + 'px';
+  }
+
+  function setSolutions(open) {
+    if (!sol) return;
+    sol.setAttribute('data-open', open ? 'true' : 'false');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menu.hidden = !open;
+    if (open) placeMenu();
+  }
+
+  if (sol) {
+    setSolutions(false);
+    // Hover and click both open it, so a pointer user never has to click and
+    // a keyboard user never has to hover.
+    sol.addEventListener('mouseenter', function () { setSolutions(true); });
+    sol.addEventListener('mouseleave', function () { setSolutions(false); });
+    btn.addEventListener('click', function () {
+      setSolutions(btn.getAttribute('aria-expanded') !== 'true');
+    });
+    sol.addEventListener('focusout', function (e) {
+      if (!sol.contains(e.relatedTarget)) setSolutions(false);
+    });
+    window.addEventListener('resize', function () {
+      if (!menu.hidden) placeMenu();
+    });
+  }
+
+  var sheet = document.getElementById('vh-sheet');
+  var ham = document.getElementById('ham-btn');
+  var close = document.getElementById('vh-close');
+  var sub = document.getElementById('vh-sheet-sub');
+  var subBtn = sheet && sheet.querySelector('.vh-sheet-sol');
+
+  function setSheet(open) {
+    if (!sheet) return;
+    sheet.hidden = !open;
+    document.body.classList.toggle('vh-locked', open);
+    if (ham) ham.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open && close) close.focus();
+    else if (!open && ham) ham.focus();
+  }
+
+  function setSub(open) {
+    if (!sub) return;
+    sub.hidden = !open;
+    subBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  if (ham) ham.addEventListener('click', function () { setSheet(sheet.hidden); });
+  if (close) close.addEventListener('click', function () { setSheet(false); });
+  if (subBtn) subBtn.addEventListener('click', function () {
+    setSub(subBtn.getAttribute('aria-expanded') !== 'true');
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    setSolutions(false);
+    if (sheet && !sheet.hidden) setSheet(false);
+  });
+
+  // A click anywhere else closes the menu, which a pointer that never enters
+  // the panel would otherwise leave open on a touch device.
+  document.addEventListener('click', function (e) {
+    if (sol && !sol.contains(e.target)) setSolutions(false);
+  });
+})();
+</script>
+<!-- /CHROME:VASL -->
 </body>
 </html>

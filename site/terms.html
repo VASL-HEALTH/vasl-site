@@ -126,19 +126,47 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
 
 <nav>
   <a href="/" class="nav-logo"><img src="/assets/logo-lockup.svg" alt="Vasl Health" width="160" height="40"></a>
-    <ul class="nav-links">
-    <li><a href="/about">About</a></li>
+  <ul class="nav-links">
     <li><a href="/platform">Platform</a></li>
-    <li><a href="/#outcomes">Outcomes</a></li>
-    <li><a href="/blog">Blog</a></li>
-    <li><a href="/team">Team</a></li>
-    <li><a href="/contact">Contact</a></li>
+    <li><a href="/vlap">VLAP</a></li>
+    <li class="vh-sol">
+      <button type="button" class="vh-sol-btn" id="vh-sol-btn" aria-expanded="false" aria-controls="vh-sol-menu">Solutions<svg class="vh-chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.2"></path></svg></button>
+      <div class="vh-sol-menu" id="vh-sol-menu" hidden>
+        <a href="/health-systems"><span class="vh-sm-name">Health Plans &amp; Systems</span><span class="vh-sm-line">VLAP and the platform inside the care you already deliver.</span></a>
+        <a href="/bridge"><span class="vh-sm-name">Vasl Bridge</span><span class="vh-sm-line">A text every day from ED discharge to the first visit.</span></a>
+        <a href="/for-schools"><span class="vh-sm-name">Schools</span><span class="vh-sm-line">Daily check-ins, peer support and coaching for K-12 districts.</span></a>
+        <a href="/for-organizations"><span class="vh-sm-name">Community Organizations</span><span class="vh-sm-line">The platform for youth-serving organizations.</span></a>
+      </div>
+    </li>
+    <li><a href="/about">About</a></li>
   </ul>
-  <button class="ham-btn" id="ham-btn" onclick="toggleNav()" aria-label="Menu">
+  <button class="ham-btn" id="ham-btn" aria-label="Menu" aria-expanded="false" aria-controls="vh-sheet">
     <span></span><span></span><span></span>
   </button>
-  <a href="baa.html" class="nav-cta">Request BAA</a>
+  <a href="/contact" class="nav-cta">Request a Demo</a>
 </nav>
+
+<div class="vh-sheet" id="vh-sheet" hidden>
+  <div class="vh-sheet-top">
+    <a href="/" class="nav-logo"><img src="/assets/logo-lockup.svg" alt="Vasl Health" width="144" height="36"></a>
+    <button type="button" class="vh-close" id="vh-close" aria-label="Close menu"><span></span><span></span></button>
+  </div>
+  <div class="vh-sheet-body">
+    <a href="/platform">Platform</a>
+    <a href="/vlap">VLAP</a>
+    <button type="button" class="vh-sheet-sol" aria-expanded="false" aria-controls="vh-sheet-sub">Solutions<svg class="vh-chev" width="14" height="14" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1"></path></svg></button>
+    <div class="vh-sheet-sub" id="vh-sheet-sub" hidden>
+        <a href="/health-systems"><span class="vh-sm-name">Health Plans &amp; Systems</span><span class="vh-sm-line">VLAP and the platform inside the care you already deliver.</span></a>
+        <a href="/bridge"><span class="vh-sm-name">Vasl Bridge</span><span class="vh-sm-line">A text every day from ED discharge to the first visit.</span></a>
+        <a href="/for-schools"><span class="vh-sm-name">Schools</span><span class="vh-sm-line">Daily check-ins, peer support and coaching for K-12 districts.</span></a>
+        <a href="/for-organizations"><span class="vh-sm-name">Community Organizations</span><span class="vh-sm-line">The platform for youth-serving organizations.</span></a>
+    </div>
+    <a href="/about">About</a>
+  </div>
+  <div class="vh-sheet-foot">
+    <a href="/contact" class="vh-sheet-cta">Request a Demo</a>
+  </div>
+</div>
 
 <div class="doc-header">
   <span class="doc-kicker">Legal</span>
@@ -258,7 +286,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
       <span class="section-anchor" id="payment-billing"></span>
       <h2 class="section-heading">8. Payment and Billing</h2>
       <div class="section-sub">8.1 Fees</div>
-      <p class="doc-p">Fees for our Services consist of a monthly platform fee and a per member per month (PMPM) fee based on organization type. Current pricing is described at <a href="/pricing">vaslhealth.com/pricing</a>. All pricing is subject to the terms of your executed Order Form or Service Agreement.</p>
+      <p class="doc-p">Fees for our Services consist of a monthly platform fee and a per member per month (PMPM) fee based on organization type. Current pricing is provided on request and is set out in your executed Order Form; <a href="/contact?subject=Pricing">talk to us about pricing</a>. All pricing is subject to the terms of your executed Order Form or Service Agreement.</p>
       <div class="section-sub">8.2 Payment Terms</div>
       <p class="doc-p">Platform fees are billed annually. PMPM fees are billed monthly based on enrolled member count. We accept major credit cards and ACH transfers for organizational accounts. Invoices are due net 30 unless otherwise specified in your Service Agreement.</p>
       <div class="section-sub">8.3 Medicaid Billing</div>
@@ -321,43 +349,27 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
     </div>
     <div class="fs-col">
       <div class="fs-head">Platform</div>
-      <a href="/platform">Platform Overview</a>
-      <a href="/platform/vasl-platform">The Vasl Platform</a>
+      <a href="/platform">Platform</a>
       <a href="/vlap">VLAP</a>
-      <a href="/ai-model">AI Model</a>
       <a href="/technology">Technology</a>
-      <a href="/infrastructure">Infrastructure, Not Burden</a>
-      <a href="/health-systems">VLAP for Health Systems</a>
-      <a href="/peer-groups">Peer Groups</a>
-      <a href="/teletherapy">Teletherapy</a>
-      <a href="demo.html">VLAP Signal Taxonomy</a>
+      <a href="/demo.html">Signal Taxonomy</a>
     </div>
     <div class="fs-col">
-      <div class="fs-head">Who We Serve</div>
-      <a href="/for-schools">For Schools</a>
-      <a href="/for-organizations">For Organizations</a>
-      <a href="/#outcomes">Outcomes</a>
-      <a href="/clinical-outcomes">Clinical Outcomes</a>
-      <a href="/pricing">Pricing</a>
+      <div class="fs-head">Solutions</div>
+      <a href="/health-systems">Health Plans &amp; Systems</a>
+      <a href="/bridge">Vasl Bridge</a>
+      <a href="/for-schools">Schools</a>
+      <a href="/for-organizations">Community Organizations</a>
+      <a href="/contact?subject=Pricing">Talk to us about pricing</a>
     </div>
     <div class="fs-col">
       <div class="fs-head">Company</div>
-      <a href="/about">About Vasl</a>
+      <a href="/about">About</a>
       <a href="/team">Team</a>
       <a href="/careers">Careers</a>
       <a href="/research">Research</a>
-      <a href="/blog">Blog &amp; Insights</a>
+      <a href="/blog">Blog</a>
       <a href="/contact">Contact</a>
-      <a href="/glossary">Glossary</a>
-    </div>
-    <div class="fs-col">
-      <div class="fs-head">Support &amp; Legal</div>
-      <a href="/support">Help Center</a>
-      <a href="/for-families">For Families</a>
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="terms.html">Terms of Service</a>
-      <a href="baa.html">Business Associate Agreement</a>
-      <a href="/accessibility">Accessibility</a>
     </div>
     <div class="fs-col">
       <div class="fs-head">Resources</div>
@@ -365,22 +377,192 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
       <a href="/school-mental-health-rfp">School Mental Health RFP Guide</a>
       <a href="/dialect-bias-mental-health-screening">Dialect Bias in Screening</a>
       <a href="/hedis-behavioral-health-cultural-fit">HEDIS &amp; Cultural Fit</a>
+      <a href="/for-families">For Families</a>
+      <a href="/support">Help Center</a>
+    </div>
+    <div class="fs-col">
+      <div class="fs-head">Legal</div>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/baa.html">BAA</a>
+      <a href="/accessibility">Accessibility</a>
     </div>
   </div>
   <div class="footer-bottom">
-    <div class="footer-copy">&copy; 2026 Vasl Health, Inc. All rights reserved.</div>
-    <div class="footer-legal">
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
-      <a href="baa.html">BAA</a>
-    </div>
+    <div class="footer-copy">&copy; 2026 Vasl Health PBC. All rights reserved.</div>
   </div>
 </footer>
 <script>
-  function toggleNav() {
-    document.querySelector('.nav-links').classList.toggle('open');
-    document.getElementById('ham-btn').classList.toggle('open');
-  }
 </script>
+<!-- CHROME:VASL -->
+<style>
+/* Header, Solutions menu, phone sheet and footer. Values come from the
+   navigation artboards; every colour falls back to a literal so the block
+   also works on a page that does not define the full token set. */
+/* The logo image is inline by default, so its line box added 13px of leading
+   and made the bar 94px instead of the 81px the artboards draw. */
+.nav-logo img{display:block;}
+.nav-links{align-items:center;}
+.nav-links > li{display:flex;align-items:center;}
+.nav-links a,.vh-sol-btn{height:40px;display:inline-flex;align-items:center;}
+.vh-sol-btn{gap:6px;background:none;border:0;padding:0;cursor:pointer;line-height:1.2;
+  font-family:var(--mono,'IBM Plex Mono',monospace);font-size:10px;letter-spacing:0.09em;
+  text-transform:uppercase;color:var(--dust,#8B7B6B);transition:color 0.2s;}
+.vh-sol-btn:hover{color:var(--ink,#1C1C1C);}
+.vh-sol[data-open="true"] .vh-sol-btn{color:var(--ink,#1C1C1C);}
+.vh-sol[data-open="true"] .vh-chev{transform:rotate(180deg);}
+.vh-chev{transition:transform 0.18s;}
+.nav-links a.is-active,.vh-sol.is-active .vh-sol-btn{color:var(--ink,#1C1C1C);
+  padding-bottom:4px;border-bottom:1px solid var(--clay,#C4896F);}
+.vh-sol-menu{position:absolute;top:100%;margin-top:1px;left:0;width:440px;z-index:120;
+  background:var(--warm-white,#FAF7F2);border:1px solid var(--chalk,#E2DAD0);
+  border-top:2px solid var(--deep-green,#2D4A3E);box-shadow:0 18px 40px rgba(28,28,28,0.10);
+  display:flex;flex-direction:column;}
+.vh-sol-menu[hidden]{display:none;}
+.vh-sol-menu a{display:flex;flex-direction:column;align-items:flex-start;gap:4px;
+  padding:18px 24px;height:auto;
+  border-bottom:1px solid var(--chalk,#E2DAD0);text-decoration:none;text-transform:none;
+  letter-spacing:normal;transition:background 0.15s;}
+.vh-sol-menu a:last-child{border-bottom:none;}
+.vh-sol-menu a:hover{background:var(--parchment,#F0EAE0);}
+.vh-sol-menu a.is-active{border-left:2px solid var(--ink,#1C1C1C);padding-left:22px;}
+.vh-sm-name{font-family:var(--serif,'Newsreader',Georgia,serif);font-size:20px;font-weight:400;
+  letter-spacing:-0.01em;line-height:1.25;color:var(--ink,#1C1C1C);text-transform:none;}
+.vh-sm-line{font-family:var(--sans,'IBM Plex Sans',sans-serif);font-size:14px;font-weight:300;
+  line-height:1.55;color:var(--ink-70,rgba(28,28,28,0.70));text-transform:none;}
+
+/* Phone sheet */
+.vh-sheet{position:fixed;inset:0;z-index:300;background:var(--warm-white,#FAF7F2);
+  display:flex;flex-direction:column;}
+.vh-sheet[hidden]{display:none;}
+.vh-sheet-top{height:72px;flex-shrink:0;padding:16px 20px;display:flex;align-items:center;
+  justify-content:space-between;border-bottom:1px solid var(--ink-12,rgba(28,28,28,0.12));}
+.vh-close{width:44px;height:44px;position:relative;background:none;border:0;cursor:pointer;padding:0;}
+.vh-close span{position:absolute;left:11px;top:21px;width:22px;height:1.5px;
+  background:var(--ink,#1C1C1C);display:block;}
+.vh-close span:first-child{transform:rotate(45deg);}
+.vh-close span:last-child{transform:rotate(-45deg);}
+.vh-sheet-body{flex:1;min-height:0;overflow-y:auto;padding:8px 20px;display:flex;flex-direction:column;}
+.vh-sheet-body > a,.vh-sheet-sol{height:64px;flex-shrink:0;display:flex;align-items:center;
+  border-bottom:1px solid var(--chalk,#E2DAD0);background:none;border-left:0;border-right:0;border-top:0;
+  font-family:var(--mono,'IBM Plex Mono',monospace);font-size:14px;letter-spacing:0.09em;
+  text-transform:uppercase;color:var(--ink,#1C1C1C);text-decoration:none;cursor:pointer;
+  width:100%;justify-content:flex-start;padding:0;}
+.vh-sheet-sol{justify-content:space-between;}
+.vh-sheet-sol[aria-expanded="true"]{border-bottom:none;}
+.vh-sheet-sol[aria-expanded="true"] .vh-chev{transform:rotate(180deg);}
+.vh-sheet-sub{background:var(--parchment,#F0EAE0);border-top:2px solid var(--deep-green,#2D4A3E);
+  display:flex;flex-direction:column;flex-shrink:0;}
+.vh-sheet-sub[hidden]{display:none;}
+.vh-sheet-sub a{display:flex;flex-direction:column;align-items:flex-start;gap:2px;
+  padding:13px 16px;height:auto;
+  border-bottom:1px solid var(--chalk,#E2DAD0);text-decoration:none;}
+.vh-sheet-sub .vh-sm-name{font-size:19px;}
+.vh-sheet-sub .vh-sm-line{font-size:13.5px;line-height:1.5;}
+.vh-sheet-foot{padding:16px 20px 28px;border-top:1px solid var(--chalk,#E2DAD0);flex-shrink:0;
+  background:var(--warm-white,#FAF7F2);}
+.vh-sheet-cta{display:block;text-align:center;font-family:var(--mono,'IBM Plex Mono',monospace);
+  font-size:11px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;
+  background:var(--ink,#1C1C1C);color:var(--warm-white,#FAF7F2);padding:18px 32px;}
+body.vh-locked{overflow:hidden;}
+
+/* The help pages never carried a hamburger, so the button styling ships here
+   rather than relying on each page's own copy. */
+.ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;
+  cursor:pointer;padding:6px;margin-left:8px;}
+.ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink,#1C1C1C);}
+@media(min-width:781px){.vh-sheet{display:none;}}
+@media(max-width:780px){
+  .ham-btn{display:flex;}
+  .nav-links{display:none;}
+  .nav-cta{display:none;}
+  .vh-sol-menu{display:none;}
+  nav{padding-top:16px;padding-bottom:16px;}
+  nav > .nav-logo img{width:144px;height:36px;}
+}
+</style>
+<script>
+(function () {
+  var sol = document.querySelector('.vh-sol');
+  var btn = sol && sol.querySelector('.vh-sol-btn');
+  var menu = sol && sol.querySelector('.vh-sol-menu');
+
+  // The panel hangs off <nav>, so its left edge is set from the button rather
+  // than inherited from a positioned list item. Measuring beats a hard-coded
+  // offset here: nav height varies by a few pixels from page to page.
+  function placeMenu() {
+    if (!menu || !btn) return;
+    var nav = btn.closest('nav');
+    var pad = parseFloat(getComputedStyle(nav).paddingRight) || 0;
+    var max = nav.clientWidth - pad - menu.offsetWidth;
+    menu.style.left = Math.max(0, Math.min(btn.offsetLeft, max)) + 'px';
+  }
+
+  function setSolutions(open) {
+    if (!sol) return;
+    sol.setAttribute('data-open', open ? 'true' : 'false');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menu.hidden = !open;
+    if (open) placeMenu();
+  }
+
+  if (sol) {
+    setSolutions(false);
+    // Hover and click both open it, so a pointer user never has to click and
+    // a keyboard user never has to hover.
+    sol.addEventListener('mouseenter', function () { setSolutions(true); });
+    sol.addEventListener('mouseleave', function () { setSolutions(false); });
+    btn.addEventListener('click', function () {
+      setSolutions(btn.getAttribute('aria-expanded') !== 'true');
+    });
+    sol.addEventListener('focusout', function (e) {
+      if (!sol.contains(e.relatedTarget)) setSolutions(false);
+    });
+    window.addEventListener('resize', function () {
+      if (!menu.hidden) placeMenu();
+    });
+  }
+
+  var sheet = document.getElementById('vh-sheet');
+  var ham = document.getElementById('ham-btn');
+  var close = document.getElementById('vh-close');
+  var sub = document.getElementById('vh-sheet-sub');
+  var subBtn = sheet && sheet.querySelector('.vh-sheet-sol');
+
+  function setSheet(open) {
+    if (!sheet) return;
+    sheet.hidden = !open;
+    document.body.classList.toggle('vh-locked', open);
+    if (ham) ham.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open && close) close.focus();
+    else if (!open && ham) ham.focus();
+  }
+
+  function setSub(open) {
+    if (!sub) return;
+    sub.hidden = !open;
+    subBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  if (ham) ham.addEventListener('click', function () { setSheet(sheet.hidden); });
+  if (close) close.addEventListener('click', function () { setSheet(false); });
+  if (subBtn) subBtn.addEventListener('click', function () {
+    setSub(subBtn.getAttribute('aria-expanded') !== 'true');
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    setSolutions(false);
+    if (sheet && !sheet.hidden) setSheet(false);
+  });
+
+  // A click anywhere else closes the menu, which a pointer that never enters
+  // the panel would otherwise leave open on a touch device.
+  document.addEventListener('click', function (e) {
+    if (sol && !sol.contains(e.target)) setSolutions(false);
+  });
+})();
+</script>
+<!-- /CHROME:VASL -->
 </body>
 </html>

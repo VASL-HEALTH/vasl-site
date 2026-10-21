@@ -34,6 +34,10 @@ STYLE = """<style>
 .vrl-item-title{font-family:var(--serif);font-size:18px;font-weight:400;color:var(--ink);margin-bottom:8px;line-height:1.3;letter-spacing:-0.01em;transition:color 0.2s;}
 .vrl-item:hover .vrl-item-title{color:var(--clay);}
 .vrl-item-desc{font-size:13px;font-weight:300;color:var(--ink-70);line-height:1.6;}
+.vrl-pair{display:flex;flex-direction:column;gap:14px;}
+.vrl-sub{align-self:flex-start;font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--deep-green,#2D4A3E);text-decoration:none;padding-top:10px;border-top:1px solid var(--chalk);}
+.vrl-sub:hover{color:var(--ink);}
+@media(max-width:680px){.vrl-pair{gap:6px;}.vrl-sub{border-top:none;padding-top:0;min-height:44px;display:flex;align-items:center;}}
 </style>"""
 
 
@@ -68,16 +72,26 @@ def build_block(rel: str) -> str:
     header = HEADER_OVERRIDES.get(rel, "Related Reading")
 
     items = []
-    for target, anchor, desc in edges:
+    for edge in edges:
+        target, anchor, desc = edge[0], edge[1], edge[2]
+        extra = edge[3] if len(edge) > 3 else None
         if target in IGNORE:
             continue
         href = canonical_href(target)
-        items.append(
+        card = (
             f'<a href="{href}" class="vrl-item">'
             f'<div class="vrl-item-title">{esc(anchor)}</div>'
             f'<div class="vrl-item-desc">{esc(desc)}</div>'
             f"</a>"
         )
+        if extra:
+            # The second link is a sibling, not a child: nesting it inside the
+            # card anchor would make it unclickable and the markup invalid.
+            card = (
+                f'<div class="vrl-pair">{card}'
+                f'<a href="{extra[0]}" class="vrl-sub">{esc(extra[1])}</a></div>'
+            )
+        items.append(card)
 
     lines = [
         MARK_OPEN,

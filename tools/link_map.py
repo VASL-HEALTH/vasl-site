@@ -8,52 +8,50 @@ Each value is a list of (target_rel, anchor_text, one_line_reason) tuples.
 target_rel is relative to site/ (e.g. "vlap.html" or "help/billing.html").
 Order is preserved in the rendered block.
 
+A tuple may carry a fourth item, (href, label), for a card that needs a second
+target of its own. The homepage health plans card uses it so Vasl Bridge is a
+link in its own right rather than buried inside the card's one big hit area.
+
 Edges required by SEO-WEEK2.md workstream 1, plus enough additional coverage
 to land in the 60-80 new-link target without turning any page into a link
 dump, every entry earns its place with a reason someone would click it.
 """
 
 LINKS = {
-    # ---- Buyer pages: platform, vlap, ai-model, outcomes, pricing ------------
+    # ---- Buyer pages: platform, vlap, ai-model, outcomes ---------------------
     "for-schools.html": [
-        ("platform.html", "the full five-layer platform",
-         "Peer community, coaching, and licensed therapy in one continuum, see how the layers connect."),
+        ("platform.html", "the Vasl platform",
+         "The path a student actually takes, from the first check-in text to a warm handoff."),
         ("vlap.html", "how VLAP reads distress signals",
          "The language layer behind every alert a counselor sees, what it flags and what it deliberately leaves alone."),
         ("ai-model.html", "the model trained on youth vernacular",
          "VLAP, and why standard clinical NLP misses the way your students actually talk about distress."),
         ("outcomes.html", "pilot cohort outcomes and ROI",
          "Retention, symptom change, and the budget case for your board and grants office."),
-        ("pricing.html", "how pricing works for districts",
-         "Cost structure by enrollment size, and how Title I and Medicaid billing typically offset it."),
         ("school-mental-health-rfp.html", "evaluating this against an RFP",
          "The same ten criteria a district procurement office checks, and where Vasl's answer to each one lives."),
     ],
     "health-systems.html": [
-        ("platform.html", "the platform's five care layers",
-         "From peer community to licensed therapy where each layer sits in a member's care continuum."),
+        ("platform.html", "the Vasl platform",
+         "What happens after VLAP reads a reply, step by step, and who sees what."),
         ("vlap.html", "VLAP's signal detection layer",
          "How language analysis surfaces risk to a human reviewer without ever assigning a diagnosis."),
         ("ai-model.html", "VLAP's training approach",
          "Why a model trained on standard clinical text underperforms with the members you're trying to retain."),
         ("outcomes.html", "engagement and retention data",
          "30-day retention and symptom-change figures from pilot cohorts, benchmarked against digital health norms."),
-        ("pricing.html", "pricing for health plans and systems",
-         "Population-based pricing and what a pilot deployment typically includes."),
         ("hedis-behavioral-health-cultural-fit.html", "how this connects to HEDIS measures",
          "Which behavioral health measures are most exposed to cultural and linguistic mismatch, and where engagement moves them."),
     ],
     "for-organizations.html": [
-        ("platform.html", "the platform's care layers",
-         "Peer support, coaching, and licensed therapy, sized for an organization without its own clinical team."),
+        ("platform.html", "the Vasl platform",
+         "Daily check-ins, a peer community and a coach, for an organization without its own clinical team."),
         ("vlap.html", "how VLAP surfaces distress signals",
          "The language layer that flags risk to a human who already knows the young person."),
         ("ai-model.html", "the model behind VLAP",
          "DeBERTa-v3 and the vocabulary work that lets it read AAVE and youth vernacular directly."),
         ("outcomes.html", "outcomes across pilot cohorts",
          "Retention and engagement figures, with the methodology behind each number."),
-        ("pricing.html", "pricing for community organizations",
-         "How cost scales with population size, and what a pilot includes."),
     ],
 
     # ---- Blog posts: single most relevant buyer page + vlap or ai-model ------
@@ -146,8 +144,6 @@ LINKS = {
          "The literature and ongoing validation study behind Vasl's clinical approach."),
         ("clinical-outcomes.html", "the full clinical outcomes breakdown",
          "PHQ-8 trajectories, retention checkpoints, and escalation methodology in detail."),
-        ("pricing.html", "what this costs to deploy",
-         "How these outcomes map to pricing by population size and setting."),
         ("hedis-behavioral-health-cultural-fit.html", "what these numbers mean for a health plan's HEDIS scores",
          "How the retention and engagement figures here connect to FUH, IET, FUM, and SSD."),
     ],
@@ -187,7 +183,8 @@ LINKS = {
         ("for-schools.html", "Vasl for K-12 districts",
          "A tiered program mapped to MTSS, staffed by people students recognize."),
         ("health-systems.html", "Vasl for health plans and systems",
-         "Engagement built on cultural fit for the members standard outreach loses."),
+         "Engagement built on cultural fit for the members standard outreach loses.",
+         ("/bridge", "See Vasl Bridge →")),
         ("for-organizations.html", "Vasl for community organizations",
          "Extend behavioral health reach without hiring a clinical team of your own."),
     ],
@@ -202,6 +199,10 @@ LINKS = {
     "platform.html": [
         ("vlap.html", "VLAP in depth",
          "The language analysis layer that reads for distress signal across the platform."),
+        # peer-groups left the footer in the navigation restructure, so this is
+        # now its only inbound link. Dropping it orphans an indexable page.
+        ("peer-groups.html", "the peer community layer",
+         "How peer groups are organized around shared identity and experience, and who moderates them."),
         ("ai-model.html", "the model behind the platform",
          "VLAP's architecture and vocabulary extension process."),
         ("teletherapy.html", "the licensed therapy layer",
@@ -214,14 +215,6 @@ LINKS = {
          "How VLAP's output becomes the signal taxonomy a human actually reviews."),
         ("technology.html", "the architecture this model runs inside",
          "PHI boundaries and the security model around every prediction this model makes."),
-    ],
-    "pricing.html": [
-        ("school-mental-health-rfp.html", "evaluating this as part of an RFP",
-         "The ten criteria districts actually score vendors on, and where Vasl's answer to each lives."),
-        ("outcomes.html", "the outcomes this pricing is buying",
-         "Retention and symptom-change figures, with the methodology behind every number."),
-        ("contact.html", "talk to someone about a specific quote",
-         "Population size and setting change the number, a 15-minute call gets you an actual figure."),
     ],
 
     # ---- new pages (workstream 2) ---------------------------------------------
@@ -254,8 +247,6 @@ LINKS = {
          "The pilot-cohort figures referenced throughout this page, with full methodology."),
         ("clinical-outcomes.html", "the clinical outcomes detail",
          "PHQ-8 trajectories and escalation rates behind the summary numbers here."),
-        ("pricing.html", "pricing for health plans and systems",
-         "Population-based cost structure for a quality or behavioral health lead evaluating this."),
         ("glossary.html", "definitions for FUH, IET, FUM, and SSD",
          "Plain-language definitions for every measure acronym used on this page."),
     ],
