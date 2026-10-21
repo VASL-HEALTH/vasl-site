@@ -25,8 +25,7 @@ REWRITES = {
     # ---- Primary buyer paths -------------------------------------------------
     "index.html": (
         "Culturally Grounded Youth Behavioral Health | Vasl Health",
-        "Behavioral health for Black, Latino, LGBTQ+, and first-generation youth 14 to 24, "
-        "built on how they actually speak. Detection, not diagnosis.",
+        "Language infrastructure for Black, Brown, LGBTQ+, rural and Medicaid youth.",
     ),
     "for-schools.html": (
         "School-Based Mental Health Platform for Districts | Vasl",
