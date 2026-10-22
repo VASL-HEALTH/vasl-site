@@ -576,6 +576,13 @@
     border-bottom: 1px solid var(--chalk);
   }
 
+  .outcomes-claim {
+    font-family: var(--serif); font-size: clamp(21px, 2.1vw, 27px);
+    font-weight: 300; line-height: 1.5; letter-spacing: -0.012em;
+    color: var(--ink); max-width: 960px; margin: 30px 0 64px;
+    text-wrap: pretty;
+  }
+
   .outcomes-header {
     display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px;
     align-items: end; margin-bottom: 90px;
@@ -974,8 +981,8 @@
         <div class="hs-label">Avg. wait for therapy<br>in underserved communities</div>
       </div>
       <div class="hs-item">
-        <div class="hs-num">$0</div>
-        <div class="hs-label">Cost to members<br>payer or org funded</div>
+        <div class="hs-num">Day one</div>
+        <div class="hs-label">Peer community and a coach<br>from the day of enrollment</div>
       </div>
       <div class="hs-item">
         <div class="hs-num">0.83 <em class="hs-vs">vs</em> 0.65</div>
@@ -1023,13 +1030,8 @@
       <div class="ct-cell"><span class="ct-vasl"><strong>Day one</strong>peer community access and coach assignment, no intake form</span></div>
     </div>
     <div class="ct-row">
-      <div class="ct-cell"><span class="ct-metric">Time to First Meaningful Support*</span></div>
-      <div class="ct-cell"><span class="ct-old">~9 months to a first appointment</span></div>
-      <div class="ct-cell"><span class="ct-vasl"><strong>3-week median</strong> to a first substantive peer or coach exchange</span></div>
-    </div>
-    <div class="ct-row">
       <div class="ct-cell"><span class="ct-metric">Cost</span></div>
-      <div class="ct-cell"><span class="ct-old">$150 to 300 per session, rarely covered</span></div>
+      <div class="ct-cell"><span class="ct-old">Out of pocket for most families, rarely covered</span></div>
       <div class="ct-cell"><span class="ct-vasl"><strong>Free to members</strong>org or payer funded</span></div>
     </div>
     <div class="ct-row">
@@ -1050,11 +1052,10 @@
     <div class="ct-row">
       <div class="ct-cell"><span class="ct-metric">Risk detection</span></div>
       <div class="ct-cell"><span class="ct-old">Keyword rules and published clinical lexicons</span></div>
-      <div class="ct-cell"><span class="ct-vasl"><strong>0.8255 vs 0.6489</strong> against the MIT / Child Mind / Crisis Text Line lexicon</span></div>
+      <div class="ct-cell"><span class="ct-vasl"><strong>0.83 vs 0.65</strong> against the field&rsquo;s reference lexicon on suicide-attempt severity</span></div>
     </div>
   </div>
-  <p class="reveal" style="margin-top:16px;font-size:12px;font-weight:300;color:var(--ink-50);max-width:680px;">*&ldquo;First meaningful support&rdquo; is measured conservatively, from enrollment to a member&rsquo;s first substantive peer interaction or coach exchange, not from account activation. Community access and coach assignment happen on day one; we report the 3-week median because we count real support, not sign-ups.</p>
-
+  
   <div class="continuum-strip reveal">
     <div class="cs-step">
       <div class="cs-num">Step 01</div>
@@ -1073,8 +1074,8 @@
     </div>
     <div class="cs-step">
       <div class="cs-num">Step 04</div>
-      <div class="cs-name">Licensed Therapy</div>
-      <div class="cs-desc">When the member is ready. Warm handoff, VLAP signal context and coaching notes travel with them.</div>
+      <div class="cs-name">Warm handoff to licensed care</div>
+      <div class="cs-desc">When the member is ready, the partner&rsquo;s licensed clinician delivers the therapy. VLAP signal context and coaching notes travel with them.</div>
     </div>
     <div class="cs-step">
       <div class="cs-num">Step 05</div>
@@ -1232,12 +1233,12 @@
       <div class="ss-label">Average wait to see<br>a school counselor</div>
     </div>
     <div class="ss-cell">
-      <div class="ss-num">3<span style="font-size:22px">wks</span></div>
-      <div class="ss-label">Median time to first<br>peer support on Vasl</div>
+      <div class="ss-num">Day one</div>
+      <div class="ss-label">Peer groups and a coach<br>from the day of enrollment</div>
     </div>
     <div class="ss-cell">
       <div class="ss-num">$26B</div>
-      <div class="ss-label">Annual cost of student<br>mental health to U.S. institutions</div>
+      <div class="ss-label">Annual cost of student<br>mental health to U.S. institutions<br><span style="opacity:0.6">Active Minds, 2023 analysis</span></div>
     </div>
   </div>
 
@@ -1276,7 +1277,7 @@
       <div class="school-item reveal">
         <div class="si-label">Every Student, Same Day</div>
         <div class="si-title">Peer support and coaching from the first day of enrollment, not the first day of crisis.</div>
-        <p class="si-body">The 9-month wait is a national average. With Vasl, the median time to first peer support is 3 weeks. Students access 70+ peer groups, daily check-ins, and a culturally matched coaching relationship from the day their school activates the program. No waitlist. No insurance requirement. No intake form.</p>
+        <p class="si-body">The 9-month wait is a national average. On Vasl, peer support and a coach are there from the day a student is enrolled. Students access 70+ peer groups, daily check-ins, and a culturally matched coaching relationship from the day their school activates the program. No waitlist. No insurance requirement. No intake form.</p>
       </div>
 
       <div class="school-item reveal">
@@ -1295,6 +1296,8 @@
 <section id="outcomes">
   <div class="chapter-label reveal">Chapter 05, Measured against the field&rsquo;s standard</div>
 
+  <p class="outcomes-claim reveal">Vasl is the first and only clinical language infrastructure built on how Black, Brown, LGBTQ+, rural and Medicaid youth actually describe distress, and the only one that turns what it reads into care the same day.</p>
+
   <div class="outcomes-header">
     <h2 class="outcomes-headline reveal d1">
       The field published its map.<br>
@@ -1307,14 +1310,14 @@
 
   <div class="outcomes-grid">
     <div class="outcome-item reveal">
-      <div class="oi-num">0.8255</div>
+      <div class="oi-num">0.83</div>
       <div class="oi-label">VLAP</div>
       <p class="oi-desc">The VLAP severity head, scored as ROC-AUC on suicide-attempt severity.</p>
       <span class="oi-note">Higher is better</span>
     </div>
 
     <div class="outcome-item reveal d1">
-      <div class="oi-num">0.6489</div>
+      <div class="oi-num">0.65</div>
       <div class="oi-label">MIT / Child Mind / Crisis Text Line lexicon</div>
       <p class="oi-desc">The Suicide Risk Lexicon, 50 constructs, 6,910 terms, scored on the same corpus, the same split, the same way.</p>
       <span class="oi-note">Same corpus, same split</span>
@@ -1361,7 +1364,7 @@
       <div class="vc-persona">School Counselor, High School, Baltimore</div>
       <p class="vc-quote">"I finally have a tool that helps me see who needs support before they end up in my office in crisis."</p>
       <p class="vc-context">The shift from reactive to proactive care is the difference between a counselor managing crises and a counselor preventing them. The population-level insight from Vasl's org portal changes what a school counselor can see and when.</p>
-      <div class="vc-attr">Pilot program, 6-month deployment</div>
+      <div class="vc-attr">Community program participant</div>
     </div>
 
     <div class="voice-card reveal d2">

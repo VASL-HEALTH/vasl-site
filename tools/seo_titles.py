@@ -29,9 +29,8 @@ REWRITES = {
     ),
     "for-schools.html": (
         "School-Based Mental Health Platform for Districts | Vasl",
-        "A tiered youth behavioral health program for K-12 districts, peer support "
-        "through licensed therapy, mapped to MTSS and staffed by people students "
-        "recognize.",
+        "A tiered program for K-12 districts, peer support through a warm handoff "
+        "to licensed care, mapped to MTSS and staffed by people students recognize.",
     ),
     "health-systems.html": (
         "Youth Behavioral Health for Health Plans & Systems | Vasl",
@@ -73,9 +72,9 @@ REWRITES = {
         "that exists before a crisis does, run by people from their own communities.",
     ),
     "teletherapy.html": (
-        "Culturally Matched Teletherapy for Youth | Vasl Health",
-        "Licensed therapy for youth 14 to 24, matched on culture and language rather than "
-        "availability alone, the layer reached only when it is actually needed.",
+        "Warm Handoff to Culturally Matched Licensed Care | Vasl Health",
+        "Vasl delivers no therapy. The partner's own licensed clinician does, matched "
+        "on culture and language rather than availability alone.",
     ),
     "technology.html": (
         "Architecture, Privacy & Security | Vasl Health",
@@ -86,20 +85,19 @@ REWRITES = {
     "infrastructure.html": (
         "Infrastructure & Data Handling | Vasl Health",
         "The hosting, encryption, access control, and retention model behind Vasl, "
-        "what a district IT reviewer or plan security team needs before a pilot.",
+        "what a district IT reviewer or plan security team needs before a deployment.",
     ),
     # ---- Evidence ------------------------------------------------------------
     "outcomes.html": (
         "Youth Behavioral Health Outcomes & ROI | Vasl Health",
-        "Pilot-cohort results and stakeholder ROI for districts, plans, and "
+        "Measured model performance and stakeholder ROI for districts, plans, and "
         "community organizations, with the methodology behind every number stated "
         "openly.",
     ),
     "clinical-outcomes.html": (
         "Clinical Outcomes: Symptom Change & Retention | Vasl",
-        "PHQ-8 change at 90 days, 30-day retention, time to first meaningful "
-        "support, and escalation rates from Vasl pilot cohorts, with methodology "
-        "and limitations.",
+        "0.83 vs 0.65 against the field's reference lexicon on suicide-attempt "
+        "severity, with the methodology and the limitations stated openly.",
     ),
     "research.html": (
         "Research & Evidence Base | Vasl Health",

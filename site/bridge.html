@@ -76,6 +76,31 @@ section{padding:130px var(--gutter);position:relative;}
 .hero-photo{background:var(--parchment);}
 .hero-photo img{display:block;width:100%;height:600px;object-fit:cover;}
 
+/* NO APP, NO DOWNLOAD */
+#noapp{background:var(--warm-white);border-top:1px solid var(--chalk);border-bottom:1px solid var(--chalk);}
+.noapp-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:72px;align-items:center;}
+.noapp-copy{display:flex;flex-direction:column;gap:24px;}
+.noapp-kicker{font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--dust);}
+.noapp-headline{font-family:var(--serif);font-size:clamp(36px,4.6vw,56px);font-weight:300;line-height:1.05;letter-spacing:-0.025em;color:var(--ink);}
+.noapp-headline em{font-style:italic;color:var(--clay);}
+.noapp-copy p{font-size:17px;font-weight:300;line-height:1.72;color:var(--ink-70);max-width:600px;text-wrap:pretty;}
+.noapp-phone-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;}
+.noapp-phone-note{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--deep-green);text-align:center;}
+.noapp-phone{width:300px;height:540px;border-radius:44px;background:var(--ink);padding:12px;}
+.noapp-screen{width:100%;height:100%;border-radius:34px;background:#fff;overflow:hidden;display:flex;flex-direction:column;}
+.noapp-screen-top{padding:30px 16px 12px;border-bottom:1px solid var(--chalk);text-align:center;}
+.noapp-screen-top b{display:block;font-size:16px;font-weight:500;color:var(--ink);}
+.noapp-screen-top span{display:block;font-size:11px;color:var(--ink-50);margin-top:2px;}
+.noapp-thread{padding:18px 14px;display:flex;flex-direction:column;gap:10px;}
+.noapp-in{align-self:flex-start;max-width:210px;background:var(--parchment);border-radius:18px 18px 18px 5px;padding:10px 14px;font-size:14px;font-weight:300;line-height:1.45;color:var(--ink);}
+.noapp-out{align-self:flex-end;background:var(--deep-green);color:var(--warm-white);border-radius:18px 18px 5px 18px;padding:10px 14px;font-size:14px;font-weight:300;line-height:1.45;}
+.noapp-delivered{align-self:flex-end;font-size:11px;color:var(--ink-50);margin-top:-4px;}
+.noapp-points{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;border-top:2px solid var(--deep-green);padding-top:28px;}
+.noapp-point{display:flex;flex-direction:column;gap:8px;}
+.noapp-point-n{font-family:var(--mono);font-size:12px;color:var(--clay);}
+.noapp-point-t{font-family:var(--serif);font-size:28px;font-weight:400;line-height:1.15;letter-spacing:-0.01em;color:var(--ink);}
+.noapp-point-b{font-size:16px;font-weight:300;line-height:1.7;color:var(--ink-70);}
+
 /* BUYERS */
 #buyers{background:var(--warm-white);border-bottom:1px solid var(--chalk);}
 .buyers-headline{font-family:var(--serif);font-size:clamp(34px,4vw,48px);font-weight:300;line-height:1.08;letter-spacing:-0.025em;color:var(--ink);margin-bottom:48px;}
@@ -113,6 +138,15 @@ section{padding:130px var(--gutter);position:relative;}
   .hero-photo{margin-top:40px;}
   .hero-note{margin-top:0;}
   .hero-photo img{height:260px;}
+  .noapp-grid{grid-template-columns:1fr;gap:16px;}
+  .noapp-copy{display:contents;}
+  .noapp-kicker{order:1;}
+  .noapp-headline{order:2;}
+  .noapp-phone-wrap{order:3;padding:12px 0;}
+  .noapp-copy p{order:4;}
+  .noapp-points{order:5;grid-template-columns:1fr;gap:0;margin-top:8px;}
+  .noapp-point{padding:18px 0;border-bottom:1px solid var(--chalk);gap:4px;}
+  .noapp-point-t{font-size:22px;}
   .buyer-head{display:none;}
   .buyer-row{grid-template-columns:1fr;gap:14px;border-top:2px solid var(--deep-green);border-bottom:none;padding:20px 0 28px;}
   .buyer-cell-label{display:block;}
@@ -126,6 +160,11 @@ section{padding:130px var(--gutter);position:relative;}
   .nav-links{display:none;}
   section{padding:80px var(--gutter);}
   #hero{padding-top:120px;padding-bottom:70px;min-height:0;}
+  .noapp-phone{width:250px;height:420px;border-radius:38px;padding:10px;}
+  .noapp-screen{border-radius:29px;}
+  .noapp-in{max-width:180px;font-size:12.5px;}
+  .noapp-out{font-size:12.5px;}
+  .noapp-copy p{font-size:15px;}
   .week-actions .btn-dark{display:block;text-align:center;}
 }
 
@@ -221,7 +260,48 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
   <div class="hero-photo reveal d2">
     <img src="/assets/bridge-hero.jpg" alt="A young person lying on a bed at home, holding a phone above them." width="1600" height="1067" decoding="async">
   </div>
-  <p class="hero-body reveal d3">A text from Vasl every day, from the day a young person leaves the emergency department to their first appointment. When a reply hides distress, the partner&rsquo;s clinician sees it.</p>
+  <p class="hero-body reveal d3">A text from Vasl every day, from the day a young person leaves the emergency department to their first appointment. Vasl Bridge is built on how Black, Brown, LGBTQ+, rural and Medicaid youth actually describe distress, so when a reply hides it, the partner&rsquo;s clinician sees it.</p>
+</section>
+
+<section id="noapp">
+  <div class="noapp-grid">
+    <div class="noapp-copy reveal">
+      <div class="noapp-kicker">No app. No download.</div>
+      <h2 class="noapp-headline">The text is <em>the product.</em></h2>
+      <p>Vasl Bridge needs one thing: a phone number. At discharge, the social worker enrolls the young person, and the first text arrives that day. There is nothing to download, nothing to install, and no account to set up before support starts. The daily check-in is a text message. They answer by replying. It works on any phone that can send a text.</p>
+      <p>When they want more, the mood map and their peer community open in the phone&rsquo;s browser. Still nothing to install.</p>
+    </div>
+    <div class="noapp-phone-wrap reveal d1">
+      <div class="noapp-phone-note">Enrolled at discharge &rarr; first text today</div>
+      <div class="noapp-phone">
+        <div class="noapp-screen">
+          <div class="noapp-screen-top"><b>Vasl</b><span>Text Message &middot; Today</span></div>
+          <div class="noapp-thread">
+            <div class="noapp-in">Hey, it&rsquo;s Vasl. Checking in like every day. How are you doing today? Reply in your own words, whatever&rsquo;s true.</div>
+            <div class="noapp-out">I&rsquo;m fine, it&rsquo;s whatever.</div>
+            <div class="noapp-delivered">Delivered</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="noapp-points reveal d2">
+      <div class="noapp-point">
+        <span class="noapp-point-n">01</span>
+        <span class="noapp-point-t">Nothing to download.</span>
+        <span class="noapp-point-b">Enrolled by phone number at discharge.</span>
+      </div>
+      <div class="noapp-point">
+        <span class="noapp-point-n">02</span>
+        <span class="noapp-point-t">Nothing to remember.</span>
+        <span class="noapp-point-b">Vasl texts first, every day.</span>
+      </div>
+      <div class="noapp-point">
+        <span class="noapp-point-n">03</span>
+        <span class="noapp-point-t">Nothing to learn.</span>
+        <span class="noapp-point-b">If they can text, they can use it.</span>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section id="buyers">
