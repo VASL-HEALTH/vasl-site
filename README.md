@@ -6,11 +6,18 @@ One deployment: `site/` → **gotovasl.com** on S3 + CloudFront.
 |------|--------|-----|
 | Marketing site | `site/` | gotovasl.com |
 | Platform prototype | `site/prototype.html` | gotovasl.com/prototype.html |
-| VLAP live demo | `site/demo.html` | gotovasl.com/demo.html |
+| VLAP live demo | not in this repo | https://vlap.gotovasl.com/ |
+| Retired demo redirect | `site/demo.html` | gotovasl.com/demo.html |
 
-Every page's footer links to it as **VLAP Signal Demo**, alongside
-**Live Demo Portal** (`prototype.html`) — they are different artifacts and both
-are linked.
+Every page's footer links the live demo as **Signal Taxonomy**, pointing
+straight at `https://vlap.gotovasl.com/`. The homepage outcomes chapter and
+the `/vlap` hero link the same URL, in the same tab. The footer link is
+generated from `FOOTER_COLS` in `tools/chrome_inject.py`, so repointing it
+again is one edit and a re-run, not fifty hand-edits.
+
+`site/demo.html` is no longer linked from anywhere. It stays live as a
+noindex meta-refresh to `vlap-standalone.gotovasl.com` so the old URL still
+resolves; retiring it is a separate decision.
 
 > **`gotovasl.com/demo` (no extension) is broken and is not ours to fix here.**
 > It 301s to `https://demo.gotovasl.com/`, which is NXDOMAIN. `/prototype`,

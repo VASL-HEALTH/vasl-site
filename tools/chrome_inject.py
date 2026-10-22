@@ -59,7 +59,10 @@ FOOTER_COLS = [
         ("/platform", "Platform"),
         ("/vlap", "VLAP"),
         ("/technology", "Technology"),
-        ("/demo.html", "Signal Taxonomy"),
+        # Points at the live VLAP taxonomy surface (vlap.gotovasl.com), not
+        # the retired /demo.html hop. Same tab, deliberately: it is part of
+        # the product story, not an outbound citation.
+        ("https://vlap.gotovasl.com/", "Signal Taxonomy"),
     ]),
     ("Solutions", [
         ("/health-systems", "Health Plans &amp; Systems"),

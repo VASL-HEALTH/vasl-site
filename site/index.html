@@ -128,7 +128,7 @@
 
 
   /* ═══════════════════════════════════════════
-     CHAPTER 01: OPENING
+     OPENING (HERO, UNLABELLED)
   ═══════════════════════════════════════════ */
   #hero {
     min-height: 100vh;
@@ -208,7 +208,7 @@
 
 
   /* ═══════════════════════════════════════════
-     CHAPTER 02: THERAPY LAST
+     CHAPTER 01: THERAPY LAST
   ═══════════════════════════════════════════ */
   #therapylast {
     background: var(--charcoal);
@@ -319,7 +319,7 @@
 
 
   /* ═══════════════════════════════════════════
-     CHAPTER 03: THE PLATFORM
+     CHAPTER 02: THE PLATFORM
   ═══════════════════════════════════════════ */
   #platform {
     background: var(--parchment);
@@ -385,7 +385,7 @@
 
 
   /* ═══════════════════════════════════════════
-     CHAPTER 04: THE INTELLIGENCE LAYER
+     CHAPTER 03: THE INTELLIGENCE LAYER
   ═══════════════════════════════════════════ */
   #intelligence {
     background: var(--deep-green);
@@ -469,7 +469,7 @@
 
 
   /* ═══════════════════════════════════════════
-     CHAPTER 05: FOR SCHOOLS & DISTRICTS
+     CHAPTER 04: FOR SCHOOLS & DISTRICTS
   ═══════════════════════════════════════════ */
   #schools {
     background: var(--warm-white);
@@ -568,7 +568,7 @@
   }
 
   /* ═══════════════════════════════════════════
-     CHAPTER 06: OUTCOMES
+     CHAPTER 05: OUTCOMES
   ═══════════════════════════════════════════ */
   #outcomes {
     background: var(--parchment);
@@ -623,9 +623,18 @@
     border: 1px solid var(--deep-green); padding: 4px 10px; display: inline-block;
   }
 
+  .oi-live {
+    margin-top: 32px; display: inline-block; font-family: var(--mono);
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--deep-green); text-decoration: none;
+    border-bottom: 1px solid var(--deep-green); padding-bottom: 4px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .oi-live:hover { color: var(--clay); border-color: var(--clay); }
+
 
   /* ═══════════════════════════════════════════
-     CHAPTER 07: VOICES
+     CHAPTER 06: VOICES
   ═══════════════════════════════════════════ */
   #voices {
     background: var(--warm-white);
@@ -709,7 +718,7 @@
 
 
   /* ═══════════════════════════════════════════
-     CHAPTER 08: THE ASK
+     CHAPTER 07: THE ASK
   ═══════════════════════════════════════════ */
   #ask {
     background: var(--charcoal);
@@ -908,7 +917,7 @@
 
 
 <!-- ═══════════════════════════════════
-     CHAPTER 01: OPENING
+     OPENING (HERO, UNLABELLED)
 ════════════════════════════════════ -->
 <section id="hero">
   <div class="hero-left">
@@ -978,10 +987,10 @@
 
 
 <!-- ═══════════════════════════════════
-     CHAPTER 02: THERAPY LAST
+     CHAPTER 01: THERAPY LAST
 ════════════════════════════════════ -->
 <section id="therapylast">
-  <div class="chapter-label light reveal">Chapter 02, Therapy Last. Not Therapy Never.</div>
+  <div class="chapter-label light reveal">Chapter 01, Therapy Last. Not Therapy Never.</div>
 
   <div class="tl-header">
     <h2 class="tl-headline reveal d1">
@@ -1077,10 +1086,10 @@
 
 
 <!-- ═══════════════════════════════════
-     CHAPTER 03: THE PLATFORM
+     CHAPTER 02: THE PLATFORM
 ════════════════════════════════════ -->
 <section id="platform">
-  <div class="chapter-label reveal">Chapter 03, The Platform</div>
+  <div class="chapter-label reveal">Chapter 02, The Platform</div>
 
   <div class="platform-header">
     <h2 class="platform-headline reveal d1">
@@ -1129,10 +1138,10 @@
 
 
 <!-- ═══════════════════════════════════
-     CHAPTER 04: THE INTELLIGENCE LAYER
+     CHAPTER 03: THE INTELLIGENCE LAYER
 ════════════════════════════════════ -->
 <section id="intelligence">
-  <div class="chapter-label light reveal">Chapter 04, The Intelligence Layer</div>
+  <div class="chapter-label light reveal">Chapter 03, The Intelligence Layer</div>
 
   <div class="intel-grid">
     <div class="intel-left">
@@ -1208,10 +1217,10 @@
 
 
 <!-- ═══════════════════════════════════
-     CHAPTER 05: FOR SCHOOLS
+     CHAPTER 04: FOR SCHOOLS
 ════════════════════════════════════ -->
 <section id="schools">
-  <div class="chapter-label reveal">Chapter 05, For Schools & Districts</div>
+  <div class="chapter-label reveal">Chapter 04, For Schools & Districts</div>
 
   <div class="school-stats reveal">
     <div class="ss-cell">
@@ -1281,10 +1290,10 @@
 
 
 <!-- ═══════════════════════════════════
-     CHAPTER 06: MEASURED AGAINST THE FIELD'S STANDARD
+     CHAPTER 05: MEASURED AGAINST THE FIELD'S STANDARD
 ════════════════════════════════════ -->
 <section id="outcomes">
-  <div class="chapter-label reveal">Chapter 06, Measured against the field&rsquo;s standard</div>
+  <div class="chapter-label reveal">Chapter 05, Measured against the field&rsquo;s standard</div>
 
   <div class="outcomes-header">
     <h2 class="outcomes-headline reveal d1">
@@ -1322,14 +1331,16 @@
   <p class="reveal d3" style="margin-top:32px;font-size:13px;font-weight:300;color:var(--ink-50);max-width:640px;">Suicide-attempt severity, chunk level, n_pos 307, held-out test split.</p>
 
   <p class="reveal d3" style="margin-top:28px;font-size:18px;font-weight:300;line-height:1.72;color:var(--ink-70);max-width:720px;">The language our young people use isn&rsquo;t on the field&rsquo;s map. VLAP was built to read it and surfaces what it finds for a clinician&rsquo;s review.</p>
+
+  <a href="https://vlap.gotovasl.com/" class="oi-live reveal d3">Try it live &rarr;</a>
 </section>
 
 
 <!-- ═══════════════════════════════════
-     CHAPTER 07: VOICES
+     CHAPTER 06: VOICES
 ════════════════════════════════════ -->
 <section id="voices">
-  <div class="chapter-label reveal">Chapter 07, Voices</div>
+  <div class="chapter-label reveal">Chapter 06, Voices</div>
 
   <div class="voices-header reveal d1">
     <h2 class="voices-headline">
@@ -1380,13 +1391,13 @@
 
 
 <!-- ═══════════════════════════════════
-     CHAPTER 08: THE ASK
+     CHAPTER 07: THE ASK
 ════════════════════════════════════ -->
 <section id="ask">
   <div class="ask-bg" aria-hidden="true">Vasl</div>
   <div class="ask-inner">
     <div class="ask-left">
-      <div class="chapter-label muted reveal">Chapter 08, The Work Starts Here</div>
+      <div class="chapter-label muted reveal">Chapter 07, The Work Starts Here</div>
       <h2 class="ask-headline reveal d1">Bring Vasl to your community</h2>
       <p class="ask-body reveal d2">
         We don't do generic demos. Every walkthrough is configured around your population, your partners, and the care gap you're trying to close. Tell us who you serve and we'll show you exactly what Vasl looks like for them.
@@ -1468,7 +1479,7 @@
       <a href="/platform">Platform</a>
       <a href="/vlap">VLAP</a>
       <a href="/technology">Technology</a>
-      <a href="/demo.html">Signal Taxonomy</a>
+      <a href="https://vlap.gotovasl.com/">Signal Taxonomy</a>
     </div>
     <div class="fs-col">
       <div class="fs-head">Solutions</div>

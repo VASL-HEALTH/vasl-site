@@ -180,6 +180,22 @@
   .chapter-label.muted { color: rgba(250,247,242,0.35); }
   .chapter-label.muted::after { background: rgba(250,247,242,0.35); }
 
+  /* Dark primary button for light sections, same spec as the homepage. */
+  .btn-dark {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--warm-white);
+    padding: 16px 32px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.22s;
+  }
+  .btn-dark:hover { background: var(--deep-green); }
+  .intro-cta-row { margin-top: 30px; }
+
   section { padding: 130px var(--gutter); position: relative; }
 
   /* ═══════════════════════════════════════════
@@ -1345,6 +1361,10 @@
       <span class="tag">Clinician-facing only</span>
     </div>
 
+    <div class="intro-cta-row reveal d3">
+      <a href="https://vlap.gotovasl.com/" class="btn-dark">Try VLAP live</a>
+    </div>
+
     <p class="intro-body reveal d3" style="margin-top:20px;font-size:14px;">
       This page walks through why VLAP exists. For the full model architecture, training methodology, and security documentation, see the <a href="/technology" style="color:var(--clay);text-decoration:underline;">Technology deep-dive</a>.
     </p>
@@ -1981,7 +2001,7 @@
       <a href="/platform">Platform</a>
       <a href="/vlap">VLAP</a>
       <a href="/technology">Technology</a>
-      <a href="/demo.html">Signal Taxonomy</a>
+      <a href="https://vlap.gotovasl.com/">Signal Taxonomy</a>
     </div>
     <div class="fs-col">
       <div class="fs-head">Solutions</div>
