@@ -159,6 +159,7 @@
     color: var(--ink); margin-bottom: 52px;
   }
   .hero-headline em { font-style: italic; color: var(--clay); }
+  .hero-headline .br-phone { display: none; }
 
   .hero-body {
     font-size: 19px; font-weight: 300; line-height: 1.72;
@@ -849,6 +850,20 @@
     .pl-layer:last-child { border-bottom: none; }
   }
 
+  /* ─── PHONES: the hero headline has to out-weigh the 19px subhead. ───
+     The base rule is clamp(20px, 7.75cqw, 92px), which lands at 27px on a
+     390px phone, barely above body copy. Here the coefficient is raised so
+     the headline hits 35px at 390 and the cap holds it there on wider phones;
+     9.97cqw scales it back down below that so "Your patients don't." never
+     overflows on a 320px screen. At 500px the two rules agree to within
+     0.13px, so there is no step at the breakpoint. Desktop is untouched.
+     The .br-phone break keeps "textbook." off a line of its own: greedy
+     wrapping at 35px would leave it orphaned. */
+  @media (max-width: 500px) {
+    .hero-headline { font-size: clamp(20px, 9.97cqw, 35px); }
+    .hero-headline .br-phone { display: inline; }
+  }
+
   .ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:8px;}
   .ham-btn span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.2s;}
   .ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
@@ -939,7 +954,7 @@
 <section id="hero">
   <span class="hero-eyebrow reveal">Behavioral Health &middot; Community Language &middot; Precision Interpretation</span>
   <h1 class="hero-headline reveal d1">
-    Your screener speaks textbook.<br>
+    Your screener <br class="br-phone">speaks textbook.<br>
     Your patients don&rsquo;t.
   </h1>
   <div class="hero-left">
