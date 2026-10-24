@@ -137,21 +137,25 @@
     border-bottom: 1px solid var(--chalk);
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-areas: "eyebrow eyebrow" "head head" "left right";
     gap: 0 80px;
     align-items: start;
+    container-type: inline-size;
   }
 
-  .hero-left {}
+  .hero-left { grid-area: left; }
 
   .hero-eyebrow {
+    grid-area: eyebrow;
     font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
     text-transform: uppercase; color: var(--dust); margin-bottom: 40px; display: block;
   }
 
   .hero-headline {
+    grid-area: head;
     font-family: var(--serif);
-    font-size: clamp(26px, 3.15vw, 48px);
-    font-weight: 300; line-height: 1.06; letter-spacing: -0.03em;
+    font-size: clamp(20px, 7.75cqw, 92px);
+    font-weight: 300; line-height: 1.02; letter-spacing: -0.03em;
     color: var(--ink); margin-bottom: 52px;
   }
   .hero-headline em { font-style: italic; color: var(--clay); }
@@ -164,6 +168,7 @@
   .hero-actions { display: flex; align-items: center; gap: 32px; }
 
   .hero-right {
+    grid-area: right;
     border-left: 1px solid var(--chalk);
     padding-left: 72px;
     display: flex; flex-direction: column; gap: 0;
@@ -792,8 +797,13 @@
 
   /* ─── RESPONSIVE ─── */
   @media (max-width: 1100px) {
-    #hero { grid-template-columns: 1fr; gap: 80px; padding-top: 160px; }
-    .hero-right { border-left: none; padding-left: 0; border-top: 1px solid var(--chalk); padding-top: 60px; }
+    /* Row gap is 0 here on purpose. The eyebrow and the headline are their own
+       grid rows now, so a blanket 80px row gap lands between every one of them
+       and leaves dead space above and below the headline on a phone. Their own
+       margins already space them; only hero-right needs the 80px, so it takes
+       it as a margin. */
+    #hero { grid-template-columns: 1fr; grid-template-areas: "eyebrow" "head" "left" "right"; gap: 0; padding-top: 160px; }
+    .hero-right { grid-area: right; margin-top: 80px; border-left: none; padding-left: 0; border-top: 1px solid var(--chalk); padding-top: 60px; }
     .misread-pair { grid-template-columns: 1fr; gap: 12px; }
     .hero-stats { flex-wrap: wrap; }
     .compare-table { overflow-x: auto; }
@@ -927,12 +937,12 @@
      OPENING (HERO, UNLABELLED)
 ════════════════════════════════════ -->
 <section id="hero">
+  <span class="hero-eyebrow reveal">Behavioral Health &middot; Community Language &middot; Precision Interpretation</span>
+  <h1 class="hero-headline reveal d1">
+    Your screener speaks textbook.<br>
+    Your patients don&rsquo;t.
+  </h1>
   <div class="hero-left">
-    <span class="hero-eyebrow reveal">Behavioral Health &middot; Community Language &middot; Precision Interpretation</span>
-    <h1 class="hero-headline reveal d1">
-      Your screener speaks textbook.<br>
-      Your patients don&rsquo;t.
-    </h1>
     <p class="hero-body reveal d2">
  Vasl connects Black, Brown, LGBTQ+, rural and Medicaid youth, the clinicians who treat them, and the systems that pay for their care, on one language infrastructure. VLAP, our clinical language model, reads how young people actually describe distress. The Vasl platform turns what it reads into care, starting the same day.
  </p>
