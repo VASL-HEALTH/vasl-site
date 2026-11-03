@@ -1,0 +1,7 @@
+# site/tour.html is the canonical record of bytes served at gotovasl.com/tour.
+# Its source is VASL-HEALTH/vasl-platform infra/aws/demo-site/content/portal-tour.html,
+# which pins `content/*.html -text` for the same reason: core.autocrlf=true would
+# store this CRLF file as an LF blob, so a Linux checkout would upload different
+# bytes than a Windows one -- same rendering, different Content-Length, and the
+# repo copy would stop matching what S3 serves.
+site/tour.html -text

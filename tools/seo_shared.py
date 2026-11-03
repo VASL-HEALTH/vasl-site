@@ -17,6 +17,15 @@ never treat it as a page that can carry or receive a related-reading link.
 """
 
 IGNORE = {
+    # tour.html is a byte-frozen copy of VASL-HEALTH/vasl-platform
+    # infra/aws/demo-site/content/portal-tour.html, served at /tour as an
+    # unlinked, noindex, link-shared page. The repo copy exists to be the
+    # canonical record of the bytes S3 serves, so seo_inject.py must never
+    # inject a head layer into it and seo_validate.py must never demand a
+    # canonical/og set it was never going to have -- one injected byte and
+    # the repo copy stops matching the live object. gen_sitemap.py must not
+    # list it either: it is deliberately unlinked, not indexable.
+    "tour.html",
     "google21b71dccc4b8882d.html",
     # demo.html is a redirect to vlap-standalone.gotovasl.com, not a page. It
     # carries noindex and a canonical pointing at another origin; seo_inject
