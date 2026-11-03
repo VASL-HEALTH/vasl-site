@@ -1,12 +1,39 @@
+# Repo-wide line-ending rule, set 2026-11-03.
+#
+# Every text blob is stored LF and checked out LF on every platform. This
+# repo sets core.autocrlf=true, which was converting LF blobs to CRLF in a
+# Windows working copy: a deploy from this laptop uploaded CRLF HTML while
+# the same commit deployed from Linux would upload LF -- identical
+# rendering, different Content-Length and ETag on every object. eol=lf
+# makes the working copy byte-identical to the blob wherever it is checked
+# out, so what you deploy no longer depends on which machine you are on.
+* text=auto eol=lf
+
+# Images, fonts and PDFs are never line-ending converted and never diffed
+# as text. text=auto already guesses this from NUL bytes; declaring it is
+# what stops a guess from being wrong on a file that happens to contain
+# none. `binary` is the built-in macro for `-diff -merge -text`.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.webp binary
+*.avif binary
+*.ico  binary
+*.pdf  binary
+*.ttf  binary
+*.otf  binary
+*.woff  binary
+*.woff2 binary
+
+# SVG is XML, not an image format for these purposes: it stays text so it
+# diffs and normalizes like the rest of the source.
+
 # site/tour.html is the canonical record of the bytes served at
 # gotovasl.com/tour. Its source is VASL-HEALTH/vasl-platform
 # infra/aws/demo-site/content/portal-tour.html, which pins
-# `content/*.html -text` for the same reason.
-#
-# The blob is LF. This repo sets core.autocrlf=true, which converts LF to
-# CRLF on checkout, so without this pin a Windows working copy would be
-# 22,537 bytes instead of 22,206 and a deploy from it would upload CRLF --
-# same rendering, different Content-Length, and the repo copy would stop
-# matching the live S3 object. With the pin, a checkout is byte-identical
-# to the blob on every platform.
+# `content/*.html -text` for the same reason. Listed last so it wins over
+# the `*` rule above: this one file is frozen exactly as stored (LF,
+# 22,206 bytes, md5 5728de78989dda2f93c687ee927f1021) and must never be
+# converted in either direction, independently of the repo-wide policy.
 site/tour.html -text
