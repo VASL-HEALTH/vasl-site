@@ -1,7 +1,12 @@
-# site/tour.html is the canonical record of bytes served at gotovasl.com/tour.
-# Its source is VASL-HEALTH/vasl-platform infra/aws/demo-site/content/portal-tour.html,
-# which pins `content/*.html -text` for the same reason: core.autocrlf=true would
-# store this CRLF file as an LF blob, so a Linux checkout would upload different
-# bytes than a Windows one -- same rendering, different Content-Length, and the
-# repo copy would stop matching what S3 serves.
+# site/tour.html is the canonical record of the bytes served at
+# gotovasl.com/tour. Its source is VASL-HEALTH/vasl-platform
+# infra/aws/demo-site/content/portal-tour.html, which pins
+# `content/*.html -text` for the same reason.
+#
+# The blob is LF. This repo sets core.autocrlf=true, which converts LF to
+# CRLF on checkout, so without this pin a Windows working copy would be
+# 22,537 bytes instead of 22,206 and a deploy from it would upload CRLF --
+# same rendering, different Content-Length, and the repo copy would stop
+# matching the live S3 object. With the pin, a checkout is byte-identical
+# to the blob on every platform.
 site/tour.html -text

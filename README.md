@@ -45,14 +45,90 @@ History, so this does not get "fixed" back the wrong way:
 
 ## Deploying
 
-Push to `main` touching `site/**` → `.github/workflows/deploy-site.yml` syncs
-to S3 and invalidates CloudFront. That is the whole pipeline.
+The site is deployed **by hand from committed `main`**. The push trigger was
+removed from `.github/workflows/deploy-site.yml` on 2026-10-13, so pushing to
+`main` ships nothing; both workflows in this repo are `workflow_dispatch` only.
+Run the three cache-control passes yourself, then invalidate.
+
+```bash
+# 1. assets, long cache (everything but HTML, sitemap.xml, robots.txt)
+aws s3 sync site/ s3://vasl-marketing-site/ --delete   --exclude '*.html' --exclude 'sitemap.xml' --exclude 'robots.txt'   --cache-control 'public,max-age=31536000,immutable' --no-progress
+
+# 2. sitemap.xml + robots.txt, short cache. cp, not sync: sync skips a file
+#    whose size and mtime look unchanged and would leave a stale header.
+aws s3 cp site/sitemap.xml s3://vasl-marketing-site/sitemap.xml   --cache-control 'public,max-age=300' --no-progress
+aws s3 cp site/robots.txt  s3://vasl-marketing-site/robots.txt   --cache-control 'public,max-age=300' --no-progress
+
+# 3. HTML last, so a page is never live before the asset it needs
+aws s3 sync site/ s3://vasl-marketing-site/ --delete   --exclude '*' --include '*.html'   --cache-control 'public,max-age=0,must-revalidate'   --content-type 'text/html; charset=utf-8' --no-progress
+
+# 4. invalidate, then wait for Completed (see the Git Bash note below)
+MSYS_NO_PATHCONV=1 aws cloudfront create-invalidation   --distribution-id E11DM7B5W2KRCQ   --paths '/' '/*.html' '/help/*' '/sitemap.xml' '/robots.txt'
+```
+
+Both `sync` passes carry `--delete`. **Add `--dryrun` and read the `delete:`
+lines before running either one for real.** An object that is live but absent
+from `site/` is deleted with nothing to restore it from, which is how
+`tour.html` was nearly lost on 2026-11-03.
+
+### Git Bash rewrites the invalidation paths
+
+On Windows, MSYS argument conversion rewrites any argument beginning with `/`,
+so `--paths '/' '/blog' '/sitemap.xml'` reaches CloudFront as
+`C:/Program Files/Git/`, `C:/Program Files/Git/blog` and
+`C:/Program Files/Git/sitemap.xml`. Single quotes do **not** prevent it. A path
+containing a wildcard (`/*`, `/*.html`) is exempt and passes through intact.
+
+Prefix the command with `MSYS_NO_PATHCONV=1`, or run it from PowerShell, and
+check the returned `InvalidationBatch.Paths.Items` against what you intended.
+The failure is usually loud (`InvalidArgument ... invalid invalidation paths`),
+but a set of only extensionless paths can convert into something CloudFront
+accepts, then invalidate the wrong keys while reporting `Completed`.
+
+This is a *different* bug from the `--paths` globbing one commented in
+`deploy-site.yml`: that one is bash expanding an unquoted `/*` against the
+Actions runner's filesystem, and its fix does not cover the by-hand path.
+
+### `site/tour.html` is byte-frozen
+
+`site/tour.html` serves gotovasl.com/tour and `/tour.html`. **Never edit it in
+this repo.** Its source is
+[`VASL-PLATFORM/infra/aws/demo-site/content/portal-tour.html`](https://github.com/VASL-HEALTH/VASL-PLATFORM/blob/main/infra/aws/demo-site/content/portal-tour.html).
+Change it there, then copy the bytes across so the two stay identical
+(md5 `5728de78989dda2f93c687ee927f1021`, 22,206 bytes, verified with `cmp`).
+
+Two guards keep it frozen and both must survive:
+
+- **`.gitattributes` pins `site/tour.html -text`.** The blob is LF. This repo
+  sets `core.autocrlf=true`, which converts LF to CRLF *on checkout*, so
+  without the pin a Windows working copy of this file would be 22,537 bytes
+  (22,206 + 331 line endings) and a deploy from that checkout would upload
+  CRLF: same rendering, different `Content-Length`, and the repo copy would
+  stop being the record of what S3 serves. With the pin, a checkout is
+  byte-identical to the blob on every platform. The platform repo pins
+  `content/*.html -text` for the same reason.
+
+  Verified on 2026-11-03: `site/tour.html` is the only HTML file here whose
+  working copy matches its blob. Every other page has an LF blob and a CRLF
+  working copy, so HTML deployed from this laptop is CRLF while the same
+  commit deployed from Linux would be LF. Harmless for rendering, but it means
+  a deploy run from a different platform rewrites every HTML object's bytes.
+- **`tour.html` is listed in `tools/seo_shared.IGNORE`.** Without it
+  `seo_inject.py` injects a head layer, `gen_sitemap.py` lists a deliberately
+  unlinked `noindex` page, and `seo_validate.py` fails it for a canonical and
+  four `og:` tags it never had. Each of those changes the bytes. Note that
+  `seo_validate.py` does **not** gate its canonical and `og:` checks on
+  `noindex`, so the page's own `noindex, nofollow` is not enough to exempt it.
+
+The page was hand-uploaded straight to S3 on 2026-11-03 02:34 UTC and existed
+in no commit on any branch, so S3 held the only copy. It was committed in
+`d4ab746` so `--delete` could go back on the HTML pass.
 
 ## Updating a Page
 
-All pages are plain HTML — edit any `.html` file under `site/` and push to
-`main`. Changes go live once the deploy workflow finishes the S3 sync and the
-CloudFront invalidation.
+All pages are plain HTML — edit any `.html` file under `site/`, commit, push,
+then run the deploy passes under **Deploying** above. Pushing alone ships
+nothing. `site/tour.html` is the one file never to edit here.
 
 ## Structure
 
@@ -66,9 +142,10 @@ vasl-site/
 
 ## Deployment (site/ → AWS)
 
-`site/` (gotovasl.com) deploys to **S3 + CloudFront**, not Netlify, via
-`.github/workflows/deploy-site.yml` on every push to `main` that touches
-`site/`. Infrastructure lives in
+`site/` (gotovasl.com) deploys to **S3 + CloudFront**, not Netlify. Treat
+`.github/workflows/deploy-site.yml` as the reference for the exact sync flags;
+it no longer runs on push and is `workflow_dispatch` only, so deploys happen by
+hand as described under **Deploying** above. Infrastructure lives in
 [`VASL-PLATFORM/infra/aws/static-sites`](https://github.com/VASL-HEALTH/VASL-PLATFORM/tree/main/infra/aws/static-sites).
 
 The workflow authenticates with GitHub OIDC — there are no AWS keys in repo
