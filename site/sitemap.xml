@@ -56,7 +56,7 @@
   </url>
   <url>
     <loc>https://gotovasl.com/blog</loc>
-    <lastmod>2026-10-22</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -135,6 +135,12 @@
   <url>
     <loc>https://gotovasl.com/blog/what-a-suicide-risk-word-list-cant-hear</loc>
     <lastmod>2026-10-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gotovasl.com/blog-seven-days-after-discharge</loc>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
