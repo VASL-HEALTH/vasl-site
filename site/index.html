@@ -154,8 +154,9 @@
   .hero-headline {
     grid-area: head;
     font-family: var(--serif);
-    font-size: clamp(20px, 7.75cqw, 92px);
+    font-size: clamp(20px, 4.55cqw, 54px);
     font-weight: 300; line-height: 1.02; letter-spacing: -0.03em;
+    text-wrap: balance;
     color: var(--ink); margin-bottom: 52px;
   }
   .hero-headline em { font-style: italic; color: var(--clay); }
@@ -851,16 +852,18 @@
   }
 
   /* ─── PHONES: the hero headline has to out-weigh the 19px subhead. ───
-     The base rule is clamp(20px, 7.75cqw, 92px), which lands at 27px on a
-     390px phone, barely above body copy. Here the coefficient is raised so
-     the headline hits 35px at 390 and the cap holds it there on wider phones;
-     9.97cqw scales it back down below that so "Your patients don't." never
-     overflows on a 320px screen. At 500px the two rules agree to within
-     0.13px, so there is no step at the breakpoint. Desktop is untouched.
-     The .br-phone break keeps "textbook." off a line of its own: greedy
-     wrapping at 35px would leave it orphaned. */
+     Refitted 2026-11-08 for the new line, which is 97 characters against the
+     old 44, so both the cap and the coefficient come down. The base rule is
+     clamp(20px, 4.55cqw, 54px), which lands at 16px on a 390px phone,
+     under the 17px body copy. Here the coefficient is raised so the headline
+     hits 30px at 390, comfortably above body, and the 32px cap holds it
+     there on wider phones; 8.55cqw scales it back down below that so the
+     longest line never overflows a 320px screen. At 500px the two rules
+     agree to within 0.4px, so there is no step at the breakpoint.
+     The .br-phone break puts each sentence's clause on its own line: greedy
+     wrapping at 26px strands "wrong." on a line of its own. */
   @media (max-width: 500px) {
-    .hero-headline { font-size: clamp(20px, 9.97cqw, 35px); }
+    .hero-headline { font-size: clamp(18px, 8.55cqw, 32px); }
     .hero-headline .br-phone { display: inline; }
   }
 
@@ -956,8 +959,8 @@
 <section id="hero">
   <span class="hero-eyebrow reveal">Behavioral Health &middot; Community Language &middot; Precision Interpretation</span>
   <h1 class="hero-headline reveal d1">
-    Your screener <br class="br-phone">speaks textbook.<br>
-    Your patients don&rsquo;t.
+    We built VLAP on the patients <br class="br-phone">every other tool gets wrong.<br>
+    That&rsquo;s why it works for everyone else.
   </h1>
   <div class="hero-left">
     <p class="hero-body reveal d2">
