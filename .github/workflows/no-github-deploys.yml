@@ -1,0 +1,79 @@
+# Required check: no GitHub-side deploy path may enter this repo.
+#
+# Enforces the DEPLOY RULE at the top of CLAUDE.md. Everything runs in AWS;
+# GitHub holds source code only and has no BAA. A GitHub runner must never hold
+# an AWS credential, assume an AWS role, push an artifact, or mutate
+# infrastructure.
+#
+# Fails the PR when a workflow it ADDS or EDITS contains any of:
+#
+#   * AWS credentials (AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY /
+#     AWS_SESSION_TOKEN from a secret, variable or literal; an AKIA key id)
+#   * OIDC role assumption (aws-actions/configure-aws-credentials,
+#     role-to-assume, aws sts assume-role, an id-token mint alongside AWS use)
+#   * an ECS / S3 / ECR deploy command, a container push, a CloudFront
+#     invalidation, or a kubectl / helm / terraform / sam / cdk mutation
+#   * a deploy key (ssh-agent actions, DEPLOY_KEY-shaped secrets, an inline
+#     private key)
+#   * a GitHub Environment on a job
+#
+# Read-only AWS calls (describe-*, list-*, get-*) are NOT findings: reading
+# state is not deploying. Comment lines are skipped, so the decommission notes
+# left behind in this directory do not trip their own guard. Deleting a
+# workflow is never a finding -- that is the fix.
+#
+# NO PATH FILTER, deliberately. This is a required status check, and GitHub
+# will not merge a PR whose required context never reported. It therefore runs
+# on every PR and exits in a couple of seconds when no workflow changed. It is
+# one job, under its own name, for the same reason Secret Scan is: a required
+# context has to keep reporting under the name branch protection knows.
+#
+# No secrets. No `id-token`. `contents: read` and nothing else -- this guard
+# would be self-violating if it needed a credential to run.
+
+name: No GitHub Deploy Paths
+
+on:
+  pull_request:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: no-github-deploys-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  no-github-deploys:
+    name: No GitHub Deploy Paths
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Need the merge base to tell which workflows this PR touched.
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install PyYAML
+        # The scanner parses workflow YAML to tell a deploy Environment apart
+        # from a workflow_dispatch input that happens to be named
+        # "environment". Without PyYAML it still runs, but skips those two
+        # structural checks -- so install it rather than let the guard quietly
+        # get weaker.
+        run: pip install --quiet pyyaml
+
+      - name: Scan workflows added or edited by this PR
+        if: github.event_name == 'pull_request'
+        run: |
+          python .github/scripts/check_no_github_deploys.py \
+            --changed "origin/${{ github.base_ref }}"
+
+      - name: Scan every workflow
+        if: github.event_name != 'pull_request'
+        run: python .github/scripts/check_no_github_deploys.py --all
