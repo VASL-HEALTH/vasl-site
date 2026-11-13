@@ -45,8 +45,6 @@ SOLUTIONS = [
      "VLAP and the platform inside the care you already deliver."),
     ("/bridge", "Vasl Bridge",
      "A text every day from ED discharge to the first visit."),
-    ("/for-schools", "Schools",
-     "Daily check-ins, peer support and coaching for K-12 districts."),
     ("/for-organizations", "Community Organizations",
      "The platform for youth-serving organizations."),
 ]
@@ -67,7 +65,6 @@ FOOTER_COLS = [
     ("Solutions", [
         ("/health-systems", "Health Plans &amp; Systems"),
         ("/bridge", "Vasl Bridge"),
-        ("/for-schools", "Schools"),
         ("/for-organizations", "Community Organizations"),
         ("/contact?subject=Pricing", "Talk to us about pricing"),
     ]),
@@ -81,7 +78,6 @@ FOOTER_COLS = [
     ]),
     ("Resources", [
         ("/glossary", "Glossary"),
-        ("/school-mental-health-rfp", "School Mental Health RFP Guide"),
         ("/dialect-bias-mental-health-screening", "Dialect Bias in Screening"),
         ("/hedis-behavioral-health-cultural-fit", "HEDIS &amp; Cultural Fit"),
         ("/for-families", "For Families"),
@@ -104,8 +100,7 @@ COPYRIGHT = "&copy; 2026 Vasl Health PBC. All rights reserved."
 ACTIVE_PLATFORM = {"platform.html"}
 ACTIVE_VLAP = {"vlap.html"}
 ACTIVE_SOLUTIONS = {
-    "health-systems.html", "bridge.html",
-    "for-schools.html", "for-organizations.html",
+    "health-systems.html", "bridge.html", "for-organizations.html",
 }
 ACTIVE_ABOUT = {"about.html", "team.html", "blog.html"}
 

@@ -27,7 +27,6 @@ OUT = SITE / "sitemap.xml"
 # the only signal priority actually carries.
 PRIORITY = {
     "index.html": ("1.0", "weekly"),
-    "for-schools.html": ("0.9", "monthly"),
     "health-systems.html": ("0.9", "monthly"),
     "for-organizations.html": ("0.9", "monthly"),
     "platform.html": ("0.9", "monthly"),
@@ -49,7 +48,6 @@ PRIORITY = {
     "infrastructure.html": ("0.6", "monthly"),
     "support.html": ("0.5", "monthly"),
     "accessibility.html": ("0.3", "yearly"),
-    "school-mental-health-rfp.html": ("0.7", "monthly"),
     "dialect-bias-mental-health-screening.html": ("0.7", "monthly"),
     "hedis-behavioral-health-cultural-fit.html": ("0.7", "monthly"),
     "glossary.html": ("0.6", "monthly"),

@@ -27,11 +27,6 @@ REWRITES = {
         "Culturally Grounded Youth Behavioral Health | Vasl Health",
         "Language infrastructure for Black, Brown, LGBTQ+, rural and Medicaid youth.",
     ),
-    "for-schools.html": (
-        "School-Based Mental Health Platform for Districts | Vasl",
-        "A tiered program for K-12 districts, peer support through a warm handoff "
-        "to licensed care, mapped to MTSS and staffed by people students recognize.",
-    ),
     "health-systems.html": (
         "Youth Behavioral Health for Health Plans & Systems | Vasl",
         "Reach and retain the adolescent and transition-age members standard programs "
@@ -169,12 +164,6 @@ REWRITES = {
         "the problem, what it looks like for Black, Latino, and LGBTQ+ youth.",
     ),
     # ---- SEO week 2: new pages ------------------------------------------------
-    "school-mental-health-rfp.html": (
-        "School Mental Health RFP Evaluation Guide | Vasl",
-        "What districts ask for in behavioral health RFPs, drawn from real published "
-        "solicitations, evaluation criteria and what a strong vendor answer looks "
-        "like.",
-    ),
     "dialect-bias-mental-health-screening.html": (
         "Dialect Bias in Mental Health Screening | Vasl",
         "Why the same screening score can mean different things across dialects, "

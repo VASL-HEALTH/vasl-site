@@ -19,18 +19,6 @@ dump, every entry earns its place with a reason someone would click it.
 
 LINKS = {
     # ---- Buyer pages: platform, vlap, ai-model, outcomes ---------------------
-    "for-schools.html": [
-        ("platform.html", "the Vasl platform",
-         "The path a student actually takes, from the first check-in text to a warm handoff."),
-        ("vlap.html", "how VLAP reads distress signals",
-         "The language layer behind every alert a counselor sees, what it flags and what it deliberately leaves alone."),
-        ("ai-model.html", "the model trained on youth vernacular",
-         "VLAP, and why standard clinical NLP misses the way your students actually talk about distress."),
-        ("outcomes.html", "pilot cohort outcomes and ROI",
-         "Retention, symptom change, and the budget case for your board and grants office."),
-        ("school-mental-health-rfp.html", "evaluating this against an RFP",
-         "The same ten criteria a district procurement office checks, and where Vasl's answer to each one lives."),
-    ],
     "health-systems.html": [
         ("platform.html", "the Vasl platform",
          "What happens after VLAP reads a reply, step by step, and who sees what."),
@@ -38,8 +26,6 @@ LINKS = {
          "How language analysis surfaces risk to a human reviewer without ever assigning a diagnosis."),
         ("ai-model.html", "VLAP's training approach",
          "Why a model trained on standard clinical text underperforms with the members you're trying to retain."),
-        ("outcomes.html", "engagement and retention data",
-         "30-day retention and symptom-change figures from pilot cohorts, benchmarked against digital health norms."),
         ("hedis-behavioral-health-cultural-fit.html", "how this connects to HEDIS measures",
          "Which behavioral health measures are most exposed to cultural and linguistic mismatch, and where engagement moves them."),
     ],
@@ -50,8 +36,6 @@ LINKS = {
          "The language layer that flags risk to a human who already knows the young person."),
         ("ai-model.html", "the model behind VLAP",
          "DeBERTa-v3 and the vocabulary work that lets it read AAVE and youth vernacular directly."),
-        ("outcomes.html", "outcomes across pilot cohorts",
-         "Retention and engagement figures, with the methodology behind each number."),
     ],
 
     # ---- Blog posts: single most relevant buyer page + vlap or ai-model ------
@@ -76,16 +60,14 @@ LINKS = {
          "Why cultural and linguistic fit, more than access, is what actually drives retention."),
     ],
     "blog-mental-health-equity-crisis.html": [
-        ("for-schools.html", "what districts can do about it",
-         "The tiered program built to close this gap inside a school's existing MTSS structure."),
         ("ai-model.html", "the model built to close the language gap",
          "VLAP's approach to the vocabulary and context problem this piece describes."),
         ("dialect-bias-mental-health-screening.html", "the measurement problem behind the equity gap",
          "Why standard screening instruments score the same distress differently across groups and what that requires of a model."),
     ],
     "blog-other-diagnosis.html": [
-        ("for-schools.html", "how this shows up in a school setting",
-         "Why counselors need a way to distinguish identity-based stress from pathology before it escalates."),
+        ("for-organizations.html", "how this shows up in a community setting",
+         "Why a program needs a way to distinguish identity-based stress from pathology before it escalates."),
         ("vlap.html", "how VLAP is built to avoid this",
          "The signal taxonomy designed to separate cultural expression from clinical risk."),
     ],
@@ -120,32 +102,20 @@ LINKS = {
          "How the language analysis layer works, in plain terms, for a non-technical reader."),
     ],
 
-    # ---- research.html <-> clinical-outcomes.html <-> outcomes.html ----------
+    # ---- research.html <-> clinical-outcomes.html ----------------------------
     "research.html": [
         ("clinical-outcomes.html", "clinical outcomes data",
-         "PHQ-8 change, retention, and escalation rates from pilot cohorts, with methodology."),
-        ("outcomes.html", "stakeholder and ROI outcomes",
-         "What the research translates into for districts, plans, and community partners."),
+         "The benchmark figures VLAP is measured on, each with the measure named."),
         ("about.html", "who reviews this research",
          "The clinical governance structure that reviews every claim before it's published."),
     ],
     "clinical-outcomes.html": [
         ("research.html", "the research base behind these numbers",
          "The peer-reviewed literature and active IRB study this data builds on."),
-        ("outcomes.html", "what these numbers mean for stakeholders",
-         "Cost and ROI implications of the retention and symptom data on this page."),
         ("vlap.html", "the signal layer behind the data",
          "How VLAP's detection informs the clinical escalation figures reported here."),
         ("hedis-behavioral-health-cultural-fit.html", "how these figures map to HEDIS measures",
-         "PHQ-8 and retention data, reframed against the specific behavioral health measures a payer reports on."),
-    ],
-    "outcomes.html": [
-        ("research.html", "the evidence base",
-         "The literature and ongoing validation study behind Vasl's clinical approach."),
-        ("clinical-outcomes.html", "the full clinical outcomes breakdown",
-         "PHQ-8 trajectories, retention checkpoints, and escalation methodology in detail."),
-        ("hedis-behavioral-health-cultural-fit.html", "what these numbers mean for a health plan's HEDIS scores",
-         "How the retention and engagement figures here connect to FUH, IET, FUM, and SSD."),
+         "The behavioral health measures most exposed to linguistic mismatch, named one by one."),
     ],
 
     # ---- technology.html <-> infrastructure.html <-> vlap.html ---------------
@@ -180,8 +150,8 @@ LINKS = {
 
     # ---- broader coverage: homepage, about, platform --------------------------
     "index.html": [
-        ("for-schools.html", "Vasl for K-12 districts",
-         "A tiered program mapped to MTSS, staffed by people students recognize."),
+        ("vlap.html", "VLAP, the engine",
+         "The language model every Vasl workflow runs on, and what it is measured against."),
         ("health-systems.html", "Vasl for health plans and systems",
          "Engagement built on cultural fit for the members standard outreach loses.",
          ("/bridge", "See Vasl Bridge →")),
@@ -218,18 +188,6 @@ LINKS = {
     ],
 
     # ---- new pages (workstream 2) ---------------------------------------------
-    "school-mental-health-rfp.html": [
-        ("for-schools.html", "Vasl's program for K-12 districts",
-         "The tiered model this checklist's criteria map to, if you want to see it end to end."),
-        ("vlap.html", "how the language layer works",
-         "What VLAP actually reads for, and what it deliberately never does."),
-        ("outcomes.html", "outcomes data with methodology",
-         "Retention and symptom-change figures, reported with the rigor an RFP evaluator would expect."),
-        ("contact.html", "talk to an implementation lead",
-         "A 45-minute conversation, not a sales pitch, bring your RFP and we'll answer it directly."),
-        ("glossary.html", "definitions for the acronyms in this checklist",
-         "MTSS, FERPA, HIPAA, and the rest of the terms an RFP evaluator will see, defined plainly."),
-    ],
     "dialect-bias-mental-health-screening.html": [
         ("vlap.html", "VLAP's signal taxonomy",
          "How the detection layer built for this problem is actually structured."),
@@ -243,10 +201,8 @@ LINKS = {
     "hedis-behavioral-health-cultural-fit.html": [
         ("health-systems.html", "Vasl for health plans",
          "How the engagement model described here fits into a plan's broader behavioral health strategy."),
-        ("outcomes.html", "engagement and retention data",
-         "The pilot-cohort figures referenced throughout this page, with full methodology."),
         ("clinical-outcomes.html", "the clinical outcomes detail",
-         "PHQ-8 trajectories and escalation rates behind the summary numbers here."),
+         "The benchmark figures behind the summary numbers here, each with its measure."),
         ("glossary.html", "definitions for FUH, IET, FUM, and SSD",
          "Plain-language definitions for every measure acronym used on this page."),
     ],
@@ -261,8 +217,6 @@ LINKS = {
          "The full explainer behind two of the definitions above."),
         ("hedis-behavioral-health-cultural-fit.html", "HEDIS, FUH, IET, and FUM, in full",
          "How the measures defined above connect to cultural and linguistic mismatch."),
-        ("school-mental-health-rfp.html", "MTSS, FERPA, and HIPAA in an RFP context",
-         "How several of the terms above show up as actual evaluation criteria in a district RFP."),
     ],
 }
 
