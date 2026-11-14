@@ -160,9 +160,8 @@ def jsonld_blocks(rel: str, title: str, desc: str, canonical: str) -> list:
                 "url": f"{ORIGIN}/",
                 "logo": f"{ORIGIN}/assets/mark-v-tile.svg",
                 "description": (
-                    "Vasl Health builds culturally grounded, clinically governed early "
-                    "detection and behavioral health support for Black, Latino, and "
-                    "first-generation youth ages 14 to 24."
+                    "Vasl Health PBC builds language intelligence for healthcare. "
+                    "VLAP, Vasl Bridge and Vasl Keep serve Medicaid plans and health systems."
                 ),
                 "email": "hello@vaslhealth.com",
                 "foundingLocation": {
@@ -192,8 +191,8 @@ def jsonld_blocks(rel: str, title: str, desc: str, canonical: str) -> list:
                 ],
                 "knowsAbout": [
                     "culturally responsive behavioral health",
-                    "youth mental health",
-                    "school-based mental health",
+                    "Medicaid member engagement",
+                    "follow-up after emergency department visits",
                     "behavioral health equity",
                     "natural language processing in mental health",
                 ],
