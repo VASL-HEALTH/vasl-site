@@ -275,6 +275,7 @@ mark{background:#e6d3b6;color:var(--ink);padding:0 2px;}
 .vh-legend span.q::before{background:#e6e0d4;}
 .vh-legend span.k::before{background:var(--clay-fill);}
 .vh-card .vh-b{margin:0 0 10px;font-size:14px;}
+.vh-card .vh-b.in{margin-left:auto;}
 .vh-card .vh-b.out{display:inline-block;}
 .vh-card-foot{border-top:1px solid var(--rule);margin-top:6px;padding-top:12px;font-size:12.5px;color:var(--green);}
 .vh-card-foot::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--clay);margin-right:8px;}

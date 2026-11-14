@@ -704,7 +704,7 @@ PATH_BLOCK = """<div class="vx-path">
 def security():
     commit = cols([
         ("", "<h3>Patient text stays with us</h3><p>VLAP reads patient text on Vasl infrastructure. No patient text goes to an outside AI company or a third-party model.</p>"),
-        ("is-clay", '<h3>HIPAA compliant</h3><p>Built for protected health information from the start. We sign a <a href="/baa">business associate agreement</a> with every partner.</p>'),
+        ("is-clay", '<h3>HIPAA compliant</h3><p>Built for protected health information from the start. We sign a <a href="/baa">business associate agreement</a> before any patient data is shared.</p>'),
         ("is-light", "<h3>Outbound texts carry no health information</h3><p>Bridge and Keep check-ins say nothing about a patient&rsquo;s health. Only the patient&rsquo;s reply carries it.</p>"),
         ("", "<h3>The clinician decides</h3><p>Non-device clinical decision support under the 21st Century Cures Act, Section 3060. VLAP shows its evidence and never acts on its own.</p>"),
     ], 2)
@@ -732,7 +732,7 @@ def security():
 def pilot():
     steps_ = numbered([
         ("Choose", "Pick the workflow", "Bridge from your emergency department, Keep for your members, or VLAP on text you already hold."),
-        ("Review", "Walk the data path", "Your security team reviews it with us, and we sign a business associate agreement."),
+        ("Review", "Walk the data path", "Your security team reviews it with us, and we sign a business associate agreement before any patient data is shared."),
         ("Run", "Run it with your team", "We staff Bridge with your team. Flags go to the clinicians and navigators you already have."),
         ("Compare", "Measure it", "VLAP runs beside the tool you use today, on your own held-out text. We run the comparison with you."),
     ])
