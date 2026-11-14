@@ -221,6 +221,71 @@ ENGINE = """<div class="vx-engine">
 </div>"""
 
 
+
+FLAG_CARD = """<div class="vh-flag">
+        <div class="vh-flag-top"><span>Care team &middot; Day 3 after discharge</span><i></i></div>
+        <h3>Isolation <span class="vh-chip">VLAP flag</span></h3>
+        <p>&ldquo;been staying in my room. <mark>ain&rsquo;t nobody checking for me</mark> anyway&rdquo;</p>
+        <div class="vh-flag-btns"><span>Review</span><span>Assign coach</span></div>
+      </div>"""
+
+PHONE = """<div class="vh-phone">
+        <div class="vh-phone-top">Vasl &middot; text message</div>
+        <div class="vh-day">Day 1</div>
+        <div class="vh-b out">Hey, it&rsquo;s Vasl. How are you doing today?</div>
+        <div class="vh-b in" style="max-width:40%">ok i guess</div>
+        <div class="vh-day">Day 3</div>
+        <div class="vh-b out">Checking in. How&rsquo;s today going?</div>
+        <div class="vh-b in">been staying in my room. ain&rsquo;t nobody checking for me anyway</div>
+      </div>"""
+
+KEEP_CARD = """<div class="vh-card">
+        <div class="vh-b out">Did you get your hours in this month?</div>
+        <div class="vh-b in">i work at my cousin shop but they pay cash, idk how to show that</div>
+        <div class="vh-card-foot">Reply sorted &middot; sent to the navigator queue</div>
+      </div>"""
+
+QUEUE = """<div class="vq">
+      <div class="vq-top"><span><b>Care team queue</b> &middot; example replies needing review</span><span>Sorted by signal</span></div>
+      <div class="vq-row h"><span>Patient</span><span>What they wrote</span><span>VLAP flag</span><span></span></div>
+      <div class="vq-row"><span>Patient A</span><span>been staying in my room. <mark>ain&rsquo;t nobody checking for me</mark> anyway</span><span><span class="vh-chip">Isolation</span></span><a href="/vlap">Review</a></div>
+      <div class="vq-row"><span>Patient B</span><span>lost the apartment so <mark>sleeping in my car</mark> til friday</span><span><span class="vh-chip">Housing</span></span><a href="/vlap">Review</a></div>
+      <div class="vq-row"><span>Patient C</span><span>did the meds today. <mark>been drinking more than usual</mark> tho</span><span><span class="vh-chip">Substance use</span></span><a href="/vlap">Review</a></div>
+    </div>"""
+
+
+def browser(img, label, alt, cap=""):
+    c = f'<p class="vb-cap">{cap}</p>' if cap else ""
+    return (f'<div class="vb"><div class="vb-top"><i></i><i></i><i></i><span>{label}</span></div>'
+            f'<img src="/assets/product/{img}" alt="{alt}" loading="lazy"></div>{c}')
+
+
+def band(img, html, pos="center"):
+    return (f'<section class="vband" style="background-image:url(/assets/people/{img});background-position:{pos}">'
+            f'<div class="vx-wrap"><p>{html}</p></div></section>')
+
+
+def band2(img1, img2, html, pos1="center", pos2="center"):
+    return (f'<section class="vband2"><div style="background-image:url(/assets/people/{img1});background-position:{pos1}"></div>'
+            f'<div style="background-image:url(/assets/people/{img2});background-position:{pos2}"></div>'
+            f'<div class="vx-wrap"><p>{html}</p></div></section>')
+
+
+def hero_photo(eyebrow, h1, lede, img, pos="center", extra=""):
+    lede_html = f'<p class="vx-lede">{lede}</p>' if lede else ""
+    return f"""<section class="vx-hero"><div class="vx-wrap vh-split-hero">
+  <div><p class="vx-eyebrow">{eyebrow}</p><h1>{h1}</h1>{lede_html}{extra}</div>
+  <div class="vp-photo" style="background-image:url(/assets/people/{img});background-position:{pos}"></div>
+</div></section>"""
+
+
+REC_ALT = "Vasl clinician portal: a member record showing VLAP signals with the exact words behind each one, and social needs found in her notes"
+
+
+def photo(img, inner="", pos="center"):
+    return f'<div class="vp-photo" style="background-image:url(/assets/{img});background-position:{pos}">{inner}</div>'
+
+
 # ---------------------------------------------------------------------------
 # Pages
 # ---------------------------------------------------------------------------
@@ -231,23 +296,7 @@ def home():
       <div class="vx-actions"><a class="vh-pill" href="/contact">Talk to us about a pilot</a><a class="vh-arrow" href="/vlap">How VLAP works &rarr;</a></div>
       <p class="vh-small">Our own model, our own weights. No patient text goes to an outside AI company.</p>
     </div>"""
-    stage = """<div class="vh-stage" aria-label="A Vasl Bridge text thread and the flag the care team sees">
-      <div class="vh-phone">
-        <div class="vh-phone-top">Vasl &middot; text message</div>
-        <div class="vh-day">Day 1</div>
-        <div class="vh-b out">Hey, it&rsquo;s Vasl. How are you doing today?</div>
-        <div class="vh-b in" style="max-width:40%">ok i guess</div>
-        <div class="vh-day">Day 3</div>
-        <div class="vh-b out">Checking in. How&rsquo;s today going?</div>
-        <div class="vh-b in">been staying in my room. ain&rsquo;t nobody checking for me anyway</div>
-      </div>
-      <div class="vh-flag">
-        <div class="vh-flag-top"><span>Care team &middot; Day 3 after discharge</span><i></i></div>
-        <h3>Isolation <span class="vh-chip">VLAP flag</span></h3>
-        <p>&ldquo;been staying in my room. <mark>ain&rsquo;t nobody checking for me</mark> anyway&rdquo;</p>
-        <div class="vh-flag-btns"><span>Review</span><span>Assign coach</span></div>
-      </div>
-    </div>"""
+    stage = photo("bridge-hero.jpg", PHONE + FLAG_CARD, "42% 50%")
     stats = """<div class="vh-band"><div class="vx-wrap vh-stats">
       <div>0.83<small>vs 0.65</small><p>Suicide-attempt severity, against MIT&rsquo;s Suicide Risk Lexicon (Low, Ghosh et al., 2026)</p></div>
       <div>0.97<small>vs 0.83</small><p>Substance use in clinical notes, against a keyword rule (n2c2 2022 SHAC test, 518 notes)</p></div>
@@ -295,12 +344,17 @@ def home():
       </div>
     </div></div>"""
     dark = """<section class="vh-dark"><div class="vx-wrap">
-      <h2>Two Black founders. Nobody built the instrument because nobody in the room spoke the language. <em>We do.</em></h2>
+      <h2>Nobody built the instrument because nobody in the room spoke the language. <em>We do.</em></h2>
       <a class="vh-pill is-light" href="/contact">Talk to us about a pilot</a>
     </div></section>"""
     body = "\n".join([
         f'<section><div class="vx-wrap vh-hero">{hero_l}{stage}</div></section>',
-        stats, layer,
+        stats,
+        sec("The product", "What a clinician sees. <em>The signal, the exact words, and the social needs in her notes.</em>",
+            browser("clinician-record.jpg", "clinician.gotovasl.com &middot; member record", REC_ALT,
+                    "The clinician portal. Every signal carries the sentence behind it, and social needs come from her own notes.")),
+        layer,
+        band2("black-boy-joy.jpg", "woman-texting-outdoors.jpg", "Current tools are least accurate for Black, Brown, LGBTQ+, rural and Medicaid patients. <em>VLAP was built on them first.</em>", "center 35%", "60% center"),
         f'<section><div class="vx-wrap">{bridge}{keep}</div></section>',
         engine, dark,
     ])
@@ -332,6 +386,8 @@ def vlap():
     body = "\n".join([
         hero("VLAP &middot; Vasl Language Analysis Platform",
              "Our own language engine. <em>Licensed to healthcare.</em>", STATEMENT + " VLAP is that engine.", facts),
+        sec("In your workflow", "What a clinician sees. <em>A named signal, with the words behind it.</em>",
+            browser("clinician-signals.jpg", "clinician.gotovasl.com &middot; signals and social needs", REC_ALT), "is-light"),
         sec("How VLAP works", "VLAP flags the signal and shows the words. <em>A clinician reviews and decides.</em>", how),
         sec("Taxonomy v2.0", "55 signals. <em>Seven dimensions.</em>", bars, "is-light"),
         sec("Evidence", "Held-out tests. <em>Against the tools in use today.</em>", RESULTS_TABLE),
@@ -346,7 +402,6 @@ def vlap():
 
 
 def bridge():
-    dots = '<div class="vx-dots" aria-hidden="true">' + '<i class="on"></i>' * 31 + "<i></i>" * 69 + "</div>"
     top = f"""<section class="vx-hero">
   <div class="vx-wrap vx-split">
     <div>
@@ -355,7 +410,7 @@ def bridge():
       <p class="vx-note">Young people on Medicaid. Hoffmann et al., Pediatrics 2023.</p>
       <div class="vx-actions">{PILOT}</div>
     </div>
-    {dots}
+    <div class="vh-stage">{PHONE}{FLAG_CARD}</div>
   </div>
 </section>"""
     how = numbered([
@@ -378,6 +433,10 @@ def bridge():
     body = "\n".join([
         top,
         sec("How Bridge works", "A daily text from discharge to the first visit. <em>VLAP reads every reply.</em>", how),
+        sec("What the care team sees", "Her words, every day. <em>Not a score.</em>",
+            browser("bridge-record.jpg", "clinician.gotovasl.com &middot; Bridge member record",
+                    "Vasl clinician portal: a Bridge member's self-reported mood by day and her reply notes in her own words"), "is-light"),
+        band("young-man-texting.jpg", "A daily text from discharge, no app. <em>Silence is a signal too.</em>", "center 30%"),
         sec("The difference", "Everyone else sends reminders. <em>We understand the replies.</em>", diff, "is-clay"),
         sec("Status", "Built and run live. <em>10 of 10 steps passed.</em>", f'<div class="vx-flow" style="border:0;padding:0">{status}</div>'),
         sec("Pricing", "Priced on enrollment and completed visits. <em>Vasl bills the partner.</em>", pricing),
@@ -405,12 +464,15 @@ def keep():
         ("", '<span class="vx-mono">Keep with a VLAP license</span><div class="vx-price">$0.80</div><p>per covered member per month, bundled with a VLAP license.</p>'),
     ], 2) + '<p class="vx-foot-note">Vasl bills the partner. Vasl never bills Medicaid.</p>'
     body = "\n".join([
-        hero("Vasl Keep",
-             "Eligible members keep the coverage they qualify for. <em>Every reply sorted for a navigator.</em>",
-             "Keep supports Medicaid plans under the community engagement rule of 80 hours a month. "
-             "Members answer by text. Each reply is sorted into a category. Navigators see who needs help, "
-             "and the plan sees the totals.", status),
+        f"""<section class="vx-hero"><div class="vx-wrap vp-split">
+  <div><p class="vx-eyebrow">Vasl Keep</p>
+    <h1>Eligible members keep the coverage they qualify for. <em>Every reply sorted for a navigator.</em></h1>
+    <p class="vx-lede">Keep supports Medicaid plans under the community engagement rule of 80 hours a month. Members answer by text. Each reply is sorted into a category. Navigators see who needs help, and the plan sees the totals.</p>
+    {status}</div>
+  <div class="vp-photo" style="background-image:url(/assets/people/rural-porch-couple.jpg);background-position:center 40%">{KEEP_CARD}</div>
+</div></section>""",
         sec("How Keep works", "One text in. <em>One clear next step out.</em>", how, "is-clay"),
+        band("kentucky-farm-road.jpg", "Members answer by text. <em>No app, no portal login.</em>", "center 60%"),
         sec("Reply categories", "Seven reply categories. <em>Plus &ldquo;no reply&rdquo;.</em>", cats),
         sec("Status", "Two live end-to-end runs. <em>9 of 9 steps.</em>", status2, "is-clay"),
         sec("Pricing", "Keep on its own, <em>or bundled with VLAP.</em>", pricing),
@@ -452,10 +514,14 @@ def health_systems():
     </table>
     <p class="vx-foot-note">Vasl bills the partner. Vasl never bills Medicaid.</p>"""
     body = "\n".join([
-        hero("Health plans and systems",
+        hero_photo("Health plans and systems",
              "Clinical decision support inside the workflows you run. <em>No new screen to learn.</em>",
-             STATEMENT + " Medicaid plans and health systems are the first to buy it."),
+             STATEMENT + " Medicaid plans and health systems are the first to buy it.", "latina-rising.jpg", "center 30%"),
         sec("What VLAP reads", "The text you already have. <em>Flagged where your clinicians already work.</em>", io),
+        sec("For the plan", "Social needs, counted across your members.",
+            browser("org-admin-social-needs.jpg", "admin.gotovasl.com &middot; social needs screening",
+                    "Vasl org admin portal: social needs screening counts for housing, employment, alcohol, drug and tobacco use",
+                    "Counts come from notes in the last 90 days. Small counts are withheld."), "is-light"),
         sec("Built workflows", "Start with a workflow. <em>Keep the engine.</em>", flows, "is-clay"),
         sec("Pricing", "Simple units. <em>Priced against measures you are already scored on.</em>", pricing),
         next_step("Talk to us about a pilot. <em>Bridge, Keep or a VLAP license.</em>",
@@ -541,14 +607,14 @@ def team():
     advisor = """<div class="vx-people"><div class="vx-person"><h3>Panagis Galiatsatos, MD, MHS</h3>
       <span class="vx-mono">Senior Medical Advisor &middot; Johns Hopkins</span></div></div>"""
     body = "\n".join([
-        hero("Team", "Two Black founders. Nobody built the instrument because nobody in the room spoke the language. <em>We do.</em>"),
+        hero("Team", "Nobody built the instrument because nobody in the room spoke the language. <em>We do.</em>"),
         sec("Leadership", "The people building Vasl.", people, "is-light"),
         sec("Medical advisor", "Clinical guidance.", advisor, "is-light"),
         next_step("Building with us? <em>Talk to us.</em>"),
     ])
     return page("team.html", "Team | Vasl Health",
-                "Vasl Health was founded by two Black founders building language intelligence for healthcare. "
-                "Meet the leadership team and our senior medical advisor.", body)
+                "Meet the people building Vasl Health, language intelligence infrastructure for healthcare, "
+                "and our senior medical advisor from Johns Hopkins.", body)
 
 
 def about():
@@ -564,10 +630,11 @@ def about():
         ("is-light", "<h3>We bill the partner</h3><p>Vasl never bills Medicaid.</p>"),
     ]) + '<p class="vx-foot-note">Vasl Health PBC is a Delaware public benefit corporation. HIPAA compliant.</p>'
     body = "\n".join([
-        hero("About Vasl Health",
+        hero_photo("About Vasl Health",
              "Vasl Health is building the language intelligence infrastructure for healthcare. <em>VLAP is the engine.</em>",
-             STATEMENT),
+             STATEMENT, "black-girl-magic.jpg", "center 30%"),
         sec("What we build", "VLAP is the platform. Healthcare is the market. <em>Bridge and Keep are the beginning.</em>", build),
+        band("rural-farm-family.jpg", "We built VLAP on the patients <em>every other tool gets wrong.</em>", "center 35%"),
         sec("What we hold to", "Three commitments.", hold, "is-clay"),
         sec("More about Vasl", "Who we are and how we work.",
             '<div class="vx-actions" style="margin-top:0"><a class="vx-link" href="/team">Team</a><a class="vx-link" href="/technology">Technology</a><a class="vx-link" href="/security">Security</a><a class="vx-link" href="/research">Research</a><a class="vx-link" href="/blog">Blog</a></div>', "is-light"),
@@ -753,8 +820,8 @@ def pilot():
     </table>
     <p class="vx-foot-note">Vasl bills the partner. Vasl never bills Medicaid.</p>"""
     body = "\n".join([
-        hero("How a pilot works", "Start with one workflow. <em>Measure it on your own patients.</em>",
-             "A pilot runs Bridge, Keep or VLAP with your team, on your patients&rsquo; own text, against the tool you use today."),
+        hero_photo("How a pilot works", "Start with one workflow. <em>Measure it on your own patients.</em>",
+             "A pilot runs Bridge, Keep or VLAP with your team, on your patients&rsquo; own text, against the tool you use today.", "rural-fence-sunrise.jpg", "center 30%"),
         sec("Four steps", "From first call to a result you can read.", steps_),
         sec("What a pilot measures", "Each pilot is scored on something you already track.", measures, "is-clay"),
         sec("Pricing", "Simple units. <em>Priced against measures you are already scored on.</em>", pricing),
