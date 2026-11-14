@@ -153,7 +153,7 @@ resource "aws_codebuild_project" "site_build" {
 # smoke test, and it still runs inside AWS after the approval.
 resource "aws_codebuild_project" "site_deploy" {
   name         = "vasl-site-deploy"
-  description  = "Publishes the approved artifact to s3://vasl-marketing-site, invalidates CloudFront, smoke-tests the result."
+  description  = "Publishes the built artifact to s3://vasl-marketing-site, invalidates CloudFront, smoke-tests the result."
   service_role = aws_iam_role.deploy.arn
 
   artifacts {

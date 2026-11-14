@@ -1,7 +1,9 @@
 # The gotovasl.com deploy pipeline. Builds from `main`, runs inside AWS, and
-# cannot reach the live site until Rodney approves it.
+# publishes with no human stop -- ruling, Rodney 2026-11-14. The build is the
+# gate: a blocking check in buildspec.yml fails Build, and Deploy is then
+# unreachable.
 #
-#   Source (S3: main's bundle) -> Build (CodeBuild) -> Approve -> Deploy (S3 + CloudFront)
+#   Source (S3: main's bundle) -> Build (CodeBuild) -> Deploy (S3 + CloudFront)
 #
 # ============================================================================
 # WHAT THE REAL DEPLOY TARGET IS, AND HOW THAT WAS ESTABLISHED
@@ -70,10 +72,12 @@
 # WHAT THIS DOES NOT DO
 # ============================================================================
 #
-# IT IS NOT APPLIED, and no AWS resource was created while writing it. IAM
-# roots are applied by hand under `rodney-admin`, never from a session or from
-# CI. This directory is the code record; README.md carries the plan and apply
-# commands and the expected resource count.
+# IT IS APPLIED. It was applied on 2026-11-14 under `rodney-admin` and the
+# pipeline is live; state is `vasl-site/site-pipeline/terraform.tfstate` in
+# `vasl-terraform-state`. This comment used to say the opposite, which was true
+# when written and became false at the first apply -- a plan run against the
+# stale sentence stops on the correct plan. IAM roots are still applied by hand
+# under `rodney-admin`, never from a session or from CI.
 #
 # IT DOES NOT MANAGE `vasl-marketing-site` OR THE DISTRIBUTION. Both belong to
 # VASL-PLATFORM's `static-sites` state. This root only grants itself narrow
@@ -135,7 +139,4 @@ locals {
   site_bucket     = "vasl-marketing-site"
   distribution_id = "E11DM7B5W2KRCQ"
 
-  #: The ONLY principal that may approve a site deploy. Ruling,
-  #: Rodney 2026-11-14: his approval sits on the deploy, not on the merge.
-  approver_arn = "arn:aws:iam::558215002439:user/rodney-admin"
 }

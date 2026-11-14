@@ -150,7 +150,7 @@ resource "aws_iam_role_policy" "codebuild" {
 
 resource "aws_iam_role" "deploy" {
   name               = "vasl-site-deploy"
-  description        = "Publishes the approved artifact to the live site. Reachable only through the pipeline's Deploy stage, which is behind the manual approval."
+  description        = "Publishes the built artifact to the live site. Reachable only through the pipeline's Deploy stage, which runs only after Build succeeds."
   assume_role_policy = data.aws_iam_policy_document.codebuild_assume.json
 }
 
@@ -227,61 +227,23 @@ resource "aws_iam_role_policy" "deploy" {
   policy = data.aws_iam_policy_document.deploy.json
 }
 
-# --------------------------------------------------------- VESTIGIAL: READ ME
+# ------------------------------------------- WHAT USED TO BE THE GATE, REMOVED
 
-# THIS POLICY NO LONGER GATES ANYTHING, AND IS LEFT HERE DELIBERATELY.
+# THE APPROVAL POLICY IS GONE, not merely unused.
 #
-# Ruling, Rodney 2026-11-14 (superseding the earlier ruling the same day): the
-# marketing site auto-deploys and the Approve stage has been removed from
-# pipeline.tf. The resource below names
-# `<pipeline>/Approve/RodneyApprovesTheSite`, a stage and action that no longer
-# exist, so the grant permits an operation that cannot be performed. It is inert
-# rather than dangerous -- there is no approval left to give.
+# `vasl-approve-site-deploy` granted `codepipeline:PutApprovalResult` on
+# `<pipeline>/Approve/RodneyApprovesTheSite` and was attached to rodney-admin.
+# With the Approve stage removed there is no action to approve, so the grant
+# permitted an operation that could not be performed. It is deleted along with
+# its user attachment rather than left inert: dead IAM is how somebody later
+# mistakes a corpse for a live control, and a policy named "approve site
+# deploy" is an unusually convincing corpse.
 #
-# IT IS KEPT IN THIS CHANGE ONLY SO THE PLAN STAYS WHAT WAS PREDICTED: the
-# stage removal alone. Deleting the policy and its user attachment is a separate,
-# cleaner change and should be made -- it is two destroys, and leaving dead IAM
-# lying about is how somebody later mistakes it for a live control.
+# Keeping it would also have cost something concrete. Its document interpolated
+# `aws_codepipeline.site.name`, so Terraform deferred the data source and
+# planned the policy as `policy -> (known after apply)` -- a second change whose
+# content the plan could not show, on the one apply where every line should be
+# readable in advance.
 #
-# WHEN IT GOES, THE GATE DOES NOT GO WITH IT. The gate is now buildspec.yml's
-# blocking checks plus the build/deploy role split above, neither of which this
-# policy touches.
-data "aws_iam_policy_document" "approve_site_deploy" {
-  statement {
-    sid     = "ApproveTheSiteDeploy"
-    effect  = "Allow"
-    actions = ["codepipeline:PutApprovalResult"]
-    resources = [
-      "arn:aws:codepipeline:${local.region}:${local.account}:${aws_codepipeline.site.name}/Approve/RodneyApprovesTheSite",
-    ]
-  }
-
-  statement {
-    sid    = "AndSeeWhatHeIsApproving"
-    effect = "Allow"
-    actions = [
-      "codepipeline:GetPipeline",
-      "codepipeline:GetPipelineState",
-      "codepipeline:GetPipelineExecution",
-      "codepipeline:ListPipelineExecutions",
-      "codepipeline:ListActionExecutions",
-    ]
-    resources = [
-      "arn:aws:codepipeline:${local.region}:${local.account}:${aws_codepipeline.site.name}",
-    ]
-  }
-}
-
-resource "aws_iam_policy" "approve_site_deploy" {
-  name        = "vasl-approve-site-deploy"
-  description = "The only principal holding this may approve a deploy of gotovasl.com."
-  policy      = data.aws_iam_policy_document.approve_site_deploy.json
-}
-
-resource "aws_iam_user_policy_attachment" "rodney_approves" {
-  # The user half of local.approver_arn. Written out rather than parsed from
-  # the ARN so a reader does not have to evaluate a split() to learn who can
-  # ship the site.
-  user       = "rodney-admin"
-  policy_arn = aws_iam_policy.approve_site_deploy.arn
-}
+# THE GATE DID NOT GO WITH IT. It is buildspec.yml's blocking checks plus the
+# build/deploy role split above.

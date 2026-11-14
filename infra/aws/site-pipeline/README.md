@@ -66,8 +66,16 @@ and that workflow exist.
 
 Not a person. Four things, in order:
 
-1. **`main`'s required checks.** Nothing reaches the bundle that did not pass
-   them, because CI only publishes the bundle on a push to `main`.
+1. **`main`'s branch protection — but read what it actually covers.** The
+   required contexts are *No GitHub Deploy Paths*, *CodeQL*, *Analyze
+   (actions)* and *Analyze (python)*, and `required_approving_review_count` is
+   **0**. **None of them inspects `site/`, and no human review is required.**
+   `.github/workflows/seo-check.yml` would, but its push and `pull_request`
+   triggers were removed on 2026-10-13 and it is `workflow_dispatch:` only. So
+   this line is about *provenance*, not content: `enforce_admins` is on and
+   force-push and deletion are blocked, so the bundle is genuinely whatever is
+   on `main`. It is not a content gate, and listing it as one would inflate the
+   apparent margin exactly where the human was removed.
 2. **The blocking checks in `buildspec.yml`.** These fail the Build stage, and
    the Deploy stage cannot run without Build's output artifact.
 3. **Separate roles.** `vasl-site-build` has CloudWatch Logs and the artifact
@@ -115,15 +123,22 @@ AWS_PROFILE=rodney-admin terraform plan -out site-pipeline.tfplan
 AWS_PROFILE=rodney-admin terraform apply site-pipeline.tfplan
 ```
 
-**Expected plan: 16 to add, 0 to change, 0 to destroy.** Anything else is
-drift — stop and read it. The 16: the artifact bucket and its four settings
-(public access block, encryption, versioning, lifecycle), the two CodeBuild
-projects, the pipeline, three roles with an inline policy each, and the
-(now-vestigial) approval policy and its attachment to `rodney-admin`.
-
-`terraform fmt`: clean. `terraform validate`: **Success** (Terraform v1.15.8,
-`init -backend=false`), 2026-11-13. State goes to
+**The stack is applied.** The first apply — 16 to add — happened on
+2026-11-14: the artifact bucket and its four settings (public access block,
+encryption, versioning, lifecycle), the two CodeBuild projects, the pipeline,
+three roles with an inline policy each, and the approval policy with its
+attachment to `rodney-admin`. State is
 `vasl-site/site-pipeline/terraform.tfstate` in `vasl-terraform-state`.
+
+**For the auto-deploy change the measured plan is 0 to add, 1 to change, 2 to
+destroy.** The one change is `aws_codepipeline.site` updated **in place** —
+removing a stage is not a replacement, though Terraform renders it as a
+re-index (`~ name = "Approve" -> "Deploy"`) which reads more alarmingly than it
+is. The two destroys are `aws_iam_policy.approve_site_deploy` and
+`aws_iam_user_policy_attachment.rodney_approves`, which granted approval of a
+stage that no longer exists. **Anything else is drift — stop and read it.**
+
+`terraform fmt`: clean. `terraform validate`: **Success** (Terraform v1.15.8).
 
 ## Prove it before trusting it
 
@@ -138,17 +153,17 @@ None of this can be done from a session:
 3. **Read the build log.** It prints the
    commit, the page count, the file count and the byte count. 53 HTML pages is
    what `main` has today (`find site -name '*.html' | wc -l`, 2026-11-13).
-4. **Two build checks are ADVISORY and should not stay that way.**
-   `tools/seo_inject.py --check` and `tools/gen_sitemap.py --check` both FAIL
-   on `main` today — measured 2026-11-13 on `f607253`: 2 pages with an
-   out-of-date head layer, and a stale `sitemap.xml`. Making them blocking
-   would mean a pipeline that can never deploy at all, and
-   fixing them means regenerating files under `site/`, which the change that
-   introduced this pipeline was scoped not to touch. So they print and do not
-   fail. Run `python3 tools/seo_inject.py` and `python3 tools/gen_sitemap.py`,
-   commit the result, then delete the `|| echo ...` tails in `buildspec.yml`.
-   `tools/internal_links.py --check` and `tools/seo_validate.py` pass today and
-   are already blocking.
+4. **All eight build checks block, and that is now the whole gate.** The two
+   that were advisory — `tools/seo_inject.py --check` and
+   `tools/gen_sitemap.py --check` — had their `|| echo` tails removed by the
+   November 2026 rebuild (`dd494e3`) and now fail the build like the rest.
+   Measured on `7e4c4fc`: all eight exit 0, including `seo_inject` ("SEO head
+   layer is current") and `gen_sitemap` ("sitemap.xml is current (26 URLs)").
+   The blocking set is `build_pages`, `chrome_inject`, `retire_pages`,
+   `check_forms`, `internal_links`, `seo_validate`, `seo_inject` and
+   `gen_sitemap` — eight, not the two this file used to name. Restoring a
+   `|| echo` tail to any of them removes a check from the only gate the deploy
+   has.
 
 ## There is no deploy path until this is applied
 
@@ -158,5 +173,5 @@ directory existed) and its push trigger had already been removed on
 CloudFront invalidation from a laptop. This pipeline replaces that, and **until
 somebody applies it, the repo has no working deploy path at all.** That is the
 intended end state of the ruling that put this here — nothing ships without a
-deliberate, reviewed merge to `main` — but it should not come as a surprise to
+deliberate merge to `main` — but it should not come as a surprise to
 whoever next tries to publish a page.

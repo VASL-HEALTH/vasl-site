@@ -28,7 +28,10 @@ phases:
       # before that is irreversible.
       - test -f site/index.html
       - test -f site/404.html
-      - test "$(find site -name '*.html' | wc -l)" -ge 10
+      # Raised from 10 to 45 with the approval stage's removal -- see the note
+      # in buildspec.yml. This is the last check before `aws s3 sync --delete`
+      # touches the live bucket.
+      - test "$(find site -name '*.html' | wc -l)" -ge 45
 
   build:
     commands:
