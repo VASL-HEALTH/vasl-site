@@ -7,8 +7,8 @@ s = P.read_text(encoding="utf-8")
 
 OLD_DESC = ("Vasl's language layer, 47 culturally specific distress signals across coded language, "
             "AAVE, and youth vernacular, surfaced to humans, never used to diagnose.")
-NEW_DESC = ("VLAP is Vasl's own language model. It reads the words patients actually use and flags "
-            "55 signals across seven dimensions, each with the words behind it. It never diagnoses.")
+NEW_DESC = ("VLAP, Vasl's own language model, reads the words patients actually use and flags "
+            "55 signals across seven dimensions, each with the words behind it. Never a diagnosis.")
 
 PAIRS = [
     # meta, title, og, twitter (count-checked below)

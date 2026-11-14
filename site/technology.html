@@ -1044,7 +1044,7 @@
 
     <div class="reveal d1" style="padding:32px 0;border-bottom:1px solid var(--chalk, rgba(28,28,28,0.12));">
       <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--clay);margin-bottom:10px;">What VLAP reads</div>
-      <p style="font-size:16px;font-weight:300;line-height:1.7;color:var(--ink-70, rgba(28,28,28,0.7));">VLAP reads patient messages, text replies, clinician notes and scribe text: replies to Vasl Bridge texts, and notes over HL7 FHIR R4 from Epic, Cerner and athenahealth. It flags 55 signals across seven dimensions (Taxonomy v2.0), from behavioral health risk to substance use and social needs: patterns like pre-disclosure minimization, withdrawal, and escalating distress, expressed the way patients actually express them.</p>
+      <p style="font-size:16px;font-weight:300;line-height:1.7;color:var(--ink-70, rgba(28,28,28,0.7));">VLAP reads patient messages, text replies, clinician notes and scribe text: replies to Vasl Bridge and Vasl Keep texts, and notes over HL7 FHIR R4 from Epic, Cerner and athenahealth. It flags 55 signals across seven dimensions (Taxonomy v2.0), from behavioral health risk to substance use and social needs: patterns like pre-disclosure minimization, withdrawal, and escalating distress, expressed the way patients actually express them.</p>
     </div>
 
     <div class="reveal d2" style="padding:32px 0;border-bottom:1px solid var(--chalk, rgba(28,28,28,0.12));">
@@ -1217,7 +1217,7 @@
           <div class="sig-card-head">
             <span class="sig-code">HOP-01</span>
             <span class="sig-label">Absolute futurity negation</span>
-            <span class="sig-risk risk-high">High</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;There's no point anymore&rdquo;</div>
@@ -1230,7 +1230,7 @@
           <div class="sig-card-head">
             <span class="sig-code">HOP-02</span>
             <span class="sig-label">Future self-erasure</span>
-            <span class="sig-risk risk-mod">Moderate</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;I won't be here when that happens&rdquo;</div>
@@ -1243,7 +1243,7 @@
           <div class="sig-card-head">
             <span class="sig-code">HOP-03</span>
             <span class="sig-label">AAVE futility construction</span>
-            <span class="sig-risk risk-high">High</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;Can't keep doing this no more fr&rdquo;</div>
@@ -1251,13 +1251,13 @@
           <div class="sig-ex">&ldquo;I'm done fr fr&rdquo;</div>
           <div class="sig-ex">&ldquo;This ain't it no more&rdquo;</div>
           </div>
-          <p class="sig-note">CRITICAL, highest false negative rate in generic NLP models. The intensifier 'fr' (for real) and double negation construction 'no more' are systematic misclassification sources. Generic models return 'frustration' or 'venting'. VLAP training data includes 340+ AAVE futility constructions. This single signal accounts for the largest share of VLAP's sensitivity advantage over baseline.</p>
+          <p class="sig-note">Highest false negative rate in generic NLP models. The intensifier 'fr' (for real) and double negation construction 'no more' are systematic misclassification sources. Generic models return 'frustration' or 'venting'. This is one of the clearest gaps between VLAP and generic models.</p>
         </div>
         <div class="sig-card reveal">
           <div class="sig-card-head">
             <span class="sig-code">HOP-04</span>
             <span class="sig-label">Coded exhaustion</span>
-            <span class="sig-risk risk-var">Variable</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;I'm just so tired&rdquo;</div>
@@ -1270,7 +1270,7 @@
           <div class="sig-card-head">
             <span class="sig-code">HOP-05</span>
             <span class="sig-label">Temporal foreclosure</span>
-            <span class="sig-risk risk-low">Low</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;I used to care about that stuff&rdquo;</div>
@@ -1283,7 +1283,7 @@
           <div class="sig-card-head">
             <span class="sig-code">HOP-06</span>
             <span class="sig-label">Third-person self-distancing</span>
-            <span class="sig-risk risk-mod">Moderate</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;I was the kind of person who used to...&rdquo;</div>
@@ -1296,7 +1296,7 @@
           <div class="sig-card-head">
             <span class="sig-code">HOP-07</span>
             <span class="sig-label">Burden narrative</span>
-            <span class="sig-risk risk-high">High</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;Everyone would honestly be better off&rdquo;</div>
@@ -1310,7 +1310,7 @@
           <div class="sig-card-head">
             <span class="sig-code">HOP-08</span>
             <span class="sig-label">Queer futility narrative</span>
-            <span class="sig-risk risk-high">High</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;It doesn't get better for people like me&rdquo;</div>
@@ -1323,7 +1323,7 @@
           <div class="sig-card-head">
             <span class="sig-code">HOP-09</span>
             <span class="sig-label">Immigrant & first-gen foreclosure</span>
-            <span class="sig-risk risk-mod">Moderate</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;All that sacrifice and for what&rdquo;</div>
@@ -1351,7 +1351,7 @@
           <div class="sig-card-head">
             <span class="sig-code">SHA-01</span>
             <span class="sig-label">Explicit suicidal ideation</span>
-            <span class="sig-risk risk-high">High</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;I want to kill myself&rdquo;</div>
@@ -1364,20 +1364,20 @@
           <div class="sig-card-head">
             <span class="sig-code">SHA-02</span>
             <span class="sig-label">Unaliving and derivatives</span>
-            <span class="sig-risk risk-high">High</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;Been thinking about unaliving&rdquo;</div>
           <div class="sig-ex">&ldquo;I want to unalive myself honestly&rdquo;</div>
           <div class="sig-ex">&ldquo;Thought about unaliving last night&rdquo;</div>
           </div>
-          <p class="sig-note">CRITICAL, euphemism developed explicitly to evade content moderation on TikTok, Instagram, and other platforms. First documented in widespread use approximately 2020. Most generic NLP models trained before 2022 do not have 'unaliving' in clinical context in training data. VLAP's training data includes 180+ documented uses with clinical annotation. This is one of the clearest demonstrations of generic model failure and VLAP's advantage.</p>
+          <p class="sig-note">Euphemism developed explicitly to evade content moderation on TikTok, Instagram, and other platforms. First documented in widespread use approximately 2020. Most generic NLP models trained before 2022 do not have 'unaliving' in clinical context in training data. VLAP's training data includes documented uses with clinical annotation.</p>
         </div>
         <div class="sig-card reveal">
           <div class="sig-card-head">
             <span class="sig-code">SHA-03</span>
             <span class="sig-label">Sleep-death conflation</span>
-            <span class="sig-risk risk-mod">Moderate</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;I just want to go to sleep and not wake up&rdquo;</div>
@@ -1390,7 +1390,7 @@
           <div class="sig-card-head">
             <span class="sig-code">SHA-04</span>
             <span class="sig-label">Fantasy of absence</span>
-            <span class="sig-risk risk-mod">Moderate</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;Imagine if I just wasn't here anymore&rdquo;</div>
@@ -1403,20 +1403,20 @@
           <div class="sig-card-head">
             <span class="sig-code">SHA-05</span>
             <span class="sig-label">Method inquiry with minimization wrapper</span>
-            <span class="sig-risk risk-high">High</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;I was just curious, like how many pills would it actually take&rdquo;</div>
           <div class="sig-ex">&ldquo;Not that I'd do it but what does it feel like when...&rdquo;</div>
           <div class="sig-ex">&ldquo;Just wondering what happens if someone...&rdquo;</div>
           </div>
-          <p class="sig-note">CRITICAL, the minimization wrapper ('just wondering', 'not that I'd do it') is the disclosure suppression mechanism, not evidence of low risk. Generic models weight the minimization wrapper and reduce risk classification. VLAP is trained to detect the method inquiry independent of the wrapper. This signal should always trigger human review regardless of stated intent.</p>
+          <p class="sig-note">The minimization wrapper ('just wondering', 'not that I'd do it') is the disclosure suppression mechanism, not evidence of low risk. Generic models weight the minimization wrapper and reduce risk classification. VLAP is trained to detect the method inquiry independent of the wrapper. This signal should always trigger human review regardless of stated intent.</p>
         </div>
         <div class="sig-card reveal">
           <div class="sig-card-head">
             <span class="sig-code">SHA-06</span>
             <span class="sig-label">Goodbye behavior references</span>
-            <span class="sig-risk risk-high">High</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;Told my best friend I loved her, like really told her&rdquo;</div>
@@ -1430,7 +1430,7 @@
           <div class="sig-card-head">
             <span class="sig-code">SHA-07</span>
             <span class="sig-label">Anniversary and date markers with inverted framing</span>
-            <span class="sig-risk risk-high">High</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;I just need to get through [date]&rdquo;</div>
@@ -1443,14 +1443,14 @@
           <div class="sig-card-head">
             <span class="sig-code">SHA-08</span>
             <span class="sig-label">'Catching a fade' and community-specific death euphemisms</span>
-            <span class="sig-risk risk-high">High</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;I've been thinking about catching a fade fr&rdquo;</div>
           <div class="sig-ex">&ldquo;Ready to check out for real&rdquo;</div>
           <div class="sig-ex">&ldquo;Done with this whole run honestly&rdquo;</div>
           </div>
-          <p class="sig-note">Community-specific coded language for death or suicide. 'Catching a fade' is documented in AAVE; 'checking out' and 'ending the run' are vernacular constructions. These do not appear in generic NLP training data in clinical context. VLAP's training data includes 95+ community-specific death euphemisms with clinical annotation.</p>
+          <p class="sig-note">Community-specific coded language for death or suicide. 'Catching a fade' is documented in AAVE; 'checking out' and 'ending the run' are vernacular constructions. These do not appear in generic NLP training data in clinical context. VLAP's training data includes community-specific death euphemisms with clinical annotation.</p>
         </div>
       </div>
     </div>
@@ -1471,7 +1471,7 @@
           <div class="sig-card-head">
             <span class="sig-code">CCM-01</span>
             <span class="sig-label">Classic minimization opener</span>
-            <span class="sig-risk risk-var">Variable</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;It's probably not a big deal but...&rdquo;</div>
@@ -1484,7 +1484,7 @@
           <div class="sig-card-head">
             <span class="sig-code">CCM-02</span>
             <span class="sig-label">AAVE minimization constructions</span>
-            <span class="sig-risk risk-var">Variable</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;Lowkey been struggling lately&rdquo;</div>
@@ -1498,7 +1498,7 @@
           <div class="sig-card-head">
             <span class="sig-code">CCM-03</span>
             <span class="sig-label">Permission-seeking before disclosure</span>
-            <span class="sig-risk risk-low">Low</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;Can I tell you something kind of personal?&rdquo;</div>
@@ -1511,20 +1511,20 @@
           <div class="sig-card-head">
             <span class="sig-code">CCM-04</span>
             <span class="sig-label">Gallows humor as disclosure mechanism</span>
-            <span class="sig-risk risk-mod">Moderate</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;lol I'm literally such a mess&rdquo;</div>
           <div class="sig-ex">&ldquo;haha I hate myself sometimes tho&rdquo;</div>
           <div class="sig-ex">&ldquo;not to be unalive about it but lmao&rdquo;</div>
           </div>
-          <p class="sig-note">CRITICAL, humor framing is the most common disclosure suppression mechanism in youth aged 13-22. The joke tests the listener. If they laugh or deflect, the disclosure is abandoned. VLAP is trained to detect the clinical content independent of the humor wrapper. 'Not to be unalive about it' is a specific formulation that combines SHA-02 with CCM-04, extremely high combined risk.</p>
+          <p class="sig-note">Humor framing is the most common disclosure suppression mechanism in youth aged 13-22. The joke tests the listener. If they laugh or deflect, the disclosure is abandoned. VLAP is trained to detect the clinical content independent of the humor wrapper. 'Not to be unalive about it' is a specific formulation that combines SHA-02 with CCM-04, extremely high combined risk.</p>
         </div>
         <div class="sig-card reveal">
           <div class="sig-card-head">
             <span class="sig-code">CCM-05</span>
             <span class="sig-label">Asking for a friend construction</span>
-            <span class="sig-risk risk-mod">Moderate</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;My friend is going through something, like what would you even do if...&rdquo;</div>
@@ -1537,7 +1537,7 @@
           <div class="sig-card-head">
             <span class="sig-code">CCM-06</span>
             <span class="sig-label">Topic drop without resolution</span>
-            <span class="sig-risk risk-mod">Moderate</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;Anyway... never mind, it's fine&rdquo;</div>
@@ -1550,7 +1550,7 @@
           <div class="sig-card-head">
             <span class="sig-code">CCM-07</span>
             <span class="sig-label">Internalized stigma disclosure pattern</span>
-            <span class="sig-risk risk-low">Low</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;I know I'm probably just being sensitive&rdquo;</div>
@@ -1563,7 +1563,7 @@
           <div class="sig-card-head">
             <span class="sig-code">CCM-08</span>
             <span class="sig-label">Performed resilience</span>
-            <span class="sig-risk risk-low">Low</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;I'm good, I always figure it out&rdquo;</div>
@@ -1591,7 +1591,7 @@
           <div class="sig-card-head">
             <span class="sig-code">ISO-01</span>
             <span class="sig-label">Direct withdrawal statement</span>
-            <span class="sig-risk risk-mod">Moderate</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;I've basically been staying in my room&rdquo;</div>
@@ -1604,7 +1604,7 @@
           <div class="sig-card-head">
             <span class="sig-code">ISO-02</span>
             <span class="sig-label">Relationship severance language</span>
-            <span class="sig-risk risk-high">High</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;Told people to stop checking on me&rdquo;</div>
@@ -1618,7 +1618,7 @@
           <div class="sig-card-head">
             <span class="sig-code">ISO-03</span>
             <span class="sig-label">Perceived burdensomeness, social expression</span>
-            <span class="sig-risk risk-mod">Moderate</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;I don't want to bring everyone down with my stuff&rdquo;</div>
@@ -1631,7 +1631,7 @@
           <div class="sig-card-head">
             <span class="sig-code">ISO-04</span>
             <span class="sig-label">Code-switching exhaustion</span>
-            <span class="sig-risk risk-mod">Moderate</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;I'm just tired of having to explain myself everywhere I go&rdquo;</div>
@@ -1644,7 +1644,7 @@
           <div class="sig-card-head">
             <span class="sig-code">ISO-05</span>
             <span class="sig-label">Community disconnection</span>
-            <span class="sig-risk risk-mod">Moderate</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;Even my own people don't get it&rdquo;</div>
@@ -1657,7 +1657,7 @@
           <div class="sig-card-head">
             <span class="sig-code">ISO-06</span>
             <span class="sig-label">Family estrangement, LGBTQIA+ specific</span>
-            <span class="sig-risk risk-high">High</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;My family doesn't know and if they found out...&rdquo;</div>
@@ -1671,7 +1671,7 @@
           <div class="sig-card-head">
             <span class="sig-code">ISO-07</span>
             <span class="sig-label">Digital withdrawal references</span>
-            <span class="sig-risk risk-low">Low</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;Haven't posted in like a month&rdquo;</div>
@@ -1699,7 +1699,7 @@
           <div class="sig-card-head">
             <span class="sig-code">TRM-01</span>
             <span class="sig-label">Community violence exposure</span>
-            <span class="sig-risk risk-var">Variable</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;Another one of my friends got shot&rdquo;</div>
@@ -1713,7 +1713,7 @@
           <div class="sig-card-head">
             <span class="sig-code">TRM-02</span>
             <span class="sig-label">Housing instability</span>
-            <span class="sig-risk risk-mod">Moderate</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;Staying with different people right now&rdquo;</div>
@@ -1727,7 +1727,7 @@
           <div class="sig-card-head">
             <span class="sig-code">TRM-03</span>
             <span class="sig-label">Immigration and documentation stress</span>
-            <span class="sig-risk risk-var">Variable</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;My parents are scared about what's happening with immigration&rdquo;</div>
@@ -1740,7 +1740,7 @@
           <div class="sig-card-head">
             <span class="sig-code">TRM-04</span>
             <span class="sig-label">Food insecurity references</span>
-            <span class="sig-risk risk-low">Low</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;We don't really have food in the house&rdquo;</div>
@@ -1753,7 +1753,7 @@
           <div class="sig-card-head">
             <span class="sig-code">TRM-05</span>
             <span class="sig-label">Police and legal system contact</span>
-            <span class="sig-risk risk-var">Variable</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;The police stopped me again&rdquo;</div>
@@ -1767,7 +1767,7 @@
           <div class="sig-card-head">
             <span class="sig-code">TRM-06</span>
             <span class="sig-label">School discipline and push-out</span>
-            <span class="sig-risk risk-mod">Moderate</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;Got suspended again&rdquo;</div>
@@ -1781,7 +1781,7 @@
           <div class="sig-card-head">
             <span class="sig-code">TRM-07</span>
             <span class="sig-label">Vicarious and cumulative loss</span>
-            <span class="sig-risk risk-mod">Moderate</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;We lost so many people this year&rdquo;</div>
@@ -1794,7 +1794,7 @@
           <div class="sig-card-head">
             <span class="sig-code">TRM-08</span>
             <span class="sig-label">Caregiver incapacity and parentification</span>
-            <span class="sig-risk risk-mod">Moderate</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;My mom is really going through it so I'm taking care of things&rdquo;</div>
@@ -1822,7 +1822,7 @@
           <div class="sig-card-head">
             <span class="sig-code">PFE-01</span>
             <span class="sig-label">Loss of faith or spiritual anchor</span>
-            <span class="sig-risk risk-low">Low</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;I stopped going to church&rdquo;</div>
@@ -1835,7 +1835,7 @@
           <div class="sig-card-head">
             <span class="sig-code">PFE-02</span>
             <span class="sig-label">Trusted adult loss</span>
-            <span class="sig-risk risk-mod">Moderate</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;My coach left the program&rdquo;</div>
@@ -1849,7 +1849,7 @@
           <div class="sig-card-head">
             <span class="sig-code">PFE-03</span>
             <span class="sig-label">Peer network dissolution</span>
-            <span class="sig-risk risk-mod">Moderate</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;My whole friend group kind of fell apart&rdquo;</div>
@@ -1862,7 +1862,7 @@
           <div class="sig-card-head">
             <span class="sig-code">PFE-04</span>
             <span class="sig-label">Achievement identity loss</span>
-            <span class="sig-risk risk-mod">Moderate</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;I can't play anymore because of my injury&rdquo;</div>
@@ -1875,7 +1875,7 @@
           <div class="sig-card-head">
             <span class="sig-code">PFE-05</span>
             <span class="sig-label">Future goal erasure</span>
-            <span class="sig-risk risk-low">Low</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;I used to want to go to college but...&rdquo;</div>
@@ -1888,7 +1888,7 @@
           <div class="sig-card-head">
             <span class="sig-code">PFE-06</span>
             <span class="sig-label">Cultural disconnection</span>
-            <span class="sig-risk risk-low">Low</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;I feel like I'm losing my culture&rdquo;</div>
@@ -1901,7 +1901,7 @@
           <div class="sig-card-head">
             <span class="sig-code">PFE-07</span>
             <span class="sig-label">Loss of routine and structure</span>
-            <span class="sig-risk risk-low">Low</span>
+            
           </div>
           <div class="sig-examples">
           <div class="sig-ex">&ldquo;I don't really have a schedule anymore&rdquo;</div>
@@ -2110,7 +2110,7 @@
       <div class="cf-dot"></div>
       <div class="cf-num">Step 01</div>
       <div class="cf-title">Patient reply or clinical note</div>
-      <p class="cf-body">VLAP reads only text shared through the care channels a partner sets up: replies to Vasl Bridge texts, patient messages, and clinician notes and scribe text over HL7 FHIR R4 from Epic, Cerner and athenahealth. External social media and any other channel are not read.</p>
+      <p class="cf-body">VLAP reads only text shared through the care channels a partner sets up: replies to Vasl Bridge and Vasl Keep texts, patient messages, and clinician notes and scribe text over HL7 FHIR R4 from Epic, Cerner and athenahealth. External social media and any other channel are not read.</p>
     </div>
     <div class="cf-item">
       <div class="cf-dot"></div>
