@@ -33,28 +33,7 @@
 // TWO COPIES, KEPT IDENTICAL. The function is Terraform-managed in
 // VASL-PLATFORM infra/aws/static-sites/functions/viewer-request.js. This file
 // is the source of record for the site repo; they must match byte for byte.
-var RETIRED = {
-  '/for-schools': '/',
-  '/for-organizations': '/',
-  '/for-families': '/',
-  '/school-mental-health-rfp': '/',
-  '/platform': '/',
-  '/peer-groups': '/',
-  '/ai-model': '/vlap',
-  '/teletherapy': '/vlap',
-  '/outcomes': '/research',
-  '/clinical-outcomes': '/research',
-  '/infrastructure': '/security',
-  '/careers': '/team',
-  '/support': '/contact',
-  '/help/assessments': '/technology',
-  '/help/billing': '/technology',
-  '/help/clinical': '/technology',
-  '/help/compliance': '/security',
-  '/help/getting-started': '/technology',
-  '/help/technical': '/technology',
-  '/help/vlap-technology': '/vlap'
-};
+var RETIRED = {};
 
 // Carry the query string across a redirect, so /support?subject=Pricing keeps
 // its subject when it lands on /contact. A viewer-request function gets the
