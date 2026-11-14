@@ -45,7 +45,7 @@ LINKS = {
     ],
     "for-organizations.html": [
         ("platform.html", "the Vasl platform",
-         "Daily check-ins, a peer community and a coach, for an organization without its own clinical team."),
+         "Daily check-ins and a coach, for an organization without its own clinical team."),
         ("vlap.html", "how VLAP surfaces distress signals",
          "The language layer that flags risk to a human who already knows the young person."),
         ("ai-model.html", "the model behind VLAP",
@@ -123,7 +123,7 @@ LINKS = {
     # ---- research.html <-> clinical-outcomes.html <-> outcomes.html ----------
     "research.html": [
         ("clinical-outcomes.html", "clinical outcomes data",
-         "PHQ-8 change, retention, and escalation rates from pilot cohorts, with methodology."),
+         "The outcomes a pilot measures, and the methodology behind them."),
         ("outcomes.html", "stakeholder and ROI outcomes",
          "What the research translates into for districts, plans, and community partners."),
         ("about.html", "who reviews this research",
@@ -131,7 +131,7 @@ LINKS = {
     ],
     "clinical-outcomes.html": [
         ("research.html", "the research base behind these numbers",
-         "The peer-reviewed literature and active IRB study this data builds on."),
+         "The peer-reviewed literature this data builds on."),
         ("outcomes.html", "what these numbers mean for stakeholders",
          "Cost and ROI implications of the retention and symptom data on this page."),
         ("vlap.html", "the signal layer behind the data",
@@ -165,7 +165,7 @@ LINKS = {
         ("vlap.html", "what runs on this infrastructure",
          "The signal-detection layer this hosting and access model is built to support."),
         ("research.html", "how this holds up under independent review",
-         "The IRB validation process this infrastructure is built to support."),
+         "The published results this infrastructure is built to support."),
     ],
     "vlap.html": [
         ("technology.html", "the architecture VLAP runs on",
@@ -190,7 +190,7 @@ LINKS = {
     ],
     "about.html": [
         ("research.html", "the research and evidence base",
-         "The literature, the active IRB study, and how we handle claims we can't yet support."),
+         "The literature, the measurements, and how we handle claims we can't yet support."),
         ("vlap.html", "VLAP, the platform's language layer",
          "How language analysis surfaces signal without ever assigning a diagnosis."),
         ("team.html", "the team and clinical advisors",
@@ -198,15 +198,13 @@ LINKS = {
     ],
     "platform.html": [
         ("vlap.html", "VLAP in depth",
-         "The language analysis layer that reads for distress signal across the platform."),
-        # peer-groups left the footer in the navigation restructure, so this is
-        # now its only inbound link. Dropping it orphans an indexable page.
-        ("peer-groups.html", "the peer community layer",
-         "How peer groups are organized around shared identity and experience, and who moderates them."),
-        ("ai-model.html", "the model behind the platform",
-         "VLAP's architecture and vocabulary extension process."),
-        ("teletherapy.html", "the licensed therapy layer",
-         "Culturally matched teletherapy, and when a member is routed to it."),
+         "Our own language model, with our own weights: 55 signals across seven dimensions, each with the words behind it."),
+        ("bridge.html", "Vasl Bridge",
+         "A daily text from emergency discharge to the first follow-up visit. 10 of 10 steps passed live, with real texts delivered."),
+        ("keep.html", "Vasl Keep",
+         "Eligible Medicaid members keep the coverage they qualify for. Each reply is sorted for a navigator."),
+        ("health-systems.html", "Health plans and systems",
+         "VLAP inside the care you already deliver, with intake through HL7 FHIR R4 from Epic, Cerner and athenahealth."),
     ],
     "ai-model.html": [
         ("dialect-bias-mental-health-screening.html", "the bias problem this model addresses",
@@ -236,7 +234,7 @@ LINKS = {
         ("ai-model.html", "VLAP's architecture",
          "The bidirectional model and vocabulary extension this piece describes in plain terms."),
         ("research.html", "the full research base",
-         "The peer-reviewed literature and active validation study behind Vasl's approach."),
+         "The peer-reviewed literature and validation results behind Vasl's approach."),
         ("glossary.html", "definitions for the terms used here",
          "Differential item functioning, dialect bias, and related terms, defined plainly."),
     ],

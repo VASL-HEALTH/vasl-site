@@ -23,20 +23,9 @@ SITE = Path(__file__).resolve().parent.parent / "site"
 # rel -> (title, description). Either may be None to leave that tag alone.
 REWRITES = {
     # ---- Primary buyer paths -------------------------------------------------
-    "index.html": (
-        "Culturally Grounded Youth Behavioral Health | Vasl Health",
-        "Language infrastructure for Black, Brown, LGBTQ+, rural and Medicaid youth.",
-    ),
-    "for-schools.html": (
-        "School-Based Mental Health Platform for Districts | Vasl",
-        "A tiered program for K-12 districts, peer support through a warm handoff "
-        "to licensed care, mapped to MTSS and staffed by people students recognize.",
-    ),
-    "health-systems.html": (
-        "Youth Behavioral Health for Health Plans & Systems | Vasl",
-        "Reach and retain the adolescent and transition-age members standard programs "
-        "lose. Engagement built on cultural and linguistic fit, not translation.",
-    ),
+    "index.html": (None, None),
+    "for-schools.html": ('School-Based Mental Health Platform for Districts | Vasl', None),
+    "health-systems.html": (None, None),
     "for-organizations.html": (
         "Youth Mental Health for Community Organizations | Vasl",
         "Community health centers, FQHCs, and youth-serving nonprofits use Vasl to "
@@ -48,24 +37,9 @@ REWRITES = {
         "should expect. Plain language, no clinical jargon, no surveillance.",
     ),
     # ---- Product -------------------------------------------------------------
-    "platform.html": (
-        "The Vasl Platform: What Happens After VLAP Reads",
-        "What happens after VLAP reads a reply: a check-in text every day, a mood "
-        "map, a peer community, a coach the same day, and a warm handoff to a "
-        "licensed clinician.",
-    ),
-    "vlap.html": (
-        "VLAP: Reading Youth Language for Distress Signals | Vasl",
-        "Vasl's language layer, 47 culturally specific distress signals across coded "
-        "language, AAVE, and youth vernacular, surfaced to humans, never used to "
-        "diagnose.",
-    ),
-    "ai-model.html": (
-        "VLAP: AI Trained on How Youth Actually Speak",
-        "Standard clinical NLP misreads AAVE and youth vernacular. VLAP is "
-        "trained on it directly, 2,400+ tokens, six signal categories, no "
-        "diagnostic output.",
-    ),
+    "platform.html": ('The Vasl Platform: What Happens After VLAP Reads', None),
+    "vlap.html": (None, None),
+    "ai-model.html": ('VLAP: AI Trained on How Youth Actually Speak', None),
     "peer-groups.html": (
         "Moderated Peer Support Groups for Youth | Vasl Health",
         "Facilitated peer groups where youth show up as themselves, the relationship "
@@ -88,29 +62,15 @@ REWRITES = {
         "what a district IT reviewer or plan security team needs before a deployment.",
     ),
     # ---- Evidence ------------------------------------------------------------
-    "outcomes.html": (
-        "Youth Behavioral Health Outcomes & ROI | Vasl Health",
-        "Measured model performance and stakeholder ROI for districts, plans, and "
-        "community organizations, with the methodology behind every number stated "
-        "openly.",
-    ),
+    "outcomes.html": (None, None),
     "clinical-outcomes.html": (
         "Clinical Outcomes: Symptom Change & Retention | Vasl",
         "0.83 vs 0.65 against the field's reference lexicon on suicide-attempt "
         "severity, with the methodology and the limitations stated openly.",
     ),
-    "research.html": (
-        "Research & Evidence Base | Vasl Health",
-        "The peer-reviewed literature Vasl is built on, the active IRB study "
-        "underway with a university partner, and how we handle claims we cannot yet "
-        "support.",
-    ),
+    "research.html": ('Research & Evidence Base | Vasl Health', None),
     # ---- Company -------------------------------------------------------------
-    "about.html": (
-        "About Vasl Health: Built for the Youth Systems Miss",
-        "Behavioral health for Black, Latino, LGBTQ+, and first-generation youth, designed "
-        "inside their language and culture from the start, not retrofitted after.",
-    ),
+    "about.html": (None, None),
     "team.html": (
         "Our Team & Clinical Advisors | Vasl Health",
         "The clinicians, engineers, and community practitioners building Vasl and "
@@ -121,11 +81,7 @@ REWRITES = {
         "Open roles across clinical, engineering, and community partnerships and "
         "what we expect from people building for youth who are usually built around.",
     ),
-    "contact.html": (
-        "Contact Vasl Health, Request a Demo",
-        "Schedule a demo, ask about implementation timelines, or reach our clinical, "
-        "education, research, or community partnerships teams directly.",
-    ),
+    "contact.html": (None, None),
     "support.html": (
         "Help Center & Implementation Support | Vasl Health",
         "Answers on getting started, assessments, billing, clinical escalation, "
