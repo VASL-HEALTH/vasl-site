@@ -4,7 +4,7 @@ Own the site header and footer on every content page.
 
 Before this, both were hand-copied into 50 files, which is how /health-systems
 and /bridge ended up with a "Talk to Us" button while every other page said
-"Request a Demo", and how the footer's column list drifted page by page. The
+"Talk to Us", and how the footer's column list drifted page by page. The
 header and footer are now generated from the two tables below, so a nav change
 is one edit instead of fifty.
 
@@ -42,13 +42,11 @@ SKIP = IGNORE | {"404.html"}
 # ---------------------------------------------------------------------------
 SOLUTIONS = [
     ("/health-systems", "Health Plans &amp; Systems",
-     "VLAP and the platform inside the care you already deliver."),
+     "VLAP inside the care you already deliver."),
     ("/bridge", "Vasl Bridge",
-     "A text every day from ED discharge to the first visit."),
-    ("/for-schools", "Schools",
-     "Daily check-ins, peer support and coaching for K-12 districts."),
-    ("/for-organizations", "Community Organizations",
-     "The platform for youth-serving organizations."),
+     "A text every day from emergency discharge to the first visit."),
+    ("/keep", "Vasl Keep",
+     "Eligible Medicaid members keep the coverage they qualify for."),
 ]
 
 # ---------------------------------------------------------------------------
@@ -67,8 +65,7 @@ FOOTER_COLS = [
     ("Solutions", [
         ("/health-systems", "Health Plans &amp; Systems"),
         ("/bridge", "Vasl Bridge"),
-        ("/for-schools", "Schools"),
-        ("/for-organizations", "Community Organizations"),
+        ("/keep", "Vasl Keep"),
         ("/contact?subject=Pricing", "Talk to us about pricing"),
     ]),
     ("Company", [
@@ -81,10 +78,8 @@ FOOTER_COLS = [
     ]),
     ("Resources", [
         ("/glossary", "Glossary"),
-        ("/school-mental-health-rfp", "School Mental Health RFP Guide"),
         ("/dialect-bias-mental-health-screening", "Dialect Bias in Screening"),
         ("/hedis-behavioral-health-cultural-fit", "HEDIS &amp; Cultural Fit"),
-        ("/for-families", "For Families"),
         ("/support", "Help Center"),
     ]),
     ("Legal", [
@@ -382,7 +377,7 @@ def header_html(rel: str) -> str:
   <button class="ham-btn" id="ham-btn" aria-label="Menu" aria-expanded="false" aria-controls="vh-sheet">
     <span></span><span></span><span></span>
   </button>
-  <a href="/contact" class="nav-cta">Request a Demo</a>
+  <a href="/contact" class="nav-cta">Talk to Us</a>
 </nav>
 
 <div class="vh-sheet" id="vh-sheet" hidden>
@@ -400,7 +395,7 @@ def header_html(rel: str) -> str:
     <a href="/about">About</a>
   </div>
   <div class="vh-sheet-foot">
-    <a href="/contact" class="vh-sheet-cta">Request a Demo</a>
+    <a href="/contact" class="vh-sheet-cta">Talk to Us</a>
   </div>
 </div>"""
 
@@ -422,7 +417,7 @@ def footer_html() -> str:
     <div class="fs-brand">
       <a href="/" class="footer-logo"><img src="/assets/logo-lockup-dark.svg" alt="Vasl Health" width="160" height="40"></a>
       <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
-      <a href="/contact" class="fs-cta">Request a Demo &rarr;</a>
+      <a href="/contact" class="fs-cta">Talk to Us &rarr;</a>
     </div>
 {chr(10).join(cols)}
   </div>

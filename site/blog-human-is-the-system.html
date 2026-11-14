@@ -177,10 +177,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
       <button type="button" class="vh-sol-btn" id="vh-sol-btn" aria-expanded="false" aria-controls="vh-sol-menu">Solutions<svg class="vh-chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.2"></path></svg></button>
       <span class="vh-sol-bridge" aria-hidden="true"></span>
       <div class="vh-sol-menu" id="vh-sol-menu" hidden>
-        <a href="/health-systems"><span class="vh-sm-name">Health Plans &amp; Systems</span><span class="vh-sm-line">VLAP and the platform inside the care you already deliver.</span></a>
-        <a href="/bridge"><span class="vh-sm-name">Vasl Bridge</span><span class="vh-sm-line">A text every day from ED discharge to the first visit.</span></a>
-        <a href="/for-schools"><span class="vh-sm-name">Schools</span><span class="vh-sm-line">Daily check-ins, peer support and coaching for K-12 districts.</span></a>
-        <a href="/for-organizations"><span class="vh-sm-name">Community Organizations</span><span class="vh-sm-line">The platform for youth-serving organizations.</span></a>
+        <a href="/health-systems"><span class="vh-sm-name">Health Plans &amp; Systems</span><span class="vh-sm-line">VLAP inside the care you already deliver.</span></a>
+        <a href="/bridge"><span class="vh-sm-name">Vasl Bridge</span><span class="vh-sm-line">A text every day from emergency discharge to the first visit.</span></a>
+        <a href="/keep"><span class="vh-sm-name">Vasl Keep</span><span class="vh-sm-line">Eligible Medicaid members keep the coverage they qualify for.</span></a>
       </div>
     </li>
     <li><a href="/about" class="is-active">About</a></li>
@@ -188,7 +187,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
   <button class="ham-btn" id="ham-btn" aria-label="Menu" aria-expanded="false" aria-controls="vh-sheet">
     <span></span><span></span><span></span>
   </button>
-  <a href="/contact" class="nav-cta">Request a Demo</a>
+  <a href="/contact" class="nav-cta">Talk to Us</a>
 </nav>
 
 <div class="vh-sheet" id="vh-sheet" hidden>
@@ -201,15 +200,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
     <a href="/vlap">VLAP</a>
     <button type="button" class="vh-sheet-sol" aria-expanded="false" aria-controls="vh-sheet-sub">Solutions<svg class="vh-chev" width="14" height="14" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1"></path></svg></button>
     <div class="vh-sheet-sub" id="vh-sheet-sub" hidden>
-        <a href="/health-systems"><span class="vh-sm-name">Health Plans &amp; Systems</span><span class="vh-sm-line">VLAP and the platform inside the care you already deliver.</span></a>
-        <a href="/bridge"><span class="vh-sm-name">Vasl Bridge</span><span class="vh-sm-line">A text every day from ED discharge to the first visit.</span></a>
-        <a href="/for-schools"><span class="vh-sm-name">Schools</span><span class="vh-sm-line">Daily check-ins, peer support and coaching for K-12 districts.</span></a>
-        <a href="/for-organizations"><span class="vh-sm-name">Community Organizations</span><span class="vh-sm-line">The platform for youth-serving organizations.</span></a>
+        <a href="/health-systems"><span class="vh-sm-name">Health Plans &amp; Systems</span><span class="vh-sm-line">VLAP inside the care you already deliver.</span></a>
+        <a href="/bridge"><span class="vh-sm-name">Vasl Bridge</span><span class="vh-sm-line">A text every day from emergency discharge to the first visit.</span></a>
+        <a href="/keep"><span class="vh-sm-name">Vasl Keep</span><span class="vh-sm-line">Eligible Medicaid members keep the coverage they qualify for.</span></a>
     </div>
     <a href="/about">About</a>
   </div>
   <div class="vh-sheet-foot">
-    <a href="/contact" class="vh-sheet-cta">Request a Demo</a>
+    <a href="/contact" class="vh-sheet-cta">Talk to Us</a>
   </div>
 </div>
 
@@ -245,13 +243,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
   <div class="article-content ac">
 <p>&ldquo;Everything is fine now actually, I&rsquo;m so over it lol.&rdquo;</p>
 
-<p>Read that sentence the way a standard sentiment model reads it and you get a positive score. Read it after two weeks of the same young person writing about not sleeping, not eating with their family, and not seeing the point of school, and it means something else. A sudden positive shift that follows sustained distress is one of the patterns clinicians are trained to take seriously. In VLAP&rsquo;s taxonomy it is HOP-07, a farewell and disengagement pattern. The &ldquo;lol&rdquo; is a distancing marker, not a laugh.</p>
+<p>Read that sentence the way a standard sentiment model reads it and you get a positive score. Read it after two weeks of the same member writing about not sleeping, not eating with their family, and not seeing the point of going to work, and it means something else. A sudden positive shift that follows sustained distress is one of the patterns clinicians are trained to take seriously. In VLAP&rsquo;s taxonomy it is HOP-07, a farewell and disengagement pattern. The &ldquo;lol&rdquo; is a distancing marker, not a laugh.</p>
 
 <p>Now imagine the generic model is wired to act on its own output. The member&rsquo;s status gets marked as improved. Their check-in cadence drops. The dashboard turns green. Nobody made a bad decision, because nobody made a decision at all. The software did, on a reading of the language that was wrong in exactly the direction that costs the most.</p>
 
 <p>That scenario is the reason VLAP is built the way it is. Every signal it surfaces ends in front of a licensed clinician, who reviews the context and decides what happens next. There is no output field connected to an automated action. No alert fires on its own. No protocol activates because a score crossed a line. We wrote it into our design principles in one sentence, and it is the sentence I return to most when people ask what makes this platform different: the human is not a checkpoint in an automated system. The human is the system.</p>
 
-<p>This post is about why we drew that line, where exactly it sits in the pipeline, and why I think it is the only defensible place to draw it for the young people we serve.</p>
+<p>This post is about why we drew that line, where exactly it sits in the pipeline, and why I think it is the only defensible place to draw it for the patients and members we serve.</p>
 
 <h2>The limits of automation</h2>
 
@@ -259,11 +257,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
 
 <p>A model that reads language and produces a score is a measuring instrument. A model that reads language, produces a score, and then sends a message, changes a care plan, or notifies a third party is an actor. The second kind of system inherits every blind spot of the first and adds consequences on top. When the blind spots fall on a specific population, the consequences do too.</p>
 
-<p>For Black, Latino, and LGBTQ+ youth, the blind spots are well documented. Roughly 23% of VLAP&rsquo;s training corpus would be processed as unknown tokens by a standard BERT-family model without our extended vocabulary. That is a quarter of the language that standard models are structurally unable to read. A young person who writes &ldquo;been thinking about unaliving lately ngl&rdquo; is using a euphemism that youth communities developed specifically to get past content filters. A generic model has never seen the word. It classifies the sentence as neutral or ambiguous and moves on.</p>
+<p>For Black, Latino, and LGBTQ+ patients, the blind spots are well documented. Roughly 23% of VLAP&rsquo;s training corpus would be processed as unknown tokens by a standard BERT-family model without our extended vocabulary. That is a quarter of the language that standard models are structurally unable to read. A member who writes &ldquo;been thinking about unaliving lately ngl&rdquo; is using a euphemism that online communities developed specifically to get past content filters. A generic model has never seen the word. It classifies the sentence as neutral or ambiguous and moves on.</p>
 
-<p>Pre-disclosure minimization works the same way. &ldquo;It&rsquo;s not that deep but lowkey been struggling since school started&rdquo; opens with a hedge. Generic models weight the hedge and lower the concern. In the communities we work with, that hedge is often the sign that a real disclosure is coming, because help-seeking carries stigma and people test the ground before they step on it. VLAP is trained to read the minimization as the signal, not as evidence against one.</p>
+<p>Pre-disclosure minimization works the same way. &ldquo;It&rsquo;s not that deep but lowkey been struggling since the new job started&rdquo; opens with a hedge. Generic models weight the hedge and lower the concern. In the communities we work with, that hedge is often the sign that a real disclosure is coming, because help-seeking carries stigma and people test the ground before they step on it. VLAP is trained to read the minimization as the signal, not as evidence against one.</p>
 
-<p>Put those gaps together with automation and you get a predictable failure. The system under-reads distress in exactly the populations where the risk is climbing. Black youth suicide rose 29.4% between 2018 and 2023 while white youth suicide fell 14.8%.<sup>1</sup> A model that misses a quarter of the language, then acts confidently on its under-reading, widens that gap. Or it over-reads cultural expression as pathology and escalates a young person to a principal or a parent for talking the way their friends talk. Both failures are worse when no human stands between the model and the outcome.</p>
+<p>Put those gaps together with automation and you get a predictable failure. The system under-reads distress in exactly the populations where the risk is climbing. Black youth suicide rose 29.4% between 2018 and 2023 while white youth suicide fell 14.8%.<sup>1</sup> A model that misses a quarter of the language, then acts confidently on its under-reading, widens that gap. Or it over-reads cultural expression as pathology and escalates a patient to an employer or a relative for talking the way their friends talk. Both failures are worse when no human stands between the model and the outcome.</p>
 
 <p>We could have tried to solve that by making the model better and then trusting it. We did make the model better. We did not stop trusting people.</p>
 
@@ -275,7 +273,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
 
 <p>Next, identifying information comes out. Names, locations, phone numbers, and account references are stripped before the model sees a single word. The model never processes who a member is, only what they said.</p>
 
-<p>Then VLAP reads the language against its taxonomy: 47 signals across six clinical categories, from hopelessness and social withdrawal to coded self-harm language and the minimization patterns that come before disclosure. Signals are not read one at a time. The taxonomy includes combination rules, so a moderate hopelessness signal paired with a moderate self-harm signal is treated as high risk, and certain signals, such as a method inquiry wrapped in &ldquo;not that I&rsquo;d do it but,&rdquo; always go to human review regardless of what the member says about their intent.</p>
+<p>Then VLAP reads the language against its taxonomy: 55 signals across seven dimensions, from hopelessness and social withdrawal to coded self-harm language and the minimization patterns that come before disclosure. Signals are not read one at a time. The taxonomy includes combination rules, so a moderate hopelessness signal paired with a moderate self-harm signal is treated as high risk, and certain signals, such as a method inquiry wrapped in &ldquo;not that I&rsquo;d do it but,&rdquo; always go to human review regardless of what the member says about their intent.</p>
 
 <p>The output of that step is a signal profile: signal codes, community-language annotations, confidence indicators, and session context. At that point the raw text is discarded. The member&rsquo;s words do not live in a database, a backup, a retraining pipeline, or an analytics system. What persists is the de-identified profile, retained for 90 days and tied to the member&rsquo;s care record, with an audit log kept for six years.</p>
 
@@ -284,7 +282,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
 <p>A licensed clinician opens the profile before a session and decides what to do with it. When signals or combinations meet high-risk criteria, the system does not send an alert. It creates a review queue item, and that item requires a licensed clinician to open it, review it, and document a response. Vasl commits to a 90-minute window for clinical supervisor review on those items. The review is initiated by a person, not a trigger.</p>
 
 <div class="pull-quote">
-  <div class="pq-text">&ldquo;A model can tell you what it read. Only a clinician should decide what it means for this young person, today.&rdquo;</div>
+  <div class="pq-text">&ldquo;A model can tell you what it read. Only a clinician should decide what it means for this patient, today.&rdquo;</div>
   <div class="pq-attr">Rodney Bell, Founder & CEO, Vasl Health</div>
 </div>
 
@@ -296,33 +294,33 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
 
 <p>Keeping a human at the end of the pipeline only matters if it is the right human. A lot of the harm in this space comes from the wrong person seeing the right information.</p>
 
-<p>VLAP is never member-facing. No young person ever sees a signal code about themselves, and VLAP never generates messages to members. Coaches see the context they need to reach out well, in plain language with no dimensional codes or clinical jargon. Licensed clinicians see the full signal profile, including the cultural interpretation notes, before a session. Organizations, whether a school district, a university, a health plan, or a community nonprofit, see aggregate, de-identified trends and never an individual young person.</p>
+<p>VLAP is never member-facing. No member ever sees a signal code about themselves, and VLAP never generates messages to members. Coaches see the context they need to reach out well, in plain language with no dimensional codes or clinical jargon. Licensed clinicians see the full signal profile, including the cultural interpretation notes, before a session. Organizations, whether a Medicaid plan, a health system, or a community clinic, see aggregate, de-identified trends and never an individual member.</p>
 
-<p>That last boundary is the one I get asked about most by administrators, and it is the one we hold most firmly. VLAP does not send alerts to police, principals, or parents. It does not show individual conversations to schools or funders. Every escalation goes to one place: a licensed clinician, who reviews the full context before anything happens. If a clinician decides that a family or a school needs to be involved, that is a clinical decision made by a person with a license and a duty of care, documented in the record. It is not a notification the software sent on a pattern match.</p>
+<p>That last boundary is the one I get asked about most by administrators, and it is the one we hold most firmly. VLAP does not send alerts to police, employers, or relatives. It does not show individual conversations to plan administrators or funders. Every escalation goes to one place: a licensed clinician, who reviews the full context before anything happens. If a clinician decides that a family or a caseworker needs to be involved, that is a clinical decision made by a person with a license and a duty of care, documented in the record. It is not a notification the software sent on a pattern match.</p>
 
-<p>Ask a sixteen-year-old in any of the communities we serve what happens when an adult system hears them say something alarming, and many will tell you the same thing: someone they did not choose gets called. That expectation is a big part of why young people go quiet. A platform that routes signals straight to authority figures confirms it. A platform that routes them only to a clinician who knows the young person&rsquo;s context, and who will make a judgment instead of a report, gives them a reason to keep talking.</p>
+<p>Ask a member in any of the communities we serve what happens when an adult system hears them say something alarming, and many will tell you the same thing: someone they did not choose gets called. That expectation is a big part of why people go quiet. A platform that routes signals straight to authority figures confirms it. A platform that routes them only to a clinician who knows the member&rsquo;s context, and who will make a judgment instead of a report, gives them a reason to keep talking.</p>
 
-<p>Health systems deploy the same intelligence in a different form, as clinical decision support inside existing care delivery, running on documentation their teams already generate. The governance is the same. Signals route only to licensed clinicians, never to administrators, payers, or automated systems. Risk is framed in four tiers, from low through moderate and elevated to acute, with mandatory human review before any escalation. Every signal, every review, and every escalation decision carries a full audit trail. Decision support, in other words, means exactly that. It supports a decision someone else makes.</p>
+<p>Health systems deploy the same intelligence in a different form, as clinical decision support inside existing care delivery, running on documentation their teams already generate. The governance is the same. Signals route only to licensed clinicians, never to administrators, outside parties, or automated systems. Risk is framed in four tiers, from low through moderate and elevated to acute, with mandatory human review before any escalation. Every signal, every review, and every escalation decision carries a full audit trail. Decision support, in other words, means exactly that. It supports a decision someone else makes.</p>
 
 <h2>The case for a person in the loop</h2>
 
 <p>Here is the part of the design that only works with a clinician in the loop, and it is the part I think most people outside clinical work underestimate.</p>
 
-<p>VLAP&rsquo;s high-distress signal sensitivity is 90% in preliminary results from an active IRB-approved validation study with a university research partner, measured against clinician-adjudicated ground truth. Those results are pending peer-reviewed publication, and we say so every time we cite the number. Sensitivity is the share of real high-distress signals the model surfaces when they are present. We tuned for it on purpose. In the self-harm and hopelessness categories, and for the signal combinations that trigger high-risk review, we accept more false positives in exchange for fewer missed crisis signals.</p>
+<p>On suicide-attempt severity, VLAP scores 0.83 ROC-AUC against 0.65 for MIT&rsquo;s Suicide Risk Lexicon, on the same corpus and the same split. Sensitivity is the share of real high-distress signals the model surfaces when they are present. We tuned for it on purpose. In the self-harm and hopelessness categories, and for the signal combinations that trigger high-risk review, we accept more false positives in exchange for fewer missed crisis signals.</p>
 
-<p>That tradeoff is only responsible because a clinician sits at the end of it. A false positive that lands in front of a trained reviewer costs a few minutes of their attention. They read the context, recognize that &ldquo;I&rsquo;m dead tired&rdquo; was about a double shift, and move on. The same false positive wired to an automated action costs the young person something: a phone call home, a referral they did not need, a flag in a record, a reason not to write honestly next time. Remove the human and you have to tune the model the other way to avoid those harms. Tune it the other way and you miss more of the signals that matter most.</p>
+<p>That tradeoff is only responsible because a clinician sits at the end of it. A false positive that lands in front of a trained reviewer costs a few minutes of their attention. They read the context, recognize that &ldquo;I&rsquo;m dead tired&rdquo; was about a double shift, and move on. The same false positive wired to an automated action costs the member something: an unwanted phone call, a referral they did not need, a flag in a record, a reason not to write honestly next time. Remove the human and you have to tune the model the other way to avoid those harms. Tune it the other way and you miss more of the signals that matter most.</p>
 
 <p>So the clinician is not a safety disclaimer bolted onto a model that would otherwise run on its own. The clinician is what makes the model&rsquo;s best setting usable. We could only build for sensitivity because we were never going to let the output act alone.</p>
 
-<p>The same logic applies to bias. False-positive and false-negative rates are tracked by demographic subgroup in every inference batch, and a model version must meet minimum parity thresholds across Black, Latino, LGBTQ+, first-generation, and limited-English-proficiency subgroups before it is deployed. If a systematic disparity shows up, it does not go into a quarterly report. It triggers a mandatory model review that suspends the affected signal category. We treat that as an operational gate, not a metric. But no gate catches everything, and the clinician reading a profile is the last place a cultural misreading can be stopped before it reaches a young person. Every signal profile carries cultural interpretation notes for that reason. The model&rsquo;s job is to translate. The clinician&rsquo;s job is to judge whether the translation fits the person in front of them.</p>
+<p>The same logic applies to bias. False-positive and false-negative rates are tracked by demographic subgroup in every inference batch, and a model version must meet minimum parity thresholds across Black, Latino, LGBTQ+, first-generation, and limited-English-proficiency subgroups before it is deployed. If a systematic disparity shows up, it does not go into a quarterly report. It triggers a mandatory model review that suspends the affected signal category. We treat that as an operational gate, not a metric. But no gate catches everything, and the clinician reading a profile is the last place a cultural misreading can be stopped before it reaches a patient. Every signal profile carries cultural interpretation notes for that reason. The model&rsquo;s job is to translate. The clinician&rsquo;s job is to judge whether the translation fits the person in front of them.</p>
 
-<p>None of this makes the work easier for us. A fully automated product would be cheaper to run, simpler to sell, and easier to scale on a slide. It would also put a model trained on community language in the position of making clinical calls about the community it learned from, with nobody accountable for the call. We were not willing to build that, and I do not think the districts, health systems, and families we work with would accept it if they saw it clearly.</p>
+<p>None of this makes the work easier for us. A fully automated product would be cheaper to run, simpler to sell, and easier to scale on a slide. It would also put a model trained on community language in the position of making clinical calls about the community it learned from, with nobody accountable for the call. We were not willing to build that, and I do not think the Medicaid plans, health systems, and members we work with would accept it if they saw it clearly.</p>
 
-<p>What we built instead is narrower and, I think, more useful. VLAP reads the language standard tools were never designed to read, translates it into context a clinician can use, and hands it to that clinician with the reasoning attached. It flags. It does not decide. In our pilot cohorts, roughly one in five members is connected to licensed clinical care through a warm handoff from the coaching layer, and every one of those handoffs runs through a person.</p>
+<p>What we built instead is narrower and, I think, more useful. VLAP reads the language standard tools were never designed to read, translates it into context a clinician can use, and hands it to that clinician with the reasoning attached. It flags. It does not decide.</p>
 
-<p>That is the line, and we do not plan to move it. As VLAP adds language modules, starting with rural and Appalachian youth after African American Language (AAL), the same rule comes with every one of them. A new module means a new community&rsquo;s language read accurately. It does not mean a new place for the software to act on its own. The pipeline will keep ending where it ends now: with a licensed clinician, the full context, and a decision that belongs to them.</p>
+<p>That is the line, and we do not plan to move it. As VLAP adds language modules, starting with rural and Appalachian speech after African American Language (AAL), the same rule comes with every one of them. A new module means a new community&rsquo;s language read accurately. It does not mean a new place for the software to act on its own. The pipeline will keep ending where it ends now: with a licensed clinician, the full context, and a decision that belongs to them.</p>
 
-<p style="font-size:13px;font-family:var(--mono);color:var(--dust);margin-top:8px;">1, CDC, MMWR 74(35);550 to 553, &ldquo;Differences in Suicide Rates by Race, Ethnicity and Age Group, 2018 to 2023&rdquo; (Sept. 2025). VLAP sensitivity, retention, and escalation figures are from Vasl pilot cohorts and an active IRB study; see <a href="/clinical-outcomes">Clinical Outcomes</a>.</p>
+<p style="font-size:13px;font-family:var(--mono);color:var(--dust);margin-top:8px;">1, CDC, MMWR 74(35);550 to 553, &ldquo;Differences in Suicide Rates by Race, Ethnicity and Age Group, 2018 to 2023&rdquo; (Sept. 2025). VLAP results are from held-out test data, same corpus, same split; see <a href="/clinical-outcomes">Clinical Outcomes</a>.</p>
 
   </div>
   <aside class="article-sidebar">
@@ -330,7 +328,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
       <div class="as-label">Key Data Points</div>
       <div class="as-stat"><div class="as-stat-num">0</div><div class="as-stat-label">VLAP output fields connected to an automated action, notification, or external API call</div><div class="as-stat-caveat">Vasl design principle, review queue, not alerts</div></div>
 <div class="as-stat"><div class="as-stat-num">90 min</div><div class="as-stat-label">Committed window for licensed clinical supervisor review of high-risk signals, initiated by a person</div><div class="as-stat-caveat">Vasl crisis review SLA</div></div>
-<div class="as-stat"><div class="as-stat-num">90%</div><div class="as-stat-label">High-distress signal sensitivity against clinician-adjudicated ground truth</div><div class="as-stat-caveat">Preliminary &middot; IRB validation in progress &middot; pending publication</div></div>
+<div class="as-stat"><div class="as-stat-num">0.83</div><div class="as-stat-label">VLAP ROC-AUC on suicide-attempt severity, against 0.65 for MIT&rsquo;s Suicide Risk Lexicon</div><div class="as-stat-caveat">Same corpus &middot; same split</div></div>
 
     </div>
     <div class="as-section">
@@ -347,7 +345,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
     <div class="cta-headline">See Vasl Health<br>in <em>action.</em></div>
     <p class="cta-body">Book a 45-minute call with an implementation lead. We come prepared with context specific to your organization and population.</p>
   </div>
-  <a href="/contact" class="cta-btn">Request a Demo &rarr;</a>
+  <a href="/contact" class="cta-btn">Talk to us about a pilot &rarr;</a>
 </div>
 
 <!-- LINKS:VASL -->
@@ -374,7 +372,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
     <div class="fs-brand">
       <a href="/" class="footer-logo"><img src="/assets/logo-lockup-dark.svg" alt="Vasl Health" width="160" height="40"></a>
       <div class="footer-mission">Language is culture, not pathology.<br>Interpretation is care.<br>Delaware Public Benefit Corporation.</div>
-      <a href="/contact" class="fs-cta">Request a Demo &rarr;</a>
+      <a href="/contact" class="fs-cta">Talk to Us &rarr;</a>
     </div>
     <div class="fs-col">
       <div class="fs-head">Platform</div>
@@ -387,8 +385,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
       <div class="fs-head">Solutions</div>
       <a href="/health-systems">Health Plans &amp; Systems</a>
       <a href="/bridge">Vasl Bridge</a>
-      <a href="/for-schools">Schools</a>
-      <a href="/for-organizations">Community Organizations</a>
+      <a href="/keep">Vasl Keep</a>
       <a href="/contact?subject=Pricing">Talk to us about pricing</a>
     </div>
     <div class="fs-col">
@@ -403,10 +400,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
     <div class="fs-col">
       <div class="fs-head">Resources</div>
       <a href="/glossary">Glossary</a>
-      <a href="/school-mental-health-rfp">School Mental Health RFP Guide</a>
       <a href="/dialect-bias-mental-health-screening">Dialect Bias in Screening</a>
       <a href="/hedis-behavioral-health-cultural-fit">HEDIS &amp; Cultural Fit</a>
-      <a href="/for-families">For Families</a>
       <a href="/support">Help Center</a>
     </div>
     <div class="fs-col">

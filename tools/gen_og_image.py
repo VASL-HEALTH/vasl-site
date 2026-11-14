@@ -53,16 +53,16 @@ def main():
     # Hairline
     d.rectangle([pad, 440, W - pad, 441], fill=INK_12)
 
-    # Positioning line, what a district or plan buyer needs to see in the preview.
+    # Positioning line, what a plan or health-system buyer needs to see in the preview.
     d.text(
         (pad, 474),
-        "Culturally grounded behavioral health for youth 14 to 24.",
+        "Language intelligence for Medicaid plans and health systems.",
         font=f(SERIF, 34),
         fill=INK,
     )
     d.text(
         (pad, 522),
-        "Detection, not diagnosis. Human in the loop, every time.",
+        "A named signal with the words behind it. Never a diagnosis.",
         font=f(SERIF, 34),
         fill=DEEP_GREEN,
     )

@@ -42,6 +42,12 @@ PLAUSIBLE_SCRIPT = "https://plausible.io/js/script.outbound-links.tagged-events.
 # pages. They remain crawlable so link equity still flows.
 NOINDEX = {
     "404.html",
+    # Retired with the pivot to Medicaid plans and health systems (14 Nov 2026):
+    # kept on disk, out of the sitemap and search.
+    "for-schools.html",
+    "for-families.html",
+    "school-mental-health-rfp.html",
+    "peer-groups.html",
     "terms.html",
     "privacy.html",
     "baa.html",
@@ -52,10 +58,10 @@ NOINDEX = {
 MISSING_DESC = {
     "ai-model.html": (
         "VLAP is the language model behind Vasl, trained on how Black, Latino, "
-        "and first-generation youth actually describe distress. Detection, not diagnosis."
+        "and first-generation patients actually describe distress. Detection, not diagnosis."
     ),
     "platform.html": (
-        "A five-layer behavioral health continuum for youth: peer community, daily check-ins, "
+        "Vasl Bridge, Vasl Keep and VLAP for Medicaid plans and health systems: daily check-ins, "
         "culturally matched coaching, licensed therapy, and crisis support in one system."
     ),
     "peer-groups.html": (
@@ -160,9 +166,8 @@ def jsonld_blocks(rel: str, title: str, desc: str, canonical: str) -> list:
                 "url": f"{ORIGIN}/",
                 "logo": f"{ORIGIN}/assets/mark-v-tile.svg",
                 "description": (
-                    "Vasl Health builds culturally grounded, clinically governed early "
-                    "detection and behavioral health support for Black, Latino, and "
-                    "first-generation youth ages 14 to 24."
+                    "Vasl Health PBC builds language intelligence for healthcare. "
+                    "VLAP, Vasl Bridge and Vasl Keep serve Medicaid plans and health systems."
                 ),
                 "email": "hello@vaslhealth.com",
                 "foundingLocation": {
@@ -192,8 +197,8 @@ def jsonld_blocks(rel: str, title: str, desc: str, canonical: str) -> list:
                 ],
                 "knowsAbout": [
                     "culturally responsive behavioral health",
-                    "youth mental health",
-                    "school-based mental health",
+                    "Medicaid member engagement",
+                    "follow-up after emergency department visits",
                     "behavioral health equity",
                     "natural language processing in mental health",
                 ],
