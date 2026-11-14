@@ -369,3 +369,10 @@ mark{background:#e6d3b6;color:var(--ink);padding:0 2px;}
 .vh-split-hero{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center;}
 .vh-split-hero .vp-photo{min-height:460px;}
 @media (max-width:900px){.vh-split-hero{grid-template-columns:1fr;}.vh-split-hero .vp-photo{min-height:320px;}.vband{min-height:360px;}}
+.vband2{position:relative;display:grid;grid-template-columns:1fr 1fr;min-height:460px;}
+.vband2 > div{background:#222 center/cover no-repeat;}
+.vband2::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(0,0,0,.66) 100%);}
+.vband2 .vx-wrap{position:absolute;left:0;right:0;bottom:0;z-index:1;padding-bottom:56px;}
+.vband2 p{font-family:var(--serif);font-size:clamp(26px,3vw,38px);line-height:1.2;color:#fff;max-width:20em;margin:0;}
+.vband2 p em{color:var(--clay-fill);}
+@media (max-width:700px){.vband2{grid-template-columns:1fr;min-height:620px;}}

@@ -21,7 +21,6 @@ Getty. Fetched from `images.unsplash.com` at `w=1600&q=85`, then resized to
 - woman-texting-outdoors.jpg: Ladislav Stercell, @lacostercell, https://unsplash.com/@lacostercell, unsplash id w_HGyzjdBmU, Unsplash License
 - rural-porch-couple.jpg: Portraits of Modern Dairy, https://unsplash.com/@portraitsofmoderndairy, unsplash id XU9PBmAGDD4, Unsplash License (Minnesota)
 - rural-fence-sunrise.jpg: Portraits of Modern Dairy, https://unsplash.com/@portraitsofmoderndairy, unsplash id 7AdnJ27e8qE, Unsplash License (Maryland)
-- rural-pickup-driver.jpg: Adam Winger, @awcreativeut, https://unsplash.com/@awcreativeut, unsplash id lAUc8Uec-f4, Unsplash License (Utah)
 
 `_contact-sheet-rural.png` is a review aid for PR #36 and is to be deleted
 before merge.

@@ -265,6 +265,12 @@ def band(img, html, pos="center"):
             f'<div class="vx-wrap"><p>{html}</p></div></section>')
 
 
+def band2(img1, img2, html, pos1="center", pos2="center"):
+    return (f'<section class="vband2"><div style="background-image:url(/assets/people/{img1});background-position:{pos1}"></div>'
+            f'<div style="background-image:url(/assets/people/{img2});background-position:{pos2}"></div>'
+            f'<div class="vx-wrap"><p>{html}</p></div></section>')
+
+
 def hero_photo(eyebrow, h1, lede, img, pos="center", extra=""):
     lede_html = f'<p class="vx-lede">{lede}</p>' if lede else ""
     return f"""<section class="vx-hero"><div class="vx-wrap vh-split-hero">
@@ -348,7 +354,7 @@ def home():
             browser("clinician-record.jpg", "clinician.gotovasl.com &middot; member record", REC_ALT,
                     "The clinician portal. Every signal carries the sentence behind it, and social needs come from her own notes.")),
         layer,
-        band("black-boy-joy.jpg", "Current tools are least accurate for Black, Brown, LGBTQ+, rural and Medicaid patients. <em>VLAP was built on them first.</em>", "center 35%"),
+        band2("black-boy-joy.jpg", "woman-texting-outdoors.jpg", "Current tools are least accurate for Black, Brown, LGBTQ+, rural and Medicaid patients. <em>VLAP was built on them first.</em>", "center 35%", "60% center"),
         f'<section><div class="vx-wrap">{bridge}{keep}</div></section>',
         engine, dark,
     ])
@@ -430,6 +436,7 @@ def bridge():
         sec("What the care team sees", "Her words, every day. <em>Not a score.</em>",
             browser("bridge-record.jpg", "clinician.gotovasl.com &middot; Bridge member record",
                     "Vasl clinician portal: a Bridge member's self-reported mood by day and her reply notes in her own words"), "is-light"),
+        band("young-man-texting.jpg", "A daily text from discharge, no app. <em>Silence is a signal too.</em>", "center 30%"),
         sec("The difference", "Everyone else sends reminders. <em>We understand the replies.</em>", diff, "is-clay"),
         sec("Status", "Built and run live. <em>10 of 10 steps passed.</em>", f'<div class="vx-flow" style="border:0;padding:0">{status}</div>'),
         sec("Pricing", "Priced on enrollment and completed visits. <em>Vasl bills the partner.</em>", pricing),
@@ -462,9 +469,10 @@ def keep():
     <h1>Eligible members keep the coverage they qualify for. <em>Every reply sorted for a navigator.</em></h1>
     <p class="vx-lede">Keep supports Medicaid plans under the community engagement rule of 80 hours a month. Members answer by text. Each reply is sorted into a category. Navigators see who needs help, and the plan sees the totals.</p>
     {status}</div>
-  {photo("platform-hero.jpg", KEEP_CARD, "center 30%")}
+  <div class="vp-photo" style="background-image:url(/assets/people/rural-porch-couple.jpg);background-position:center 40%">{KEEP_CARD}</div>
 </div></section>""",
         sec("How Keep works", "One text in. <em>One clear next step out.</em>", how, "is-clay"),
+        band("kentucky-farm-road.jpg", "Members answer by text. <em>No app, no portal login.</em>", "center 60%"),
         sec("Reply categories", "Seven reply categories. <em>Plus &ldquo;no reply&rdquo;.</em>", cats),
         sec("Status", "Two live end-to-end runs. <em>9 of 9 steps.</em>", status2, "is-clay"),
         sec("Pricing", "Keep on its own, <em>or bundled with VLAP.</em>", pricing),
@@ -626,6 +634,7 @@ def about():
              "Vasl Health is building the language intelligence infrastructure for healthcare. <em>VLAP is the engine.</em>",
              STATEMENT, "black-girl-magic.jpg", "center 30%"),
         sec("What we build", "VLAP is the platform. Healthcare is the market. <em>Bridge and Keep are the beginning.</em>", build),
+        band("rural-farm-family.jpg", "We built VLAP on the patients <em>every other tool gets wrong.</em>", "center 35%"),
         sec("What we hold to", "Three commitments.", hold, "is-clay"),
         sec("More about Vasl", "Who we are and how we work.",
             '<div class="vx-actions" style="margin-top:0"><a class="vx-link" href="/team">Team</a><a class="vx-link" href="/technology">Technology</a><a class="vx-link" href="/security">Security</a><a class="vx-link" href="/research">Research</a><a class="vx-link" href="/blog">Blog</a></div>', "is-light"),
@@ -812,7 +821,7 @@ def pilot():
     <p class="vx-foot-note">Vasl bills the partner. Vasl never bills Medicaid.</p>"""
     body = "\n".join([
         hero_photo("How a pilot works", "Start with one workflow. <em>Measure it on your own patients.</em>",
-             "A pilot runs Bridge, Keep or VLAP with your team, on your patients&rsquo; own text, against the tool you use today.", "start-hero.jpg"),
+             "A pilot runs Bridge, Keep or VLAP with your team, on your patients&rsquo; own text, against the tool you use today.", "rural-fence-sunrise.jpg", "center 30%"),
         sec("Four steps", "From first call to a result you can read.", steps_),
         sec("What a pilot measures", "Each pilot is scored on something you already track.", measures, "is-clay"),
         sec("Pricing", "Simple units. <em>Priced against measures you are already scored on.</em>", pricing),
