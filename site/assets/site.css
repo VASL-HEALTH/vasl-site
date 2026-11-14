@@ -317,3 +317,39 @@ mark{background:#e6d3b6;color:var(--ink);padding:0 2px;}
 .vx-gloss dt{font-family:var(--serif);font-size:20px;color:var(--green);padding:18px 0;border-top:1px solid var(--rule);}
 .vx-gloss dd{margin:0;padding:20px 0 18px;border-top:1px solid var(--rule);font-size:15px;line-height:1.65;color:var(--ink-2);}
 @media (max-width:820px){.vx-gloss{grid-template-columns:1fr;}.vx-gloss dd{border-top:0;padding-top:0;}}
+
+/* ---------- photos with the product on top ---------- */
+.vp-photo{position:relative;border-radius:20px;background-color:#d8d0c2;background-size:cover;background-repeat:no-repeat;min-height:540px;}
+.vh-hero .vp-photo{margin-right:84px;min-height:580px;}
+.vh-hero .vp-photo .vh-phone{left:auto;right:-84px;top:36px;}
+.vh-hero .vp-photo .vh-flag{right:-60px;bottom:-40px;}
+.vp-photo .vh-phone{left:-78px;top:28px;box-shadow:0 22px 50px rgba(20,20,15,.28);}
+.vp-photo .vh-flag{right:-26px;top:auto;bottom:-34px;}
+.vp-photo .vh-card{position:absolute;left:-48px;bottom:-34px;width:min(380px,90%);}
+.vp-split{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;}
+.vp-split .vp-photo{min-height:460px;}
+.vp-cap{font-size:12px;color:var(--mute);margin-top:44px;}
+.vh-dark.has-photo{text-align:left;padding:0;}
+.vh-dark.has-photo .vx-wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:center;padding-top:72px;padding-bottom:72px;}
+.vh-dark.has-photo .vp-photo{min-height:420px;}
+.vh-dark.has-photo h2{margin:0 0 30px;}
+/* care team queue */
+.vq{background:#fbf9f4;border-radius:16px;box-shadow:0 18px 48px rgba(40,35,25,.10);overflow:hidden;}
+.vq-top{display:flex;justify-content:space-between;padding:14px 22px;border-bottom:1px solid var(--rule);font-size:13px;color:var(--ink-2);}
+.vq-top b{color:var(--ink);font-weight:500;}
+.vq-row{display:grid;grid-template-columns:92px 1.7fr 140px 70px;gap:16px;align-items:center;padding:15px 22px;border-bottom:1px solid var(--rule);font-size:14px;}
+.vq-row:last-child{border-bottom:0;}
+.vq-row.h{font-size:11px;color:var(--mute);padding-top:10px;padding-bottom:10px;}
+.vq-row mark{background:#f2d9c2;padding:0 2px;}
+.vq-row .vh-chip{background:#f7e6d6;color:#8a4f1d;font-size:11.5px;}
+.vq-row a{color:var(--green);font-weight:500;font-size:13px;text-decoration:none;}
+@media (max-width:900px){
+  .vh-hero .vp-photo{margin-right:0;}
+  .vp-photo{min-height:440px;}
+  .vp-photo .vh-phone{display:none;}
+  .vp-photo .vh-flag{left:12px;right:12px;width:auto;bottom:-30px;}
+  .vp-photo .vh-card{left:12px;right:12px;width:auto;}
+  .vp-split,.vh-dark.has-photo .vx-wrap{grid-template-columns:1fr;gap:56px;}
+  .vq-row{grid-template-columns:1fr;gap:6px;}
+  .vq-row.h{display:none;}
+}
