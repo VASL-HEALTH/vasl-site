@@ -433,7 +433,7 @@
   .tax-constraint p { font-size: 14px; font-weight: 300; line-height: 1.7; color: rgba(250,247,242,0.72); }
   .tax-constraint p strong { color: var(--warm-white); font-weight: 500; }
 
-  /* Category blocks (47-signal taxonomy) */
+  /* Category blocks (taxonomy examples) */
   .cat-blocks { display: flex; flex-direction: column; gap: 0; }
 
   .cat-block { padding: 56px 0; border-bottom: 1px solid rgba(250,247,242,0.12); }
@@ -938,7 +938,7 @@
       <em>missing.</em>
     </h1>
     <p class="hero-body reveal d2">
- Standard NLP models are trained on majority-White internet text. They were never designed to read how Black, Brown, LGBTQ+, rural and Medicaid youth communicate distress and they consistently fail to. VLAP was built specifically for those communities. Not adapted. Built.
+ Standard language models are trained on textbook and internet English. They were never designed to read how Black, Brown, LGBTQ+, rural and Medicaid patients describe what they are going through, and they are least accurate for exactly those patients. VLAP is our own language model, with our own weights, built on them first. Not adapted. Built.
  </p>
     <div class="hero-actions reveal d3">
       <a href="/contact" class="btn-dark">Request Technical Evaluation</a>
@@ -948,23 +948,23 @@
 
   <div class="hero-right reveal d2">
     <div class="accuracy-block">
-      <div class="ab-label">High-Distress Signal Sensitivity</div>
-      <div class="ab-num">90<span>%</span></div>
-      <p class="ab-desc">On high-distress signal detection in active IRB validation with a university research partner. Specificity and predictive-value results will be published with the completed study because half a statistic isn&rsquo;t transparency.</p>
-      <div class="ab-caveat">Active validation &middot; Results pending &middot; Non-diagnostic output</div>
+      <div class="ab-label">Suicide-Attempt Severity, ROC-AUC</div>
+      <div class="ab-num">0.83<span> vs 0.65</span></div>
+      <p class="ab-desc">VLAP against MIT&rsquo;s Suicide Risk Lexicon, the field&rsquo;s reference, on the same corpus and the same split. On substance use, VLAP scores 0.97 F1 on the n2c2 2022 SHAC test, 518 notes, against 0.83 for a keyword rule.</p>
+      <div class="ab-caveat">Same corpus &middot; Same split &middot; Non-diagnostic output</div>
     </div>
     <div class="hero-stats">
       <div class="hs-row">
-        <div class="hs-num">2,400<span style="font-size:16px">+</span></div>
-        <div class="hs-label">AAVE and youth vernacular tokens added beyond standard BERT-family vocabulary</div>
+        <div class="hs-num">0.97</div>
+        <div class="hs-label">F1 on substance use, n2c2 2022 SHAC test, 518 notes</div>
       </div>
       <div class="hs-row">
-        <div class="hs-num">47</div>
-        <div class="hs-label">Clinical signals across 6 categories</div>
+        <div class="hs-num">55</div>
+        <div class="hs-label">Signals across seven dimensions (Taxonomy v2.0)</div>
       </div>
       <div class="hs-row">
-        <div class="hs-num">5</div>
-        <div class="hs-label">Cultural communities represented in the training annotation cohort</div>
+        <div class="hs-num">0</div>
+        <div class="hs-label">Patient text sent to an outside AI company</div>
       </div>
     </div>
   </div>
@@ -982,9 +982,9 @@
         never learned<br>
         <em>their language.</em>
       </h2>
-      <p class="problem-body">General-purpose NLP models, including large language models, are trained on internet text that skews heavily toward majority-White, educated, English-speaking populations. Standard models therefore miss the specific ways Black and Latino, LGBTQ+, and first-generation youth signal emotional distress.</p>
+      <p class="problem-body">General-purpose NLP models, including large language models, are trained on internet text that skews heavily toward majority-White, educated, English-speaking populations. Standard models therefore miss the specific ways Black and Latino, LGBTQ+, rural, and first-generation patients signal emotional distress.</p>
       <p class="problem-body">This isn't a model failure in the traditional sense. These models perform well on the populations they were trained for. The failure is in deploying them, uncorrected, for populations they were never trained on and expecting accurate clinical signal detection to follow.</p>
-      <p class="problem-body">The gap isn't theoretical. In clinical practice, it means a youth saying "lowkey been struggling fr" is read as casual. A pre-disclosure minimization pattern ("it's not that deep but...") reduces the model's confidence instead of increasing it. Community-developed coded language, terms built specifically to avoid content filters, registers as noise. Standard models consistently miss these signals in the communities that most need them caught.</p>
+      <p class="problem-body">The gap isn't theoretical. In clinical practice, it means a patient saying "lowkey been struggling fr" is read as casual. A pre-disclosure minimization pattern ("it's not that deep but...") reduces the model's confidence instead of increasing it. Community-developed coded language, terms built specifically to avoid content filters, registers as noise. Standard models consistently miss these signals in the communities that most need them caught.</p>
     </div>
 
     <div class="failure-panels reveal d2">
@@ -1002,7 +1002,7 @@
         </div>
       </div>
       <div class="fp-item">
-        <div class="fp-utterance">"it's not that deep but lowkey been struggling since school started."</div>
+        <div class="fp-utterance">"it's not that deep but lowkey been struggling since I got laid off."</div>
         <div class="fp-row">
           <div class="fp-col standard">
             <div class="fp-col-label">Standard NLP reads</div>
@@ -1044,7 +1044,7 @@
 
     <div class="reveal d1" style="padding:32px 0;border-bottom:1px solid var(--chalk, rgba(28,28,28,0.12));">
       <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--clay);margin-bottom:10px;">What VLAP reads</div>
-      <p style="font-size:16px;font-weight:300;line-height:1.7;color:var(--ink-70, rgba(28,28,28,0.7));">VLAP analyzes the language members choose to share on the platform, check-ins, peer-group messages, coach conversations. It looks for 47 clinical signals across 6 categories: patterns like pre-disclosure minimization, withdrawal, and escalating distress, expressed the way young people actually express them.</p>
+      <p style="font-size:16px;font-weight:300;line-height:1.7;color:var(--ink-70, rgba(28,28,28,0.7));">VLAP reads patient messages, text replies, clinician notes and scribe text: replies to Vasl Bridge texts, and notes over HL7 FHIR R4 from Epic, Cerner and athenahealth. It flags 55 signals across seven dimensions (Taxonomy v2.0), from behavioral health risk to substance use and social needs: patterns like pre-disclosure minimization, withdrawal, and escalating distress, expressed the way patients actually express them.</p>
     </div>
 
     <div class="reveal d2" style="padding:32px 0;border-bottom:1px solid var(--chalk, rgba(28,28,28,0.12));">
@@ -1054,22 +1054,22 @@
 
     <div class="reveal d3" style="padding:32px 0;border-bottom:1px solid var(--chalk, rgba(28,28,28,0.12));">
       <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--clay);margin-bottom:10px;">What VLAP never does</div>
-      <p style="font-size:16px;font-weight:300;line-height:1.7;color:var(--ink-70, rgba(28,28,28,0.7));">It never diagnoses. It never labels or scores a young person. It never sends alerts to police, principals, or parents. It never shows individual conversations to schools or funders. Every escalation goes to one place only: a licensed clinician, who reviews the full context before anything happens.</p>
+      <p style="font-size:16px;font-weight:300;line-height:1.7;color:var(--ink-70, rgba(28,28,28,0.7));">It never diagnoses. It never labels or scores a patient. It never sends alerts to police, employers, or family. It never shows individual conversations to outside parties. Every flag goes to the clinician and care team responsible for the patient, who review the full context before anything happens.</p>
     </div>
 
     <div class="reveal d4" style="padding:32px 0;border-bottom:1px solid var(--chalk, rgba(28,28,28,0.12));">
       <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--clay);margin-bottom:10px;">Who sees what</div>
-      <p style="font-size:16px;font-weight:300;line-height:1.7;color:var(--ink-70, rgba(28,28,28,0.7));">Members see their own experience. Coaches see the context they need to reach out well. Licensed clinicians see signal context before sessions. Organizations see only aggregate, de-identified trends, never an individual young person.</p>
+      <p style="font-size:16px;font-weight:300;line-height:1.7;color:var(--ink-70, rgba(28,28,28,0.7));">Patients see their own messages. Coaches see the context they need to reach out well. Clinicians see a named signal with the words behind it, in the workflow they already run. Plan and health-system leadership see only aggregate, de-identified totals. Outside parties see nothing.</p>
     </div>
 
     <div class="reveal d4" style="padding:32px 0;">
       <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--clay);margin-bottom:10px;">How we know it works</div>
-      <p style="font-size:16px;font-weight:300;line-height:1.7;color:var(--ink-70, rgba(28,28,28,0.7));">Our signal accuracy and member outcomes are being independently validated through an IRB-approved study with a university research partner. We publish our measurement definitions, and when the study concludes, we&rsquo;ll publish what it finds, including accuracy across demographic groups.</p>
+      <p style="font-size:16px;font-weight:300;line-height:1.7;color:var(--ink-70, rgba(28,28,28,0.7));">We measure VLAP against the field&rsquo;s reference tools on the same data. On suicide-attempt severity, it scores 0.83 ROC-AUC against 0.65 for MIT&rsquo;s Suicide Risk Lexicon, same corpus, same split. On substance use, it scores 0.97 F1 on the n2c2 2022 SHAC test, 518 notes, against 0.83 for a keyword rule. We publish our measurement definitions with each result.</p>
     </div>
 
   </div>
 
-  <p class="reveal" style="margin-top:40px;font-size:13px;font-weight:300;color:var(--dust, #8B7B6B);max-width:600px;">Written for a parent as much as a clinician, see the <a href="/for-families" style="color:var(--clay);text-decoration:underline;">plain-language version for families</a>.</p>
+  <p class="reveal" style="margin-top:40px;font-size:13px;font-weight:300;color:var(--dust, #8B7B6B);max-width:600px;">Written for a patient&rsquo;s family as much as a clinician, see the <a href="/for-families" style="color:var(--clay);text-decoration:underline;">plain-language version for families</a>.</p>
 </section>
 
 
@@ -1079,27 +1079,27 @@
 
   <div class="arch-header">
     <h2 class="arch-headline reveal d1">
-      Built on BERT-family.<br>
-      Fine-tuned for<br>
+      Our own model.<br>
+      Trained for<br>
       <em>cultural fluency.</em>
     </h2>
-    <p class="arch-intro reveal d2">VLAP is a fine-tuned BERT-family transformer model, trained on a purpose-built corpus of culturally specific mental health language. The BERT-family architecture was selected for its bidirectional context processing, essential for reading the layered meaning in code-switching, minimization patterns, and culturally framed expressions where individual words carry different weight depending on surrounding context. The model was then extended with a culturally specific vocabulary and fine-tuned against a clinically annotated training corpus.</p>
+    <p class="arch-intro reveal d2">VLAP is our own language model, with our own weights, trained on a purpose-built corpus of culturally specific behavioral health language. It reads the layered meaning in code-switching, minimization patterns, and culturally framed expressions, where individual words carry different weight depending on surrounding context. Patient text is read on Vasl infrastructure and never sent to an outside AI company.</p>
   </div>
 
   <div class="arch-layers reveal">
     <div class="arch-layer">
       <div class="al-num">Foundation</div>
       <div class="al-body">
-        <div class="al-title">BERT-Family Base Architecture, Bidirectional Transformer</div>
-        <p class="al-desc">The bidirectional encoding layer processes the full context window simultaneously in both directions, unlike unidirectional models that read left-to-right. This is architecturally necessary for cultural signal detection: the meaning of "lowkey" depends entirely on what follows it, and the clinical significance of a minimization hedge ("it's not that deep but") only becomes clear in context of what comes after the conjunction.</p>
-        <div class="al-tech">BERT-family base &middot; fine-tuned &middot; behavioral health corpus</div>
+        <div class="al-title">Our Own Model, Our Own Weights</div>
+        <p class="al-desc">VLAP reads each message as a whole, so every word is weighed by what surrounds it. That matters for cultural signal detection: the meaning of "lowkey" depends entirely on what follows it, and the clinical significance of a minimization hedge ("it's not that deep but") only becomes clear in context of what comes after the conjunction.</p>
+        <div class="al-tech">Own model &middot; Own weights &middot; Behavioral health corpus</div>
       </div>
     </div>
     <div class="arch-layer">
       <div class="al-num">Extension</div>
       <div class="al-body">
-        <div class="al-title">Vocabulary Extension, 2,400+ Cultural Tokens</div>
-        <p class="al-desc">Standard BERT-family vocabulary was extended with 2,400+ AAVE terms, youth vernacular expressions, code-switching patterns, and community-developed coded language, including terms built specifically to circumvent content filters (e.g., "unaliving"). This extension was compiled through community engagement with BIPOC and LGBTQ+ youth populations and validated by licensed clinicians with relevant community competency. Without this extension, approximately 23% of the training corpus would be processed as unknown tokens by the base model.</p>
+        <div class="al-title">Vocabulary Built With the Communities</div>
+        <p class="al-desc">VLAP&rsquo;s vocabulary covers African American Language, rural speech, queer vernacular, code-switching patterns, and community-developed coded language, including terms built specifically to get past content filters (e.g., "unaliving"). It was compiled through community engagement with BIPOC, LGBTQ+, and rural communities and validated by licensed clinicians with relevant community competency. Standard models read much of this language as unknown words or as noise.</p>
         <div class="al-tech">Community-sourced &middot; Clinically validated &middot; Continuously updated</div>
       </div>
     </div>
@@ -1107,24 +1107,24 @@
       <div class="al-num">Training</div>
       <div class="al-body">
         <div class="al-title">Fine-Tuning on Culturally Specific Mental Health Corpus</div>
-        <p class="al-desc">The extended BERT-family model was fine-tuned on annotated language samples drawn from the communities VLAP serves, specifically collected and clinically annotated mental health communication rather than web-scraped text. Each sample was labeled by licensed clinicians with community competency training against the 47-signal taxonomy across six clinical categories. The fine-tuning process was conducted in multiple phases with inter-annotator agreement validation.</p>
+        <p class="al-desc">VLAP was trained on annotated language samples drawn from the communities it serves, specifically collected and clinically annotated mental health communication rather than web-scraped text. Each sample was labeled by licensed clinicians with community competency training against the VLAP taxonomy, now 55 signals across seven dimensions (Taxonomy v2.0). The fine-tuning process was conducted in multiple phases with inter-annotator agreement validation.</p>
         <div class="al-tech">Multi-phase fine-tuning &middot; IAA validation across annotation cohort</div>
       </div>
     </div>
     <div class="arch-layer">
       <div class="al-num">Output</div>
       <div class="al-body">
-        <div class="al-title">Dimensional Signal Profiling, Non-Diagnostic Output Layer</div>
-        <p class="al-desc">The model output layer generates dimensional signal profiles across the six-category taxonomy, not diagnostic outputs, not severity scores, and not clinical recommendations. The output is an interpretive context package containing which signal patterns are present, their dimensional classification, and cultural interpretation notes that help clinicians understand what the patterns typically indicate in the communities that produce them. Every output includes a non-diagnostic disclaimer and is designed to support clinical judgment, not substitute for it.</p>
-        <div class="al-tech">Non-diagnostic &middot; Interpretive context &middot; 47-signal taxonomy &middot; Clinician-surfaced only</div>
+        <div class="al-title">Named Signals, Non-Diagnostic Output Layer</div>
+        <p class="al-desc">The output layer generates named signals across the seven dimensions, each with the words behind it. Not diagnostic outputs, not scores, and not clinical recommendations. The output shows which signal patterns are present, the exact words behind each, and cultural interpretation notes that help clinicians understand what the patterns typically indicate in the communities that produce them. VLAP is non-device clinical decision support under Section 3060 of the 21st Century Cures Act, built to support clinical judgment, not substitute for it.</p>
+        <div class="al-tech">Non-diagnostic &middot; Words behind every flag &middot; 55 signals, seven dimensions &middot; Clinician-facing</div>
       </div>
     </div>
     <div class="arch-layer">
       <div class="al-num">Processing</div>
       <div class="al-body">
-        <div class="al-title">In-Memory Processing, No Verbatim Storage</div>
-        <p class="al-desc">VLAP processes member language in-memory. Verbatim input text is not stored after signal profile generation. The retained output is a dimensional signal profile, not a transcript, not a quote, not a record of the member's exact language. This architectural constraint is a HIPAA technical safeguard, not a configurable setting. It cannot be disabled by organizational administrators or overridden by clinical staff.</p>
-        <div class="al-tech">In-memory inference &middot; No PHI retention post-processing &middot; HIPAA technical safeguard</div>
+        <div class="al-title">Read on Vasl Infrastructure, Never Sent Out</div>
+        <p class="al-desc">VLAP reads patient text on Vasl infrastructure. Patient text is never sent to an outside AI company. The output is a named signal with the words behind it, delivered only to the clinician and care team responsible for the patient. This architectural constraint is a HIPAA technical safeguard, not a configurable setting. It cannot be disabled by organizational administrators or overridden by clinical staff.</p>
+        <div class="al-tech">Vasl infrastructure &middot; No outside AI company &middot; HIPAA technical safeguard</div>
       </div>
     </div>
   </div>
@@ -1148,23 +1148,23 @@
     <div class="tg-col">
       <div class="tg-col-label">Corpus Scale</div>
       <div class="tg-stat">
-        <div class="tg-stat-num">2,400<span style="font-size:24px">+</span></div>
-        <div class="tg-stat-label">Extended vocabulary tokens beyond base BERT-family vocabulary</div>
+        <div class="tg-stat-num">55</div>
+        <div class="tg-stat-label">Signals across seven dimensions (Taxonomy v2.0)</div>
       </div>
       <div class="tg-stat">
         <div class="tg-stat-num">5</div>
         <div class="tg-stat-label">Cultural community cohorts represented in annotation</div>
       </div>
       <div class="tg-stat">
-        <div class="tg-stat-num">47</div>
-        <div class="tg-stat-label">Distress signal patterns across 6 clinical categories</div>
+        <div class="tg-stat-num">518</div>
+        <div class="tg-stat-label">Clinical notes in the n2c2 2022 SHAC test, where VLAP scores 0.97 F1 on substance use</div>
       </div>
     </div>
     <div class="tg-col">
       <div class="tg-col-label">Methodology</div>
       <div class="tg-item">
         <div class="tg-item-title">Community-partnered data collection</div>
-        <p class="tg-item-body">Language samples were collected in partnership with community organizations serving Black, Latino, LGBTQ+, first-generation, and youth in urban and rural communities, not scraped from public platforms. Consent protocols, anonymization procedures, and community review were built into the collection process.</p>
+        <p class="tg-item-body">Language samples were collected in partnership with community organizations serving Black, Latino, LGBTQ+, and first-generation people in urban and rural communities, not scraped from public platforms. Consent protocols, anonymization procedures, and community review were built into the collection process.</p>
       </div>
       <div class="tg-item">
         <div class="tg-item-title">Clinical annotation with community competency requirement</div>
@@ -1172,7 +1172,7 @@
       </div>
       <div class="tg-item">
         <div class="tg-item-title">Vocabulary development through community engagement</div>
-        <p class="tg-item-body">The 2,400+ vocabulary extension was compiled through structured engagement with youth from the target communities, not through generic web scraping. Vocabulary candidates were reviewed for clinical accuracy by the annotation cohort before inclusion.</p>
+        <p class="tg-item-body">The vocabulary was compiled through structured engagement with people from the target communities, not through generic web scraping. Vocabulary candidates were reviewed for clinical accuracy by the annotation cohort before inclusion.</p>
       </div>
       <div class="tg-item">
         <div class="tg-item-title">Bias monitoring integrated into training</div>
@@ -1185,14 +1185,14 @@
 
 <!-- ═══ TAXONOMY ═══ -->
 <section id="taxonomy">
-  <div class="chapter-label light reveal">Chapter 05, The 47-Signal Distress Signal Taxonomy</div>
+  <div class="chapter-label light reveal">Chapter 05, The VLAP Signal Taxonomy, v2.0</div>
 
   <div class="tax-header">
     <h2 class="tax-headline reveal d1">
-      47 signals.<br>
-      <em>Six categories.</em>
+      55 signals.<br>
+      <em>Seven dimensions.</em>
     </h2>
-    <p class="tax-intro reveal d2">The VLAP Distress Signal Taxonomy (v1.0) is the clinical reference document behind VLAP, it defines the 47 discrete linguistic, behavioral, and contextual signals VLAP is trained to detect, organized into six clinically grounded categories. It serves as the model specification, the annotation codebook for IRB study data labeling, and the signal-level evidence base for VLAP&rsquo;s NIMH SBIR Phase I application. The taxonomy is updated as language evolves and as clinical review proceeds.</p>
+    <p class="tax-intro reveal d2">The VLAP Signal Taxonomy (v2.0) is the clinical reference document behind VLAP. It defines 55 linguistic, behavioral, and contextual signals across seven dimensions, from behavioral health risk to substance use and social needs. It serves as the model specification, the annotation codebook, and the signal-level evidence base for VLAP&rsquo;s NIMH SBIR Phase I application. The signals below are illustrative examples of how VLAP reads culturally specific distress, not the full taxonomy. The taxonomy is updated as language evolves and as clinical review proceeds.</p>
   </div>
 
   <div class="tax-constraint reveal">
@@ -1205,7 +1205,7 @@
       <div class="cat-head">
         <div class="cat-code-col">
           <div class="cat-code">HOP</div>
-          <div class="cat-signal-count">9 signals</div>
+          <div class="cat-signal-count">Examples</div>
         </div>
         <div class="cat-main">
           <div class="cat-name">Hopelessness & Futility</div>
@@ -1277,7 +1277,7 @@
           <div class="sig-ex">&ldquo;I don't really think about the future anymore&rdquo;</div>
           <div class="sig-ex">&ldquo;Stopped making plans&rdquo;</div>
           </div>
-          <p class="sig-note">Shift from future-orientation to present-only or past-only temporal framing. Requires longitudinal signal comparison, most meaningful when contrasted against previous session content. Flags for V2 cross-session modeling. In single-session context: Low-Moderate.</p>
+          <p class="sig-note">Shift from future-orientation to present-only or past-only temporal framing. Requires longitudinal signal comparison, most meaningful when contrasted against previous session content. Flags for cross-session modeling. In single-session context: Low-Moderate.</p>
         </div>
         <div class="sig-card reveal">
           <div class="sig-card-head">
@@ -1317,7 +1317,7 @@
           <div class="sig-ex">&ldquo;I've seen what happens to people like us&rdquo;</div>
           <div class="sig-ex">&ldquo;That kind of life isn't for someone like me&rdquo;</div>
           </div>
-          <p class="sig-note">Specifically references the cultural narrative of LGBTQIA+ suffering, 'people like me' and 'people like us' are key referents. Generic models do not detect the referent. For LGBTQIA+ youth, this expression carries the weight of observed community trauma as well as personal pessimism. Requires LGBTQIA+ identity context flag from member profile.</p>
+          <p class="sig-note">Specifically references the cultural narrative of LGBTQIA+ suffering, 'people like me' and 'people like us' are key referents. Generic models do not detect the referent. For LGBTQIA+ patients, this expression carries the weight of observed community trauma as well as personal pessimism. Requires LGBTQIA+ identity context flag from member profile.</p>
         </div>
         <div class="sig-card reveal">
           <div class="sig-card-head">
@@ -1330,7 +1330,7 @@
           <div class="sig-ex">&ldquo;My parents went through all that and I can't even&rdquo;</div>
           <div class="sig-ex">&ldquo;I was supposed to be the one who made it&rdquo;</div>
           </div>
-          <p class="sig-note">Specific to first-generation and immigrant youth, the weight of intergenerational sacrifice creates a distinct form of hopelessness in which the member perceives themselves as failing a familial obligation. Not detectable by generic models without cultural context. Requires first-gen or immigrant identity flag from member profile.</p>
+          <p class="sig-note">Specific to first-generation and immigrant patients, the weight of intergenerational sacrifice creates a distinct form of hopelessness in which the member perceives themselves as failing a familial obligation. Not detectable by generic models without cultural context. Requires first-gen or immigrant identity flag from member profile.</p>
         </div>
       </div>
     </div>
@@ -1339,7 +1339,7 @@
       <div class="cat-head">
         <div class="cat-code-col">
           <div class="cat-code">SHA</div>
-          <div class="cat-signal-count">8 signals</div>
+          <div class="cat-signal-count">Examples</div>
         </div>
         <div class="cat-main">
           <div class="cat-name">Coded Suicidal Ideation</div>
@@ -1358,7 +1358,7 @@
           <div class="sig-ex">&ldquo;I'm thinking about suicide&rdquo;</div>
           <div class="sig-ex">&ldquo;I've been having thoughts of ending my life&rdquo;</div>
           </div>
-          <p class="sig-note">Well-detected by all NLP models. Included as validation baseline. VLAP does not differentiate meaningfully from generic models on this signal. The 47-signal taxonomy is justified by performance on SHA-02 through SHA-08 and the other five categories, not SHA-01.</p>
+          <p class="sig-note">Well-detected by all NLP models. Included as validation baseline. VLAP does not differentiate meaningfully from generic models on this signal. The taxonomy is justified by performance on SHA-02 through SHA-08 and the other dimensions, not SHA-01.</p>
         </div>
         <div class="sig-card reveal">
           <div class="sig-card-head">
@@ -1371,7 +1371,7 @@
           <div class="sig-ex">&ldquo;I want to unalive myself honestly&rdquo;</div>
           <div class="sig-ex">&ldquo;Thought about unaliving last night&rdquo;</div>
           </div>
-          <p class="sig-note">CRITICAL, youth-specific euphemism developed explicitly to evade content moderation on TikTok, Instagram, and other platforms. First documented in widespread use approximately 2020. Most generic NLP models trained before 2022 do not have 'unaliving' in clinical context in training data. VLAP's training data includes 180+ documented uses with clinical annotation. This is one of the clearest demonstrations of generic model failure and VLAP's advantage.</p>
+          <p class="sig-note">CRITICAL, euphemism developed explicitly to evade content moderation on TikTok, Instagram, and other platforms. First documented in widespread use approximately 2020. Most generic NLP models trained before 2022 do not have 'unaliving' in clinical context in training data. VLAP's training data includes 180+ documented uses with clinical annotation. This is one of the clearest demonstrations of generic model failure and VLAP's advantage.</p>
         </div>
         <div class="sig-card reveal">
           <div class="sig-card-head">
@@ -1450,7 +1450,7 @@
           <div class="sig-ex">&ldquo;Ready to check out for real&rdquo;</div>
           <div class="sig-ex">&ldquo;Done with this whole run honestly&rdquo;</div>
           </div>
-          <p class="sig-note">Community-specific coded language for death or suicide. 'Catching a fade' is documented in AAVE; 'checking out' and 'ending the run' are youth-vernacular constructions. These do not appear in generic NLP training data in clinical context. VLAP's training data includes 95+ community-specific death euphemisms with clinical annotation.</p>
+          <p class="sig-note">Community-specific coded language for death or suicide. 'Catching a fade' is documented in AAVE; 'checking out' and 'ending the run' are vernacular constructions. These do not appear in generic NLP training data in clinical context. VLAP's training data includes 95+ community-specific death euphemisms with clinical annotation.</p>
         </div>
       </div>
     </div>
@@ -1459,7 +1459,7 @@
       <div class="cat-head">
         <div class="cat-code-col">
           <div class="cat-code">CCM</div>
-          <div class="cat-signal-count">8 signals</div>
+          <div class="cat-signal-count">Examples</div>
         </div>
         <div class="cat-main">
           <div class="cat-name">Minimization & Disclosure Suppression</div>
@@ -1505,7 +1505,7 @@
           <div class="sig-ex">&ldquo;Is it weird if I say something?&rdquo;</div>
           <div class="sig-ex">&ldquo;Don't judge me, okay, but...&rdquo;</div>
           </div>
-          <p class="sig-note">Pre-disclosure social negotiation, the member is seeking explicit permission and a non-judgmental response before disclosing. Particularly significant in youth who have previously disclosed to an adult and experienced a negative response. VLAP flags this for an immediate warm, non-judgmental coach response.</p>
+          <p class="sig-note">Pre-disclosure social negotiation, the member is seeking explicit permission and a non-judgmental response before disclosing. Particularly significant in patients who have previously disclosed to someone and experienced a negative response. VLAP flags this for an immediate warm, non-judgmental coach response.</p>
         </div>
         <div class="sig-card reveal">
           <div class="sig-card-head">
@@ -1557,7 +1557,7 @@
           <div class="sig-ex">&ldquo;Other people have it so much worse than me&rdquo;</div>
           <div class="sig-ex">&ldquo;I shouldn't be this upset, it's not even that serious&rdquo;</div>
           </div>
-          <p class="sig-note">Internalized stigma, the member has accepted the message that their distress is not legitimate or warranted. Particularly documented in Black, Latino, and LGBTQIA+ youth. The comparison to 'other people' with more severe situations is a disclosure suppression mechanism. VLAP flags for validation-focused coach response.</p>
+          <p class="sig-note">Internalized stigma, the member has accepted the message that their distress is not legitimate or warranted. Particularly documented in Black, Latino, and LGBTQIA+ communities. The comparison to 'other people' with more severe situations is a disclosure suppression mechanism. VLAP flags for validation-focused coach response.</p>
         </div>
         <div class="sig-card reveal">
           <div class="sig-card-head">
@@ -1579,7 +1579,7 @@
       <div class="cat-head">
         <div class="cat-code-col">
           <div class="cat-code">ISO</div>
-          <div class="cat-signal-count">7 signals</div>
+          <div class="cat-signal-count">Examples</div>
         </div>
         <div class="cat-main">
           <div class="cat-name">Social Isolation & Withdrawal</div>
@@ -1598,7 +1598,7 @@
           <div class="sig-ex">&ldquo;Stopped going out or seeing people&rdquo;</div>
           <div class="sig-ex">&ldquo;Not really talking to anyone these days&rdquo;</div>
           </div>
-          <p class="sig-note">Explicit social withdrawal. Well-detected by generic models in standard formulation. VLAP adds detection of AAVE and youth-vernacular variants. Moderate risk in isolation; elevates significantly in combination with HOP or SHA signals.</p>
+          <p class="sig-note">Explicit social withdrawal. Well-detected by generic models in standard formulation. VLAP adds detection of AAVE and other vernacular variants. Moderate risk in isolation; elevates significantly in combination with HOP or SHA signals.</p>
         </div>
         <div class="sig-card reveal">
           <div class="sig-card-head">
@@ -1638,7 +1638,7 @@
           <div class="sig-ex">&ldquo;Can't be myself anywhere, it's exhausting&rdquo;</div>
           <div class="sig-ex">&ldquo;Always performing, never actually me&rdquo;</div>
           </div>
-          <p class="sig-note">Documented psychological stressor specific to Black, Latino, and LGBTQIA+ youth, the exhaustion of constantly adapting one's language, presentation, and identity to majority contexts. In VLAP's context, code-switching exhaustion is an isolation marker.</p>
+          <p class="sig-note">Documented psychological stressor specific to Black, Latino, and LGBTQIA+ people, the exhaustion of constantly adapting one's language, presentation, and identity to majority contexts. In VLAP's context, code-switching exhaustion is an isolation marker.</p>
         </div>
         <div class="sig-card reveal">
           <div class="sig-card-head">
@@ -1651,7 +1651,7 @@
           <div class="sig-ex">&ldquo;Don't fit in anywhere, not even with people like me&rdquo;</div>
           <div class="sig-ex">&ldquo;Feel like I'm between worlds and belong in neither&rdquo;</div>
           </div>
-          <p class="sig-note">Feeling rejected or invisible within one's own cultural community, a specific form of isolation particularly painful for youth who experience intersectional marginalization. Generic models do not detect the cultural referent.</p>
+          <p class="sig-note">Feeling rejected or invisible within one's own cultural community, a specific form of isolation particularly painful for people who experience intersectional marginalization. Generic models do not detect the cultural referent.</p>
         </div>
         <div class="sig-card reveal">
           <div class="sig-card-head">
@@ -1678,7 +1678,7 @@
           <div class="sig-ex">&ldquo;Turned all my notifications off&rdquo;</div>
           <div class="sig-ex">&ldquo;Not really on anything anymore&rdquo;</div>
           </div>
-          <p class="sig-note">Withdrawal from digital social spaces, for youth, digital social networks are primary social infrastructure. Low risk in isolation; Moderate in combination with ISO-01 or any HOP signal.</p>
+          <p class="sig-note">Withdrawal from digital social spaces, for many younger patients, digital social networks are primary social infrastructure. Low risk in isolation; Moderate in combination with ISO-01 or any HOP signal.</p>
         </div>
       </div>
     </div>
@@ -1687,7 +1687,7 @@
       <div class="cat-head">
         <div class="cat-code-col">
           <div class="cat-code">TRM</div>
-          <div class="cat-signal-count">8 signals</div>
+          <div class="cat-signal-count">Examples</div>
         </div>
         <div class="cat-main">
           <div class="cat-name">Trauma & Acute Stressor Markers</div>
@@ -1707,7 +1707,7 @@
           <div class="sig-ex">&ldquo;This neighborhood just takes people&rdquo;</div>
           <div class="sig-ex">&ldquo;Can't even go outside without...&rdquo;</div>
           </div>
-          <p class="sig-note">Repeated exposure to community violence is a documented trauma and acute stressor for urban youth. For many members, violence is normalized in language. VLAP flags for trauma-informed engagement. Cumulative exposure tracked longitudinally.</p>
+          <p class="sig-note">Repeated exposure to community violence is a documented trauma and acute stressor in urban communities. For many members, violence is normalized in language. VLAP flags for trauma-informed engagement. Cumulative exposure tracked longitudinally.</p>
         </div>
         <div class="sig-card reveal">
           <div class="sig-card-head">
@@ -1721,7 +1721,7 @@
           <div class="sig-ex">&ldquo;My mom moved us again&rdquo;</div>
           <div class="sig-ex">&ldquo;Don't really have a stable place&rdquo;</div>
           </div>
-          <p class="sig-note">Housing instability is a strong predictor of youth mental health crisis, often expressed matter-of-factly in communities where it is common. VLAP flags for social determinants of health documentation and connection to housing support resources.</p>
+          <p class="sig-note">Housing instability is a strong predictor of mental health crisis, often expressed matter-of-factly in communities where it is common. VLAP flags for social determinants of health documentation and connection to housing support resources.</p>
         </div>
         <div class="sig-card reveal">
           <div class="sig-card-head">
@@ -1734,7 +1734,7 @@
           <div class="sig-ex">&ldquo;We don't know if we can stay&rdquo;</div>
           <div class="sig-ex">&ldquo;ICE came to someone's house in our neighborhood&rdquo;</div>
           </div>
-          <p class="sig-note">Immigration anxiety is an acute and chronic stressor for immigrant youth and families. Not independently a clinical risk indicator but a significant context marker that elevates other signals.</p>
+          <p class="sig-note">Immigration anxiety is an acute and chronic stressor for immigrant families. Not independently a clinical risk indicator but a significant context marker that elevates other signals.</p>
         </div>
         <div class="sig-card reveal">
           <div class="sig-card-head">
@@ -1761,7 +1761,7 @@
           <div class="sig-ex">&ldquo;Scared every time I leave the house&rdquo;</div>
           <div class="sig-ex">&ldquo;Got a court date coming up&rdquo;</div>
           </div>
-          <p class="sig-note">Police contact and legal system involvement are acute and chronic stressors for Black and Latino youth disproportionately. The fear of police contact is independently traumatic regardless of actual contact.</p>
+          <p class="sig-note">Police contact and legal system involvement are acute and chronic stressors for Black and Latino communities disproportionately. The fear of police contact is independently traumatic regardless of actual contact.</p>
         </div>
         <div class="sig-card reveal">
           <div class="sig-card-head">
@@ -1788,7 +1788,7 @@
           <div class="sig-ex">&ldquo;I've been to too many funerals&rdquo;</div>
           <div class="sig-ex">&ldquo;My community just keeps losing people&rdquo;</div>
           </div>
-          <p class="sig-note">Cumulative community loss, the accumulation of grief across multiple losses within a community. Particularly significant for Black and Latino youth in communities with high rates of gun violence.</p>
+          <p class="sig-note">Cumulative community loss, the accumulation of grief across multiple losses within a community. Particularly significant for Black and Latino patients in communities with high rates of gun violence.</p>
         </div>
         <div class="sig-card reveal">
           <div class="sig-card-head">
@@ -1801,7 +1801,7 @@
           <div class="sig-ex">&ldquo;I'm basically the parent right now&rdquo;</div>
           <div class="sig-ex">&ldquo;Nobody's really home, I'm handling everything&rdquo;</div>
           </div>
-          <p class="sig-note">Parentified youth, children assuming caregiver roles, experience heightened stress, accelerated loss of childhood, and reduced access to their own emotional needs. VLAP flags for acknowledgment of the burden and connection to youth support resources.</p>
+          <p class="sig-note">Parentified youth, children assuming caregiver roles, experience heightened stress, accelerated loss of childhood, and reduced access to their own emotional needs. VLAP flags for acknowledgment of the burden and connection to caregiver support resources.</p>
         </div>
       </div>
     </div>
@@ -1810,11 +1810,11 @@
       <div class="cat-head">
         <div class="cat-code-col">
           <div class="cat-code">PFE</div>
-          <div class="cat-signal-count">7 signals</div>
+          <div class="cat-signal-count">Examples</div>
         </div>
         <div class="cat-main">
           <div class="cat-name">Protective Factor Erosion</div>
-          <p class="cat-basis">PFE signals are not distress signals in isolation, they indicate that a previously present protective factor has been removed, which elevates baseline risk. They are most clinically significant as longitudinal markers (V2 cross-session modeling) and in combination with HOP or SHA signals. The protective factors most relevant to Vasl&rsquo;s population, faith community, mentors, peer networks, cultural identity, and aspirational goals, are different from those in the clinical literature developed for White, middle-class youth populations.</p>
+          <p class="cat-basis">PFE signals are not distress signals in isolation, they indicate that a previously present protective factor has been removed, which elevates baseline risk. They are most clinically significant as longitudinal markers (cross-session modeling) and in combination with HOP or SHA signals. The protective factors most relevant to Vasl&rsquo;s population, faith community, mentors, friendships, cultural identity, and aspirational goals, are different from those in the clinical literature developed for White, middle-class populations.</p>
         </div>
       </div>
       <div class="sig-grid">
@@ -1843,7 +1843,7 @@
           <div class="sig-ex">&ldquo;The one adult who actually got me is gone&rdquo;</div>
           <div class="sig-ex">&ldquo;Nobody checks on me like that anymore&rdquo;</div>
           </div>
-          <p class="sig-note">Loss of a trusted adult is a documented protective factor erosion. For youth with limited trusted adult relationships, losing one trusted adult removes a disproportionate share of the member's social safety net. VLAP flags for immediate coach relationship reinforcement.</p>
+          <p class="sig-note">Loss of a trusted adult is a documented protective factor erosion. For patients with few trusted adults in their lives, losing one removes a disproportionate share of the member's social safety net. VLAP flags for immediate coach relationship reinforcement.</p>
         </div>
         <div class="sig-card reveal">
           <div class="sig-card-head">
@@ -1882,7 +1882,7 @@
           <div class="sig-ex">&ldquo;Stopped thinking about that kind of future&rdquo;</div>
           <div class="sig-ex">&ldquo;Those dreams don't seem realistic anymore&rdquo;</div>
           </div>
-          <p class="sig-note">Aspirational identity erosion. Particularly significant for first-generation youth for whom educational aspirations carry the weight of family sacrifice. A longitudinal hopelessness marker.</p>
+          <p class="sig-note">Aspirational identity erosion. Particularly significant for first-generation patients for whom educational aspirations carry the weight of family sacrifice. A longitudinal hopelessness marker.</p>
         </div>
         <div class="sig-card reveal">
           <div class="sig-card-head">
@@ -1895,7 +1895,7 @@
           <div class="sig-ex">&ldquo;Don't know where I belong, not here, not there&rdquo;</div>
           <div class="sig-ex">&ldquo;Forgot how to be who I was supposed to be&rdquo;</div>
           </div>
-          <p class="sig-note">Cultural identity is a documented protective factor for BIPOC youth. Strong cultural identity correlates with lower rates of depression and suicidal ideation in these populations. Particularly relevant in first-generation, immigrant, and mixed-heritage youth.</p>
+          <p class="sig-note">Cultural identity is a documented protective factor in BIPOC communities. Strong cultural identity correlates with lower rates of depression and suicidal ideation in these populations. Particularly relevant for first-generation, immigrant, and mixed-heritage patients.</p>
         </div>
         <div class="sig-card reveal">
           <div class="sig-card-head">
@@ -2012,7 +2012,7 @@
           </div>
           <div class="val-status-row">
             <div class="vsr-cat">PFE<span class="vsr-range">PFE-01 to PFE-07</span></div>
-            <div class="vsr-status">All signals annotated as longitudinal markers. Requires session data accumulation for validation. Primarily a V2 research agenda.</div>
+            <div class="vsr-status">All signals annotated as longitudinal markers. Requires session data accumulation for validation. Primarily a longitudinal research agenda.</div>
             <div class="vsr-question"><span class="vsr-q-label">SBIR Research Question</span>Do PFE signals predict PHQ-8 trajectory deterioration over 60 days when present in the absence of active HOP/SHA signals?</div>
           </div>
     </div>
@@ -2041,36 +2041,36 @@
 
   <div class="val-header">
     <h2 class="val-headline reveal d1">
-      Validated against<br>
-      real clinical<br>
-      <em>populations.</em>
+      Measured against<br>
+      the field&rsquo;s<br>
+      <em>reference tools.</em>
     </h2>
-    <p class="val-sub reveal d2">VLAP's accuracy claims are grounded in active IRB-approved clinical research with a university research partner, not internal testing, not synthetic benchmarks, and not general NLP performance metrics that don't account for cultural signal specificity.</p>
+    <p class="val-sub reveal d2">VLAP&rsquo;s accuracy claims are measured head to head against the field&rsquo;s reference tools on the same data, on a held-out test split, with the corpus, the split and the limitations stated. Not projected targets, and not general NLP performance metrics that don't account for cultural signal specificity.</p>
   </div>
 
   <div class="val-grid">
     <div class="val-col reveal">
       <div class="val-col-label">Accuracy Metrics</div>
       <div class="val-metric">
-        <div class="val-metric-num">90<span style="font-size:24px">%</span></div>
-        <div class="val-metric-label">High-distress signal sensitivity</div>
-        <p class="val-metric-body">VLAP's ability to detect high-distress signals when they are present in member language, measured against clinician-adjudicated ground truth in the IRB study cohort. Sensitivity is optimized conservatively for the SHA and HOP categories, and for signal combinations that trigger High-risk escalation: we accept more false positives to minimize missed crisis signals.</p>
+        <div class="val-metric-num">0.83<span style="font-size:24px"> vs 0.65</span></div>
+        <div class="val-metric-label">Suicide-attempt severity, ROC-AUC</div>
+        <p class="val-metric-body">VLAP against MIT&rsquo;s Suicide Risk Lexicon, the field&rsquo;s reference, on the same corpus and the same split. The lexicon scores 0.65. Sensitivity is set conservatively for the SHA and HOP categories, and for signal combinations that trigger High-risk escalation: we accept more false positives to minimize missed crisis signals.</p>
       </div>
       <div class="val-metric">
-        <div class="val-metric-num">23<span style="font-size:24px">%</span></div>
-        <div class="val-metric-label">Standard NLP vocabulary gap</div>
-        <p class="val-metric-body">Percentage of the VLAP training corpus that would be processed as unknown tokens by a standard BERT model without the extended vocabulary, representing the portion of culturally specific language that standard models are structurally unable to read.</p>
+        <div class="val-metric-num">0.97<span style="font-size:24px"> F1</span></div>
+        <div class="val-metric-label">Substance use in clinical notes</div>
+        <p class="val-metric-body">On the n2c2 2022 SHAC test, 518 clinical notes, VLAP scores 0.97 F1 on substance use. A keyword rule scores 0.83 on the same notes.</p>
       </div>
     </div>
     <div class="val-col reveal d1">
       <div class="val-col-label">Validation Approach</div>
       <div class="val-metric">
-        <div class="val-metric-label">Active IRB Study, University Research Partner</div>
-        <p class="val-metric-body">VLAP signal accuracy is being validated through an IRB-approved clinical study with a university research partner, using production deployment data from live Vasl cohorts. The study compares VLAP signal output against clinician-adjudicated gold-standard assessments of the same member language. Results will be published in peer-reviewed literature upon study completion.</p>
+        <div class="val-metric-label">Head-to-Head Measurement</div>
+        <p class="val-metric-body">Every result is measured against a named reference on the same data: MIT&rsquo;s Suicide Risk Lexicon for suicide-attempt severity, and a keyword rule for substance use on the n2c2 2022 SHAC test. Each result names its corpus, its split and what it was compared against.</p>
       </div>
       <div class="val-metric">
         <div class="val-metric-label">Demographic Bias Monitoring</div>
-        <p class="val-metric-body">False positive and false negative rates are disaggregated across Black, Latino, LGBTQ+, first-generation, and limited English proficiency subgroups in both the training validation and the IRB study. Parity thresholds are enforced operationally, a model version that meets aggregate accuracy targets but fails subgroup parity is not deployed. Bias monitoring is an ongoing production gate, not a one-time evaluation.</p>
+        <p class="val-metric-body">False positive and false negative rates are disaggregated across Black, Latino, LGBTQ+, first-generation, and limited English proficiency subgroups in training validation and in every measurement. Parity thresholds are enforced operationally, a model version that meets aggregate accuracy targets but fails subgroup parity is not deployed. Bias monitoring is an ongoing production gate, not a one-time evaluation.</p>
       </div>
       <div class="val-metric">
         <div class="val-metric-label">What Sensitivity Means and Doesn't</div>
@@ -2081,8 +2081,8 @@
 
   <div class="irb-note reveal">
     <div>
-      <div class="irb-label">IRB Study, University Research Partner</div>
-      <p class="irb-body">The active IRB study is currently in the data collection and preliminary analysis phase. Results will be published in a peer-reviewed journal upon completion. The study protocol and preliminary design documentation are available to institutional evaluators under NDA. Contact clinical@gotovasl.com to request access.</p>
+      <div class="irb-label">Model Measurement Report</div>
+      <p class="irb-body">The Model Measurement Report sets out the 0.83 vs 0.65 result on suicide-attempt severity and the 0.97 F1 result on substance use, with the corpus, the split and the limitations stated. It is available to institutional evaluators under NDA. Contact clinical@gotovasl.com to request access.</p>
     </div>
     <div>
       <div class="irb-label">Medical Advisory, Senior Clinical Oversight</div>
@@ -2109,32 +2109,32 @@
     <div class="cf-item">
       <div class="cf-dot"></div>
       <div class="cf-num">Step 01</div>
-      <div class="cf-title">Member check-in or coach message</div>
-      <p class="cf-body">VLAP processes only language shared through Vasl's care channels, daily check-ins and coach messaging threads. Peer group posts, external social media, school email, and any other channel are not processed.</p>
+      <div class="cf-title">Patient reply or clinical note</div>
+      <p class="cf-body">VLAP reads only text shared through the care channels a partner sets up: replies to Vasl Bridge texts, patient messages, and clinician notes and scribe text over HL7 FHIR R4 from Epic, Cerner and athenahealth. External social media and any other channel are not read.</p>
     </div>
     <div class="cf-item">
       <div class="cf-dot"></div>
       <div class="cf-num">Step 02</div>
-      <div class="cf-title">In-memory VLAP inference</div>
-      <p class="cf-body">VLAP processes the language against the 47-signal taxonomy. In-memory only, verbatim text is not retained after processing. Output: a dimensional signal profile.</p>
+      <div class="cf-title">VLAP reads on Vasl infrastructure</div>
+      <p class="cf-body">VLAP reads the text across 55 signals in seven dimensions, on Vasl infrastructure. Patient text is never sent to an outside AI company. Output: a named signal with the words behind it.</p>
     </div>
     <div class="cf-item">
       <div class="cf-dot"></div>
       <div class="cf-num">Step 03</div>
-      <div class="cf-title">AI Client Insights surface to coach dashboard</div>
-      <p class="cf-body">Coaches see a simplified surface of VLAP output in the AI Client Insights panel: plain-language pattern alerts and mood trajectory summaries for their active members. No dimensional codes, no clinical jargon.</p>
+      <div class="cf-title">Signals land in the workflow the team already runs</div>
+      <p class="cf-body">Signals are delivered into the workflow the care team already runs. No new screen to learn. Coaches and care coordinators see plain-language pattern alerts for the patients they follow. No dimensional codes, no clinical jargon.</p>
     </div>
     <div class="cf-item">
       <div class="cf-dot"></div>
       <div class="cf-num">Step 04</div>
-      <div class="cf-title">Full dimensional panel surfaces to licensed clinician</div>
-      <p class="cf-body">When a member is connected to a licensed clinician, the pre-session view includes the full VLAP dimensional signal profile, dimensional codes, pattern descriptions, cultural interpretation notes, and coaching context. Accessible only to licensed clinicians.</p>
+      <div class="cf-title">Full signal context surfaces to the clinician</div>
+      <p class="cf-body">The clinician responsible for the patient sees each named signal, the exact words behind it, pattern descriptions, and cultural interpretation notes. The clinician decides.</p>
     </div>
     <div class="cf-item">
       <div class="cf-dot"></div>
       <div class="cf-num">Step 05</div>
-      <div class="cf-title">High-risk escalations surface to clinical supervisor, 90-minute SLA</div>
-      <p class="cf-body">Signals or signal combinations that meet High-risk escalation criteria are surfaced immediately to Vasl's licensed clinical supervisor team. A licensed clinician reviews the signal and determines the appropriate response. No automated action. Human judgment initiates every response.</p>
+      <div class="cf-title">High-risk signals surface for immediate clinician review</div>
+      <p class="cf-body">Signals or signal combinations that meet High-risk escalation criteria surface immediately to the responsible clinician. A clinician reviews the signal and decides the response. No automated action. Human judgment starts every response.</p>
     </div>
   </div>
 
@@ -2146,19 +2146,19 @@
       <div class="cd-item">Make clinical decisions or recommendations</div>
       <div class="cd-item">Initiate contact with members automatically</div>
       <div class="cd-item">Take automated action in response to crisis signals</div>
-      <div class="cd-item">Scan peer group posts or external channels</div>
-      <div class="cd-item">Store verbatim member language after processing</div>
-      <div class="cd-item">Surface individual signal data to school or org administrators</div>
+      <div class="cd-item">Read social media or other outside channels</div>
+      <div class="cd-item">Send patient text to an outside AI company</div>
+      <div class="cd-item">Share individual signal data with outside parties</div>
     </div>
     <div class="cd-col">
       <div class="cd-header">VLAP Does</div>
       <div class="cd-item">Detect culturally specific distress signals in care-channel language</div>
-      <div class="cd-item">Surface dimensional signal profiles to coaches and clinicians</div>
+      <div class="cd-item">Deliver named signals, with the words behind them, to care teams</div>
       <div class="cd-item">Flag crisis signals for immediate human clinical supervisor review</div>
-      <div class="cd-item">Provide pre-session cultural context to licensed clinicians</div>
-      <div class="cd-item">Support coaches with AI Client Insights summaries</div>
-      <div class="cd-item">Enable aggregate, de-identified population trend data for org dashboards</div>
-      <div class="cd-item">Process in-memory without verbatim PHI retention</div>
+      <div class="cd-item">Provide cultural context to clinicians</div>
+      <div class="cd-item">Give coaches plain-language pattern alerts</div>
+      <div class="cd-item">Give plans and health systems aggregate, de-identified totals</div>
+      <div class="cd-item">Read patient text on Vasl infrastructure</div>
       <div class="cd-item">Operate entirely behind the clinical layer, invisible to members</div>
     </div>
   </div>
@@ -2174,39 +2174,39 @@
       Built for<br>
       <em>clinical data.</em>
     </h2>
-    <p class="sec-sub reveal d2">VLAP processes the most sensitive category of user data, mental health language from youth in underserved communities. The security architecture was designed specifically for HIPAA-regulated, school-based, and community health deployment contexts. Every constraint below is architectural, not configurable.</p>
+    <p class="sec-sub reveal d2">VLAP reads the most sensitive category of data there is, behavioral health language from patients in underserved communities. The security architecture was designed specifically for HIPAA-regulated Medicaid plan and health-system deployment. Every constraint below is architectural, not configurable.</p>
   </div>
 
   <div class="sec-grid">
     <div class="sec-item reveal">
       <div class="si-code">01 &middot; Data Handling</div>
-      <div class="si-title">In-Memory Processing</div>
-      <p class="si-body">VLAP processes member language in-memory. Verbatim input text is not stored after signal profile generation. The retained output is a dimensional signal profile, not a transcript, not a quote. This is a HIPAA technical safeguard, not a configurable setting.</p>
+      <div class="si-title">Vasl Infrastructure Only</div>
+      <p class="si-body">Patient text is read by VLAP on Vasl infrastructure and never sent to an outside AI company. The output is a named signal with the words behind it, delivered only to the care team responsible for the patient. This is a HIPAA technical safeguard, not a configurable setting.</p>
     </div>
     <div class="sec-item reveal d1">
-      <div class="si-code">02 &middot; HIPAA</div>
+      <div class="si-code">02 &middot; HIPAA, BAA</div>
       <div class="si-title">Full Technical Safeguard Implementation</div>
-      <p class="si-body">HIPAA Security Rule technical safeguards implemented across all platform components, encryption in transit and at rest, access controls, audit logging, and automatic logoff. Business Associate Agreement required for all organizational deployments. Annual third-party security audit.</p>
+      <p class="si-body">HIPAA Security Rule technical safeguards implemented across all platform components, encryption in transit and at rest, access controls, audit logging, and automatic logoff. We sign a business associate agreement before any patient data is shared.</p>
     </div>
     <div class="sec-item reveal d2">
-      <div class="si-code">03 &middot; Certification</div>
-      <div class="si-title">SOC 2 Type II</div>
-      <p class="si-body">Annual SOC 2 Type II audit covering security, availability, and confidentiality trust service criteria. Full audit report available to institutional evaluators under NDA. Audit conducted by an independent third-party auditor.</p>
+      <div class="si-code">03 &middot; Integration</div>
+      <div class="si-title">HL7 FHIR R4</div>
+      <p class="si-body">Intake over HL7 FHIR R4 from Epic, Cerner and athenahealth. Named signals are delivered into the workflow your teams already run. No new screen to learn.</p>
     </div>
     <div class="sec-item reveal">
       <div class="si-code">04 &middot; Access Control</div>
       <div class="si-title">Role-Based Signal Access</div>
-      <p class="si-body">Individual VLAP signal context is accessible only to the assigned coach (AI Client Insights summary) and the assigned licensed clinician (full dimensional profile). School staff, org administrators, and Vasl team members outside clinical supervisory functions have zero access to individual signal data, architecturally enforced.</p>
+      <p class="si-body">Individual VLAP signal context is accessible only to the clinician and care team responsible for the patient. Outside parties, administrators outside the care team, and Vasl team members outside clinical supervisory functions have zero access to individual signal data, architecturally enforced.</p>
     </div>
     <div class="sec-item reveal d1">
-      <div class="si-code">05 &middot; FERPA</div>
-      <div class="si-title">School-Based Deployment</div>
-      <p class="si-body">For school district deployments, Vasl operates as a direct service provider to students. Student health data generated in Vasl is classified as health information under HIPAA, not as an education record under FERPA, and is structurally inaccessible to school administrators under any circumstances.</p>
+      <div class="si-code">05 &middot; Regulatory</div>
+      <div class="si-title">Non-Device Clinical Decision Support</div>
+      <p class="si-body">VLAP is non-device clinical decision support under Section 3060 of the 21st Century Cures Act. It gives the clinician a named signal with the words behind it, never a score or a diagnosis, so the clinician can see the basis for every flag.</p>
     </div>
     <div class="sec-item reveal d2">
       <div class="si-code">06 &middot; Aggregate Data</div>
       <div class="si-title">De-Identification by Architecture</div>
-      <p class="si-body">Population-level aggregate signal trends surfaced to org administrators use minimum cohort size enforcement to prevent de-identification by inference. Individual member contributions to aggregate data are never discernible. This constraint applies to all org-level reporting, without exception.</p>
+      <p class="si-body">Population-level aggregate signal trends reported to plan and health-system administrators use minimum cohort size enforcement to prevent de-identification by inference. Individual member contributions to aggregate data are never discernible. This constraint applies to all org-level reporting, without exception.</p>
     </div>
   </div>
 </section>
@@ -2218,24 +2218,24 @@
 
   <div class="part-header">
     <h2 class="part-headline reveal d1">
-      Validated by<br>
-      the institutions<br>
+      Checked against<br>
+      the references<br>
       <em>that matter.</em>
     </h2>
-    <p class="part-sub reveal d2">VLAP's clinical credibility is grounded in active institutional partnerships, not aspirational affiliations or advisory relationships that don't involve actual work. The partnerships listed below involve ongoing operational collaboration, active research, or formal clinical oversight.</p>
+    <p class="part-sub reveal d2">VLAP&rsquo;s clinical credibility rests on measurement against independent references and on formal clinical oversight, not aspirational affiliations or advisory relationships that don't involve actual work.</p>
   </div>
 
   <div class="part-list">
     <div class="part-item reveal">
       <div class="part-logo-area">
-        <div class="part-org">Academic Research Partner</div>
-        <div class="part-type">Research University, IRB Study</div>
+        <div class="part-org">Independent References</div>
+        <div class="part-type">MIT Suicide Risk Lexicon &middot; n2c2 2022 SHAC</div>
       </div>
       <div class="part-body">
-        <div class="part-relationship">Active IRB Study, VLAP Clinical Signal Validation</div>
-        <p class="part-desc">An IRB-approved clinical study is in progress with an academic research partner validating VLAP's signal detection accuracy against clinician-adjudicated ground truth assessments. The study uses production deployment data from live Vasl cohorts. Results will be published in a peer-reviewed journal upon completion. The study represents the first formal independent validation of VLAP's culturally specific signal detection capabilities.</p>
+        <div class="part-relationship">Head-to-Head Measurement, Same Data</div>
+        <p class="part-desc">On suicide-attempt severity, VLAP scores 0.83 ROC-AUC against 0.65 for MIT&rsquo;s Suicide Risk Lexicon, on the same corpus and the same split. On substance use, VLAP scores 0.97 F1 on the n2c2 2022 SHAC test, 518 notes, against 0.83 for a keyword rule. The Model Measurement Report states the corpus, the split and the limitations.</p>
       </div>
-      <div class="part-status"><span class="part-status-badge psb-active">IRB Active</span></div>
+      <div class="part-status"><span class="part-status-badge psb-active">Measured</span></div>
     </div>
 
     <div class="part-item reveal">
@@ -2264,9 +2264,9 @@
         the model<br>
         <em>directly.</em>
       </h2>
-      <p class="access-body reveal d2">Vasl Health provides full technical documentation to qualified institutional evaluators, health systems, research institutions, school district technology teams, and health plan medical directors. All documentation is available under NDA. Contact clinical@gotovasl.com or use the form below to initiate an evaluation request.</p>
+      <p class="access-body reveal d2">Vasl Health provides full technical documentation to qualified institutional evaluators: Medicaid plans, health systems, research institutions, and health plan medical directors. All documentation is available under NDA. Contact clinical@gotovasl.com or use the form below to initiate an evaluation request.</p>
       <div class="reveal d3" style="display:flex;flex-direction:column;gap:14px;align-items:flex-start;">
-        <a href="/contact" class="btn-light">Request Evaluation Package</a>
+        <a href="/contact" class="btn-light">Talk to us about a pilot</a>
         <a href="mailto:clinical@gotovasl.com" class="btn-ghost-light">clinical@gotovasl.com</a>
       </div>
     </div>
@@ -2275,23 +2275,23 @@
       <div class="access-doc">
         <div class="ad-left">
           <div class="ad-title">VLAP Technical Specification</div>
-          <div class="ad-desc">37-page model specification, architecture, training methodology, signal taxonomy with full annotation guidelines, inference pipeline, bias monitoring protocol, and performance benchmarks.</div>
+          <div class="ad-desc">37-page model specification, training methodology, signal taxonomy (v2.0) with full annotation guidelines, inference pipeline, bias monitoring protocol, and performance benchmarks.</div>
         </div>
         <div class="ad-req">NDA Required</div>
       </div>
       <div class="access-doc">
         <div class="ad-left">
-          <div class="ad-title">IRB Study Protocol</div>
-          <div class="ad-desc">IRB study design, methodology, data collection protocol, and preliminary validation framework. Results pending publication.</div>
+          <div class="ad-title">VLAP Signal Taxonomy, v2.0</div>
+          <div class="ad-desc">55 signals across seven dimensions, with the definition, examples and annotation guidance behind each.</div>
         </div>
         <div class="ad-req">NDA Required</div>
       </div>
       <div class="access-doc">
         <div class="ad-left">
-          <div class="ad-title">SOC 2 Type II Report</div>
-          <div class="ad-desc">Full annual third-party security audit report covering security, availability, and confidentiality trust service criteria.</div>
+          <div class="ad-title">Business Associate Agreement</div>
+          <div class="ad-desc">The BAA we sign before any patient data is shared.</div>
         </div>
-        <div class="ad-req">NDA Required</div>
+        <div class="ad-req">Available on Request</div>
       </div>
       <div class="access-doc">
         <div class="ad-left">
@@ -2302,8 +2302,8 @@
       </div>
       <div class="access-doc">
         <div class="ad-left">
-          <div class="ad-title">Health-System Data Collaboration Brief</div>
-          <div class="ad-desc">Overview of the two-year data collaboration scope, data domains, formats (HL7 FHIR / CSV / JSON), HIPAA Safe Harbor de-identification specifications, and Year 1/Year 2 objectives.</div>
+          <div class="ad-title">Pilot Brief</div>
+          <div class="ad-desc">How a pilot is set up around your population, your workflow and the measure you are scored on, with intake over HL7 FHIR R4 and a BAA signed before any patient data is shared.</div>
         </div>
         <div class="ad-req">NDA Required</div>
       </div>
