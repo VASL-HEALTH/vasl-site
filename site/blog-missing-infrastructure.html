@@ -242,13 +242,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
 <div class="article-body-wrap">
   <div class="article-content ac">
     
-<p>Black youth suicide rose 29.4% between 2018 and 2023. White youth suicide fell 14.8% over the same period.<sup>1</sup> Those two numbers sat next to each other in a CDC report, and the detection systems deployed in schools and clinics during those five years were trained and validated on everyone except the population where the rate was climbing fastest.</p>
+<p>Black youth suicide rose 29.4% between 2018 and 2023. White youth suicide fell 14.8% over the same period.<sup>1</sup> Those two numbers sat next to each other in a CDC report, and the detection systems deployed in clinics, emergency departments and Medicaid plans during those five years were trained and validated on everyone except the population where the rate was climbing fastest.</p>
 
 <p>The instinct is to call this an awareness problem, more training, better outreach, a poster in the counselor&rsquo;s office. It is not an awareness problem. Awareness does not change what a language model was trained on. The gap is data, specifically a corpus pairing African American Language (AAL) with behavioral-health distress labels, annotated by people who speak the language and trained to recognize clinical risk inside it. We looked for that corpus before we built one. It does not exist in any public repository. We checked systematically, not casually, searched the standard NLP dataset registries, the academic corpora indexed for clinical and social-science research, and the commercial vendors who license behavioral-health training data. Nothing pairs the two.</p>
 
 <h2>The structural gap</h2>
 
-<p>Standard sentiment and risk-detection models are trained on internet text that skews heavily toward Standard American English. A young person who codes-witches into AAL under stress, or who expresses distress through register shift rather than explicit language, is invisible to a model that has never seen that pattern labeled as anything at all, let alone labeled as risk. The model does not fail loudly. It fails silently, by never flagging the signal in the first place.</p>
+<p>Standard sentiment and risk-detection models are trained on internet text that skews heavily toward Standard American English. A patient who code-switches into AAL under stress, or who expresses distress through register shift rather than explicit language, is invisible to a model that has never seen that pattern labeled as anything at all, let alone labeled as risk. The model does not fail loudly. It fails silently, by never flagging the signal in the first place.</p>
 
 <p>This is not a bias that gets fixed by adding more examples to an existing dataset. There was no existing dataset with the right label structure to add examples to. Someone had to define the taxonomy first, VLAP&rsquo;s 55 signals across seven dimensions, and then annotate real, community-sourced language against it, with clinicians adjudicating what counts as risk and what counts as culturally normal register. That is a multi-year construction project, not a data-cleaning task.</p>
 
@@ -265,7 +265,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
 
 <h2>One Layer, Many Modules</h2>
 
-<p>The architecture is intentionally not &ldquo;an AAL model.&rdquo; It is one intelligence layer with a language module for every community it serves, built with that community. African American Language is the first module because the CDC data made the case first and most urgently. Rural and Appalachian youth are next, the same community-annotated method, the same clinician-in-the-loop process, applied to counties where the behavioral-health workforce gap is not about cultural mismatch but about there being no workforce at all.</p>
+<p>The architecture is intentionally not &ldquo;an AAL model.&rdquo; It is one intelligence layer with a language module for every community it serves, built with that community. African American Language is the first module because the CDC data made the case first and most urgently. Rural and Appalachian speech is next, the same community-annotated method, the same clinician-in-the-loop process, applied to counties where the behavioral-health workforce gap is not about cultural mismatch but about there being no workforce at all.</p>
 
 <p>Every module that gets added follows the same rule: VLAP surfaces distress signals for a clinician&rsquo;s independent review. It does not monitor continuously in the background, it does not escalate on its own, and it does not diagnose. A clinician reads what the model surfaces and decides what happens next. That constraint is the reason the taxonomy had to be built by clinicians in the first place, and the reason the corpus took as long as it did.</p>
 

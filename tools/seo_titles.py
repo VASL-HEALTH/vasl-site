@@ -39,7 +39,7 @@ REWRITES = {
     # ---- Product -------------------------------------------------------------
     "platform.html": ('The Vasl Platform: What Happens After VLAP Reads', None),
     "vlap.html": (None, None),
-    "ai-model.html": ('VLAP: AI Trained on How Youth Actually Speak', None),
+    "ai-model.html": ('VLAP: AI Trained on How Patients Actually Speak', None),
     "peer-groups.html": (
         "Moderated Peer Support Groups for Youth | Vasl Health",
         "Facilitated peer groups where youth show up as themselves, the relationship "
@@ -144,7 +144,7 @@ REWRITES = {
         "the gap.",
     ),
     "glossary.html": (
-        "Glossary: Youth Behavioral Health & AI Terms | Vasl",
+        "Glossary: Behavioral Health & AI Terms | Vasl",
         "Plain-language definitions for the clinical, technical, and policy terms "
         "used across Vasl, from differential item functioning to warm handoff.",
     ),

@@ -299,11 +299,11 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
 
       <p class="section-body">HIPAA, the Health Insurance Portability and Accountability Act, sets federal standards for how health information is handled, stored, and shared. Vasl Health is a HIPAA-covered entity, which means your health information in the Vasl platform receives the same legal protections as your medical records at a doctor's office.</p>
 
-      <p class="section-body">In practice, this means Vasl cannot share your individual health information with anyone outside your care team without your explicit consent, not your school, not your employer, not your parents (unless you're a minor and applicable state law requires it), and not any commercial third party. The architecture enforces this. It is built into how the system works.</p>
+      <p class="section-body">In practice, this means Vasl cannot share your individual health information with anyone outside your care team without your explicit consent, not your employer, not your parents (unless you're a minor and applicable state law requires it), and not any commercial third party. The architecture enforces this. It is built into how the system works.</p>
 
       <div class="callout info">
         <div class="callout-label">The Plain-Language Version</div>
-        <p class="callout-text">What you share in Vasl is treated like medical information. It stays within your care team, your coach and your clinician. Your school administrator, your employer, and your parents do not have access to it. We don't sell it, share it for advertising, or disclose it without your consent. That's the commitment, and HIPAA makes it a legal one.</p>
+        <p class="callout-text">What you share in Vasl is treated like medical information. It stays within your care team, your coach and your clinician. Your organization's administrators, your employer, and your family do not have access to it. We don't sell it, share it for advertising, or disclose it without your consent. That's the commitment, and HIPAA makes it a legal one.</p>
       </div>
     </div>
 
@@ -365,7 +365,7 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
 
       <div class="callout note">
         <div class="callout-label">On Assessment Scores</div>
-        <p class="callout-text">The PHQ-8 and GAD-7 scores you complete during onboarding are stored and visible in your profile. They are also visible to your coach and clinician as clinical context. They are not shared with your school, employer, or org administrator. Your individual scores are never part of any aggregate data provided to organizations, only de-identified population-level trends are shared with org administrators.</p>
+        <p class="callout-text">The PHQ-8 and GAD-7 scores you complete during onboarding are stored and visible in your profile. They are also visible to your coach and clinician as clinical context. They are not shared with your employer or org administrator. Your individual scores are never part of any aggregate data provided to organizations, only de-identified population-level trends are shared with org administrators.</p>
       </div>
     </div>
 
@@ -383,7 +383,7 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
           <div class="ath">You</div>
           <div class="ath">Your Coach</div>
           <div class="ath">Your Clinician</div>
-          <div class="ath">School / Org Admin</div>
+          <div class="ath">Org Admin</div>
         </div>
         <div class="at-row">
           <div class="atc">Check-ins & messages</div>
@@ -429,11 +429,11 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
         </div>
       </div>
 
-      <p class="section-body">The school administrator or org admin column says "Never" for every individual data type and "Aggregate &middot; De-identified" for community-level trends. That last entry means the org can see things like "this week, 34% of members reported mood scores below 3", with no names, no individual records, and no way to identify who contributed to the number. A minimum cohort size is required before aggregate data is surfaced, specifically to prevent de-identification by inference.</p>
+      <p class="section-body">The org admin column says "Never" for every individual data type and "Aggregate &middot; De-identified" for community-level trends. That last entry means the org can see things like "this week, 34% of members reported mood scores below 3", with no names, no individual records, and no way to identify who contributed to the number. A minimum cohort size is required before aggregate data is surfaced, specifically to prevent de-identification by inference.</p>
 
       <div class="callout info">
-        <div class="callout-label">Why Your School Can't See Your Data</div>
-        <p class="callout-text">This is a question many members have, especially students who worry that what they share will reach their counselors, teachers, or parents. The answer is architectural. The system is built so that individual disclosure to school administrators is structurally impossible. It is not a setting that can be changed, a policy that can be overridden by the school, or an exception that applies in any circumstance. Individual member data never reaches school staff.</p>
+        <div class="callout-label">Why Your Organization Can't See Your Data</div>
+        <p class="callout-text">This is a question many members have, especially those who worry that what they share will reach their employer, their organization, or their family. The answer is architectural. The system is built so that individual disclosure to org administrators is structurally impossible. It is not a setting that can be changed, a policy that can be overridden by the organization, or an exception that applies in any circumstance. Individual member data never reaches org staff.</p>
       </div>
     </div>
 
@@ -456,7 +456,7 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
         </div>
         <div class="st-row">
           <div class="st-label">Who sees it</div>
-          <div class="st-value">Your coach sees a simplified summary. Your clinician sees the full dimensional profile. No one else, not school staff, not org administrators, not Vasl team members outside the clinical supervisory function.</div>
+          <div class="st-value">Your coach sees a simplified summary. Your clinician sees the full dimensional profile. No one else, not org administrators, not Vasl team members outside the clinical supervisory function.</div>
         </div>
         <div class="st-row">
           <div class="st-label">What VLAP does not do</div>
@@ -531,7 +531,7 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
       <span class="section-anchor" id="for-organizations"></span>
       <h2 class="section-heading">For organizations, BAA and compliance requirements</h2>
 
-      <p class="section-body">Every organization that deploys Vasl Health, school districts, universities, community health centers, health plans, is required to execute a Business Associate Agreement (BAA) with Vasl Health before any member data is collected or processed. The BAA establishes the legal framework for how Vasl handles protected health information (PHI) on behalf of the organization, and the specific safeguards that apply.</p>
+      <p class="section-body">Every organization that deploys Vasl Health, Medicaid plans, health systems, community health centers, is required to execute a Business Associate Agreement (BAA) with Vasl Health before any member data is collected or processed. The BAA establishes the legal framework for how Vasl handles protected health information (PHI) on behalf of the organization, and the specific safeguards that apply.</p>
 
       <div class="spec-table">
         <div class="st-row">
@@ -547,16 +547,12 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
           <div class="st-value">Organizational administrators access only aggregate, de-identified population data. The BAA specifies these access controls and prohibits individual member data from being shared with org staff under any circumstances.</div>
         </div>
         <div class="st-row">
-          <div class="st-label">FERPA alignment</div>
-          <div class="st-value">For school district deployments, Vasl operates as a direct service provider to students, not as an agent of the school district for FERPA purposes. Student health records generated in Vasl are classified as health information under HIPAA, not as education records under FERPA, and are structurally inaccessible to school administrators.</div>
-        </div>
-        <div class="st-row">
           <div class="st-label">Security</div>
           <div class="st-value">HIPAA, BAA. Compliance documentation available under NDA to partner organizations upon request.</div>
         </div>
         <div class="st-row">
           <div class="st-label">Medicaid documentation</div>
-          <div class="st-value">For school and community health deployments using school-based Medicaid billing, Vasl provides HIPAA-compliant documentation exports formatted for Medicaid billing submission. Clinical data used for billing meets applicable state Medicaid program requirements.</div>
+          <div class="st-value">For health system and community health deployments using Medicaid billing, Vasl provides HIPAA-compliant documentation exports formatted for Medicaid billing submission. Clinical data used for billing meets applicable state Medicaid program requirements.</div>
         </div>
         <div class="st-row">
           <div class="st-label">BAA request</div>

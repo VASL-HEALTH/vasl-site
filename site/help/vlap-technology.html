@@ -295,7 +295,7 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
       <span class="section-anchor" id="what-vlap-is"></span>
       <h2 class="section-heading">About VLAP</h2>
       <p class="section-body">VLAP, the Vasl Language Analysis Platform, is a clinical signal detection system built on a fine-tuned BERT architecture trained on culturally specific mental health language. It processes language that members share through Vasl's care channels and surfaces dimensional signal context to coaches and licensed clinicians before and between sessions.</p>
-      <p class="section-body">The core problem VLAP addresses is specific: standard NLP models are trained predominantly on majority-White internet text and consistently miss the coded, vernacular, and culturally framed ways that BIPOC, LGBTQ+, and first-generation youth communicate distress. "Lowkey been struggling fr" reads as casual to a standard model. To VLAP, it reads as a minimization pattern with an authenticity escalator, a signal worth surfacing.</p>
+      <p class="section-body">The core problem VLAP addresses is specific: standard NLP models are trained predominantly on majority-White internet text and consistently miss the coded, vernacular, and culturally framed ways patients communicate distress: African American Language, rural speech, queer vernacular, coded phrases. "Lowkey been struggling fr" reads as casual to a standard model. To VLAP, it reads as a minimization pattern with an authenticity escalator, a signal worth surfacing.</p>
       <div class="callout info">
         <div class="callout-label">The One-Sentence Definition</div>
         <p class="callout-text">VLAP detects culturally specific distress signals in member language and surfaces interpretive context to the care team. It does not respond to members, make clinical decisions, or initiate any action independently.</p>
@@ -317,7 +317,7 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
         <div class="dim-row">
           <div class="drc">HOP</div>
           <div class="drc">Hopelessness & Futility</div>
-          <div class="drc">Indirect hopelessness, temporal collapse, and "no point" framing expressed through AAVE, coded youth language, and minimization patterns</div>
+          <div class="drc">Indirect hopelessness, temporal collapse, and "no point" framing expressed through AAVE, coded language, and minimization patterns</div>
           <div class="drc">9</div>
         </div>
         <div class="dim-row">
@@ -399,7 +399,7 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
         <div class="sp-body">
           <div class="sp-col">
             <div class="sp-col-label">What the member said</div>
-            <div class="sp-utterance">"it's not that deep but lowkey been struggling since school started."</div>
+            <div class="sp-utterance">"it's not that deep but lowkey been struggling since this job started."</div>
           </div>
           <div class="sp-col">
             <div class="sp-col-label">What VLAP surfaces to care team</div>
@@ -408,7 +408,7 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
               <div class="sp-interp">CCM-04: Classic pre-disclosure frame. Standard models reduce signal weight here. VLAP increases it, the minimization hedge before authentic disclosure is the signal, not a dismissal of it.</div>
             </div>
             <div class="sp-detection-item">
-              <div class="sp-term">"since school started"</div>
+              <div class="sp-term">"since this job started"</div>
               <div class="sp-interp">ISO-04: Temporal marker. Onset-linked distress with a specific starting point, may be tied to identifiable stressors the coach can explore.</div>
             </div>
           </div>
@@ -430,7 +430,7 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
             <div class="sp-col-label">What VLAP surfaces to care team</div>
             <div class="sp-detection-item">
               <div class="sp-term">"unaliving"</div>
-              <div class="sp-interp">SHA-02: Coded suicidal ideation term developed in youth communities to circumvent content filters. Not in standard NLP training data. In VLAP's extended vocabulary.</div>
+              <div class="sp-interp">SHA-02: Coded suicidal ideation term developed in online communities to circumvent content filters. Not in standard NLP training data. In VLAP's extended vocabulary.</div>
             </div>
             <div class="sp-detection-item">
               <div class="sp-term">"ngl" (not gonna lie)</div>
@@ -451,7 +451,7 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
           <div class="fs-num"><div class="fs-num-inner">01</div></div>
           <div class="fs-body">
             <div class="fs-title">Member sends a check-in or coach message</div>
-            <p class="fs-desc">VLAP only processes language members share through Vasl's care channels, daily check-ins and coach messages. It does not scan social media, school email, or any external channel.</p>
+            <p class="fs-desc">VLAP only processes language members share through Vasl's care channels, daily check-ins and coach messages. It does not scan social media, work email, or any external channel.</p>
           </div>
         </div>
         <div class="flow-step">
@@ -499,7 +499,7 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
           <div class="does-item">Take any action in response to a crisis signal without human review</div>
           <div class="does-item">Access any channel outside Vasl's care platform</div>
           <div class="does-item">Store verbatim member language after processing</div>
-          <div class="does-item">Surface individual signal data to school staff or org administrators</div>
+          <div class="does-item">Surface individual signal data to org administrators</div>
           <div class="does-item">Operate in a member-visible way at any point</div>
         </div>
         <div class="does-col">
@@ -570,15 +570,11 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
         </div>
         <div class="st-row">
           <div class="st-label">Access Control</div>
-          <div class="st-value">Individual VLAP signal context accessible only to: assigned coach (AI Client Insights summary) and assigned licensed clinician (full dimensional profile). Never accessible to school staff, org administrators, or Vasl team members outside clinical supervisory functions.</div>
+          <div class="st-value">Individual VLAP signal context accessible only to: assigned coach (AI Client Insights summary) and assigned licensed clinician (full dimensional profile). Never accessible to org administrators or Vasl team members outside clinical supervisory functions.</div>
         </div>
         <div class="st-row">
           <div class="st-label">HIPAA</div>
           <div class="st-value">Full technical safeguard implementation. BAA required for all organizational deployments.</div>
-        </div>
-        <div class="st-row">
-          <div class="st-label">FERPA</div>
-          <div class="st-value">VLAP signal data is classified as health information under HIPAA, not as an education record, and is structurally inaccessible to school administrators under any circumstances.</div>
         </div>
         <div class="st-row">
           <div class="st-label">Aggregate Use</div>

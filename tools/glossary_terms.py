@@ -21,7 +21,7 @@ TERMS = [
     ("Behavioral health equity", "behavioral-health-equity",
      "The absence of avoidable, unfair differences in behavioral health access, quality, and "
      "outcomes across groups defined by race, ethnicity, language, or socioeconomic status. In "
-     "youth mental health, inequity shows up as longer wait times, lower engagement, and higher "
+     "behavioral health, inequity shows up as longer wait times, lower engagement, and higher "
      "dropout for Black, Latino, and first-generation populations, not because need is lower, "
      "but because the systems built to reach them usually weren't."),
     ("Care continuum", "care-continuum",
@@ -79,16 +79,11 @@ TERMS = [
      "screening and detection contexts, false negatives are generally treated as the more serious "
      "error type, since they mean a person who needed support wasn't identified. Sensitivity is "
      "the metric most directly tied to minimizing false negatives."),
-    ("FERPA", "ferpa",
-     "The Family Educational Rights and Privacy Act, the federal law governing the privacy of "
-     "student education records. School-based behavioral health tools need to be architected "
-     "around FERPA's boundaries on what counts as an education record and who can access it, "
-     "distinct from HIPAA, which governs health records in clinical settings."),
     ("FQHC", "fqhc",
      "A Federally Qualified Health Center, a community-based clinic that receives federal "
      "funding to provide primary and preventive care, including behavioral health, in "
      "underserved areas, regardless of a patient's ability to pay. FQHCs are a common deployment "
-     "setting for youth behavioral health programs serving Medicaid populations."),
+     "setting for behavioral health programs serving Medicaid populations."),
     ("FUH", "fuh",
      "Follow-Up After Hospitalization for Mental Illness, a HEDIS measure tracking whether a "
      "patient received outpatient follow-up care within 7 and 30 days of a mental health "
@@ -112,7 +107,7 @@ TERMS = [
      "The Health Insurance Portability and Accountability Act, the federal law governing the "
      "privacy and security of individually identifiable health information in clinical and payer "
      "settings. Vasl's architecture is built around HIPAA's boundaries on protected health "
-     "information, distinct from the FERPA boundaries that apply in school settings."),
+     "information."),
     ("Human-in-the-loop", "human-in-the-loop",
      "A system design principle where a human reviews and makes the final determination on any "
      "consequential output, rather than the system acting autonomously. Vasl surfaces signals to "
@@ -132,10 +127,6 @@ TERMS = [
      "Expressing distress in a form that minimizes social risk or the chance of an unwanted "
      "response, hedged, indirect, or coded language that carries real weight to someone who "
      "reads it correctly, but reads as minor or ambiguous otherwise."),
-    ("MTSS", "mtss",
-     "Multi-Tiered System of Supports, a framework used in K-12 education for matching the "
-     "intensity of support to the intensity of student need, typically organized in three tiers. "
-     "See Tier 1/2/3 supports."),
     ("Natural language processing", "natural-language-processing",
      "The field of computing concerned with how systems process, interpret, and generate human "
      "language. Clinical NLP applies these methods to language generated in health and behavioral "
@@ -178,18 +169,8 @@ TERMS = [
     ("Teletherapy", "teletherapy",
      "Licensed mental health therapy delivered remotely, typically by video or phone, by a "
      "clinician credentialed in the client's state. Teletherapy extends the reach of licensed "
-     "care without requiring a young person to access it in person, which matters most in areas "
+     "care without requiring a patient to access it in person, which matters most in areas "
      "with clinician shortages."),
-    ("Tier 1/2/3 supports", "tier-1-2-3-supports",
-     "The three levels of MTSS: Tier 1 is universal support available to every student; Tier 2 is "
-     "targeted support for students showing early signs of need; Tier 3 is intensive, "
-     "individualized support for students with significant need. A well-mapped program has clear "
-     "criteria for moving between tiers in both directions."),
-    ("Transition-age youth", "transition-age-youth",
-     "Young people roughly ages 16 to 25 moving out of child-serving systems (pediatric care, "
-     "K-12 schools, foster care) and into adult-serving ones, a period associated with "
-     "significant drop-off in behavioral health engagement, since eligibility, providers, and "
-     "sometimes insurance all change at once."),
     ("Universal screening", "universal-screening",
      "Administering a standardized assessment to an entire population, rather than only to "
      "individuals already flagged for concern, so that need is identified consistently rather "
