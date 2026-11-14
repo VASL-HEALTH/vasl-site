@@ -17,256 +17,45 @@ to land in the 60-80 new-link target without turning any page into a link
 dump, every entry earns its place with a reason someone would click it.
 """
 
+# November 2026 rebuild: the related-reading block now lives only on blog
+# posts, and every link points at a page in the new ten-page site.
 LINKS = {
-    # ---- Buyer pages: platform, vlap, ai-model, outcomes ---------------------
-    "for-schools.html": [
-        ("platform.html", "the Vasl platform",
-         "The path a student actually takes, from the first check-in text to a warm handoff."),
-        ("vlap.html", "how VLAP reads distress signals",
-         "The language layer behind every alert a counselor sees, what it flags and what it deliberately leaves alone."),
-        ("ai-model.html", "the model trained on youth vernacular",
-         "VLAP, and why standard clinical NLP misses the way your students actually talk about distress."),
-        ("outcomes.html", "pilot cohort outcomes and ROI",
-         "Retention, symptom change, and the budget case for your board and grants office."),
-        ("school-mental-health-rfp.html", "evaluating this against an RFP",
-         "The same ten criteria a district procurement office checks, and where Vasl's answer to each one lives."),
-    ],
-    "health-systems.html": [
-        ("platform.html", "the Vasl platform",
-         "What happens after VLAP reads a reply, step by step, and who sees what."),
-        ("vlap.html", "VLAP's signal detection layer",
-         "How language analysis surfaces risk to a human reviewer without ever assigning a diagnosis."),
-        ("ai-model.html", "VLAP's training approach",
-         "Why a model trained on standard clinical text underperforms with the members you're trying to retain."),
-        ("outcomes.html", "engagement and retention data",
-         "30-day retention and symptom-change figures from pilot cohorts, benchmarked against digital health norms."),
-        ("hedis-behavioral-health-cultural-fit.html", "how this connects to HEDIS measures",
-         "Which behavioral health measures are most exposed to cultural and linguistic mismatch, and where engagement moves them."),
-    ],
-    "for-organizations.html": [
-        ("platform.html", "the Vasl platform",
-         "Daily check-ins, a peer community and a coach, for an organization without its own clinical team."),
-        ("vlap.html", "how VLAP surfaces distress signals",
-         "The language layer that flags risk to a human who already knows the young person."),
-        ("ai-model.html", "the model behind VLAP",
-         "DeBERTa-v3 and the vocabulary work that lets it read AAVE and youth vernacular directly."),
-        ("outcomes.html", "outcomes across pilot cohorts",
-         "Retention and engagement figures, with the methodology behind each number."),
-    ],
-
-    # ---- Blog posts: single most relevant buyer page + vlap or ai-model ------
-    "blog-bridging-chasm.html": [
-        ("health-systems.html", "what this means for health plans",
-         "How the vocabulary and validation work described here translates into member retention for payers."),
-        ("ai-model.html", "VLAP in full",
-         "The architecture and vocabulary extension process behind the model this piece describes."),
-        ("dialect-bias-mental-health-screening.html", "the research this piece is built on",
-         "Differential item functioning and dialect bias, explained in full with the underlying citations."),
+    "blog-crisis-without-solving.html": [
+        ('bridge.html', 'Vasl Bridge', 'A daily text from emergency department discharge to the first follow-up visit.'),
+        ('vlap.html', 'VLAP, the language engine', 'How VLAP flags a signal, shows the exact words and leaves the decision to a clinician.'),
     ],
     "blog-future-culturally-responsive.html": [
-        ("for-organizations.html", "what this looks like for community organizations",
-         "How FQHCs and youth-serving nonprofits put a culturally responsive model into practice."),
-        ("vlap.html", "VLAP, the layer built to read for it",
-         "The signal-detection layer built to act on the argument this piece makes."),
-    ],
-    "blog-medicaid-populations.html": [
-        ("health-systems.html", "the health plan case for this approach",
-         "How Medicaid-serving plans use Vasl to reach members standard outreach doesn't retain."),
-        ("vlap.html", "the language layer behind engagement",
-         "Why cultural and linguistic fit, more than access, is what actually drives retention."),
-    ],
-    "blog-mental-health-equity-crisis.html": [
-        ("for-schools.html", "what districts can do about it",
-         "The tiered program built to close this gap inside a school's existing MTSS structure."),
-        ("ai-model.html", "the model built to close the language gap",
-         "VLAP's approach to the vocabulary and context problem this piece describes."),
-        ("dialect-bias-mental-health-screening.html", "the measurement problem behind the equity gap",
-         "Why standard screening instruments score the same distress differently across groups and what that requires of a model."),
-    ],
-    "blog-other-diagnosis.html": [
-        ("for-schools.html", "how this shows up in a school setting",
-         "Why counselors need a way to distinguish identity-based stress from pathology before it escalates."),
-        ("vlap.html", "how VLAP is built to avoid this",
-         "The signal taxonomy designed to separate cultural expression from clinical risk."),
+        ('vlap.html', 'VLAP, the language engine', 'How VLAP flags a signal, shows the exact words and leaves the decision to a clinician.'),
+        ('research.html', 'what VLAP has measured', 'Held-out tests against the tools in use today, with every dataset named.'),
     ],
     "blog-healing-great-divide.html": [
-        ("for-organizations.html", "closing structural gaps at the community level",
-         "How community organizations extend behavioral health reach without building a clinical team from scratch."),
-        ("ai-model.html", "the model built for this population",
-         "What training a language model directly on underserved communities' speech patterns actually requires."),
+        ('vlap.html', 'VLAP, the language engine', 'How VLAP flags a signal, shows the exact words and leaves the decision to a clinician.'),
+        ('health-systems.html', 'Vasl for health plans and systems', 'Clinical decision support inside the workflows plans and health systems already run.'),
     ],
-    "blog-crisis-without-solving.html": [
-        ("for-organizations.html", "an implementation, not another report",
-         "What Vasl actually deploys for community organizations, past the documentation stage."),
-        ("vlap.html", "the detection layer this argues for",
-         "How VLAP turns language signal into an early, human-reviewed intervention point."),
+    "blog-human-is-the-system.html": [
+        ('technology.html', 'where patient text goes', 'Our own model on our own infrastructure. No patient text goes to an outside AI company.'),
+        ('vlap.html', 'VLAP, the language engine', 'How VLAP flags a signal, shows the exact words and leaves the decision to a clinician.'),
     ],
-
-    # ---- support.html: complete help index ------------------------------------
-    "support.html": [
-        ("help/getting-started.html", "Getting Started",
-         "Onboarding steps for a new partner organization, from contract to first member enrolled."),
-        ("help/assessments.html", "Assessments",
-         "Which clinical instruments are used, when, and how results are handled."),
-        ("help/billing.html", "Billing",
-         "Invoicing, Medicaid billing support, and how contract costs are structured."),
-        ("help/clinical.html", "Clinical Escalation",
-         "How warm handoffs to licensed care work, and who is involved at each step."),
-        ("help/compliance.html", "Compliance",
-         "FERPA, HIPAA, and the data-handling questions partners ask before signing."),
-        ("help/technical.html", "Technical",
-         "Integration, access, and platform administration questions."),
-        ("help/vlap-technology.html", "VLAP Technology",
-         "How the language analysis layer works, in plain terms, for a non-technical reader."),
+    "blog-mental-health-equity-crisis.html": [
+        ('research.html', 'what VLAP has measured', 'Held-out tests against the tools in use today, with every dataset named.'),
+        ('health-systems.html', 'Vasl for health plans and systems', 'Clinical decision support inside the workflows plans and health systems already run.'),
     ],
-
-    # ---- research.html <-> clinical-outcomes.html <-> outcomes.html ----------
-    "research.html": [
-        ("clinical-outcomes.html", "clinical outcomes data",
-         "PHQ-8 change, retention, and escalation rates from pilot cohorts, with methodology."),
-        ("outcomes.html", "stakeholder and ROI outcomes",
-         "What the research translates into for districts, plans, and community partners."),
-        ("about.html", "who reviews this research",
-         "The clinical governance structure that reviews every claim before it's published."),
+    "blog-missing-infrastructure.html": [
+        ('vlap.html', 'VLAP, the language engine', 'How VLAP flags a signal, shows the exact words and leaves the decision to a clinician.'),
+        ('technology.html', 'where patient text goes', 'Our own model on our own infrastructure. No patient text goes to an outside AI company.'),
     ],
-    "clinical-outcomes.html": [
-        ("research.html", "the research base behind these numbers",
-         "The peer-reviewed literature and active IRB study this data builds on."),
-        ("outcomes.html", "what these numbers mean for stakeholders",
-         "Cost and ROI implications of the retention and symptom data on this page."),
-        ("vlap.html", "the signal layer behind the data",
-         "How VLAP's detection informs the clinical escalation figures reported here."),
-        ("hedis-behavioral-health-cultural-fit.html", "how these figures map to HEDIS measures",
-         "PHQ-8 and retention data, reframed against the specific behavioral health measures a payer reports on."),
+    "blog-other-diagnosis.html": [
+        ('research.html', 'what VLAP has measured', 'Held-out tests against the tools in use today, with every dataset named.'),
+        ('vlap.html', 'VLAP, the language engine', 'How VLAP flags a signal, shows the exact words and leaves the decision to a clinician.'),
     ],
-    "outcomes.html": [
-        ("research.html", "the evidence base",
-         "The literature and ongoing validation study behind Vasl's clinical approach."),
-        ("clinical-outcomes.html", "the full clinical outcomes breakdown",
-         "PHQ-8 trajectories, retention checkpoints, and escalation methodology in detail."),
-        ("hedis-behavioral-health-cultural-fit.html", "what these numbers mean for a health plan's HEDIS scores",
-         "How the retention and engagement figures here connect to FUH, IET, FUM, and SSD."),
+    "blog-seven-days-after-discharge.html": [
+        ('bridge.html', 'Vasl Bridge', 'A daily text from emergency department discharge to the first follow-up visit.'),
+        ('health-systems.html', 'Vasl for health plans and systems', 'Clinical decision support inside the workflows plans and health systems already run.'),
     ],
-
-    # ---- technology.html <-> infrastructure.html <-> vlap.html ---------------
-    "technology.html": [
-        ("infrastructure.html", "the infrastructure and data handling model",
-         "Hosting, encryption, and retention specifics for a security or IT reviewer."),
-        ("vlap.html", "VLAP, the layer this architecture supports",
-         "What the language analysis layer actually does with the data described here."),
-        ("ai-model.html", "the model running inside this architecture",
-         "VLAP's training approach and current validation status."),
-        ("dialect-bias-mental-health-screening.html", "why this architecture exists",
-         "The dialect and cultural bias problem this whole stack is built to address."),
-    ],
-    "infrastructure.html": [
-        ("technology.html", "the full architecture and security model",
-         "PHI boundaries, auditability, and human-in-the-loop escalation design."),
-        ("vlap.html", "what runs on this infrastructure",
-         "The signal-detection layer this hosting and access model is built to support."),
-        ("research.html", "how this holds up under independent review",
-         "The IRB validation process this infrastructure is built to support."),
-    ],
-    "vlap.html": [
-        ("technology.html", "the architecture VLAP runs on",
-         "PHI handling, access control, and the security model behind the signal layer."),
-        ("infrastructure.html", "the infrastructure and data handling behind it",
-         "Hosting, encryption, and retention specifics for a compliance reviewer."),
-        ("ai-model.html", "DeBERTa-v3, the architecture behind VLAP",
-         "The language model that powers VLAP's signal detection."),
-        ("dialect-bias-mental-health-screening.html", "the research problem VLAP is built to answer",
-         "Why the same screening score can mean different things across dialects, and what that requires of a detection layer."),
-    ],
-
-    # ---- broader coverage: homepage, about, platform --------------------------
-    "index.html": [
-        ("for-schools.html", "Vasl for K-12 districts",
-         "A tiered program mapped to MTSS, staffed by people students recognize."),
-        ("health-systems.html", "Vasl for health plans and systems",
-         "Engagement built on cultural fit for the members standard outreach loses.",
-         ("/bridge", "See Vasl Bridge →")),
-        ("for-organizations.html", "Vasl for community organizations",
-         "Extend behavioral health reach without hiring a clinical team of your own."),
-    ],
-    "about.html": [
-        ("research.html", "the research and evidence base",
-         "The literature, the active IRB study, and how we handle claims we can't yet support."),
-        ("vlap.html", "VLAP, the platform's language layer",
-         "How language analysis surfaces signal without ever assigning a diagnosis."),
-        ("team.html", "the team and clinical advisors",
-         "Who reviews what the platform is allowed to claim, and how."),
-    ],
-    "platform.html": [
-        ("vlap.html", "VLAP in depth",
-         "The language analysis layer that reads for distress signal across the platform."),
-        # peer-groups left the footer in the navigation restructure, so this is
-        # now its only inbound link. Dropping it orphans an indexable page.
-        ("peer-groups.html", "the peer community layer",
-         "How peer groups are organized around shared identity and experience, and who moderates them."),
-        ("ai-model.html", "the model behind the platform",
-         "VLAP's architecture and vocabulary extension process."),
-        ("teletherapy.html", "the licensed therapy layer",
-         "Culturally matched teletherapy, and when a member is routed to it."),
-    ],
-    "ai-model.html": [
-        ("dialect-bias-mental-health-screening.html", "the bias problem this model addresses",
-         "Differential item functioning, dialect bias, and why standard screening instruments don't hold up across groups."),
-        ("vlap.html", "VLAP, the layer this model powers",
-         "How VLAP's output becomes the signal taxonomy a human actually reviews."),
-        ("technology.html", "the architecture this model runs inside",
-         "PHI boundaries and the security model around every prediction this model makes."),
-    ],
-
-    # ---- new pages (workstream 2) ---------------------------------------------
-    "school-mental-health-rfp.html": [
-        ("for-schools.html", "Vasl's program for K-12 districts",
-         "The tiered model this checklist's criteria map to, if you want to see it end to end."),
-        ("vlap.html", "how the language layer works",
-         "What VLAP actually reads for, and what it deliberately never does."),
-        ("outcomes.html", "outcomes data with methodology",
-         "Retention and symptom-change figures, reported with the rigor an RFP evaluator would expect."),
-        ("contact.html", "talk to an implementation lead",
-         "A 45-minute conversation, not a sales pitch, bring your RFP and we'll answer it directly."),
-        ("glossary.html", "definitions for the acronyms in this checklist",
-         "MTSS, FERPA, HIPAA, and the rest of the terms an RFP evaluator will see, defined plainly."),
-    ],
-    "dialect-bias-mental-health-screening.html": [
-        ("vlap.html", "VLAP's signal taxonomy",
-         "How the detection layer built for this problem is actually structured."),
-        ("ai-model.html", "VLAP's architecture",
-         "The bidirectional model and vocabulary extension this piece describes in plain terms."),
-        ("research.html", "the full research base",
-         "The peer-reviewed literature and active validation study behind Vasl's approach."),
-        ("glossary.html", "definitions for the terms used here",
-         "Differential item functioning, dialect bias, and related terms, defined plainly."),
-    ],
-    "hedis-behavioral-health-cultural-fit.html": [
-        ("health-systems.html", "Vasl for health plans",
-         "How the engagement model described here fits into a plan's broader behavioral health strategy."),
-        ("outcomes.html", "engagement and retention data",
-         "The pilot-cohort figures referenced throughout this page, with full methodology."),
-        ("clinical-outcomes.html", "the clinical outcomes detail",
-         "PHQ-8 trajectories and escalation rates behind the summary numbers here."),
-        ("glossary.html", "definitions for FUH, IET, FUM, and SSD",
-         "Plain-language definitions for every measure acronym used on this page."),
-    ],
-    "glossary.html": [
-        ("vlap.html", "VLAP",
-         "The language analysis layer many of these terms describe."),
-        ("ai-model.html", "DeBERTa-v3",
-         "The model architecture behind several of the technical terms above."),
-        ("research.html", "the research base",
-         "Where the clinical and technical terms above come from in the literature."),
-        ("dialect-bias-mental-health-screening.html", "differential item functioning and dialect bias, in full",
-         "The full explainer behind two of the definitions above."),
-        ("hedis-behavioral-health-cultural-fit.html", "HEDIS, FUH, IET, and FUM, in full",
-         "How the measures defined above connect to cultural and linguistic mismatch."),
-        ("school-mental-health-rfp.html", "MTSS, FERPA, and HIPAA in an RFP context",
-         "How several of the terms above show up as actual evaluation criteria in a district RFP."),
+    "blog/what-a-suicide-risk-word-list-cant-hear.html": [
+        ('research.html', 'what VLAP has measured', 'Held-out tests against the tools in use today, with every dataset named.'),
+        ('vlap.html', 'VLAP, the language engine', 'How VLAP flags a signal, shows the exact words and leaves the decision to a clinician.'),
     ],
 }
 
-# Per-page header override. Default is "Related Reading".
-HEADER_OVERRIDES = {
-    "support.html": "Complete Help Center",
-}
+HEADER_OVERRIDES = {}

@@ -21,9 +21,6 @@ FORMS = {
         "form", "first_name", "last_name", "email", "org_name", "role",
         "org_type", "pop_size", "timeline", "additional", "interest", "page",
     }),
-    "support.html": ("support", {
-        "form", "name", "email", "organization", "category", "message", "page",
-    }),
     "blog.html": ("newsletter", {"form", "email", "page"}),
 }
 
@@ -82,8 +79,6 @@ for fname, (form_value, expected_fields) in FORMS.items():
         if "await vaslPost" not in inner:
             err(f"{fname}: vaslPost is not awaited inside the try block")
         if fname == "contact.html":
-            if "showPartnerPackageDownload()" not in inner:
-                err("contact.html: Partner Package reveal is not gated on a successful response")
             if "plausible(" not in inner:
                 err("contact.html: the Plausible event is not gated on a successful response")
 
