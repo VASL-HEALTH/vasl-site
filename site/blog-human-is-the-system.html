@@ -273,7 +273,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
 
 <p>Next, identifying information comes out. Names, locations, phone numbers, and account references are stripped before the model sees a single word. The model never processes who a member is, only what they said.</p>
 
-<p>Then VLAP reads the language against its taxonomy: 47 signals across six clinical categories, from hopelessness and social withdrawal to coded self-harm language and the minimization patterns that come before disclosure. Signals are not read one at a time. The taxonomy includes combination rules, so a moderate hopelessness signal paired with a moderate self-harm signal is treated as high risk, and certain signals, such as a method inquiry wrapped in &ldquo;not that I&rsquo;d do it but,&rdquo; always go to human review regardless of what the member says about their intent.</p>
+<p>Then VLAP reads the language against its taxonomy: 55 signals across seven dimensions, from hopelessness and social withdrawal to coded self-harm language and the minimization patterns that come before disclosure. Signals are not read one at a time. The taxonomy includes combination rules, so a moderate hopelessness signal paired with a moderate self-harm signal is treated as high risk, and certain signals, such as a method inquiry wrapped in &ldquo;not that I&rsquo;d do it but,&rdquo; always go to human review regardless of what the member says about their intent.</p>
 
 <p>The output of that step is a signal profile: signal codes, community-language annotations, confidence indicators, and session context. At that point the raw text is discarded. The member&rsquo;s words do not live in a database, a backup, a retraining pipeline, or an analytics system. What persists is the de-identified profile, retained for 90 days and tied to the member&rsquo;s care record, with an audit log kept for six years.</p>
 
@@ -306,7 +306,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
 
 <p>Here is the part of the design that only works with a clinician in the loop, and it is the part I think most people outside clinical work underestimate.</p>
 
-<p>VLAP&rsquo;s high-distress signal sensitivity is 90% in preliminary results from an active IRB-approved validation study with a university research partner, measured against clinician-adjudicated ground truth. Those results are pending peer-reviewed publication, and we say so every time we cite the number. Sensitivity is the share of real high-distress signals the model surfaces when they are present. We tuned for it on purpose. In the self-harm and hopelessness categories, and for the signal combinations that trigger high-risk review, we accept more false positives in exchange for fewer missed crisis signals.</p>
+<p>On suicide-attempt severity, VLAP scores 0.83 ROC-AUC against 0.65 for MIT&rsquo;s Suicide Risk Lexicon, on the same corpus and the same split. Sensitivity is the share of real high-distress signals the model surfaces when they are present. We tuned for it on purpose. In the self-harm and hopelessness categories, and for the signal combinations that trigger high-risk review, we accept more false positives in exchange for fewer missed crisis signals.</p>
 
 <p>That tradeoff is only responsible because a clinician sits at the end of it. A false positive that lands in front of a trained reviewer costs a few minutes of their attention. They read the context, recognize that &ldquo;I&rsquo;m dead tired&rdquo; was about a double shift, and move on. The same false positive wired to an automated action costs the young person something: a phone call home, a referral they did not need, a flag in a record, a reason not to write honestly next time. Remove the human and you have to tune the model the other way to avoid those harms. Tune it the other way and you miss more of the signals that matter most.</p>
 
@@ -316,11 +316,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
 
 <p>None of this makes the work easier for us. A fully automated product would be cheaper to run, simpler to sell, and easier to scale on a slide. It would also put a model trained on community language in the position of making clinical calls about the community it learned from, with nobody accountable for the call. We were not willing to build that, and I do not think the districts, health systems, and families we work with would accept it if they saw it clearly.</p>
 
-<p>What we built instead is narrower and, I think, more useful. VLAP reads the language standard tools were never designed to read, translates it into context a clinician can use, and hands it to that clinician with the reasoning attached. It flags. It does not decide. In our pilot cohorts, roughly one in five members is connected to licensed clinical care through a warm handoff from the coaching layer, and every one of those handoffs runs through a person.</p>
+<p>What we built instead is narrower and, I think, more useful. VLAP reads the language standard tools were never designed to read, translates it into context a clinician can use, and hands it to that clinician with the reasoning attached. It flags. It does not decide.</p>
 
 <p>That is the line, and we do not plan to move it. As VLAP adds language modules, starting with rural and Appalachian youth after African American Language (AAL), the same rule comes with every one of them. A new module means a new community&rsquo;s language read accurately. It does not mean a new place for the software to act on its own. The pipeline will keep ending where it ends now: with a licensed clinician, the full context, and a decision that belongs to them.</p>
 
-<p style="font-size:13px;font-family:var(--mono);color:var(--dust);margin-top:8px;">1, CDC, MMWR 74(35);550 to 553, &ldquo;Differences in Suicide Rates by Race, Ethnicity and Age Group, 2018 to 2023&rdquo; (Sept. 2025). VLAP sensitivity, retention, and escalation figures are from Vasl pilot cohorts and an active IRB study; see <a href="/clinical-outcomes">Clinical Outcomes</a>.</p>
+<p style="font-size:13px;font-family:var(--mono);color:var(--dust);margin-top:8px;">1, CDC, MMWR 74(35);550 to 553, &ldquo;Differences in Suicide Rates by Race, Ethnicity and Age Group, 2018 to 2023&rdquo; (Sept. 2025). VLAP results are from held-out test data, same corpus, same split; see <a href="/clinical-outcomes">Clinical Outcomes</a>.</p>
 
   </div>
   <aside class="article-sidebar">
@@ -328,7 +328,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px var(--gutter);d
       <div class="as-label">Key Data Points</div>
       <div class="as-stat"><div class="as-stat-num">0</div><div class="as-stat-label">VLAP output fields connected to an automated action, notification, or external API call</div><div class="as-stat-caveat">Vasl design principle, review queue, not alerts</div></div>
 <div class="as-stat"><div class="as-stat-num">90 min</div><div class="as-stat-label">Committed window for licensed clinical supervisor review of high-risk signals, initiated by a person</div><div class="as-stat-caveat">Vasl crisis review SLA</div></div>
-<div class="as-stat"><div class="as-stat-num">90%</div><div class="as-stat-label">High-distress signal sensitivity against clinician-adjudicated ground truth</div><div class="as-stat-caveat">Preliminary &middot; IRB validation in progress &middot; pending publication</div></div>
+<div class="as-stat"><div class="as-stat-num">0.83</div><div class="as-stat-label">VLAP ROC-AUC on suicide-attempt severity, against 0.65 for MIT&rsquo;s Suicide Risk Lexicon</div><div class="as-stat-caveat">Same corpus &middot; same split</div></div>
 
     </div>
     <div class="as-section">
