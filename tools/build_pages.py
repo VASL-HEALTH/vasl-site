@@ -316,7 +316,7 @@ def home():
       </div>
     </div></div>"""
     dark = """<section class="vh-dark"><div class="vx-wrap">
-      <h2>Two Black founders. Nobody built the instrument because nobody in the room spoke the language. <em>We do.</em></h2>
+      <h2>Nobody built the instrument because nobody in the room spoke the language. <em>We do.</em></h2>
       <a class="vh-pill is-light" href="/contact">Talk to us about a pilot</a>
     </div></section>"""
     body = "\n".join([
@@ -568,14 +568,14 @@ def team():
     advisor = """<div class="vx-people"><div class="vx-person"><h3>Panagis Galiatsatos, MD, MHS</h3>
       <span class="vx-mono">Senior Medical Advisor &middot; Johns Hopkins</span></div></div>"""
     body = "\n".join([
-        hero("Team", "Two Black founders. Nobody built the instrument because nobody in the room spoke the language. <em>We do.</em>"),
+        hero("Team", "Nobody built the instrument because nobody in the room spoke the language. <em>We do.</em>"),
         sec("Leadership", "The people building Vasl.", people, "is-light"),
         sec("Medical advisor", "Clinical guidance.", advisor, "is-light"),
         next_step("Building with us? <em>Talk to us.</em>"),
     ])
     return page("team.html", "Team | Vasl Health",
-                "Vasl Health was founded by two Black founders building language intelligence for healthcare. "
-                "Meet the leadership team and our senior medical advisor.", body)
+                "Meet the people building Vasl Health, language intelligence infrastructure for healthcare, "
+                "and our senior medical advisor from Johns Hopkins.", body)
 
 
 def about():
