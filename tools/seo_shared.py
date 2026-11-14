@@ -49,3 +49,9 @@ IGNORE = {
     # rather than incidental.
     "outcomes.html",
 }
+
+# Every page retired in the November 2026 rebuild is a noindex refresh stub,
+# the same shape as demo.html and prototype.html above.
+from retired import RETIRED  # noqa: E402
+
+IGNORE = IGNORE | set(RETIRED)
