@@ -376,3 +376,43 @@ mark{background:#e6d3b6;color:var(--ink);padding:0 2px;}
 .vband2 p{font-family:var(--serif);font-size:clamp(26px,3vw,38px);line-height:1.2;color:#fff;max-width:20em;margin:0;}
 .vband2 p em{color:var(--clay-fill);}
 @media (max-width:700px){.vband2{grid-template-columns:1fr;min-height:620px;}}
+
+/* ---------- home, calm (November 2026) ---------- */
+.hc-hero{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;padding-top:clamp(56px,8vw,104px);padding-bottom:clamp(56px,7vw,96px);}
+.hc-hero h1{font-size:clamp(38px,4.6vw,58px);line-height:1.08;max-width:13em;}
+.hc-hero .vx-lede{font-size:18px;line-height:1.7;color:var(--ink-2);max-width:31em;margin-top:28px;}
+.hc-links{display:flex;gap:28px;margin-top:34px;flex-wrap:wrap;}
+.hc-links a{font-size:16px;color:var(--green);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px;}
+.hc-links a:hover{color:var(--ink);}
+.hc-photo{position:relative;border-radius:4px;min-height:560px;background:#d8d0c2 center/cover no-repeat;}
+.hc-photo .vh-flag{position:absolute;left:-56px;right:auto;top:auto;bottom:48px;width:300px;}
+.hc-prose{padding:clamp(72px,9vw,128px) 0;border-top:1px solid var(--rule);}
+.hc-prose p{font-family:var(--serif);font-size:clamp(24px,2.6vw,32px);line-height:1.42;color:var(--ink);max-width:28em;margin:0 auto 1em;}
+.hc-prose p:last-child{margin-bottom:0;}
+.hc-prose p em{color:var(--green);}
+.hc-prose small{display:block;font-family:var(--sans);font-size:13px;color:var(--mute);max-width:56em;margin:28px auto 0;text-align:left;}
+.hc-section{padding:clamp(64px,8vw,112px) 0;}
+.hc-label{font-size:14px;color:var(--mute);margin:0 0 18px;}
+.hc-section h2{font-size:clamp(28px,3vw,38px);max-width:22em;margin-bottom:40px;}
+.hc-two{display:grid;grid-template-columns:1fr 1fr;gap:64px;border-top:1px solid var(--rule);}
+.hc-two > div{padding-top:28px;}
+.hc-two h3{font-size:26px;margin:0 0 14px;}
+.hc-two p{font-size:16px;line-height:1.7;color:var(--ink-2);margin:0 0 16px;max-width:30em;}
+.hc-two .hc-status{font-size:14px;color:var(--green);}
+.hc-two a{font-size:15px;color:var(--green);}
+.hc-people{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:10px;}
+.hc-people div{min-height:400px;background:#d8d0c2 center/cover no-repeat;border-radius:4px;}
+.hc-evidence{border-top:1px solid var(--rule);display:grid;grid-template-columns:repeat(3,1fr);gap:48px;padding-top:32px;}
+.hc-evidence b{display:block;font-family:var(--serif);font-weight:400;font-size:44px;color:var(--green);line-height:1;}
+.hc-evidence b small{font-size:18px;color:var(--mute);margin-left:6px;}
+.hc-evidence p{font-size:14px;line-height:1.6;color:var(--ink-2);margin:12px 0 0;}
+.hc-close{padding:clamp(80px,10vw,140px) 0;text-align:center;border-top:1px solid var(--rule);}
+.hc-close p{font-family:var(--serif);font-size:clamp(28px,3.2vw,40px);line-height:1.3;color:var(--green);max-width:20em;margin:0 auto 36px;}
+.hc-close .hc-links{justify-content:center;}
+@media (max-width:900px){
+  .hc-hero,.hc-two,.hc-evidence{grid-template-columns:1fr;gap:40px;}
+  .hc-photo{min-height:420px;}
+  .hc-photo .vh-flag{left:16px;right:16px;width:auto;bottom:-28px;}
+  .hc-people{grid-template-columns:1fr;}
+  .hc-people div{min-height:300px;}
+}

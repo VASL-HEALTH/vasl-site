@@ -290,74 +290,56 @@ def photo(img, inner="", pos="center"):
 # Pages
 # ---------------------------------------------------------------------------
 def home():
-    hero_l = f"""<div>
-      <h1>We built VLAP on the patients every other tool gets wrong. <em>That&rsquo;s why it works for everyone else.</em></h1>
-      <p class="vx-lede">{STATEMENT}</p>
-      <div class="vx-actions"><a class="vh-pill" href="/contact">Talk to us about a pilot</a><a class="vh-arrow" href="/vlap">How VLAP works &rarr;</a></div>
-      <p class="vh-small">Our own model, our own weights. No patient text goes to an outside AI company.</p>
-    </div>"""
-    stage = photo("bridge-hero.jpg", PHONE + FLAG_CARD, "42% 50%")
-    stats = """<div class="vh-band"><div class="vx-wrap vh-stats">
-      <div>0.83<small>vs 0.65</small><p>Suicide-attempt severity, against MIT&rsquo;s Suicide Risk Lexicon (Low, Ghosh et al., 2026)</p></div>
-      <div>0.97<small>vs 0.83</small><p>Substance use in clinical notes, against a keyword rule (n2c2 2022 SHAC test, 518 notes)</p></div>
-      <div>0.83<small>F1</small><p>Social needs in hospital notes (n2c2 2022)</p></div>
-    </div></div>"""
-    layer = """<section class="vh-center"><div class="vx-wrap">
-      <h2>Claims have clearinghouses. Notes have the electronic health record. <em>What patients write has had nothing.</em></h2>
-      <div class="vh-layer">
-        <div><small>Claims</small>Clearinghouses</div>
-        <div><small>Clinician notes</small>Electronic health records</div>
-        <div class="is-us"><small>What patients write</small>Vasl</div>
-      </div>
-    </div></section>"""
-    bridge = """<div class="vh-prod">
-      <div><p class="vh-kicker">Vasl Bridge</p>
-        <h2>From the emergency department to the first follow-up visit.</h2>
-        <p>A daily text from discharge, no app. VLAP reads every reply and shows the care team the exact words that matter. Silence is a signal too.</p>
-        <p class="vh-status">10 of 10 steps passed live, real texts delivered.</p>
-        <a class="vh-arrow" href="/bridge">See Vasl Bridge &rarr;</a></div>
-      <div class="vh-card" aria-label="Seven days from discharge to first visit">
-        <div class="vh-tl-ends"><span>Discharge</span><span>First visit</span></div>
-        <div class="vh-tl"><i></i><i></i><i class="f"></i><i class="q"></i><i></i><i></i><i class="k"></i></div>
-        <div class="vh-legend"><span>Replied</span><span class="f">Flagged for clinician</span><span class="q">Quiet, coach reached out</span><span class="k">Visit kept</span></div>
-      </div>
-    </div>"""
-    keep = """<div class="vh-prod">
-      <div class="vh-card">
-        <div class="vh-b out">Did you get your hours in this month?</div>
-        <div class="vh-b in">i work at my cousin shop but they pay cash, idk how to show that</div>
-        <div class="vh-card-foot">Reply sorted &middot; sent to the navigator queue</div>
-      </div>
-      <div><p class="vh-kicker">Vasl Keep</p>
-        <h2>Eligible members keep the coverage they qualify for.</h2>
-        <p>Members answer by text. Each reply is sorted, navigators see who needs a person, and the plan sees the totals.</p>
-        <p class="vh-status">Built. Two live end-to-end runs, 9 of 9 steps.</p>
-        <a class="vh-arrow" href="/keep">See Vasl Keep &rarr;</a></div>
-    </div>"""
-    engine = """<div class="vh-band"><div class="vx-wrap vh-engine">
-      <div class="vh-engine-top"><h2>One engine. <em>Bridge and Keep are the beginning.</em></h2><a class="vh-arrow" href="/vlap#licensing">License VLAP &rarr;</a></div>
-      <div class="vh-chips"><span class="on">Bridge</span><span class="on">Keep</span><span>Medication adherence</span><span>Intake and triage</span><span>Care management</span><span>Crisis lines and teletherapy</span></div>
-      <div class="vh-buyers">
-        <div><a href="/health-systems">Medicaid plans &rarr;</a><p>Bridge and Keep, per covered member per month.</p></div>
-        <div><a href="/health-systems">Health systems &rarr;</a><p>VLAP inside the electronic health record. Bridge from discharge.</p></div>
-        <div><a href="/vlap#licensing">Teletherapy, crisis lines, clinical software &rarr;</a><p>VLAP by API.</p></div>
-      </div>
-    </div></div>"""
-    dark = """<section class="vh-dark"><div class="vx-wrap">
-      <h2>Nobody built the instrument because nobody in the room spoke the language. <em>We do.</em></h2>
-      <a class="vh-pill is-light" href="/contact">Talk to us about a pilot</a>
-    </div></section>"""
-    body = "\n".join([
-        f'<section><div class="vx-wrap vh-hero">{hero_l}{stage}</div></section>',
-        stats,
-        sec("The product", "What a clinician sees. <em>The signal, the exact words, and the social needs in her notes.</em>",
-            browser("clinician-record.jpg", "clinician.gotovasl.com &middot; member record", REC_ALT,
-                    "The clinician portal. Every signal carries the sentence behind it, and social needs come from her own notes.")),
-        layer,
-        band2("black-boy-joy.jpg", "woman-texting-outdoors.jpg", "Current tools are least accurate for Black, Brown, LGBTQ+, rural and Medicaid patients. <em>VLAP was built on them first.</em>", "center 35%", "60% center"),
-        f'<section><div class="vx-wrap">{bridge}{keep}</div></section>',
-        engine, dark,
-    ])
+    hero = f"""<section><div class="vx-wrap hc-hero">
+  <div>
+    <h1>We built VLAP on the patients every other tool gets wrong. <em>That&rsquo;s why it works for everyone else.</em></h1>
+    <p class="vx-lede">{STATEMENT}</p>
+    <div class="hc-links"><a href="/vlap">How VLAP works</a><a href="/research">What we have measured</a></div>
+  </div>
+  <div class="hc-photo" style="background-image:url(/assets/bridge-hero.jpg);background-position:45% 50%">{FLAG_CARD}</div>
+</div></section>"""
+    prose = """<section class="hc-prose"><div class="vx-wrap">
+  <p>Claims have clearinghouses. Clinician notes have the electronic health record. <em>What patients write has had nothing.</em></p>
+  <p>The texts, check-ins and messages where people say how they are really doing are read by tools built on textbook English. Those tools are least accurate for Black, Brown, LGBTQ+, rural and Medicaid patients. We built VLAP on them first.</p>
+  <small>Language-based depression models were over three times less predictive for Black users (Penn, PNAS 2024).</small>
+</div></section>"""
+    product = f"""<section class="hc-section" style="padding-top:0"><div class="vx-wrap">
+  <p class="hc-label">What a clinician sees</p>
+  <h2>A named signal, the exact words behind it, and the needs in her own notes.</h2>
+  {browser("clinician-record.jpg", "clinician.gotovasl.com &middot; member record", REC_ALT,
+           "VLAP surfaces, flags and informs. The clinician decides. Non-device clinical decision support under the 21st Century Cures Act, Section 3060.")}
+</div></section>"""
+    people = """<section><div class="vx-wrap"><div class="hc-people" style="grid-template-columns:1fr 1fr">
+  <div style="background-image:url(/assets/people/black-boy-joy.jpg);background-position:center 35%"></div>
+  <div style="background-image:url(/assets/people/woman-texting-outdoors.jpg);background-position:60% center"></div>
+</div></div></section>"""
+    work = """<section class="hc-section"><div class="vx-wrap">
+  <p class="hc-label">Running on VLAP today</p>
+  <h2>Two workflows, each built around a measure health plans already track.</h2>
+  <div class="hc-two">
+    <div><h3>Vasl Bridge</h3>
+      <p>A daily text from the emergency department to the first follow-up visit. No app. VLAP reads every reply, and a coach reaches out when someone goes quiet.</p>
+      <p class="hc-status">10 of 10 steps passed live, with real texts delivered.</p>
+      <a href="/bridge">About Bridge</a></div>
+    <div><h3>Vasl Keep</h3>
+      <p>Eligible Medicaid members keep the coverage they qualify for. Members answer by text, each reply is sorted, and navigators reach the people who need a person first.</p>
+      <p class="hc-status">Built. Two live end-to-end runs, 9 of 9 steps.</p>
+      <a href="/keep">About Keep</a></div>
+  </div>
+</div></section>"""
+    evidence = """<section class="hc-section" style="padding-top:0"><div class="vx-wrap">
+  <p class="hc-label">Measured on held-out data, against the tools in use today</p>
+  <div class="hc-evidence">
+    <div><b>0.83<small>vs 0.65</small></b><p>Suicide-attempt severity, against MIT&rsquo;s Suicide Risk Lexicon (Low, Ghosh et al., 2026).</p></div>
+    <div><b>0.97<small>vs 0.83</small></b><p>Substance use in clinical notes, against a keyword rule (n2c2 2022 SHAC test, 518 notes).</p></div>
+    <div><b>0.83<small>F1</small></b><p>Social needs in hospital notes (n2c2 2022).</p></div>
+  </div>
+</div></section>"""
+    close = """<section class="hc-close"><div class="vx-wrap">
+  <p>Nobody built the instrument because nobody in the room spoke the language. <em>We do.</em></p>
+  <div class="hc-links"><a href="/about">About Vasl Health</a><a href="/contact">Get in touch</a></div>
+</div></section>"""
+    body = "\n".join([hero, prose, product, people, work, evidence, close])
     return page("index.html", "Vasl Health | Language intelligence for healthcare",
                 "VLAP reads what patients write and flags clinically relevant signals for a clinician. "
                 "Our own model, our own weights, built for Medicaid plans and health systems.", body)
