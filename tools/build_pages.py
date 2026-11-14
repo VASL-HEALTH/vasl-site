@@ -28,20 +28,22 @@ MARK = (
 )
 
 NAV = [
-    ("/vlap", "VLAP", "vlap.html"),
-    ("/bridge", "Bridge", "bridge.html"),
-    ("/keep", "Keep", "keep.html"),
-    ("/health-systems", "Health plans and systems", "health-systems.html"),
-    ("/technology", "Technology", "technology.html"),
-    ("/research", "Research", "research.html"),
-    ("/team", "Team", "team.html"),
-    ("/about", "About", "about.html"),
+    ("/vlap", "VLAP", {"vlap.html"}),
+    ("/bridge", "Bridge", {"bridge.html"}),
+    ("/keep", "Keep", {"keep.html"}),
+    ("/health-systems", "Health plans and systems", {"health-systems.html", "pilot.html", "hedis-behavioral-health-cultural-fit.html"}),
+    ("/research", "Research", {"research.html", "dialect-bias-mental-health-screening.html", "glossary.html"}),
+    ("/about", "Company", {"about.html", "team.html", "technology.html", "security.html", "contact.html"}),
 ]
 
 FOOT_PLATFORM = [("/vlap", "VLAP"), ("/bridge", "Vasl Bridge"), ("/keep", "Vasl Keep"),
-                 ("/technology", "Technology")]
-FOOT_COMPANY = [("/health-systems", "Health plans and systems"), ("/research", "Research"),
-                ("/team", "Team"), ("/about", "About"), ("/blog", "Blog"), ("/contact", "Contact")]
+                 ("/technology", "Technology"), ("/security", "Security")]
+FOOT_BUYERS = [("/health-systems", "Health plans and systems"), ("/pilot", "How a pilot works"),
+               ("/hedis-behavioral-health-cultural-fit", "Seven-day follow-up"),
+               ("/dialect-bias-mental-health-screening", "Dialect bias in screening"),
+               ("/glossary", "Glossary")]
+FOOT_COMPANY = [("/about", "About"), ("/team", "Team"), ("/research", "Research"),
+                ("/blog", "Blog"), ("/contact", "Contact")]
 LEGAL = [("/privacy", "Privacy"), ("/terms", "Terms"), ("/accessibility", "Accessibility")]
 
 CUR = ' aria-current="page"'
@@ -50,7 +52,7 @@ PILOT = '<a class="vx-btn" href="/contact">Talk to us about a pilot</a>'
 
 def header(rel: str) -> str:
     links = "\n".join(
-        f'      <li><a href="{h}"{CUR if r == rel else ""}>{t}</a></li>'
+        f'      <li><a href="{h}"{CUR if rel in r else ""}>{t}</a></li>'
         for h, t, r in NAV
     )
     menu = "\n".join(f'        <a href="{h}">{t}</a>' for h, t, _ in NAV)
@@ -82,13 +84,14 @@ def footer() -> str:
   <div class="vx-wrap">
     <div class="vx-foot-grid">
       <div>
-        <a class="vx-brand" href="/">{MARK}<span>Vasl Health PBC</span></a>
+        <a class="vx-brand vx-foot-brand" href="/">{MARK}<span>Vasl Health PBC</span></a>
         <p class="vx-foot-tag">Language intelligence infrastructure for healthcare. <em>Our own model, our own weights.</em></p>
       </div>
       {col("Platform", FOOT_PLATFORM)}
+      {col("For buyers", FOOT_BUYERS)}
       {col("Company", FOOT_COMPANY)}
     </div>
-    <div class="vx-foot-base vx-mono">
+    <div class="vx-foot-base">
       <span>Vasl Health PBC &middot; HIPAA compliant &middot; Non-device clinical decision support</span>
       <span class="vx-foot-legal">{legal}<span>&copy; 2026 Vasl Health PBC</span></span>
     </div>
@@ -222,49 +225,84 @@ ENGINE = """<div class="vx-engine">
 # Pages
 # ---------------------------------------------------------------------------
 def home():
-    facts = """<dl class="vx-facts">
-      <div><dt>Model</dt><dd>Our own model</dd></div>
-      <div><dt>Weights</dt><dd>Our own weights</dd></div>
-      <div><dt>Patient text</dt><dd>Never sent to an outside AI company</dd></div>
-    </dl>"""
-    actions = f'<div class="vx-actions">{PILOT}<a class="vx-link" href="/vlap">See VLAP</a></div>\n    {facts}'
-    results = """<div class="vx-results">
-      <div class="vx-result"><div class="vx-big">0.83<small>vs 0.65</small></div>
-        <div class="vx-bar" style="width:83%"></div><div class="vx-bar is-old" style="width:65%"></div>
-        <p><strong>Suicide-attempt severity.</strong> VLAP against MIT&rsquo;s Suicide Risk Lexicon (Low, Ghosh et al., 2026), the reference word list.</p>
-        <span class="vx-mono">ROC-AUC &middot; held-out posts</span></div>
-      <div class="vx-result"><div class="vx-big">0.97<small>vs 0.83</small></div>
-        <div class="vx-bar" style="width:97%"></div><div class="vx-bar is-old" style="width:83%"></div>
-        <p><strong>Substance use in clinical notes.</strong> VLAP against a keyword rule on notes labeled by human annotators.</p>
-        <span class="vx-mono">F1 &middot; n2c2 2022 SHAC test &middot; 518 notes</span></div>
-      <div class="vx-result"><div class="vx-big">0.83<small>F1</small></div>
-        <div class="vx-bar" style="width:83%"></div>
-        <p><strong>Social needs in hospital notes.</strong> Housing, food, transportation and other needs written into the chart.</p>
-        <span class="vx-mono">F1 &middot; n2c2 2022</span></div>
-    </div>
-    <div class="vx-key"><span>VLAP</span><span class="is-old">Tool in use today</span></div>"""
-    layer = f"""<div class="vx-layer">
-      <div><span>Claims</span><span class="vx-arrow"></span><span>Clearinghouses</span></div>
-      <div><span>Clinician notes</span><span class="vx-arrow"></span><span>Electronic health records</span></div>
-      <div class="is-vasl"><span>What patients write</span><span class="vx-arrow"></span><span class="vx-v">{MARK}Vasl</span></div>
+    hero_l = f"""<div>
+      <h1>We built VLAP on the patients every other tool gets wrong. <em>That&rsquo;s why it works for everyone else.</em></h1>
+      <p class="vx-lede">{STATEMENT}</p>
+      <div class="vx-actions"><a class="vh-pill" href="/contact">Talk to us about a pilot</a><a class="vh-arrow" href="/vlap">How VLAP works &rarr;</a></div>
+      <p class="vh-small">Our own model, our own weights. No patient text goes to an outside AI company.</p>
     </div>"""
-    buyers = cols([
-        ("", "<h3>Medicaid plans</h3><p>Bridge and Keep, priced per covered member per month.</p>"),
-        ("", "<h3>Health systems</h3><p>VLAP inside the electronic health record, and Bridge from emergency department discharge.</p>"),
-        ("is-clay", "<h3>Teletherapy, crisis lines and clinical software</h3><p>VLAP by application programming interface (API).</p>"),
-    ])
-    licensing = f'<div style="margin-top:40px">{LICENSES}</div><p style="margin-top:22px"><a class="vx-link" href="/vlap#licensing">Licensing details</a></p>'
+    stage = """<div class="vh-stage" aria-label="A Vasl Bridge text thread and the flag the care team sees">
+      <div class="vh-phone">
+        <div class="vh-phone-top">Vasl &middot; text message</div>
+        <div class="vh-day">Day 1</div>
+        <div class="vh-b out">Hey, it&rsquo;s Vasl. How are you doing today?</div>
+        <div class="vh-b in" style="max-width:40%">ok i guess</div>
+        <div class="vh-day">Day 3</div>
+        <div class="vh-b out">Checking in. How&rsquo;s today going?</div>
+        <div class="vh-b in">been staying in my room. ain&rsquo;t nobody checking for me anyway</div>
+      </div>
+      <div class="vh-flag">
+        <div class="vh-flag-top"><span>Care team &middot; Day 3 after discharge</span><i></i></div>
+        <h3>Isolation <span class="vh-chip">VLAP flag</span></h3>
+        <p>&ldquo;been staying in my room. <mark>ain&rsquo;t nobody checking for me</mark> anyway&rdquo;</p>
+        <div class="vh-flag-btns"><span>Review</span><span>Assign coach</span></div>
+      </div>
+    </div>"""
+    stats = """<div class="vh-band"><div class="vx-wrap vh-stats">
+      <div>0.83<small>vs 0.65</small><p>Suicide-attempt severity, against MIT&rsquo;s Suicide Risk Lexicon (Low, Ghosh et al., 2026)</p></div>
+      <div>0.97<small>vs 0.83</small><p>Substance use in clinical notes, against a keyword rule (n2c2 2022 SHAC test, 518 notes)</p></div>
+      <div>0.83<small>F1</small><p>Social needs in hospital notes (n2c2 2022)</p></div>
+    </div></div>"""
+    layer = """<section class="vh-center"><div class="vx-wrap">
+      <h2>Claims have clearinghouses. Notes have the electronic health record. <em>What patients write has had nothing.</em></h2>
+      <div class="vh-layer">
+        <div><small>Claims</small>Clearinghouses</div>
+        <div><small>Clinician notes</small>Electronic health records</div>
+        <div class="is-us"><small>What patients write</small>Vasl</div>
+      </div>
+    </div></section>"""
+    bridge = """<div class="vh-prod">
+      <div><p class="vh-kicker">Vasl Bridge</p>
+        <h2>From the emergency department to the first follow-up visit.</h2>
+        <p>A daily text from discharge, no app. VLAP reads every reply and shows the care team the exact words that matter. Silence is a signal too.</p>
+        <p class="vh-status">10 of 10 steps passed live, real texts delivered.</p>
+        <a class="vh-arrow" href="/bridge">See Vasl Bridge &rarr;</a></div>
+      <div class="vh-card" aria-label="Seven days from discharge to first visit">
+        <div class="vh-tl-ends"><span>Discharge</span><span>First visit</span></div>
+        <div class="vh-tl"><i></i><i></i><i class="f"></i><i class="q"></i><i></i><i></i><i class="k"></i></div>
+        <div class="vh-legend"><span>Replied</span><span class="f">Flagged for clinician</span><span class="q">Quiet, coach reached out</span><span class="k">Visit kept</span></div>
+      </div>
+    </div>"""
+    keep = """<div class="vh-prod">
+      <div class="vh-card">
+        <div class="vh-b out">Did you get your hours in this month?</div>
+        <div class="vh-b in">i work at my cousin shop but they pay cash, idk how to show that</div>
+        <div class="vh-card-foot">Reply sorted &middot; sent to the navigator queue</div>
+      </div>
+      <div><p class="vh-kicker">Vasl Keep</p>
+        <h2>Eligible members keep the coverage they qualify for.</h2>
+        <p>Members answer by text. Each reply is sorted, navigators see who needs a person, and the plan sees the totals.</p>
+        <p class="vh-status">Built. Two live end-to-end runs, 9 of 9 steps.</p>
+        <a class="vh-arrow" href="/keep">See Vasl Keep &rarr;</a></div>
+    </div>"""
+    engine = """<div class="vh-band"><div class="vx-wrap vh-engine">
+      <div class="vh-engine-top"><h2>One engine. <em>Bridge and Keep are the beginning.</em></h2><a class="vh-arrow" href="/vlap#licensing">License VLAP &rarr;</a></div>
+      <div class="vh-chips"><span class="on">Bridge</span><span class="on">Keep</span><span>Medication adherence</span><span>Intake and triage</span><span>Care management</span><span>Crisis lines and teletherapy</span></div>
+      <div class="vh-buyers">
+        <div><a href="/health-systems">Medicaid plans &rarr;</a><p>Bridge and Keep, per covered member per month.</p></div>
+        <div><a href="/health-systems">Health systems &rarr;</a><p>VLAP inside the electronic health record. Bridge from discharge.</p></div>
+        <div><a href="/vlap#licensing">Teletherapy, crisis lines, clinical software &rarr;</a><p>VLAP by API.</p></div>
+      </div>
+    </div></div>"""
+    dark = """<section class="vh-dark"><div class="vx-wrap">
+      <h2>Two Black founders. Nobody built the instrument because nobody in the room spoke the language. <em>We do.</em></h2>
+      <a class="vh-pill is-light" href="/contact">Talk to us about a pilot</a>
+    </div></section>"""
     body = "\n".join([
-        hero("Vasl Language Analysis Platform",
-             "We built VLAP on the patients every other tool gets wrong. <em>That&rsquo;s why it works for everyone else.</em>",
-             STATEMENT, actions),
-        sec("Measured, not claimed", "Three held-out tests. <em>VLAP against the tools in use today.</em>", results),
-        sec("The missing layer", "Every kind of health data has infrastructure. <em>Except what patients write.</em>", layer, "is-clay"),
-        sec("Built workflows", "Two workflows. <em>Both run live.</em>", WORKFLOWS_HOME),
-        sec("One engine, many workflows", "VLAP is the platform. Healthcare is the market. <em>Bridge and Keep are the beginning.</em>", ENGINE, "is-light"),
-        sec("Who buys", "The first buyers. <em>Not the boundary.</em>", buyers + licensing),
-        sec("The founders", "Two Black founders. Nobody built the instrument because nobody in the room spoke the language. <em>We do.</em>",
-            f'<div class="vx-actions" style="margin-top:0">{PILOT}<a class="vx-link" href="/team">Meet the team</a></div>'),
+        f'<section><div class="vx-wrap vh-hero">{hero_l}{stage}</div></section>',
+        stats, layer,
+        f'<section><div class="vx-wrap">{bridge}{keep}</div></section>',
+        engine, dark,
     ])
     return page("index.html", "Vasl Health | Language intelligence for healthcare",
                 "VLAP reads what patients write and flags clinically relevant signals for a clinician. "
@@ -420,7 +458,8 @@ def health_systems():
         sec("What VLAP reads", "The text you already have. <em>Flagged where your clinicians already work.</em>", io),
         sec("Built workflows", "Start with a workflow. <em>Keep the engine.</em>", flows, "is-clay"),
         sec("Pricing", "Simple units. <em>Priced against measures you are already scored on.</em>", pricing),
-        next_step("Talk to us about a pilot. <em>Bridge, Keep or a VLAP license.</em>"),
+        next_step("Talk to us about a pilot. <em>Bridge, Keep or a VLAP license.</em>",
+                  '<a class="vx-link" href="/pilot">How a pilot works</a>'),
     ])
     return page("health-systems.html", "Health plans and systems | Vasl Health",
                 "Clinical decision support inside the workflows Medicaid plans and health systems already run. "
@@ -454,7 +493,8 @@ def technology():
         sec("Where patient text goes", "One engine, one cloud. <em>Nothing leaves for a third-party model.</em>", path),
         sec("Clinical decision support", "VLAP surfaces, flags and informs. <em>The clinician decides.</em>", cds, "is-clay"),
         sec("How VLAP is measured", "Held-out tests, human-labeled answers. <em>Reported by language variety.</em>", measured),
-        next_step("Bring your security team. <em>We will walk the data path with them.</em>"),
+        next_step("Bring your security team. <em>We will walk the data path with them.</em>",
+                  '<a class="vx-link" href="/security">Security and compliance</a>'),
     ])
     return page("technology.html", "Technology: our own model, our own weights | Vasl Health",
                 "VLAP is a language model Vasl built and owns, running on Vasl infrastructure in AWS. "
@@ -481,7 +521,8 @@ def research():
              "Every number on this site comes from a held-out test with a named dataset and a named comparison."),
         sec("Results", "Three tests. <em>Three wins over the tools in use today.</em>", RESULTS_TABLE),
         sec("Taxonomy and patent", "55 signals across seven dimensions. <em>Provisional patent filed.</em>", tax, "is-light"),
-        sec("Sources cited on this site", "The evidence we build on.", sources),
+        sec("Sources cited on this site", "The evidence we build on.", sources +
+            '<div class="vx-actions"><a class="vx-link" href="/dialect-bias-mental-health-screening">Dialect bias in screening</a><a class="vx-link" href="/hedis-behavioral-health-cultural-fit">Seven-day follow-up</a><a class="vx-link" href="/glossary">Glossary</a></div>'),
         next_step("Run VLAP on your own held-out text. <em>We publish what we find.</em>",
                   '<a class="vx-link" href="/blog">Read the blog</a>'),
     ])
@@ -528,6 +569,8 @@ def about():
              STATEMENT),
         sec("What we build", "VLAP is the platform. Healthcare is the market. <em>Bridge and Keep are the beginning.</em>", build),
         sec("What we hold to", "Three commitments.", hold, "is-clay"),
+        sec("More about Vasl", "Who we are and how we work.",
+            '<div class="vx-actions" style="margin-top:0"><a class="vx-link" href="/team">Team</a><a class="vx-link" href="/technology">Technology</a><a class="vx-link" href="/security">Security</a><a class="vx-link" href="/research">Research</a><a class="vx-link" href="/blog">Blog</a></div>', "is-light"),
         next_step("Talk to us about a pilot.", '<a class="vx-link" href="/team">Meet the team</a>'),
     ])
     return page("about.html", "About Vasl Health | Language intelligence infrastructure",
@@ -649,10 +692,181 @@ def contact():
                 "Medicaid plan, health system or clinical software.", body, CONTACT_SCRIPT)
 
 
+PATH_BLOCK = """<div class="vx-path">
+      <div><span class="vx-mono">In</span>Messages, replies, notes, scribe text, FHIR R4</div>
+      <div><span class="vx-mono">Read by</span>VLAP, built by Vasl</div>
+      <div><span class="vx-mono">Runs on</span>Vasl infrastructure in AWS</div>
+      <div><span class="vx-mono">Out</span>Flags with the exact words, for a clinician</div>
+    </div>
+    <div class="vx-never"><span>&times;&nbsp;&nbsp;Outside AI model providers</span><b>NEVER</b></div>"""
+
+
+def security():
+    commit = cols([
+        ("", "<h3>Patient text stays with us</h3><p>VLAP reads patient text on Vasl infrastructure. No patient text goes to an outside AI company or a third-party model.</p>"),
+        ("is-clay", '<h3>HIPAA compliant</h3><p>Built for protected health information from the start. We sign a <a href="/baa">business associate agreement</a> with every partner.</p>'),
+        ("is-light", "<h3>Outbound texts carry no health information</h3><p>Bridge and Keep check-ins say nothing about a patient&rsquo;s health. Only the patient&rsquo;s reply carries it.</p>"),
+        ("", "<h3>The clinician decides</h3><p>Non-device clinical decision support under the 21st Century Cures Act, Section 3060. VLAP shows its evidence and never acts on its own.</p>"),
+    ], 2)
+    integ = numbered([
+        ("Electronic health record", "HL7 FHIR R4", "Intake from Epic, Cerner and athenahealth."),
+        ("Messages", "Patient messages and text replies", "Including Bridge and Keep replies."),
+        ("Notes", "Clinician notes", "And ambient scribe and note text."),
+        ("Output", "A flag with the exact words", "Delivered where your clinicians already work."),
+    ])
+    body = "\n".join([
+        hero("Security", "Patient text stays inside Vasl. <em>Bring your security team.</em>",
+             "VLAP is a language model Vasl built and owns, running on Vasl infrastructure in AWS. "
+             "Patient text is read by VLAP and by no outside AI vendor."),
+        sec("What we commit to", "Four commitments your security team can check.", commit),
+        sec("Where patient text goes", "One engine, one cloud. <em>Nothing leaves for a third-party model.</em>", PATH_BLOCK, "is-clay"),
+        sec("Integration", "The text you already have. <em>In the standards you already use.</em>", integ),
+        next_step("Bring your security team. <em>We will walk the data path with them.</em>",
+                  '<a class="vx-link" href="/technology">How VLAP is built</a>'),
+    ])
+    return page("security.html", "Security and compliance | Vasl Health",
+                "Patient text stays inside Vasl: our own model on our own AWS infrastructure, HIPAA "
+                "compliant, with a business associate agreement for every partner.", body)
+
+
+def pilot():
+    steps_ = numbered([
+        ("Choose", "Pick the workflow", "Bridge from your emergency department, Keep for your members, or VLAP on text you already hold."),
+        ("Review", "Walk the data path", "Your security team reviews it with us, and we sign a business associate agreement."),
+        ("Run", "Run it with your team", "We staff Bridge with your team. Flags go to the clinicians and navigators you already have."),
+        ("Compare", "Measure it", "VLAP runs beside the tool you use today, on your own held-out text. We run the comparison with you."),
+    ])
+    measures = cols([
+        ("", '<span class="vx-mono">Vasl Bridge</span><h3>The seven-day follow-up rate</h3><p>The measure every Medicaid plan is scored on. Bridge records the first visit after discharge.</p>'),
+        ("is-clay", '<span class="vx-mono">Vasl Keep</span><h3>Who answered, and what they need</h3><p>Every reply sorted, the members who need a person first, and plan-level totals.</p>'),
+        ("is-light", '<span class="vx-mono">VLAP</span><h3>VLAP against your current tool</h3><p>On your own held-out text, against the word list or keyword rule it would replace.</p>'),
+    ])
+    pricing = """<table class="vx-table">
+      <thead><tr><th>Product</th><th>Buyer</th><th>Price</th></tr></thead>
+      <tbody>
+        <tr><td>Vasl Bridge</td><td>Medicaid plans</td><td><span class="vx-p">$0.50</span> per covered member per month</td></tr>
+        <tr><td>Vasl Bridge</td><td>Health systems</td><td><span class="vx-p">$150 + $150</span> per patient enrolled, plus per completed seven-day visit</td></tr>
+        <tr><td>Vasl Keep</td><td>Medicaid plans</td><td><span class="vx-p">$0.50</span> per covered member per month; $0.80 with a VLAP license</td></tr>
+        <tr><td>VLAP Enterprise</td><td>Plans and health systems</td><td><span class="vx-p">$300,000</span> a year up to 50,000 members, then $0.50 per member per month</td></tr>
+        <tr><td>VLAP API</td><td>Teletherapy, crisis lines, clinical software</td><td><span class="vx-p">$50,000</span> a year, from</td></tr>
+      </tbody>
+    </table>
+    <p class="vx-foot-note">Vasl bills the partner. Vasl never bills Medicaid.</p>"""
+    body = "\n".join([
+        hero("How a pilot works", "Start with one workflow. <em>Measure it on your own patients.</em>",
+             "A pilot runs Bridge, Keep or VLAP with your team, on your patients&rsquo; own text, against the tool you use today."),
+        sec("Four steps", "From first call to a result you can read.", steps_),
+        sec("What a pilot measures", "Each pilot is scored on something you already track.", measures, "is-clay"),
+        sec("Pricing", "Simple units. <em>Priced against measures you are already scored on.</em>", pricing),
+        next_step("Talk to us about a pilot. <em>Bridge, Keep or a VLAP license.</em>"),
+    ])
+    return page("pilot.html", "How a Vasl pilot works | Vasl Health",
+                "How a pilot of Vasl Bridge, Vasl Keep or VLAP runs: choose the workflow, walk the data "
+                "path, run it with your team, and measure it on your own patients.", body)
+
+
+def article(rel, title, desc, eyebrow, h1, lede, html, sources):
+    rows = "".join(f"<tr><td>{a}</td><td>{b}</td></tr>" for a, b in sources)
+    src = f"""<table class="vx-table"><thead><tr><th>Source</th><th>What it shows</th></tr></thead><tbody>{rows}</tbody></table>"""
+    body = "\n".join([
+        hero(eyebrow, h1, lede),
+        f'<section class="vx-sec" style="padding-top:8px"><div class="vx-wrap"><div class="vx-article">{html}</div></div></section>',
+        sec("Sources", "What this page cites.", src, "is-light"),
+        next_step("Run VLAP on your own patients&rsquo; text. <em>We run the comparison with you.</em>",
+                  '<a class="vx-link" href="/research">Read the research</a>'),
+    ])
+    return page(rel, title, desc, body)
+
+
+def dialect():
+    html = """
+<p>Screening tools and the language models now layered on top of them read words. Most were built on one variety of English, written in fairly direct terms. A patient who says the same thing another way is not being unclear. The tool was never built to hear it.</p>
+<h2>What the research shows</h2>
+<p>The pattern holds across the language technology health care is starting to rely on.</p>
+<ul>
+<li><strong>Depression detection.</strong> Language-based depression models were over three times less predictive for Black users than for white users (Penn, PNAS 2024).</li>
+<li><strong>Speech recognition.</strong> Five commercial speech recognition systems made nearly twice as many errors for Black speakers as for white speakers (Koenecke et al., PNAS 2020). Ambient scribes are built on this kind of system.</li>
+<li><strong>Automated reading of text.</strong> Posts written in African American English were more likely to be labeled offensive by widely used classifiers (Sap et al., ACL 2019).</li>
+</ul>
+<blockquote>Current tools are least accurate for Black, Brown, LGBTQ+, rural and Medicaid patients.</blockquote>
+<h2>Why it matters in screening</h2>
+<p>The failure is rarely dramatic. A real signal reads as ambiguous, scores lower than it should, or is missed. In screening and early detection, that false negative is the costly error: the person who needed someone to follow up never gets flagged.</p>
+<p>It is also the error nobody sees. A missed flag leaves no trace in the chart, so a tool can look accurate on average while it fails the patients it reaches least.</p>
+<h2>How VLAP is built against it</h2>
+<p>We built VLAP on the patients every other tool gets wrong. That means three things in practice.</p>
+<ul>
+<li><strong>Measured by language variety.</strong> Every result is reported by how patients write, starting with African American Language.</li>
+<li><strong>Tested against the tool in use today.</strong> On held-out data, VLAP scored 0.83 on suicide-attempt severity against 0.65 for MIT&rsquo;s Suicide Risk Lexicon, and 0.97 F1 on substance use in clinical notes against 0.83 for a keyword rule.</li>
+<li><strong>Every flag shows its words.</strong> VLAP flags a named signal from a taxonomy of 55 signals across seven dimensions, with the exact sentence behind it, so the clinician can check the basis and decide.</li>
+</ul>
+<p>Read the full results on the <a href="/research">research page</a>, or see <a href="/vlap">how VLAP works</a>.</p>
+"""
+    return article("dialect-bias-mental-health-screening.html",
+                   "Dialect bias in mental health screening | Vasl Health",
+                   "Language tools used in mental health screening are least accurate for Black, Brown and "
+                   "Medicaid patients. What the research shows, and how VLAP is built against it.",
+                   "Research", "Dialect bias in mental health screening. <em>The signal is there. The tool can&rsquo;t hear it.</em>",
+                   "What the research says about language tools and the patients they misread, and what building against it requires.",
+                   html,
+                   [("Penn, PNAS 2024", "Language-based depression models were over three times less predictive for Black users."),
+                    ("Koenecke et al., PNAS 2020", "Commercial speech recognition made nearly twice as many errors for Black speakers."),
+                    ("Sap et al., ACL 2019", "Text in African American English was more likely to be labeled offensive by automated classifiers."),
+                    ("Low, Ghosh et al., 2026", "MIT&rsquo;s Suicide Risk Lexicon, the reference word list VLAP is compared against."),
+                    ("n2c2 2022", "Shared-task clinical notes for substance use (SHAC) and social needs.")])
+
+
+def fum():
+    html = """
+<p>Only 31.2% of young people on Medicaid make it to a follow-up visit within seven days of a mental health emergency visit (Hoffmann et al., Pediatrics 2023). The other two thirds leave the emergency department and go quiet in the week that matters most.</p>
+<h2>The measure</h2>
+<p>Follow-Up After Emergency Department Visit for Mental Illness, known as FUM, is the HEDIS measure for that week. It counts members 6 and older who have a follow-up visit within 7 days, and within 30 days, of an emergency department visit for mental illness or intentional self-harm. Medicaid plans are scored on it.</p>
+<p>FUM does not measure whether a patient got better. It measures whether they came back. That makes it an engagement measure, and engagement is decided in the days between discharge and the first visit.</p>
+<h2>Where patients drop off</h2>
+<p>Most follow-up programs send reminders and count who answered. A reply like &ldquo;been staying in my room. ain&rsquo;t nobody checking for me anyway&rdquo; counts as an answer. It is also the reply a clinician most needs to see.</p>
+<blockquote>Everyone else sends reminders. We understand the replies.</blockquote>
+<h2>How Vasl Bridge works on it</h2>
+<ul>
+<li>The patient is enrolled by text before leaving the emergency department. No app.</li>
+<li>A check-in goes out every day. Outbound texts carry no health information.</li>
+<li>VLAP reads every reply, and a clinician sees the flag and the exact sentence behind it.</li>
+<li>If the patient goes quiet, a coach reaches out. Silence is a signal too.</li>
+<li>The first visit is recorded against the seven-day measure.</li>
+</ul>
+<p>Bridge has passed 10 of 10 steps live, with real texts delivered. For health systems it is priced at $150 per patient enrolled plus $150 per completed seven-day visit, and one avoided boarding stay ($2,264) pays for eight enrollments and seven completed visits. For Medicaid plans it is $0.50 per covered member per month.</p>
+<p>See <a href="/bridge">Vasl Bridge</a>, or <a href="/pilot">how a pilot works</a>.</p>
+"""
+    return article("hedis-behavioral-health-cultural-fit.html",
+                   "Seven-day mental health follow-up (FUM) | Vasl Health",
+                   "Only 31.2% of young people on Medicaid get follow-up within seven days of a mental health "
+                   "emergency visit. The HEDIS FUM measure, and how Vasl Bridge works on it.",
+                   "Health plans and systems", "Seven days after a mental health emergency visit. <em>Most patients go quiet.</em>",
+                   "The HEDIS follow-up measure Medicaid plans are scored on, where patients drop off, and what reading their replies changes.",
+                   html,
+                   [("Hoffmann et al., Pediatrics 2023", "31.2% of young people on Medicaid attend a follow-up within seven days of a mental health emergency visit."),
+                    ("NCQA HEDIS", "Follow-Up After Emergency Department Visit for Mental Illness (FUM), 7-day and 30-day rates.")])
+
+
+def glossary():
+    from glossary_terms import TERMS
+    items = "".join(f'<dt id="{slug}">{term}</dt><dd>{d}</dd>' for term, slug, d in TERMS)
+    body = "\n".join([
+        hero("Glossary", "The terms on this site. <em>In plain language.</em>",
+             "What we mean by the words we use about VLAP, Bridge, Keep and how we measure them."),
+        f'<section class="vx-sec" style="padding-top:8px"><div class="vx-wrap"><dl class="vx-gloss">{items}</dl></div></section>',
+        next_step("Questions we did not answer here? <em>Talk to us.</em>"),
+    ])
+    return page("glossary.html", "Glossary: VLAP, Bridge, Keep and how we measure | Vasl Health",
+                "Plain-language definitions of the terms on gotovasl.com: VLAP, signals, dialect bias, "
+                "held-out tests, F1, ROC-AUC, FHIR R4, FUM and more.", body)
+
+
 PAGES = {
     "index.html": home, "vlap.html": vlap, "bridge.html": bridge, "keep.html": keep,
     "health-systems.html": health_systems, "technology.html": technology,
     "research.html": research, "team.html": team, "about.html": about, "contact.html": contact,
+    "security.html": security, "pilot.html": pilot,
+    "dialect-bias-mental-health-screening.html": dialect,
+    "hedis-behavioral-health-cultural-fit.html": fum, "glossary.html": glossary,
 }
 
 

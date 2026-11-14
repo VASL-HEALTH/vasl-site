@@ -2,12 +2,102 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Vasl Health</title>
-<meta name="robots" content="noindex,follow">
-<link rel="canonical" href="https://gotovasl.com/vlap">
-<meta http-equiv="refresh" content="0; url=/vlap">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glossary: VLAP, Bridge, Keep and how we measure | Vasl Health</title>
+<meta name="description" content="Plain-language definitions of the terms on gotovasl.com: VLAP, signals, dialect bias, held-out tests, F1, ROC-AUC, FHIR R4, FUM and more.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- SEO:VASL -->
+<link rel="canonical" href="https://gotovasl.com/glossary">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vasl Health">
+<meta property="og:title" content="Glossary: VLAP, Bridge, Keep and how we measure | Vasl Health">
+<meta property="og:description" content="Plain-language definitions of the terms on gotovasl.com: VLAP, signals, dialect bias, held-out tests, F1, ROC-AUC, FHIR R4, FUM and more.">
+<meta property="og:url" content="https://gotovasl.com/glossary">
+<meta property="og:image" content="https://gotovasl.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Vasl Health, Language Is Care">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Glossary: VLAP, Bridge, Keep and how we measure | Vasl Health">
+<meta name="twitter:description" content="Plain-language definitions of the terms on gotovasl.com: VLAP, signals, dialect bias, held-out tests, F1, ROC-AUC, FHIR R4, FUM and more.">
+<meta name="twitter:image" content="https://gotovasl.com/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"DefinedTermSet","@id":"https://gotovasl.com/glossary#termset","name":"Vasl Health Glossary","description":"Plain-language definitions of the terms on gotovasl.com: VLAP, signals, dialect bias, held-out tests, F1, ROC-AUC, FHIR R4, FUM and more.","url":"https://gotovasl.com/glossary","hasDefinedTerm":[{"@type":"DefinedTerm","name":"African American Language","description":"The variety of English spoken by many Black Americans, with its own grammar, sounds and vocabulary. It is also called African American English or AAVE. Language tools trained mostly on Mainstream American English misread it, not because it is imprecise, but because the tools were never built on it. VLAP reports every result by language variety, starting with African American Language.","url":"https://gotovasl.com/glossary#african-american-language","inDefinedTermSet":"https://gotovasl.com/glossary#termset"},{"@type":"DefinedTerm","name":"Ambient scribe","description":"Software that listens to a clinical visit and drafts the note. The draft is text about the patient, often close to their own words, and it is one of the kinds of text VLAP can read alongside messages, text replies and clinician notes.","url":"https://gotovasl.com/glossary#ambient-scribe","inDefinedTermSet":"https://gotovasl.com/glossary#termset"},{"@type":"DefinedTerm","name":"Clinical decision support","description":"Software that gives a clinician information to inform a decision. VLAP is non-device clinical decision support under the 21st Century Cures Act, Section 3060: it surfaces a signal and shows the exact words behind it so the clinician can check the basis, and it never decides or acts on its own.","url":"https://gotovasl.com/glossary#clinical-decision-support","inDefinedTermSet":"https://gotovasl.com/glossary#termset"},{"@type":"DefinedTerm","name":"Community engagement requirement","description":"The Medicaid rule under which some adult members must show 80 hours a month of work, school, volunteering or another qualifying activity to keep their coverage. Vasl Keep helps eligible members keep the coverage they qualify for: members answer by text, each reply is sorted, and navigators reach the members who need a person first.","url":"https://gotovasl.com/glossary#community-engagement-requirement","inDefinedTermSet":"https://gotovasl.com/glossary#termset"},{"@type":"DefinedTerm","name":"Dialect bias","description":"When a test, screener or language model performs worse for people who speak a particular variety of a language. Research has found language-based depression models over three times less predictive for Black users (Penn, PNAS 2024). In screening, the cost is usually a quiet one: a real signal reads as nothing, and nobody follows up.","url":"https://gotovasl.com/glossary#dialect-bias","inDefinedTermSet":"https://gotovasl.com/glossary#termset"},{"@type":"DefinedTerm","name":"F1 score","description":"A measure of how well a system finds what it is looking for, combining how many of its flags are right (precision) with how many of the real cases it catches (recall). It runs from 0 to 1, higher is better. VLAP scored 0.97 F1 on substance use in clinical notes, against 0.83 for a keyword rule.","url":"https://gotovasl.com/glossary#f1-score","inDefinedTermSet":"https://gotovasl.com/glossary#termset"},{"@type":"DefinedTerm","name":"FHIR R4","description":"Fast Healthcare Interoperability Resources, Release 4, the HL7 standard electronic health records use to exchange data. VLAP takes intake through FHIR R4 from Epic, Cerner and athenahealth, so it reads the text a health system already has without a new screen for clinicians to learn.","url":"https://gotovasl.com/glossary#fhir-r4","inDefinedTermSet":"https://gotovasl.com/glossary#termset"},{"@type":"DefinedTerm","name":"Follow-up after an emergency visit (FUM)","description":"The HEDIS measure Follow-Up After Emergency Department Visit for Mental Illness. It counts members 6 and older with a follow-up visit within 7 and 30 days of an emergency department visit for mental illness or intentional self-harm. Medicaid plans are scored on it, and it is the measure Vasl Bridge is built around.","url":"https://gotovasl.com/glossary#fum","inDefinedTermSet":"https://gotovasl.com/glossary#termset"},{"@type":"DefinedTerm","name":"Held-out test","description":"A test on data the model never saw while it was being built. It is the honest way to measure a model, because a model can look accurate on text it has already learned from. Every VLAP result on this site comes from a held-out test with a named dataset and a named comparison.","url":"https://gotovasl.com/glossary#held-out-test","inDefinedTermSet":"https://gotovasl.com/glossary#termset"},{"@type":"DefinedTerm","name":"n2c2 2022","description":"A shared-task dataset of clinical notes annotated by people, used by researchers to compare systems on the same ground. VLAP is tested on its substance use (SHAC) and social needs tasks, including 518 notes in the SHAC test set.","url":"https://gotovasl.com/glossary#n2c2-2022","inDefinedTermSet":"https://gotovasl.com/glossary#termset"},{"@type":"DefinedTerm","name":"Navigator","description":"A person on a health plan or care team who helps members get what they need, such as paperwork, appointments or benefits. In Vasl Keep, navigators work one queue of sorted replies and reach the members who need a person first.","url":"https://gotovasl.com/glossary#navigator","inDefinedTermSet":"https://gotovasl.com/glossary#termset"},{"@type":"DefinedTerm","name":"ROC-AUC","description":"A measure of how well a model ranks real cases above non-cases, from 0.5 (chance) to 1 (perfect). VLAP scored 0.83 on suicide-attempt severity in held-out posts, against 0.65 for MIT's Suicide Risk Lexicon (Low, Ghosh et al., 2026).","url":"https://gotovasl.com/glossary#roc-auc","inDefinedTermSet":"https://gotovasl.com/glossary#termset"},{"@type":"DefinedTerm","name":"Signal","description":"A named finding VLAP flags in a piece of text, such as isolation or substance use. A signal is not a score or a diagnosis. Every flag carries the sentence behind it, and a clinician reviews it and decides what to do.","url":"https://gotovasl.com/glossary#signal","inDefinedTermSet":"https://gotovasl.com/glossary#termset"},{"@type":"DefinedTerm","name":"Taxonomy v2.0","description":"The list of signals VLAP reads for: 55 signals across seven dimensions, including behavioral health risk, substance use and social needs. The taxonomy is what makes a VLAP flag specific enough for a clinician to act on.","url":"https://gotovasl.com/glossary#taxonomy","inDefinedTermSet":"https://gotovasl.com/glossary#termset"},{"@type":"DefinedTerm","name":"VLAP","description":"The Vasl Language Analysis Platform, the language model Vasl built and owns. It reads patient messages, text replies, clinician notes and scribe text, flags clinically relevant signals with the exact words behind them, and runs on Vasl infrastructure. No patient text goes to an outside AI company.","url":"https://gotovasl.com/glossary#vlap","inDefinedTermSet":"https://gotovasl.com/glossary#termset"},{"@type":"DefinedTerm","name":"Vasl Bridge","description":"A daily text from emergency department discharge to the first follow-up visit, with no app. VLAP reads every reply, a clinician sees the flag, and a coach reaches out when a patient goes quiet. It passed 10 of 10 steps live, with real texts delivered.","url":"https://gotovasl.com/glossary#vasl-bridge","inDefinedTermSet":"https://gotovasl.com/glossary#termset"},{"@type":"DefinedTerm","name":"Vasl Keep","description":"A text workflow that helps eligible Medicaid members keep the coverage they qualify for under the community engagement requirement. Each reply is sorted into one of seven categories or no reply, navigators work the queue, and the plan sees the totals.","url":"https://gotovasl.com/glossary#vasl-keep","inDefinedTermSet":"https://gotovasl.com/glossary#termset"}]}</script>
+<script defer data-domain="gotovasl.com" src="https://plausible.io/js/script.outbound-links.tagged-events.js"></script>
+<script>window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>
+<script>(function(){var PAGE="glossary";document.addEventListener("click",function(e){var a=e.target.closest("a[href]");if(!a)return;var href=a.getAttribute("href");if(!href)return;if(/(^|\/)contact(\.html)?(\?|#|$)/.test(href)){window.plausible("Contact CTA",{props:{page:PAGE}});if(PAGE==="pricing"){window.plausible("Pricing CTA",{props:{page:PAGE}});}}},true);})();</script>
+<!-- /SEO:VASL -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/chrome.css">
+<link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
-<p>This page has moved. <a href="/vlap">Continue to https://gotovasl.com/vlap</a>.</p>
+<!-- Generated by tools/build_pages.py. Edit the content there, not here. -->
+<a class="vx-skip" href="#main">Skip to content</a>
+<nav class="vx-nav" aria-label="Main">
+  <div class="vx-wrap vx-nav-in">
+    <a class="vx-brand" href="/"><svg viewBox="0 0 55 48" aria-hidden="true"><path d="M0 0 L10 0 L32 46 L27 48 Z" fill="#2d5f4f"/><path d="M32 46 L27 48 L49 0 L55 0 Z" fill="#d4a574"/></svg><span>Vasl Health</span></a>
+    <ul class="vx-links">
+      <li><a href="/vlap">VLAP</a></li>
+      <li><a href="/bridge">Bridge</a></li>
+      <li><a href="/keep">Keep</a></li>
+      <li><a href="/health-systems">Health plans and systems</a></li>
+      <li><a href="/research" aria-current="page">Research</a></li>
+      <li><a href="/about">Company</a></li>
+    </ul>
+    <a class="vx-cta" href="/contact">Talk to us</a>
+    <details class="vx-menu">
+      <summary>Menu</summary>
+      <div class="vx-menu-panel">
+        <a href="/vlap">VLAP</a>
+        <a href="/bridge">Bridge</a>
+        <a href="/keep">Keep</a>
+        <a href="/health-systems">Health plans and systems</a>
+        <a href="/research">Research</a>
+        <a href="/about">Company</a>
+        <a class="vx-cta" href="/contact">Talk to us</a>
+      </div>
+    </details>
+  </div>
+</nav>
+<main id="main">
+<section class="vx-hero">
+  <div class="vx-wrap">
+    <p class="vx-eyebrow">Glossary</p>
+    <h1>The terms on this site. <em>In plain language.</em></h1>
+    <p class="vx-lede">What we mean by the words we use about VLAP, Bridge, Keep and how we measure them.</p>
+    
+  </div>
+</section>
+<section class="vx-sec" style="padding-top:8px"><div class="vx-wrap"><dl class="vx-gloss"><dt id="african-american-language">African American Language</dt><dd>The variety of English spoken by many Black Americans, with its own grammar, sounds and vocabulary. It is also called African American English or AAVE. Language tools trained mostly on Mainstream American English misread it, not because it is imprecise, but because the tools were never built on it. VLAP reports every result by language variety, starting with African American Language.</dd><dt id="ambient-scribe">Ambient scribe</dt><dd>Software that listens to a clinical visit and drafts the note. The draft is text about the patient, often close to their own words, and it is one of the kinds of text VLAP can read alongside messages, text replies and clinician notes.</dd><dt id="clinical-decision-support">Clinical decision support</dt><dd>Software that gives a clinician information to inform a decision. VLAP is non-device clinical decision support under the 21st Century Cures Act, Section 3060: it surfaces a signal and shows the exact words behind it so the clinician can check the basis, and it never decides or acts on its own.</dd><dt id="community-engagement-requirement">Community engagement requirement</dt><dd>The Medicaid rule under which some adult members must show 80 hours a month of work, school, volunteering or another qualifying activity to keep their coverage. Vasl Keep helps eligible members keep the coverage they qualify for: members answer by text, each reply is sorted, and navigators reach the members who need a person first.</dd><dt id="dialect-bias">Dialect bias</dt><dd>When a test, screener or language model performs worse for people who speak a particular variety of a language. Research has found language-based depression models over three times less predictive for Black users (Penn, PNAS 2024). In screening, the cost is usually a quiet one: a real signal reads as nothing, and nobody follows up.</dd><dt id="f1-score">F1 score</dt><dd>A measure of how well a system finds what it is looking for, combining how many of its flags are right (precision) with how many of the real cases it catches (recall). It runs from 0 to 1, higher is better. VLAP scored 0.97 F1 on substance use in clinical notes, against 0.83 for a keyword rule.</dd><dt id="fhir-r4">FHIR R4</dt><dd>Fast Healthcare Interoperability Resources, Release 4, the HL7 standard electronic health records use to exchange data. VLAP takes intake through FHIR R4 from Epic, Cerner and athenahealth, so it reads the text a health system already has without a new screen for clinicians to learn.</dd><dt id="fum">Follow-up after an emergency visit (FUM)</dt><dd>The HEDIS measure Follow-Up After Emergency Department Visit for Mental Illness. It counts members 6 and older with a follow-up visit within 7 and 30 days of an emergency department visit for mental illness or intentional self-harm. Medicaid plans are scored on it, and it is the measure Vasl Bridge is built around.</dd><dt id="held-out-test">Held-out test</dt><dd>A test on data the model never saw while it was being built. It is the honest way to measure a model, because a model can look accurate on text it has already learned from. Every VLAP result on this site comes from a held-out test with a named dataset and a named comparison.</dd><dt id="n2c2-2022">n2c2 2022</dt><dd>A shared-task dataset of clinical notes annotated by people, used by researchers to compare systems on the same ground. VLAP is tested on its substance use (SHAC) and social needs tasks, including 518 notes in the SHAC test set.</dd><dt id="navigator">Navigator</dt><dd>A person on a health plan or care team who helps members get what they need, such as paperwork, appointments or benefits. In Vasl Keep, navigators work one queue of sorted replies and reach the members who need a person first.</dd><dt id="roc-auc">ROC-AUC</dt><dd>A measure of how well a model ranks real cases above non-cases, from 0.5 (chance) to 1 (perfect). VLAP scored 0.83 on suicide-attempt severity in held-out posts, against 0.65 for MIT's Suicide Risk Lexicon (Low, Ghosh et al., 2026).</dd><dt id="signal">Signal</dt><dd>A named finding VLAP flags in a piece of text, such as isolation or substance use. A signal is not a score or a diagnosis. Every flag carries the sentence behind it, and a clinician reviews it and decides what to do.</dd><dt id="taxonomy">Taxonomy v2.0</dt><dd>The list of signals VLAP reads for: 55 signals across seven dimensions, including behavioral health risk, substance use and social needs. The taxonomy is what makes a VLAP flag specific enough for a clinician to act on.</dd><dt id="vlap">VLAP</dt><dd>The Vasl Language Analysis Platform, the language model Vasl built and owns. It reads patient messages, text replies, clinician notes and scribe text, flags clinically relevant signals with the exact words behind them, and runs on Vasl infrastructure. No patient text goes to an outside AI company.</dd><dt id="vasl-bridge">Vasl Bridge</dt><dd>A daily text from emergency department discharge to the first follow-up visit, with no app. VLAP reads every reply, a clinician sees the flag, and a coach reaches out when a patient goes quiet. It passed 10 of 10 steps live, with real texts delivered.</dd><dt id="vasl-keep">Vasl Keep</dt><dd>A text workflow that helps eligible Medicaid members keep the coverage they qualify for under the community engagement requirement. Each reply is sorted into one of seven categories or no reply, navigators work the queue, and the plan sees the totals.</dd></dl></div></section>
+<section class="vx-sec">
+  <div class="vx-wrap">
+    <div class="vx-head"><p class="vx-eyebrow">Next step</p><h2>Questions we did not answer here? <em>Talk to us.</em></h2></div>
+    <div class="vx-actions" style="margin-top:0"><a class="vx-btn" href="/contact">Talk to us about a pilot</a></div>
+  </div>
+</section>
+</main>
+<footer class="vx-foot">
+  <div class="vx-wrap">
+    <div class="vx-foot-grid">
+      <div>
+        <a class="vx-brand vx-foot-brand" href="/"><svg viewBox="0 0 55 48" aria-hidden="true"><path d="M0 0 L10 0 L32 46 L27 48 Z" fill="#2d5f4f"/><path d="M32 46 L27 48 L49 0 L55 0 Z" fill="#d4a574"/></svg><span>Vasl Health PBC</span></a>
+        <p class="vx-foot-tag">Language intelligence infrastructure for healthcare. <em>Our own model, our own weights.</em></p>
+      </div>
+      <div><h4>Platform</h4><ul><li><a href="/vlap">VLAP</a></li><li><a href="/bridge">Vasl Bridge</a></li><li><a href="/keep">Vasl Keep</a></li><li><a href="/technology">Technology</a></li><li><a href="/security">Security</a></li></ul></div>
+      <div><h4>For buyers</h4><ul><li><a href="/health-systems">Health plans and systems</a></li><li><a href="/pilot">How a pilot works</a></li><li><a href="/hedis-behavioral-health-cultural-fit">Seven-day follow-up</a></li><li><a href="/dialect-bias-mental-health-screening">Dialect bias in screening</a></li><li><a href="/glossary">Glossary</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="/about">About</a></li><li><a href="/team">Team</a></li><li><a href="/research">Research</a></li><li><a href="/blog">Blog</a></li><li><a href="/contact">Contact</a></li></ul></div>
+    </div>
+    <div class="vx-foot-base">
+      <span>Vasl Health PBC &middot; HIPAA compliant &middot; Non-device clinical decision support</span>
+      <span class="vx-foot-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/accessibility">Accessibility</a><span>&copy; 2026 Vasl Health PBC</span></span>
+    </div>
+  </div>
+</footer>
 </body>
 </html>
