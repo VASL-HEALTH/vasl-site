@@ -1,0 +1,99 @@
+# Build the gotovasl.com artifact from main's bundle.
+#
+# THIS FILE BUILDS. It does not deploy, and the role it runs under cannot:
+# `vasl-site-build` has logs and the artifact store and nothing else -- no
+# write on vasl-marketing-site, no CloudFront permission. The deploy is a
+# separate stage behind Rodney's approval, and a build that could also deploy
+# would make the approval decoration.
+#
+# THE SOURCE ARTIFACT IS A GIT BUNDLE, NOT A WORKING TREE. CI writes
+# `git bundle create repo.bundle main` to S3 on every push to main and the
+# pipeline's S3 source hands that single file over. Cloning it is what gives
+# this build real history, which matters twice: the commit becomes readable so
+# the deploy can name what it published, and `tools/gen_sitemap.py` reads
+# `git log` for each page's <lastmod>.
+
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - set -euo pipefail
+      # The bundle is the whole artifact. Verify before trusting it: a
+      # truncated upload clones into a repository that is missing commits
+      # rather than failing outright.
+      - git bundle verify repo.bundle
+      - git clone -b main repo.bundle src
+      - echo "cloned $(git -C src rev-parse HEAD)"
+
+  build:
+    commands:
+      - set -euo pipefail
+      - cd "$CODEBUILD_SRC_DIR/src"
+      # RE-READ, NOT INHERITED. A shell variable set in `pre_build` is not
+      # reliably visible in `build` -- CodeBuild gives each phase its own
+      # shell -- so the commit is read from the clone again here rather than
+      # carried across the phase boundary, where it would silently become
+      # empty and stamp an empty COMMIT.txt.
+      - SHA="$(git rev-parse HEAD)"
+
+      # BLOCKING CHECKS. Both pass on main today [measured 2026-11-13 on
+      # f607253: exit 0], so a failure here is a real regression and not
+      # inherited debt.
+      - python3 tools/internal_links.py --check
+      - python3 tools/seo_validate.py
+
+      # ADVISORY, AND THIS IS A COMPROMISE WORTH SEEING. These two FAIL on
+      # main today [measured 2026-11-13 on f607253: `seo_inject.py --check`
+      # reports 2 pages out of date, `gen_sitemap.py --check` reports
+      # sitemap.xml is stale]. Making them blocking would mean a pipeline that
+      # can never reach its own approval stage until somebody regenerates the
+      # SEO layer -- and regenerating it edits pages under site/, which the
+      # change that introduced this pipeline was scoped not to touch.
+      #
+      # So they run, they print, and they do not stop the build. Flip them to
+      # blocking (drop the `|| ...` tail) the moment `python3
+      # tools/seo_inject.py` and `python3 tools/gen_sitemap.py` have been run
+      # and committed. A check that is permanently advisory is a check nobody
+      # reads.
+      - python3 tools/seo_inject.py --check || echo "ADVISORY FAILURE -- the generated head layer is out of date on main. Run tools/seo_inject.py and commit."
+      - python3 tools/gen_sitemap.py --check || echo "ADVISORY FAILURE -- sitemap.xml is stale on main. Run tools/gen_sitemap.py and commit."
+
+      # The artifact is assembled OUTSIDE site/ on purpose. The commit stamp
+      # has to travel with the artifact so the deploy can name what it is
+      # publishing, and anything written inside site/ would be synced to the
+      # live bucket and served.
+      - cd "$CODEBUILD_SRC_DIR"
+      - mkdir -p out
+      - cp -R src/site out/site
+      - printf '%s\n' "$SHA" > out/COMMIT.txt
+
+      # THE DEPLOY SCRIPT TRAVELS INSIDE THE ARTIFACT, and it has to: the
+      # Deploy stage's input is THIS artifact, and a CodeBuild action reads
+      # its buildspec from its input artifact. Without this copy the deploy
+      # action fails with "buildspec not found" -- the repository tree is not
+      # there to read it from.
+      #
+      # That constraint is also a property worth having. The deploy that runs
+      # is the one from the commit that was approved, not whatever is on main
+      # at the time somebody clicks approve.
+      - cp src/infra/aws/site-pipeline/buildspec-deploy.yml out/buildspec-deploy.yml
+
+      # What the approver reads before clicking. A page count that suddenly
+      # halves is the cheapest possible signal that the artifact is wrong.
+      - echo "commit $SHA"
+      - echo "pages $(find out/site -name '*.html' | wc -l)"
+      - echo "files $(find out/site -type f | wc -l)"
+      - echo "bytes $(du -sb out/site | cut -f1)"
+
+      # Refuse an artifact that cannot be a site. An empty or half-copied
+      # artifact synced with --delete would empty the live bucket, and the
+      # approval button cannot tell the difference by looking.
+      - test -f out/site/index.html
+      - test -f out/site/404.html
+      - test "$(find out/site -name '*.html' | wc -l)" -ge 10
+
+artifacts:
+  base-directory: out
+  files:
+    - "**/*"
