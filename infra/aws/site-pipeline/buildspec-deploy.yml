@@ -1,0 +1,144 @@
+# Publish the APPROVED artifact to gotovasl.com, then prove it.
+#
+# This runs in the pipeline's Deploy stage, which is reachable only through
+# the manual approval stage before it. The role it runs under
+# (`vasl-site-deploy`) can write objects to s3://vasl-marketing-site and
+# invalidate distribution E11DM7B5W2KRCQ, and nothing else -- no other bucket,
+# no other distribution, no ECS, no PassRole.
+#
+# THREE CACHE-CONTROL PASSES, NOT ONE SYNC. This is carried over from
+# `.github/workflows/deploy-site.yml` (deleted in 2e1b40f, read back with
+# `git show 2e1b40f^:.github/workflows/deploy-site.yml`) because the reasoning
+# in it was right and would have been lost with the file. CloudFront's
+# CachingOptimized policy honors the origin's Cache-Control, so the header
+# written at upload time IS the cache behavior.
+
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - set -euo pipefail
+      # What is about to be published, by commit. The build stamped it; the
+      # deploy log is where somebody later looks to answer "what is live?".
+      - test -f COMMIT.txt
+      - echo "deploying commit $(cat COMMIT.txt) to s3://$SITE_BUCKET"
+      # Refuse to publish an artifact that is not a site. `--delete` below
+      # would otherwise empty the live bucket, and this is the last point
+      # before that is irreversible.
+      - test -f site/index.html
+      - test -f site/404.html
+      - test "$(find site -name '*.html' | wc -l)" -ge 10
+
+  build:
+    commands:
+      - set -euo pipefail
+
+      # Pass 1 -- fingerprinted/static assets. Safe to cache hard: a changed
+      # image gets a changed filename, or is caught by the invalidation below.
+      # sitemap.xml and robots.txt are excluded here because they are neither
+      # fingerprinted nor invalidated by path, so a year-long immutable cache
+      # would leave crawlers reading a stale sitemap for up to a year. They
+      # get their own short-cache pass next.
+      #
+      # `--delete` with `--exclude '*.html'` deletes removed ASSETS only: the
+      # exclude applies to the destination listing too, so HTML in the bucket
+      # is not touched by this pass. That is the same split the old workflow
+      # had, and it is why pass 3 carries its own `--delete`.
+      - |
+        aws s3 sync site/ "s3://${SITE_BUCKET}/" \
+          --delete \
+          --exclude '*.html' \
+          --exclude 'sitemap.xml' \
+          --exclude 'robots.txt' \
+          --cache-control 'public,max-age=31536000,immutable' \
+          --no-progress
+
+      # Pass 2 -- sitemap.xml and robots.txt. `cp`, not `sync`: sync skips a
+      # file whose size and mtime look unchanged, which would silently leave a
+      # stale Cache-Control header in place. cp always writes, so the short
+      # TTL is guaranteed on every deploy whether or not the content moved.
+      - |
+        aws s3 cp site/sitemap.xml "s3://${SITE_BUCKET}/sitemap.xml" \
+          --cache-control 'public,max-age=300' \
+          --no-progress
+      - |
+        aws s3 cp site/robots.txt "s3://${SITE_BUCKET}/robots.txt" \
+          --cache-control 'public,max-age=300' \
+          --no-progress
+
+      # Pass 3 -- HTML last, so a page is never live before the asset it
+      # needs. `public,max-age=0,must-revalidate` is what Netlify served on
+      # gotovasl.com (verified against the live response 2026-08-08).
+      - |
+        aws s3 sync site/ "s3://${SITE_BUCKET}/" \
+          --delete \
+          --exclude '*' \
+          --include '*.html' \
+          --cache-control 'public,max-age=0,must-revalidate' \
+          --content-type 'text/html; charset=utf-8' \
+          --no-progress
+
+      # PATHS MUST BE AN ARRAY EXPANDED AS "${PATHS[@]}", NEVER AN UNQUOTED
+      # STRING. The old workflow had `PATHS='/*'` expanded as ${PATHS}, so the
+      # shell globbed it against the RUNNER'S filesystem and sent CloudFront
+      # "/usr /etc /proc /home ..." instead of "/*" -- meaning the
+      # invalidate-everything option silently invalidated nothing while
+      # reporting success. Assets are uploaded immutable for a year, so a
+      # changed logo kept serving the old bytes from cache with a completely
+      # green deploy. Preserved here as an array for that reason.
+      #
+      # The default list is the set of things that are NOT fingerprinted. It
+      # deliberately omits /.well-known/*, which this distribution serves from
+      # a different bucket that this deploy does not touch.
+      - |
+        if [ "${INVALIDATE_ALL:-false}" = "true" ]; then
+          PATHS=('/*')
+        else
+          PATHS=('/' '/*.html' '/help/*' '/sitemap.xml' '/robots.txt')
+        fi
+        echo "invalidating: ${PATHS[*]}"
+        ID=$(aws cloudfront create-invalidation \
+               --distribution-id "${DISTRIBUTION_ID}" \
+               --paths "${PATHS[@]}" \
+               --query 'Invalidation.Id' --output text)
+        echo "$ID" > /tmp/invalidation-id
+        aws cloudfront wait invalidation-completed \
+          --distribution-id "${DISTRIBUTION_ID}" \
+          --id "$ID"
+        echo "invalidation $ID complete"
+
+  post_build:
+    commands:
+      - set -euo pipefail
+      # POST-DEPLOY PROOF, AGAINST THE DISTRIBUTION DOMAIN AND NOT
+      # gotovasl.com. Hitting the distribution directly means the test is
+      # about what this deploy published, not about where DNS currently
+      # points.
+      #
+      # The 404 case is the one that catches a broken deploy: this
+      # distribution maps S3's 403 to /404.html with a 404 response, so a
+      # missing page returning 403 would mean the error mapping or the OAC is
+      # wrong, and a missing page returning 200 would mean something is
+      # serving the wrong object.
+      - |
+        HOST=$(aws cloudfront get-distribution \
+                 --id "${DISTRIBUTION_ID}" \
+                 --query 'Distribution.DomainName' --output text)
+        fail=0
+        check() { # path  expected-status  label
+          code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 20 "https://${HOST}$1")
+          if [ "$code" = "$2" ]; then
+            printf 'ok    %-24s %s (%s)\n' "$1" "$code" "$3"
+          else
+            printf 'FAIL  %-24s %s, want %s (%s)\n' "$1" "$code" "$2" "$3"; fail=1
+          fi
+        }
+        check /                    200 'apex serves index'
+        check /index.html          200 'explicit index'
+        check /about               200 'pretty URL -> about.html, via the viewer-request function'
+        check /about.html          200 'explicit .html'
+        check /help/billing.html   200 'nested page'
+        check /404.html            200 'error page itself is a real file'
+        check /no-such-page-xyz    404 'missing page returns 404, not 403'
+        exit $fail
