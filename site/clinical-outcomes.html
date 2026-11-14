@@ -326,15 +326,15 @@ section{padding:130px var(--gutter);position:relative;}
         <div class="as-sub">Against the Suicide Risk Lexicon&rsquo;s 0.65 and a 71-term clinical keyword rule we wrote ourselves at 0.56. Chunk level, n_pos 307, held-out test split, same treatment for all three.</div>
       </div>
       <div class="as-item">
-        <div class="as-num">23 of 47</div>
-        <div class="as-label">Signals With No Counterpart</div>
-        <div class="as-sub">VLAP signals with no match anywhere in the lexicon&rsquo;s 6,910 terms, across five of our six dimensions, among them the signals for <em>unaliving</em> and <em>catching a fade</em>. Checkable in a minute by anyone who downloads their file.</div>
+        <div class="as-num">0.97</div>
+        <div class="as-label">Substance Use in Clinical Notes, F1</div>
+        <div class="as-sub">On the n2c2 2022 SHAC test, 518 notes labeled by human annotators, against 0.83 for a keyword rule. Held-out test.</div>
       </div>
       <div class="as-item">
-        <div class="as-num">0.9673</div>
-        <div class="as-label">Micro-F1, All 47 Signals</div>
-        <div class="as-sub">First-person youth check-ins, held-out <strong>synthetic</strong> text, n&nbsp;=&nbsp;2,992, run <code>vlap47_20260817T223142Z</code>. This figure stands alone: the clinician-note comparison it used to be paired with was retired on 26 Sept 2026 and no replacement pairing is published.</div>
-        <div class="as-caveat">Synthetic corpus &middot; Non-diagnostic &middot; Not clinical validation</div>
+        <div class="as-num">55</div>
+        <div class="as-label">Signals Across Seven Dimensions</div>
+        <div class="as-sub">Taxonomy v2.0. Each flag names the signal and shows the words behind it, never a score or a diagnosis.</div>
+        <div class="as-caveat">Non-diagnostic &middot; For a clinician&rsquo;s independent review</div>
       </div>
     </div>
   </div>
@@ -437,13 +437,13 @@ section{padding:130px var(--gutter);position:relative;}
     </div>
     <div class="meth-item reveal d2">
       <div class="mi-num">03</div>
-      <div class="mi-title">What the overlap claim is, and is not</div>
-      <p class="mi-body">The vocabulary finding is mechanical string overlap and nothing more: 24 of our 47 signals share at least one string with the lexicon, so 23 share none. Whether a given construct and a given signal measure the same underlying thing is a clinical mapping question we have not done and do not assert.</p>
+      <div class="mi-title">The second result, on clinical notes</div>
+      <p class="mi-body">On substance use in clinical notes, VLAP scored 0.97 F1 on the n2c2 2022 SHAC test, 518 notes labeled by human annotators, against 0.83 for a keyword rule. It is a held-out test on real clinical text, separate from the severity comparison above.</p>
     </div>
     <div class="meth-item reveal d3">
       <div class="mi-num">04</div>
       <div class="mi-title">The limits, stated</div>
-      <p class="mi-body">The severity classes are thin at user level, between 9 and 97 positives, and thin classes carry wide intervals. The 0.9673 micro-F1 figure is on <strong>synthetic</strong> text and is labelled as such everywhere it appears. The real-post corpus is adult writing, not the 15 to 26 population VLAP serves, so it is supporting evidence rather than the target measurement. None of this is a randomised controlled trial, and none of it is clinical validation.</p>
+      <p class="mi-body">The severity classes are thin at user level, between 9 and 97 positives, and thin classes carry wide intervals. The real-post corpus is adult writing, not the 15 to 26 population VLAP serves, so it is supporting evidence rather than the target measurement. None of this is a randomised controlled trial, and none of it is clinical validation.</p>
       <div class="mi-caveat">Non-diagnostic &middot; VLAP never determines, diagnoses, decides or escalates on its own &middot; every output surfaces for a clinician&rsquo;s independent review</div>
     </div>
   </div>
@@ -471,8 +471,8 @@ section{padding:130px var(--gutter);position:relative;}
         <div class="ci-text">Full cohort methodology, statistical analysis, disaggregated outcomes by population subgroup, VLAP signal detection preliminary data, and implementation context for each org type deployed.</div>
       </div>
       <div class="cta-item">
-        <div class="ci-label">IRB study access</div>
-        <div class="ci-text">The IRB study protocol and preliminary design documentation are available to institutional evaluators under NDA. Contact clinical@gotovasl.com to request access.</div>
+        <div class="ci-label">Methodology access</div>
+        <div class="ci-text">The study protocol and design documentation are available to institutional evaluators under NDA. Contact clinical@gotovasl.com to request access.</div>
       </div>
       <div class="cta-item">
         <div class="ci-label">Response time</div>
@@ -500,7 +500,7 @@ section{padding:130px var(--gutter);position:relative;}
 <div class="vrl-wrap">
   <div class="vrl-head">Related Reading</div>
   <div class="vrl-grid">
-    <a href="/research" class="vrl-item"><div class="vrl-item-title">the research base behind these numbers</div><div class="vrl-item-desc">The peer-reviewed literature and active IRB study this data builds on.</div></a>
+    <a href="/research" class="vrl-item"><div class="vrl-item-title">the research base behind these numbers</div><div class="vrl-item-desc">The peer-reviewed literature this data builds on.</div></a>
     <a href="/vlap" class="vrl-item"><div class="vrl-item-title">the signal layer behind the data</div><div class="vrl-item-desc">How VLAP's detection informs the clinical escalation figures reported here.</div></a>
     <a href="/hedis-behavioral-health-cultural-fit" class="vrl-item"><div class="vrl-item-title">how these figures map to HEDIS measures</div><div class="vrl-item-desc">PHQ-8 and retention data, reframed against the specific behavioral health measures a payer reports on.</div></a>
   </div>
