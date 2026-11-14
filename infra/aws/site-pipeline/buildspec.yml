@@ -42,22 +42,19 @@ phases:
       # inherited debt.
       - python3 tools/internal_links.py --check
       - python3 tools/seo_validate.py
+      # November 2026 rebuild: the page generators, the retired-page stubs
+      # (which also check viewer-request.js against tools/retired.py) and the
+      # contact form contract. All pass on the rebuild commit.
+      - python3 tools/build_pages.py --check
+      - python3 tools/chrome_inject.py --check
+      - python3 tools/retire_pages.py --check
+      - python3 tools/check_forms.py
 
-      # ADVISORY, AND THIS IS A COMPROMISE WORTH SEEING. These two FAIL on
-      # main today [measured 2026-11-13 on f607253: `seo_inject.py --check`
-      # reports 2 pages out of date, `gen_sitemap.py --check` reports
-      # sitemap.xml is stale]. Making them blocking would mean a pipeline that
-      # can never reach its own approval stage until somebody regenerates the
-      # SEO layer -- and regenerating it edits pages under site/, which the
-      # change that introduced this pipeline was scoped not to touch.
-      #
-      # So they run, they print, and they do not stop the build. Flip them to
-      # blocking (drop the `|| ...` tail) the moment `python3
-      # tools/seo_inject.py` and `python3 tools/gen_sitemap.py` have been run
-      # and committed. A check that is permanently advisory is a check nobody
-      # reads.
-      - python3 tools/seo_inject.py --check || echo "ADVISORY FAILURE -- the generated head layer is out of date on main. Run tools/seo_inject.py and commit."
-      - python3 tools/gen_sitemap.py --check || echo "ADVISORY FAILURE -- sitemap.xml is stale on main. Run tools/gen_sitemap.py and commit."
+      # Blocking since the November 2026 rebuild regenerated the head layer
+      # and the sitemap. gen_sitemap reads `git log` for <lastmod>, which is
+      # why the build clones the bundle with full history.
+      - python3 tools/seo_inject.py --check
+      - python3 tools/gen_sitemap.py --check
 
       # The artifact is assembled OUTSIDE site/ on purpose. The commit stamp
       # has to travel with the artifact so the deploy can name what it is

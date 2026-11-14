@@ -6,8 +6,10 @@
 // 2. Pretty URLs: S3 stores pages flat as <page>.html, so /about serves
 //    about.html and / serves index.html. A path with a dot is served as is.
 //
-// Applied through Terraform with the rest of the distribution. Until it is,
-// every retired file is also a noindex refresh stub, so old links still land.
+// LIVE COPY: this function is Terraform-managed in VASL-PLATFORM
+// infra/aws/static-sites, not by this repo's pipeline. This file is the source
+// to copy there and apply. Until it is applied, every retired file is also a
+// noindex refresh stub, so old links still land.
 var RETIRED = {
   '/for-schools': '/',
   '/for-organizations': '/',
@@ -34,6 +36,20 @@ var RETIRED = {
   '/help/vlap-technology': '/vlap'
 };
 
+// Carry the query string across a redirect, so /support?subject=Pricing keeps
+// its subject when it lands on /contact.
+function qs(q) {
+  var parts = [];
+  for (var k in q) {
+    if (q[k].multiValue) {
+      for (var i = 0; i < q[k].multiValue.length; i++) parts.push(k + '=' + q[k].multiValue[i].value);
+    } else {
+      parts.push(k + '=' + q[k].value);
+    }
+  }
+  return parts.length ? '?' + parts.join('&') : '';
+}
+
 function handler(event) {
   var req = event.request;
   var uri = req.uri;
@@ -44,7 +60,7 @@ function handler(event) {
     return {
       statusCode: 301,
       statusDescription: 'Moved Permanently',
-      headers: { location: { value: 'https://gotovasl.com' + RETIRED[key] } }
+      headers: { location: { value: 'https://gotovasl.com' + RETIRED[key] + qs(req.querystring) } }
     };
   }
 
