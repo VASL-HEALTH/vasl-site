@@ -254,6 +254,28 @@ QUEUE = """<div class="vq">
     </div>"""
 
 
+def browser(img, label, alt, cap=""):
+    c = f'<p class="vb-cap">{cap}</p>' if cap else ""
+    return (f'<div class="vb"><div class="vb-top"><i></i><i></i><i></i><span>{label}</span></div>'
+            f'<img src="/assets/product/{img}" alt="{alt}" loading="lazy"></div>{c}')
+
+
+def band(img, html, pos="center"):
+    return (f'<section class="vband" style="background-image:url(/assets/people/{img});background-position:{pos}">'
+            f'<div class="vx-wrap"><p>{html}</p></div></section>')
+
+
+def hero_photo(eyebrow, h1, lede, img, pos="center", extra=""):
+    lede_html = f'<p class="vx-lede">{lede}</p>' if lede else ""
+    return f"""<section class="vx-hero"><div class="vx-wrap vh-split-hero">
+  <div><p class="vx-eyebrow">{eyebrow}</p><h1>{h1}</h1>{lede_html}{extra}</div>
+  <div class="vp-photo" style="background-image:url(/assets/people/{img});background-position:{pos}"></div>
+</div></section>"""
+
+
+REC_ALT = "Vasl clinician portal: a member record showing VLAP signals with the exact words behind each one, and social needs found in her notes"
+
+
 def photo(img, inner="", pos="center"):
     return f'<div class="vp-photo" style="background-image:url(/assets/{img});background-position:{pos}">{inner}</div>'
 
@@ -322,8 +344,11 @@ def home():
     body = "\n".join([
         f'<section><div class="vx-wrap vh-hero">{hero_l}{stage}</div></section>',
         stats,
-        sec("In your workflow", "A flag your care team can act on. <em>With the sentence behind it.</em>", QUEUE),
+        sec("The product", "What a clinician sees. <em>The signal, the exact words, and the social needs in her notes.</em>",
+            browser("clinician-record.jpg", "clinician.gotovasl.com &middot; member record", REC_ALT,
+                    "The clinician portal. Every signal carries the sentence behind it, and social needs come from her own notes.")),
         layer,
+        band("black-boy-joy.jpg", "Current tools are least accurate for Black, Brown, LGBTQ+, rural and Medicaid patients. <em>VLAP was built on them first.</em>", "center 35%"),
         f'<section><div class="vx-wrap">{bridge}{keep}</div></section>',
         engine, dark,
     ])
@@ -355,7 +380,8 @@ def vlap():
     body = "\n".join([
         hero("VLAP &middot; Vasl Language Analysis Platform",
              "Our own language engine. <em>Licensed to healthcare.</em>", STATEMENT + " VLAP is that engine.", facts),
-        sec("In your workflow", "What a clinician sees. <em>A named signal, with the words behind it.</em>", QUEUE, "is-light"),
+        sec("In your workflow", "What a clinician sees. <em>A named signal, with the words behind it.</em>",
+            browser("clinician-signals.jpg", "clinician.gotovasl.com &middot; signals and social needs", REC_ALT), "is-light"),
         sec("How VLAP works", "VLAP flags the signal and shows the words. <em>A clinician reviews and decides.</em>", how),
         sec("Taxonomy v2.0", "55 signals. <em>Seven dimensions.</em>", bars, "is-light"),
         sec("Evidence", "Held-out tests. <em>Against the tools in use today.</em>", RESULTS_TABLE),
@@ -401,7 +427,9 @@ def bridge():
     body = "\n".join([
         top,
         sec("How Bridge works", "A daily text from discharge to the first visit. <em>VLAP reads every reply.</em>", how),
-        sec("What the care team sees", "The reply, the flag, and the exact words. <em>One click to act.</em>", QUEUE, "is-light"),
+        sec("What the care team sees", "Her words, every day. <em>Not a score.</em>",
+            browser("bridge-record.jpg", "clinician.gotovasl.com &middot; Bridge member record",
+                    "Vasl clinician portal: a Bridge member's self-reported mood by day and her reply notes in her own words"), "is-light"),
         sec("The difference", "Everyone else sends reminders. <em>We understand the replies.</em>", diff, "is-clay"),
         sec("Status", "Built and run live. <em>10 of 10 steps passed.</em>", f'<div class="vx-flow" style="border:0;padding:0">{status}</div>'),
         sec("Pricing", "Priced on enrollment and completed visits. <em>Vasl bills the partner.</em>", pricing),
@@ -478,11 +506,14 @@ def health_systems():
     </table>
     <p class="vx-foot-note">Vasl bills the partner. Vasl never bills Medicaid.</p>"""
     body = "\n".join([
-        hero("Health plans and systems",
+        hero_photo("Health plans and systems",
              "Clinical decision support inside the workflows you run. <em>No new screen to learn.</em>",
-             STATEMENT + " Medicaid plans and health systems are the first to buy it."),
+             STATEMENT + " Medicaid plans and health systems are the first to buy it.", "latina-rising.jpg", "center 30%"),
         sec("What VLAP reads", "The text you already have. <em>Flagged where your clinicians already work.</em>", io),
-        sec("In your workflow", "What your care team sees.", QUEUE, "is-light"),
+        sec("For the plan", "Social needs, counted across your members.",
+            browser("org-admin-social-needs.jpg", "admin.gotovasl.com &middot; social needs screening",
+                    "Vasl org admin portal: social needs screening counts for housing, employment, alcohol, drug and tobacco use",
+                    "Counts come from notes in the last 90 days. Small counts are withheld."), "is-light"),
         sec("Built workflows", "Start with a workflow. <em>Keep the engine.</em>", flows, "is-clay"),
         sec("Pricing", "Simple units. <em>Priced against measures you are already scored on.</em>", pricing),
         next_step("Talk to us about a pilot. <em>Bridge, Keep or a VLAP license.</em>",
@@ -591,9 +622,9 @@ def about():
         ("is-light", "<h3>We bill the partner</h3><p>Vasl never bills Medicaid.</p>"),
     ]) + '<p class="vx-foot-note">Vasl Health PBC is a Delaware public benefit corporation. HIPAA compliant.</p>'
     body = "\n".join([
-        hero("About Vasl Health",
+        hero_photo("About Vasl Health",
              "Vasl Health is building the language intelligence infrastructure for healthcare. <em>VLAP is the engine.</em>",
-             STATEMENT),
+             STATEMENT, "black-girl-magic.jpg", "center 30%"),
         sec("What we build", "VLAP is the platform. Healthcare is the market. <em>Bridge and Keep are the beginning.</em>", build),
         sec("What we hold to", "Three commitments.", hold, "is-clay"),
         sec("More about Vasl", "Who we are and how we work.",
@@ -780,8 +811,8 @@ def pilot():
     </table>
     <p class="vx-foot-note">Vasl bills the partner. Vasl never bills Medicaid.</p>"""
     body = "\n".join([
-        hero("How a pilot works", "Start with one workflow. <em>Measure it on your own patients.</em>",
-             "A pilot runs Bridge, Keep or VLAP with your team, on your patients&rsquo; own text, against the tool you use today."),
+        hero_photo("How a pilot works", "Start with one workflow. <em>Measure it on your own patients.</em>",
+             "A pilot runs Bridge, Keep or VLAP with your team, on your patients&rsquo; own text, against the tool you use today.", "start-hero.jpg"),
         sec("Four steps", "From first call to a result you can read.", steps_),
         sec("What a pilot measures", "Each pilot is scored on something you already track.", measures, "is-clay"),
         sec("Pricing", "Simple units. <em>Priced against measures you are already scored on.</em>", pricing),

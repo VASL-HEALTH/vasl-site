@@ -353,3 +353,19 @@ mark{background:#e6d3b6;color:var(--ink);padding:0 2px;}
   .vq-row{grid-template-columns:1fr;gap:6px;}
   .vq-row.h{display:none;}
 }
+
+/* ---------- real product screens and people ---------- */
+.vb{border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 24px 64px rgba(30,30,20,.16);border:1px solid #e2ddd2;}
+.vb-top{display:flex;align-items:center;gap:7px;padding:10px 14px;background:#efebe3;border-bottom:1px solid #e2ddd2;}
+.vb-top i{width:10px;height:10px;border-radius:50%;background:#d6cfc2;display:block;}
+.vb-top span{margin-left:12px;font-size:11.5px;color:var(--mute);}
+.vb img{display:block;width:100%;height:auto;}
+.vb-cap{font-size:13px;color:var(--ink-2);margin-top:16px;max-width:46em;}
+.vband{position:relative;min-height:440px;background:#222 center/cover no-repeat;display:flex;align-items:flex-end;}
+.vband::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 30%,rgba(0,0,0,.62) 100%);}
+.vband .vx-wrap{position:relative;z-index:1;padding-top:120px;padding-bottom:56px;width:100%;}
+.vband p{font-family:var(--serif);font-size:clamp(26px,3vw,38px);line-height:1.2;color:#fff;max-width:20em;margin:0;}
+.vband p em{color:var(--clay-fill);}
+.vh-split-hero{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center;}
+.vh-split-hero .vp-photo{min-height:460px;}
+@media (max-width:900px){.vh-split-hero{grid-template-columns:1fr;}.vh-split-hero .vp-photo{min-height:320px;}.vband{min-height:360px;}}
