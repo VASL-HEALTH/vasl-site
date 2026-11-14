@@ -1,10 +1,24 @@
 # The gotovasl.com deploy pipeline
 
-Builds from `main`, runs inside AWS, reaches the live site only after Rodney
-approves. **Written and validated, NOT APPLIED** — see the apply section, and
-read the warning at the bottom first.
+Builds from `main` and publishes gotovasl.com, entirely inside AWS.
 
-    Source (S3: main's bundle)  ->  Build (CodeBuild)  ->  Approve  ->  Deploy (S3 + CloudFront)
+    Source (S3: main's bundle)  ->  Build (CodeBuild)  ->  Deploy (S3 + CloudFront)
+
+**The site auto-deploys.** Ruling, Rodney 2026-11-14: a merge to `main` reaches
+the live site with no human stop. There is no approval stage.
+
+**The build is the gate.** That is not a softening of the old rule, it is where
+the rule now lives. Every blocking check in `buildspec.yml` runs before the
+Deploy stage exists as a possibility, and a red check fails Build, so Deploy is
+never reached and the site keeps serving what it served before. The practical
+consequence is worth stating plainly: **weakening a check in `buildspec.yml` is
+now the same act as weakening the deploy gate.** `tools/internal_links.py
+--check` and `tools/seo_validate.py` are blocking and must stay that way.
+
+**Scope.** This applies to the marketing site only. The product pipelines --
+the portals and VLAP -- keep their manual approvals. The asymmetry is
+deliberate: the worst case here is a wrong page on a public brochure, and the
+worst case there is a wrong answer about somebody in distress.
 
 ## What the real deploy target is
 
@@ -48,28 +62,27 @@ which an S3 source action requires — it triggers on a new object version.
 **Apply `../code-bundle` first**: this pipeline has no source until that bucket
 and that workflow exist.
 
-## Where the approval actually lives
+## What stops a bad deploy now
 
-CodePipeline has **no "approver" field.** The gate is
-`codepipeline:PutApprovalResult`, and `iam.tf` grants it to exactly one
-principal (`user/rodney-admin`) on exactly one action
-(`vasl-site/Approve/RodneyApprovesTheSite`). Anyone else with console access
-sees the button and gets `AccessDenied`.
+Not a person. Four things, in order:
 
-The approval is its **own stage**, not an option on the deploy: the deploy
-stage has no other way to be reached, and a reordering edit would have to
-delete a stage for the diff to hide it.
+1. **`main`'s required checks.** Nothing reaches the bundle that did not pass
+   them, because CI only publishes the bundle on a push to `main`.
+2. **The blocking checks in `buildspec.yml`.** These fail the Build stage, and
+   the Deploy stage cannot run without Build's output artifact.
+3. **Separate roles.** `vasl-site-build` has CloudWatch Logs and the artifact
+   bucket and nothing else -- no write on `vasl-marketing-site`, no CloudFront.
+   Only `vasl-site-deploy` can publish, and only the Deploy stage can start it.
+   That separation predates the auto-deploy ruling and still holds: a build that
+   could also publish would let a compromised build step skip the Deploy stage's
+   buildspec entirely.
+4. **Versioned buckets.** The bundle bucket keeps three noncurrent versions for
+   seven days, so a bad bundle is addressable by version id, and the site bucket
+   is versioned too.
 
-It is also enforced a second way, by permissions. The build role
-(`vasl-site-build`) has CloudWatch Logs and the artifact bucket and *nothing
-else* — no write on `vasl-marketing-site`, no CloudFront. Only
-`vasl-site-deploy` can publish, and the only thing that can start it is the
-Deploy stage, which sits behind the approval. If one role did both jobs the
-approval would be decoration.
-
-**What it cannot do:** an account administrator can attach themselves the same
-action. That is true of every IAM control. This closes the ordinary route, not
-the privileged one.
+What is genuinely gone is the human read of the build log before publishing.
+The build still prints the commit, the page count, the file count and the byte
+count -- it is now a record to read *after* the fact rather than a gate.
 
 ## Why the deploy is a CodeBuild action
 
@@ -78,11 +91,11 @@ it writes, cannot delete files that left the repo, and cannot invalidate
 CloudFront. The site needs three cache classes (immutable assets, 5-minute
 sitemap/robots, must-revalidate HTML), `--delete` so a removed page stops being
 live, an invalidation, and a smoke test. `buildspec-deploy.yml` does all of it
-and still runs inside AWS, after the approval.
+and still runs inside AWS, in the Deploy stage.
 
 `buildspec-deploy.yml` is copied into the build artifact and read from there,
 because a CodeBuild action reads its buildspec from its *input artifact* — so
-the deploy script that runs is the one from the commit that was approved.
+the deploy script that runs is the one from the commit that was built.
 
 ## Scope, deliberately narrow
 
@@ -105,8 +118,8 @@ AWS_PROFILE=rodney-admin terraform apply site-pipeline.tfplan
 **Expected plan: 16 to add, 0 to change, 0 to destroy.** Anything else is
 drift — stop and read it. The 16: the artifact bucket and its four settings
 (public access block, encryption, versioning, lifecycle), the two CodeBuild
-projects, the pipeline, three roles with an inline policy each, the approval
-policy and its attachment to `rodney-admin`.
+projects, the pipeline, three roles with an inline policy each, and the
+(now-vestigial) approval policy and its attachment to `rodney-admin`.
 
 `terraform fmt`: clean. `terraform validate`: **Success** (Terraform v1.15.8,
 `init -backend=false`), 2026-11-13. State goes to
@@ -118,18 +131,18 @@ None of this can be done from a session:
 
 1. **Watch the first execution, do not assume it.** Push a no-op commit to
    `main`, confirm the pipeline starts on the new bundle version, and confirm
-   it **stops at Approve**.
-2. **Prove the gate denies.** Have some other principal attempt
-   `codepipeline:PutApprovalResult` and confirm `AccessDenied`. A gate nobody
-   has seen refuse is a gate nobody has tested.
-3. **Read the build log before approving the first time.** It prints the
+   it runs **Source -> Build -> Deploy with no stop**.
+2. **Prove a red check stops the deploy.** Break a blocking check on a branch,
+   merge it, and confirm Build fails and Deploy never runs. That is now the only
+   gate, so it is the one worth proving rather than assuming.
+3. **Read the build log.** It prints the
    commit, the page count, the file count and the byte count. 53 HTML pages is
    what `main` has today (`find site -name '*.html' | wc -l`, 2026-11-13).
 4. **Two build checks are ADVISORY and should not stay that way.**
    `tools/seo_inject.py --check` and `tools/gen_sitemap.py --check` both FAIL
    on `main` today — measured 2026-11-13 on `f607253`: 2 pages with an
    out-of-date head layer, and a stale `sitemap.xml`. Making them blocking
-   would mean a pipeline that can never reach its own approval stage, and
+   would mean a pipeline that can never deploy at all, and
    fixing them means regenerating files under `site/`, which the change that
    introduced this pipeline was scoped not to touch. So they print and do not
    fail. Run `python3 tools/seo_inject.py` and `python3 tools/gen_sitemap.py`,
@@ -145,5 +158,5 @@ directory existed) and its push trigger had already been removed on
 CloudFront invalidation from a laptop. This pipeline replaces that, and **until
 somebody applies it, the repo has no working deploy path at all.** That is the
 intended end state of the ruling that put this here — nothing ships without a
-deliberate approval, and nothing can ship until the approval exists — but it
-should not come as a surprise to whoever next tries to publish a page.
+deliberate, reviewed merge to `main` — but it should not come as a surprise to
+whoever next tries to publish a page.

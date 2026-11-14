@@ -1,15 +1,20 @@
-# Source (S3, main's bundle) -> Build (CodeBuild) -> Approve (Rodney) -> Deploy (S3 + CloudFront)
+# Source (S3, main's bundle) -> Build (CodeBuild) -> Deploy (S3 + CloudFront)
 #
-# THE APPROVAL IS A SEPARATE STAGE, NOT AN OPTION ON THE DEPLOY. A manual
-# approval action in its own stage cannot be skipped by a pipeline execution:
-# the deploy stage has no other way to be reached. An approval attached to the
-# deploy stage could be reordered by a later edit without the diff looking
-# like it removed a gate.
+# THE MARKETING SITE AUTO-DEPLOYS. Ruling, Rodney 2026-11-14: a merge to main
+# publishes gotovasl.com with no human stop. The manual approval stage that
+# used to sit between Build and Deploy is gone.
 #
-# WHO MAY APPROVE IS AN IAM QUESTION, NOT A PIPELINE SETTING. CodePipeline has
-# no "approver" field -- the gate is `codepipeline:PutApprovalResult`, and
-# iam.tf grants it to exactly one principal on exactly this action. Anyone
-# else with console access sees the button and gets AccessDenied.
+# THE GATE MOVED, IT DID NOT DISAPPEAR, and that distinction is the whole
+# reason this is safe. The build is now the only thing standing between a merge
+# and the live site, so every blocking check in buildspec.yml is load-bearing:
+# a red check fails the Build stage, the Deploy stage is never reached, and the
+# site keeps serving what it served before. Weakening a check in buildspec.yml
+# is now equivalent to weakening the deploy gate -- treat it that way.
+#
+# WHAT THIS DOES NOT CHANGE. Product pipelines -- the portals and VLAP -- keep
+# their approvals. This ruling is scoped to the marketing site, whose worst
+# case is a wrong page on a public brochure, not a wrong answer about somebody
+# in distress.
 
 resource "aws_s3_bucket" "artifacts" {
   bucket = "vasl-site-pipeline-artifacts-${local.account}"
@@ -239,21 +244,6 @@ resource "aws_codepipeline" "site" {
     }
   }
 
-  stage {
-    name = "Approve"
-
-    action {
-      name     = "RodneyApprovesTheSite"
-      category = "Approval"
-      owner    = "AWS"
-      provider = "Manual"
-      version  = "1"
-
-      configuration = {
-        CustomData = "Deploy of gotovasl.com. The build log prints the commit it built and the page count; check them before approving."
-      }
-    }
-  }
 
   stage {
     name = "Deploy"

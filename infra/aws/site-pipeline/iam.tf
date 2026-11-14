@@ -1,14 +1,18 @@
-# Three roles and one gate.
+# Three roles, and a gate that has moved.
 #
-# THE GATE IS THE LAST POLICY IN THIS FILE. CodePipeline has no "who may
-# approve" field; the only thing standing between a built artifact and
-# gotovasl.com is who holds `codepipeline:PutApprovalResult` on the approval
-# action. Everything above it is plumbing.
+# THE APPROVAL STAGE IS GONE. Ruling, Rodney 2026-11-14: the marketing site
+# auto-deploys, so a merge to `main` publishes gotovasl.com with no human stop.
+# What now stands between a built artifact and the live site is the set of
+# blocking checks in buildspec.yml, which fail the Build stage and leave Deploy
+# unreachable.
 #
-# THE SPLIT BETWEEN BUILD AND DEPLOY IS THE POINT. The build role cannot write
-# to the site bucket and has no CloudFront permission whatsoever. The deploy
-# role can, and the only way to reach it is through the approval stage. If one
-# role did both, the approval would be decoration.
+# THE SPLIT BETWEEN BUILD AND DEPLOY STILL MATTERS, AND MORE THAN BEFORE. The
+# build role cannot write to the site bucket and has no CloudFront permission
+# whatsoever; only the deploy role can publish, and only the Deploy stage can
+# start it. That separation used to be what made the approval meaningful. It is
+# now what stops a compromised build step from publishing directly and skipping
+# the Deploy stage's buildspec -- the checks, the cache headers, the --delete
+# and the invalidation -- altogether. Do not collapse these two roles.
 
 # ------------------------------------------------------------------ pipeline
 
@@ -223,24 +227,25 @@ resource "aws_iam_role_policy" "deploy" {
   policy = data.aws_iam_policy_document.deploy.json
 }
 
-# ------------------------------------------------------------------- THE GATE
+# --------------------------------------------------------- VESTIGIAL: READ ME
 
-# RODNEY, AND NOBODY ELSE, MAY APPROVE A SITE DEPLOY.
+# THIS POLICY NO LONGER GATES ANYTHING, AND IS LEFT HERE DELIBERATELY.
 #
-# Ruling, Rodney 2026-11-14: approvals on `main` are 0 and his approval sits
-# on the deploy instead. This policy is that sentence as IAM. The principal is
-# local.approver_arn -- arn:aws:iam::558215002439:user/rodney-admin.
+# Ruling, Rodney 2026-11-14 (superseding the earlier ruling the same day): the
+# marketing site auto-deploys and the Approve stage has been removed from
+# pipeline.tf. The resource below names
+# `<pipeline>/Approve/RodneyApprovesTheSite`, a stage and action that no longer
+# exist, so the grant permits an operation that cannot be performed. It is inert
+# rather than dangerous -- there is no approval left to give.
 #
-# SCOPED TO THE ACTION, NOT THE PIPELINE. The resource names the stage and the
-# action, so a future stage added to this pipeline does not inherit the right
-# to be approved by anyone.
+# IT IS KEPT IN THIS CHANGE ONLY SO THE PLAN STAYS WHAT WAS PREDICTED: the
+# stage removal alone. Deleting the policy and its user attachment is a separate,
+# cleaner change and should be made -- it is two destroys, and leaving dead IAM
+# lying about is how somebody later mistakes it for a live control.
 #
-# ATTACHED TO HIS USER, NOT TO A GROUP. A group is a second place the
-# membership can change without this file changing.
-#
-# WHAT THIS CANNOT DO: an account administrator can attach themselves a policy
-# granting the same action. That is true of every IAM control. This closes the
-# ordinary route, not the privileged one.
+# WHEN IT GOES, THE GATE DOES NOT GO WITH IT. The gate is now buildspec.yml's
+# blocking checks plus the build/deploy role split above, neither of which this
+# policy touches.
 data "aws_iam_policy_document" "approve_site_deploy" {
   statement {
     sid     = "ApproveTheSiteDeploy"
