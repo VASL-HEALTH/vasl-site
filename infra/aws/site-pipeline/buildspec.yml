@@ -109,7 +109,13 @@ phases:
       # approval button cannot tell the difference by looking.
       - test -f out/site/index.html
       - test -f out/site/404.html
-      - test "$(find out/site -name '*.html' | wc -l)" -ge 10
+      # FLOOR RAISED 2026-11-14, when the approval stage was removed. It was
+      # 10 against a site of 54 pages, which is not a floor -- a build emitting
+      # 12 pages passed it, and the deploy's `aws s3 sync --delete` would then
+      # remove 42 live pages. That was survivable only because a human read the
+      # printed page count before approving. Nobody reads it now, so the number
+      # has to do the work the person used to do.
+      - test "$(find out/site -name '*.html' | wc -l)" -ge 45
 
 artifacts:
   base-directory: out

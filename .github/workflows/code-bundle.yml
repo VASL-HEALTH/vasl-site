@@ -3,10 +3,20 @@
 # WHY THIS IS NOT A DEPLOY, stated first because the repo has a required check
 # whose whole job is to keep deploy paths out of GitHub. Nothing here touches
 # the live site. It writes one object to one key in one private bucket that no
-# distribution serves and no browser can reach. What reads that object is the
-# AWS-side pipeline in infra/aws/site-pipeline, which builds and then waits
-# for Rodney's approval before anything reaches gotovasl.com. This workflow is
-# the supply line into AWS; the decisions all happen on the AWS side of it.
+# distribution serves and no browser can reach.
+#
+# THE EXEMPTION IS RESTATED, NOT INHERITED. Until 2026-11-14 the argument was
+# that the AWS pipeline waited for Rodney's approval, so this workflow could
+# not reach the site on its own. The site now auto-deploys, so a push to `main`
+# IS one automatic chain to gotovasl.com and that argument is gone. The
+# exemption still holds, for a different and narrower reason: what this
+# workflow can do is bounded by its credential, not by a human downstream. Its
+# OIDC role can PutObject one key in one private bucket and has no permission
+# on the site bucket, the distribution, or the pipeline. It cannot choose what
+# ships -- it can only mirror whatever already passed `main`'s protection.
+# The decisions still happen on the AWS side; what changed is that the last of
+# them is now a build check rather than a person.
+#
 # `.github/scripts/check_no_github_deploys.py` exempts this file BY NAME for
 # that reason -- one filename, not a pattern.
 #

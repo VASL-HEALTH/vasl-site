@@ -1,14 +1,18 @@
-# Three roles and one gate.
+# Three roles, and a gate that has moved.
 #
-# THE GATE IS THE LAST POLICY IN THIS FILE. CodePipeline has no "who may
-# approve" field; the only thing standing between a built artifact and
-# gotovasl.com is who holds `codepipeline:PutApprovalResult` on the approval
-# action. Everything above it is plumbing.
+# THE APPROVAL STAGE IS GONE. Ruling, Rodney 2026-11-14: the marketing site
+# auto-deploys, so a merge to `main` publishes gotovasl.com with no human stop.
+# What now stands between a built artifact and the live site is the set of
+# blocking checks in buildspec.yml, which fail the Build stage and leave Deploy
+# unreachable.
 #
-# THE SPLIT BETWEEN BUILD AND DEPLOY IS THE POINT. The build role cannot write
-# to the site bucket and has no CloudFront permission whatsoever. The deploy
-# role can, and the only way to reach it is through the approval stage. If one
-# role did both, the approval would be decoration.
+# THE SPLIT BETWEEN BUILD AND DEPLOY STILL MATTERS, AND MORE THAN BEFORE. The
+# build role cannot write to the site bucket and has no CloudFront permission
+# whatsoever; only the deploy role can publish, and only the Deploy stage can
+# start it. That separation used to be what made the approval meaningful. It is
+# now what stops a compromised build step from publishing directly and skipping
+# the Deploy stage's buildspec -- the checks, the cache headers, the --delete
+# and the invalidation -- altogether. Do not collapse these two roles.
 
 # ------------------------------------------------------------------ pipeline
 
@@ -146,7 +150,7 @@ resource "aws_iam_role_policy" "codebuild" {
 
 resource "aws_iam_role" "deploy" {
   name               = "vasl-site-deploy"
-  description        = "Publishes the approved artifact to the live site. Reachable only through the pipeline's Deploy stage, which is behind the manual approval."
+  description        = "Publishes the built artifact to the live site. Reachable only through the pipeline's Deploy stage, which runs only after Build succeeds."
   assume_role_policy = data.aws_iam_policy_document.codebuild_assume.json
 }
 
@@ -223,60 +227,23 @@ resource "aws_iam_role_policy" "deploy" {
   policy = data.aws_iam_policy_document.deploy.json
 }
 
-# ------------------------------------------------------------------- THE GATE
+# ------------------------------------------- WHAT USED TO BE THE GATE, REMOVED
 
-# RODNEY, AND NOBODY ELSE, MAY APPROVE A SITE DEPLOY.
+# THE APPROVAL POLICY IS GONE, not merely unused.
 #
-# Ruling, Rodney 2026-11-14: approvals on `main` are 0 and his approval sits
-# on the deploy instead. This policy is that sentence as IAM. The principal is
-# local.approver_arn -- arn:aws:iam::558215002439:user/rodney-admin.
+# `vasl-approve-site-deploy` granted `codepipeline:PutApprovalResult` on
+# `<pipeline>/Approve/RodneyApprovesTheSite` and was attached to rodney-admin.
+# With the Approve stage removed there is no action to approve, so the grant
+# permitted an operation that could not be performed. It is deleted along with
+# its user attachment rather than left inert: dead IAM is how somebody later
+# mistakes a corpse for a live control, and a policy named "approve site
+# deploy" is an unusually convincing corpse.
 #
-# SCOPED TO THE ACTION, NOT THE PIPELINE. The resource names the stage and the
-# action, so a future stage added to this pipeline does not inherit the right
-# to be approved by anyone.
+# Keeping it would also have cost something concrete. Its document interpolated
+# `aws_codepipeline.site.name`, so Terraform deferred the data source and
+# planned the policy as `policy -> (known after apply)` -- a second change whose
+# content the plan could not show, on the one apply where every line should be
+# readable in advance.
 #
-# ATTACHED TO HIS USER, NOT TO A GROUP. A group is a second place the
-# membership can change without this file changing.
-#
-# WHAT THIS CANNOT DO: an account administrator can attach themselves a policy
-# granting the same action. That is true of every IAM control. This closes the
-# ordinary route, not the privileged one.
-data "aws_iam_policy_document" "approve_site_deploy" {
-  statement {
-    sid     = "ApproveTheSiteDeploy"
-    effect  = "Allow"
-    actions = ["codepipeline:PutApprovalResult"]
-    resources = [
-      "arn:aws:codepipeline:${local.region}:${local.account}:${aws_codepipeline.site.name}/Approve/RodneyApprovesTheSite",
-    ]
-  }
-
-  statement {
-    sid    = "AndSeeWhatHeIsApproving"
-    effect = "Allow"
-    actions = [
-      "codepipeline:GetPipeline",
-      "codepipeline:GetPipelineState",
-      "codepipeline:GetPipelineExecution",
-      "codepipeline:ListPipelineExecutions",
-      "codepipeline:ListActionExecutions",
-    ]
-    resources = [
-      "arn:aws:codepipeline:${local.region}:${local.account}:${aws_codepipeline.site.name}",
-    ]
-  }
-}
-
-resource "aws_iam_policy" "approve_site_deploy" {
-  name        = "vasl-approve-site-deploy"
-  description = "The only principal holding this may approve a deploy of gotovasl.com."
-  policy      = data.aws_iam_policy_document.approve_site_deploy.json
-}
-
-resource "aws_iam_user_policy_attachment" "rodney_approves" {
-  # The user half of local.approver_arn. Written out rather than parsed from
-  # the ARN so a reader does not have to evaluate a split() to learn who can
-  # ship the site.
-  user       = "rodney-admin"
-  policy_arn = aws_iam_policy.approve_site_deploy.arn
-}
+# THE GATE DID NOT GO WITH IT. It is buildspec.yml's blocking checks plus the
+# build/deploy role split above.
