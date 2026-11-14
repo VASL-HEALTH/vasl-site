@@ -180,13 +180,13 @@ LINKS = {
 
     # ---- broader coverage: homepage, about, platform --------------------------
     "index.html": [
-        ("for-schools.html", "Vasl for K-12 districts",
-         "A tiered program mapped to MTSS, staffed by people students recognize."),
         ("health-systems.html", "Vasl for health plans and systems",
-         "Engagement built on cultural fit for the members standard outreach loses.",
+         "VLAP inside the care you already deliver, priced against the measures you are scored on.",
          ("/bridge", "See Vasl Bridge →")),
-        ("for-organizations.html", "Vasl for community organizations",
-         "Extend behavioral health reach without hiring a clinical team of your own."),
+        ("keep.html", "Vasl Keep",
+         "Eligible Medicaid members keep the coverage they qualify for, one text at a time."),
+        ("vlap.html", "VLAP, the language engine",
+         "Our own model, our own weights. A named signal with the exact words behind it."),
     ],
     "about.html": [
         ("research.html", "the research and evidence base",
