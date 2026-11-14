@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Standard clinical NLP misreads AAVE and youth vernacular. VLAP is trained on it directly, 2,400+ tokens, six signal categories, no diagnostic output.">
+<meta name="description" content="Standard clinical NLP misreads AAVE and youth vernacular. VLAP is trained on it directly, with a community-annotated language library, 55 signals across seven dimensions and no diagnostic output.">
 <title>VLAP: AI Trained on How Youth Actually Speak</title>
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/mark-v-tile.svg">
@@ -13,7 +13,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Vasl Health">
 <meta property="og:title" content="VLAP: AI Trained on How Youth Actually Speak">
-<meta property="og:description" content="Standard clinical NLP misreads AAVE and youth vernacular. VLAP is trained on it directly, 2,400+ tokens, six signal categories, no diagnostic output.">
+<meta property="og:description" content="Standard clinical NLP misreads AAVE and youth vernacular. VLAP is trained on it directly, with a community-annotated language library, 55 signals across seven dimensions and no diagnostic output.">
 <meta property="og:url" content="https://gotovasl.com/ai-model">
 <meta property="og:image" content="https://gotovasl.com/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -22,7 +22,7 @@
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="VLAP: AI Trained on How Youth Actually Speak">
-<meta name="twitter:description" content="Standard clinical NLP misreads AAVE and youth vernacular. VLAP is trained on it directly, 2,400+ tokens, six signal categories, no diagnostic output.">
+<meta name="twitter:description" content="Standard clinical NLP misreads AAVE and youth vernacular. VLAP is trained on it directly, with a community-annotated language library, 55 signals across seven dimensions and no diagnostic output.">
 <meta name="twitter:image" content="https://gotovasl.com/og-image.png">
 <script defer data-domain="gotovasl.com" src="https://plausible.io/js/script.outbound-links.tagged-events.js"></script>
 <script>window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>
@@ -965,16 +965,16 @@
 
     <div class="model-stats">
       <div class="ms-cell">
-        <div class="ms-num">90<span style="font-size: 20px">%</span></div>
-        <div class="ms-label">Sensitivity on high-distress<br>signal detection</div>
+        <div class="ms-num">0.83<span style="font-size: 20px"> vs 0.65</span></div>
+        <div class="ms-label">Suicide-attempt severity,<br>VLAP vs MIT&rsquo;s lexicon</div>
       </div>
       <div class="ms-cell">
-        <div class="ms-num">47</div>
-        <div class="ms-label">Clinical signals<br>across 6 categories</div>
+        <div class="ms-num">55</div>
+        <div class="ms-label">Signals across<br>seven dimensions</div>
       </div>
       <div class="ms-cell">
-        <div class="ms-num">2,400<span style="font-size: 16px">+</span></div>
-        <div class="ms-label">AAVE & youth vernacular<br>tokens in vocabulary</div>
+        <div class="ms-num">0.97</div>
+        <div class="ms-label">F1 on substance use<br>in clinical notes</div>
       </div>
     </div>
   </div>
@@ -1012,7 +1012,7 @@
         </div>
         <div class="tb-row">
           <div class="tb-label">Vocabulary extension</div>
-          <div class="tb-value">2,400+ tokens added to base vocabulary: AAVE constructions, queer vernacular, youth coded language (including euphemisms for self-harm ideation), minimization patterns, and cultural idiom</div>
+          <div class="tb-value">A community-annotated language library added to the base vocabulary: AAVE constructions, queer vernacular, youth coded language (including euphemisms for self-harm ideation), minimization patterns, and cultural idiom</div>
         </div>
         <div class="tb-row">
           <div class="tb-label">Annotation method</div>
@@ -1024,7 +1024,7 @@
         </div>
         <div class="tb-row">
           <div class="tb-label">Validation status</div>
-          <div class="tb-value">Active IRB study in partnership with a university research partner validating clinical signal accuracy in production deployment. Study ongoing, results to be published upon completion</div>
+          <div class="tb-value">0.83 vs 0.65 ROC-AUC on suicide-attempt severity against MIT&rsquo;s Suicide Risk Lexicon, same corpus, same split. 0.97 F1 on substance use in clinical notes, n2c2 2022 SHAC test, 518 notes</div>
         </div>
       </div>
     </div>
@@ -1074,12 +1074,12 @@
 
   <div class="tax-header">
     <h2 class="tax-headline reveal d1">
-      47 signals.<br>
-      6 categories.<br>
+      55 signals.<br>
+      Seven dimensions.<br>
       <em>Zero diagnostic<br>outputs.</em>
     </h2>
     <p class="tax-intro reveal d2">
- The VLAP Distress Signal Taxonomy (v1.0) defines every signal VLAP is trained to detect. Each signal has a clinical definition, a community-language annotation, and a risk-level weighting. None produce a diagnosis. All surface as interpretive context for a licensed clinician who decides what to do with them. Full clinical notes, escalation rules, and validation status for every signal are documented in the <a href="/technology" style="color:var(--clay);text-decoration:underline;">Technology deep-dive</a>.
+ The VLAP Distress Signal Taxonomy (v2.0) defines every signal VLAP is trained to detect. Each signal has a clinical definition and a community-language annotation. The rows below are examples. None produce a score or a diagnosis. All surface as interpretive context for a licensed clinician who decides what to do with them. Full clinical notes, escalation rules, and validation status for every signal are documented in the <a href="/technology" style="color:var(--clay);text-decoration:underline;">Technology deep-dive</a>.
     </p>
   </div>
 
@@ -1399,8 +1399,8 @@
       <div class="pipe-dot"></div>
       <div class="pipe-step-num">Step 01, Ingestion</div>
       <div class="pipe-step-name">Member language enters the system.</div>
-      <p class="pipe-step-desc">Text is received from Member App check-ins and coach messaging, channels where youth have explicitly chosen to share within a care relationship. No passive collection. No ambient monitoring. Language enters the pipeline only through intentional member action within the Vasl platform.</p>
-      <div class="pipe-step-tech">Channel: Member App &middot; Coach messaging &middot; Consent-gated input only</div>
+      <p class="pipe-step-desc">Text is received from patient replies and messages in the clinician&rsquo;s workflow, channels where youth have explicitly chosen to share within a care relationship. No passive collection. No ambient monitoring. Language enters the pipeline only through intentional member action within the Vasl platform.</p>
+      <div class="pipe-step-tech">Channel: Patient replies &middot; Clinician&rsquo;s workflow &middot; Consent-gated input only</div>
       <span class="pipe-step-tag">Active input only</span>
     </div>
 
@@ -1426,8 +1426,8 @@
       <div class="pipe-dot"></div>
       <div class="pipe-step-num">Step 04, Tokenization & Vocabulary Matching</div>
       <div class="pipe-step-name">The extended vocabulary layer activates, reading language that standard models cannot.</div>
-      <p class="pipe-step-desc">The text is tokenized using VLAP's extended vocabulary which includes the 2,400+ AAVE and youth vernacular tokens added to the base vocabulary. This is where standard NLP fails: it encounters tokens like "unaliving" or constructions like "can't keep doing this no more fr" and has no representation for them. VLAP has trained representations for all of them.</p>
-      <div class="pipe-step-tech">Extended BERT-family tokenizer &middot; 2,400+ custom tokens &middot; Cultural register detection active</div>
+      <p class="pipe-step-desc">The text is tokenized using VLAP's extended vocabulary which includes a community-annotated library of AAVE and youth vernacular added to the base vocabulary. This is where standard NLP fails: it encounters tokens like "unaliving" or constructions like "can't keep doing this no more fr" and has no representation for them. VLAP has trained representations for all of them.</p>
+      <div class="pipe-step-tech">Extended BERT-family tokenizer &middot; Community-annotated language library &middot; Cultural register detection active</div>
       <span class="pipe-step-tag">Cultural vocabulary</span>
     </div>
 
@@ -1435,7 +1435,7 @@
       <div class="pipe-dot"></div>
       <div class="pipe-step-num">Step 05, Inference</div>
       <div class="pipe-step-name">VLAP classifies signals across all clinical categories.</div>
-      <p class="pipe-step-desc">The model runs inference across the full VLAP Distress Signal Taxonomy, evaluating the input against all 47 signals across six clinical categories simultaneously. CCM modifiers adjust signal weights based on cultural register, minimization patterns, and code-switching context. Output is a structured dimensional signal profile, not a score, not a diagnosis, not a risk tier.</p>
+      <p class="pipe-step-desc">The model runs inference across the full VLAP Distress Signal Taxonomy, evaluating the input against all 55 signals across seven dimensions simultaneously. CCM modifiers adjust signal weights based on cultural register, minimization patterns, and code-switching context. Output is a structured dimensional signal profile, not a score, not a diagnosis, not a risk tier.</p>
       <div class="pipe-step-tech">VLAP V1 &middot; CCM weighting active</div>
       <span class="pipe-step-tag">Non-diagnostic output</span>
     </div>
@@ -1444,8 +1444,8 @@
       <div class="pipe-dot"></div>
       <div class="pipe-step-num">Step 06, Clinical Output Generation</div>
       <div class="pipe-step-name">Structured interpretive context is formatted for the clinician and only the clinician.</div>
-      <p class="pipe-step-desc">The dimensional signal profile is structured into an interpretive context package, signal codes, community-language annotations, confidence indicators, and session history context and delivered to the clinician's Coach Portal view. The raw text is discarded at this point. What the clinician receives is context, not content. The member's words do not persist in the system.</p>
-      <div class="pipe-step-tech">Coach Portal delivery &middot; Raw text discarded &middot; Signal profile retained for 90 days &middot; Audit log: 6 years</div>
+      <p class="pipe-step-desc">The dimensional signal profile is structured into an interpretive context package, signal codes, community-language annotations, confidence indicators, and session history context and delivered into the clinician's workflow. The raw text is discarded at this point. What the clinician receives is context, not content. The member's words do not persist in the system.</p>
+      <div class="pipe-step-tech">Delivered in the clinician&rsquo;s workflow &middot; Raw text discarded &middot; Signal profile retained for 90 days &middot; Audit log: 6 years</div>
       <span class="pipe-step-tag">Clinician-only delivery</span>
     </div>
 
@@ -1487,7 +1487,7 @@
     <div class="pr-right">
       <div class="pr-technical">
         <div class="pr-tech-label">Technical Implementation</div>
-        <div class="pr-tech-text">Coach Portal access requires licensed clinician credential verification. Member-facing app has zero API surface to VLAP output. No derived scores, no wellness indicators, no secondary displays of VLAP inference. Access control is architectural, not policy-based, member app and clinical portal are separate systems.</div>
+        <div class="pr-tech-text">Access in the clinician&rsquo;s workflow requires licensed clinician credential verification. Nothing member-facing has any API surface to VLAP output. No derived scores, no wellness indicators, no secondary displays of VLAP inference. Access control is architectural, not policy-based. Member-facing systems and clinical systems are separate.</div>
       </div>
     </div>
   </div>
@@ -1545,18 +1545,18 @@
   <div class="val-grid">
     <div class="val-left">
       <h2 class="val-headline reveal d1">
-        In active<br>
-        <em>clinical validation.</em>
+        Measured<br>
+        <em>on clinical text.</em>
       </h2>
       <p class="val-body reveal d2">
- VLAP is in active clinical deployment, with a parallel IRB study underway at an independent academic research institution validating signal accuracy in production conditions. The model earns its claim in the real world, with real youth, under real clinical oversight. Results will be published upon study completion.
+ VLAP is measured against outside benchmarks on clinical text. On suicide-attempt severity it scored 0.83 ROC-AUC against 0.65 for MIT&rsquo;s Suicide Risk Lexicon, on the same corpus and the same split. On substance use in clinical notes it scored 0.97 F1 on the n2c2 2022 SHAC test set of 518 notes, against 0.83 for a keyword rule.
  </p>
 
       <div class="irb-block reveal d3">
-        <div class="irb-label">Active Study, IRB Approved</div>
-        <div class="irb-title">Clinical Signal Accuracy Validation, VASL-IRB-001</div>
-        <div class="irb-desc">IRB-approved study validating VLAP signal accuracy against licensed clinician assessment in production deployment conditions. Study evaluates signal sensitivity, specificity, and demographic subgroup parity across Black, Latino, LGBTQ+, and youth in urban and rural communities.</div>
-        <div class="irb-status">Study in progress, results to be published upon completion</div>
+        <div class="irb-label">Results</div>
+        <div class="irb-title">Suicide-attempt severity, VLAP vs MIT&rsquo;s Suicide Risk Lexicon</div>
+        <div class="irb-desc">0.83 vs 0.65 ROC-AUC, same corpus, same split.</div>
+        <div class="irb-status">Substance use in clinical notes: 0.97 F1, n2c2 2022 SHAC test, 518 notes</div>
       </div>
     </div>
 
@@ -1567,14 +1567,6 @@
           <div class="ci-right">
             <div class="ci-title">Full technical safeguard implementation. BAA required for all partners.</div>
             <div class="ci-desc">Complete HIPAA technical safeguard mapping across all platform components. Business Associate Agreement required for every clinical partner deployment. Annual compliance review. Audit log retention: 6 years.</div>
-          </div>
-        </div>
-
-        <div class="compliance-item">
-          <div class="ci-name">SOC 2 Type II</div>
-          <div class="ci-right">
-            <div class="ci-title">Annual third-party security audit. Full report available under NDA.</div>
-            <div class="ci-desc">SOC 2 Type II certification covering security, availability, and confidentiality trust service criteria. Third-party audit conducted annually. Report available to clinical partners under NDA upon request.</div>
           </div>
         </div>
 
@@ -1640,8 +1632,8 @@
         <div class="spec-toc-item">
           <span class="stoc-num">§03</span>
           <div>
-            <div class="stoc-title">VLAP Distress Signal Taxonomy v1.0, Full Definitions</div>
-            <div class="stoc-pages">Pages 13 to 20 &middot; 47 signal definitions &middot; Escalation rules &middot; Confidence weighting</div>
+            <div class="stoc-title">VLAP Distress Signal Taxonomy v2.0, Full Definitions</div>
+            <div class="stoc-pages">Pages 13 to 20 &middot; 55 signal definitions &middot; Escalation rules &middot; Confidence weighting</div>
           </div>
         </div>
         <div class="spec-toc-item">

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="The peer-reviewed literature Vasl is built on, the active IRB study underway with a university partner, and how we handle claims we cannot yet support.">
+<meta name="description" content="How Vasl measures VLAP: 0.83 vs 0.65 against MIT's Suicide Risk Lexicon on suicide-attempt severity, 0.97 F1 on substance use in clinical notes, and how we handle claims we cannot yet support.">
 <title>Research &amp; Evidence Base | Vasl Health</title>
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/mark-v-tile.svg">
@@ -13,7 +13,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Vasl Health">
 <meta property="og:title" content="Research &amp; Evidence Base | Vasl Health">
-<meta property="og:description" content="The peer-reviewed literature Vasl is built on, the active IRB study underway with a university partner, and how we handle claims we cannot yet support.">
+<meta property="og:description" content="How Vasl measures VLAP: 0.83 vs 0.65 against MIT's Suicide Risk Lexicon on suicide-attempt severity, 0.97 F1 on substance use in clinical notes, and how we handle claims we cannot yet support.">
 <meta property="og:url" content="https://gotovasl.com/research">
 <meta property="og:image" content="https://gotovasl.com/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -22,7 +22,7 @@
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Research &amp; Evidence Base | Vasl Health">
-<meta name="twitter:description" content="The peer-reviewed literature Vasl is built on, the active IRB study underway with a university partner, and how we handle claims we cannot yet support.">
+<meta name="twitter:description" content="How Vasl measures VLAP: 0.83 vs 0.65 against MIT's Suicide Risk Lexicon on suicide-attempt severity, 0.97 F1 on substance use in clinical notes, and how we handle claims we cannot yet support.">
 <meta name="twitter:image" content="https://gotovasl.com/og-image.png">
 <script defer data-domain="gotovasl.com" src="https://plausible.io/js/script.outbound-links.tagged-events.js"></script>
 <script>window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>
@@ -305,9 +305,9 @@ section{padding:130px var(--gutter);position:relative;}
       progress. <em>Honest</em><br>
       about where we are.
     </h1>
-    <p class="hero-body reveal d2">Vasl's research program, on how Black, Brown, LGBTQ+, rural and Medicaid youth describe distress, is in its early stages which is the honest description of where we are. We have one active IRB study, one active data collaboration with a leading academic medical center, and a clinical advisory relationship with Johns Hopkins. Peer-reviewed publication is in progress. That's what we know. It's enough to build on.</p>
+    <p class="hero-body reveal d2">Vasl&rsquo;s research asks how Black, Brown, LGBTQ+, rural and Medicaid patients describe distress in the words they actually use. It is early, and that is the honest description of where we are. We have two measured results on held-out test data: 0.83 vs 0.65 ROC-AUC against MIT&rsquo;s Suicide Risk Lexicon on suicide-attempt severity, and 0.97 F1 on substance use in clinical notes. We have a clinical advisory relationship with Johns Hopkins. Peer-reviewed publication is in progress. That's what we know. It's enough to build on.</p>
     <div class="hero-actions reveal d3">
-      <a href="#active" class="btn-dark">Active Research</a>
+      <a href="#active" class="btn-dark">Measured Results</a>
       <a href="mailto:research@gotovasl.com" class="btn-ghost">Research inquiries</a>
     </div>
   </div>
@@ -315,17 +315,17 @@ section{padding:130px var(--gutter);position:relative;}
   <div class="hero-right reveal d2">
     <div class="status-summary">
       <div class="ss-item">
-        <span class="ss-status ss-active">Active</span>
+        <span class="ss-status ss-active">Measured</span>
         <div class="ss-right">
-          <div class="ss-title">IRB Study, University Research Partner</div>
-          <div class="ss-desc">VLAP signal detection accuracy validation against clinician-adjudicated ground truth. Results pending peer-reviewed publication.</div>
+          <div class="ss-title">Suicide-Attempt Severity, VLAP vs MIT&rsquo;s Lexicon</div>
+          <div class="ss-desc">0.83 vs 0.65 ROC-AUC against MIT&rsquo;s Suicide Risk Lexicon. Same corpus, same split, held-out test.</div>
         </div>
       </div>
       <div class="ss-item">
-        <span class="ss-status ss-active">Active</span>
+        <span class="ss-status ss-active">Measured</span>
         <div class="ss-right">
-          <div class="ss-title">Health-System Data Collaboration</div>
-          <div class="ss-desc">Two-year data collaboration with an academic medical center, Year 1 model development, Year 2 prospective validation. HL7 FHIR behavioral health data infrastructure.</div>
+          <div class="ss-title">Substance Use in Clinical Notes</div>
+          <div class="ss-desc">0.97 F1 on the n2c2 2022 SHAC test, 518 notes, against 0.83 for a keyword rule.</div>
         </div>
       </div>
       <div class="ss-item">
@@ -339,7 +339,7 @@ section{padding:130px var(--gutter);position:relative;}
         <span class="ss-status ss-pending">Pending</span>
         <div class="ss-right">
           <div class="ss-title">Peer-Reviewed Publication</div>
-          <div class="ss-desc">IRB study results will be published in a peer-reviewed journal upon study completion. Timeline subject to study progress.</div>
+          <div class="ss-desc">Both results are being prepared for submission to a peer-reviewed journal. Timeline subject to review.</div>
         </div>
       </div>
     </div>
@@ -348,80 +348,80 @@ section{padding:130px var(--gutter);position:relative;}
 
 <!-- ACTIVE RESEARCH -->
 <section id="active">
-  <div class="chapter-label reveal">Chapter 01, Active Research</div>
+  <div class="chapter-label reveal">Chapter 01, Measured Results</div>
   <div class="active-header">
     <h2 class="active-headline reveal d1">
-      Two active<br>
-      <em>collaborations.</em>
+      Two measured<br>
+      <em>results.</em>
     </h2>
-    <p class="active-sub reveal d2">Both are operational, not announced, not aspirational. The university research partner IRB study is in active data collection. The academic medical center data collaboration is in its first year of a two-year arc. These are the two research foundations that underpin every VLAP accuracy claim on this site.</p>
+    <p class="active-sub reveal d2">Both are measured, not projected. Each was scored on held-out test data against the reference a reviewer would choose, and each names its corpus, its split and what it was compared against. These two results underpin every VLAP accuracy claim on this site.</p>
   </div>
 
-  <!-- UMD Study -->
+  <!-- Suicide-attempt severity -->
   <div class="study-row reveal">
     <div class="sr-left">
-      <span class="sr-status-badge sr-active">Active &middot; IRB</span>
-      <div class="sr-type">Clinical Validation</div>
-      <a href="mailto:research@gotovasl.com?subject=IRB Study Inquiry" class="sr-link">Request documentation</a>
+      <span class="sr-status-badge sr-active">Measured &middot; Held-out test</span>
+      <div class="sr-type">Benchmark</div>
+      <a href="mailto:research@gotovasl.com?subject=Measurement Report Inquiry" class="sr-link">Request documentation</a>
     </div>
     <div class="sr-right">
-      <div class="sr-title">VLAP Clinical Signal Validation Study, University Research Partner</div>
-      <p class="sr-desc">An IRB-approved study validating VLAP's signal detection accuracy against clinician-adjudicated ground truth assessments. The study uses production deployment data from live Vasl cohorts, real members, real language, real clinical annotations by licensed clinicians with community competency training. This is the primary independent validation of VLAP's culturally specific signal detection capabilities. Results will be published in a peer-reviewed journal upon study completion.</p>
+      <div class="sr-title">Suicide-Attempt Severity, VLAP vs MIT&rsquo;s Suicide Risk Lexicon</div>
+      <p class="sr-desc">In 2026, MIT&rsquo;s McGovern Institute, the Child Mind Institute and Crisis Text Line published the Suicide Risk Lexicon, the field&rsquo;s reference standard for risk language. We measured VLAP against it, scoring both on the same corpus, the same split, the same way. VLAP reached 0.83 ROC-AUC on suicide-attempt severity. The lexicon reached 0.65. The first write-up is on our blog: <a href="/blog/what-a-suicide-risk-word-list-cant-hear" style="color:var(--deep-green);text-decoration:none;border-bottom:1px solid rgba(45,74,62,0.3)">what a suicide-risk word list can&rsquo;t hear</a>.</p>
       <div class="sr-details">
         <div class="srd-item">
-          <div class="srd-label">Institution</div>
-          <div class="srd-value"><strong>Partner name withheld pending joint publicity approval</strong></div>
+          <div class="srd-label">Reference</div>
+          <div class="srd-value"><strong>MIT / Child Mind / Crisis Text Line Suicide Risk Lexicon</strong>, 50 constructs, 6,910 terms</div>
         </div>
         <div class="srd-item">
           <div class="srd-label">Study Type</div>
-          <div class="srd-value">IRB-approved observational validation study</div>
+          <div class="srd-value">Head-to-head comparison, same corpus, same split</div>
         </div>
         <div class="srd-item">
           <div class="srd-label">Data Source</div>
-          <div class="srd-value">Production deployment data from live Vasl cohorts, de-identified</div>
+          <div class="srd-value">Held-out test split, chunk level, n_pos 307</div>
         </div>
         <div class="srd-item">
           <div class="srd-label">Primary Outcome</div>
-          <div class="srd-value">VLAP signal sensitivity vs. clinician-adjudicated ground truth</div>
+          <div class="srd-value">ROC-AUC on suicide-attempt severity</div>
         </div>
         <div class="srd-item">
-          <div class="srd-label">Preliminary Finding</div>
-          <div class="srd-value"><strong>90% sensitivity</strong> on high-distress signal detection, preliminary, pending publication</div>
+          <div class="srd-label">Result</div>
+          <div class="srd-value"><strong>0.83 vs 0.65</strong> ROC-AUC, VLAP vs the lexicon. Higher is better.</div>
         </div>
         <div class="srd-item">
           <div class="srd-label">Status</div>
-          <div class="srd-value">Active data collection &middot; Results pending peer-reviewed publication</div>
+          <div class="srd-value">Measured &middot; Being prepared for peer-reviewed publication</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Health-System Data Collaboration -->
+  <!-- Substance use in clinical notes -->
   <div class="study-row reveal">
     <div class="sr-left">
-      <span class="sr-status-badge sr-active">Active &middot; Year 1</span>
-      <div class="sr-type">Data Collaboration</div>
-      <a href="mailto:research@gotovasl.com?subject=Health-System Collaboration Inquiry" class="sr-link">Request brief</a>
+      <span class="sr-status-badge sr-active">Measured &middot; Held-out test</span>
+      <div class="sr-type">Benchmark</div>
+      <a href="mailto:research@gotovasl.com?subject=Substance Use Measurement Inquiry" class="sr-link">Request brief</a>
     </div>
     <div class="sr-right">
-      <div class="sr-title">Academic Medical Center, Two-Year Data Collaboration</div>
-      <p class="sr-desc">Vasl Health is an active participant in a structured data-collaboration program with an academic medical center's research accelerator. The collaboration provides access to de-identified behavioral health data infrastructure for VLAP model development and validation. The two-year arc is structured specifically to support VLAP's NLP training, validation, and LEP (Limited English Proficiency) population baseline work, with Year 1 focused on model development and Year 2 on prospective validation. Partner name withheld pending joint publicity approval.</p>
+      <div class="sr-title">Substance Use in Clinical Notes, n2c2 2022 SHAC Test</div>
+      <p class="sr-desc">Clinical notes are one of the four kinds of text VLAP reads, with patient messages, text replies and scribe text. We measured VLAP on the test set of the 2022 National NLP Clinical Challenges (n2c2) Social History Annotation Corpus (SHAC): 518 clinical notes labeled by human annotators. VLAP flagged substance use with 0.97 F1. A keyword rule on the same notes reached 0.83.</p>
       <div class="sr-details">
         <div class="srd-item">
-          <div class="srd-label">Data Domains</div>
-          <div class="srd-value">BH encounters, ICD-10 (mood/anxiety/trauma/SUD), PHQ-9/GAD-7/PCL-5/AUDIT/DAST, demographics/SDoH</div>
+          <div class="srd-label">Test Set</div>
+          <div class="srd-value">n2c2 2022 SHAC test, 518 clinical notes labeled by human annotators</div>
         </div>
         <div class="srd-item">
-          <div class="srd-label">Format</div>
-          <div class="srd-value">HL7 FHIR or CSV/JSON &middot; HIPAA Safe Harbor de-identification &middot; 12 to 36 months longitudinal</div>
+          <div class="srd-label">Comparison</div>
+          <div class="srd-value">Keyword rule, scored on the same notes</div>
         </div>
         <div class="srd-item">
-          <div class="srd-label">Year 1 Objective</div>
-          <div class="srd-value">VLAP model development using behavioral health signal data</div>
+          <div class="srd-label">Result</div>
+          <div class="srd-value"><strong>0.97 F1</strong> vs 0.83 for the keyword rule</div>
         </div>
         <div class="srd-item">
-          <div class="srd-label">Year 2 Objective</div>
-          <div class="srd-value">Prospective validation of VLAP signal accuracy</div>
+          <div class="srd-label">Signal</div>
+          <div class="srd-value">Substance use, one of 55 signals across seven dimensions (Taxonomy v2.0)</div>
         </div>
       </div>
     </div>
@@ -436,32 +436,32 @@ section{padding:130px var(--gutter);position:relative;}
       Institutional<br>
       <em>grounding.</em>
     </h2>
-    <p class="found-intro reveal d2">The research program is grounded in three active institutional relationships, each with a specific, documented role. These are not advisory relationships in name only. Each involves ongoing operational work, clinical oversight, or data access that directly informs VLAP's development and validation.</p>
+    <p class="found-intro reveal d2">The research rests on two published reference standards and one clinical advisory relationship. We measure VLAP against the benchmarks a reviewer would choose, and a senior clinician reviews how we frame what VLAP finds.</p>
   </div>
 
   <div class="found-partners">
     <div class="fp-item reveal">
       <div>
-        <div class="fp-org-name">Academic Medical Center</div>
-        <div class="fp-org-type">Health System &middot; Research Accelerator</div>
+        <div class="fp-org-name">Suicide Risk Lexicon</div>
+        <div class="fp-org-type">MIT McGovern Institute &middot; Child Mind Institute &middot; Crisis Text Line</div>
       </div>
       <div class="fp-body">
-        <div class="fp-relationship">Data Collaboration, Active Participant</div>
-        <p class="fp-desc">Access to de-identified behavioral health data infrastructure for VLAP model development and validation. Two-year structured collaboration, Year 1 model development, Year 2 prospective validation. Provides the data scale necessary for VLAP's NLP training on longitudinal behavioral health signals at clinical population level. Partner name withheld pending joint publicity approval.</p>
+        <div class="fp-relationship">Published Reference Standard, Suicide-Attempt Severity</div>
+        <p class="fp-desc">Published in 2026 as the field&rsquo;s reference standard for risk language: 50 constructs, 6,910 terms. We scored VLAP and the lexicon on the same corpus, the same split, the same way. VLAP reached 0.83 ROC-AUC on suicide-attempt severity. The lexicon reached 0.65.</p>
       </div>
-      <span class="fp-badge">Active &middot; Year 1</span>
+      <span class="fp-badge">Benchmark</span>
     </div>
 
     <div class="fp-item reveal">
       <div>
-        <div class="fp-org-name">University Research Partner</div>
-        <div class="fp-org-type">Research University &middot; IRB Study &middot; Name withheld pending joint publicity approval</div>
+        <div class="fp-org-name">n2c2 2022 SHAC</div>
+        <div class="fp-org-type">National NLP Clinical Challenges &middot; Social History Annotation Corpus</div>
       </div>
       <div class="fp-body">
-        <div class="fp-relationship">Active IRB Study, VLAP Signal Validation</div>
-        <p class="fp-desc">Independent academic validation of VLAP signal detection accuracy through an IRB-approved study comparing VLAP output against clinician-adjudicated ground truth. The study represents the first formal independent validation of VLAP's culturally specific signal detection capabilities. Results will be published in peer-reviewed literature upon completion.</p>
+        <div class="fp-relationship">Public Clinical Benchmark, Substance Use</div>
+        <p class="fp-desc">Clinical notes labeled by human annotators for substance use and other social history. On its test set of 518 notes, VLAP reached 0.97 F1 on substance use, against 0.83 for a keyword rule.</p>
       </div>
-      <span class="fp-badge">IRB Active</span>
+      <span class="fp-badge">Benchmark</span>
     </div>
 
     <div class="fp-item reveal">
@@ -483,14 +483,14 @@ section{padding:130px var(--gutter);position:relative;}
   <div class="chapter-label reveal">Chapter 03, Research Principles</div>
   <div class="appr-header">
     <h2 class="appr-headline reveal d1">Our research process</h2>
-    <p class="appr-sub reveal d2">Four principles that govern every research decision Vasl makes, from the design of the IRB study to the way we report preliminary findings. These aren't aspirational values. They're constraints that shape the work.</p>
+    <p class="appr-sub reveal d2">Four principles that govern every research decision Vasl makes, from how we choose a benchmark to the way we report a result. These aren't aspirational values. They're constraints that shape the work.</p>
   </div>
 
   <div class="appr-grid">
     <div class="appr-item reveal">
       <div class="ai-num">01</div>
       <div class="ai-title">We report what we know, not what we expect to find</div>
-      <p class="ai-body">No pilot has run, so no claim on this site reports pilot outcomes. Every measurement claim is drawn from a held-out test split or from active IRB research, not projected from internal estimates or aspirational targets. Where findings are preliminary, specifically VLAP signal accuracy, that is stated explicitly, with the caveat that results are pending peer-reviewed publication. We don't report IRB study findings before the study is complete.</p>
+      <p class="ai-body">No pilot has run, so no claim on this site reports pilot outcomes. Every measurement claim is drawn from a held-out test split, not projected from internal estimates or aspirational targets. Each result names its corpus, its split and what it was compared against. Where a result is not yet published in a peer-reviewed journal, we say so.</p>
     </div>
     <div class="appr-item reveal d1">
       <div class="ai-num">02</div>
@@ -500,12 +500,12 @@ section{padding:130px var(--gutter);position:relative;}
     <div class="appr-item reveal">
       <div class="ai-num">03</div>
       <div class="ai-title">Bias monitoring is an operational gate, not a post-hoc audit</div>
-      <p class="ai-body">False positive and false negative rates are disaggregated by demographic subgroup throughout model development, not checked after a model version is deployed. A model version that meets aggregate accuracy targets but fails subgroup parity thresholds across Black, Latino, LGBTQ+, or first-generation subgroups is not deployed. This standard is applied to the IRB validation study as a primary research outcome, not a secondary analysis.</p>
+      <p class="ai-body">False positive and false negative rates are disaggregated by demographic subgroup throughout model development, not checked after a model version is deployed. A model version that meets aggregate accuracy targets but fails subgroup parity thresholds across Black, Latino, LGBTQ+, or first-generation subgroups is not deployed. This standard applies to every result we report, as a primary outcome rather than a secondary analysis.</p>
     </div>
     <div class="appr-item reveal d1">
       <div class="ai-num">04</div>
-      <div class="ai-title">IRB oversight applies to every human subjects research activity</div>
-      <p class="ai-body">All research involving human subjects data, including the university research partner validation study and any future studies using Vasl deployment data, operates under IRB approval with informed consent, data privacy protection, and ongoing compliance monitoring. Institutional oversight is a minimum standard, not a credential for marketing purposes. The full IRB study protocol is available to qualified institutional evaluators under NDA.</p>
+      <div class="ai-title">Patient data is protected before any work begins</div>
+      <p class="ai-body">Any work with patient text runs under HIPAA, with a business associate agreement (BAA) signed before any patient data is shared. Patient text is read by VLAP on Vasl infrastructure and never sent to an outside AI company. Outside parties see nothing without explicit, documented consent. The full measurement report is available to qualified institutional evaluators under NDA.</p>
     </div>
   </div>
 </section>
@@ -518,23 +518,23 @@ section{padding:130px var(--gutter);position:relative;}
       In progress.<br>
       Not yet <em>published.</em>
     </h2>
-    <p class="pub-sub reveal d2">Vasl Health does not currently have peer-reviewed publications. The IRB study with a university research partner is the primary vehicle for the first peer-reviewed publication. Here is what is in progress and when it is expected.</p>
+    <p class="pub-sub reveal d2">Vasl Health PBC does not yet have peer-reviewed publications. The two measured results above are the first we will submit for peer review. Here is what is in progress.</p>
   </div>
 
   <div class="pub-note reveal">
     <div class="pn-label">In Progress, Pending Publication</div>
-    <div class="pn-title">VLAP Cultural Signal Detection Validation, University Research Partner IRB Study</div>
-    <p class="pn-desc">The primary planned publication is the peer-reviewed results of the active IRB study with a university research partner, validating VLAP's signal detection accuracy against clinician-adjudicated ground truth in deployed pilot cohorts. The study uses production data from live Vasl deployments across BIPOC, LGBTQ+, and first-generation youth populations. Results will be submitted to a peer-reviewed journal upon study completion.</p>
+    <div class="pn-title">VLAP Measured Results, Suicide-Attempt Severity and Substance Use</div>
+    <p class="pn-desc">The primary planned publication reports VLAP against MIT&rsquo;s Suicide Risk Lexicon on suicide-attempt severity (0.83 vs 0.65 ROC-AUC, same corpus, same split) and on substance use in the n2c2 2022 SHAC test (0.97 F1 on 518 notes, against 0.83 for a keyword rule). Results will be submitted to a peer-reviewed journal.</p>
     <div class="pn-details">
-      <div class="pnd-item">Status: Active data collection</div>
+      <div class="pnd-item">Status: Measured, write-up in preparation</div>
       <div class="pnd-item">&middot;</div>
-      <div class="pnd-item">Institution: Name withheld pending joint publicity approval</div>
+      <div class="pnd-item">Authors: Vasl Health PBC</div>
       <div class="pnd-item">&middot;</div>
-      <div class="pnd-item">Target: Peer-reviewed journal submission upon completion</div>
+      <div class="pnd-item">Target: Peer-reviewed journal submission</div>
     </div>
   </div>
 
-  <p class="pub-forthcoming reveal">Study protocol and preliminary design documentation are available to institutional evaluators under NDA. Contact <a href="mailto:research@gotovasl.com" style="color:var(--deep-green);text-decoration:none;border-bottom:1px solid rgba(45,74,62,0.3)">research@gotovasl.com</a> to request access. We will update this page when the study is submitted for publication and when it is published.</p>
+  <p class="pub-forthcoming reveal">The measurement report and method documentation are available to institutional evaluators under NDA. Contact <a href="mailto:research@gotovasl.com" style="color:var(--deep-green);text-decoration:none;border-bottom:1px solid rgba(45,74,62,0.3)">research@gotovasl.com</a> to request access. We will update this page when the results are submitted for publication and when they are published.</p>
 </section>
 
 <!-- COLLABORATE -->
@@ -544,7 +544,7 @@ section{padding:130px var(--gutter);position:relative;}
     <div class="collab-left">
       <div class="chapter-label muted reveal">Collaborate</div>
       <h2 class="collab-headline reveal d1">Working together</h2>
-      <p class="collab-body reveal d2">We are actively interested in research partnerships with academic institutions, health systems, and community organizations working on behavioral health equity, culturally-responsive AI, and clinical NLP. We bring the platform infrastructure, production deployment data, and community relationships. We're looking for partners who bring research rigor, clinical expertise, and institutional oversight.</p>
+      <p class="collab-body reveal d2">We are actively interested in research partnerships with academic institutions, health systems, and community organizations working on behavioral health equity, culturally-responsive AI, and clinical NLP. We bring VLAP, its measured results, and community relationships. We're looking for partners who bring research rigor, clinical expertise, and institutional oversight.</p>
       <div class="collab-actions reveal d3">
         <a href="mailto:research@gotovasl.com" class="btn-light">Contact Research Team</a>
         <a href="/technology" class="btn-ghost-light">VLAP technical documentation</a>
@@ -554,18 +554,18 @@ section{padding:130px var(--gutter);position:relative;}
     <div class="collab-right reveal d2">
       <div class="cr-item">
         <div class="cr-label">What We Bring</div>
-        <div class="cr-title">Platform, data, and community</div>
-        <p class="cr-body">Production deployment data from live Vasl cohorts, BIPOC, LGBTQ+, and first-generation youth populations. The VLAP model and its clinical signal taxonomy. Community relationships built through years of co-design. Health-system-grade data infrastructure for behavioral health signal data at scale, via an active academic medical center collaboration.</p>
+        <div class="cr-title">Model, results, and community</div>
+        <p class="cr-body">VLAP, our own language model with our own weights, and its clinical signal taxonomy: 55 signals across seven dimensions (Taxonomy v2.0). Measured results on held-out clinical benchmarks. Community relationships built through years of co-design. Intake over HL7 FHIR R4 from Epic, Cerner and athenahealth, under HIPAA and a business associate agreement.</p>
       </div>
       <div class="cr-item">
         <div class="cr-label">What We're Looking For</div>
         <div class="cr-title">Research rigor and institutional infrastructure</div>
-        <p class="cr-body">IRB-approved research protocols. Clinical expertise in behavioral health, NLP for mental health, or health equity research. Academic partners with experience in community-based participatory research. Peer-reviewed publication capacity and journal relationships in behavioral health, health equity, or clinical AI.</p>
+        <p class="cr-body">Human subjects review for any study involving patients. Clinical expertise in behavioral health, NLP for mental health, or health equity research. Academic partners with experience in community-based participatory research. Peer-reviewed publication capacity and journal relationships in behavioral health, health equity, or clinical AI.</p>
       </div>
       <div class="cr-item">
         <div class="cr-label">Documentation Available</div>
         <div class="cr-title">Under NDA to qualified partners</div>
-        <p class="cr-body">37-page VLAP technical specification. IRB study protocol. Signal taxonomy with full annotation guidelines. Bias monitoring methodology and demographic disaggregation approach. Model measurement report: corpus, split, figures and limitations. Health-system data collaboration brief.</p>
+        <p class="cr-body">37-page VLAP technical specification. Signal taxonomy with full annotation guidelines. Bias monitoring methodology and demographic disaggregation approach. Model measurement report: corpus, split, figures and limitations.</p>
       </div>
     </div>
   </div>
@@ -589,7 +589,7 @@ section{padding:130px var(--gutter);position:relative;}
 <div class="vrl-wrap">
   <div class="vrl-head">Related Reading</div>
   <div class="vrl-grid">
-    <a href="/clinical-outcomes" class="vrl-item"><div class="vrl-item-title">clinical outcomes data</div><div class="vrl-item-desc">PHQ-8 change, retention, and escalation rates from pilot cohorts, with methodology.</div></a>
+    <a href="/clinical-outcomes" class="vrl-item"><div class="vrl-item-title">clinical outcomes data</div><div class="vrl-item-desc">The outcomes a pilot measures, and the methodology behind them.</div></a>
     <a href="/about" class="vrl-item"><div class="vrl-item-title">who reviews this research</div><div class="vrl-item-desc">The clinical governance structure that reviews every claim before it's published.</div></a>
   </div>
 </div>
