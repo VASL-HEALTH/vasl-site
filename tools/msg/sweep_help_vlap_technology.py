@@ -38,3 +38,6 @@ assert "—" not in "".join(n for _, n, _ in PAIRS) and "&mdash;" not in "".join
 P.write_text(s, encoding="utf-8")
 print(f"{P}: {len(PAIRS)} pairs applied")
 
+
+# Follow-up: output carries the words behind it.
+FOLLOW_UP = [("Processing happens in-memory, verbatim content is not stored after signal profile generation. The output is a dimensional signal profile, not a transcript or quote.", "Patient text is read on Vasl infrastructure and never sent to an outside AI company. The output is a named signal with the words behind it, never a score or a diagnosis.")]
