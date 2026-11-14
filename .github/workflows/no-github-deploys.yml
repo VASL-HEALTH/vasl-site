@@ -22,6 +22,12 @@
 # left behind in this directory do not trip their own guard. Deleting a
 # workflow is never a finding -- that is the fix.
 #
+# ONE WORKFLOW IS EXEMPT BY NAME: `code-bundle.yml`, the source mirror the
+# AWS-side pipeline reads from. The scanner prints the exemption and its
+# reason on every run, so it can never be a silent pass. The set holds exactly
+# one filename, matched on basename; the full argument sits in the scanner
+# next to EXEMPT_FILENAMES.
+#
 # NO PATH FILTER, deliberately. This is a required status check, and GitHub
 # will not merge a PR whose required context never reported. It therefore runs
 # on every PR and exits in a couple of seconds when no workflow changed. It is

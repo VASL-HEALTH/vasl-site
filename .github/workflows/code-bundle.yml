@@ -1,0 +1,117 @@
+# Publish this repo as a git bundle to S3. SOURCE MIRROR, NOT A DEPLOY.
+#
+# WHY THIS IS NOT A DEPLOY, stated first because the repo has a required check
+# whose whole job is to keep deploy paths out of GitHub. Nothing here touches
+# the live site. It writes one object to one key in one private bucket that no
+# distribution serves and no browser can reach. What reads that object is the
+# AWS-side pipeline in infra/aws/site-pipeline, which builds and then waits
+# for Rodney's approval before anything reaches gotovasl.com. This workflow is
+# the supply line into AWS; the decisions all happen on the AWS side of it.
+# `.github/scripts/check_no_github_deploys.py` exempts this file BY NAME for
+# that reason -- one filename, not a pattern.
+#
+# WHY A BUNDLE IN S3 AT ALL. Standing ruling: git never deploys, S3 does. A
+# CodePipeline source that reads GitHub needs a CodeConnections connection,
+# and a new connection sits in PENDING until somebody finishes an OAuth
+# handshake in a browser -- which no unattended path can do. An S3 source
+# needs no connection and no browser. So the repo publishes itself to S3 and
+# the pipeline reads the object.
+#
+# A BUNDLE AND NOT A TARBALL. `git clone` from a bundle gives the build a real
+# repository with a resolvable HEAD and a commit SHA it can stamp onto what it
+# produces. A tarball gives files that cannot answer "which commit is this?",
+# which is the question that matters when somebody asks what is live on
+# gotovasl.com.
+#
+# NO paths-ignore AND NO paths FILTER. Every push to main must refresh the
+# bundle, including one that only touches docs: a pipeline sourcing a bundle
+# three commits behind main is worse than one that fails to source it, because
+# it looks like it worked.
+name: Code bundle to S3
+
+on:
+  push:
+    branches: [main]
+  # For proving the path without waiting for a merge, and for re-publishing if
+  # an upload ever fails. Does nothing a push to main does not.
+  workflow_dispatch:
+
+# Only the newest main matters. An older run still uploading would otherwise
+# race the newer one to the same key and could win.
+concurrency:
+  group: code-bundle
+  cancel-in-progress: true
+
+permissions:
+  id-token: write # OIDC, the only credential in this workflow
+  contents: read
+
+jobs:
+  bundle:
+    name: Bundle and upload
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      # fetch-depth: 0 is REQUIRED. git refuses to bundle from a shallow
+      # repository, and a bundle without history would defeat the point of
+      # using one. It is cheap here: the whole pack is 4.18 MiB
+      # [measured 2026-11-13, `git count-objects -vH`].
+      - name: Check out, full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create the bundle
+        id: bundle
+        run: |
+          set -euo pipefail
+          start=$(date +%s)
+
+          # `main` only, not --all. --all would pull in every branch and tag
+          # ref in the repository, and this repo has twenty-odd stale content
+          # branches that the pipeline must never build.
+          git bundle create repo.bundle main
+
+          # A bundle that cannot be verified is not a bundle. This catches a
+          # truncated or corrupt write before it reaches S3, where it would
+          # become the thing the pipeline builds from.
+          git bundle verify repo.bundle
+
+          echo "sha=$(git rev-parse main)" >> "$GITHUB_OUTPUT"
+          echo "bytes=$(stat -c%s repo.bundle)" >> "$GITHUB_OUTPUT"
+          echo "bundle_seconds=$(( $(date +%s) - start ))" >> "$GITHUB_OUTPUT"
+
+      - name: Assume the upload role
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::558215002439:role/vasl-site-code-bundle-github
+          aws-region: us-east-1
+
+      - name: Upload
+        id: upload
+        run: |
+          set -euo pipefail
+          start=$(date +%s)
+          aws s3 cp repo.bundle s3://vasl-site-code-bundle-558215002439/main/repo.bundle \
+            --only-show-errors
+          echo "upload_seconds=$(( $(date +%s) - start ))" >> "$GITHUB_OUTPUT"
+
+      # The commit the pipeline will build, on the run page, so a deploy that
+      # reports a SHA can be checked against what was actually published
+      # without reading the bucket.
+      - name: Record
+        run: |
+          {
+            echo "### Code bundle published"
+            echo ""
+            echo "| | |"
+            echo "|---|---|"
+            echo "| commit | \`${{ steps.bundle.outputs.sha }}\` |"
+            echo "| bundle size | ${{ steps.bundle.outputs.bytes }} bytes |"
+            echo "| bundle step | ${{ steps.bundle.outputs.bundle_seconds }}s |"
+            echo "| upload step | ${{ steps.upload.outputs.upload_seconds }}s |"
+            echo "| destination | \`s3://vasl-site-code-bundle-558215002439/main/repo.bundle\` |"
+            echo ""
+            echo "This is a source mirror. It does not deploy anything."
+          } >> "$GITHUB_STEP_SUMMARY"

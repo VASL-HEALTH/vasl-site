@@ -6,6 +6,20 @@ Enforced by `.github/workflows/no-github-deploys.yml`, a required check, which r
 `.github/scripts/check_no_github_deploys.py` over every workflow a PR adds or edits.
 Run it yourself with `python .github/scripts/check_no_github_deploys.py --all`.
 
+ONE EXEMPTION, by filename: `.github/workflows/code-bundle.yml`. It assumes a
+GitHub-to-AWS OIDC role, which the paragraph above forbids, and it is allowed
+anyway because it is a source mirror and not a deploy. Its role holds
+`s3:PutObject` on one key of one private bucket
+(`s3://vasl-site-code-bundle-558215002439/main/repo.bundle`) and nothing else:
+no write on `vasl-marketing-site`, no `cloudfront:CreateInvalidation`, no
+PassRole. Nothing it can do changes what a visitor sees. It exists because the
+AWS deploy pipeline (`infra/aws/site-pipeline/`) sources that object — a
+CodePipeline GitHub source would need a CodeConnections OAuth handshake in a
+browser, which no unattended path can complete, so git never deploys and S3
+does. **Do not delete it to "finish" removing GitHub deploy paths.** Deleting
+it leaves the pipeline with no source, which is the mistake named at the end of
+the next section.
+
 ## Parallel work
 
 **Parallel or side work runs as subagents (model: opus) inside this session.

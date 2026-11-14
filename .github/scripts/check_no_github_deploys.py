@@ -19,6 +19,8 @@ Comment-only lines are skipped. A comment cannot deploy anything, and the
 workflows here carry long decommission notes that quote the commands they
 removed.
 
+One workflow is exempt BY NAME -- see EXEMPT_FILENAMES below for which and why.
+
 Exit 0 clean, 1 on any finding, 2 on a usage error.
 """
 
@@ -28,6 +30,40 @@ import subprocess
 import sys
 
 WORKFLOW_DIR = ".github/workflows"
+
+# THE ONE EXEMPTION, AND IT IS A FILENAME AND NOT A PATTERN.
+#
+# `code-bundle.yml` assumes an AWS role from the runner and runs `aws s3 cp`,
+# so every rule in this file fires on it. It is still not a deploy:
+#
+#   * It writes ONE object to ONE key in a private bucket
+#     (s3://vasl-site-code-bundle-558215002439/main/repo.bundle). No
+#     distribution has that bucket as an origin and nothing public can read
+#     it.
+#   * Its role (`vasl-site-code-bundle-github`) holds s3:PutObject on that
+#     single key and NOTHING else -- see infra/aws/code-bundle/main.tf. It has
+#     no write on `vasl-marketing-site`, no cloudfront:CreateInvalidation, no
+#     ecs, no ecr, no PassRole. A credential that cannot change what anyone
+#     sees is not a deploy credential.
+#   * It is the SUPPLY LINE the AWS-side deploy reads from. The pipeline in
+#     infra/aws/site-pipeline sources that exact object, because a
+#     CodePipeline GitHub source needs a CodeConnections OAuth handshake that
+#     no unattended path can complete. Standing ruling: git never deploys, S3
+#     does. Removing this file does not make the repo safer -- it makes the
+#     AWS pipeline sourceless, which is how a safety change ends up deleting
+#     the thing it depends on.
+#
+# A FILENAME, DELIBERATELY. `code-bundle*`, or any path glob, would exempt a
+# file somebody adds later with a name chosen to match. This set holds exactly
+# one string, so widening it is an edit to this file that shows up in a diff.
+# Matched on basename so it cannot be sidestepped by path.
+EXEMPT_FILENAMES = {"code-bundle.yml"}
+
+EXEMPT_REASON = (
+    "source mirror, not a deploy: PutObject on one private key, and the object "
+    "the AWS-side pipeline sources (infra/aws/code-bundle, "
+    "infra/aws/site-pipeline)"
+)
 
 # Literal values that are not credentials. botocore needs something in the
 # environment or it walks the provider chain and dies on NoRegionError; CI
@@ -263,6 +299,14 @@ def main(argv):
         targets = argv
 
     targets = [t for t in targets if os.path.exists(t)]
+
+    # Announced, never silent. An exemption nobody can see in the run log is
+    # how a scanner that passes stops meaning anything.
+    exempt = [t for t in targets if os.path.basename(t) in EXEMPT_FILENAMES]
+    targets = [t for t in targets if os.path.basename(t) not in EXEMPT_FILENAMES]
+    for path in exempt:
+        print("Exempt by name: %s\n  %s" % (path, EXEMPT_REASON))
+
     if not targets:
         print("No workflow file added or edited. Nothing to check.")
         return 0
