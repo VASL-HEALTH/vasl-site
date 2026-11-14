@@ -22,9 +22,35 @@ phases:
       # The bundle is the whole artifact. Verify before trusting it: a
       # truncated upload clones into a repository that is missing commits
       # rather than failing outright.
-      - git bundle verify repo.bundle
-      - git clone -b main repo.bundle src
-      - echo "cloned $(git -C src rev-parse HEAD)"
+      #
+      # TWO THINGS THIS CANNOT ASSUME, both measured 2026-11-14 against build
+      # vasl-site-build:34793f7a-0500-4213-a838-86f2c802f983.
+      #
+      # 1. THE FILENAME. CodePipeline renames the artifact object -- the S3
+      #    source wrote `main/repo.bundle` and the artifact arrived as
+      #    `vasl-site/src/WBZb36e.bundle`, a fresh random name per execution.
+      #    So the bundle is located, never named.
+      #
+      # 2. `git bundle verify` NEEDS A REPOSITORY. Outside one it exits 1 with
+      #    `error: need a repository to verify a bundle`, because it resolves
+      #    the bundle's prerequisites against some repo's objects. The build
+      #    directory is not a repository, so the check has to be run from a
+      #    throwaway one. Dropping the check instead would have been the wrong
+      #    trade: it is the only thing standing between a truncated upload and
+      #    a clone that silently lacks commits.
+      - |
+        set -euo pipefail
+        cd "$CODEBUILD_SRC_DIR"
+        ls -l
+        BUNDLE="$(find . -maxdepth 2 -name '*.bundle' -type f | head -1)"
+        test -n "$BUNDLE" || { echo "no .bundle in the source artifact"; exit 1; }
+        BUNDLE="$(cd "$(dirname "$BUNDLE")" && pwd)/$(basename "$BUNDLE")"
+        echo "bundle: $BUNDLE ($(stat -c %s "$BUNDLE") bytes)"
+        git init -q _verify
+        git -C _verify bundle verify "$BUNDLE"
+        git clone -b main "$BUNDLE" src
+        rm -rf _verify
+        echo "cloned $(git -C src rev-parse HEAD)"
 
   build:
     commands:

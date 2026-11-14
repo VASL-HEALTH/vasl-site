@@ -98,7 +98,26 @@ resource "aws_codebuild_project" "site_build" {
     type = "CODEPIPELINE"
     # In the repository so the build is reviewed like any other change, not
     # typed into a console field where a diff can never show it.
-    buildspec = "infra/aws/site-pipeline/buildspec.yml"
+    #
+    # PASSED AS CONTENTS, NOT AS A PATH, and it has to be. A CodeBuild action
+    # resolves a buildspec path inside its INPUT ARTIFACT, and this project's
+    # input artifact is the Source stage's output: the single object
+    # `main/repo.bundle`. There is no `infra/` directory in it to find, so the
+    # path form fails in DOWNLOAD_SOURCE, before any command runs, with
+    # `YAML_FILE_ERROR: stat .../src/infra/aws/site-pipeline/buildspec.yml: no
+    # such file or directory` [measured 2026-11-14, build
+    # vasl-site-build:d61622ea-b7c5-49ff-9873-d807aff954d8].
+    #
+    # `file()` inlines it, which is also the only form consistent with what
+    # buildspec.yml does: its first commands are `git bundle verify
+    # repo.bundle` and `git clone -b main repo.bundle src`, i.e. it expects the
+    # bundle at the artifact root and creates the working tree itself.
+    #
+    # The deploy project below is the opposite case and is correct as a path:
+    # its input artifact is this build's OUTPUT, which contains
+    # buildspec-deploy.yml at its root, so the deploy script that runs is the
+    # one from the commit that was approved.
+    buildspec = file("${path.module}/buildspec.yml")
   }
 
   logs_config {

@@ -170,10 +170,14 @@ data "aws_iam_policy_document" "bundle_upload_trust" {
     # makes recoverable, and which already requires getting a workflow past
     # main's required checks. It cannot reach the site bucket, the
     # distribution, or the pipeline.
+    # The subject carries the owner's and the repo's numeric ids, because this
+    # repo has GitHub's immutable subject claim enabled -- see
+    # `github_sub_prefix` in variables.tf for the measurement and why the
+    # owner/repo name form cannot work.
     condition {
       test     = "StringLike"
       variable = "token.actions.githubusercontent.com:sub"
-      values   = ["repo:${var.github_repo}:ref:refs/heads/main"]
+      values   = ["${var.github_sub_prefix}:ref:refs/heads/main"]
     }
   }
 }
