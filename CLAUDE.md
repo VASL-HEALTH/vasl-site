@@ -31,3 +31,14 @@ parallel and produced two duplicate Semgrep workflows, two CODEOWNERS files
 and a PR that deleted the code-bundle publisher another PR's pipeline read
 from. Subagents share this session's context and report back into it, so the
 work is divided rather than duplicated.
+
+## Docker
+
+**Never install or use Docker on the laptop. Container builds run in AWS only.**
+
+Docker Desktop was uninstalled on 2026-11-14 after its disk file reached
+85 GB on a 476 GB laptop with 23 GB free. Nothing needs it locally: images
+are built by CodeBuild in the production pipeline, or on the workbench and
+pushed to ECR from inside AWS. The only callers of a local daemon were the
+laptop push scripts, which are the deploy bypass the production gate
+removed.
