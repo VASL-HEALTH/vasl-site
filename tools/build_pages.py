@@ -378,7 +378,7 @@ def bridge():
       <p class="vx-note">Young people on Medicaid. Hoffmann et al., Pediatrics 2023.</p>
       <div class="vx-actions">{PILOT}</div>
     </div>
-    {photo("bridge-hero.jpg", FLAG_CARD, "60% 50%")}
+    <div class="vh-stage">{PHONE}{FLAG_CARD}</div>
   </div>
 </section>"""
     how = numbered([
