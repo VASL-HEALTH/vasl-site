@@ -962,7 +962,7 @@
   </h1>
   <div class="hero-left">
     <p class="hero-body reveal d2">
- Vasl Health is building the language intelligence infrastructure that enables healthcare organizations to understand patient communication, surface clinically relevant signals, and act earlier. VLAP, our own language model, reads how patients actually describe what they are going through. Vasl Bridge and Vasl Keep turn what it reads into follow-up.
+ Healthcare runs on language, and its tools misread the people who need care most. Language-based depression models are over three times less predictive for Black users (Rai et al., PNAS 2024). Vasl built the engine that reads them right, owns every weight of it, and beats the published tools head to head. VLAP reads how Black, Brown, LGBTQ+, rural and Medicaid patients actually describe what they are going through, and Vasl Bridge and Vasl Keep turn what it reads into follow-up.
  </p>
     <div class="hero-actions reveal d3">
       <a href="#ask" class="btn-dark">Talk to us about a pilot</a>
@@ -1004,16 +1004,16 @@
 
     <div class="hero-stats reveal d3">
       <div class="hs-item">
-        <div class="hs-num">7 days</div>
-        <div class="hs-label">the follow-up window Medicaid plans are scored on<br>after a mental health emergency visit</div>
-      </div>
-      <div class="hs-item">
-        <div class="hs-num">10 of 10</div>
-        <div class="hs-label">Vasl Bridge steps passed live,<br>real texts delivered</div>
-      </div>
-      <div class="hs-item">
         <div class="hs-num">0.83 <em class="hs-vs">vs</em> 0.65</div>
-        <div class="hs-label">against the field&rsquo;s reference<br>lexicon on suicide-attempt severity.</div>
+        <div class="hs-label">suicide-attempt severity, against the<br>field&rsquo;s reference lexicon. +0.18</div>
+      </div>
+      <div class="hs-item">
+        <div class="hs-num">0.82 <em class="hs-vs">vs</em> 0.60</div>
+        <div class="hs-label">the same task at 160 characters,<br>text-message length. +0.22</div>
+      </div>
+      <div class="hs-item">
+        <div class="hs-num">0.97 <em class="hs-vs">vs</em> 0.83</div>
+        <div class="hs-label">F1 on substance use in clinical<br>notes, against a keyword rule. +0.14</div>
       </div>
     </div>
   </div>
@@ -1095,7 +1095,7 @@
     <div class="ct-row">
       <div class="ct-cell"><span class="ct-metric">Substance Use in Notes</span></div>
       <div class="ct-cell"><span class="ct-old">Keyword rule, 0.83 F1</span></div>
-      <div class="ct-cell"><span class="ct-vasl"><strong>0.97 F1</strong>on the n2c2 2022 SHAC test, 518 notes</span></div>
+      <div class="ct-cell"><span class="ct-vasl"><strong>0.97 F1</strong>on the n2c2 2022 SHAC test</span></div>
     </div>
     <div class="ct-row">
       <div class="ct-cell"><span class="ct-metric">Patient Text</span></div>
@@ -1383,7 +1383,7 @@
     <div class="outcome-item reveal d2">
       <div class="oi-num">0.97</div>
       <div class="oi-label">Substance use in clinical notes</div>
-      <p class="oi-desc">F1 on the n2c2 2022 SHAC test, 518 notes labeled by human annotators, against 0.83 for a keyword rule.</p>
+      <p class="oi-desc">F1 on the n2c2 2022 SHAC test, labeled by human annotators, against 0.83 for a keyword rule.</p>
       <span class="oi-note">Held-out test</span>
     </div>
   </div>
