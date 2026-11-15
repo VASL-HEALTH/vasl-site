@@ -528,6 +528,191 @@
   }
 
   /* ═══════════════════════════════════════════
+     INTERSTITIAL: THE PROOF, THE MOAT, THE MARKET
+  ═══════════════════════════════════════════ */
+  #proof {
+    background: var(--warm-white);
+    padding-top: 130px;
+    padding-bottom: 130px;
+  }
+
+  .proof-kicker {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--clay);
+  }
+
+  .proof-headline {
+    font-family: var(--serif);
+    font-size: clamp(30px, 3.6vw, 46px);
+    font-weight: 300;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-top: 22px;
+    max-width: 900px;
+  }
+  .proof-headline em { font-style: italic; color: var(--clay); }
+
+  .proof-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 44px;
+  }
+  .proof-table th {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-45);
+    font-weight: 400;
+    text-align: left;
+    padding: 0 18px 12px 0;
+    border-bottom: 1px solid var(--chalk);
+  }
+  .proof-table td {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--ink-70);
+    padding: 18px 18px 18px 0;
+    border-bottom: 1px solid var(--chalk);
+    vertical-align: top;
+  }
+  .proof-table td.pt-read { color: var(--ink); font-weight: 400; width: 38%; }
+  .proof-table td.pt-vasl {
+    font-family: var(--serif);
+    font-size: 24px;
+    color: var(--deep-green);
+    white-space: nowrap;
+    width: 16%;
+  }
+  .proof-table td.pt-gain {
+    font-family: var(--mono);
+    font-size: 15px;
+    color: var(--clay);
+    white-space: nowrap;
+    width: 10%;
+  }
+  .proof-note {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-45);
+    margin-top: 18px;
+  }
+
+  .proof-sub {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-top: 90px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--chalk);
+  }
+
+  .moat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px 48px;
+    margin-top: 40px;
+  }
+  .moat-item-title {
+    font-family: var(--serif);
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--ink);
+  }
+  .moat-item-body {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--ink-70);
+    margin-top: 10px;
+  }
+
+  .market-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 0 72px;
+    align-items: start;
+    margin-top: 40px;
+  }
+  .market-body {
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--ink-70);
+    max-width: 620px;
+  }
+  .market-body + .market-body { margin-top: 20px; }
+  .market-body strong { color: var(--ink); font-weight: 500; }
+  .market-pull {
+    margin-top: 28px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 21px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--deep-green);
+    border-left: 2px solid var(--clay);
+    padding-left: 20px;
+  }
+  .market-card {
+    background: var(--parchment);
+    padding: 32px 30px;
+  }
+  .market-card-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--clay);
+  }
+  .market-card-num {
+    font-family: var(--serif);
+    font-size: 44px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--deep-green);
+    margin-top: 12px;
+  }
+  .market-card-body {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--ink-70);
+    margin-top: 14px;
+  }
+  .market-card + .market-card { margin-top: 20px; }
+
+  .review-body {
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--ink-70);
+    max-width: 860px;
+    margin-top: 32px;
+  }
+  .review-body + .review-body { margin-top: 18px; }
+
+  @media (max-width: 900px) {
+    .moat-grid { grid-template-columns: 1fr; gap: 32px; }
+    .market-grid { grid-template-columns: 1fr; gap: 40px; }
+    .proof-table, .proof-table tbody, .proof-table tr, .proof-table td, .proof-table th { display: block; width: auto; }
+    .proof-table thead { display: none; }
+    .proof-table tr { border-bottom: 1px solid var(--chalk); padding: 16px 0; }
+    .proof-table td { border-bottom: none; padding: 2px 0; }
+    .proof-table td.pt-vasl { font-size: 28px; margin-top: 6px; }
+  }
+
+  /* ═══════════════════════════════════════════
      CHAPTER 03: THE FIVE DIMENSIONS
   ═══════════════════════════════════════════ */
   #dimensions {
@@ -1351,7 +1536,7 @@
     </h1>
 
     <p class="intro-body reveal d2">
- The PHQ-9. The GAD-7. The Columbia Protocol. They are rigorous instruments, carefully validated, on populations that don't look, speak, or carry pain the way Black, Brown, LGBTQ+, rural and Medicaid members do. The tools aren't wrong. They're just measuring the wrong frequency.
+ Healthcare runs on language, and its tools misread the people who need care most. The PHQ-9. The GAD-7. The Columbia Protocol. They are rigorous instruments, carefully validated, on populations that don't look, speak, or carry pain the way Black, Brown, LGBTQ+, rural and Medicaid members do. Language-based depression models are over three times less predictive for Black users (Rai et al., PNAS 2024). The tools aren't wrong. They're just measuring the wrong frequency.
  </p>
 
     <div class="intro-tag-row reveal d3">
@@ -1460,7 +1645,7 @@
       </h2>
 
       <p class="what-body reveal d2">
- VLAP, the Vasl Language Analysis Platform, is a precision interpretation engine trained on community language, not clinical corpora. It doesn't assign diagnoses. It doesn't surface alerts. It translates, converting the words patients actually use into signal a licensed clinician can act on.
+ VLAP, the Vasl Language Analysis Platform, is Vasl's own engine: our model, our weights, no outside AI vendor, and patient text that never leaves Vasl's infrastructure. It is adapted on more than 120 million tokens of real first-person language, 41% of it African American Language, the register most clinical AI is built without. It doesn't assign diagnoses. It doesn't surface alerts. It translates, converting the words patients actually use into signal a licensed clinician can act on.
  </p>
 
       <blockquote class="what-pull reveal d3">
@@ -1479,11 +1664,11 @@
       <div class="what-spec-row">
         <div class="spec-cell">
           <div class="spec-num">0.83<span style="font-size:22px"> vs 0.65</span></div>
-          <div class="spec-label">Suicide-attempt severity,<br>VLAP vs MIT&rsquo;s lexicon</div>
+          <div class="spec-label">Suicide-attempt severity,<br>VLAP vs MIT&rsquo;s lexicon. +0.18</div>
         </div>
         <div class="spec-cell">
-          <div class="spec-num">0.97</div>
-          <div class="spec-label">F1 on substance use<br>in clinical notes</div>
+          <div class="spec-num">0.97<span style="font-size:22px"> vs 0.83</span></div>
+          <div class="spec-label">F1 on substance use in clinical<br>notes, vs a keyword rule. +0.14</div>
         </div>
         <div class="spec-cell">
           <div class="spec-num">55</div>
@@ -1496,6 +1681,118 @@
       </div>
     </div>
   </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     INTERSTITIAL: THE PROOF, THE MOAT, THE MARKET
+════════════════════════════════════ -->
+<section id="proof">
+  <div class="proof-kicker reveal">The proof</div>
+  <h2 class="proof-headline reveal d1">
+    Measured against the published tools, <em>on the same data, head to head.</em>
+  </h2>
+
+  <table class="proof-table reveal d2">
+    <thead>
+      <tr>
+        <th>What VLAP reads</th>
+        <th>VLAP</th>
+        <th>Best comparison</th>
+        <th>Gain</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="pt-read">Suicide-attempt severity in first-person posts</td>
+        <td class="pt-vasl">0.83 <span style="font-size:13px;letter-spacing:0.08em;">ROC-AUC</span></td>
+        <td>MIT Suicide Risk Lexicon, 0.65</td>
+        <td class="pt-gain">+0.18</td>
+      </tr>
+      <tr>
+        <td class="pt-read">The same task at text-message length, 160 characters</td>
+        <td class="pt-vasl">0.82 <span style="font-size:13px;letter-spacing:0.08em;">ROC-AUC</span></td>
+        <td>Suicide Risk Lexicon, 0.60</td>
+        <td class="pt-gain">+0.22</td>
+      </tr>
+      <tr>
+        <td class="pt-read">Substance use in clinical notes, human-labeled held-out test</td>
+        <td class="pt-vasl">0.97 <span style="font-size:13px;letter-spacing:0.08em;">F1</span></td>
+        <td>Keyword rule, 0.83</td>
+        <td class="pt-gain">+0.14</td>
+      </tr>
+      <tr>
+        <td class="pt-read">Social needs in hospital notes, n2c2 2022 national benchmark, 518 held-out notes</td>
+        <td class="pt-vasl">0.83 <span style="font-size:13px;letter-spacing:0.08em;">F1</span></td>
+        <td>Official benchmark scorer</td>
+        <td class="pt-gain"></td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="proof-note">Every number comes from a held-out test set the model never saw.</p>
+
+  <div class="proof-sub reveal">Why no one catches us</div>
+  <div class="moat-grid">
+    <div class="reveal">
+      <div class="moat-item-title">Our model, our weights</div>
+      <p class="moat-item-body">VLAP is Vasl&rsquo;s own engine. No outside AI vendor, and patient text never leaves Vasl&rsquo;s infrastructure.</p>
+    </div>
+    <div class="reveal d1">
+      <div class="moat-item-title">120 million tokens of how people actually talk</div>
+      <p class="moat-item-body">VLAP is adapted on more than 120 million tokens of real first-person language, 41% of it African American Language, the register most clinical AI is built without.</p>
+    </div>
+    <div class="reveal d2">
+      <div class="moat-item-title">A clinical taxonomy no one else has</div>
+      <p class="moat-item-body">55 clinically approved signals across seven dimensions, from hopelessness and minimization to substance use. Depression and anxiety are next.</p>
+    </div>
+    <div class="reveal">
+      <div class="moat-item-title">Fairness built into every release</div>
+      <p class="moat-item-body">Every new output is audited for dialect bias before it ships. The first audit caught two and kept them out of production.</p>
+    </div>
+    <div class="reveal d1">
+      <div class="moat-item-title">Protected</div>
+      <p class="moat-item-body">Provisional patent 64/147,276, filed September 2026.</p>
+    </div>
+    <div class="reveal d2">
+      <div class="moat-item-title">The founders</div>
+      <p class="moat-item-body">Nobody built the instrument because nobody in the room spoke the language. We do.</p>
+    </div>
+  </div>
+
+  <div class="proof-sub reveal">The market</div>
+  <div class="market-grid">
+    <div>
+      <p class="market-body reveal d1">
+        Only <strong>31.2%</strong> of young people on Medicaid made a follow-up visit within seven days of a mental health emergency visit (Hoffmann et al., <em>Pediatrics</em> 2023). Seven-day follow-up after a mental health emergency visit is a mandatory Medicaid quality measure.
+      </p>
+      <p class="market-body reveal d1">
+        Vasl Bridge, the first workflow on VLAP, keeps patients connected from discharge to the first visit and tells the care team who is slipping, in their own words.
+      </p>
+      <p class="market-pull reveal d2">Everyone else sends reminders. We understand the replies.</p>
+    </div>
+    <div class="reveal d2">
+      <div class="market-card">
+        <div class="market-card-label">Payback</div>
+        <div class="market-card-num">$2,264</div>
+        <p class="market-card-body">One avoided boarding stay pays for eight enrollments and seven completed visits.</p>
+      </div>
+      <div class="market-card">
+        <div class="market-card-label">Beyond Bridge</div>
+        <div class="market-card-num">Vasl Keep</div>
+        <p class="market-card-body">And any workflow that runs on patient language, from medication adherence to care transitions.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="proof-sub reveal">Built to clear review</div>
+  <p class="review-body reveal d1">
+    Non-device clinical decision support under the 21st Century Cures Act, Section 3060.
+  </p>
+  <p class="review-body reveal d1">
+    Vasl operates under the HIPAA Privacy and Security Rules and signs a business associate agreement with every customer that shares protected health information.
+  </p>
+  <p class="review-body reveal d1">
+    AWS is the only subprocessor that ever touches patient data.
+  </p>
 </section>
 
 <!-- ═══════════════════════════════════
