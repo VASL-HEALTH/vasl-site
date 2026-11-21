@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Enter your plan&rsquo;s own numbers. See how many members you stand to lose under the 80-hours-a-month community engagement rule and what they are worth to you.">
+<meta name="description" content="Enter your plan’s own numbers. See how many members you stand to lose under the 80-hours-a-month community engagement rule and what they are worth to you.">
 <title>Vasl Keep: What Coverage Loss Costs Your Plan</title>
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/mark-v-tile.svg">
@@ -13,7 +13,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Vasl Health">
 <meta property="og:title" content="Vasl Keep: What Coverage Loss Costs Your Plan">
-<meta property="og:description" content="Enter your plan&amp;rsquo;s own numbers. See how many members you stand to lose under the 80-hours-a-month community engagement rule and what they are worth to you.">
+<meta property="og:description" content="Enter your plan’s own numbers. See how many members you stand to lose under the 80-hours-a-month community engagement rule and what they are worth to you.">
 <meta property="og:url" content="https://gotovasl.com/keep/calculator">
 <meta property="og:image" content="https://gotovasl.com/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -22,7 +22,7 @@
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Vasl Keep: What Coverage Loss Costs Your Plan">
-<meta name="twitter:description" content="Enter your plan&amp;rsquo;s own numbers. See how many members you stand to lose under the 80-hours-a-month community engagement rule and what they are worth to you.">
+<meta name="twitter:description" content="Enter your plan’s own numbers. See how many members you stand to lose under the 80-hours-a-month community engagement rule and what they are worth to you.">
 <meta name="twitter:image" content="https://gotovasl.com/og-image.png">
 <script defer data-domain="gotovasl.com" src="https://plausible.io/js/script.outbound-links.tagged-events.js"></script>
 <script>window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>
@@ -101,6 +101,8 @@ section{padding:130px var(--gutter);position:relative;}
   .calc-grid{grid-template-columns:1fr;gap:48px;}
 }
 @media(max-width:768px){
+  :root{--gutter:5vw;}
+  section{padding:80px var(--gutter);}
   #calc{padding-top:116px;}
   .calc-kicker{margin-bottom:24px;}
   .calc-lead{font-size:16px;}
@@ -208,7 +210,7 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
       <div class="calc-field">
         <label for="loss">Share expected to lose coverage in a year</label>
         <div class="calc-hint">Arkansas lost 23% of those subject within seven months of its 2018 rule.</div>
-        <div class="calc-row"><input type="range" id="lossR" min="0" max="50" step="1" value="23"><input type="number" id="loss" min="0" max="100" step="1" value="23"> %</div>
+        <div class="calc-row"><input type="range" id="lossR" aria-label="Share expected to lose coverage in a year" min="0" max="50" step="1" value="23"><input type="number" id="loss" min="0" max="100" step="1" value="23"> %</div>
       </div>
 
       <div class="calc-field">
@@ -220,7 +222,7 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
       <div class="calc-field">
         <label for="mlr">Medical cost ratio of the members who leave</label>
         <div class="calc-hint">The Medicaid managed care average is about 87%. Healthier members who leave first usually run lower.</div>
-        <div class="calc-row"><input type="range" id="mlrR" min="50" max="100" step="1" value="87"><input type="number" id="mlr" min="0" max="100" step="1" value="87"> %</div>
+        <div class="calc-row"><input type="range" id="mlrR" aria-label="Medical cost ratio of the members who leave" min="50" max="100" step="1" value="87"><input type="number" id="mlr" min="0" max="100" step="1" value="87"> %</div>
       </div>
 
       <div class="calc-field">
