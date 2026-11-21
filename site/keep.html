@@ -134,8 +134,10 @@ section{padding:130px var(--gutter);position:relative;}
 .day-reply span{height:4px;border-radius:2px;background:rgba(250,247,242,0.55);}
 .day-reply span:last-child{width:60%;}
 .week-actions{margin-top:56px;}
-.week-calc{font-size:16px;font-weight:300;line-height:1.7;margin-top:22px;}
-.week-calc a{color:var(--clay);text-decoration:underline;}
+.week-calc{margin-top:16px;}
+.btn-line{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:transparent;color:var(--ink);border:1px solid var(--ink);padding:15px 31px;text-decoration:none;display:inline-block;transition:background 0.22s,color 0.22s;}
+.btn-line:hover{background:var(--ink);color:var(--warm-white);}
+.hero-calc{margin-top:28px;}
 
 @media(max-width:1100px){
   #hero{grid-template-columns:1fr;grid-template-areas:"head" "photo" "note";gap:0;}
@@ -261,6 +263,7 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
     <h1 class="hero-headline reveal d1">A month of work, school or service that some Medicaid members must now show to keep their coverage.</h1>
     <div class="hero-source reveal d2">Medicaid community engagement rule</div>
     <p class="hero-punch reveal d2">Eligible members keep the coverage <span class="nowrap">they qualify for.</span></p>
+    <a href="/keep/calculator" class="btn-dark hero-calc reveal d2">See what the work rule costs your plan</a>
   </div>
   <div class="hero-photo reveal d2">
     <img src="/assets/people/rural-porch-couple.jpg" alt="A couple on a porch glider reading a text message together." width="1400" height="2099" decoding="async" style="object-position:center 40%">
@@ -378,7 +381,7 @@ footer{background:var(--charcoal);border-top:1px solid rgba(250,247,242,0.08);pa
   </div>
   <div class="week-actions reveal d3">
     <a href="/contact?subject=Vasl Keep Pilot" class="btn-dark">Talk to us about a pilot</a>
-    <p class="week-calc"><a href="/keep/calculator">See what the work rule costs your plan.</a></p>
+    <p class="week-calc"><a href="/keep/calculator" class="btn-line">See what the work rule costs your plan</a></p>
   </div>
 </section>
 
